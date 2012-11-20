@@ -48,11 +48,11 @@ namespace CrystalGate.Scenes
             boundary.CollisionCategories = Category.All;
             boundary.CollidesWith = Category.All;
             joueurs.Add(new Joueur(map)); // ajout joueur
-            for (int j = 0; j < 3; j++) // ajout unités
+            for (int j = 0; j < 20; j++) // ajout unités
             {
-                for (int i = 0; i < 3; i++)
+                for (int i = 0; i < 20; i++)
                 {
-                    //if( i  % 2 == 0 && j % 2 == 0)
+                    if( i  % 2 == 0 && j % 2 == 0)
                     unites.Add(new Unite(content.Load<Texture2D>("knight"), new Vector2(i, j), map, spriteBatch, pack));
                 }
             }
