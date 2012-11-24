@@ -32,7 +32,12 @@ namespace CrystalGate
             Outil.RemoveDeadBodies(unites);
         }
 
-        public void DrawIso(SpriteBatch spriteBatch)
+        public void ClearEffects()
+        {
+
+        }
+
+        /*public void DrawIso(SpriteBatch spriteBatch)
         {
             int lengthx = 168;
             int lengthy = 89;
@@ -66,7 +71,7 @@ namespace CrystalGate
                     }
                 }
 
-        }
+        }*/
 
         public void Draw(SpriteBatch spriteBatch)
         {
@@ -75,12 +80,8 @@ namespace CrystalGate
 
             Vector2 _posDepart = new Vector2(100, 100);
             for (int i = 0; i < Cellules.GetLength(0); i++) //On parcourt les lignes du tableau
-            {
                 for (int j = 0; j < Cellules.GetLength(1); j++) //On parcourt les colonnes du tableau
-                {
                         spriteBatch.Draw(Sprite, new Vector2(i * lengthx, j * lengthy), Color.White);
-                }
-            }
 
         }
     }

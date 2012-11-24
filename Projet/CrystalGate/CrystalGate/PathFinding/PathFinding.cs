@@ -30,7 +30,7 @@ namespace CrystalGate
         
             return map;
         }
-
+        // Aide à deboguer
         public static string Draw(Noeud[,] map)
         {
             string mapString = "";
@@ -92,8 +92,6 @@ namespace CrystalGate
                 noeud = map[(int)current.Position.X - 1, (int)current.Position.Y];
                 voisins.Add(noeud);
             }
-            /*if (enableDiagonales)
-            {*/
                 // TOP LEFT
                 if (current.Position.Y - 1 >= 0 && current.Position.X - 1 >= 0 && map[(int)current.Position.X - 1, (int)current.Position.Y - 1].IsWalkable)
                 {
@@ -118,7 +116,6 @@ namespace CrystalGate
                     noeud = map[(int)current.Position.X + 1, (int)current.Position.Y + 1];
                     voisins.Add(noeud);
                 }
-            //}
 
             return voisins;
         }

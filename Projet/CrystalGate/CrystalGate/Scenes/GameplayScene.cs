@@ -15,21 +15,21 @@ namespace CrystalGate.Scenes
 {
     public class GameplayScene : AbstractGameScene
     {
-        private ContentManager content;
-        private SpriteFont gameFont;
-        private float pauseAlpha;
-        private Map map;
-        Body boundary;
+        private ContentManager content; // Osef
+        private SpriteFont gameFont; // Police d'ecriture
+        private float pauseAlpha; // Osef
+        private Map map; // La map
+        Body boundary; // Les limtes du monde physique
 
-        private List<Joueur> joueurs = new List<Joueur> { };
-        private List<Objet> unites = new List<Objet> { };
-        private List<Effet> effets = new List<Effet> { };
+        private List<Joueur> joueurs = new List<Joueur> { }; // joueurs sur la map
+        private List<Objet> unites = new List<Objet> { }; // unites sur la map
+        private List<Effet> effets = new List<Effet> { }; // effes qui seront draw
 
         public GameplayScene(SceneManager sceneMgr)
             : base(sceneMgr)
         {
-            TransitionOnTime = TimeSpan.FromSeconds(1.5);
-            TransitionOffTime = TimeSpan.FromSeconds(0.5);
+            TransitionOnTime = TimeSpan.FromSeconds(1.5); // temps de transition depuis le menu
+            TransitionOffTime = TimeSpan.FromSeconds(0.5); // - vers - 
         }
 
         protected override void LoadContent()
@@ -38,30 +38,31 @@ namespace CrystalGate.Scenes
                 content = new ContentManager(SceneManager.Game.Services, "Content");
 
             SpriteBatch spriteBatch = SceneManager.SpriteBatch;
-            PackTexture pack = new PackTexture(content.Load<Texture2D>("blank"));
             gameFont = content.Load<SpriteFont>("menufont");
 
+            // Pack de texture (useless pour le moment)
+            PackTexture pack = new PackTexture(content.Load<Texture2D>("blank"));
+            
+            // Creation de la carte
             map = new Map(content.Load<Texture2D>("tile"), 30, new Vector2(32, 32));
 
+            // Creation de la physique de la carte
             var bounds = GetBounds();
             boundary = BodyFactory.CreateLoopShape(map.world, bounds);
             boundary.CollisionCategories = Category.All;
             boundary.CollidesWith = Category.All;
-            joueurs.Add(new Joueur(map)); // ajout joueur
-            for (int j = 0; j < 20; j++) // ajout unités
-            {
-                for (int i = 0; i < 20; i++)
-                {
-                    if( i  % 2 == 0 && j % 2 == 0)
-                    unites.Add(new Unite(content.Load<Texture2D>("knight"), new Vector2(i, j), map, spriteBatch, pack));
-                }
-            }
-            
-            //unites.Add(new Champion(content.Load<Texture2D>("knight"), new Vector2(10, 10), map, spriteBatch, pack));
 
+            // ajout joueurs
+            joueurs.Add(new Joueur(map));
+
+            // ajout unités
+            for (int j = 0; j < 20; j++)
+                for (int i = 0; i < 20; i++)
+                    if( i  % 2 == 0 && j % 2 == 0)
+                        unites.Add(new Unite(content.Load<Texture2D>("knight"), new Vector2(i, j), map, spriteBatch, pack));
         }
 
-        protected override void UnloadContent()
+        protected override void UnloadContent() // Osef
         {
             content.Unload();
         }
@@ -74,16 +75,21 @@ namespace CrystalGate.Scenes
                 ? Math.Min(pauseAlpha + 1f / 32, 1) 
                 : Math.Max(pauseAlpha - 1f / 32, 0);
 
-            if (IsActive)
+            if (IsActive) // Si le jeu tourne (en gros)
             {
                 KeyboardState k = Keyboard.GetState();
+                // On update les infos de la map
                 map.Update(unites);
+                // On update les infos des unites
                 foreach (Objet o in unites)
                     o.Update(unites, effets);
+                // On update les infos des joueurs
                 foreach (Joueur j in joueurs)
                     j.Update(unites);
+                // On update les effets sur la carte
                 foreach (Effet e in effets)
                     e.Update();
+                // Script temporaire pour se faire chasser par les unites
                 if (k.IsKeyDown(Keys.A))
                 {
                     foreach (Unite u in unites)
@@ -97,6 +103,7 @@ namespace CrystalGate.Scenes
                             l.body.LinearVelocity = Vector2.Zero;
                             l.ObjectifListe.Clear();
                         }
+                // Update de la physique
                 map.world.Step(1 / 60f);
             }
         }
@@ -125,7 +132,7 @@ namespace CrystalGate.Scenes
                 SceneManager.FadeBackBufferToBlack(alpha);
             }
         }
-
+        // Gestion des raccourcis des menus
         public override void HandleInput()
         {
             KeyboardState keyboardState = InputState.CurrentKeyboardState;
@@ -137,7 +144,7 @@ namespace CrystalGate.Scenes
             if (InputState.IsPauseGame() || gamePadDisconnected)
                 new PauseMenuScene(SceneManager, this).Add();
         }
-
+        // Utilisé pour creer le monde physique
         private Vertices GetBounds()
         {
             float width = ConvertUnits.ToSimUnits(1000);

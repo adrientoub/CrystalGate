@@ -72,7 +72,7 @@ namespace CrystalGate
             Unite objet1 = (Unite)(fixtureA.Body.UserData);
             Unite objet2 = (Unite)(fixtureB.Body.UserData);
 
-            if (objet1.uniteSuivi == null && debug > 20)
+            if (objet1.uniteSuivi == null && debug > 200)
             {
                 if (objet1.ObjectifListe.Count > 0)
                 {
@@ -85,7 +85,6 @@ namespace CrystalGate
             }
             else
                 debug++;
-
 
                 return true;
         }

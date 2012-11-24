@@ -23,7 +23,7 @@ namespace CrystalGate
         {
             Vie = VieMax = 200;
             Vitesse = 2.0f;
-            Portee = 2 * Map.TailleTiles.X;
+            Portee = 2 * Map.TailleTiles.X; // Temporaire
             Dommages = 1;
         }
 
@@ -32,6 +32,7 @@ namespace CrystalGate
             Animer(); 
             Deplacer();
             TestMort(effets);
+            // On rafraichit la propriete suivante, elle est juste indicative et n'affecte pas le draw, mais le pathfinding
             PositionTile = new Vector2((int)(ConvertUnits.ToDisplayUnits(body.Position.X) / 32), (int)(ConvertUnits.ToDisplayUnits(body.Position.Y) / 32));
         }
 
@@ -51,7 +52,7 @@ namespace CrystalGate
                 Suivre(unite);
             else
             {
-                uniteSuivi = null;
+               // uniteSuivi = null;  Source de lags
                 unite.Vie -= Dommages;
                 
                 if (Animation.Count == 0)

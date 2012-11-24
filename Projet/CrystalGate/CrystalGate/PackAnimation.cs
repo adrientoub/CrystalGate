@@ -13,6 +13,9 @@ namespace CrystalGate
 {
     public class PackAnimation
     {
+        /* Le packAnimation est un pack qui regroupe les differentes positions de la sprite
+           à Draw pour afficher l'animation correspondante */
+
         // STAND
 
         public static List<Vector2> StandHaut()
