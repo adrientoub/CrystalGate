@@ -7,26 +7,8 @@
       <Importer>FontDescriptionImporter</Importer>
       <Processor>FontDescriptionProcessor</Processor>
       <Options>None</Options>
-      <Output>c:\users\damien pradier\documents\visual studio 2010\Projects\Dungeon_Defender\Dungeon_Defender\Dungeon_Defender\bin\x86\Debug\Content\menufont.xnb</Output>
-      <Time>2012-10-06T21:20:17.7910156+02:00</Time>
-    </Item>
-    <Item>
-      <Source>blank.png</Source>
-      <Name>blank</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>c:\users\damien pradier\documents\visual studio 2010\Projects\Dungeon_Defender\Dungeon_Defender\Dungeon_Defender\bin\x86\Debug\Content\blank.xnb</Output>
-      <Time>2012-10-06T21:22:45.5644531+02:00</Time>
-    </Item>
-    <Item>
-      <Source>background.jpg</Source>
-      <Name>background</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>c:\users\damien pradier\documents\visual studio 2010\Projects\Dungeon_Defender\Dungeon_Defender\Dungeon_Defender\bin\x86\Debug\Content\background.xnb</Output>
-      <Time>2012-10-06T21:23:00.3193359+02:00</Time>
+      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\menufont.xnb</Output>
+      <Time>2012-11-21T22:40:39.5003282+01:00</Time>
     </Item>
     <Item>
       <Source>gamefont.spritefont</Source>
@@ -34,8 +16,26 @@
       <Importer>FontDescriptionImporter</Importer>
       <Processor>FontDescriptionProcessor</Processor>
       <Options>None</Options>
-      <Output>c:\users\damien pradier\documents\visual studio 2010\Projects\Dungeon_Defender\Dungeon_Defender\Dungeon_Defender\bin\x86\Debug\Content\gamefont.xnb</Output>
-      <Time>2012-10-06T21:23:30.4638671+02:00</Time>
+      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\gamefont.xnb</Output>
+      <Time>2012-11-21T22:40:39.4973281+01:00</Time>
+    </Item>
+    <Item>
+      <Source>blank.png</Source>
+      <Name>blank</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\blank.xnb</Output>
+      <Time>2012-11-21T22:40:39.496328+01:00</Time>
+    </Item>
+    <Item>
+      <Source>background.jpg</Source>
+      <Name>background</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\background.xnb</Output>
+      <Time>2012-11-21T22:40:39.4953279+01:00</Time>
     </Item>
     <Item>
       <Source>knight.png</Source>
@@ -43,8 +43,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Damien Pradier\Documents\Visual Studio 2010\Projects\Dungeon_Defender\Dungeon_Defender\Dungeon_Defender\bin\x86\Debug\Content\knight.xnb</Output>
-      <Time>2012-10-07T20:05:30.4960937+02:00</Time>
+      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\knight.xnb</Output>
+      <Time>2012-11-21T22:40:39.5003282+01:00</Time>
     </Item>
     <Item>
       <Source>gradient.png</Source>
@@ -52,8 +52,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Damien Pradier\Documents\Visual Studio 2010\Projects\Dungeon_Defender\Dungeon_Defender\Dungeon_Defender\bin\x86\Debug\Content\gradient.xnb</Output>
-      <Time>2011-04-26T14:42:50+02:00</Time>
+      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\gradient.xnb</Output>
+      <Time>2012-11-21T22:40:39.4973281+01:00</Time>
     </Item>
     <Item>
       <Source>archer.png</Source>
@@ -61,8 +61,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Damien Pradier\Documents\Visual Studio 2010\Projects\Dungeon_Defender\Dungeon_Defender\Dungeon_Defender\bin\x86\Debug\Content\archer.xnb</Output>
-      <Time>2012-10-09T00:05:47.4873046+02:00</Time>
+      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\archer.xnb</Output>
+      <Time>2012-11-21T22:40:39.4903277+01:00</Time>
     </Item>
     <Item>
       <Source>grunt.png</Source>
@@ -70,8 +70,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Damien Pradier\Documents\Visual Studio 2010\Projects\Dungeon_Defender\Dungeon_Defender\Dungeon_Defender\bin\x86\Debug\Content\grunt.xnb</Output>
-      <Time>2012-10-09T00:10:27.4404296+02:00</Time>
+      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\grunt.xnb</Output>
+      <Time>2012-11-21T22:40:39.4993282+01:00</Time>
     </Item>
     <Item>
       <Source>tile.png</Source>
@@ -79,8 +79,17 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Damien Pradier\Documents\Visual Studio 2010\Projects\Dungeon_Defender\Dungeon_Defender\Dungeon_Defender\bin\x86\Debug\Content\tile.xnb</Output>
-      <Time>2012-10-13T18:15:28.383789+02:00</Time>
+      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\tile.xnb</Output>
+      <Time>2012-11-21T22:40:39.5083287+01:00</Time>
+    </Item>
+    <Item>
+      <Source>sword1.mp3</Source>
+      <Name>sword1</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\sword1.xnb</Output>
+      <Time>2012-12-08T21:15:14.4269239+01:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
@@ -88,10 +97,10 @@
       <TargetProfile>HiDef</TargetProfile>
       <BuildConfiguration>Debug</BuildConfiguration>
       <CompressContent>false</CompressContent>
-      <RootDirectory>C:\Users\Damien Pradier\Documents\Visual Studio 2010\Projects\Dungeon_Defender\Dungeon_Defender\Dungeon_DefenderContent\</RootDirectory>
-      <LoggerRootDirectory>C:\Users\Damien Pradier\Documents\Visual Studio 2010\Projects\Dungeon_Defender\Dungeon_Defender\Dungeon_Defender\</LoggerRootDirectory>
-      <IntermediateDirectory>C:\Users\Damien Pradier\Documents\Visual Studio 2010\Projects\Dungeon_Defender\Dungeon_Defender\Dungeon_DefenderContent\obj\x86\Debug\</IntermediateDirectory>
-      <OutputDirectory>C:\Users\Damien Pradier\Documents\Visual Studio 2010\Projects\Dungeon_Defender\Dungeon_Defender\Dungeon_Defender\bin\x86\Debug\Content\</OutputDirectory>
+      <RootDirectory>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGateContent\</RootDirectory>
+      <LoggerRootDirectory>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\</LoggerRootDirectory>
+      <IntermediateDirectory>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGateContent\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\</OutputDirectory>
     </Settings>
     <Assemblies>
       <Assembly>
@@ -120,7 +129,7 @@
       </Assembly>
       <Assembly>
         <Key>C:\Windows\Microsoft.Net\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\v4.0_4.0.0.0__842cf8be1de50553\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
-        <Value>2011-08-03T17:33:58.6222029+02:00</Value>
+        <Value>2012-10-08T23:02:02.8685317+02:00</Value>
       </Assembly>
     </Assemblies>
   </Asset>

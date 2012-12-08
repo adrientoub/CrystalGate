@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Audio;
 using FarseerPhysics.Common;
 using FarseerPhysics.Factories;
 using FarseerPhysics.Dynamics;
@@ -21,6 +22,7 @@ namespace CrystalGate.Scenes
         private Map map; // La map
         Body boundary; // Les limtes du monde physique
 
+        public static List<SoundEffect> _sons = new List<SoundEffect> { }; // Tous les effets sonores.
         private List<Joueur> joueurs = new List<Joueur> { }; // joueurs sur la map
         private List<Objet> unites = new List<Objet> { }; // unites sur la map
         private List<Effet> effets = new List<Effet> { }; // effes qui seront draw
@@ -52,6 +54,9 @@ namespace CrystalGate.Scenes
             boundary.CollisionCategories = Category.All;
             boundary.CollidesWith = Category.All;
 
+            // Les sons.
+            _sons.Add(content.Load<SoundEffect>("sword1"));
+
             // ajout joueurs
             joueurs.Add(new Joueur(map));
 
@@ -62,7 +67,7 @@ namespace CrystalGate.Scenes
                         unites.Add(new Unite(content.Load<Texture2D>("knight"), new Vector2(i, j), map, spriteBatch, pack));
         }
 
-        protected override void UnloadContent() // Osef
+        protected override void UnloadContent() 
         {
             content.Unload();
         }

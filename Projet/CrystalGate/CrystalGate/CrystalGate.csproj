@@ -119,6 +119,7 @@
     <Compile Include="PathFinding\Noeud.cs" />
     <Compile Include="PathFinding\PathFinding.cs" />
     <Compile Include="Outil.cs" />
+    <Compile Include="EffetSonore.cs" />
     <Compile Include="Unite.cs" />
     <Compile Include="PackAnimation.cs" />
     <Compile Include="Champion.cs" />

@@ -15,6 +15,8 @@ namespace CrystalGate
         public float Vitesse { get; set; }
         public float Portee { get; set; }
         public int Dommages { get; set; }
+        private EffetSonore effetUnite;
+        private int nbFrameSonJoue;
 
         public bool Drawlife { get; set; }
 
@@ -25,6 +27,8 @@ namespace CrystalGate
             Vitesse = 2.0f;
             Portee = 2 * Map.TailleTiles.X; // Temporaire
             Dommages = 1;
+            effetUnite = new EffetSonore(0);
+            nbFrameSonJoue = 0;
         }
 
         public override void Update(List<Objet> unitsOnMap, List<Effet> effets)
@@ -41,6 +45,7 @@ namespace CrystalGate
             if (Vie <= 0 && !Mort)
             {
                 Mort = true;
+                effetUnite.Dispose();
                 effets.Add(new Effet(Sprite, ConvertUnits.ToDisplayUnits(body.Position), PackAnimation.Mort(), new Vector2(370 / 5, 835 / 11), 1));
                 Map.world.RemoveBody(body);
             }
@@ -52,7 +57,21 @@ namespace CrystalGate
                 Suivre(unite);
             else
             {
-               // uniteSuivi = null;  Source de lags
+                // uniteSuivi = null;  Source de lags
+
+                /* Ce if else permet que les sons ne soient pas joués trop fréquemment. 
+                 * Mais je pense pas que les unités devraient attaquer aussi souvent.
+                 * Chaque attaque aura un cooldown (ou un temps en tout cas). Qui fera que le son sera joué (beaucoup) moins souvent.
+                 * Actuellement les unités attaquent en continu...
+                 */
+                if (nbFrameSonJoue == 0 || nbFrameSonJoue == 50) 
+                {
+                    effetUnite.Play();
+                    nbFrameSonJoue = 0;
+                }
+                else
+                    nbFrameSonJoue++;
+
                 unite.Vie -= Dommages;
                 
                 if (Animation.Count == 0)
