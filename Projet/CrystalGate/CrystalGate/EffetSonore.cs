@@ -15,7 +15,7 @@ namespace CrystalGate
         {
             try
             {
-                son = CrystalGate.Scenes.GameplayScene._sons[i].CreateInstance();
+                son = CrystalGate.Scenes.GameplayScene._effetsSonores[i].CreateInstance();
             }
             catch (Exception)
             {

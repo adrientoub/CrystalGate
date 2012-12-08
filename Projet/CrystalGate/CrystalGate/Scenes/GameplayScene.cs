@@ -22,7 +22,7 @@ namespace CrystalGate.Scenes
         private Map map; // La map
         Body boundary; // Les limtes du monde physique
 
-        public static List<SoundEffect> _sons = new List<SoundEffect> { }; // Tous les effets sonores.
+        public static List<SoundEffect> _effetsSonores = new List<SoundEffect> { }; // Tous les effets sonores.
         private List<Joueur> joueurs = new List<Joueur> { }; // joueurs sur la map
         private List<Objet> unites = new List<Objet> { }; // unites sur la map
         private List<Effet> effets = new List<Effet> { }; // effes qui seront draw
@@ -55,7 +55,7 @@ namespace CrystalGate.Scenes
             boundary.CollidesWith = Category.All;
 
             // Les sons.
-            _sons.Add(content.Load<SoundEffect>("sword1"));
+            _effetsSonores.Add(content.Load<SoundEffect>("sword1"));
 
             // ajout joueurs
             joueurs.Add(new Joueur(map));
