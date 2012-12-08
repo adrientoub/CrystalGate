@@ -48,7 +48,7 @@ namespace CrystalGate.Scenes
             pack.unites.Add(content.Load<Texture2D>("grunt"));
 
             // Creation de la carte
-            map = new Map(content.Load<Texture2D>("tile"), new Vector2((int)(this.Game.Window.ClientBounds.Width / 32), (int)(this.Game.Window.ClientBounds.Height / 32)), new Vector2(32, 32));
+            map = new Map(content.Load<Texture2D>("tile"), new Vector2((int)(this.Game.Window.ClientBounds.Width / 32), (int)(this.Game.Window.ClientBounds.Height / 32) + 1), new Vector2(32, 32));
 
             // Creation de la physique de la carte
             var bounds = GetBounds();

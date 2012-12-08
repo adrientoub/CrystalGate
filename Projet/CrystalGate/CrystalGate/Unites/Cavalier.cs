@@ -20,7 +20,7 @@ namespace CrystalGate
 
             // Statistique
             Vie = VieMax = 200;
-            Vitesse = 2.0f;
+            Vitesse = 5.0f;
             Portee = 1; // 1 = Corps à corps
             Dommages = 2;
         }

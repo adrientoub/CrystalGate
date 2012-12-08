@@ -105,7 +105,7 @@ namespace CrystalGate
                 // HAUT GAUCHE
                 if (PositionTile.X > ObjectifListe[0].Position.X && PositionTile.Y > ObjectifListe[0].Position.Y)
                 {
-                    body.LinearVelocity = new Vector2(-Vitesse / 2, -Vitesse / 2);
+                    body.LinearVelocity = new Vector2(-Vitesse / 1.41f, -Vitesse / 1.41f);
                     FlipH = true;
 
                     if (direction != Direction.HautGauche || Animation.Count == 0)
@@ -115,7 +115,7 @@ namespace CrystalGate
                 // HAUT DROITE
                 else if (PositionTile.X < ObjectifListe[0].Position.X && PositionTile.Y > ObjectifListe[0].Position.Y)
                     {
-                        body.LinearVelocity = new Vector2(Vitesse / 2, -Vitesse / 2);
+                        body.LinearVelocity = new Vector2(Vitesse / 1.41f, -Vitesse / 1.41f);
                         FlipH = false;
 
                         if (direction != Direction.HautDroite || Animation.Count == 0)
@@ -125,7 +125,7 @@ namespace CrystalGate
                     // BAS DROITE
                 else if (PositionTile.X < ObjectifListe[0].Position.X && PositionTile.Y < ObjectifListe[0].Position.Y)
                 {
-                    body.LinearVelocity = new Vector2(Vitesse / 2, Vitesse / 2);
+                    body.LinearVelocity = new Vector2(Vitesse / 1.41f, Vitesse / 1.41f);
                     FlipH = false;
 
                     if (direction != Direction.BasDroite || Animation.Count == 0)
@@ -135,7 +135,7 @@ namespace CrystalGate
                 // BAS GAUCHE
                 else if (PositionTile.X > ObjectifListe[0].Position.X && PositionTile.Y < ObjectifListe[0].Position.Y)
                 {
-                    body.LinearVelocity = new Vector2(-Vitesse / 2, Vitesse / 2);
+                    body.LinearVelocity = new Vector2(-Vitesse / 1.41f, Vitesse / 1.41f);
                     FlipH = true;
 
                     if (direction != Direction.BasGauche || Animation.Count == 0)
