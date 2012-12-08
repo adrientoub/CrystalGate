@@ -31,7 +31,6 @@ namespace CrystalGate
         protected const int AnimationLimite = 4;
         public const int suivrelimite = 20;
         public int suivreactuel = 20;
-        public int debug = 20;
 
         protected Direction direction { get; set; }
         protected bool FlipH { get; set; }
@@ -41,7 +40,7 @@ namespace CrystalGate
         public Unite uniteSuivi { get; set; }
         public Unite uniteAttacked { get; set; }
 
-        public Objet(Texture2D Sprite, Vector2 Position, Map Map, SpriteBatch spriteBatch, PackTexture packTexture)
+        public Objet(Vector2 Position, Map Map, SpriteBatch spriteBatch, PackTexture packTexture)
         {
             // Général
             this.Map = Map;
@@ -56,15 +55,13 @@ namespace CrystalGate
             this.body.Mass = 100;
             
             // Graphique
-            this.Sprite = Sprite;
+            this.Sprite = packTexture.blank;
             this.Animation = new List<Vector2> { };
             this.spriteBatch = spriteBatch;
             this.packTexture = packTexture;
             this.direction = Direction.Bas;
             this.FlipH = false;
 
-            //* GRUNT */ this.Tiles = new Vector2( 380 / 5, 600 / 11);
-            /* KNIGHT */ this.Tiles = new Vector2(370 / 5, 835 / 11);
         }
 
         bool body_OnCollision(Fixture fixtureA, Fixture fixtureB, FarseerPhysics.Dynamics.Contacts.Contact contact)
@@ -72,7 +69,7 @@ namespace CrystalGate
             Unite objet1 = (Unite)(fixtureA.Body.UserData);
             Unite objet2 = (Unite)(fixtureB.Body.UserData);
 
-            if (objet1.uniteSuivi == null && debug > 200)
+            if (objet1.uniteSuivi == null)
             {
                 if (objet1.ObjectifListe.Count > 0)
                 {
@@ -80,11 +77,8 @@ namespace CrystalGate
                     List<Noeud> chemin = PathFinding.TrouverChemin(position, objet1.ObjectifListe[objet1.ObjectifListe.Count - 1].Position, objet1.Map.Taille, Map.unites, false);
                     if (chemin != null)
                         objet1.ObjectifListe = chemin;
-                    debug = 0;
                 }
             }
-            else
-                debug++;
 
                 return true;
         }

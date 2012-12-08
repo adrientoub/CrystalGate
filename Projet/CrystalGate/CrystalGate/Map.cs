@@ -13,14 +13,14 @@ namespace CrystalGate
         Texture2D Sprite { get; set; }
         int[,] Cellules { get; set; }
         public Vector2 TailleTiles { get; set; }
-        public int Taille { get; set; }
+        public Vector2 Taille { get; set; }
         public List<Objet> unites { get; set; }
         public World world { get; set; }
 
-        public Map(Texture2D sprite, int taille, Vector2 tailleTiles)
+        public Map(Texture2D sprite, Vector2 taille, Vector2 tailleTiles)
         {
             Sprite = sprite;
-            Cellules = new int[taille, taille];
+            Cellules = new int[(int)taille.X, (int)taille.Y];
             TailleTiles = tailleTiles;
             Taille = taille;
             world = new World(Vector2.Zero);

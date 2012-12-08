@@ -11,8 +11,8 @@ namespace CrystalGate
     public class Champion : Unite
     {
 
-        public Champion(Texture2D Sprite, Vector2 Position, Map map, SpriteBatch spriteBatch, PackTexture packTexture)
-            : base(Sprite, Position, map, spriteBatch, packTexture)
+        public Champion(Vector2 Position, Map map, SpriteBatch spriteBatch, PackTexture packTexture)
+            : base(Position, map, spriteBatch, packTexture)
         {
 
         }

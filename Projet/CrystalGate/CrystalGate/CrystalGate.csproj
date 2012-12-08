@@ -97,6 +97,8 @@
     <Reference Include="System">
       <Private>False</Private>
     </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml">
       <Private>False</Private>
     </Reference>
@@ -138,6 +140,8 @@
     <Compile Include="Scenes\MessageBoxScene.cs" />
     <Compile Include="Scenes\OptionsMenuScene.cs" />
     <Compile Include="Scenes\PauseMenuScene.cs" />
+    <Compile Include="Unites\Cavalier.cs" />
+    <Compile Include="Unites\Grunt.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />

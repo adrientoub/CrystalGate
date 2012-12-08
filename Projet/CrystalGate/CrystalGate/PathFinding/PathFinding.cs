@@ -8,9 +8,9 @@ namespace CrystalGate
 {
     public class PathFinding
     {
-        public static Noeud[,] Initialiser(int taille, Vector2 arrivee, List<Objet> unites)
+        public static Noeud[,] Initialiser(Vector2 taille, Vector2 arrivee, List<Objet> unites)
         {
-            Noeud[,] map = new Noeud[taille, taille];
+            Noeud[,] map = new Noeud[(int)taille.X, (int)taille.Y];
             List<Noeud> unitToNoeud = new List<Noeud> { };
                 foreach (Unite o in unites)
                     if (o != null)
@@ -19,8 +19,8 @@ namespace CrystalGate
                         unitToNoeud.Add(new Noeud(lol, false, 1));
                     }
 
-            for (int j = 0; j < taille; j++)
-                for (int i = 0; i < taille; i++)
+            for (int j = 0; j < taille.Y; j++)
+                for (int i = 0; i < taille.X; i++)
                 {
                     if (NoeudInList(new Noeud(new Vector2(i,j), false, 0), unitToNoeud))
                         map[i, j] = new Noeud(new Vector2(i, j), false, GetHeuristic(arrivee, new Vector2(i, j)));
@@ -160,7 +160,7 @@ namespace CrystalGate
             return newList;
         }
 
-        public static List<Noeud> TrouverChemin(Vector2 depart, Vector2 arrivee, int taille, List<Objet> unites, bool champion)
+        public static List<Noeud> TrouverChemin(Vector2 depart, Vector2 arrivee, Vector2 taille, List<Objet> unites, bool champion)
         {
 
             Noeud[,] map = Initialiser(taille, arrivee, unites); // INITIALISATION DU POIDS DES NOEUDS ET DES OBSTACLES
@@ -168,7 +168,7 @@ namespace CrystalGate
 
             List<Noeud> openList = new List<Noeud> { map[(int)depart.X,(int)depart.Y] };
 
-            if (arrivee.X >= 0 && arrivee.Y >= 0 && arrivee.X < taille && arrivee.Y < taille && map[(int)arrivee.X, (int)arrivee.Y].IsWalkable) // SI ON NE SORT PAS DE LA MAP ET QUE L'ON PEUT MARCHER SUR LE POINT D'ARRIVEE
+            if (arrivee.X >= 0 && arrivee.Y >= 0 && arrivee.X < taille.X && arrivee.Y < taille.Y && map[(int)arrivee.X, (int)arrivee.Y].IsWalkable) // SI ON NE SORT PAS DE LA MAP ET QUE L'ON PEUT MARCHER SUR LE POINT D'ARRIVEE
             {
                 Noeud noeudDepart = map[(int)depart.X, (int)depart.Y];
                 Noeud noeudArrivee = map[(int)arrivee.X, (int)arrivee.Y];

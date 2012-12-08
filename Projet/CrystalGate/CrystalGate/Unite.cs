@@ -15,17 +15,18 @@ namespace CrystalGate
         public float Vitesse { get; set; }
         public float Portee { get; set; }
         public int Dommages { get; set; }
-        private EffetSonore effetUnite;
-        private int nbFrameSonJoue;
+        protected EffetSonore effetUnite;
+        protected int nbFrameSonJoue;
 
         public bool Drawlife { get; set; }
 
-        public Unite(Texture2D Sprite, Vector2 Position, Map map, SpriteBatch spriteBatch, PackTexture packTexture)
-            : base(Sprite, Position, map, spriteBatch, packTexture)
+        public Unite(Vector2 Position, Map map, SpriteBatch spriteBatch, PackTexture packTexture)
+            : base(Position, map, spriteBatch, packTexture)
         {
-            Vie = VieMax = 200;
-            Vitesse = 2.0f;
-            Portee = 2 * Map.TailleTiles.X; // Temporaire
+            // Constructeur par default d'une unité
+            Vie = VieMax = 1;
+            Vitesse = 1.0f;
+            Portee = 1; // 1 = Corps à corps
             Dommages = 1;
             effetUnite = new EffetSonore(0);
             nbFrameSonJoue = 0;
@@ -53,7 +54,7 @@ namespace CrystalGate
 
         public virtual void Attaquer(Unite unite)
         {
-            if (Outil.DistanceUnites(this, unite) >= Portee)
+            if (Outil.DistanceUnites(this, unite) >= Portee * Map.TailleTiles.X)
                 Suivre(unite);
             else
             {
@@ -104,7 +105,7 @@ namespace CrystalGate
                 // HAUT GAUCHE
                 if (PositionTile.X > ObjectifListe[0].Position.X && PositionTile.Y > ObjectifListe[0].Position.Y)
                 {
-                    body.LinearVelocity = new Vector2(-Vitesse, -Vitesse);
+                    body.LinearVelocity = new Vector2(-Vitesse / 2, -Vitesse / 2);
                     FlipH = true;
 
                     if (direction != Direction.HautGauche || Animation.Count == 0)
@@ -114,7 +115,7 @@ namespace CrystalGate
                 // HAUT DROITE
                 else if (PositionTile.X < ObjectifListe[0].Position.X && PositionTile.Y > ObjectifListe[0].Position.Y)
                     {
-                        body.LinearVelocity = new Vector2(Vitesse, -Vitesse);
+                        body.LinearVelocity = new Vector2(Vitesse / 2, -Vitesse / 2);
                         FlipH = false;
 
                         if (direction != Direction.HautDroite || Animation.Count == 0)
@@ -124,7 +125,7 @@ namespace CrystalGate
                     // BAS DROITE
                 else if (PositionTile.X < ObjectifListe[0].Position.X && PositionTile.Y < ObjectifListe[0].Position.Y)
                 {
-                    body.LinearVelocity = new Vector2(Vitesse, Vitesse);
+                    body.LinearVelocity = new Vector2(Vitesse / 2, Vitesse / 2);
                     FlipH = false;
 
                     if (direction != Direction.BasDroite || Animation.Count == 0)
@@ -134,7 +135,7 @@ namespace CrystalGate
                 // BAS GAUCHE
                 else if (PositionTile.X > ObjectifListe[0].Position.X && PositionTile.Y < ObjectifListe[0].Position.Y)
                 {
-                    body.LinearVelocity = new Vector2(-Vitesse, Vitesse);
+                    body.LinearVelocity = new Vector2(-Vitesse / 2, Vitesse / 2);
                     FlipH = true;
 
                     if (direction != Direction.BasGauche || Animation.Count == 0)
@@ -195,7 +196,7 @@ namespace CrystalGate
             List<Objet> liste = new List<Objet> { };
 
                 double distance = Outil.DistanceUnites(this, unite);
-                bool ok = distance > 2 * Map.TailleTiles.X;
+                bool ok = distance > Portee * Map.TailleTiles.X;
                 if (ok && suivreactuel > suivrelimite)
                 {
                     foreach (Unite u in Map.unites)
