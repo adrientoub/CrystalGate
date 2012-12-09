@@ -115,6 +115,7 @@
   <ItemGroup>
     <Compile Include="ConvertUnits.cs" />
     <Compile Include="Effet.cs" />
+    <Compile Include="FondSonore.cs" />
     <Compile Include="Joueur.cs" />
     <Compile Include="Map.cs" />
     <Compile Include="PackTexture.cs" />

@@ -158,6 +158,7 @@ namespace CrystalGate.Scenes.Core
         {
             // Si la scène a un temps de désactivation nul, retrait immédiat
             // de la scène, sinon, désactivation de la scène
+            FondSonore.Resume();
             if (_transitionOffTime == TimeSpan.Zero)
                 _sceneManager.RemoveScene(this);
             else

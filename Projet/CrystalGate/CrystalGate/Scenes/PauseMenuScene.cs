@@ -20,6 +20,7 @@ namespace CrystalGate.Scenes
             : base(sceneMgr, "Pause")
         {
             _parent = parent;
+            FondSonore.Pause();
 
             // Création des options
             var resumeGameMenuItem = new MenuItem("Revenir au jeu");
@@ -51,6 +52,7 @@ namespace CrystalGate.Scenes
         {
             Remove();
             _parent.Remove();
+            CrystalGate.FondSonore.Stop();
             LoadingScene.Load(SceneManager, false);
         }
 

@@ -39,6 +39,7 @@ namespace CrystalGate.Scenes
         private void PlayGameMenuItemSelected(object sender, EventArgs e)
         {
             LoadingScene.Load(SceneManager, true, new GameplayScene(SceneManager));
+            CrystalGate.FondSonore.Play();
         }
 
         private void OptionsMenuItemSelected(object sender, EventArgs e)
