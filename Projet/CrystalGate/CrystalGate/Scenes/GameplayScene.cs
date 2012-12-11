@@ -11,6 +11,7 @@ using Microsoft.Xna.Framework.Audio;
 using FarseerPhysics.Common;
 using FarseerPhysics.Factories;
 using FarseerPhysics.Dynamics;
+using AForge;
 
 namespace CrystalGate.Scenes
 {
@@ -64,8 +65,8 @@ namespace CrystalGate.Scenes
 
             unites.Add(new Cavalier(new Vector2(11, 11), map, spriteBatch, pack));
             // ajout unités
-            for (int j = 0; j < 15; j++)
-                for (int i = 0; i < 15; i++)
+            for (int j = 0; j < 20; j++)
+                for (int i = 0; i < 20; i++)
                     if(i % 2 == 0 && j % 2 == 0)
                         unites.Add(new Grunt(new Vector2(i, j), map, spriteBatch, pack));
         }
@@ -89,8 +90,8 @@ namespace CrystalGate.Scenes
                 // On update les infos de la map
                 map.Update(unites);
                 // On update les infos des unites
-                foreach (Objet o in unites)
-                    o.Update(unites, effets);
+                foreach (Unite u in unites)
+                    u.Update(unites, effets);
                 // On update les infos des joueurs
                 foreach (Joueur j in joueurs)
                     j.Update(unites);
@@ -100,7 +101,7 @@ namespace CrystalGate.Scenes
                 // Script temporaire pour se faire chasser par les unites
                 unites[0].uniteSuivi = null;
                 if (k.IsKeyDown(Keys.A))
-                { 
+                {
                     foreach (Unite u in unites)
                         if (u != unites[0])
                             u.Attaquer((Unite)unites[0]);
@@ -108,9 +109,8 @@ namespace CrystalGate.Scenes
                 else
                     foreach (Unite l in unites)
                         if (l != unites[0])
-                        {
                             l.ObjectifListe.Clear();
-                        }
+
                 // Update de la physique
                 map.world.Step(1 / 60f);
             }

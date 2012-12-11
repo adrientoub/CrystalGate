@@ -19,14 +19,16 @@ namespace CrystalGate
                         unitToNoeud.Add(new Noeud(lol, false, 1));
                     }
 
-            for (int j = 0; j < taille.Y; j++)
-                for (int i = 0; i < taille.X; i++)
-                {
-                    if (NoeudInList(new Noeud(new Vector2(i,j), false, 0), unitToNoeud))
-                        map[i, j] = new Noeud(new Vector2(i, j), false, GetHeuristic(arrivee, new Vector2(i, j)));
-                    else
-                        map[i, j] = new Noeud(new Vector2(i, j), true, GetHeuristic(arrivee, new Vector2(i, j)));
-                }
+                AForge.Parallel.For(0, (int)taille.Y, delegate(int j)
+                        {
+                            for (int i = 0; i < taille.X; i++)
+                            {
+                                if (NoeudInList(new Noeud(new Vector2(i, j), false, 0), unitToNoeud))
+                                    map[i, j] = new Noeud(new Vector2(i, j), false, GetHeuristic(arrivee, new Vector2(i, j)));
+                                else
+                                    map[i, j] = new Noeud(new Vector2(i, j), true, GetHeuristic(arrivee, new Vector2(i, j)));
+                            }
+                        });
         
             return map;
         }

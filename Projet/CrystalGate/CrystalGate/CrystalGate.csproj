@@ -60,6 +60,9 @@
     <XnaCompressContent>true</XnaCompressContent>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AForge">
+      <HintPath>..\..\AForge.dll</HintPath>
+    </Reference>
     <Reference Include="FarseerPhysicsXNA, Version=3.3.4623.34057, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\FarseerPhysicsXNA.dll</HintPath>
