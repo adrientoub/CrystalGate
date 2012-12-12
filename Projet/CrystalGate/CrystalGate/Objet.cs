@@ -19,6 +19,7 @@ namespace CrystalGate
         public Vector2 PositionTile { get; set; }
         public Map Map { get; set; }
         public Body body { get; set; }
+        public int id { get; set; }
 
         public List<Vector2> Animation { get; set; }
         public PackTexture packTexture { get; set; }
@@ -38,7 +39,6 @@ namespace CrystalGate
         public List<Noeud> ObjectifListe { get; set; }
 
         public Unite uniteSuivi { get; set; }
-        public Unite uniteAttacked { get; set; }
 
         public Objet(Vector2 Position, Map Map, SpriteBatch spriteBatch, PackTexture packTexture)
         {

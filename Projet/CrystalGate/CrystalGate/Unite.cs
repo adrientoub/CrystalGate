@@ -197,7 +197,7 @@ namespace CrystalGate
 
                 double distance = Outil.DistanceUnites(this, unite);
                 bool ok = distance > Portee * Map.TailleTiles.X;
-                if (ok && suivreactuel > suivrelimite)
+                if (ok)
                 {
                     foreach (Unite u in Map.unites)
                         if (Outil.DistanceUnites(this, u) <= 2 * Map.TailleTiles.X)

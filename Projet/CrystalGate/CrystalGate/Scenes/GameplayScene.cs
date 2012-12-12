@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Threading;
 using System.Collections.Generic;
 using CrystalGate.Inputs;
@@ -22,6 +23,7 @@ namespace CrystalGate.Scenes
         private float pauseAlpha;
         private Map map; // La map
         Body boundary; // Les limtes du monde physique
+        int t = 0; // Compteur pour le pF
 
         public static List<SoundEffect> _effetsSonores = new List<SoundEffect> { }; // Tous les effets sonores.
         private List<Joueur> joueurs = new List<Joueur> { }; // joueurs sur la map
@@ -69,6 +71,9 @@ namespace CrystalGate.Scenes
                 for (int i = 0; i < 20; i++)
                     if(i % 2 == 0 && j % 2 == 0)
                         unites.Add(new Grunt(new Vector2(i, j), map, spriteBatch, pack));
+
+            for (int i = 0; i < unites.Count; i++)
+                unites[i].id = i;
         }
 
         protected override void UnloadContent() 
@@ -99,17 +104,20 @@ namespace CrystalGate.Scenes
                 foreach (Effet e in effets)
                     e.Update();
                 // Script temporaire pour se faire chasser par les unites
+                int nb = 10; // 10 unites par thread calculent leurs chemins
+                t += nb;
+                t %= PLusGrosId(unites); // pour eviter d'avoir des unités inactives
                 unites[0].uniteSuivi = null;
                 if (k.IsKeyDown(Keys.A))
                 {
                     foreach (Unite u in unites)
-                        if (u != unites[0])
+                        if (u != unites[0] && u.id >= t && u.id <= t + nb) // si t<=id<t + 10
                             u.Attaquer((Unite)unites[0]);
                 }
                 else
-                    foreach (Unite l in unites)
-                        if (l != unites[0])
-                            l.ObjectifListe.Clear();
+                    foreach (Unite u in unites)
+                        if(u != unites[0])
+                            u.ObjectifListe.Clear();
 
                 // Update de la physique
                 map.world.Step(1 / 60f);
@@ -132,6 +140,7 @@ namespace CrystalGate.Scenes
                 o.Draw();
             // DRAW STRINGS
             //spriteBatch.DrawString(gameFont, PathFinding.Draw(PathFinding.Initialiser(map.Taille,Vector2.Zero, unites)), Vector2.Zero, Color.White);
+            spriteBatch.DrawString(gameFont, t.ToString(), Vector2.Zero, Color.White);
             spriteBatch.End();
 
             if (TransitionPosition > 0 || pauseAlpha > 0)
@@ -165,6 +174,20 @@ namespace CrystalGate.Scenes
             bounds.Add(new Vector2(0, height));
 
             return bounds;
+        }
+
+        static int PLusGrosId(List<Objet> liste)
+        {
+            List<int> newList = new List<int> { };
+
+            var requete = from u in liste
+                          orderby u.id
+                          select new { u.id };
+
+            foreach (var n in requete)
+                newList.Add(n.id);
+
+            return newList[newList.Count - 1];
         }
     }
 }
