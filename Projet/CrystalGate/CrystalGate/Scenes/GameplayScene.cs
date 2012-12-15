@@ -64,13 +64,12 @@ namespace CrystalGate.Scenes
             // ajout joueurs
             joueurs.Add(new Joueur(map));
 
-            unites.Add(new Champion(new Vector2(11, 11), map, spriteBatch, pack));
             // ajout unités
             for (int j = 0; j < 20; j++)
-                for (int i = 0; i < 35; i++)
-                    if(i == 0)
+                for (int i = 0; i < 30; i++)
+                    if(i == 0 | i == 5)
                         unites.Add(new Grunt(new Vector2(i, j), map, spriteBatch, pack));
-                    else if(i == 30)
+                    else if(i == 25 | i == 20)
                         unites.Add(new Cavalier(new Vector2(i, j), map, spriteBatch, pack));
 
             for (int i = 0; i < unites.Count; i++)
@@ -109,15 +108,24 @@ namespace CrystalGate.Scenes
                 Random random = new Random();
 
                     foreach(Unite u in unites)
-                        if (u.uniteAttacked == null)
+                        //if (u.uniteAttacked == null)
                         {
+                            float lol = 100000;
+                            Unite lol2 = null;
                             foreach (Unite u2 in unites)
                             {
-                                if (u != u2 && Outil.DistanceUnites(u, u2) <= 2 * map.TailleTiles.X)
+                                
+                                if (u != u2)
                                 {
-                                    u.uniteAttacked = u2;
-                                    break;
+                                    float temp = Outil.DistanceUnites(u, u2);
+                                    if (temp < lol && u.ToString() != u2.ToString())
+                                    {
+                                        lol = temp;
+                                        lol2 = u2;
+                                        u.uniteAttacked = lol2;
+                                    }
                                 }
+                                
                             }
                         }
 

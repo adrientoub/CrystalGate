@@ -31,7 +31,7 @@ namespace CrystalGate
             Dommages = 1;
             effetUnite = new EffetSonore(0);
             nbFrameSonJoue = 0;
-            Vitesse_Attaque = 1f;
+            Vitesse_Attaque = 2f;
         }
 
         public override void Update(List<Objet> unitsOnMap, List<Effet> effets)
@@ -65,6 +65,7 @@ namespace CrystalGate
             {
                 if (Map.gametime.TotalGameTime.TotalMilliseconds - LastAttack > Vitesse_Attaque * 1000) // Si le cooldown est fini
                 {
+                    body.LinearVelocity = Vector2.Zero;
                     LastAttack = (float)Map.gametime.TotalGameTime.TotalMilliseconds; // On met à jour "l'heure de la dernière attaque"
                     // uniteSuivi = null;  Source de lags
 
@@ -108,8 +109,8 @@ namespace CrystalGate
         public virtual void Deplacer()
         {
             if (ObjectifListe.Count > 0)
-            {
-                body.Position = ConvertUnits.ToSimUnits(new Vector2((float)Math.Round(ConvertUnits.ToDisplayUnits(body.Position.X)), (float)Math.Round(ConvertUnits.ToDisplayUnits(body.Position.Y) )));
+            {  // Bug, je sais pas pouquoi
+               // body.Position = ConvertUnits.ToSimUnits(new Vector2((float)Math.Round(ConvertUnits.ToDisplayUnits(body.Position.X)), (float)Math.Round(ConvertUnits.ToDisplayUnits(body.Position.Y) )));
                 Vector2 VecMap = new Vector2(0, 0);
                 // HAUT GAUCHE
                 if (PositionTile.X > ObjectifListe[0].Position.X && PositionTile.Y > ObjectifListe[0].Position.Y)
