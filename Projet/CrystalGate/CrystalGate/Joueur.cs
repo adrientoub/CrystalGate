@@ -37,8 +37,11 @@ namespace CrystalGate
             /*foreach (Unite u in unites)
                 if ((int)(mouse.X / map.TailleTiles.X) == (int)u.PositionTile.X && (int)(mouse.Y / map.TailleTiles.Y) == (int)u.PositionTile.Y)
                     Selection = u;*/
-            Selection = (Unite)unites[0];
-            ((Unite)unites[0]).Drawlife = true;
+            if (unites.Count > 0)
+            {
+                Selection = (Unite)unites[0];
+                ((Unite)unites[0]).Drawlife = true;
+            }
         }
 
         public void DonnerOrdreDeplacer(Unite unite, Map map)

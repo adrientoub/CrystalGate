@@ -23,7 +23,6 @@ namespace CrystalGate.Scenes
         private float pauseAlpha;
         private Map map; // La map
         Body boundary; // Les limtes du monde physique
-        int t = 0; // Compteur pour le pF
 
         public static List<SoundEffect> _effetsSonores = new List<SoundEffect> { }; // Tous les effets sonores.
         private List<Joueur> joueurs = new List<Joueur> { }; // joueurs sur la map
@@ -58,19 +57,21 @@ namespace CrystalGate.Scenes
             boundary = BodyFactory.CreateLoopShape(map.world, bounds);
             boundary.CollisionCategories = Category.All;
             boundary.CollidesWith = Category.All;
-
+            
             // Les sons.
             _effetsSonores.Add(content.Load<SoundEffect>("sword1"));
 
             // ajout joueurs
             joueurs.Add(new Joueur(map));
 
-            unites.Add(new Cavalier(new Vector2(11, 11), map, spriteBatch, pack));
+            unites.Add(new Champion(new Vector2(11, 11), map, spriteBatch, pack));
             // ajout unités
             for (int j = 0; j < 20; j++)
-                for (int i = 0; i < 20; i++)
-                    if(i % 2 == 0 && j % 2 == 0)
+                for (int i = 0; i < 35; i++)
+                    if(i == 0)
                         unites.Add(new Grunt(new Vector2(i, j), map, spriteBatch, pack));
+                    else if(i == 30)
+                        unites.Add(new Cavalier(new Vector2(i, j), map, spriteBatch, pack));
 
             for (int i = 0; i < unites.Count; i++)
                 unites[i].id = i;
@@ -93,7 +94,7 @@ namespace CrystalGate.Scenes
             {
                 KeyboardState k = Keyboard.GetState();
                 // On update les infos de la map
-                map.Update(unites);
+                map.Update(unites, gameTime);
                 // On update les infos des unites
                 foreach (Unite u in unites)
                     u.Update(unites, effets);
@@ -103,21 +104,22 @@ namespace CrystalGate.Scenes
                 // On update les effets sur la carte
                 foreach (Effet e in effets)
                     e.Update();
-                // Script temporaire pour se faire chasser par les unites
-                int nb = 10; // 10 unites par thread calculent leurs chemins
-                t += nb;
-                t %= PLusGrosId(unites); // pour eviter d'avoir des unités inactives
-                unites[0].uniteSuivi = null;
-                if (k.IsKeyDown(Keys.A))
-                {
-                    foreach (Unite u in unites)
-                        if (u != unites[0] && u.id >= t && u.id <= t + nb) // si t<=id<t + 10
-                            u.Attaquer((Unite)unites[0]);
-                }
-                else
-                    foreach (Unite u in unites)
-                        if(u != unites[0])
-                            u.ObjectifListe.Clear();
+
+                // Script temporaire pourlancer la bataille
+                Random random = new Random();
+
+                    foreach(Unite u in unites)
+                        if (u.uniteAttacked == null)
+                        {
+                            foreach (Unite u2 in unites)
+                            {
+                                if (u != u2 && Outil.DistanceUnites(u, u2) <= 2 * map.TailleTiles.X)
+                                {
+                                    u.uniteAttacked = u2;
+                                    break;
+                                }
+                            }
+                        }
 
                 // Update de la physique
                 map.world.Step(1 / 60f);
@@ -140,7 +142,8 @@ namespace CrystalGate.Scenes
                 o.Draw();
             // DRAW STRINGS
             //spriteBatch.DrawString(gameFont, PathFinding.Draw(PathFinding.Initialiser(map.Taille,Vector2.Zero, unites)), Vector2.Zero, Color.White);
-            spriteBatch.DrawString(gameFont, t.ToString(), Vector2.Zero, Color.White);
+            if(unites.Count > 0)
+                spriteBatch.DrawString(gameFont, (unites[unites.Count - 1].uniteAttacked == null) ? "Il attaque pas" : "Il attaque!", Vector2.Zero, Color.White);
             spriteBatch.End();
 
             if (TransitionPosition > 0 || pauseAlpha > 0)
@@ -176,18 +179,6 @@ namespace CrystalGate.Scenes
             return bounds;
         }
 
-        static int PLusGrosId(List<Objet> liste)
-        {
-            List<int> newList = new List<int> { };
 
-            var requete = from u in liste
-                          orderby u.id
-                          select new { u.id };
-
-            foreach (var n in requete)
-                newList.Add(n.id);
-
-            return newList[newList.Count - 1];
-        }
     }
 }

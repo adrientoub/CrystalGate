@@ -5,6 +5,7 @@ using System.Text;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using FarseerPhysics.Dynamics;
+using Microsoft.Xna.Framework.Input;
 
 namespace CrystalGate
 {
@@ -16,6 +17,10 @@ namespace CrystalGate
         public Vector2 Taille { get; set; }
         public List<Objet> unites { get; set; }
         public World world { get; set; }
+        public GameTime gametime { get; set; }
+
+        public int compteur = 0;
+        public int pFParThread = 10; // 10 unites par thread calculent leurs chemins
 
         public Map(Texture2D sprite, Vector2 taille, Vector2 tailleTiles)
         {
@@ -26,15 +31,40 @@ namespace CrystalGate
             world = new World(Vector2.Zero);
         }
 
-        public void Update(List<Objet> unites)
+        public void Update(List<Objet> unites, GameTime GT)
         {
             this.unites = unites;
             Outil.RemoveDeadBodies(unites);
+            gametime = GT;
+
+            compteur += pFParThread; // Update du compteur pour le pF
+            int temp = PLusGrosId(unites);
+            compteur %= (temp != 0) ? temp : 1; // pour eviter d'avoir des unités inactives
+
+            KeyboardState k = Keyboard.GetState();
+
+            foreach (Unite u in unites)
+                if (u.uniteAttacked != null && !unites.Contains((Unite)u.uniteAttacked))
+                    u.uniteAttacked = null;
         }
 
         public void ClearEffects()
         {
 
+        }
+
+        static int PLusGrosId(List<Objet> liste)
+        {
+            List<int> newList = new List<int> { };
+
+            var requete = from u in liste
+                          orderby u.id
+                          select new { u.id };
+
+            foreach (var n in requete)
+                newList.Add(n.id);
+
+            return (newList.Count == 0) ? 0 : newList[newList.Count - 1];
         }
 
         /*public void DrawIso(SpriteBatch spriteBatch)

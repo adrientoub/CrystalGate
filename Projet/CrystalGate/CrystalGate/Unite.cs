@@ -15,6 +15,7 @@ namespace CrystalGate
         public float Vitesse { get; set; }
         public float Portee { get; set; }
         public int Dommages { get; set; }
+        public float Vitesse_Attaque { get; set; }
         protected EffetSonore effetUnite;
         protected int nbFrameSonJoue;
 
@@ -26,10 +27,11 @@ namespace CrystalGate
             // Constructeur par default d'une unité
             Vie = VieMax = 1;
             Vitesse = 1.0f;
-            Portee = 1; // 1 = Corps à corps
+            Portee = 2; // 2 = Corps à corps
             Dommages = 1;
             effetUnite = new EffetSonore(0);
             nbFrameSonJoue = 0;
+            Vitesse_Attaque = 1f;
         }
 
         public override void Update(List<Objet> unitsOnMap, List<Effet> effets)
@@ -39,6 +41,9 @@ namespace CrystalGate
             TestMort(effets);
             // On rafraichit la propriete suivante, elle est juste indicative et n'affecte pas le draw, mais le pathfinding
             PositionTile = new Vector2((int)(ConvertUnits.ToDisplayUnits(body.Position.X) / 32), (int)(ConvertUnits.ToDisplayUnits(body.Position.Y) / 32));
+
+            if (uniteAttacked != null)
+                Attaquer(uniteAttacked);
         }
 
         public virtual void TestMort(List<Effet> effets)
@@ -58,40 +63,44 @@ namespace CrystalGate
                 Suivre(unite);
             else
             {
-                // uniteSuivi = null;  Source de lags
-
-                /* Ce if else permet que les sons ne soient pas joués trop fréquemment. 
-                 * Mais je pense pas que les unités devraient attaquer aussi souvent.
-                 * Chaque attaque aura un cooldown (ou un temps en tout cas). Qui fera que le son sera joué (beaucoup) moins souvent.
-                 * Actuellement les unités attaquent en continu...
-                 */
-                if (nbFrameSonJoue == 0 || nbFrameSonJoue == 50) 
+                if (Map.gametime.TotalGameTime.TotalMilliseconds - LastAttack > Vitesse_Attaque * 1000) // Si le cooldown est fini
                 {
-                    effetUnite.Play();
-                    nbFrameSonJoue = 0;
-                }
-                else
-                    nbFrameSonJoue++;
+                    LastAttack = (float)Map.gametime.TotalGameTime.TotalMilliseconds; // On met à jour "l'heure de la dernière attaque"
+                    // uniteSuivi = null;  Source de lags
 
-                unite.Vie -= Dommages;
-                
-                if (Animation.Count == 0)
-                {
-                    AnimationCurrent = AnimationLimite;
-                    FlipH = false;
-                    float angle = Outil.AngleUnites(this, unite);
-                    
-                     if (unite.PositionTile.Y < this.PositionTile.Y)
-                        Animation = PackAnimation.AttaquerHaut();
-                     if (unite.PositionTile.X < this.PositionTile.X)
+                    /* Ce if else permet que les sons ne soient pas joués trop fréquemment. 
+                     * Mais je pense pas que les unités devraient attaquer aussi souvent.
+                     * Chaque attaque aura un cooldown (ou un temps en tout cas). Qui fera que le son sera joué (beaucoup) moins souvent.
+                     * Actuellement les unités attaquent en continu...
+                     */
+                    if (nbFrameSonJoue == 0 || nbFrameSonJoue == 50)
                     {
-                        FlipH = true;
-                        Animation = PackAnimation.AttaquerDroite();
+                        effetUnite.Play();
+                        nbFrameSonJoue = 0;
                     }
-                     if (unite.PositionTile.Y >= this.PositionTile.Y)
-                        Animation = PackAnimation.AttaquerBas();
-                     if (unite.PositionTile.Y >= this.PositionTile.Y)
-                         Animation = PackAnimation.AttaquerDroite();
+                    else
+                        nbFrameSonJoue++;
+
+                    unite.Vie -= Dommages;
+
+                    if (Animation.Count == 0)
+                    {
+                        AnimationCurrent = AnimationLimite;
+                        FlipH = false;
+                        float angle = Outil.AngleUnites(this, unite);
+
+                        if (unite.PositionTile.Y < this.PositionTile.Y)
+                            Animation = PackAnimation.AttaquerHaut();
+                        if (unite.PositionTile.X < this.PositionTile.X)
+                        {
+                            FlipH = true;
+                            Animation = PackAnimation.AttaquerDroite();
+                        }
+                        if (unite.PositionTile.Y >= this.PositionTile.Y)
+                            Animation = PackAnimation.AttaquerBas();
+                        if (unite.PositionTile.Y >= this.PositionTile.Y)
+                            Animation = PackAnimation.AttaquerDroite();
+                    }
                 }
             }
         }
@@ -193,8 +202,9 @@ namespace CrystalGate
 
         public void Suivre(Unite unite)
         {
-            List<Objet> liste = new List<Objet> { };
-
+            if (this.id >= Map.compteur && this.id <= Map.compteur + Map.pFParThread) // Si on a la possiblité d'obtnir un pF
+            {
+                List<Objet> liste = new List<Objet> { };
                 double distance = Outil.DistanceUnites(this, unite);
                 bool ok = distance > Portee * Map.TailleTiles.X;
                 if (ok)
@@ -221,8 +231,7 @@ namespace CrystalGate
                 }
                 else
                     suivreactuel++;
-
-                uniteSuivi = unite;
+            }
             
         }
 

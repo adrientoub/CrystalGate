@@ -38,7 +38,8 @@ namespace CrystalGate
         public bool Mort { get; set; }
         public List<Noeud> ObjectifListe { get; set; }
 
-        public Unite uniteSuivi { get; set; }
+        public float LastAttack { get; set; }
+        public Unite uniteAttacked { get; set; }
 
         public Objet(Vector2 Position, Map Map, SpriteBatch spriteBatch, PackTexture packTexture)
         {
@@ -61,7 +62,6 @@ namespace CrystalGate
             this.packTexture = packTexture;
             this.direction = Direction.Bas;
             this.FlipH = false;
-
         }
 
         bool body_OnCollision(Fixture fixtureA, Fixture fixtureB, FarseerPhysics.Dynamics.Contacts.Contact contact)
@@ -69,7 +69,7 @@ namespace CrystalGate
             Unite objet1 = (Unite)(fixtureA.Body.UserData);
             Unite objet2 = (Unite)(fixtureB.Body.UserData);
 
-            if (objet1.uniteSuivi == null)
+            if (objet1 is Champion)
             {
                 if (objet1.ObjectifListe.Count > 0)
                 {
