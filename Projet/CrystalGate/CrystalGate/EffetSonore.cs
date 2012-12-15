@@ -26,7 +26,8 @@ namespace CrystalGate
         {
             try
             {
-                son.Play();
+                if (!son.IsDisposed)
+                    son.Play();
             }
             catch (NoAudioHardwareException) // On ne lit pas l'audio si il n'y a pas de HP/casque (ça permet d'éviter un crash)
             {
