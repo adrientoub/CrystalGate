@@ -26,8 +26,9 @@ namespace CrystalGate
 
         public void Draw()
         {
+            string str = "Ici, faudrait une interface a la Diablo, ceci est juste un exemple";
             spritebatch.Draw(Bas, BasPosition, Color.White);
-            spritebatch.DrawString(gamefont, "Niveau : 10 \nVie : 100 / 200", new Vector2(System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width / 2, BasPosition.Y + Bas.Height / 2), Color.White); 
+            spritebatch.DrawString(gamefont, str, new Vector2(System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width / 2 - gamefont.MeasureString(str).X / 2, BasPosition.Y + Bas.Height / 2), Color.White); 
         }
     }
 }

@@ -17,9 +17,11 @@ namespace CrystalGate
         public int Dommages { get; set; }
         public float Vitesse_Attaque { get; set; }
         public int Defense { get; set; }
+
         protected EffetSonore effetUnite;
         protected int nbFrameSonJoue;
 
+        public List<Spell> spells { get; set; }
         public bool Drawlife { get; set; }
 
         public Unite(Vector2 Position, Map map, SpriteBatch spriteBatch, PackTexture packTexture)
@@ -34,6 +36,8 @@ namespace CrystalGate
             nbFrameSonJoue = 0;
             Vitesse_Attaque = 2f;
             Defense = 1;
+
+            spells = new List<Spell> { new Bump(this)};
         }
 
         public override void Update(List<Objet> unitsOnMap, List<Effet> effets)
@@ -112,7 +116,7 @@ namespace CrystalGate
         {
             if (ObjectifListe.Count > 0)
             {  // Bug, je sais pas pouquoi
-               // body.Position = ConvertUnits.ToSimUnits(new Vector2((float)Math.Round(ConvertUnits.ToDisplayUnits(body.Position.X)), (float)Math.Round(ConvertUnits.ToDisplayUnits(body.Position.Y) )));
+                // body.Position = ConvertUnits.ToSimUnits(new Vector2((float)Math.Round(ConvertUnits.ToDisplayUnits(body.Position.X)), (float)Math.Round(ConvertUnits.ToDisplayUnits(body.Position.Y) )));
                 Vector2 VecMap = new Vector2(0, 0);
                 // HAUT GAUCHE
                 if (PositionTile.X > ObjectifListe[0].Position.X && PositionTile.Y > ObjectifListe[0].Position.Y)
@@ -126,15 +130,15 @@ namespace CrystalGate
                 }
                 // HAUT DROITE
                 else if (PositionTile.X < ObjectifListe[0].Position.X && PositionTile.Y > ObjectifListe[0].Position.Y)
-                    {
-                        body.LinearVelocity = new Vector2(Vitesse / 1.41f, -Vitesse / 1.41f);
-                        FlipH = false;
+                {
+                    body.LinearVelocity = new Vector2(Vitesse / 1.41f, -Vitesse / 1.41f);
+                    FlipH = false;
 
-                        if (direction != Direction.HautDroite || Animation.Count == 0)
-                            Animation = PackAnimation.HautDroite();
-                        direction = Direction.HautDroite;
-                    }
-                    // BAS DROITE
+                    if (direction != Direction.HautDroite || Animation.Count == 0)
+                        Animation = PackAnimation.HautDroite();
+                    direction = Direction.HautDroite;
+                }
+                // BAS DROITE
                 else if (PositionTile.X < ObjectifListe[0].Position.X && PositionTile.Y < ObjectifListe[0].Position.Y)
                 {
                     body.LinearVelocity = new Vector2(Vitesse / 1.41f, Vitesse / 1.41f);
@@ -199,7 +203,7 @@ namespace CrystalGate
 
             }
             else
-                body.LinearVelocity = Vector2.Zero;
+                body.LinearVelocity *= 0.90f;
                
         }
 
@@ -236,6 +240,15 @@ namespace CrystalGate
                     suivreactuel++;
             }
             
+        }
+
+        public void Cast()
+        {
+            if (Map.gametime.TotalGameTime.TotalMilliseconds - spells[0].LastCast > spells[0].Cooldown * 1000) // Si le cooldown est fini
+            {
+                spells[0].LastCast = (float)Map.gametime.TotalGameTime.TotalMilliseconds;
+                spells[0].Update();
+            }
         }
 
         public void Patrouiller(Vector2 point1, Vector2 point2)

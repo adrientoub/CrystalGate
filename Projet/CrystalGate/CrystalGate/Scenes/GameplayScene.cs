@@ -45,12 +45,13 @@ namespace CrystalGate.Scenes
             SpriteBatch spriteBatch = SceneManager.SpriteBatch;
             gameFont = content.Load<SpriteFont>("menufont");
 
-            // Pack de texture (Contient toutes les sprites des unites)
+            // Pack de texture (Contient toutes les sprites des unites et des sorts)
             PackTexture pack = new PackTexture(content.Load<Texture2D>("blank"));
             pack.unites.Add(content.Load<Texture2D>("knight"));
             pack.unites.Add(content.Load<Texture2D>("grunt"));
+            pack.sorts.Add(content.Load<Texture2D>("grunt"));
             // Interface
-            //Interface = new UI(content.Load<Texture2D>("UI"), spriteBatch, gameFont);
+            Interface = new UI(content.Load<Texture2D>("UI"), spriteBatch, gameFont);
 
             // Creation de la carte
             map = new Map(content.Load<Texture2D>("tile"), new Vector2((int)(this.Game.Window.ClientBounds.Width / 32), (int)(this.Game.Window.ClientBounds.Height / 32) + 1), new Vector2(32, 32));
@@ -69,7 +70,7 @@ namespace CrystalGate.Scenes
 
             // ajout unités
             for (int j = 0; j < 20; j++)
-                for (int i = 0; i < 30; i++)
+                for (int i = 0; i < 35; i++)
                     if (i == 0 | i == 4 | i == 5)
                         unites.Add(new Grunt(new Vector2(i, j), map, spriteBatch, pack));
                     else if(i == 20 | i == 24 | i == 25)
@@ -107,30 +108,29 @@ namespace CrystalGate.Scenes
                 foreach (Effet e in effets)
                     e.Update();
 
-                // Script temporaire pourlancer la bataille
+                // Script temporaire pour lancer la bataille
                 Random random = new Random();
-
-                    foreach(Unite u in unites)
-                        //if (u.uniteAttacked == null)
+                foreach (Unite u in unites)
+                //if (u.uniteAttacked == null)
+                {
+                    float lol = 100000;
+                    Unite lol2 = null;
+                    foreach (Unite u2 in unites)
+                        if (u != u2)
                         {
-                            float lol = 100000;
-                            Unite lol2 = null;
-                            foreach (Unite u2 in unites)
+                            float temp = Outil.DistanceUnites(u, u2);
+                            if (temp < lol && u.ToString() != u2.ToString())
                             {
-                                
-                                if (u != u2)
-                                {
-                                    float temp = Outil.DistanceUnites(u, u2);
-                                    if (temp < lol && u.ToString() != u2.ToString())
-                                    {
-                                        lol = temp;
-                                        lol2 = u2;
-                                        u.uniteAttacked = lol2;
-                                    }
-                                }
-                                
+                                lol = temp;
+                                lol2 = u2;
+                                u.uniteAttacked = lol2;
                             }
                         }
+                }
+
+                // Script temporaire pour lancer un sort
+                    if (k.IsKeyDown(Keys.A))
+                        ((Unite)unites[0]).Cast();
 
                 // Update de la physique
                 map.world.Step(1 / 60f);
@@ -152,9 +152,10 @@ namespace CrystalGate.Scenes
             foreach (Objet o in unites)
                 o.Draw();
             // DRAW INTERFACE
-            //Interface.Draw();
+            Interface.Draw();
             // DRAW STRINGS
-            //spriteBatch.DrawString(gameFont, _effetsSonores.Count.ToString(), Vector2.Zero, Color.White);
+            if(map.unites != null && unites.Count > 0)
+            spriteBatch.DrawString(gameFont,((Unite)unites[0]).spells[0].unite.body.Position.ToString(), Vector2.Zero, Color.White);
             /*if(unites.Count > 0)
                 spriteBatch.DrawString(gameFont, (unites[unites.Count - 1].uniteAttacked == null) ? "Il attaque pas" : "Il attaque!", Vector2.Zero, Color.White);*/
             spriteBatch.End();

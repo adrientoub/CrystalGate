@@ -21,7 +21,7 @@ namespace CrystalGate
 
         public static float AngleUnites(Objet unite1, Objet unite2)
         {
-            return (float)Math.Atan2(Math.Abs(unite1.body.Position.Y - unite2.body.Position.Y), Math.Abs(unite1.body.Position.X - unite2.body.Position.X));
+            return (float)Math.Atan2(unite1.body.Position.Y - unite2.body.Position.Y, unite1.body.Position.X - unite2.body.Position.X);
         }
 
         public static float DistanceUnites(Objet unite1, Objet unite2)
@@ -36,40 +36,13 @@ namespace CrystalGate
                     unites.RemoveAt(i);
         }
 
-        /*public static void CheckCollision(List<Objet> unites)
+        public static List<Unite> ObjetToUnits(List<Objet> objets)
         {
-            Unite same = null;
+            List<Unite> u = new List<Unite> { };
+            foreach (Objet o in objets)
+                u.Add((Unite)o);
 
-            foreach(Unite u in unites)
-                foreach (Unite u2 in unites)
-                    if (u != u2 && same != u)
-                        if (Collision(u, u2))
-                        {
-                            same = u2;
-                            u.collideWith = u2;
-                            u2.collideWith = u;
-
-                            if (u.ObjectifListe.Count > 0)
-                            {
-                                Vector2 position = new Vector2((int)(ConvertUnits.ToDisplayUnits(u.body.Position.X) / 32), (int)(ConvertUnits.ToDisplayUnits(u.body.Position.Y) / 32));
-                                List<Noeud> lol = PathFinding.TrouverChemin(position, u.ObjectifListe[u.ObjectifListe.Count - 1].Position, u.Map.Taille, new List<Objet> { u2 }, false);
-                                if (lol != null)
-                                    u.ObjectifListe = lol;
-                            }
-
-                            
-                        }
-                    else
-                        continue;
+            return u;
         }
-
-        public static void DebugCollision(List<Objet> unites)
-        {
-            List<Unite> unitesConvert = ListObjetToUnite(unites);
-
-            foreach (Unite u in unitesConvert)
-                if (u.collideWith != null && !Collision(u, u.collideWith))
-                    u.collideWith = null;
-        }*/
     }
 }
