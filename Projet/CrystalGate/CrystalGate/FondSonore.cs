@@ -13,13 +13,18 @@ namespace CrystalGate
         {
             MediaPlayer.Volume = 100; // Mets le volume à fond (nécessaire pour éviter un bug)
             MediaLibrary sampleMediaLibrary = new MediaLibrary();
-            Random rand = new Random();
-            // generate a random valid index into Albums
-            int i = rand.Next(0, sampleMediaLibrary.Albums.Count - 1);
-            int j = rand.Next(0, sampleMediaLibrary.Albums[i].Songs.Count - 1);
 
-            // play the first track from the album
-            MediaPlayer.Play(sampleMediaLibrary.Albums[i].Songs[j]);
+            if (sampleMediaLibrary.Albums.Count != 0)
+            {
+                Random rand = new Random();
+                // generate a random valid index into Albums
+                int i = rand.Next(0, sampleMediaLibrary.Albums.Count - 1);
+                int j = rand.Next(0, sampleMediaLibrary.Albums[i].Songs.Count - 1);
+                // play the first track from the album
+                MediaPlayer.Play(sampleMediaLibrary.Albums[i].Songs[j]);
+            }
+
+
         }
         public static void Pause() // Pause pour quand dans les menus
         {
