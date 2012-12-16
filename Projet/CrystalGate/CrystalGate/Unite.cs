@@ -16,6 +16,7 @@ namespace CrystalGate
         public float Portee { get; set; }
         public int Dommages { get; set; }
         public float Vitesse_Attaque { get; set; }
+        public int Defense { get; set; }
         protected EffetSonore effetUnite;
         protected int nbFrameSonJoue;
 
@@ -32,6 +33,7 @@ namespace CrystalGate
             effetUnite = new EffetSonore(0);
             nbFrameSonJoue = 0;
             Vitesse_Attaque = 2f;
+            Defense = 1;
         }
 
         public override void Update(List<Objet> unitsOnMap, List<Effet> effets)
@@ -82,7 +84,7 @@ namespace CrystalGate
                     else
                         nbFrameSonJoue++;
 
-                    unite.Vie -= Dommages;
+                    unite.Vie -= Dommages - unite.Defense;
 
                     if (Animation.Count == 0)
                     {

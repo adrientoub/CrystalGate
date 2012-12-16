@@ -23,6 +23,7 @@ namespace CrystalGate.Scenes
         private float pauseAlpha;
         private Map map; // La map
         Body boundary; // Les limtes du monde physique
+        UI Interface;
 
         public static List<SoundEffect> _effetsSonores = new List<SoundEffect> { }; // Tous les effets sonores.
         private List<Joueur> joueurs = new List<Joueur> { }; // joueurs sur la map
@@ -48,6 +49,8 @@ namespace CrystalGate.Scenes
             PackTexture pack = new PackTexture(content.Load<Texture2D>("blank"));
             pack.unites.Add(content.Load<Texture2D>("knight"));
             pack.unites.Add(content.Load<Texture2D>("grunt"));
+            // Interface
+            //Interface = new UI(content.Load<Texture2D>("UI"), spriteBatch, gameFont);
 
             // Creation de la carte
             map = new Map(content.Load<Texture2D>("tile"), new Vector2((int)(this.Game.Window.ClientBounds.Width / 32), (int)(this.Game.Window.ClientBounds.Height / 32) + 1), new Vector2(32, 32));
@@ -67,9 +70,9 @@ namespace CrystalGate.Scenes
             // ajout unités
             for (int j = 0; j < 20; j++)
                 for (int i = 0; i < 30; i++)
-                    if(i == 0 | i == 5)
+                    if (i == 0 | i == 4 | i == 5)
                         unites.Add(new Grunt(new Vector2(i, j), map, spriteBatch, pack));
-                    else if(i == 25 | i == 20)
+                    else if(i == 20 | i == 24 | i == 25)
                         unites.Add(new Cavalier(new Vector2(i, j), map, spriteBatch, pack));
 
             for (int i = 0; i < unites.Count; i++)
@@ -148,8 +151,10 @@ namespace CrystalGate.Scenes
             // DRAW UNITES
             foreach (Objet o in unites)
                 o.Draw();
+            // DRAW INTERFACE
+            Interface.Draw();
             // DRAW STRINGS
-            //spriteBatch.DrawString(gameFont, PathFinding.Draw(PathFinding.Initialiser(map.Taille,Vector2.Zero, unites)), Vector2.Zero, Color.White);
+            //spriteBatch.DrawString(gameFont, _effetsSonores.Count.ToString(), Vector2.Zero, Color.White);
             if(unites.Count > 0)
                 spriteBatch.DrawString(gameFont, (unites[unites.Count - 1].uniteAttacked == null) ? "Il attaque pas" : "Il attaque!", Vector2.Zero, Color.White);
             spriteBatch.End();
