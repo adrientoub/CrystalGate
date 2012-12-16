@@ -152,11 +152,11 @@ namespace CrystalGate.Scenes
             foreach (Objet o in unites)
                 o.Draw();
             // DRAW INTERFACE
-            Interface.Draw();
+            //Interface.Draw();
             // DRAW STRINGS
             //spriteBatch.DrawString(gameFont, _effetsSonores.Count.ToString(), Vector2.Zero, Color.White);
-            if(unites.Count > 0)
-                spriteBatch.DrawString(gameFont, (unites[unites.Count - 1].uniteAttacked == null) ? "Il attaque pas" : "Il attaque!", Vector2.Zero, Color.White);
+            /*if(unites.Count > 0)
+                spriteBatch.DrawString(gameFont, (unites[unites.Count - 1].uniteAttacked == null) ? "Il attaque pas" : "Il attaque!", Vector2.Zero, Color.White);*/
             spriteBatch.End();
 
             if (TransitionPosition > 0 || pauseAlpha > 0)
