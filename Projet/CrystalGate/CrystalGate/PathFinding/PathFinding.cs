@@ -164,7 +164,6 @@ namespace CrystalGate
 
         public static List<Noeud> TrouverChemin(Vector2 depart, Vector2 arrivee, Vector2 taille, List<Objet> unites, bool champion)
         {
-
             Noeud[,] map = Initialiser(taille, arrivee, unites); // INITIALISATION DU POIDS DES NOEUDS ET DES OBSTACLES
             List<Noeud> closedList = new List<Noeud> { };
 

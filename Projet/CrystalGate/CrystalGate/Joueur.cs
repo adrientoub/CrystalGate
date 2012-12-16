@@ -9,53 +9,47 @@ namespace CrystalGate
 {
     public class Joueur
     {
-        public MouseState mouse { get; set; }
-        public Unite Selection { get; set; }
-        public Map map { get; set; }
-        public List<Objet> unites { get; set; }
+        public Unite champion { get; set; }
 
-        public Joueur(Map map)
+        MouseState mouse { get; set; }
+
+        public Joueur(Unite champ)
         {
-            this.map = map;
+            champion = champ;
+            // Graphique
+            champion.Sprite = champ.packTexture.unites[1];
+            champion.Tiles = new Vector2(380 / 5, 600 / 11);
+
+            // Statistiques
+            champion.Vie = champ.VieMax = 100;
+            champion.Vitesse = 2.0f;
+            champion.Portee = 2f; // 2 = Corps à corps
+            champion.Dommages = 20;
+            champion.Drawlife = true;
             mouse = Mouse.GetState();
         }
 
         public void Update(List<Objet> unites)
         {
             mouse = Mouse.GetState();
-
-            //if (mouse.LeftButton == ButtonState.Pressed)
-                UpdateSelection(unites);
-
+            // Pour se déplacer
             if (mouse.RightButton == ButtonState.Pressed)
-                DonnerOrdreDeplacer(Selection, map);
-            this.unites = unites;
-        }
+                DonnerOrdreDeplacer(champion, champion.Map);
 
-        private void UpdateSelection(List<Objet> unites)
-        {
+            //this.unites = unites;
             /*foreach (Unite u in unites)
                 if ((int)(mouse.X / map.TailleTiles.X) == (int)u.PositionTile.X && (int)(mouse.Y / map.TailleTiles.Y) == (int)u.PositionTile.Y)
-                    Selection = u;*/
-            if (unites.Count > 0)
-            {
-                Selection = (Unite)unites[0];
-                ((Unite)unites[0]).Drawlife = true;
-            }
+        Selection = u;*/
         }
 
         public void DonnerOrdreDeplacer(Unite unite, Map map)
         {
-
-            if (Selection != null)
-            {
-                Vector2 lol = new Vector2((int)(ConvertUnits.ToDisplayUnits(unite.body.Position.X) / 32), (int)(ConvertUnits.ToDisplayUnits(unite.body.Position.Y) / 32));
-                Vector2 ObjectifPoint = new Vector2(mouse.X, mouse.Y) / map.TailleTiles;
-                ObjectifPoint = new Vector2((int)ObjectifPoint.X, (int)ObjectifPoint.Y);
-                List<Noeud> chemin = PathFinding.TrouverChemin(lol, ObjectifPoint, unite.Map.Taille, new List<Objet> { }, false);
+            Vector2 ObjectifPoint = new Vector2(mouse.X, mouse.Y) / map.TailleTiles;
+            //ObjectifPoint = new Vector2((int)ObjectifPoint.X, (int)ObjectifPoint.Y);
+                
+            List<Noeud> chemin = PathFinding.TrouverChemin(champion.PositionTile, ObjectifPoint, unite.Map.Taille, new List<Objet> { }, false);
                 if (chemin != null)
                     unite.ObjectifListe = chemin;
-            }
         }
     }
 }

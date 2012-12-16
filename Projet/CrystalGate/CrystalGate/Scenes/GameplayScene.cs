@@ -49,7 +49,7 @@ namespace CrystalGate.Scenes
             PackTexture pack = new PackTexture(content.Load<Texture2D>("blank"));
             pack.unites.Add(content.Load<Texture2D>("knight"));
             pack.unites.Add(content.Load<Texture2D>("grunt"));
-            pack.sorts.Add(content.Load<Texture2D>("grunt"));
+            pack.sorts.Add(content.Load<Texture2D>("bouclierfoudre"));
             // Interface
             Interface = new UI(content.Load<Texture2D>("UI"), spriteBatch, gameFont);
 
@@ -66,11 +66,12 @@ namespace CrystalGate.Scenes
             _effetsSonores.Add(content.Load<SoundEffect>("sword1"));
 
             // ajout joueurs
-            joueurs.Add(new Joueur(map));
+            joueurs.Add(new Joueur(new Unite(new Vector2(2, 2), map, spriteBatch, pack)));
+            unites.Add(joueurs[0].champion);
 
             // ajout unités
             for (int j = 0; j < 20; j++)
-                for (int i = 0; i < 35; i++)
+                for (int i = 0; i < 30; i++)
                     if (i == 0 | i == 4 | i == 5)
                         unites.Add(new Grunt(new Vector2(i, j), map, spriteBatch, pack));
                     else if(i == 20 | i == 24 | i == 25)
@@ -149,16 +150,17 @@ namespace CrystalGate.Scenes
             foreach (Effet e in effets)
                 e.Draw(spriteBatch);
             // DRAW UNITES
-            foreach (Objet o in unites)
+            foreach (Unite o in unites)
                 o.Draw();
             // DRAW INTERFACE
             Interface.Draw();
+            
             // DRAW STRINGS
-            if(map.unites != null && unites.Count > 0)
+            /*if(map.unites != null && unites.Count > 0)
             spriteBatch.DrawString(gameFont,((Unite)unites[0]).spells[0].unite.body.Position.ToString(), Vector2.Zero, Color.White);
-            /*if(unites.Count > 0)
-                spriteBatch.DrawString(gameFont, (unites[unites.Count - 1].uniteAttacked == null) ? "Il attaque pas" : "Il attaque!", Vector2.Zero, Color.White);*/
-            spriteBatch.End();
+            if(unites.Count > 0)
+                spriteBatch.DrawString(gameFont, (unites[unites.Count - 1].uniteAttacked == null) ? "Il attaque pas" : "Il attaque!", Vector2.Zero, Color.White);
+            */spriteBatch.End();
 
             if (TransitionPosition > 0 || pauseAlpha > 0)
             {

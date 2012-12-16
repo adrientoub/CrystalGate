@@ -69,6 +69,28 @@ namespace CrystalGate
                 Suivre(unite);
             else
             {
+                // Fais (au peu près) regarder l'unité vers l'unité attaqué
+                if (Animation.Count == 0)
+                {
+                    AnimationCurrent = AnimationLimite;
+                    FlipH = false;
+                    float angle = Outil.AngleUnites(this, unite);
+
+                    if (unite.PositionTile.Y < this.PositionTile.Y)
+                        direction = Direction.Haut;
+
+                    if (unite.PositionTile.X < this.PositionTile.X)
+                    {
+                        FlipH = true;
+                        direction = Direction.Gauche;
+                    }
+                    if (unite.PositionTile.Y >= this.PositionTile.Y)
+                        direction = Direction.Bas;
+
+                    if (unite.PositionTile.Y >= this.PositionTile.Y)
+                        direction = Direction.Droite;
+                }
+
                 if (Map.gametime.TotalGameTime.TotalMilliseconds - LastAttack > Vitesse_Attaque * 1000) // Si le cooldown est fini
                 {
                     body.LinearVelocity = Vector2.Zero;
@@ -97,16 +119,26 @@ namespace CrystalGate
                         float angle = Outil.AngleUnites(this, unite);
 
                         if (unite.PositionTile.Y < this.PositionTile.Y)
+                        {
                             Animation = PackAnimation.AttaquerHaut();
+                            direction = Direction.Haut;
+                        }
                         if (unite.PositionTile.X < this.PositionTile.X)
                         {
                             FlipH = true;
                             Animation = PackAnimation.AttaquerDroite();
+                            direction = Direction.Gauche;
                         }
                         if (unite.PositionTile.Y >= this.PositionTile.Y)
+                        {
                             Animation = PackAnimation.AttaquerBas();
+                            direction = Direction.Bas;
+                        }
                         if (unite.PositionTile.Y >= this.PositionTile.Y)
+                        {
                             Animation = PackAnimation.AttaquerDroite();
+                            direction = Direction.Droite;
+                        }
                     }
                 }
             }

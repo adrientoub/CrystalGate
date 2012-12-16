@@ -29,6 +29,7 @@ namespace CrystalGate
             TailleTiles = tailleTiles;
             Taille = taille;
             world = new World(Vector2.Zero);
+            unites = new List<Objet> { };
         }
 
         public void Update(List<Objet> unites, GameTime GT)

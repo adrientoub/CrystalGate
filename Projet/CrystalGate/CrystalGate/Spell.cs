@@ -29,7 +29,7 @@ namespace CrystalGate
 
         public virtual void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(SpriteBouton, new Vector2(100, 100), Color.White);
+            spriteBatch.Draw(SpriteBouton, new Vector2(780, 580), Color.White);
         }
     }
 }
