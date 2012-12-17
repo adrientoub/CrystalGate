@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Content;
 
 namespace CrystalGate
 {
-    class UI
+    public class UI
     {
         public Texture2D Bas { get; set; }
         public Rectangle BasPosition { get; set; }
@@ -24,11 +24,16 @@ namespace CrystalGate
             gamefont = gf;
         }
 
+        public void Update()
+        {
+
+        }
+
         public void Draw()
         {
             string str = "Ici, faudrait une interface a la Diablo, ceci est juste un exemple";
             spritebatch.Draw(Bas, BasPosition, Color.White);
-            spritebatch.DrawString(gamefont, str, new Vector2(System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width / 2 - gamefont.MeasureString(str).X / 2, BasPosition.Y + Bas.Height / 2), Color.White); 
+            spritebatch.DrawString(gamefont, str, new Vector2(BasPosition.X + System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width / 2 - gamefont.MeasureString(str).X / 2, BasPosition.Y + Bas.Height / 2), Color.White); 
         }
     }
 }

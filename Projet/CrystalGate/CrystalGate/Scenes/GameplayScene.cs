@@ -23,7 +23,6 @@ namespace CrystalGate.Scenes
         private float pauseAlpha;
         private Map map; // La map
         Body boundary; // Les limtes du monde physique
-        UI Interface;
 
         public static List<SoundEffect> _effetsSonores = new List<SoundEffect> { }; // Tous les effets sonores.
         private List<Joueur> joueurs = new List<Joueur> { }; // joueurs sur la map
@@ -41,7 +40,7 @@ namespace CrystalGate.Scenes
         {
             if (content == null)
                 content = new ContentManager(SceneManager.Game.Services, "Content");
-            
+
             SpriteBatch spriteBatch = SceneManager.SpriteBatch;
             gameFont = content.Load<SpriteFont>("menufont");
 
@@ -50,11 +49,9 @@ namespace CrystalGate.Scenes
             pack.unites.Add(content.Load<Texture2D>("knight"));
             pack.unites.Add(content.Load<Texture2D>("grunt"));
             pack.sorts.Add(content.Load<Texture2D>("bouclierfoudre"));
-            // Interface
-            Interface = new UI(content.Load<Texture2D>("UI"), spriteBatch, gameFont);
 
             // Creation de la carte
-            map = new Map(content.Load<Texture2D>("tile"), new Vector2((int)(this.Game.Window.ClientBounds.Width / 32), (int)(this.Game.Window.ClientBounds.Height / 32) + 1), new Vector2(32, 32));
+            map = new Map(content.Load<Texture2D>("tile"), new Vector2((int)(this.Game.Window.ClientBounds.Width / 32) * 2, (int)(this.Game.Window.ClientBounds.Height / 32) + 1) * 2, new Vector2(32, 32));
 
             // Creation de la physique de la carte
             var bounds = GetBounds();
@@ -69,14 +66,18 @@ namespace CrystalGate.Scenes
             joueurs.Add(new Joueur(new Unite(new Vector2(2, 2), map, spriteBatch, pack)));
             unites.Add(joueurs[0].champion);
 
-            // ajout unités
-            for (int j = 0; j < 20; j++)
-                for (int i = 0; i < 30; i++)
-                    if (i == 0 | i == 4 | i == 5)
-                        unites.Add(new Grunt(new Vector2(i, j), map, spriteBatch, pack));
-                    else if(i == 20 | i == 24 | i == 25)
-                        unites.Add(new Cavalier(new Vector2(i, j), map, spriteBatch, pack));
+            // Interface
+            UI Interface = new UI(content.Load<Texture2D>("UI"), spriteBatch, gameFont);
+            joueurs[0].Interface = Interface;
 
+            // ajout unités
+            for (int j = 0; j < map.Taille.Y / 2; j++)
+                for (int i = 0; i < map.Taille.X; i++)
+                    if (i == 0 | i == 4)
+                        unites.Add(new Grunt(new Vector2(i, j), map, spriteBatch, pack));
+                    else if (i == 20 | i == 24)
+                        unites.Add(new Cavalier(new Vector2(i, j), map, spriteBatch, pack));
+            // fixe l'id de toutes les unités
             for (int i = 0; i < unites.Count; i++)
                 unites[i].id = i;
         }
@@ -96,6 +97,7 @@ namespace CrystalGate.Scenes
 
             if (IsActive) // Si le jeu tourne (en gros)
             {
+                joueurs[0].Update(unites);
                 KeyboardState k = Keyboard.GetState();
                 // On update les infos de la map
                 map.Update(unites, gameTime);
@@ -143,7 +145,7 @@ namespace CrystalGate.Scenes
             SceneManager.GraphicsDevice.Clear(ClearOptions.Target, Color.Orange, 0, 0);
             SpriteBatch spriteBatch = SceneManager.SpriteBatch;
 
-            spriteBatch.Begin();
+            spriteBatch.Begin(0, null, null, null, null, null, joueurs[0].camera.CameraMatrix);
             // DRAW MAP
             map.Draw(spriteBatch);
             // DRAW EFFETS
@@ -153,7 +155,7 @@ namespace CrystalGate.Scenes
             foreach (Unite o in unites)
                 o.Draw();
             // DRAW INTERFACE
-            Interface.Draw();
+            joueurs[0].Interface.Draw();
             
             // DRAW STRINGS
             /*if(map.unites != null && unites.Count > 0)
