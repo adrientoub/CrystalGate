@@ -134,7 +134,6 @@
     <Compile Include="EffetSonore.cs" />
     <Compile Include="Unite.cs" />
     <Compile Include="PackAnimation.cs" />
-    <Compile Include="Champion.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="Inputs\InputState.cs" />
     <Compile Include="Objet.cs" />

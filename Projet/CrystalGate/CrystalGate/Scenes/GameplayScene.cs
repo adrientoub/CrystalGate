@@ -71,11 +71,11 @@ namespace CrystalGate.Scenes
             joueurs[0].Interface = Interface;
 
             // ajout unités
-            for (int j = 0; j < map.Taille.Y / 2; j++)
+            for (int j = 0; j < map.Taille.Y / 4; j++)
                 for (int i = 0; i < map.Taille.X; i++)
-                    if (i == 0 | i == 4)
+                    if (i == 2 | i == 4)
                         unites.Add(new Grunt(new Vector2(i, j), map, spriteBatch, pack));
-                    else if (i == 20 | i == 24)
+                    else if (i == 20 | i == 22)
                         unites.Add(new Cavalier(new Vector2(i, j), map, spriteBatch, pack));
             // fixe l'id de toutes les unités
             for (int i = 0; i < unites.Count; i++)
@@ -114,7 +114,6 @@ namespace CrystalGate.Scenes
                 // Script temporaire pour lancer la bataille
                 Random random = new Random();
                 foreach (Unite u in unites)
-                //if (u.uniteAttacked == null)
                 {
                     float lol = 100000;
                     Unite lol2 = null;
@@ -122,7 +121,7 @@ namespace CrystalGate.Scenes
                         if (u != u2)
                         {
                             float temp = Outil.DistanceUnites(u, u2);
-                            if (temp < lol && u.ToString() != u2.ToString())
+                            if (temp < lol && u.ToString() != u2.ToString() && u2.ToString() != joueurs[0].champion.ToString())
                             {
                                 lol = temp;
                                 lol2 = u2;
@@ -142,7 +141,7 @@ namespace CrystalGate.Scenes
 
         public override void Draw(GameTime gameTime)
         {
-            SceneManager.GraphicsDevice.Clear(ClearOptions.Target, Color.Orange, 0, 0);
+            SceneManager.GraphicsDevice.Clear(ClearOptions.Target, Color.Black, 0, 0);
             SpriteBatch spriteBatch = SceneManager.SpriteBatch;
 
             spriteBatch.Begin(0, null, null, null, null, null, joueurs[0].camera.CameraMatrix);
@@ -158,9 +157,7 @@ namespace CrystalGate.Scenes
             joueurs[0].Interface.Draw();
             
             // DRAW STRINGS
-            /*if(map.unites != null && unites.Count > 0)
-            spriteBatch.DrawString(gameFont,((Unite)unites[0]).spells[0].unite.body.Position.ToString(), Vector2.Zero, Color.White);
-            if(unites.Count > 0)
+            /*if(unites.Count > 0)
                 spriteBatch.DrawString(gameFont, (unites[unites.Count - 1].uniteAttacked == null) ? "Il attaque pas" : "Il attaque!", Vector2.Zero, Color.White);
             */spriteBatch.End();
 
@@ -196,7 +193,5 @@ namespace CrystalGate.Scenes
 
             return bounds;
         }
-
-
     }
 }

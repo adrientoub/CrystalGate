@@ -19,6 +19,7 @@ namespace CrystalGate
         public Joueur(Unite champ)
         {
             champion = champ;
+
             // Graphique
             champion.Sprite = champ.packTexture.unites[1];
             champion.Tiles = new Vector2(380 / 5, 600 / 11);
@@ -29,9 +30,9 @@ namespace CrystalGate
             champion.Portee = 2f; // 2 = Corps à corps
             champion.Dommages = 20;
             champion.Drawlife = true;
+            champion.isAChamp = true;
 
             camera = new Camera2D(Vector2.One);
-
         }
 
         public void Update(List<Objet> unites)
@@ -46,7 +47,7 @@ namespace CrystalGate
 
         public void DonnerOrdreDeplacer(Unite unite, Map map)
         {
-            Vector2 ObjectifPoint = new Vector2(mouse.X, mouse.Y) / map.TailleTiles;
+            Vector2 ObjectifPoint = new Vector2(camera.Position.X + mouse.X, camera.Position.Y + mouse.Y) / map.TailleTiles;
             ObjectifPoint = new Vector2((int)ObjectifPoint.X, (int)ObjectifPoint.Y);
                 
             List<Noeud> chemin = PathFinding.TrouverChemin(champion.PositionTile, ObjectifPoint, unite.Map.Taille, new List<Objet> { }, false);

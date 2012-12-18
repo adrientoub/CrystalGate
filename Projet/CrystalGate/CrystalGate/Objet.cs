@@ -20,6 +20,7 @@ namespace CrystalGate
         public Map Map { get; set; }
         public Body body { get; set; }
         public int id { get; set; }
+        public bool isAChamp { get; set; }
 
         public List<Vector2> Animation { get; set; }
         public PackTexture packTexture { get; set; }
@@ -69,7 +70,7 @@ namespace CrystalGate
             Unite objet1 = (Unite)(fixtureA.Body.UserData);
             Unite objet2 = (Unite)(fixtureB.Body.UserData);
 
-            if (objet1 is Champion)
+            if (objet1.isAChamp)
             {
                 if (objet1.ObjectifListe.Count > 0)
                 {
