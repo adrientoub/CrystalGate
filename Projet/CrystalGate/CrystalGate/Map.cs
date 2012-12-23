@@ -21,6 +21,7 @@ namespace CrystalGate
 
         public int compteur = 0;
         public int pFParThread = 10; // 10 unites par thread calculent leurs chemins
+        private byte[] tab;
 
         public Map(Texture2D sprite, Vector2 taille, Vector2 tailleTiles)
         {
@@ -30,6 +31,7 @@ namespace CrystalGate
             Taille = taille;
             world = new World(Vector2.Zero);
             unites = new List<Objet> { };
+            tab = new byte[] { 3, 4,6,7,8,9,10};
         }
 
         public void Update(List<Objet> unites, GameTime GT)
@@ -106,14 +108,14 @@ namespace CrystalGate
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            int lengthx = 32;
-            int lengthy = 32;
-
-            Vector2 _posDepart = new Vector2(100, 100);
             for (int i = 0; i < Cellules.GetLength(0); i++) //On parcourt les lignes du tableau
                 for (int j = 0; j < Cellules.GetLength(1); j++) //On parcourt les colonnes du tableau
-                        spriteBatch.Draw(Sprite, new Vector2(i * lengthx, j * lengthy), Color.White);
-
+                {
+                    Random rand = new Random( i * j);
+                    int x = 32 * tab[rand.Next(1,tab.Length - 1)];
+                    int y = 32 * 19; // a choisir en fonction de ce qu'on veut
+                    spriteBatch.Draw(Sprite, new Vector2(i * TailleTiles.X, j * TailleTiles.Y), new Rectangle(x + (x / 32), y + (y / 32), 32, 32), Color.White);
+                }
         }
     }
 }

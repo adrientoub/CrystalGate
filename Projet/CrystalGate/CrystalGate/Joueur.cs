@@ -59,7 +59,7 @@ namespace CrystalGate
         {
             int width = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width;
             int height = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height;
-            int vitesse = 5;
+            int vitesse = 10;
             Vector2 vec = new Vector2();
 
             // Si on déplace la caméra hors des bords de l'écran

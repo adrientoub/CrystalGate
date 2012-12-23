@@ -104,7 +104,7 @@ namespace CrystalGate
                      */
                     if (nbFrameSonJoue == 0 || nbFrameSonJoue == 50)
                     {
-                        effetUnite.Play();
+                        //effetUnite.Play();
                         nbFrameSonJoue = 0;
                     }
                     else

@@ -51,7 +51,7 @@ namespace CrystalGate.Scenes
             pack.sorts.Add(content.Load<Texture2D>("bouclierfoudre"));
 
             // Creation de la carte
-            map = new Map(content.Load<Texture2D>("tile"), new Vector2((int)(this.Game.Window.ClientBounds.Width / 32) * 2, (int)(this.Game.Window.ClientBounds.Height / 32) + 1) * 2, new Vector2(32, 32));
+            map = new Map(content.Load<Texture2D>("summertiles"), new Vector2((int)(this.Game.Window.ClientBounds.Width / 32) * 2, (int)(this.Game.Window.ClientBounds.Height / 32) + 1) * 2, new Vector2(31, 31));
 
             // Creation de la physique de la carte
             var bounds = GetBounds();
