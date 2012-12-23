@@ -114,7 +114,7 @@ namespace CrystalGate
                     Random rand = new Random( i * j);
                     int x = 32 * tab[rand.Next(1,tab.Length - 1)];
                     int y = 32 * 19; // a choisir en fonction de ce qu'on veut
-                    spriteBatch.Draw(Sprite, new Vector2(i * TailleTiles.X, j * TailleTiles.Y), new Rectangle(x + (x / 32), y + (y / 32), 32, 32), Color.White);
+                    spriteBatch.Draw(Sprite, new Vector2(i * (TailleTiles.X - 1), j * (TailleTiles.Y - 1) ), new Rectangle(x + (x / 32), y + (y / 32), 32, 32), Color.White);
                 }
         }
     }
