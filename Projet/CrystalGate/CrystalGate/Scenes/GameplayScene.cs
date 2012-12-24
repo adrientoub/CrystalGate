@@ -27,6 +27,7 @@ namespace CrystalGate.Scenes
         public static List<SoundEffect> _effetsSonores = new List<SoundEffect> { }; // Tous les effets sonores.
         private List<Joueur> joueurs = new List<Joueur> { }; // joueurs sur la map
         private List<Objet> unites = new List<Objet> { }; // unites sur la map
+        private List<Batiment> batiments = new List<Batiment> { };
         private List<Effet> effets = new List<Effet> { }; // effets qui seront draw
 
         public GameplayScene(SceneManager sceneMgr)
@@ -49,6 +50,7 @@ namespace CrystalGate.Scenes
             pack.unites.Add(content.Load<Texture2D>("knight"));
             pack.unites.Add(content.Load<Texture2D>("grunt"));
             pack.sorts.Add(content.Load<Texture2D>("bouclierfoudre"));
+            pack.map.Add(content.Load<Texture2D>("summertiles"));
 
             // Creation de la carte
             map = new Map(content.Load<Texture2D>("summertiles"), new Vector2((int)(this.Game.Window.ClientBounds.Width / 32) * 2, (int)(this.Game.Window.ClientBounds.Height / 32) + 1) * 2, new Vector2(32, 32));
@@ -71,7 +73,7 @@ namespace CrystalGate.Scenes
             joueurs[0].Interface = Interface;
 
             // ajout unités
-            for (int j = 0; j < map.Taille.Y / 4; j++)
+            for (int j = 5; j < map.Taille.Y / 4; j++)
                 for (int i = 0; i < map.Taille.X; i++)
                     if (i == 2 | i == 4)
                         unites.Add(new Grunt(new Vector2(i, j), map, spriteBatch, pack));
@@ -80,6 +82,32 @@ namespace CrystalGate.Scenes
             // fixe l'id de toutes les unités
             for (int i = 0; i < unites.Count; i++)
                 unites[i].id = i;
+            // Génère les batiments aux bords de la map
+            for (int i = 0; i < map.Taille.X; i++)
+            {
+                batiments.Add(new Mur(new Vector2(i, map.Taille.Y - 1), map, spriteBatch, pack));
+                map.unitesStatic[i, (int)map.Taille.Y - 1] = new Noeud(new Vector2(i * 32, map.Taille.Y - 1), false, 1);
+            }
+            for (int i = 0; i < map.Taille.X; i++)
+            {
+                batiments.Add(new Mur(new Vector2(i, 0), map, spriteBatch, pack));
+                map.unitesStatic[i, 0] = new Noeud(new Vector2(i * 32, 0), false, 1);
+            }
+            for (int i = 0; i < map.Taille.Y; i++)
+            {
+                batiments.Add(new Mur(new Vector2(map.Taille.X - 1, i), map, spriteBatch, pack));
+                map.unitesStatic[(int)map.Taille.X - 1, i] = new Noeud(new Vector2(map.Taille.X - 1, i * 32), false, 1);
+            }
+            for (int i = 0; i < map.Taille.Y; i++)
+            {
+                batiments.Add(new Mur(new Vector2(0, i), map, spriteBatch, pack));
+                map.unitesStatic[0, i] = new Noeud(new Vector2(0, i * 32), false, 1);
+            }
+            for (int i = 10; i < map.Taille.Y / 2; i++)
+            {
+                batiments.Add(new Mur(new Vector2(15, i), map, spriteBatch, pack));
+                map.unitesStatic[15, i] = new Noeud(new Vector2(15, i * 32), false, 1);
+            }
         }
 
         protected override void UnloadContent() 
@@ -98,12 +126,14 @@ namespace CrystalGate.Scenes
             if (IsActive) // Si le jeu tourne (en gros)
             {
                 joueurs[0].Update(unites);
-                KeyboardState k = Keyboard.GetState();
                 // On update les infos de la map
-                map.Update(unites, gameTime);
+                map.Update(unites, batiments, gameTime);
                 // On update les infos des unites
                 foreach (Unite u in unites)
                     u.Update(unites, effets);
+                // On update les infos des batiments
+                foreach (Batiment b in batiments)
+                    b.Update(unites, effets);
                 // On update les infos des joueurs
                 foreach (Joueur j in joueurs)
                     j.Update(unites);
@@ -111,14 +141,14 @@ namespace CrystalGate.Scenes
                 foreach (Effet e in effets)
                     e.Update();
 
+
                 // Script temporaire pour lancer la bataille
-                Random random = new Random();
                 foreach (Unite u in unites)
                 {
                     float lol = 100000;
                     Unite lol2 = null;
                     foreach (Unite u2 in unites)
-                        if (u != u2)
+                        if (u != u2 && !u.isAChamp)
                         {
                             float temp = Outil.DistanceUnites(u, u2);
                             if (temp < lol && u.ToString() != u2.ToString() && u2.ToString() != joueurs[0].champion.ToString())
@@ -131,6 +161,7 @@ namespace CrystalGate.Scenes
                 }
 
                 // Script temporaire pour lancer un sort
+                KeyboardState k = Keyboard.GetState();
                     if (k.IsKeyDown(Keys.A))
                         ((Unite)unites[0]).Cast();
 
@@ -153,13 +184,14 @@ namespace CrystalGate.Scenes
             // DRAW UNITES
             foreach (Unite o in unites)
                 o.Draw();
+            // DRAW BATIMENTS
+            foreach (Batiment b in batiments)
+                b.Draw();
             // DRAW INTERFACE
             joueurs[0].Interface.Draw();
-            
             // DRAW STRINGS
-            /*if(unites.Count > 0)
-                spriteBatch.DrawString(gameFont, (unites[unites.Count - 1].uniteAttacked == null) ? "Il attaque pas" : "Il attaque!", Vector2.Zero, Color.White);
-            */spriteBatch.End();
+            /**/
+            spriteBatch.End();
 
             if (TransitionPosition > 0 || pauseAlpha > 0)
             {

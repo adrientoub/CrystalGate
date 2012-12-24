@@ -27,7 +27,7 @@ namespace CrystalGate
         public Unite(Vector2 Position, Map map, SpriteBatch spriteBatch, PackTexture packTexture)
             : base(Position, map, spriteBatch, packTexture)
         {
-            // Constructeur par default d'une unité
+            // Constructeur par defaut d'une unité
             Vie = VieMax = 1;
             Vitesse = 1.0f;
             Portee = 2; // 2 = Corps à corps
@@ -36,6 +36,9 @@ namespace CrystalGate
             nbFrameSonJoue = 0;
             Vitesse_Attaque = 2f;
             Defense = 1;
+            // Graphique par defaut
+            Sprite = packTexture.unites[0];
+            Tiles = new Vector2(370 / 5, 835 / 11);
 
             spells = new List<Spell> { new Bump(this)};
         }
@@ -256,7 +259,7 @@ namespace CrystalGate
                         }
 
                     suivreactuel = 0;
-                    List<Noeud> chemin = PathFinding.TrouverChemin(PositionTile, unite.PositionTile, Map.Taille, liste, false);
+                    List<Noeud> chemin = PathFinding.TrouverChemin(PositionTile, unite.PositionTile, Map.Taille, liste, Map.unitesStatic, false);
                     if (chemin != null)
                     {
                         ObjectifListe = chemin;
@@ -290,7 +293,6 @@ namespace CrystalGate
 
         public override void Draw()
         {
-            Vector2 lol = ConvertUnits.ToDisplayUnits(body.Position);
             spriteBatch.Draw(Sprite, ConvertUnits.ToDisplayUnits(body.Position), SpritePosition, Color.White, 0f, new Vector2(Tiles.X / 2, Tiles.Y / 2), 1f, FlipH ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 0);
             DrawVie();
         }

@@ -50,7 +50,7 @@ namespace CrystalGate
             Vector2 ObjectifPoint = new Vector2(camera.Position.X + mouse.X, camera.Position.Y + mouse.Y) / map.TailleTiles;
             ObjectifPoint = new Vector2((int)ObjectifPoint.X, (int)ObjectifPoint.Y);
                 
-            List<Noeud> chemin = PathFinding.TrouverChemin(champion.PositionTile, ObjectifPoint, unite.Map.Taille, new List<Objet> { }, false);
+            List<Noeud> chemin = PathFinding.TrouverChemin(champion.PositionTile, ObjectifPoint, unite.Map.Taille, new List<Objet> { }, map.unitesStatic, false);
                 if (chemin != null)
                     unite.ObjectifListe = chemin;
         }

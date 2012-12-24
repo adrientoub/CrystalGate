@@ -16,6 +16,8 @@ namespace CrystalGate
         public Vector2 TailleTiles { get; set; }
         public Vector2 Taille { get; set; }
         public List<Objet> unites { get; set; }
+        public List<Batiment> batiments { get; set; }
+        public Noeud[,] unitesStatic { get; set; }
         public World world { get; set; }
         public GameTime gametime { get; set; }
 
@@ -31,12 +33,18 @@ namespace CrystalGate
             Taille = taille;
             world = new World(Vector2.Zero);
             unites = new List<Objet> { };
+            batiments = new List<Batiment> { };
+            unitesStatic = new Noeud[(int)taille.X, (int)taille.Y];
             tab = new byte[] { 3, 4,6,7,8,9,10};
+
+            foreach (Batiment b in batiments)
+                unitesStatic[(int)b.PositionTile.X, (int)b.PositionTile.Y] = new Noeud(b.PositionTile, false, 1);
         }
 
-        public void Update(List<Objet> unites, GameTime GT)
+        public void Update(List<Objet> unites, List<Batiment> batiments, GameTime GT)
         {
             this.unites = unites;
+            this.batiments = batiments;
             Outil.RemoveDeadBodies(unites);
             gametime = GT;
 
@@ -45,10 +53,15 @@ namespace CrystalGate
             compteur %= (temp != 0) ? temp : 1; // pour eviter d'avoir des unités inactives
 
             KeyboardState k = Keyboard.GetState();
-
-            foreach (Unite u in unites)
-                if (u.uniteAttacked != null && !unites.Contains((Unite)u.uniteAttacked))
+            // Debug les unites qui attaquent des unites mortes
+            foreach (Objet u in unites)
+                if (!(u is Batiment) && u.uniteAttacked != null && !unites.Contains((Unite)u.uniteAttacked))
                     u.uniteAttacked = null;
+        }
+
+        public void GenererMur()
+        {
+
         }
 
         public void ClearEffects()
@@ -108,8 +121,8 @@ namespace CrystalGate
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            for (int i = 0; i < Cellules.GetLength(0); i++) //On parcourt les lignes du tableau
-                for (int j = 0; j < Cellules.GetLength(1); j++) //On parcourt les colonnes du tableau
+            for (int i = 0; i < Cellules.GetLength(0) + Cellules.GetLength(0) / TailleTiles.X; i++) //On parcourt les lignes du tableau
+                for (int j = 0; j < Cellules.GetLength(1) + Cellules.GetLength(1) / TailleTiles.Y; j++) //On parcourt les colonnes du tableau
                 {
                     Random rand = new Random( i * j);
                     int x = 32 * tab[rand.Next(1,tab.Length - 1)];

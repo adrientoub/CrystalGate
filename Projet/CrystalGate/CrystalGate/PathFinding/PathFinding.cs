@@ -8,26 +8,26 @@ namespace CrystalGate
 {
     public class PathFinding
     {
-        public static Noeud[,] Initialiser(Vector2 taille, Vector2 arrivee, List<Objet> unites)
+        public static Noeud[,] Initialiser(Noeud[,] map, Vector2 taille, Vector2 arrivee, List<Objet> unites)
         {
-            Noeud[,] map = new Noeud[(int)taille.X, (int)taille.Y];
             List<Noeud> unitToNoeud = new List<Noeud> { };
+
                 foreach (Unite o in unites)
                     if (o != null)
                     {
-                        Vector2 lol = new Vector2((int)(ConvertUnits.ToDisplayUnits(o.body.Position.X) / 32), (int)(ConvertUnits.ToDisplayUnits(o.body.Position.Y) / 32));
-                        unitToNoeud.Add(new Noeud(lol, false, 1));
+                        if (map[(int)o.PositionTile.X, (int)o.PositionTile.Y] == null)
+                        {
+                            map[(int)o.PositionTile.X, (int)o.PositionTile.Y] = new Noeud(o.PositionTile, false, 1);
+                            unitToNoeud.Add(new Noeud(o.PositionTile, false, 1));
+                        }
                     }
+
 
                 AForge.Parallel.For(0, (int)taille.Y, delegate(int j)
                         {
                             for (int i = 0; i < taille.X; i++)
-                            {
-                                if (NoeudInList(new Noeud(new Vector2(i, j), false, 0), unitToNoeud))
-                                    map[i, j] = new Noeud(new Vector2(i, j), false, GetHeuristic(arrivee, new Vector2(i, j)));
-                                else
-                                    map[i, j] = new Noeud(new Vector2(i, j), true, GetHeuristic(arrivee, new Vector2(i, j)));
-                            }
+                                if (map[i, j] == null || map[i,j].IsWalkable)
+                                        map[i, j] = new Noeud(new Vector2(i, j), true, GetHeuristic(arrivee, new Vector2(i, j)));
                         });
         
             return map;
@@ -145,7 +145,6 @@ namespace CrystalGate
             }
             else
                 TrueList.Add(arrivee);
-
         }
 
         static List<Noeud> PlusPetitNoeud(List<Noeud> listenoeud)
@@ -162,9 +161,10 @@ namespace CrystalGate
             return newList;
         }
 
-        public static List<Noeud> TrouverChemin(Vector2 depart, Vector2 arrivee, Vector2 taille, List<Objet> unites, bool champion)
+        public static List<Noeud> TrouverChemin(Vector2 depart, Vector2 arrivee, Vector2 taille, List<Objet> unites, Noeud[,] batiments, bool champion)
         {
-            Noeud[,] map = Initialiser(taille, arrivee, unites); // INITIALISATION DU POIDS DES NOEUDS ET DES OBSTACLES
+            Noeud[,] map = batiments; // INITIALISATION DU POIDS DES NOEUDS ET DES OBSTACLES
+            Initialiser(map, taille, arrivee, unites);
             List<Noeud> closedList = new List<Noeud> { };
 
             List<Noeud> openList = new List<Noeud> { map[(int)depart.X,(int)depart.Y] };
