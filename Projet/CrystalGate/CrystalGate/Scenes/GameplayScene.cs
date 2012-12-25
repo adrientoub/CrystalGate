@@ -103,10 +103,13 @@ namespace CrystalGate.Scenes
                 batiments.Add(new Mur(new Vector2(0, i), map, spriteBatch, pack));
                 map.unitesStatic[0, i] = new Noeud(new Vector2(0, i * 32), false, 1);
             }
-            for (int i = 10; i < map.Taille.Y / 2; i++)
+            for (int i = 4; i < map.Taille.Y / 2; i++)
             {
-                batiments.Add(new Mur(new Vector2(15, i), map, spriteBatch, pack));
-                map.unitesStatic[15, i] = new Noeud(new Vector2(15, i * 32), false, 1);
+                if (i != 6 && i != 7)
+                {
+                    batiments.Add(new Mur(new Vector2(15, i), map, spriteBatch, pack));
+                    map.unitesStatic[15, i] = new Noeud(new Vector2(15, i * 32), false, 1);
+                }
             }
         }
 

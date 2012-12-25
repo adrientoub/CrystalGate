@@ -22,7 +22,7 @@ namespace CrystalGate
         public GameTime gametime { get; set; }
 
         public int compteur = 0;
-        public int pFParThread = 10; // 10 unites par thread calculent leurs chemins
+        public int pFParThread = 5; // 10 unites par thread calculent leurs chemins
         private byte[] tab;
 
         public Map(Texture2D sprite, Vector2 taille, Vector2 tailleTiles)

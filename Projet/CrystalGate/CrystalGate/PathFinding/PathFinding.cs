@@ -10,23 +10,17 @@ namespace CrystalGate
     {
         public static Noeud[,] Initialiser(Noeud[,] map, Vector2 taille, Vector2 arrivee, List<Objet> unites)
         {
-            List<Noeud> unitToNoeud = new List<Noeud> { };
-
+            // Prend en compte les unites
                 foreach (Unite o in unites)
                     if (o != null)
-                    {
                         if (map[(int)o.PositionTile.X, (int)o.PositionTile.Y] == null)
-                        {
                             map[(int)o.PositionTile.X, (int)o.PositionTile.Y] = new Noeud(o.PositionTile, false, 1);
-                            unitToNoeud.Add(new Noeud(o.PositionTile, false, 1));
-                        }
-                    }
-
-
+            
+            // Remplis les cases qui sont "marchables"
                 AForge.Parallel.For(0, (int)taille.Y, delegate(int j)
                         {
                             for (int i = 0; i < taille.X; i++)
-                                if (map[i, j] == null || map[i,j].IsWalkable)
+                                if (map[i, j] == null)
                                         map[i, j] = new Noeud(new Vector2(i, j), true, GetHeuristic(arrivee, new Vector2(i, j)));
                         });
         
@@ -163,7 +157,7 @@ namespace CrystalGate
 
         public static List<Noeud> TrouverChemin(Vector2 depart, Vector2 arrivee, Vector2 taille, List<Objet> unites, Noeud[,] batiments, bool champion)
         {
-            Noeud[,] map = batiments; // INITIALISATION DU POIDS DES NOEUDS ET DES OBSTACLES
+            Noeud[,] map = (Noeud[,])batiments.Clone(); // INITIALISATION DU POIDS DES NOEUDS ET DES OBSTACLES
             Initialiser(map, taille, arrivee, unites);
             List<Noeud> closedList = new List<Noeud> { };
 

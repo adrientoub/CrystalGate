@@ -252,7 +252,7 @@ namespace CrystalGate
                 if (ok)
                 {
                     foreach (Unite u in Map.unites)
-                        if (Outil.DistanceUnites(this, u) <= 2 * Map.TailleTiles.X)
+                        if (Outil.DistanceUnites(this, u) <= 1 * Map.TailleTiles.X)
                         {
                             if (u != unite && u != this)
                                 liste.Add(u);
