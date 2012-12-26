@@ -100,18 +100,7 @@ namespace CrystalGate
                     LastAttack = (float)Map.gametime.TotalGameTime.TotalMilliseconds; // On met à jour "l'heure de la dernière attaque"
                     // uniteSuivi = null;  Source de lags
 
-                    /* Ce if else permet que les sons ne soient pas joués trop fréquemment. 
-                     * Mais je pense pas que les unités devraient attaquer aussi souvent.
-                     * Chaque attaque aura un cooldown (ou un temps en tout cas). Qui fera que le son sera joué (beaucoup) moins souvent.
-                     * Actuellement les unités attaquent en continu...
-                     */
-                    if (nbFrameSonJoue == 0 || nbFrameSonJoue == 50)
-                    {
-                        //effetUnite.Play();
-                        nbFrameSonJoue = 0;
-                    }
-                    else
-                        nbFrameSonJoue++;
+                    effetUnite.Play();
 
                     unite.Vie -= Dommages - unite.Defense;
 

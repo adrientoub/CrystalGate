@@ -11,11 +11,18 @@ namespace CrystalGate
     public class EffetSonore
     {
         SoundEffectInstance son;
+        static System.Diagnostics.Stopwatch time = new System.Diagnostics.Stopwatch();
+        static bool isPlaying = false;
+        static TimeSpan duree = new TimeSpan();
+        int id;
+        static bool hasHP = true;
+
         public EffetSonore(int i)
         {
             try
             {
                 son = CrystalGate.Scenes.GameplayScene._effetsSonores[i].CreateInstance();
+                id = i;
             }
             catch (Exception)
             {
@@ -24,13 +31,34 @@ namespace CrystalGate
         }
         public void Play()
         {
-            try
+            if (hasHP)
             {
-                if (!son.IsDisposed)
-                    son.Play();
-            }
-            catch (NoAudioHardwareException) // On ne lit pas l'audio si il n'y a pas de HP/casque (ça permet d'éviter un crash)
-            {
+                if (isPlaying)
+                {
+                    if (time.Elapsed >= duree)
+                    {
+                        time.Stop();
+                        time.Reset();
+                        isPlaying = false;
+                    }
+                }
+                else
+                {
+                    try
+                    {
+                        if (!son.IsDisposed)
+                        {
+                            son.Play();
+                            duree = CrystalGate.Scenes.GameplayScene._effetsSonores[id].Duration;
+                            time.Start();
+                            isPlaying = true;
+                        }
+                    }
+                    catch (NoAudioHardwareException)
+                    {
+                        hasHP = false;
+                    } // On ne lit pas l'audio si il n'y a pas de HP/casque (ça permet d'éviter un crash)
+                }
             }
         }
         public void Dispose()
