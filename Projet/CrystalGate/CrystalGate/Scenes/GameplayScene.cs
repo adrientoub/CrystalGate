@@ -63,7 +63,7 @@ namespace CrystalGate.Scenes
             
             // Les sons.
             _effetsSonores.Add(content.Load<SoundEffect>("sword1"));
-
+            EffetSonore.InitEffects();
             // ajout joueurs
             joueurs.Add(new Joueur(new Unite(new Vector2(2, 2), map, spriteBatch, pack)));
             unites.Add(joueurs[0].champion);

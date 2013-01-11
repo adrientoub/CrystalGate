@@ -10,12 +10,24 @@ namespace CrystalGate
 {
     public class EffetSonore
     {
+        const int nbSonSimult = 3; // Nombre de sons simultanés.
+        // A changer si plus de sons voulus.
         SoundEffectInstance son;
         static System.Diagnostics.Stopwatch time = new System.Diagnostics.Stopwatch();
-        static bool isPlaying = false;
-        static TimeSpan duree = new TimeSpan();
+        static bool[] isPlaying = new bool[nbSonSimult];
+        static TimeSpan[] duree = new TimeSpan[nbSonSimult];
         int id;
-        static bool hasHP = true;
+        static bool hasHP;
+
+        static public void InitEffects()
+        {
+            for (int i = 0; i < nbSonSimult; i++)
+            {
+                isPlaying[i] = false;
+            }
+            time.Start();
+            hasHP = true;
+        }
 
         public EffetSonore(int i)
         {
@@ -31,33 +43,36 @@ namespace CrystalGate
         }
         public void Play()
         {
+            bool effectLaunch = false;
             if (hasHP)
             {
-                if (isPlaying)
+                for (int i = 0; i < nbSonSimult; i++)
                 {
-                    if (time.Elapsed >= duree)
+                    if (time.Elapsed >= duree[i])
                     {
-                        time.Stop();
-                        time.Reset();
-                        isPlaying = false;
+                        isPlaying[i] = false;
                     }
                 }
-                else
+
+                for (int i = 0; i < nbSonSimult && !effectLaunch; i++)
                 {
-                    try
+                    if (!isPlaying[i])
                     {
-                        if (!son.IsDisposed)
+                        try
                         {
-                            son.Play();
-                            duree = CrystalGate.Scenes.GameplayScene._effetsSonores[id].Duration;
-                            time.Start();
-                            isPlaying = true;
+                            if (!son.IsDisposed)
+                            {
+                                son.Play();
+                                duree[i] = time.Elapsed + CrystalGate.Scenes.GameplayScene._effetsSonores[id].Duration;
+                                isPlaying[i] = true;
+                                effectLaunch = true;
+                            }
                         }
+                        catch (NoAudioHardwareException)
+                        {
+                            hasHP = false;
+                        } // On ne lit pas l'audio si il n'y a pas de HP/casque (ça permet d'éviter un crash)
                     }
-                    catch (NoAudioHardwareException)
-                    {
-                        hasHP = false;
-                    } // On ne lit pas l'audio si il n'y a pas de HP/casque (ça permet d'éviter un crash)
                 }
             }
         }
