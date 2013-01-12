@@ -29,7 +29,7 @@ namespace CrystalGate
         {
             // Constructeur par defaut d'un batiment
             Vie = VieMax = 1;
-            effetUnite = new EffetSonore(0);
+            //effetUnite = new EffetSonore(0);
             nbFrameSonJoue = 0;
             body.IsStatic = true;
             // Graphique par défaut

@@ -13,6 +13,7 @@ using FarseerPhysics.Common;
 using FarseerPhysics.Factories;
 using FarseerPhysics.Dynamics;
 using AForge;
+using System.IO;
 
 namespace CrystalGate.Scenes
 {
@@ -51,9 +52,41 @@ namespace CrystalGate.Scenes
             pack.unites.Add(content.Load<Texture2D>("grunt"));
             pack.sorts.Add(content.Load<Texture2D>("bouclierfoudre"));
             pack.map.Add(content.Load<Texture2D>("summertiles"));
+            //
+            // Chargement de la carte
+            int counter = 0;
+            string line; // X
+            string height; // Y
+            // Read the file and display it line by line.
+            StreamReader file = new StreamReader(@"../../../Map/Map1.txt");
 
+            line = file.ReadLine();
+            string line2;
+            file = new StreamReader(@"../../../Map/Map1.txt");
+            while ((line2 = file.ReadLine()) != null)
+            {
+                counter++;
+            }
             // Creation de la carte
-            map = new Map(content.Load<Texture2D>("summertiles"), new Vector2((int)(this.Game.Window.ClientBounds.Width / 32) * 2, (int)(this.Game.Window.ClientBounds.Height / 32) + 1) * 2, new Vector2(32, 32));
+            //Vector2 ecran = new Vector2((int)(this.Game.Window.ClientBounds.Width / 32) * 2, (int)(this.Game.Window.ClientBounds.Height / 32) + 1) * 2;
+            Texture2D SpriteMap = content.Load<Texture2D>("summertiles");
+            map = new Map(SpriteMap, new Vector2(line.Length, counter) , new Vector2(32, 32));
+
+            counter = 0;
+            file = new StreamReader(@"../../../Map/Map1.txt");
+            while ((line2 = file.ReadLine()) != null)
+            {
+                for (int i = 0; i < line2.Length; i++)
+                {
+                    if (line2[i] == '1') // Mur
+                    {
+                        batiments.Add(new Mur(new Vector2(i, counter), map, spriteBatch, pack));
+                        map.unitesStatic[i, counter] = new Noeud(new Vector2(i, counter), false, 1);
+                    }
+                }
+                counter++;
+            }
+            file.Close();
 
             // Creation de la physique de la carte
             var bounds = GetBounds();
@@ -73,44 +106,15 @@ namespace CrystalGate.Scenes
             joueurs[0].Interface = Interface;
 
             // ajout unités
-            for (int j = 5; j < map.Taille.Y / 4; j++)
+            /*for (int j = 1; j < map.Taille.Y / 4; j++)
                 for (int i = 0; i < map.Taille.X; i++)
-                    if (i == 2 | i == 4)
+                    if (i == 2 || i == 4)
                         unites.Add(new Grunt(new Vector2(i, j), map, spriteBatch, pack));
-                    else if (i == 20 | i == 22)
+                    else if (i == 8 || i == 8)
                         unites.Add(new Cavalier(new Vector2(i, j), map, spriteBatch, pack));
             // fixe l'id de toutes les unités
             for (int i = 0; i < unites.Count; i++)
-                unites[i].id = i;
-            // Génère les batiments aux bords de la map
-            for (int i = 0; i < map.Taille.X; i++)
-            {
-                batiments.Add(new Mur(new Vector2(i, map.Taille.Y - 1), map, spriteBatch, pack));
-                map.unitesStatic[i, (int)map.Taille.Y - 1] = new Noeud(new Vector2(i * 32, map.Taille.Y - 1), false, 1);
-            }
-            for (int i = 0; i < map.Taille.X; i++)
-            {
-                batiments.Add(new Mur(new Vector2(i, 0), map, spriteBatch, pack));
-                map.unitesStatic[i, 0] = new Noeud(new Vector2(i * 32, 0), false, 1);
-            }
-            for (int i = 0; i < map.Taille.Y; i++)
-            {
-                batiments.Add(new Mur(new Vector2(map.Taille.X - 1, i), map, spriteBatch, pack));
-                map.unitesStatic[(int)map.Taille.X - 1, i] = new Noeud(new Vector2(map.Taille.X - 1, i * 32), false, 1);
-            }
-            for (int i = 0; i < map.Taille.Y; i++)
-            {
-                batiments.Add(new Mur(new Vector2(0, i), map, spriteBatch, pack));
-                map.unitesStatic[0, i] = new Noeud(new Vector2(0, i * 32), false, 1);
-            }
-            for (int i = 4; i < map.Taille.Y / 2; i++)
-            {
-                if (i != 6 && i != 7)
-                {
-                    batiments.Add(new Mur(new Vector2(15, i), map, spriteBatch, pack));
-                    map.unitesStatic[15, i] = new Noeud(new Vector2(15, i * 32), false, 1);
-                }
-            }
+                unites[i].id = i;*/
         }
 
         protected override void UnloadContent() 

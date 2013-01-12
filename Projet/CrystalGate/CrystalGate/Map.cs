@@ -121,8 +121,8 @@ namespace CrystalGate
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            for (int i = 0; i < Cellules.GetLength(0) + Cellules.GetLength(0) / TailleTiles.X; i++) //On parcourt les lignes du tableau
-                for (int j = 0; j < Cellules.GetLength(1) + Cellules.GetLength(1) / TailleTiles.Y; j++) //On parcourt les colonnes du tableau
+            for (int i = 0; i < Cellules.GetLength(0) + Cellules.GetLength(0) / TailleTiles.X - 1; i++) //On parcourt les lignes du tableau
+                for (int j = 0; j < Cellules.GetLength(1) + Cellules.GetLength(1) / TailleTiles.Y - 1; j++) //On parcourt les colonnes du tableau
                 {
                     Random rand = new Random( i * j);
                     int x = 32 * tab[rand.Next(1,tab.Length - 1)];
