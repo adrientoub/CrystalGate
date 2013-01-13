@@ -45,6 +45,9 @@ namespace CrystalGate.Scenes
             if (content == null)
                 content = new ContentManager(SceneManager.Game.Services, "Content");
 
+            FondSonore.Load(ref content);
+            FondSonore.Play();
+
             SpriteBatch spriteBatch = SceneManager.SpriteBatch;
             gameFont = content.Load<SpriteFont>("menufont");
 
@@ -140,6 +143,8 @@ namespace CrystalGate.Scenes
 
             if (IsActive) // Si le jeu tourne (en gros)
             {
+                FondSonore.Update();
+
                 joueurs[0].Update(unites);
                 // On update les infos de la map
                 map.Update(unites, batiments, gameTime);
