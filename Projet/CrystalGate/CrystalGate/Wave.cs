@@ -42,7 +42,7 @@ namespace CrystalGate
 
         public void Pop(GameTime GT)
         {
-            if (GT.TotalGameTime.Milliseconds % ite == 0 && current < NbWaves)
+            if (GT.TotalGameTime.Milliseconds == 1/60 && current < NbWaves)
             {
                 foreach (Vector2 v in PointsSpawn)
                 {

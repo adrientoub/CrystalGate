@@ -42,7 +42,7 @@ namespace CrystalGate
             Sprite = packTexture.unites[0];
             Tiles = new Vector2(370 / 5, 835 / 11);
 
-            spells = new List<Spell> { new Bump(this)};
+            spells = new List<Spell> { new Bump(this), new Explosion(this)};
         }
 
         public override void Update(List<Objet> unitsOnMap, List<Effet> effets)
@@ -269,24 +269,21 @@ namespace CrystalGate
             
         }
 
-        public void Cast()
+        public void Cast(int i, Vector2 point)
         {
-            if (Map.gametime.TotalGameTime.TotalMilliseconds - spells[0].LastCast > spells[0].Cooldown * 1000) // Si le cooldown est fini
-            {
-                spells[0].LastCast = (float)Map.gametime.TotalGameTime.TotalMilliseconds;
-                spells[0].Update();
-            }
-        }
-
-        public void Patrouiller(Vector2 point1, Vector2 point2)
-        {
-
+                // Activent les sort a Update et Draw
+                spells[i].LastCast = (float)Map.gametime.TotalGameTime.TotalMilliseconds;
+                spells[i].ToDraw = true;
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(Sprite, ConvertUnits.ToDisplayUnits(body.Position), SpritePosition, Color.White, 0f, new Vector2(Tiles.X / 2, Tiles.Y / 2), 1f, FlipH ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 0);
             DrawVie(spriteBatch);
+
+            foreach (Spell s in spells)
+                if (s.ToDraw)
+                    s.Draw(spriteBatch);
         }
 
         private void DrawVie(SpriteBatch spriteBatch)

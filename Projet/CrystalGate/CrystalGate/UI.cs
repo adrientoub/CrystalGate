@@ -17,6 +17,7 @@ namespace CrystalGate
         public Rectangle BasPosition { get; set; }
         public Rectangle PortraitPosition { get; set; }
 
+        public bool DrawSelectPoint;
         public Joueur joueur { get; set; }
         SpriteBatch spritebatch { get; set; }
         SpriteFont gamefont { get; set; }
@@ -48,6 +49,8 @@ namespace CrystalGate
             spritebatch.Draw(Bas, BasPosition, Color.White);
             spritebatch.Draw(Portrait, PortraitPosition, Color.White);
             spritebatch.DrawString(gamefont, str, new Vector2(BasPosition.X + System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width / 2 - gamefont.MeasureString(str).X / 2, BasPosition.Y + Bas.Height / 2), Color.White);
+            if(DrawSelectPoint)
+                spritebatch.DrawString(gamefont, "Selectionnez un point", new Vector2(BasPosition.X + System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width / 2 - gamefont.MeasureString(str).X / 2, BasPosition.Y + Bas.Height / 2 - 200), Color.White);
             spritebatch.Draw(Curseur, new Vector2(joueur.camera.Position.X + m.X, joueur.camera.Position.Y + m.Y), Color.White);
         }
     }

@@ -55,7 +55,7 @@ namespace CrystalGate.Scenes
             pack = new PackTexture(content.Load<Texture2D>("blank"));
             pack.unites.Add(content.Load<Texture2D>("knight"));
             pack.unites.Add(content.Load<Texture2D>("grunt"));
-            pack.sorts.Add(content.Load<Texture2D>("bouclierfoudre"));
+            pack.sorts.Add(content.Load<Texture2D>("explosion"));
             pack.map.Add(content.Load<Texture2D>("summertiles"));
             //
             // Chargement de la carte
@@ -103,7 +103,7 @@ namespace CrystalGate.Scenes
             boundary.CollidesWith = Category.All;
             
             // Les sons.
-            _effetsSonores.Add(content.Load<SoundEffect>("Sons/swords")); // Attaque cavalier
+            _effetsSonores.Add(content.Load<SoundEffect>("Sons/sword3")); // Attaque cavalier
             _effetsSonores.Add(content.Load<SoundEffect>("Sons/Cavalierquimeurt"));
             _effetsSonores.Add(content.Load<SoundEffect>("Sons/GruntAttack")); 
             _effetsSonores.Add(content.Load<SoundEffect>("Sons/Gruntquimeurt"));
@@ -120,8 +120,9 @@ namespace CrystalGate.Scenes
             for (int i = 0; i < unites.Count; i++)
                 unites[i].id = i;
 
+            unites.Add(new Unite(Vector2.One, map, pack));
             // La vague
-            wave = new Wave(new List<Vector2>{new Vector2(8, 7), new Vector2(8, 8)}, new List<Vector2> { new Vector2(22,0), new Vector2(39,7), new Vector2(23,17) }, new Cavalier(Vector2.Zero, map, pack), 6000, 5, joueurs[0].champion);
+            wave = new Wave(new List<Vector2>{new Vector2(8, 7), new Vector2(8, 8)}, new List<Vector2> { new Vector2(22,0), new Vector2(39,7), new Vector2(23,17) }, new Cavalier(Vector2.Zero, map, pack), 6000, 3, joueurs[0].champion);
         }
 
         protected override void UnloadContent() 

@@ -15,11 +15,11 @@ namespace CrystalGate
             SpriteBouton = unite.packTexture.sorts[0];
         }
 
-        public override void Update()
+        public override void Update(Vector2 point)
         {
             foreach (Unite u in unite.Map.unites)
                 if(u != unite && Outil.DistanceUnites(unite, u) <= 100)
-                    u.body.LinearVelocity = new Vector2((float)Math.Cos(Outil.AngleUnites(u, unite)), (float)Math.Sin(Outil.AngleUnites(u, unite))) * 10;
+                    u.body.LinearVelocity = new Vector2((float)Math.Cos(Outil.AngleUnites(u, unite)), (float)Math.Sin(Outil.AngleUnites(u, unite))) * 25;
         }
     }
 }

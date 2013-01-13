@@ -28,6 +28,10 @@ namespace CrystalGate
         {
             return (float)Math.Sqrt(Math.Pow(ConvertUnits.ToDisplayUnits(unite1.body.Position - unite2.body.Position).X, 2) + Math.Pow(ConvertUnits.ToDisplayUnits(unite1.body.Position - unite2.body.Position).Y, 2));
         }
+        public static float DistancePoints(Vector2 point1, Vector2 point2)
+        {
+            return (float)Math.Sqrt( Math.Pow(32 * (point1.X - point2.X), 2) + Math.Pow(32 * (point1.Y - point2.Y), 2));
+        }
 
         public static void RemoveDeadBodies(List<Objet> unites)
         {

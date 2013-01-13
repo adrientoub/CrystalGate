@@ -10,7 +10,7 @@ namespace CrystalGate
 {
     public class EffetSonore
     {
-        const int nbSonSimult = 3; // Nombre de sons simultanés.
+        const int nbSonSimult = 5; // Nombre de sons simultanés.
         // A changer si plus de sons voulus.
         SoundEffectInstance son;
         public static System.Diagnostics.Stopwatch time = new System.Diagnostics.Stopwatch();

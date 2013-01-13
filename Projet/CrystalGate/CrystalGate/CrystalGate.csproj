@@ -127,6 +127,7 @@
     <Compile Include="Camera\Input.cs" />
     <Compile Include="Spell.cs" />
     <Compile Include="Spells\Bump.cs" />
+    <Compile Include="Spells\Boule de feu.cs" />
     <Compile Include="UI.cs" />
     <Compile Include="Joueur.cs" />
     <Compile Include="Map.cs" />

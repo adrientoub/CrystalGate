@@ -16,6 +16,9 @@ namespace CrystalGate
         MouseState mouse { get; set; }
         KeyboardState key { get; set; }
         public UI Interface { get; set; }
+        bool InWaitingPoint;
+        Vector2 point;
+        int spell;
 
         bool isRoaming;
 
@@ -34,7 +37,14 @@ namespace CrystalGate
         {
             mouse = Mouse.GetState();
             key = Keyboard.GetState();
-
+            // Pour cibler un point pour un sort
+            if (mouse.LeftButton == ButtonState.Pressed && InWaitingPoint)
+            {
+                point = new Vector2((int)((camera.Position.X + mouse.X) / 32), (int)((camera.Position.Y + mouse.Y) / 32));
+                InWaitingPoint = false;
+                Interface.DrawSelectPoint = false;
+                champion.Cast(spell, point);
+            }
             // Pour se déplacer
             if (mouse.RightButton == ButtonState.Pressed && !DonnerOrdreAttaquer())
                 DonnerOrdreDeplacer();
@@ -44,9 +54,20 @@ namespace CrystalGate
             // Pour arreter les déplacements
             if (key.IsKeyDown(Keys.S))
                 DonnerOrdreStop();
-            // Pour lancer un sort (Bump)
+            // Pour lancer un sort
             if (key.IsKeyDown(Keys.D1))
-                champion.Cast();
+            {
+                if (champion.Map.gametime.TotalGameTime.TotalMilliseconds - champion.spells[1].LastCast > champion.spells[1].Cooldown * 1000 && champion.spells[1].NeedUnPoint)
+                {
+                    Interface.DrawSelectPoint = true;
+                    InWaitingPoint = true;
+                }
+                spell = 1;
+            }
+            // Pour Update et Draw les sorts
+            foreach (Spell s in champion.spells)
+                if (s.ToDraw)
+                    s.Update(point);
 
             if (isRoaming)
             {
@@ -64,6 +85,7 @@ namespace CrystalGate
                 }
                 champion.uniteAttacked = focus;
             }
+
             // Pour déplacer la caméra
             CameraCheck();
         }
