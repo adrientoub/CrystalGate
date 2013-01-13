@@ -9,13 +9,12 @@ namespace CrystalGate
 {
     class FondSonore
     {
-        //const string musicName = "GangnamStyle";
         static Song[] _musiqueDeFond = new Song[2];
         static bool _isLoaded = false;
         static bool _isLoadedNext = false;
         static TimeSpan _finDeLaMusique = new TimeSpan();
         static string[] _musicList = new string[] {
-            "HOM4",
+            "HOM4"
             //"AviciiLevels"
         };
         static int id = 0;

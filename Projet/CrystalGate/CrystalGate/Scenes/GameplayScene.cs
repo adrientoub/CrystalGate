@@ -113,13 +113,12 @@ namespace CrystalGate.Scenes
             UI Interface = new UI(joueurs[0], content.Load<Texture2D>("UI"), content.Load<Texture2D>("Curseur"), content.Load<Texture2D>("gruntIcone"), spriteBatch, gameFont);
             joueurs[0].Interface = Interface;
 
-            unites.Add(new Grunt(new Vector2(5, 5), map, pack));
             // fixe l'id de toutes les unités
             for (int i = 0; i < unites.Count; i++)
                 unites[i].id = i;
 
             // La vague
-            wave = new Wave(new List<Vector2>{new Vector2(8, 7), new Vector2(8, 8)}, new List<Vector2> { new Vector2(22,0), new Vector2(39,7), new Vector2(23,17) }, new Cavalier(Vector2.Zero, map, pack), 6000, 1, joueurs[0].champion);
+            wave = new Wave(new List<Vector2>{new Vector2(8, 7), new Vector2(8, 8)}, new List<Vector2> { new Vector2(22,0), new Vector2(39,7), new Vector2(23,17) }, new Cavalier(Vector2.Zero, map, pack), 6000, 5, joueurs[0].champion);
         }
 
         protected override void UnloadContent() 

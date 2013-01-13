@@ -26,6 +26,5 @@ namespace CrystalGate
             Dommages = 10;
         }
 
-
     }
 }
