@@ -25,6 +25,11 @@ namespace CrystalGate
             Portee = 2f; // 2 = Corps à corps
             Dommages = 50;
             Defense = 10;
+
+            // Sons
+            effetUniteAttaque = new EffetSonore(2);
+            effetUniteDeath = new EffetSonore(3);
+            
         }
 
 

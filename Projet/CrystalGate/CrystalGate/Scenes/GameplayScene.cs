@@ -103,7 +103,10 @@ namespace CrystalGate.Scenes
             boundary.CollidesWith = Category.All;
             
             // Les sons.
-            _effetsSonores.Add(content.Load<SoundEffect>("sword1"));
+            _effetsSonores.Add(content.Load<SoundEffect>("Sons/swords")); // Attaque cavalier
+            _effetsSonores.Add(content.Load<SoundEffect>("Sons/Cavalierquimeurt"));
+            _effetsSonores.Add(content.Load<SoundEffect>("Sons/GruntAttack")); 
+            _effetsSonores.Add(content.Load<SoundEffect>("Sons/Gruntquimeurt"));
             EffetSonore.InitEffects();
             // ajout joueurs
             joueurs.Add(new Joueur(new Grunt(new Vector2(2, 8), map, pack)));

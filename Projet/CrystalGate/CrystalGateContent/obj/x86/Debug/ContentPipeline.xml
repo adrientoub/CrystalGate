@@ -29,15 +29,6 @@
       <Time>2012-11-21T22:40:39.496328+01:00</Time>
     </Item>
     <Item>
-      <Source>background.jpg</Source>
-      <Name>background</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\background.xnb</Output>
-      <Time>2012-11-21T22:40:39.4953279+01:00</Time>
-    </Item>
-    <Item>
       <Source>knight.png</Source>
       <Name>knight</Name>
       <Importer>TextureImporter</Importer>
@@ -101,15 +92,6 @@
       <Time>2012-12-23T20:52:20.6641366+01:00</Time>
     </Item>
     <Item>
-      <Source>sword1.mp3</Source>
-      <Name>sword1</Name>
-      <Importer>Mp3Importer</Importer>
-      <Processor>SoundEffectProcessor</Processor>
-      <Options>None</Options>
-      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\sword1.xnb</Output>
-      <Time>2012-12-15T21:10:59.2146102+01:00</Time>
-    </Item>
-    <Item>
       <Source>background2.jpg</Source>
       <Name>background2</Name>
       <Importer>TextureImporter</Importer>
@@ -128,16 +110,6 @@
       <Time>2013-01-13T16:08:01.7729849+01:00</Time>
     </Item>
     <Item>
-      <Source>GangnamStyle.mp3</Source>
-      <Name>GangnamStyle</Name>
-      <Importer>Mp3Importer</Importer>
-      <Processor>SongProcessor</Processor>
-      <Options>None</Options>
-      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\GangnamStyle.xnb</Output>
-      <Extra>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\GangnamStyle.wma</Extra>
-      <Time>2012-11-14T19:20:39.2661896+01:00</Time>
-    </Item>
-    <Item>
       <Source>AviciiLevels.mp3</Source>
       <Name>AviciiLevels</Name>
       <Importer>Mp3Importer</Importer>
@@ -146,6 +118,70 @@
       <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\AviciiLevels.xnb</Output>
       <Extra>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\AviciiLevels.wma</Extra>
       <Time>2012-08-04T00:53:24.652372+02:00</Time>
+    </Item>
+    <Item>
+      <Source>gruntIcone.jpg</Source>
+      <Name>gruntIcone</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\gruntIcone.xnb</Output>
+      <Time>2013-01-13T21:46:14.2869137+01:00</Time>
+    </Item>
+    <Item>
+      <Source>HOM4.mp3</Source>
+      <Name>HOM4</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SongProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\HOM4.xnb</Output>
+      <Extra>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\HOM4.wma</Extra>
+      <Time>2013-01-13T21:46:14.2849107+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Sons\swords.wav</Source>
+      <Name>Sons\swords</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Sons\swords.xnb</Output>
+      <Time>2013-01-13T22:03:12.0172835+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Sons\Gruntquimeurt.WAV</Source>
+      <Name>Sons\Gruntquimeurt</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Sons\Gruntquimeurt.xnb</Output>
+      <Time>2013-01-13T22:03:12.0162836+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Sons\Cavalierquimeurt.wav</Source>
+      <Name>Sons\Cavalierquimeurt</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Sons\Cavalierquimeurt.xnb</Output>
+      <Time>2013-01-13T22:03:12.0142817+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Sons\GruntAttack.mp3</Source>
+      <Name>Sons\GruntAttack</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Sons\GruntAttack.xnb</Output>
+      <Time>2013-01-13T22:03:12.0122784+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Sons\sword1.mp3</Source>
+      <Name>Sons\sword1</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Sons\sword1.xnb</Output>
+      <Time>2012-12-15T21:10:59.2146102+01:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>

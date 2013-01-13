@@ -18,7 +18,8 @@ namespace CrystalGate
         public float Vitesse_Attaque { get; set; }
         public int Defense { get; set; }
 
-        protected EffetSonore effetUnite;
+        protected EffetSonore effetUniteAttaque;
+        protected EffetSonore effetUniteDeath;
         protected int nbFrameSonJoue;
 
         public List<Spell> spells { get; set; }
@@ -32,7 +33,8 @@ namespace CrystalGate
             Vitesse = 1.0f;
             Portee = 2; // 2 = Corps à corps
             Dommages = 1;
-            effetUnite = new EffetSonore(0);
+            effetUniteAttaque = new EffetSonore(0);
+            effetUniteDeath = new EffetSonore(1);
             nbFrameSonJoue = 0;
             Vitesse_Attaque = 1.00f;
             Defense = 1;
@@ -60,7 +62,8 @@ namespace CrystalGate
             if (Vie <= 0 && !Mort)
             {
                 Mort = true;
-                effetUnite.Dispose();
+                effetUniteDeath.Play();
+                effetUniteAttaque.Dispose();
                 effets.Add(new Effet(Sprite, ConvertUnits.ToDisplayUnits(body.Position), PackAnimation.Mort(), new Vector2(370 / 5, 835 / 11), 1));
                 Map.world.RemoveBody(body);
             }
@@ -100,7 +103,7 @@ namespace CrystalGate
                     LastAttack = (float)Map.gametime.TotalGameTime.TotalMilliseconds; // On met à jour "l'heure de la dernière attaque"
                     // uniteSuivi = null;  Source de lags
 
-                    effetUnite.Play();
+                    effetUniteAttaque.Play();
 
                     unite.Vie -= Dommages - unite.Defense;
 
