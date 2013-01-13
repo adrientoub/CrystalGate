@@ -48,12 +48,13 @@ namespace CrystalGate
             this.ObjectifListe = new List<Noeud> { };
 
             // Physique
-            this.body = BodyFactory.CreateRectangle(this.Map.world, ConvertUnits.ToSimUnits(32), ConvertUnits.ToSimUnits(32), 10f);
+            this.body = BodyFactory.CreateRectangle(this.Map.world, ConvertUnits.ToSimUnits(32), ConvertUnits.ToSimUnits(32), 100f);
             this.body.Position = ConvertUnits.ToSimUnits(Position * Map.TailleTiles + new Vector2(16,16));
             this.body.IsStatic = false;
             this.body.OnCollision += new OnCollisionEventHandler(body_OnCollision);
             this.body.UserData = this;
             this.body.Mass = 100;
+            this.PositionTile = Position;
             
             // Graphique
             this.Sprite = packTexture.blank;

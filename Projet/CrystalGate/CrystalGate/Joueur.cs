@@ -23,15 +23,7 @@ namespace CrystalGate
         {
             champion = champ;
 
-            // Graphique
-            champion.Sprite = champ.packTexture.unites[1];
-            champion.Tiles = new Vector2(380 / 5, 600 / 11);
-
             // Statistiques
-            champion.Vie = champ.VieMax = 100;
-            champion.Vitesse = 2.0f;
-            champion.Portee = 2f; // 2 = Corps à corps
-            champion.Dommages = 20;
             champion.Drawlife = true;
             champion.isAChamp = true;
 
@@ -148,6 +140,7 @@ namespace CrystalGate
             //Update de la position de la caméra et de l'interface
             camera.Position = new Vector2(camera.Position.X, camera.Position.Y) + vec;
             Interface.BasPosition = new Rectangle((int)(camera.Position.X), (int)(height - Interface.Bas.Height + camera.Position.Y), (int)Interface.BasPosition.Width, (int)Interface.BasPosition.Height);
+            Interface.Update();
         }
     }
 }

@@ -8,22 +8,48 @@ namespace CrystalGate
 {
     public class Wave
     {
-        int nombre;
+        List<Vector2> PointsInit;
+        List<Vector2> PointsSpawn;
         Unite unite;
         float ite;
+        Unite champ;
+        int NbWaves;
+        int current;
+        public bool enabled;
 
-        public Wave(int nombre, Unite unite, float ite)
+        public Wave(List<Vector2> pointsInit, List<Vector2> pointsSpawn, Unite unite, float ite, int nbWaves, Unite champion)
         {
-            this.nombre = nombre;
+            this.PointsInit = pointsInit;
+            this.PointsSpawn = pointsSpawn;
             this.unite = unite;
+            this.ite = ite;
+            this.champ = champion;
+            this.NbWaves = nbWaves;
+        }
+
+        public void Update(GameTime gameTime)
+        {
+            foreach (Vector2 v in PointsInit)
+                if (champ.PositionTile == v)
+                {
+                    enabled = true;
+                    break;
+                }
+
+            if (enabled)
+                Pop(gameTime);
         }
 
         public void Pop(GameTime GT)
         {
-            if (GT.TotalGameTime.TotalMilliseconds % ite == 0)
+            if (GT.TotalGameTime.Milliseconds % ite == 0 && current < NbWaves)
             {
-                unite.PositionTile = new Vector2(10, 10);
-                unite.Map.unites.Add(unite);
+                foreach (Vector2 v in PointsSpawn)
+                {
+                    unite.Map.unites.Add(new Cavalier(v, unite.Map, unite.packTexture));
+                    unite.Map.unites[unite.Map.unites.Count - 1].uniteAttacked = champ;
+                }
+                current++;
             }
         }
     }

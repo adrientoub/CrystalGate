@@ -15,8 +15,8 @@ namespace CrystalGate
         static bool _isLoadedNext = false;
         static TimeSpan _finDeLaMusique = new TimeSpan();
         static string[] _musicList = new string[] {
-            "GangnamStyle",
-            "AviciiLevels"
+            "HOM4",
+            //"AviciiLevels"
         };
         static int id = 0;
         static int idNext = 1;
@@ -28,7 +28,7 @@ namespace CrystalGate
         {
             if (_isLoaded)
             {
-                MediaPlayer.Volume = 100; // Mets le volume à fond (nécessaire pour éviter un bug)
+                MediaPlayer.Volume = 0.1f; // Mets le volume à fond (nécessaire pour éviter un bug)
                 MediaPlayer.Play(_musiqueDeFond[_playingNow]);
                 _finDeLaMusique = _musiqueDeFond[_playingNow].Duration;
             }

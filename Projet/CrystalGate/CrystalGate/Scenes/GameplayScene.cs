@@ -106,26 +106,20 @@ namespace CrystalGate.Scenes
             _effetsSonores.Add(content.Load<SoundEffect>("sword1"));
             EffetSonore.InitEffects();
             // ajout joueurs
-            joueurs.Add(new Joueur(new Unite(new Vector2(15, 2), map, pack)));
+            joueurs.Add(new Joueur(new Grunt(new Vector2(2, 8), map, pack)));
             unites.Add(joueurs[0].champion);
 
             // Interface
-            UI Interface = new UI(joueurs[0], content.Load<Texture2D>("UI"), content.Load<Texture2D>("Curseur"), spriteBatch, gameFont);
+            UI Interface = new UI(joueurs[0], content.Load<Texture2D>("UI"), content.Load<Texture2D>("Curseur"), content.Load<Texture2D>("gruntIcone"), spriteBatch, gameFont);
             joueurs[0].Interface = Interface;
 
-            // ajout unités
-            for (int j = 1; j < 5; j++)
-                for (int i = 0; i < 5; i++)
-                    if (i == 2 || i == 4)
-                        unites.Add(new Grunt(new Vector2(i, j), map, pack));
-                    else if (i == 8 || i == 8)
-                        unites.Add(new Cavalier(new Vector2(i, j), map, pack));
+            unites.Add(new Grunt(new Vector2(5, 5), map, pack));
             // fixe l'id de toutes les unités
             for (int i = 0; i < unites.Count; i++)
                 unites[i].id = i;
 
             // La vague
-            wave = new Wave(4, new Unite(Vector2.Zero, map, pack), 1000);
+            wave = new Wave(new List<Vector2>{new Vector2(8, 7), new Vector2(8, 8)}, new List<Vector2> { new Vector2(22,0), new Vector2(39,7), new Vector2(23,17) }, new Cavalier(Vector2.Zero, map, pack), 6000, 1, joueurs[0].champion);
         }
 
         protected override void UnloadContent() 
@@ -161,10 +155,7 @@ namespace CrystalGate.Scenes
                 foreach (Effet e in effets)
                     e.Update();
 
-                // Script temporaire pour lancer la bataille
-                /*if(gameTime.TotalGameTime.Milliseconds % 1000 == 0)
-                    unites.Add(new Cavalier(new Vector2(10, 8), map, pack));*/
-                wave.Pop(gameTime);
+                wave.Update(gameTime);
                 // Update de la physique
                 map.world.Step(1 / 60f);
             }

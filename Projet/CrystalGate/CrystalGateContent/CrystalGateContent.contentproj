@@ -56,13 +56,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="background.jpg">
-      <Name>background</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="gamefont.spritefont">
       <Name>gamefont</Name>
       <Importer>FontDescriptionImporter</Importer>
@@ -140,17 +133,24 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GangnamStyle.mp3">
-      <Name>GangnamStyle</Name>
+    <Compile Include="AviciiLevels.mp3">
+      <Name>AviciiLevels</Name>
       <Importer>Mp3Importer</Importer>
       <Processor>SongProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AviciiLevels.mp3">
-      <Name>AviciiLevels</Name>
+    <Compile Include="HOM4.mp3">
+      <Name>HOM4</Name>
       <Importer>Mp3Importer</Importer>
       <Processor>SongProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="gruntIcone.jpg">
+      <Name>gruntIcone</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />
