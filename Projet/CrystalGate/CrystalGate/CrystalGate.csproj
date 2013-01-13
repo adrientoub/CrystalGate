@@ -117,6 +117,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Batiments\Arbre.cs" />
     <Compile Include="Batiments\Mur.cs" />
     <Compile Include="Camera\Camera.cs" />
     <Compile Include="ConvertUnits.cs" />

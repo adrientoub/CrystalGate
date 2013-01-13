@@ -56,7 +56,6 @@ namespace CrystalGate.Scenes
             // Chargement de la carte
             int counter = 0;
             string line; // X
-            string height; // Y
             // Read the file and display it line by line.
             StreamReader file = new StreamReader(@"../../../Map/Map1.txt");
 
@@ -83,6 +82,11 @@ namespace CrystalGate.Scenes
                         batiments.Add(new Mur(new Vector2(i, counter), map, spriteBatch, pack));
                         map.unitesStatic[i, counter] = new Noeud(new Vector2(i, counter), false, 1);
                     }
+                    if (line2[i] == '2') // Mur
+                    {
+                        batiments.Add(new Arbre(new Vector2(i, counter), map, spriteBatch, pack));
+                        map.unitesStatic[i, counter] = new Noeud(new Vector2(i, counter), false, 1);
+                    }
                 }
                 counter++;
             }
@@ -102,19 +106,19 @@ namespace CrystalGate.Scenes
             unites.Add(joueurs[0].champion);
 
             // Interface
-            UI Interface = new UI(content.Load<Texture2D>("UI"), spriteBatch, gameFont);
+            UI Interface = new UI(joueurs[0], content.Load<Texture2D>("UI"), content.Load<Texture2D>("Curseur"), spriteBatch, gameFont);
             joueurs[0].Interface = Interface;
 
             // ajout unités
-            /*for (int j = 1; j < map.Taille.Y / 4; j++)
-                for (int i = 0; i < map.Taille.X; i++)
+            for (int j = 1; j < 5; j++)
+                for (int i = 0; i < 5; i++)
                     if (i == 2 || i == 4)
                         unites.Add(new Grunt(new Vector2(i, j), map, spriteBatch, pack));
                     else if (i == 8 || i == 8)
                         unites.Add(new Cavalier(new Vector2(i, j), map, spriteBatch, pack));
             // fixe l'id de toutes les unités
             for (int i = 0; i < unites.Count; i++)
-                unites[i].id = i;*/
+                unites[i].id = i;
         }
 
         protected override void UnloadContent() 
@@ -169,7 +173,7 @@ namespace CrystalGate.Scenes
 
                 // Script temporaire pour lancer un sort
                 KeyboardState k = Keyboard.GetState();
-                    if (k.IsKeyDown(Keys.A))
+                    if (k.IsKeyDown(Keys.D1))
                         ((Unite)unites[0]).Cast();
 
                 // Update de la physique

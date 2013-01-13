@@ -14,7 +14,7 @@ namespace CrystalGate.Scenes
         /// Le constructeur remplit le menu
         /// </summary>
         public MainMenuScene(SceneManager sceneMgr)
-            : base(sceneMgr, "Menu principal")
+            : base(sceneMgr, "Crystal Gate")
         {
             // Création des options
             var playGameMenuItem = new MenuItem("Lancer le jeu");
@@ -28,7 +28,7 @@ namespace CrystalGate.Scenes
 
             // Ajout des options du menu
             MenuItems.Add(playGameMenuItem);
-            MenuItems.Add(optionsMenuItem);
+            //MenuItems.Add(optionsMenuItem);
             MenuItems.Add(exitMenuItem);
         }
 

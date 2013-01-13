@@ -14,7 +14,10 @@ namespace CrystalGate
         public Camera2D camera { get; set; }
 
         MouseState mouse { get; set; }
+        KeyboardState key { get; set; }
         public UI Interface { get; set; }
+
+        bool isRoaming;
 
         public Joueur(Unite champ)
         {
@@ -38,21 +41,78 @@ namespace CrystalGate
         public void Update(List<Objet> unites)
         {
             mouse = Mouse.GetState();
+            key = Keyboard.GetState();
+
             // Pour se déplacer
-            if (mouse.RightButton == ButtonState.Pressed)
-                DonnerOrdreDeplacer(champion, champion.Map);
+            if (mouse.RightButton == ButtonState.Pressed && !DonnerOrdreAttaquer())
+                DonnerOrdreDeplacer();
+            // Pour attaquer un point
+            if (key.IsKeyDown(Keys.A))
+                DonnerOrdreAttaquerPoint();
+            // Pour arreter les déplacements
+            if (key.IsKeyDown(Keys.S))
+                DonnerOrdreStop();
+
+            if (isRoaming)
+            {
+                float distanceInit = 9000;
+                Unite focus = null;
+                foreach (Unite u in champion.Map.unites)
+                {
+                    float distance = Outil.DistanceUnites(champion, u);
+
+                    if (champion != u && distance <= distanceInit)
+                    {
+                        distanceInit = distance;
+                        focus = u;
+                    }
+                }
+                champion.uniteAttacked = focus;
+            }
             // Pour déplacer la caméra
             CameraCheck();
         }
 
-        public void DonnerOrdreDeplacer(Unite unite, Map map)
+        public void DonnerOrdreDeplacer()
         {
-            Vector2 ObjectifPoint = new Vector2(camera.Position.X + mouse.X, camera.Position.Y + mouse.Y) / map.TailleTiles;
+            isRoaming = false;
+            Vector2 ObjectifPoint = new Vector2(camera.Position.X + mouse.X, camera.Position.Y + mouse.Y) / champion.Map.TailleTiles;
             ObjectifPoint = new Vector2((int)ObjectifPoint.X, (int)ObjectifPoint.Y);
                 
-            List<Noeud> chemin = PathFinding.TrouverChemin(champion.PositionTile, ObjectifPoint, unite.Map.Taille, new List<Objet> { }, map.unitesStatic, false);
+            List<Noeud> chemin = PathFinding.TrouverChemin(champion.PositionTile, ObjectifPoint, champion.Map.Taille, new List<Objet> { }, champion.Map.unitesStatic, false);
                 if (chemin != null)
-                    unite.ObjectifListe = chemin;
+                    champion.ObjectifListe = chemin;
+                champion.uniteAttacked = null;
+        }
+
+        public bool DonnerOrdreAttaquer()
+        {
+            isRoaming = false;
+            Vector2 ObjectifPoint = new Vector2(camera.Position.X + mouse.X, camera.Position.Y + mouse.Y) / champion.Map.TailleTiles;
+            ObjectifPoint = new Vector2((int)ObjectifPoint.X, (int)ObjectifPoint.Y);
+            foreach(Unite u in champion.Map.unites)
+                if(u != champion && u.PositionTile == ObjectifPoint)
+                {
+                    //champion.Attaquer(u);
+                    champion.uniteAttacked = u;
+                    List<Noeud> chemin = PathFinding.TrouverChemin(champion.PositionTile, ObjectifPoint, champion.Map.Taille, new List<Objet> { }, champion.Map.unitesStatic, false);
+                    if (chemin != null)
+                        champion.ObjectifListe = chemin;
+                    return true;
+                }
+            return false;
+        }
+
+        public void DonnerOrdreAttaquerPoint()
+        {
+            //DonnerOrdreDeplacer();
+            isRoaming = true;
+        }
+
+        public void DonnerOrdreStop()
+        {
+            champion.uniteAttacked = null;
+            champion.ObjectifListe.Clear();
         }
 
         public void CameraCheck()

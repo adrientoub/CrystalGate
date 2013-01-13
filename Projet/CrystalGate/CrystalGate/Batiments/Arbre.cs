@@ -8,14 +8,14 @@ using Microsoft.Xna.Framework.Input;
 
 namespace CrystalGate
 {
-    public class Mur : Batiment
+    public class Arbre : Batiment
     {
 
-        public Mur(Vector2 Position, Map map, SpriteBatch spriteBatch, PackTexture packTexture)
+        public Arbre(Vector2 Position, Map map, SpriteBatch spriteBatch, PackTexture packTexture)
             : base(Position, map, spriteBatch, packTexture)
         {
             // Graphique par défaut
-            PositionSprite = new Vector2(16, 0);
+            PositionSprite = new Vector2(9, 5);
         }
     }
 }

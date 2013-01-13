@@ -34,7 +34,7 @@ namespace CrystalGate
             Dommages = 1;
             effetUnite = new EffetSonore(0);
             nbFrameSonJoue = 0;
-            Vitesse_Attaque = 2f;
+            Vitesse_Attaque = 1.25f;
             Defense = 1;
             // Graphique par defaut
             Sprite = packTexture.unites[0];
