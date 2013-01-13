@@ -13,7 +13,7 @@ namespace CrystalGate
         const int nbSonSimult = 3; // Nombre de sons simultanés.
         // A changer si plus de sons voulus.
         SoundEffectInstance son;
-        static System.Diagnostics.Stopwatch time = new System.Diagnostics.Stopwatch();
+        public static System.Diagnostics.Stopwatch time = new System.Diagnostics.Stopwatch();
         static bool[] isPlaying = new bool[nbSonSimult];
         static TimeSpan[] duree = new TimeSpan[nbSonSimult];
         int id;

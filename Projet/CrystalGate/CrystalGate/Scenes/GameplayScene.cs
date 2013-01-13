@@ -43,6 +43,8 @@ namespace CrystalGate.Scenes
             if (content == null)
                 content = new ContentManager(SceneManager.Game.Services, "Content");
 
+            FondSonore.Load(ref content);
+            FondSonore.Play();
             SpriteBatch spriteBatch = SceneManager.SpriteBatch;
             gameFont = content.Load<SpriteFont>("menufont");
 
@@ -128,6 +130,7 @@ namespace CrystalGate.Scenes
 
         public override void Update(GameTime gameTime, bool othersceneHasFocus, bool coveredByOtherscene)
         {
+            FondSonore.Update();
             base.Update(gameTime, othersceneHasFocus, false);
 
             pauseAlpha = coveredByOtherscene 
