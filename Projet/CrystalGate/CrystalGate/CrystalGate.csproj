@@ -154,6 +154,7 @@
     <Compile Include="Scenes\PauseMenuScene.cs" />
     <Compile Include="Unites\Cavalier.cs" />
     <Compile Include="Unites\Grunt.cs" />
+    <Compile Include="Wave.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />

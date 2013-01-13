@@ -24,8 +24,8 @@ namespace CrystalGate
         public List<Spell> spells { get; set; }
         public bool Drawlife { get; set; }
 
-        public Unite(Vector2 Position, Map map, SpriteBatch spriteBatch, PackTexture packTexture)
-            : base(Position, map, spriteBatch, packTexture)
+        public Unite(Vector2 Position, Map map, PackTexture packTexture)
+            : base(Position, map, packTexture)
         {
             // Constructeur par defaut d'une unité
             Vie = VieMax = 1;
@@ -280,13 +280,13 @@ namespace CrystalGate
 
         }
 
-        public override void Draw()
+        public override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(Sprite, ConvertUnits.ToDisplayUnits(body.Position), SpritePosition, Color.White, 0f, new Vector2(Tiles.X / 2, Tiles.Y / 2), 1f, FlipH ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 0);
-            DrawVie();
+            DrawVie(spriteBatch);
         }
 
-        private void DrawVie()
+        private void DrawVie(SpriteBatch spriteBatch)
         {
             if (Drawlife)
             {

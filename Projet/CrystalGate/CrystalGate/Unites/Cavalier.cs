@@ -11,8 +11,8 @@ namespace CrystalGate
     public class Cavalier : Unite
     {
 
-        public Cavalier(Vector2 Position, Map map, SpriteBatch spriteBatch, PackTexture packTexture)
-            : base(Position, map, spriteBatch, packTexture)
+        public Cavalier(Vector2 Position, Map map, PackTexture packTexture)
+            : base(Position, map, packTexture)
         {
             // Graphique
             Sprite = packTexture.unites[0];

@@ -25,8 +25,8 @@ namespace CrystalGate
         public List<Spell> spells { get; set; }
         public bool Drawlife { get; set; }
 
-        public Batiment(Vector2 Position, Map map, SpriteBatch spriteBatch, PackTexture packTexture)
-            : base(Position, map, spriteBatch, packTexture)
+        public Batiment(Vector2 Position, Map map, PackTexture packTexture)
+            : base(Position, map, packTexture)
         {
             // Constructeur par defaut d'un batiment
             Vie = VieMax = 1;
@@ -46,7 +46,7 @@ namespace CrystalGate
             PositionTile = new Vector2((int)(ConvertUnits.ToDisplayUnits(body.Position.X) / 32), (int)(ConvertUnits.ToDisplayUnits(body.Position.Y) / 32));
         }
 
-        public override void Draw()
+        public override void Draw(SpriteBatch spriteBatch)
         {
             Rectangle rec = new Rectangle((int)(Tiles.X * PositionSprite.X + PositionSprite.X), (int)(Tiles.Y * PositionSprite.Y + PositionSprite.Y), (int)Tiles.X, (int)Tiles.Y);
             spriteBatch.Draw(Sprite, ConvertUnits.ToDisplayUnits(body.Position), rec, Color.White, 0f, new Vector2(Tiles.X / 2, Tiles.Y / 2), 1f, FlipH ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 0);

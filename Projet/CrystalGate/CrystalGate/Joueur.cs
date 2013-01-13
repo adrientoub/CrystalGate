@@ -52,6 +52,9 @@ namespace CrystalGate
             // Pour arreter les déplacements
             if (key.IsKeyDown(Keys.S))
                 DonnerOrdreStop();
+            // Pour lancer un sort (Bump)
+            if (key.IsKeyDown(Keys.D1))
+                champion.Cast();
 
             if (isRoaming)
             {

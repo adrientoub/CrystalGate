@@ -11,8 +11,8 @@ namespace CrystalGate
     public class Mur : Batiment
     {
 
-        public Mur(Vector2 Position, Map map, SpriteBatch spriteBatch, PackTexture packTexture)
-            : base(Position, map, spriteBatch, packTexture)
+        public Mur(Vector2 Position, Map map, PackTexture packTexture)
+            : base(Position, map, packTexture)
         {
             // Graphique par défaut
             PositionSprite = new Vector2(16, 0);

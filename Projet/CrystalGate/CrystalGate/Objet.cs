@@ -26,7 +26,6 @@ namespace CrystalGate
         public PackTexture packTexture { get; set; }
         public Vector2 Tiles { get; set; }
 
-        protected SpriteBatch spriteBatch { get; set; }
         protected Rectangle SpritePosition { get; set; }
         protected int AnimationCurrent { get; set; }
 
@@ -42,7 +41,7 @@ namespace CrystalGate
         public float LastAttack { get; set; }
         public Unite uniteAttacked { get; set; }
 
-        public Objet(Vector2 Position, Map Map, SpriteBatch spriteBatch, PackTexture packTexture)
+        public Objet(Vector2 Position, Map Map, PackTexture packTexture)
         {
             // Général
             this.Map = Map;
@@ -59,7 +58,6 @@ namespace CrystalGate
             // Graphique
             this.Sprite = packTexture.blank;
             this.Animation = new List<Vector2> { };
-            this.spriteBatch = spriteBatch;
             this.packTexture = packTexture;
             this.direction = Direction.Bas;
             this.FlipH = false;
@@ -132,7 +130,7 @@ namespace CrystalGate
             }
         }
 
-        public virtual void Draw()
+        public virtual void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(Sprite, ConvertUnits.ToDisplayUnits(body.Position), SpritePosition, Color.White, 0f, new Vector2(Tiles.X / 2, Tiles.Y / 2), 1f, FlipH ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 0);
         }

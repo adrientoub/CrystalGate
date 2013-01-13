@@ -11,8 +11,8 @@ namespace CrystalGate
     public class Arbre : Batiment
     {
 
-        public Arbre(Vector2 Position, Map map, SpriteBatch spriteBatch, PackTexture packTexture)
-            : base(Position, map, spriteBatch, packTexture)
+        public Arbre(Vector2 Position, Map map, PackTexture packTexture)
+            : base(Position, map, packTexture)
         {
             // Graphique par défaut
             PositionSprite = new Vector2(9, 5);
