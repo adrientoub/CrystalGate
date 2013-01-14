@@ -19,6 +19,7 @@ namespace CrystalGate
             NeedUnPoint = true;
             SpriteBouton = unite.packTexture.boutons[0];
             SpriteEffect = unite.packTexture.sorts[0];
+            sonSort = new EffetSonore(5);
         }
 
         public override void Update(Vector2 Point)

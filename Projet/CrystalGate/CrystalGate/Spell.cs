@@ -26,6 +26,8 @@ namespace CrystalGate
 
         public float LastCast { get; set; }
 
+        public EffetSonore sonSort;
+
         public Spell(Unite u)
         {
             unite = u;

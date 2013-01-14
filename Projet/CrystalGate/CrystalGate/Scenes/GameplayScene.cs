@@ -106,6 +106,9 @@ namespace CrystalGate.Scenes
             _effetsSonores.Add(content.Load<SoundEffect>("Sons/Cavalierquimeurt"));
             _effetsSonores.Add(content.Load<SoundEffect>("Sons/GruntAttack")); 
             _effetsSonores.Add(content.Load<SoundEffect>("Sons/Gruntquimeurt"));
+            // Sons des sorts.
+            _effetsSonores.Add(content.Load<SoundEffect>("Sons/soin"));
+            _effetsSonores.Add(content.Load<SoundEffect>("Sons/explosion"));
             EffetSonore.InitEffects();
             // ajout joueurs
             joueurs.Add(new Joueur(new Grunt(new Vector2(2, 8), map, pack)));

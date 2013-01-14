@@ -274,6 +274,7 @@ namespace CrystalGate
                 // Activent les sort a Update et Draw
                 spells[i].LastCast = (float)Map.gametime.TotalGameTime.TotalMilliseconds;
                 spells[i].ToDraw = true;
+                spells[i].sonSort.Play();
         }
 
         public override void Draw(SpriteBatch spriteBatch)

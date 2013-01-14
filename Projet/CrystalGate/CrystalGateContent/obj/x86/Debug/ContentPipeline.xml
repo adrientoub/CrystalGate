@@ -2,24 +2,6 @@
 <XnaContent xmlns:Pipeline="Microsoft.Xna.Framework.Content.Pipeline">
   <Asset Type="Pipeline:BuildItemCollection">
     <Item>
-      <Source>menufont.spritefont</Source>
-      <Name>menufont</Name>
-      <Importer>FontDescriptionImporter</Importer>
-      <Processor>FontDescriptionProcessor</Processor>
-      <Options>None</Options>
-      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\menufont.xnb</Output>
-      <Time>2012-11-21T22:40:39.5003282+01:00</Time>
-    </Item>
-    <Item>
-      <Source>gamefont.spritefont</Source>
-      <Name>gamefont</Name>
-      <Importer>FontDescriptionImporter</Importer>
-      <Processor>FontDescriptionProcessor</Processor>
-      <Options>None</Options>
-      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\gamefont.xnb</Output>
-      <Time>2012-11-21T22:40:39.4973281+01:00</Time>
-    </Item>
-    <Item>
       <Source>blank.png</Source>
       <Name>blank</Name>
       <Importer>TextureImporter</Importer>
@@ -65,24 +47,6 @@
       <Time>2012-11-21T22:40:39.4993282+01:00</Time>
     </Item>
     <Item>
-      <Source>UI.png</Source>
-      <Name>UI</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\UI.xnb</Output>
-      <Time>2012-12-16T17:22:26.925115+01:00</Time>
-    </Item>
-    <Item>
-      <Source>bouclierfoudre.jpg</Source>
-      <Name>bouclierfoudre</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\bouclierfoudre.xnb</Output>
-      <Time>2012-12-16T23:15:19.0857936+01:00</Time>
-    </Item>
-    <Item>
       <Source>summertiles.png</Source>
       <Name>summertiles</Name>
       <Importer>TextureImporter</Importer>
@@ -90,15 +54,6 @@
       <Options>None</Options>
       <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\summertiles.xnb</Output>
       <Time>2012-12-23T20:52:20.6641366+01:00</Time>
-    </Item>
-    <Item>
-      <Source>background2.jpg</Source>
-      <Name>background2</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\background2.xnb</Output>
-      <Time>2013-01-13T16:08:01.7719832+01:00</Time>
     </Item>
     <Item>
       <Source>curseur.png</Source>
@@ -182,6 +137,114 @@
       <Options>None</Options>
       <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Sons\sword1.xnb</Output>
       <Time>2012-12-15T21:10:59.2146102+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Polices\menufont.spritefont</Source>
+      <Name>Polices\menufont</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Polices\menufont.xnb</Output>
+      <Time>2013-01-14T19:16:19.9715032+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Polices\gamefont.spritefont</Source>
+      <Name>Polices\gamefont</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Polices\gamefont.xnb</Output>
+      <Time>2013-01-14T19:16:19.9506582+01:00</Time>
+    </Item>
+    <Item>
+      <Source>background.jpg</Source>
+      <Name>background</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\background.xnb</Output>
+      <Time>2013-01-14T19:16:20.0737326+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Spells\Explosion.png</Source>
+      <Name>Spells\Explosion</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Spells\Explosion.xnb</Output>
+      <Time>2013-01-14T19:16:19.9908539+01:00</Time>
+    </Item>
+    <Item>
+      <Source>UI\Perso and stats.jpg</Source>
+      <Name>UI\Perso and stats</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\UI\Perso and stats.xnb</Output>
+      <Time>2013-01-14T19:16:19.9930016+01:00</Time>
+    </Item>
+    <Item>
+      <Source>UI\barre des sorts.png</Source>
+      <Name>UI\barre des sorts</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\UI\barre des sorts.xnb</Output>
+      <Time>2013-01-14T19:16:19.9942759+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Boutons\Explosion.JPG</Source>
+      <Name>Boutons\Explosion</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Boutons\Explosion.xnb</Output>
+      <Time>2013-01-14T19:16:19.9386143+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Spells\Soin.png</Source>
+      <Name>Spells\Soin</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Spells\Soin.xnb</Output>
+      <Time>2013-01-14T19:16:19.9919991+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Boutons\Soin.JPG</Source>
+      <Name>Boutons\Soin</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Boutons\Soin.xnb</Output>
+      <Time>2013-01-14T19:16:19.9386143+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Sons\sword3.mp3</Source>
+      <Name>Sons\sword3</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Sons\sword3.xnb</Output>
+      <Time>2013-01-14T00:50:19.9321998+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Sons\explosion.mp3</Source>
+      <Name>Sons\explosion</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Sons\explosion.xnb</Output>
+      <Time>2013-01-14T13:56:39.2905964+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Sons\soin.MP3</Source>
+      <Name>Sons\soin</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Sons\soin.xnb</Output>
+      <Time>2013-01-14T13:56:38.6823634+01:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
