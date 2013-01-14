@@ -10,8 +10,7 @@ namespace CrystalGate
     class Explosion : Spell
     {
         public Explosion(Unite u)
-            : base(u)
-            
+            : base(u)  
         {
             NeedUnPoint = true;
             SpriteBouton = unite.packTexture.sorts[0];

@@ -49,7 +49,7 @@ namespace CrystalGate.Scenes
             FondSonore.Play();
 
             SpriteBatch spriteBatch = SceneManager.SpriteBatch;
-            gameFont = content.Load<SpriteFont>("menufont");
+            gameFont = content.Load<SpriteFont>("gamefont");
 
             // Pack de texture (Contient toutes les sprites des unites et des sorts)
             pack = new PackTexture(content.Load<Texture2D>("blank"));
