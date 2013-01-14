@@ -20,7 +20,7 @@ namespace CrystalGate
 
         public List<Vector2> Animation { get; set; }
         protected int AnimationCurrent { get; set; }
-        protected const int AnimationLimite = 4;
+        protected int AnimationLimite = 4;
         protected Rectangle SpritePosition { get; set; }
         public Vector2 Tiles { get; set; }
 

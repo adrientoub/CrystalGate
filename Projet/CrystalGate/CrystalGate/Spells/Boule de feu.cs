@@ -12,6 +12,10 @@ namespace CrystalGate
         public Explosion(Unite u)
             : base(u)  
         {
+            Cooldown = 1;
+            Animation = PackAnimation.Explosion();
+            Tiles = new Vector2(65, 65);
+
             NeedUnPoint = true;
             SpriteBouton = unite.packTexture.boutons[0];
             SpriteEffect = unite.packTexture.sorts[0];

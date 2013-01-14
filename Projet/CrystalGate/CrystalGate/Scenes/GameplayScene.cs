@@ -54,8 +54,9 @@ namespace CrystalGate.Scenes
             // Pack de texture (Contient toutes les sprites des unites et des sorts)
             pack = new PackTexture(content.Load<Texture2D>("blank"));
             pack.unites = new List<Texture2D> { content.Load<Texture2D>("knight"), content.Load<Texture2D>("grunt") };
-            pack.sorts.Add(content.Load<Texture2D>("explosion"));
-            pack.boutons.Add(content.Load<Texture2D>("Boutons/Explosion"));
+            pack.sorts.Add(content.Load<Texture2D>("Spells/Explosion"));
+            pack.sorts.Add(content.Load<Texture2D>("Spells/Soin"));
+            pack.boutons = new List<Texture2D> { content.Load<Texture2D>("Boutons/Explosion"), content.Load<Texture2D>("Boutons/Soin") };
             pack.map.Add(content.Load<Texture2D>("summertiles"));
             //
             // Chargement de la carte

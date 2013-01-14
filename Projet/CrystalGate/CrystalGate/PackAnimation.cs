@@ -146,5 +146,14 @@ namespace CrystalGate
 
             return liste;
         }
+
+        public static List<Vector2> Soin()
+        {
+            List<Vector2> liste = new List<Vector2> { };
+                for (int i = 0; i <= 5; i++)
+                    liste.Add(new Vector2(0, i));
+
+            return liste;
+        }
     }
 }

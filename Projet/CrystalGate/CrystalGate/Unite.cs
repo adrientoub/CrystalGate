@@ -42,7 +42,7 @@ namespace CrystalGate
             Sprite = packTexture.unites[0];
             Tiles = new Vector2(370 / 5, 835 / 11);
 
-            spells = new List<Spell> { new Explosion(this) };
+            spells = new List<Spell> { new Explosion(this), new Soin(this) };
         }
 
         public override void Update(List<Objet> unitsOnMap, List<Effet> effets)

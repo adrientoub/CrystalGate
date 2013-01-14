@@ -64,6 +64,14 @@ namespace CrystalGate
                     InWaitingPoint = true;
                 }
             }
+            if (key.IsKeyDown(Keys.D2))
+            {
+                spell = 1;
+                if (champion.Map.gametime.TotalGameTime.TotalMilliseconds - champion.spells[spell].LastCast > champion.spells[spell].Cooldown * 1000)
+                {
+                    champion.Cast(spell, point);
+                }
+            }
             // Pour Update et Draw les sorts
             foreach (Spell s in champion.spells)
                 if (s.ToDraw)

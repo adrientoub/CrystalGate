@@ -63,9 +63,11 @@ namespace CrystalGate
             if(DrawSelectPoint)
                 spritebatch.DrawString(gamefont, str2, new Vector2(BarreDesSortsPosition.X - gamefont.MeasureString(str2).X / 2, BarreDesSortsPosition.Y - BarreDesSorts.Height), Color.White);
 
+            int i = 0;
             foreach (Spell s in joueur.champion.spells)
             {
-                spritebatch.Draw(s.SpriteBouton, new Vector2(BarreDesSortsPosition.X - 128, BarreDesSortsPosition.Y + 8), Color.White);
+                spritebatch.Draw(s.SpriteBouton, new Vector2(BarreDesSortsPosition.X - 128 + i * 32 + 3, BarreDesSortsPosition.Y + 8), Color.White);
+                i++;
             }
             spritebatch.Draw(Curseur, new Vector2(joueur.camera.Position.X + m.X, joueur.camera.Position.Y + m.Y), Color.White);
         }
