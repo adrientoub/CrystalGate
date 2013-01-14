@@ -42,7 +42,7 @@ namespace CrystalGate
             Sprite = packTexture.unites[0];
             Tiles = new Vector2(370 / 5, 835 / 11);
 
-            spells = new List<Spell> { new Bump(this), new Explosion(this)};
+            spells = new List<Spell> { new Explosion(this) };
         }
 
         public override void Update(List<Objet> unitsOnMap, List<Effet> effets)
@@ -142,7 +142,7 @@ namespace CrystalGate
         public virtual void Deplacer()
         {
             if (ObjectifListe.Count > 0)
-            {  // Bug, je sais pas pouquoi
+            {  // Bug, je sais pas pourquoi
                 // body.Position = ConvertUnits.ToSimUnits(new Vector2((float)Math.Round(ConvertUnits.ToDisplayUnits(body.Position.X)), (float)Math.Round(ConvertUnits.ToDisplayUnits(body.Position.Y) )));
                 Vector2 VecMap = new Vector2(0, 0);
                 // HAUT GAUCHE

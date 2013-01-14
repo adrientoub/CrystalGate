@@ -42,10 +42,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="menufont.spritefont">
+    <Compile Include="Polices\menufont.spritefont">
       <Name>menufont</Name>
       <Importer>FontDescriptionImporter</Importer>
       <Processor>FontDescriptionProcessor</Processor>
+      <SubType>Designer</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -56,7 +57,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="gamefont.spritefont">
+    <Compile Include="Polices\gamefont.spritefont">
       <Name>gamefont</Name>
       <Importer>FontDescriptionImporter</Importer>
       <Processor>FontDescriptionProcessor</Processor>
@@ -98,20 +99,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="UI.png">
-      <Name>UI</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="bouclierfoudre.jpg">
-      <Name>bouclierfoudre</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="summertiles.png">
       <Name>summertiles</Name>
       <Importer>TextureImporter</Importer>
@@ -119,8 +106,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="background2.jpg">
-      <Name>background2</Name>
+    <Compile Include="background.jpg">
+      <Name>background</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
@@ -191,6 +178,27 @@
   <ItemGroup>
     <Compile Include="explosion.png">
       <Name>explosion</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="UI\Perso and stats.jpg">
+      <Name>Perso and stats</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="UI\barre des sorts.png">
+      <Name>barre des sorts</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Boutons\Explosion.JPG">
+      <Name>Explosion</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

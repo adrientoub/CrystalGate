@@ -49,13 +49,13 @@ namespace CrystalGate.Scenes
             FondSonore.Play();
 
             SpriteBatch spriteBatch = SceneManager.SpriteBatch;
-            gameFont = content.Load<SpriteFont>("gamefont");
+            gameFont = content.Load<SpriteFont>("Polices/gamefont");
 
             // Pack de texture (Contient toutes les sprites des unites et des sorts)
             pack = new PackTexture(content.Load<Texture2D>("blank"));
-            pack.unites.Add(content.Load<Texture2D>("knight"));
-            pack.unites.Add(content.Load<Texture2D>("grunt"));
+            pack.unites = new List<Texture2D> { content.Load<Texture2D>("knight"), content.Load<Texture2D>("grunt") };
             pack.sorts.Add(content.Load<Texture2D>("explosion"));
+            pack.boutons.Add(content.Load<Texture2D>("Boutons/Explosion"));
             pack.map.Add(content.Load<Texture2D>("summertiles"));
             //
             // Chargement de la carte
@@ -68,11 +68,9 @@ namespace CrystalGate.Scenes
             string line2;
             file = new StreamReader(@"../../../Map/Map1.txt");
             while ((line2 = file.ReadLine()) != null)
-            {
                 counter++;
-            }
+
             // Creation de la carte
-            //Vector2 ecran = new Vector2((int)(this.Game.Window.ClientBounds.Width / 32) * 2, (int)(this.Game.Window.ClientBounds.Height / 32) + 1) * 2;
             Texture2D SpriteMap = content.Load<Texture2D>("summertiles");
             map = new Map(SpriteMap, new Vector2(line.Length, counter) , new Vector2(32, 32));
 
@@ -113,7 +111,7 @@ namespace CrystalGate.Scenes
             unites.Add(joueurs[0].champion);
 
             // Interface
-            UI Interface = new UI(joueurs[0], content.Load<Texture2D>("UI"), content.Load<Texture2D>("Curseur"), content.Load<Texture2D>("gruntIcone"), spriteBatch, gameFont);
+            UI Interface = new UI(joueurs[0], content.Load<Texture2D>("UI/Perso and stats"), content.Load<Texture2D>("UI/barre des sorts"), content.Load<Texture2D>("Curseur"), content.Load<Texture2D>("gruntIcone"), spriteBatch, gameFont);
             joueurs[0].Interface = Interface;
 
             // fixe l'id de toutes les unités

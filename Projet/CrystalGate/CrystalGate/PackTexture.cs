@@ -15,6 +15,7 @@ namespace CrystalGate
         public Texture2D blank { get; set; }
         public List<Texture2D> unites { get; set; }
         public List<Texture2D> sorts { get; set; }
+        public List<Texture2D> boutons { get; set; }
         public List<Texture2D> map { get; set; } 
 
         public PackTexture(Texture2D blank)
@@ -22,6 +23,7 @@ namespace CrystalGate
             this.blank = blank;
             unites = new List<Texture2D> { };
             sorts = new List<Texture2D> { };
+            boutons = new List<Texture2D> { };
             map = new List<Texture2D> { };
         }
         

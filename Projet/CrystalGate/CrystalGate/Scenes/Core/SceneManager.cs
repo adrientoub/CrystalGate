@@ -53,7 +53,7 @@ namespace CrystalGate.Scenes.Core
         {
             ContentManager content = Game.Content;
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-            _font = content.Load<SpriteFont>("menufont");
+            _font = content.Load<SpriteFont>("Polices/menufont");
             _blankTexture = content.Load<Texture2D>("blank");
         }
 

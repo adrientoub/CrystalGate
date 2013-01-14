@@ -1,14 +1,9 @@
-Content\menufont.xnb
-Content\gamefont.xnb
 Content\blank.xnb
 Content\knight.xnb
 Content\gradient.xnb
 Content\archer.xnb
 Content\grunt.xnb
-Content\UI.xnb
-Content\bouclierfoudre.xnb
 Content\summertiles.xnb
-Content\background2.xnb
 Content\curseur.xnb
 Content\AviciiLevels.xnb
 Content\HOM4.xnb
@@ -20,5 +15,11 @@ Content\Sons\sword1.xnb
 Content\Sons\GruntAttack.xnb
 Content\Sons\sword3.xnb
 Content\explosion.xnb
+Content\UI\Perso and stats.xnb
+Content\UI\barre des sorts.xnb
+Content\Boutons\Explosion.xnb
+Content\Polices\menufont.xnb
+Content\Polices\gamefont.xnb
+Content\background.xnb
 Content\AviciiLevels.wma
 Content\HOM4.wma

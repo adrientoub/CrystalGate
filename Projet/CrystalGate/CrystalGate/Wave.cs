@@ -15,6 +15,7 @@ namespace CrystalGate
         Unite champ;
         int NbWaves;
         int current;
+        int Nbalive;
         public bool enabled;
 
         public Wave(List<Vector2> pointsInit, List<Vector2> pointsSpawn, Unite unite, float ite, int nbWaves, Unite champion)
@@ -46,6 +47,7 @@ namespace CrystalGate
             {
                 foreach (Vector2 v in PointsSpawn)
                 {
+                    Nbalive = PointsSpawn.Count;
                     unite.Map.unites.Add(new Cavalier(v, unite.Map, unite.packTexture));
                     unite.Map.unites[unite.Map.unites.Count - 1].uniteAttacked = champ;
                 }

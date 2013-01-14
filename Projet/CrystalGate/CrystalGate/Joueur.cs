@@ -57,12 +57,12 @@ namespace CrystalGate
             // Pour lancer un sort
             if (key.IsKeyDown(Keys.D1))
             {
-                if (champion.Map.gametime.TotalGameTime.TotalMilliseconds - champion.spells[1].LastCast > champion.spells[1].Cooldown * 1000 && champion.spells[1].NeedUnPoint)
+                spell = 0;
+                if (champion.Map.gametime.TotalGameTime.TotalMilliseconds - champion.spells[spell].LastCast > champion.spells[spell].Cooldown * 1000 && champion.spells[spell].NeedUnPoint)
                 {
                     Interface.DrawSelectPoint = true;
                     InWaitingPoint = true;
                 }
-                spell = 1;
             }
             // Pour Update et Draw les sorts
             foreach (Spell s in champion.spells)
@@ -156,12 +156,11 @@ namespace CrystalGate
                 camera.Position = new Vector2(0, camera.Position.Y);
             if (camera.Position.Y < 0)
                 camera.Position = new Vector2(camera.Position.X, 0);
-            if (camera.Position.Y > champion.Map.Taille.Y * champion.Map.TailleTiles.Y - height + Interface.Bas.Height)
-                camera.Position = new Vector2(camera.Position.X, champion.Map.Taille.Y * champion.Map.TailleTiles.Y - height + Interface.Bas.Height);
+            if (camera.Position.Y > champion.Map.Taille.Y * champion.Map.TailleTiles.Y - height + Interface.BarreDesSorts.Height)
+                camera.Position = new Vector2(camera.Position.X, champion.Map.Taille.Y * champion.Map.TailleTiles.Y - height + Interface.BarreDesSorts.Height);
             
             //Update de la position de la caméra et de l'interface
             camera.Position = new Vector2(camera.Position.X, camera.Position.Y) + vec;
-            Interface.BasPosition = new Rectangle((int)(camera.Position.X), (int)(height - Interface.Bas.Height + camera.Position.Y), (int)Interface.BasPosition.Width, (int)Interface.BasPosition.Height);
             Interface.Update();
         }
     }

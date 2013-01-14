@@ -32,7 +32,7 @@ namespace CrystalGate.Scenes
             if (_content == null)
                 _content = new ContentManager(SceneManager.Game.Services, "Content");
 
-            _backgroundTexture = _content.Load<Texture2D>("background2");
+            _backgroundTexture = _content.Load<Texture2D>("background");
         }
 
         protected override void UnloadContent()
