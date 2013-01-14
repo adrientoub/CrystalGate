@@ -27,7 +27,7 @@ namespace CrystalGate
         {
             if (_isLoaded)
             {
-                MediaPlayer.Volume = 0.1f; // Mets le volume à fond (nécessaire pour éviter un bug)
+                MediaPlayer.Volume = 0.5f; // Mets le volume à fond (nécessaire pour éviter un bug)
                 MediaPlayer.Play(_musiqueDeFond[_playingNow]);
                 _finDeLaMusique = _musiqueDeFond[_playingNow].Duration;
             }

@@ -24,6 +24,7 @@ namespace CrystalGate
 
         public List<Spell> spells { get; set; }
         public bool Drawlife { get; set; }
+        public int idWave { get; set; }
 
         public Unite(Vector2 Position, Map map, PackTexture packTexture)
             : base(Position, map, packTexture)
@@ -41,6 +42,7 @@ namespace CrystalGate
             // Graphique par defaut
             Sprite = packTexture.unites[0];
             Tiles = new Vector2(370 / 5, 835 / 11);
+            idWave = -1;
 
             spells = new List<Spell> { new Explosion(this), new Soin(this) };
         }
@@ -61,6 +63,7 @@ namespace CrystalGate
         {
             if (Vie <= 0 && !Mort)
             {
+                Vie = 0;
                 Mort = true;
                 effetUniteDeath.Play();
                 effetUniteAttaque.Dispose();

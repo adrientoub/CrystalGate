@@ -35,65 +35,67 @@ namespace CrystalGate
 
         public void Update(List<Objet> unites)
         {
-            mouse = Mouse.GetState();
-            key = Keyboard.GetState();
-            // Pour cibler un point pour un sort
-            if (mouse.LeftButton == ButtonState.Pressed && InWaitingPoint)
+            if (!champion.Mort)
             {
-                point = new Vector2((int)((camera.Position.X + mouse.X) / 32), (int)((camera.Position.Y + mouse.Y) / 32));
-                InWaitingPoint = false;
-                Interface.DrawSelectPoint = false;
-                champion.Cast(spell, point);
-            }
-            // Pour se déplacer
-            if (mouse.RightButton == ButtonState.Pressed && !DonnerOrdreAttaquer())
-                DonnerOrdreDeplacer();
-            // Pour attaquer un point
-            if (key.IsKeyDown(Keys.A))
-                DonnerOrdreAttaquerPoint();
-            // Pour arreter les déplacements
-            if (key.IsKeyDown(Keys.S))
-                DonnerOrdreStop();
-            // Pour lancer un sort
-            if (key.IsKeyDown(Keys.D1))
-            {
-                spell = 0;
-                if (champion.Map.gametime.TotalGameTime.TotalMilliseconds - champion.spells[spell].LastCast > champion.spells[spell].Cooldown * 1000 && champion.spells[spell].NeedUnPoint)
+                mouse = Mouse.GetState();
+                key = Keyboard.GetState();
+                // Pour cibler un point pour un sort
+                if (mouse.LeftButton == ButtonState.Pressed && InWaitingPoint)
                 {
-                    Interface.DrawSelectPoint = true;
-                    InWaitingPoint = true;
-                }
-            }
-            if (key.IsKeyDown(Keys.D2))
-            {
-                spell = 1;
-                if (champion.Map.gametime.TotalGameTime.TotalMilliseconds - champion.spells[spell].LastCast > champion.spells[spell].Cooldown * 1000)
-                {
+                    point = new Vector2((int)((camera.Position.X + mouse.X) / 32), (int)((camera.Position.Y + mouse.Y) / 32));
+                    InWaitingPoint = false;
+                    Interface.DrawSelectPoint = false;
                     champion.Cast(spell, point);
                 }
-            }
-            // Pour Update et Draw les sorts
-            foreach (Spell s in champion.spells)
-                if (s.ToDraw)
-                    s.Update(point);
-
-            if (isRoaming)
-            {
-                float distanceInit = 9000;
-                Unite focus = null;
-                foreach (Unite u in champion.Map.unites)
+                // Pour se déplacer
+                if (mouse.RightButton == ButtonState.Pressed && !DonnerOrdreAttaquer())
+                    DonnerOrdreDeplacer();
+                // Pour attaquer un point
+                if (key.IsKeyDown(Keys.A))
+                    DonnerOrdreAttaquerPoint();
+                // Pour arreter les déplacements
+                if (key.IsKeyDown(Keys.S))
+                    DonnerOrdreStop();
+                // Pour lancer un sort
+                if (key.IsKeyDown(Keys.D1))
                 {
-                    float distance = Outil.DistanceUnites(champion, u);
-
-                    if (champion != u && distance <= distanceInit)
+                    spell = 0;
+                    if (champion.Map.gametime.TotalGameTime.TotalMilliseconds - champion.spells[spell].LastCast > champion.spells[spell].Cooldown * 1000 && champion.spells[spell].NeedUnPoint)
                     {
-                        distanceInit = distance;
-                        focus = u;
+                        Interface.DrawSelectPoint = true;
+                        InWaitingPoint = true;
                     }
                 }
-                champion.uniteAttacked = focus;
-            }
+                if (key.IsKeyDown(Keys.D2))
+                {
+                    spell = 1;
+                    if (champion.Map.gametime.TotalGameTime.TotalMilliseconds - champion.spells[spell].LastCast > champion.spells[spell].Cooldown * 1000)
+                    {
+                        champion.Cast(spell, point);
+                    }
+                }
+                // Pour Update et Draw les sorts
+                foreach (Spell s in champion.spells)
+                    if (s.ToDraw)
+                        s.Update(point);
 
+                if (isRoaming)
+                {
+                    float distanceInit = 9000;
+                    Unite focus = null;
+                    foreach (Unite u in champion.Map.unites)
+                    {
+                        float distance = Outil.DistanceUnites(champion, u);
+
+                        if (champion != u && distance <= distanceInit)
+                        {
+                            distanceInit = distance;
+                            focus = u;
+                        }
+                    }
+                    champion.uniteAttacked = focus;
+                }
+            }
             // Pour déplacer la caméra
             CameraCheck();
         }

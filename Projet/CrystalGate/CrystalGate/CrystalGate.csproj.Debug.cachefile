@@ -6,23 +6,23 @@ Content\grunt.xnb
 Content\summertiles.xnb
 Content\curseur.xnb
 Content\AviciiLevels.xnb
-Content\gruntIcone.xnb
 Content\HOM4.xnb
+Content\gruntIcone.xnb
 Content\Sons\swords.xnb
 Content\Sons\Gruntquimeurt.xnb
 Content\Sons\Cavalierquimeurt.xnb
-Content\Sons\GruntAttack.xnb
 Content\Sons\sword1.xnb
-Content\Polices\menufont.xnb
-Content\Polices\gamefont.xnb
-Content\background.xnb
-Content\Spells\Explosion.xnb
+Content\Sons\GruntAttack.xnb
+Content\Sons\sword3.xnb
 Content\UI\Perso and stats.xnb
 Content\UI\barre des sorts.xnb
 Content\Boutons\Explosion.xnb
-Content\Spells\Soin.xnb
+Content\Polices\menufont.xnb
+Content\Polices\gamefont.xnb
+Content\background.xnb
 Content\Boutons\Soin.xnb
-Content\Sons\sword3.xnb
+Content\Spells\Explosion.xnb
+Content\Spells\Soin.xnb
 Content\Sons\explosion.xnb
 Content\Sons\soin.xnb
 Content\AviciiLevels.wma

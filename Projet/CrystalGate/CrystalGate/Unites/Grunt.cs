@@ -23,7 +23,7 @@ namespace CrystalGate
             Vitesse = 2.0f;
             Vitesse_Attaque = 1f;
             Portee = 2f; // 2 = Corps à corps
-            Dommages = 50;
+            Dommages = 100;
             Defense = 5;
 
             // Sons

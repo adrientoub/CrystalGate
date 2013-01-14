@@ -15,7 +15,7 @@ namespace CrystalGate
         Unite champ;
         int NbWaves;
         int current;
-        int Nbalive;
+        int id;
         public bool enabled;
 
         public Wave(List<Vector2> pointsInit, List<Vector2> pointsSpawn, Unite unite, float ite, int nbWaves, Unite champion)
@@ -26,10 +26,12 @@ namespace CrystalGate
             this.ite = ite;
             this.champ = champion;
             this.NbWaves = nbWaves;
+            this.id = champ.Map.unites.Count;
         }
 
-        public void Update(GameTime gameTime)
+        public void Update(GameTime gameTime, Unite champion)
         {
+            this.champ = champion;
             foreach (Vector2 v in PointsInit)
                 if (champ.PositionTile == v)
                 {
@@ -43,13 +45,21 @@ namespace CrystalGate
 
         public void Pop(GameTime GT)
         {
-            if (GT.TotalGameTime.Milliseconds == 1/60 && current < NbWaves)
+            bool ok = true;
+            foreach(Unite u in champ.Map.unites)
+                if (u.idWave == id) // Si il y'a encore des unités de la vague précédente
+                {
+                    ok = false;
+                    break;
+                }
+            // Sinon on pop
+            if (ok && current < NbWaves)
             {
                 foreach (Vector2 v in PointsSpawn)
                 {
-                    Nbalive = PointsSpawn.Count;
                     unite.Map.unites.Add(new Cavalier(v, unite.Map, unite.packTexture));
                     unite.Map.unites[unite.Map.unites.Count - 1].uniteAttacked = champ;
+                    ((Unite)unite.Map.unites[unite.Map.unites.Count - 1]).idWave = id;
                 }
                 current++;
             }

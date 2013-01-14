@@ -25,13 +25,13 @@ namespace CrystalGate.Scenes
         private float pauseAlpha;
         private Map map; // La map
         Body boundary; // Les limtes du monde physique
-        private Wave wave;
 
         public static List<SoundEffect> _effetsSonores = new List<SoundEffect> { }; // Tous les effets sonores.
         private List<Joueur> joueurs = new List<Joueur> { }; // joueurs sur la map
         private List<Objet> unites = new List<Objet> { }; // unites sur la map
         private List<Batiment> batiments = new List<Batiment> { };
         private List<Effet> effets = new List<Effet> { }; // effets qui seront draw
+        private List<Wave> waves = new List<Wave> { };
 
         public GameplayScene(SceneManager sceneMgr)
             : base(sceneMgr)
@@ -73,7 +73,7 @@ namespace CrystalGate.Scenes
 
             // Creation de la carte
             Texture2D SpriteMap = content.Load<Texture2D>("summertiles");
-            map = new Map(SpriteMap, new Vector2(line.Length, counter) , new Vector2(32, 32));
+            map = new Map(SpriteMap, new Vector2(line.Length + 1, counter) , new Vector2(32, 32));
 
             counter = 0;
             file = new StreamReader(@"../../../Map/Map1.txt");
@@ -122,9 +122,10 @@ namespace CrystalGate.Scenes
             for (int i = 0; i < unites.Count; i++)
                 unites[i].id = i;
 
-            unites.Add(new Unite(Vector2.One, map, pack));
             // La vague
-            wave = new Wave(new List<Vector2>{new Vector2(8, 7), new Vector2(8, 8)}, new List<Vector2> { new Vector2(22,0), new Vector2(39,7), new Vector2(23,17) }, new Cavalier(Vector2.Zero, map, pack), 6000, 3, joueurs[0].champion);
+            waves.Add(new Wave(new List<Vector2>{new Vector2(8, 7), new Vector2(8, 8)}, new List<Vector2> { new Vector2(22,0), new Vector2(39,7), new Vector2(23,17) }, new Cavalier(Vector2.Zero, map, pack), 6000, 3, joueurs[0].champion));
+            waves.Add(new Wave(new List<Vector2> { new Vector2(40, 7), new Vector2(40, 8) }, new List<Vector2> { new Vector2(54, 0), new Vector2(68, 7), new Vector2(54, 17) }, new Cavalier(Vector2.Zero, map, pack), 6000, 3, joueurs[0].champion));
+            waves.Add(new Wave(new List<Vector2> { new Vector2(54, 17), new Vector2(55, 17) }, new List<Vector2> { new Vector2(68, 25), new Vector2(54, 34) }, new Cavalier(Vector2.Zero, map, pack), 6000, 3, joueurs[0].champion));
         }
 
         protected override void UnloadContent() 
@@ -143,7 +144,7 @@ namespace CrystalGate.Scenes
             if (IsActive) // Si le jeu tourne (en gros)
             {
                 FondSonore.Update();
-
+                // On update les infos des joueurs
                 joueurs[0].Update(unites);
                 // On update les infos de la map
                 map.Update(unites, batiments, gameTime);
@@ -159,8 +160,9 @@ namespace CrystalGate.Scenes
                 // On update les effets sur la carte
                 foreach (Effet e in effets)
                     e.Update();
-
-                wave.Update(gameTime);
+                // On update les infos des vagues
+                foreach(Wave w in waves)
+                    w.Update(gameTime, joueurs[0].champion);
                 // Update de la physique
                 map.world.Step(1 / 60f);
             }
@@ -177,12 +179,12 @@ namespace CrystalGate.Scenes
             // DRAW EFFETS
             foreach (Effet e in effets)
                 e.Draw(spriteBatch);
-            // DRAW UNITES
-            foreach (Unite o in unites)
-                o.Draw(spriteBatch);
             // DRAW BATIMENTS
             foreach (Batiment b in batiments)
                 b.Draw(spriteBatch);
+            // DRAW UNITES
+            foreach (Unite o in unites)
+                o.Draw(spriteBatch);
             // DRAW INTERFACE
             joueurs[0].Interface.Draw();
             // DRAW STRINGS

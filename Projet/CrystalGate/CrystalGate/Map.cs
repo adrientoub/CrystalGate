@@ -116,11 +116,11 @@ namespace CrystalGate
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            for (int i = 0; i < Cellules.GetLength(0) + 1; i++) //On parcourt les lignes du tableau
+            for (int i = 0; i < Cellules.GetLength(0) + 2; i++) //On parcourt les lignes du tableau
                 for (int j = 0; j < Cellules.GetLength(1) + 1; j++) //On parcourt les colonnes du tableau
                 {
                     // Pour completer le bord droit et bas
-                    if (i == Cellules.GetLength(0) || j == Cellules.GetLength(1) )
+                    if (i >= Cellules.GetLength(0) || j == Cellules.GetLength(1) )
                     {
                         Random rand = new Random(i * j);
                         int x = 32 * tab[rand.Next(1, tab.Length - 1)];
