@@ -15,7 +15,7 @@ namespace CrystalGate
         Unite champ;
         int NbWaves;
         int current;
-        int id;
+        double id;
         public bool enabled;
 
         public Wave(List<Vector2> pointsInit, List<Vector2> pointsSpawn, Unite unite, float ite, int nbWaves, Unite champion)
@@ -26,7 +26,6 @@ namespace CrystalGate
             this.ite = ite;
             this.champ = champion;
             this.NbWaves = nbWaves;
-            this.id = champ.Map.unites.Count;
         }
 
         public void Update(GameTime gameTime, Unite champion)
@@ -45,6 +44,9 @@ namespace CrystalGate
 
         public void Pop(GameTime GT)
         {
+            if (id == 0)
+                id = GT.TotalGameTime.TotalMilliseconds;
+
             bool ok = true;
             foreach(Unite u in champ.Map.unites)
                 if (u.idWave == id) // Si il y'a encore des unités de la vague précédente

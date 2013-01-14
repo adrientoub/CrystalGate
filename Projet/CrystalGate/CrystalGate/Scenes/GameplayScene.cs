@@ -63,11 +63,12 @@ namespace CrystalGate.Scenes
             int counter = 0;
             string line; // X
             // Read the file and display it line by line.
-            StreamReader file = new StreamReader(@"../../../Map/Map1.txt");
+            string mapString = "../../../Map/Map1.txt";
+            StreamReader file = new StreamReader(@mapString);
 
             line = file.ReadLine();
             string line2;
-            file = new StreamReader(@"../../../Map/Map1.txt");
+            file = new StreamReader(@mapString);
             while ((line2 = file.ReadLine()) != null)
                 counter++;
 
@@ -76,7 +77,7 @@ namespace CrystalGate.Scenes
             map = new Map(SpriteMap, new Vector2(line.Length + 1, counter) , new Vector2(32, 32));
 
             counter = 0;
-            file = new StreamReader(@"../../../Map/Map1.txt");
+            file = new StreamReader(@mapString);
             while ((line2 = file.ReadLine()) != null)
             {
                 for (int i = 0; i < line2.Length; i++)
@@ -111,11 +112,11 @@ namespace CrystalGate.Scenes
             _effetsSonores.Add(content.Load<SoundEffect>("Sons/explosion"));
             EffetSonore.InitEffects();
             // ajout joueurs
-            joueurs.Add(new Joueur(new Grunt(new Vector2(2, 8), map, pack)));
+            joueurs.Add(new Joueur(new Grunt(new Vector2(3, 7), map, pack)));
             unites.Add(joueurs[0].champion);
 
             // Interface
-            UI Interface = new UI(joueurs[0], content.Load<Texture2D>("UI/Perso and stats"), content.Load<Texture2D>("UI/barre des sorts"), content.Load<Texture2D>("Curseur"), content.Load<Texture2D>("gruntIcone"), spriteBatch, gameFont);
+            UI Interface = new UI(joueurs[0], content.Load<Texture2D>("UI/Perso and stats"), content.Load<Texture2D>("UI/barre des sorts"), content.Load<Texture2D>("Curseur"), content.Load<Texture2D>("gruntIcone"), content.Load<Texture2D>("blank"), spriteBatch, gameFont);
             joueurs[0].Interface = Interface;
 
             // fixe l'id de toutes les unités
@@ -125,7 +126,7 @@ namespace CrystalGate.Scenes
             // La vague
             waves.Add(new Wave(new List<Vector2>{new Vector2(8, 7), new Vector2(8, 8)}, new List<Vector2> { new Vector2(22,0), new Vector2(39,7), new Vector2(23,17) }, new Cavalier(Vector2.Zero, map, pack), 6000, 3, joueurs[0].champion));
             waves.Add(new Wave(new List<Vector2> { new Vector2(40, 7), new Vector2(40, 8) }, new List<Vector2> { new Vector2(54, 0), new Vector2(68, 7), new Vector2(54, 17) }, new Cavalier(Vector2.Zero, map, pack), 6000, 3, joueurs[0].champion));
-            waves.Add(new Wave(new List<Vector2> { new Vector2(54, 17), new Vector2(55, 17) }, new List<Vector2> { new Vector2(68, 25), new Vector2(54, 34) }, new Cavalier(Vector2.Zero, map, pack), 6000, 3, joueurs[0].champion));
+            waves.Add(new Wave(new List<Vector2> { new Vector2(53, 17), new Vector2(54, 17) }, new List<Vector2> { new Vector2(68, 25), new Vector2(54, 34) }, new Cavalier(Vector2.Zero, map, pack), 6000, 3, joueurs[0].champion));
         }
 
         protected override void UnloadContent() 

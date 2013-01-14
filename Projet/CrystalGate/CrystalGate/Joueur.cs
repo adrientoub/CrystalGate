@@ -98,6 +98,7 @@ namespace CrystalGate
             }
             // Pour déplacer la caméra
             CameraCheck();
+            CheckWinandLose();
         }
 
         public void DonnerOrdreDeplacer()
@@ -172,6 +173,17 @@ namespace CrystalGate
             //Update de la position de la caméra et de l'interface
             camera.Position = new Vector2(camera.Position.X, camera.Position.Y) + vec;
             Interface.Update();
+        }
+
+        public void CheckWinandLose()
+        {
+            if (champion.PositionTile == new Vector2(8, 25) || champion.PositionTile == new Vector2(8, 26))
+            {
+                Interface.Win = true;
+            }
+            if (champion.Vie == 0)
+                Interface.Lost = true;
+
         }
     }
 }

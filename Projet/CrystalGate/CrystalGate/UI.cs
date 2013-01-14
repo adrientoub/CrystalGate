@@ -15,6 +15,7 @@ namespace CrystalGate
         public Texture2D BarreDesSorts { get; set; }
         public Texture2D Curseur { get; set; }
         public Texture2D Portrait { get; set; }
+        public Texture2D blank{ get; set; }
 
         public Rectangle CadrePosition { get; set; }
         public Rectangle BarreDesSortsPosition { get; set; }
@@ -25,10 +26,13 @@ namespace CrystalGate
         SpriteBatch spritebatch { get; set; }
         SpriteFont gamefont { get; set; }
 
+        public bool Win;
+        public bool Lost;
+
         int width = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width;
         int height = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height;
 
-        public UI(Joueur joueur, Texture2D cadre, Texture2D barreDesSorts, Texture2D curseur, Texture2D portrait, SpriteBatch sp, SpriteFont gf)
+        public UI(Joueur joueur, Texture2D cadre, Texture2D barreDesSorts, Texture2D curseur, Texture2D portrait, Texture2D blank, SpriteBatch sp, SpriteFont gf)
         {
             Cadre = cadre;
             this.joueur = joueur;
@@ -37,6 +41,7 @@ namespace CrystalGate
             Curseur = curseur;
             spritebatch = sp;
             gamefont = gf;
+            this.blank = blank;
         }
 
         public void Update()
@@ -50,16 +55,20 @@ namespace CrystalGate
         {
             MouseState m = Mouse.GetState();
 
-            string str = "Vie : " + joueur.champion.Vie + " / " + joueur.champion.VieMax + "\n"
+            string str = "Vie : " + joueur.champion.PositionTile + " / " + joueur.champion.VieMax + "\n"
                 + "Attaque :" + joueur.champion.Dommages + "\n"
                 + "Defense :" + joueur.champion.Defense + "\n";
             string str2 = "Selectionnez un point";
 
             //spritebatch.Draw(Cadre, CadrePosition, Color.White);
             //spritebatch.Draw(Portrait, PortraitPosition, Color.White);
-            spritebatch.Draw(BarreDesSorts, BarreDesSortsPosition, null, Color.White, 0, new Vector2(BarreDesSorts.Width / 2, 0), SpriteEffects.None, 1); 
-            
+            spritebatch.Draw(BarreDesSorts, BarreDesSortsPosition, null, Color.White, 0, new Vector2(BarreDesSorts.Width / 2, 0), SpriteEffects.None, 1);
+            spritebatch.Draw(blank, new Rectangle((int)joueur.camera.Position.X, (int)joueur.camera.Position.Y + height - 150, 250, 150), Color.Black);
             spritebatch.DrawString(gamefont, str, new Vector2(CadrePosition.X, CadrePosition.Y + CadrePosition.Height / 2), Color.White);
+            if(Win)
+                spritebatch.DrawString(gamefont, "Victoire!", new Vector2(joueur.camera.Position.X + width / 2 - gamefont.MeasureString("Victoire").X / 2, joueur.camera.Position.Y + height / 2 - gamefont.MeasureString("Victoire").Y / 2), Color.Black);
+            if (Lost)
+                spritebatch.DrawString(gamefont, "Defaite!", new Vector2(joueur.camera.Position.X + width / 2 - gamefont.MeasureString("Defaite").X / 2, joueur.camera.Position.Y + height / 2 - gamefont.MeasureString("Defaite").Y / 2), Color.Black);
             if(DrawSelectPoint)
                 spritebatch.DrawString(gamefont, str2, new Vector2(BarreDesSortsPosition.X - gamefont.MeasureString(str2).X / 2, BarreDesSortsPosition.Y - BarreDesSorts.Height), Color.White);
 

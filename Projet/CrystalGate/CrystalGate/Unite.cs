@@ -24,7 +24,7 @@ namespace CrystalGate
 
         public List<Spell> spells { get; set; }
         public bool Drawlife { get; set; }
-        public int idWave { get; set; }
+        public double idWave { get; set; }
 
         public Unite(Vector2 Position, Map map, PackTexture packTexture)
             : base(Position, map, packTexture)
