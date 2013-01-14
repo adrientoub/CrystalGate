@@ -14,6 +14,7 @@ namespace CrystalGate
         public Camera2D camera { get; set; }
 
         MouseState mouse { get; set; }
+        MouseState Oldmouse { get; set; }
         KeyboardState key { get; set; }
         public UI Interface { get; set; }
         bool InWaitingPoint;
@@ -37,6 +38,7 @@ namespace CrystalGate
         {
             if (!champion.Mort)
             {
+
                 mouse = Mouse.GetState();
                 key = Keyboard.GetState();
                 // Pour cibler un point pour un sort
@@ -57,7 +59,8 @@ namespace CrystalGate
                 if (key.IsKeyDown(Keys.S))
                     DonnerOrdreStop();
                 // Pour lancer un sort
-                if (key.IsKeyDown(Keys.D1))
+                //int i = 0;
+                if (key.IsKeyDown(Keys.D1)/* || mouse.X + camera.Position.X >= Interface.BarreDesSortsPosition.X - 128 + i * 32 + 3 && mouse.X + camera.Position.X <= Interface.BarreDesSortsPosition.X - 128 + i * 32 + 3 + 32 && mouse.Y + camera.Position.Y >= Interface.BarreDesSortsPosition.Y + 8 && mouse.Y + camera.Position.Y <= Interface.BarreDesSortsPosition.Y + 8 + 32 && mouse.LeftButton == ButtonState.Pressed && Oldmouse.LeftButton == ButtonState.Released*/)
                 {
                     spell = 0;
                     if (champion.Map.gametime.TotalGameTime.TotalMilliseconds - champion.spells[spell].LastCast > champion.spells[spell].Cooldown * 1000 && champion.spells[spell].NeedUnPoint)
@@ -99,6 +102,7 @@ namespace CrystalGate
             // Pour déplacer la caméra
             CameraCheck();
             CheckWinandLose();
+            Oldmouse = mouse;
         }
 
         public void DonnerOrdreDeplacer()

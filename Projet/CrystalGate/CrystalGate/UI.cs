@@ -55,9 +55,9 @@ namespace CrystalGate
         {
             MouseState m = Mouse.GetState();
 
-            string str = "Vie : " + joueur.champion.PositionTile + " / " + joueur.champion.VieMax + "\n"
-                + "Attaque :" + joueur.champion.Dommages + "\n"
-                + "Defense :" + joueur.champion.Defense + "\n";
+            string str = "Vie : " + joueur.champion.Vie + " / " + joueur.champion.VieMax + "\n"
+                + "Attaque : " + joueur.champion.Dommages + "\n"
+                + "Armure : " + joueur.champion.Defense + "\n";
             string str2 = "Selectionnez un point";
 
             //spritebatch.Draw(Cadre, CadrePosition, Color.White);
