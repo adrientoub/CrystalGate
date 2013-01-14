@@ -47,8 +47,8 @@ namespace CrystalGate
         public void Update()
         {
             CadrePosition = new Rectangle((int)joueur.camera.Position.X, (int)joueur.camera.Position.Y + height - Cadre.Height, Cadre.Width, Cadre.Height);
-            PortraitPosition = new Rectangle(CadrePosition.X, CadrePosition.Y, Portrait.Width / 2, Portrait.Height / 2);
-            BarreDesSortsPosition = new Rectangle((int)(joueur.camera.Position.X + width / 2), (int)(joueur.camera.Position.Y + height - BarreDesSorts.Height), BarreDesSorts.Width, BarreDesSorts.Height);
+            PortraitPosition = new Rectangle(CadrePosition.X + 250, CadrePosition.Y + 150, Portrait.Width / 3, Portrait.Height / 3);
+            BarreDesSortsPosition = new Rectangle((int)(joueur.camera.Position.X + width / 1.5), (int)(joueur.camera.Position.Y + height - BarreDesSorts.Height), BarreDesSorts.Width, BarreDesSorts.Height);
         }
 
         public void Draw()
@@ -61,10 +61,11 @@ namespace CrystalGate
             string str2 = "Selectionnez un point";
 
             //spritebatch.Draw(Cadre, CadrePosition, Color.White);
-            //spritebatch.Draw(Portrait, PortraitPosition, Color.White);
             spritebatch.Draw(BarreDesSorts, BarreDesSortsPosition, null, Color.White, 0, new Vector2(BarreDesSorts.Width / 2, 0), SpriteEffects.None, 1);
-            spritebatch.Draw(blank, new Rectangle((int)joueur.camera.Position.X, (int)joueur.camera.Position.Y + height - 150, 250, 150), Color.Black);
+            spritebatch.Draw(blank, new Rectangle((int)joueur.camera.Position.X, (int)joueur.camera.Position.Y + height - 150, 350, 150), Color.Black);
+            spritebatch.Draw(Portrait, PortraitPosition, Color.White);
             spritebatch.DrawString(gamefont, str, new Vector2(CadrePosition.X, CadrePosition.Y + CadrePosition.Height / 2), Color.White);
+            spritebatch.DrawString(gamefont, "Grunt", new Vector2(CadrePosition.X + 260, CadrePosition.Y + 100), Color.White);
             if(Win)
                 spritebatch.DrawString(gamefont, "Victoire!", new Vector2(joueur.camera.Position.X + width / 2 - gamefont.MeasureString("Victoire").X / 2, joueur.camera.Position.Y + height / 2 - gamefont.MeasureString("Victoire").Y / 2), Color.Black);
             if (Lost)
