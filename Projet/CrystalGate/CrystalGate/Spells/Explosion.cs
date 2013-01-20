@@ -14,7 +14,8 @@ namespace CrystalGate
         {
             Cooldown = 1;
             Animation = PackAnimation.Explosion();
-            Tiles = new Vector2(65, 65);
+            AnimationReset = PackAnimation.Explosion();
+            Tiles = new Vector2(320 / 5, 320 / 5);
 
             NeedUnPoint = true;
             SpriteBouton = unite.packTexture.boutons[0];

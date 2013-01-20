@@ -19,6 +19,7 @@ namespace CrystalGate
         public bool ToDraw { get; set; }
 
         public List<Vector2> Animation { get; set; }
+        public List<Vector2> AnimationReset { get; set; }
         protected int AnimationCurrent { get; set; }
         protected int AnimationLimite = 4;
         protected Rectangle SpritePosition { get; set; }
@@ -31,9 +32,17 @@ namespace CrystalGate
         public Spell(Unite u)
         {
             unite = u;
+            AnimationCurrent = AnimationLimite;
+
             Cooldown = 1;
-            Animation = PackAnimation.Explosion();
-            Tiles = new Vector2(65, 65);
+            Animation = null;
+            AnimationReset = null;
+            Tiles = Vector2.Zero;
+
+            NeedUnPoint = false;
+            SpriteBouton = unite.packTexture.blank;
+            SpriteEffect = unite.packTexture.blank;
+            sonSort = null;
         }
 
         public void Animer()
@@ -43,7 +52,8 @@ namespace CrystalGate
                 if (Animation.Count == 0)
                 {
                     ToDraw = false;
-                    Animation = PackAnimation.Explosion();
+                    foreach (Vector2 v in AnimationReset)
+                        Animation.Add(v);
                 }
                 else
                 {

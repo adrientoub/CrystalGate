@@ -140,8 +140,8 @@ namespace CrystalGate
         public static List<Vector2> Explosion()
         {
             List<Vector2> liste = new List<Vector2> { };
-            for (int j = 0; j <= 5; j++)
-                for (int i = 0; i <= 5; i++)
+            for (int j = 0; j < 5; j++)
+                for (int i = 0; i < 5; i++)
                     liste.Add(new Vector2(i, j));
 
             return liste;
@@ -150,8 +150,8 @@ namespace CrystalGate
         public static List<Vector2> Soin()
         {
             List<Vector2> liste = new List<Vector2> { };
-                for (int i = 0; i <= 5; i++)
-                    liste.Add(new Vector2(0, i));
+                for (int i = 0; i < 6; i++)
+                    liste.Add(new Vector2(i, 0));
 
             return liste;
         }

@@ -11,19 +11,17 @@ namespace CrystalGate
         List<Vector2> PointsInit;
         List<Vector2> PointsSpawn;
         Unite unite;
-        float ite;
         Unite champ;
         int NbWaves;
         int current;
         double id;
         public bool enabled;
 
-        public Wave(List<Vector2> pointsInit, List<Vector2> pointsSpawn, Unite unite, float ite, int nbWaves, Unite champion)
+        public Wave(List<Vector2> pointsInit, List<Vector2> pointsSpawn, Unite unite, int nbWaves, Unite champion)
         {
             this.PointsInit = pointsInit;
             this.PointsSpawn = pointsSpawn;
             this.unite = unite;
-            this.ite = ite;
             this.champ = champion;
             this.NbWaves = nbWaves;
         }

@@ -124,9 +124,9 @@ namespace CrystalGate.Scenes
                 unites[i].id = i;
 
             // La vague
-            waves.Add(new Wave(new List<Vector2>{new Vector2(8, 7), new Vector2(8, 8)}, new List<Vector2> { new Vector2(22,0), new Vector2(39,7), new Vector2(23,17) }, new Cavalier(Vector2.Zero, map, pack), 6000, 3, joueurs[0].champion));
-            waves.Add(new Wave(new List<Vector2> { new Vector2(40, 7), new Vector2(40, 8) }, new List<Vector2> { new Vector2(54, 0), new Vector2(68, 7), new Vector2(54, 17) }, new Cavalier(Vector2.Zero, map, pack), 6000, 3, joueurs[0].champion));
-            waves.Add(new Wave(new List<Vector2> { new Vector2(53, 17), new Vector2(54, 17) }, new List<Vector2> { new Vector2(68, 25), new Vector2(54, 34) }, new Cavalier(Vector2.Zero, map, pack), 6000, 3, joueurs[0].champion));
+            waves.Add(new Wave(new List<Vector2>{new Vector2(8, 7), new Vector2(8, 8)}, new List<Vector2> { new Vector2(22,0), new Vector2(39,7), new Vector2(23,17) }, new Cavalier(Vector2.Zero, map, pack), 3, joueurs[0].champion));
+            waves.Add(new Wave(new List<Vector2> { new Vector2(40, 7), new Vector2(40, 8) }, new List<Vector2> { new Vector2(54, 0), new Vector2(68, 7), new Vector2(54, 17) }, new Cavalier(Vector2.Zero, map, pack), 3, joueurs[0].champion));
+            waves.Add(new Wave(new List<Vector2> { new Vector2(53, 17), new Vector2(54, 17) }, new List<Vector2> { new Vector2(68, 25), new Vector2(54, 34) }, new Cavalier(Vector2.Zero, map, pack), 3, joueurs[0].champion));
         }
 
         protected override void UnloadContent() 
@@ -189,7 +189,9 @@ namespace CrystalGate.Scenes
             // DRAW INTERFACE
             joueurs[0].Interface.Draw();
             // DRAW STRINGS
-            /**/
+            spriteBatch.DrawString(gameFont, joueurs[0].champion.spells[0].ToDraw.ToString(), Vector2.Zero, Color.White);
+            spriteBatch.DrawString(gameFont, joueurs[0].champion.spells[0].Animation.Count.ToString(), new Vector2(0,30), Color.White);
+            spriteBatch.DrawString(gameFont, joueurs[0].champion.spells[0].AnimationReset.Count.ToString(), new Vector2(0, 60), Color.White);
             spriteBatch.End();
 
             if (TransitionPosition > 0 || pauseAlpha > 0)
