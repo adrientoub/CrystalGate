@@ -39,7 +39,7 @@ namespace CrystalGate
             PositionSprite = new Vector2(16,0);
         }
 
-        public override void Update(List<Objet> unitsOnMap, List<Effet> effets)
+        public override void Update(List<Unite> unitsOnMap, List<Effet> effets)
         {
             Animer();
             // On rafraichit la propriete suivante, elle est juste indicative et n'affecte pas le draw, mais le pathfinding

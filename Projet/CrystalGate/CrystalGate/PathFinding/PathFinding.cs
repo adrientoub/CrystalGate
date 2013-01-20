@@ -8,7 +8,7 @@ namespace CrystalGate
 {
     public class PathFinding
     {
-        public static Noeud[,] Initialiser(Noeud[,] map, Vector2 taille, Vector2 arrivee, List<Objet> unites)
+        public static Noeud[,] Initialiser(Noeud[,] map, Vector2 taille, Vector2 arrivee, List<Unite> unites)
         {
             // Prend en compte les unites
                 foreach (Unite o in unites)
@@ -155,7 +155,7 @@ namespace CrystalGate
             return newList;
         }
 
-        public static List<Noeud> TrouverChemin(Vector2 depart, Vector2 arrivee, Vector2 taille, List<Objet> unites, Noeud[,] batiments, bool champion)
+        public static List<Noeud> TrouverChemin(Vector2 depart, Vector2 arrivee, Vector2 taille, List<Unite> unites, Noeud[,] batiments, bool champion)
         {
             Noeud[,] map = (Noeud[,])batiments.Clone(); // INITIALISATION DU POIDS DES NOEUDS ET DES OBSTACLES
             Initialiser(map, taille, arrivee, unites);

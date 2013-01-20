@@ -85,7 +85,7 @@ namespace CrystalGate
                 return true;
         }
 
-        public virtual void Update(List<Objet> unitsOnMap, List<Effet> effets)
+        public virtual void Update(List<Unite> unitsOnMap, List<Effet> effets)
         {
             Animer();
             PositionTile = new Vector2((int)(ConvertUnits.ToDisplayUnits(body.Position.X) / 32), (int)(ConvertUnits.ToDisplayUnits(body.Position.Y) / 32));

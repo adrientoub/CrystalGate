@@ -33,7 +33,7 @@ namespace CrystalGate
             return (float)Math.Sqrt( Math.Pow(32 * (point1.X - point2.X), 2) + Math.Pow(32 * (point1.Y - point2.Y), 2));
         }
 
-        public static void RemoveDeadBodies(List<Objet> unites)
+        public static void RemoveDeadBodies(List<Unite> unites)
         {
             for (int i = 0; i < unites.Count; i++)
                 if (unites[i].Mort)

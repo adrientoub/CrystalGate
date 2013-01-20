@@ -15,7 +15,7 @@ namespace CrystalGate
         public Vector2[,] Cellules { get; set; }
         public Vector2 TailleTiles { get; set; }
         public Vector2 Taille { get; set; }
-        public List<Objet> unites { get; set; }
+        public List<Unite> unites { get; set; }
         public List<Batiment> batiments { get; set; }
         public Noeud[,] unitesStatic { get; set; }
         public World world { get; set; }
@@ -32,7 +32,7 @@ namespace CrystalGate
             TailleTiles = tailleTiles;
             Taille = taille;
             world = new World(Vector2.Zero);
-            unites = new List<Objet> { };
+            unites = new List<Unite> { };
             batiments = new List<Batiment> { };
             unitesStatic = new Noeud[(int)taille.X, (int)taille.Y];
             tab = new byte[] { 3, 4,6,7,8,9,10};
@@ -41,7 +41,7 @@ namespace CrystalGate
                 unitesStatic[(int)b.PositionTile.X, (int)b.PositionTile.Y] = new Noeud(b.PositionTile, false, 1);
         }
 
-        public void Update(List<Objet> unites, List<Batiment> batiments, GameTime GT)
+        public void Update(List<Unite> unites, List<Batiment> batiments, GameTime GT)
         {
             this.unites = unites;
             this.batiments = batiments;
@@ -54,8 +54,8 @@ namespace CrystalGate
 
             KeyboardState k = Keyboard.GetState();
             // Debug les unites qui attaquent des unites mortes
-            foreach (Objet u in unites)
-                if (!(u is Batiment) && u.uniteAttacked != null && !unites.Contains((Unite)u.uniteAttacked))
+            foreach (Unite u in unites)
+                if (u.uniteAttacked != null && !unites.Contains((Unite)u.uniteAttacked))
                     u.uniteAttacked = null;
         }
 
@@ -64,7 +64,7 @@ namespace CrystalGate
 
         }
 
-        static int PLusGrosId(List<Objet> liste)
+        static int PLusGrosId(List<Unite> liste)
         {
             List<int> newList = new List<int> { };
 

@@ -28,7 +28,7 @@ namespace CrystalGate.Scenes
 
         public static List<SoundEffect> _effetsSonores = new List<SoundEffect> { }; // Tous les effets sonores.
         private List<Joueur> joueurs = new List<Joueur> { }; // joueurs sur la map
-        private List<Objet> unites = new List<Objet> { }; // unites sur la map
+        private List<Unite> unites = new List<Unite> { }; // unites sur la map
         private List<Batiment> batiments = new List<Batiment> { };
         private List<Effet> effets = new List<Effet> { }; // effets qui seront draw
         private List<Wave> waves = new List<Wave> { };
@@ -189,9 +189,7 @@ namespace CrystalGate.Scenes
             // DRAW INTERFACE
             joueurs[0].Interface.Draw();
             // DRAW STRINGS
-            spriteBatch.DrawString(gameFont, joueurs[0].champion.spells[0].ToDraw.ToString(), Vector2.Zero, Color.White);
-            spriteBatch.DrawString(gameFont, joueurs[0].champion.spells[0].Animation.Count.ToString(), new Vector2(0,30), Color.White);
-            spriteBatch.DrawString(gameFont, joueurs[0].champion.spells[0].AnimationReset.Count.ToString(), new Vector2(0, 60), Color.White);
+            /* */
             spriteBatch.End();
 
             if (TransitionPosition > 0 || pauseAlpha > 0)

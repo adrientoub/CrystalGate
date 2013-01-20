@@ -13,6 +13,7 @@ namespace CrystalGate
             : base(u)  
         {
             Cooldown = 1;
+            Ticks = 1;
             Animation = PackAnimation.Explosion();
             AnimationReset = PackAnimation.Explosion();
             Tiles = new Vector2(320 / 5, 320 / 5);
@@ -25,13 +26,20 @@ namespace CrystalGate
 
         public override void Update(Vector2 Point)
         {
-            this.Point = Point;
             Animer();
-            foreach (Unite u in unite.Map.unites)
+            this.Point = Point;
+            if (TickCurrent < Ticks)
             {
-                float distance = Outil.DistancePoints(this.Point, u.PositionTile);
-                if (u != unite && distance <= 75)
-                    u.Vie -= 2;
+                foreach (Unite u in unite.Map.unites)
+                {
+                    float distance = Outil.DistancePoints(this.Point, u.PositionTile);
+                    if (u != unite && distance <= 75)
+                    {
+                        u.Vie -= 50;
+                        //u.color = Color.Red;
+                    }
+                }
+                TickCurrent++;
             }
         }
 

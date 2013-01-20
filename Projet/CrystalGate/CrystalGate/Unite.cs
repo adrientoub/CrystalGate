@@ -17,6 +17,7 @@ namespace CrystalGate
         public int Dommages { get; set; }
         public float Vitesse_Attaque { get; set; }
         public int Defense { get; set; }
+        public Color color { get; set; }
 
         protected EffetSonore effetUniteAttaque;
         protected EffetSonore effetUniteDeath;
@@ -42,12 +43,13 @@ namespace CrystalGate
             // Graphique par defaut
             Sprite = packTexture.unites[0];
             Tiles = new Vector2(370 / 5, 835 / 11);
+            color = Color.White; 
+            
             idWave = -1;
-
             spells = new List<Spell> { new Explosion(this), new Soin(this) };
         }
 
-        public override void Update(List<Objet> unitsOnMap, List<Effet> effets)
+        public override void Update(List<Unite> unitsOnMap, List<Effet> effets)
         {
             Animer(); 
             Deplacer();
@@ -241,7 +243,7 @@ namespace CrystalGate
         {
             if (this.id >= Map.compteur && this.id <= Map.compteur + Map.pFParThread) // Si on a la possiblité d'obtnir un pF
             {
-                List<Objet> liste = new List<Objet> { };
+                List<Unite> liste = new List<Unite> { };
                 double distance = Outil.DistanceUnites(this, unite);
                 bool ok = distance > Portee * Map.TailleTiles.X;
                 if (ok)
@@ -274,15 +276,13 @@ namespace CrystalGate
 
         public void Cast(int i, Vector2 point)
         {
-                // Activent les sort a Update et Draw
-                spells[i].LastCast = (float)Map.gametime.TotalGameTime.TotalMilliseconds;
-                spells[i].ToDraw = true;
-                spells[i].sonSort.Play();
+            // Active le sort, et le réinitialise si il a déjà été cast
+            spells[i].Reset();
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(Sprite, ConvertUnits.ToDisplayUnits(body.Position), SpritePosition, Color.White, 0f, new Vector2(Tiles.X / 2, Tiles.Y / 2), 1f, FlipH ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 0);
+            spriteBatch.Draw(Sprite, ConvertUnits.ToDisplayUnits(body.Position), SpritePosition, color, 0f, new Vector2(Tiles.X / 2, Tiles.Y / 2), 1f, FlipH ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 0);
             DrawVie(spriteBatch);
 
             foreach (Spell s in spells)

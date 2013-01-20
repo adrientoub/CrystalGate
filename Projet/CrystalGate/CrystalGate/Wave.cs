@@ -57,9 +57,13 @@ namespace CrystalGate
             {
                 foreach (Vector2 v in PointsSpawn)
                 {
-                    unite.Map.unites.Add(new Cavalier(v, unite.Map, unite.packTexture));
+                    if (unite is Cavalier)
+                        unite.Map.unites.Add(new Cavalier(v, unite.Map, unite.packTexture));
+                    if (unite is Grunt)
+                        unite.Map.unites.Add(new Grunt(v, unite.Map, unite.packTexture));
+
                     unite.Map.unites[unite.Map.unites.Count - 1].uniteAttacked = champ;
-                    ((Unite)unite.Map.unites[unite.Map.unites.Count - 1]).idWave = id;
+                    unite.Map.unites[unite.Map.unites.Count - 1].idWave = id;
                 }
                 current++;
             }

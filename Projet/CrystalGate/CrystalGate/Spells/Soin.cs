@@ -13,6 +13,7 @@ namespace CrystalGate
             : base(u)  
         {
             Cooldown = 1;
+            Ticks = 1;
             Animation = PackAnimation.Soin();
             AnimationReset = PackAnimation.Soin();
             Tiles = new Vector2(180 / 5, 35);
@@ -25,10 +26,17 @@ namespace CrystalGate
 
         public override void Update(Vector2 Point)
         {
-            this.Point = Point;
             Animer();
-            if(unite.Vie + 1 <= unite.VieMax)
-                unite.Vie += 1;
+            this.Point = Point;
+            if (TickCurrent < Ticks)
+            {
+                int ammount = 10;
+                if (unite.Vie + ammount <= unite.VieMax)
+                {
+                    unite.Vie += ammount;
+                    TickCurrent++;
+                }
+            }
         }
 
         public override void Draw(SpriteBatch spriteBatch)

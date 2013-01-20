@@ -34,7 +34,7 @@ namespace CrystalGate
             camera = new Camera2D(Vector2.One);
         }
 
-        public void Update(List<Objet> unites)
+        public void Update(List<Unite> unites)
         {
             if (!champion.Mort)
             {
@@ -111,7 +111,7 @@ namespace CrystalGate
             Vector2 ObjectifPoint = new Vector2(camera.Position.X + mouse.X, camera.Position.Y + mouse.Y) / champion.Map.TailleTiles;
             ObjectifPoint = new Vector2((int)ObjectifPoint.X, (int)ObjectifPoint.Y);
                 
-            List<Noeud> chemin = PathFinding.TrouverChemin(champion.PositionTile, ObjectifPoint, champion.Map.Taille, new List<Objet> { }, champion.Map.unitesStatic, false);
+            List<Noeud> chemin = PathFinding.TrouverChemin(champion.PositionTile, ObjectifPoint, champion.Map.Taille, new List<Unite> { }, champion.Map.unitesStatic, false);
                 if (chemin != null)
                     champion.ObjectifListe = chemin;
                 champion.uniteAttacked = null;
@@ -127,7 +127,7 @@ namespace CrystalGate
                 {
                     //champion.Attaquer(u);
                     champion.uniteAttacked = u;
-                    List<Noeud> chemin = PathFinding.TrouverChemin(champion.PositionTile, ObjectifPoint, champion.Map.Taille, new List<Objet> { }, champion.Map.unitesStatic, false);
+                    List<Noeud> chemin = PathFinding.TrouverChemin(champion.PositionTile, ObjectifPoint, champion.Map.Taille, new List<Unite> { }, champion.Map.unitesStatic, false);
                     if (chemin != null)
                         champion.ObjectifListe = chemin;
                     return true;
