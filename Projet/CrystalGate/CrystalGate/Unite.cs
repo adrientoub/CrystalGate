@@ -39,7 +39,7 @@ namespace CrystalGate
             effetUniteDeath = new EffetSonore(1);
             nbFrameSonJoue = 0;
             Vitesse_Attaque = 1.00f;
-            Defense = 1;
+            Defense = 0;
             // Graphique par defaut
             Sprite = packTexture.unites[0];
             Tiles = new Vector2(370 / 5, 835 / 11);

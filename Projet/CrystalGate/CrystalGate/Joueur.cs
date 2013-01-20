@@ -42,7 +42,7 @@ namespace CrystalGate
                 mouse = Mouse.GetState();
                 key = Keyboard.GetState();
                 // Pour cibler un point pour un sort
-                if (mouse.LeftButton == ButtonState.Pressed && InWaitingPoint)
+                if (mouse.LeftButton == ButtonState.Pressed && Oldmouse.LeftButton == ButtonState.Released && InWaitingPoint)
                 {
                     point = new Vector2((int)((camera.Position.X + mouse.X) / 32), (int)((camera.Position.Y + mouse.Y) / 32));
                     InWaitingPoint = false;
@@ -59,8 +59,7 @@ namespace CrystalGate
                 if (key.IsKeyDown(Keys.S))
                     DonnerOrdreStop();
                 // Pour lancer un sort
-                //int i = 0;
-                if (key.IsKeyDown(Keys.D1)/* || mouse.X + camera.Position.X >= Interface.BarreDesSortsPosition.X - 128 + i * 32 + 3 && mouse.X + camera.Position.X <= Interface.BarreDesSortsPosition.X - 128 + i * 32 + 3 + 32 && mouse.Y + camera.Position.Y >= Interface.BarreDesSortsPosition.Y + 8 && mouse.Y + camera.Position.Y <= Interface.BarreDesSortsPosition.Y + 8 + 32 && mouse.LeftButton == ButtonState.Pressed && Oldmouse.LeftButton == ButtonState.Released*/)
+                if (key.IsKeyDown(Keys.D1) || SourisCheck(0))
                 {
                     spell = 0;
                     if (champion.Map.gametime.TotalGameTime.TotalMilliseconds - champion.spells[spell].LastCast > champion.spells[spell].Cooldown * 1000 && champion.spells[spell].NeedUnPoint)
@@ -69,7 +68,7 @@ namespace CrystalGate
                         InWaitingPoint = true;
                     }
                 }
-                if (key.IsKeyDown(Keys.D2))
+                if (key.IsKeyDown(Keys.D2) || SourisCheck(1))
                 {
                     spell = 1;
                     if (champion.Map.gametime.TotalGameTime.TotalMilliseconds - champion.spells[spell].LastCast > champion.spells[spell].Cooldown * 1000)
@@ -177,6 +176,12 @@ namespace CrystalGate
             //Update de la position de la caméra et de l'interface
             camera.Position = new Vector2(camera.Position.X, camera.Position.Y) + vec;
             Interface.Update();
+        }
+
+        public bool SourisCheck(int i)
+        {
+            int largeurBoutonSort = 32;
+            return mouse.X + camera.Position.X >= Interface.BarreDesSortsPosition.X - 130 + i * largeurBoutonSort && mouse.X + camera.Position.X <= Interface.BarreDesSortsPosition.X - 130 + i * largeurBoutonSort + largeurBoutonSort && mouse.Y + camera.Position.Y >= Interface.BarreDesSortsPosition.Y + 8 && mouse.Y + camera.Position.Y <= Interface.BarreDesSortsPosition.Y + 8 + largeurBoutonSort && mouse.LeftButton == ButtonState.Pressed && Oldmouse.LeftButton == ButtonState.Released;
         }
 
         public void CheckWinandLose()

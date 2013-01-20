@@ -55,13 +55,13 @@ namespace CrystalGate
             KeyboardState k = Keyboard.GetState();
             // Debug les unites qui attaquent des unites mortes
             foreach (Unite u in unites)
+            {
+                // affiche la barre des sorts des unités attawquant un champion
+                if (u.uniteAttacked != null && u.uniteAttacked.isAChamp)
+                    u.Drawlife = true;
                 if (u.uniteAttacked != null && !unites.Contains((Unite)u.uniteAttacked))
                     u.uniteAttacked = null;
-        }
-
-        public void ClearEffects()
-        {
-
+            }
         }
 
         static int PLusGrosId(List<Unite> liste)
@@ -77,42 +77,6 @@ namespace CrystalGate
 
             return (newList.Count == 0) ? 0 : newList[newList.Count - 1];
         }
-
-        /*public void DrawIso(SpriteBatch spriteBatch)
-        {
-            int lengthx = 168;
-            int lengthy = 89;
-                
-            Vector2 _posDepart = new Vector2(100, 100);
-            for (int i = 0; i < Cellules.GetLength(0); i++) //On parcourt les lignes du tableau
-                for (int j = 0; j < Cellules.GetLength(1); j++) //On parcourt les colonnes du tableau
-                {
-                    if (Cellules[i, j] != -1)
-                    {
-                        Vector2 pos = new Vector2();
-                        if (i != 0)
-                        {
-                            if (i % 2 != 0 || i == 1) //Si le numéro de ligne est impair
-                            {
-                                pos.X = ((j * lengthx + lengthx / 2) + (((i - 1) * lengthx) / 2)) - j * lengthx / 2 + _posDepart.X;
-                                pos.Y = (((i * lengthy) / 2)) - j * lengthy / 2 + _posDepart.Y;
-                            }
-                            else //Sinon s'il est pair
-                            {
-                                pos.X = (j * lengthx + ((i * lengthx) / 2)) - j * lengthx / 2 + _posDepart.X;
-                                pos.Y = (((i * lengthy) / 2)) - j * lengthy / 2 + _posDepart.Y;
-                            }
-                        }
-                        else //Si il est égal à zéro (même code que s'il est pair)
-                        {
-                            pos.X = (j * lengthx) - j * lengthx / 2 + _posDepart.X;
-                            pos.Y = (((i * lengthy) / 2)) - j * lengthy / 2 + _posDepart.Y;
-                        }
-                        spriteBatch.Draw(Sprite, pos, Color.White);
-                    }
-                }
-
-        }*/
 
         public void Draw(SpriteBatch spriteBatch)
         {
