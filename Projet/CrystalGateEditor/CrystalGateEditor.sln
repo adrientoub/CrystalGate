@@ -1,0 +1,24 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C# Express 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrystalGateEditor", "CrystalGateEditor\CrystalGateEditor\CrystalGateEditor.csproj", "{050DC414-B4D5-49E6-9FF9-62F112E545F6}"
+EndProject
+Project("{96E2B04D-8817-42C6-938A-82C39BA4D311}") = "CrystalGateEditorContent", "CrystalGateEditor\CrystalGateEditorContent\CrystalGateEditorContent.contentproj", "{F772B883-6F01-44D0-927F-6856C272D4F8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{050DC414-B4D5-49E6-9FF9-62F112E545F6}.Debug|x86.ActiveCfg = Debug|x86
+		{050DC414-B4D5-49E6-9FF9-62F112E545F6}.Debug|x86.Build.0 = Debug|x86
+		{050DC414-B4D5-49E6-9FF9-62F112E545F6}.Release|x86.ActiveCfg = Release|x86
+		{050DC414-B4D5-49E6-9FF9-62F112E545F6}.Release|x86.Build.0 = Release|x86
+		{F772B883-6F01-44D0-927F-6856C272D4F8}.Debug|x86.ActiveCfg = Debug|x86
+		{F772B883-6F01-44D0-927F-6856C272D4F8}.Release|x86.ActiveCfg = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

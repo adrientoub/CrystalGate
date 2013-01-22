@@ -41,8 +41,8 @@ namespace CrystalGate
             Vitesse_Attaque = 1.00f;
             Defense = 0;
             // Graphique par defaut
-            Sprite = packTexture.unites[0];
-            Tiles = new Vector2(370 / 5, 835 / 11);
+            Sprite = packTexture.blank;
+            Tiles = Vector2.One;
             color = Color.White; 
             
             idWave = -1;
