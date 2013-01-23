@@ -25,6 +25,7 @@ namespace CrystalGateEditor
         
         public Mode mode;
         public SousMode sousmode;
+        public TextureStart textureStart;
         
         User user;
 
@@ -32,7 +33,8 @@ namespace CrystalGateEditor
         string MapName = "";
         string longueur = "";
         string hauteur = "";
-        string current = ""; 
+        string current = "";
+        string textBase = "";
 
         // Sert a debug
         int thread;
@@ -77,7 +79,9 @@ namespace CrystalGateEditor
                     {
                         // Creer la carte
                         Map = new Vector2[int.Parse(longueur), int.Parse(hauteur)];
+                        Initialiser(new Vector2(14, 13));
                         MenuString = "";
+                        current = "";
                         mode = Mode.Draw;
                         ShowMap = true;
                     }
@@ -95,9 +99,12 @@ namespace CrystalGateEditor
                 {
                     if (user.mouse.X < width - Palette.Width && ShowPalette || !ShowPalette)
                     {
-                        int x = user.mouse.X / 32;
-                        int y = user.mouse.Y / 32;
-                        Map[x, y] = Selection;
+                        if (user.mouse.X < Map.GetLength(0) * 32 && user.mouse.Y < Map.GetLength(1) * 32)
+                        {
+                            int x = user.mouse.X / 32;
+                            int y = user.mouse.Y / 32;
+                            Map[x, y] = Selection;
+                        }
                     }
                 }
                     // Controle utilisateur
@@ -130,12 +137,14 @@ namespace CrystalGateEditor
                     MapName = "";
                     longueur = "";
                     hauteur = "";
+                    textBase = "";
                 }
             }
 
             // SousMode
             if (sousmode == SousMode.Nom)
             {
+                MenuString = "Entrez le nom de la carte :";
                 bool b = user.SaisirTexte(ref MapName, false);
                 current = MapName;
 
@@ -148,6 +157,7 @@ namespace CrystalGateEditor
 
             if (sousmode == SousMode.TailleX)
             {
+                MenuString = "Entrez la longueur de la carte :";
                 bool b = user.SaisirTexte(ref longueur, true);
                 current = longueur;
 
@@ -160,26 +170,79 @@ namespace CrystalGateEditor
 
             if (sousmode == SousMode.TailleY)
             {
+                MenuString = "Entrez la largeur de la carte :";
                 bool b = user.SaisirTexte(ref hauteur, true);
                 current = hauteur;
 
                 if (b && threadActuel != thread)
-                    sousmode = SousMode.Done;
+                    sousmode = SousMode.TextureBase;
             }
+
+            if (sousmode == SousMode.TextureBase)
+            {
+                MenuString = "Choisissez la sprite par defaut du sol :";
+                bool b = user.SaisirTexte(ref textBase, true);
+                current = textBase;
+                
+                if (b)
+                {
+                    switch (int.Parse(textBase))
+                    {
+                        case 1: textureStart = TextureStart.Herbe;
+                            break;
+                        case 2: textureStart = TextureStart.Desert;
+                            break;
+                        default: textureStart = TextureStart.Herbe;
+                            break;
+                    }
+                    sousmode = SousMode.Done;
+                }
+            }
+
+            if (thread - threadActuel > 100 && current == "Carte sauvegarde")
+                current = "";
 
             thread++;
         }
 
+        public void Initialiser(Vector2 tile)
+        {
+            for (int i = 0; i < Map.GetLength(0); i++)
+                for (int j = 0; j < Map.GetLength(1); j++)
+                {
+                    int x = 0;
+                    int y = 0;
+                    if (textureStart == TextureStart.Herbe)
+                    {
+                        Random rand = new Random(i * j);
+                        x = rand.Next(14, 18);
+                        y = 18;
+                    }
+
+                    if (textureStart == TextureStart.Desert)
+                    {
+                        Random rand = new Random(i * j);
+                        x = rand.Next(11, 14);
+                        y = 17;
+                    }
+
+                    Map[i, j] = new Vector2(x, y);
+                }
+
+        }
+
         public void SaveMap()
         {
-            StreamWriter stream = new StreamWriter(@MapName + ".txt");
+            StreamWriter stream = new StreamWriter("../../../Maps/" + MapName + ".txt");
             for (int j = 0; j < Map.GetLength(1); j++)
             {
                 for (int i = 0; i < Map.GetLength(0); i++)
-                    stream.Write("(" + Map[i,j].X + "," + Map[i,j].Y + ")|");
+                    stream.Write(Map[i,j].X + "," + Map[i,j].Y + "|");
                 stream.WriteLine();
             }
             stream.Close();
+            current = "Carte sauvegarde";
+            thread = threadActuel;
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -216,7 +279,14 @@ namespace CrystalGateEditor
             Nom,
             TailleX,
             TailleY,
+            TextureBase,
             Done
+        }
+
+        public enum TextureStart
+        {
+            Herbe,
+            Desert
         }
     }
 }
