@@ -7,6 +7,8 @@ using System.IO;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Audio;
+using FarseerPhysics.Factories;
+using FarseerPhysics.Dynamics;
 
 namespace CrystalGate
 {
@@ -53,7 +55,7 @@ namespace CrystalGate
             return u;
         }
 
-        public static void OuvrirMap(string MapName, ref Map map, PackTexture pack, List<Batiment> batiments)
+        public static void OuvrirMap(string MapName, ref Map map, PackTexture pack)
         {
             // Read the file and display it line by line.
             string mapString = "../../../Maps/" + MapName + ".txt";
@@ -86,12 +88,13 @@ namespace CrystalGate
                     int x = int.Parse((tiles[i].Split(splitchar2))[0]);
                     int y = int.Parse((tiles[i].Split(splitchar2))[1]);
                     map.Cellules[i, j] = new Vector2(x, y);
+                    // Si c'est une tile infranchissable
                     if (Outil.ProhibedTiles().Contains(new Vector2(x, y)))
                     {
-                        batiments.Add(new Mur(new Vector2(i, j), map, pack));
-                        batiments[batiments.Count - 1].PositionSprite = new Vector2(i, j);
+                        // On ajoute l'obstacle au monde physique
+                        Body bodyTemp = BodyFactory.CreateRectangle(map.world, ConvertUnits.ToSimUnits(32), ConvertUnits.ToSimUnits(32), 100f);
+                        bodyTemp.Position = ConvertUnits.ToSimUnits(new Vector2(i, j) * map.TailleTiles + new Vector2(16, 16));
                         map.unitesStatic[i, j] = new Noeud(new Vector2(i, j), false, 1);
-
                     }
                 }
                 j++;

@@ -28,12 +28,13 @@ namespace CrystalGateEditor
             keyboardState = Keyboard.GetState();
             pressedKeys = keyboardState.GetPressedKeys();
 
+            char c = ' ';
             bool shiftPressed;
 
             shiftPressed = keyboardState.IsKeyDown(Keys.LeftShift) || keyboardState.IsKeyDown(Keys.RightShift);
 
             if (keyboardState.IsKeyDown(Keys.Space) && oldKeyboardState.IsKeyUp(Keys.Space))
-                text += " ";
+                c = ' ';
 
             foreach (Keys key in pressedKeys)
             {
@@ -43,7 +44,6 @@ namespace CrystalGateEditor
 
                     if (!OnlyChiffre)
                     {
-                        char c = ' ';
                         if (keyString.Length == 1)
                         {
                             c = keyString[0];
@@ -53,18 +53,13 @@ namespace CrystalGateEditor
                         if (keyString.Length == 7)
                             c = keyString[6];
 
-                        text += "" + c;
+                        text += c;
                     }
                     // SI WANNACHIFFRE
                     if (keyString.Length == 7 && OnlyChiffre)
                     {
-                        char c = keyString[6];
-                        //
-                        // ATTENTION, PRENDRE EN COMPTE LES CHIFFRES!!!!
-                        //
-
-
-                        text += "" + c;
+                        c = keyString[6];
+                        text += c;
                     }
                 }
             }
@@ -73,6 +68,17 @@ namespace CrystalGateEditor
             {
                 oldKeyboardState = keyboardState;
                 prevPressedKeys = pressedKeys;
+                string text2 = "";
+                for (int i = 0; i < text.Length; i++)
+                {
+                    if (i == 0 && text[i] == ' ' || i == text.Length - 1 && text[i] == ' ')
+                    {
+
+                    }
+                    else
+                        text2 += text[i];
+                }
+                text = text2;
                 return true;
             }
             else

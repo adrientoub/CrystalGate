@@ -66,8 +66,6 @@ namespace CrystalGate
 
         bool body_OnCollision(Fixture fixtureA, Fixture fixtureB, FarseerPhysics.Dynamics.Contacts.Contact contact)
         {
-            if (!(fixtureA.Body.UserData is Batiment))
-            {
                 Unite objet1 = (Unite)(fixtureA.Body.UserData);
 
                 if (objet1.isAChamp)
@@ -80,7 +78,6 @@ namespace CrystalGate
                             objet1.ObjectifListe = chemin;
                     }
                 }
-            }
             
                 return true;
         }

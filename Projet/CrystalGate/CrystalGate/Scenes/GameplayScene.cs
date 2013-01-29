@@ -24,12 +24,10 @@ namespace CrystalGate.Scenes
         private PackTexture pack; // Toutes les textures
         private float pauseAlpha;
         private Map map; // La map
-        Body boundary; // Les limtes du monde physique
 
         public static List<SoundEffect> _effetsSonores = new List<SoundEffect> { }; // Tous les effets sonores.
         private List<Joueur> joueurs = new List<Joueur> { }; // joueurs sur la map
         private List<Unite> unites = new List<Unite> { }; // unites sur la map
-        private List<Batiment> batiments = new List<Batiment> { };
         private List<Effet> effets = new List<Effet> { }; // effets qui seront draw
         private List<Wave> waves = new List<Wave> { };
 
@@ -60,13 +58,7 @@ namespace CrystalGate.Scenes
             pack.map.Add(content.Load<Texture2D>("summertiles"));
 
             // Chargement de la carte
-            Outil.OuvrirMap("lol", ref map, pack, batiments);
-
-            // Creation de la physique de la carte
-            var bounds = GetBounds();
-            boundary = BodyFactory.CreateLoopShape(map.world, bounds);
-            boundary.CollisionCategories = Category.All;
-            boundary.CollidesWith = Category.All;
+            Outil.OuvrirMap("lol", ref map, pack);
 
             // Chargement sons
             Outil.LoadSounds(_effetsSonores, content);
@@ -75,11 +67,11 @@ namespace CrystalGate.Scenes
             joueurs.Add(new Joueur(new Grunt(new Vector2(3, 7), map, pack)));
             unites.Add(joueurs[0].champion);
 
-            // Interface
+            // Ajout Interface
             UI Interface = new UI(joueurs[0], content.Load<Texture2D>("UI/Perso and stats"), content.Load<Texture2D>("UI/barre des sorts"), content.Load<Texture2D>("Curseur"), content.Load<Texture2D>("gruntIcone"), content.Load<Texture2D>("blank"), spriteBatch, gameFont);
             joueurs[0].Interface = Interface;
 
-            // fixe l'id de toutes les unités
+            // fixe l'id de toutes les unités (useless depuis spawn vagues)
             for (int i = 0; i < unites.Count; i++)
                 unites[i].id = i;
 
@@ -108,13 +100,10 @@ namespace CrystalGate.Scenes
                 // On update les infos des joueurs
                 joueurs[0].Update(unites);
                 // On update les infos de la map
-                map.Update(unites, batiments, gameTime);
+                map.Update(unites, gameTime);
                 // On update les infos des unites
                 foreach (Unite u in unites)
                     u.Update(unites, effets);
-                // On update les infos des batiments
-                foreach (Batiment b in batiments)
-                    b.Update(unites, effets);
                 // On update les infos des joueurs
                 foreach (Joueur j in joueurs)
                     j.Update(unites);
@@ -140,9 +129,6 @@ namespace CrystalGate.Scenes
             // DRAW EFFETS
             foreach (Effet e in effets)
                 e.Draw(spriteBatch);
-            // DRAW BATIMENTS
-            foreach (Batiment b in batiments)
-                b.Draw(spriteBatch);
             // DRAW UNITES
             foreach (Unite o in unites)
                 o.Draw(spriteBatch);
@@ -170,19 +156,6 @@ namespace CrystalGate.Scenes
             if (InputState.IsPauseGame() || gamePadDisconnected)
                 new PauseMenuScene(SceneManager, this).Add();
         }
-        // Utilisé pour creer le monde physique
-        private Vertices GetBounds()
-        {
-            float width = ConvertUnits.ToSimUnits(map.Taille.X * map.TailleTiles.X);
-            float height = ConvertUnits.ToSimUnits(map.Taille.Y * map.TailleTiles.Y);
 
-            Vertices bounds = new Vertices(4);
-            bounds.Add(new Vector2(0, 0));
-            bounds.Add(new Vector2(width, 0));
-            bounds.Add(new Vector2(width, height));
-            bounds.Add(new Vector2(0, height));
-
-            return bounds;
-        }
     }
 }

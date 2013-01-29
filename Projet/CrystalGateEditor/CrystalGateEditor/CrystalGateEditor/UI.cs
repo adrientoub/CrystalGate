@@ -58,6 +58,7 @@ namespace CrystalGateEditor
 
         public void Update()
         {
+
             // NouvelleMap ou on Charge ?
             if (mode == Mode.LoadOrCreate)
             {
@@ -181,11 +182,15 @@ namespace CrystalGateEditor
 
             if (sousmode == SousMode.TextureBase)
             {
-                MenuString = "Choisissez la sprite par defaut du sol :";
-                bool b = user.SaisirTexte(ref textBase, true);
-                current = textBase;
-                
-                if (b)
+                MenuString = "    Choisir le type de sol : \n 1 - Herbe \n 2 - Desert";
+                current = "";
+
+                if (user.keyboardState.IsKeyDown(Keys.D1))
+                    textBase = "1";
+                else if (user.keyboardState.IsKeyDown(Keys.D2))
+                    textBase = "2";
+
+                else if(textBase.Length == 1)
                 {
                     switch (int.Parse(textBase))
                     {
@@ -204,6 +209,7 @@ namespace CrystalGateEditor
                 current = "";
 
             thread++;
+
             user.oldKeyboardState = user.keyboardState;
         }
 

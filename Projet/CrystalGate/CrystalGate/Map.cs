@@ -6,6 +6,8 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using FarseerPhysics.Dynamics;
 using Microsoft.Xna.Framework.Input;
+using FarseerPhysics.Common;
+using FarseerPhysics.Factories;
 
 namespace CrystalGate
 {
@@ -16,14 +18,13 @@ namespace CrystalGate
         public Vector2 TailleTiles { get; set; }
         public Vector2 Taille { get; set; }
         public List<Unite> unites { get; set; }
-        public List<Batiment> batiments { get; set; }
         public Noeud[,] unitesStatic { get; set; }
         public World world { get; set; }
+        Body boundary; // Les limites du monde physique
         public GameTime gametime { get; set; }
 
         public int compteur = 0;
         public int pFParThread = 5; // 10 unites par thread calculent leurs chemins
-        private byte[] tab;
 
         public Map(Texture2D sprite, Vector2 taille, Vector2 tailleTiles)
         {
@@ -33,18 +34,19 @@ namespace CrystalGate
             Taille = taille;
             world = new World(Vector2.Zero);
             unites = new List<Unite> { };
-            batiments = new List<Batiment> { };
             unitesStatic = new Noeud[(int)taille.X, (int)taille.Y];
-            tab = new byte[] { 3, 4,6,7,8,9,10};
 
-            foreach (Batiment b in batiments)
-                unitesStatic[(int)b.PositionTile.X, (int)b.PositionTile.Y] = new Noeud(b.PositionTile, false, 1);
+            // Creation de la physique de la carte
+            var bounds = GetBounds();
+            boundary = BodyFactory.CreateLoopShape(world, bounds);
+            boundary.CollisionCategories = Category.All;
+            boundary.CollidesWith = Category.All;
+
         }
 
-        public void Update(List<Unite> unites, List<Batiment> batiments, GameTime GT)
+        public void Update(List<Unite> unites, GameTime GT)
         {
             this.unites = unites;
-            this.batiments = batiments;
             Outil.RemoveDeadBodies(unites);
             gametime = GT;
 
@@ -83,10 +85,27 @@ namespace CrystalGate
             for (int i = 0; i < Cellules.GetLength(0); i++) //On parcourt les lignes du tableau
                 for (int j = 0; j < Cellules.GetLength(1); j++) //On parcourt les colonnes du tableau
                 {
-                        int x = 32 * (int)Cellules[i, j].X;
-                        int y = 32 * (int)Cellules[i, j].Y;
+                        int x = (int)TailleTiles.X * (int)Cellules[i, j].X;
+                        int y = (int)TailleTiles.Y * (int)Cellules[i, j].Y;
                         spriteBatch.Draw(Sprite, new Vector2(i * (TailleTiles.X - 1), j * (TailleTiles.Y - 1)), new Rectangle(x + (x / 32), y + (y / 32), 32, 32), Color.White);
                 }
         }
+
+        // Utilisé pour creer le monde physique
+        private Vertices GetBounds()
+        {
+            float width = ConvertUnits.ToSimUnits(Taille.X * TailleTiles.X);
+            float height = ConvertUnits.ToSimUnits(Taille.Y * TailleTiles.Y);
+
+            Vertices bounds = new Vertices(4);
+            bounds.Add(new Vector2(0, 0));
+            bounds.Add(new Vector2(width, 0));
+            bounds.Add(new Vector2(width, height));
+            bounds.Add(new Vector2(0, height));
+
+            return bounds;
+        }
     }
+
+
 }
