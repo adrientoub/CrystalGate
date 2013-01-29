@@ -54,10 +54,11 @@ namespace CrystalGate
         public void Draw()
         {
             MouseState m = Mouse.GetState();
+            Text life = new Text("Life"), attack = new Text("Attack"), armor = new Text("Armor"); // définition des mots traduisibles
 
-            string str = "Vie : " + joueur.champion.Vie + " / " + joueur.champion.VieMax + "\n"
-                + "Attaque : " + joueur.champion.Dommages + "\n"
-                + "Armure : " + joueur.champion.Defense + "\n";
+            string str = life.get() + " : " + joueur.champion.Vie + " / " + joueur.champion.VieMax + "\n"
+                + attack.get() + " : " + joueur.champion.Dommages + "\n"
+                + armor.get() + " : " + joueur.champion.Defense + "\n";
             string str2 = "Selectionnez un point";
 
             //spritebatch.Draw(Cadre, CadrePosition, Color.White);

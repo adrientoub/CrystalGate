@@ -2,3 +2,4 @@ C:\Users\René\Documents\GitHub\CrystalGate\Dungeon_Defender\Dungeon_DefenderCon
 C:\Users\René\Documents\GitHub\CrystalGate\CrystalGate\CrystalGateContent\obj\x86\Debug\ResolveAssemblyReference.cache
 C:\Users\René\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGateContent\obj\x86\Debug\ResolveAssemblyReference.cache
 D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGateContent\obj\x86\Debug\CrystalGateContent.contentprojResolveAssemblyReference.cache
+C:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGateContent\obj\x86\Debug\CrystalGateContent.contentprojResolveAssemblyReference.cache

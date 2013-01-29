@@ -126,6 +126,8 @@
     <Compile Include="Spells\Bump.cs" />
     <Compile Include="Spells\Explosion.cs" />
     <Compile Include="Spells\Soin.cs" />
+    <Compile Include="Translate\GameText.cs" />
+    <Compile Include="Translate\Text.cs" />
     <Compile Include="UI.cs" />
     <Compile Include="Joueur.cs" />
     <Compile Include="Map.cs" />

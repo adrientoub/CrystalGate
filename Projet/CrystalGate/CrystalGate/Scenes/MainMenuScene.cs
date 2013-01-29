@@ -16,10 +16,13 @@ namespace CrystalGate.Scenes
         public MainMenuScene(SceneManager sceneMgr)
             : base(sceneMgr, "Crystal Gate")
         {
+            GameText.initGameText();
             // Création des options
-            var playGameMenuItem = new MenuItem("Lancer le jeu");
+            Text launchGame = new Text("LaunchGame");
+            Text quitGame = new Text("Quit");
+            var playGameMenuItem = new MenuItem(launchGame.get());
             var optionsMenuItem = new MenuItem("Options");
-            var exitMenuItem = new MenuItem("Quitter");
+            var exitMenuItem = new MenuItem(quitGame.get());
 
             // Gestion des évènements
             playGameMenuItem.Selected += PlayGameMenuItemSelected;
