@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
+using System.IO;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Audio;
 
 namespace CrystalGate
 {
@@ -47,6 +51,108 @@ namespace CrystalGate
                 u.Add((Unite)o);
 
             return u;
+        }
+
+        public static void OuvrirMap(string MapName, ref Map map, PackTexture pack, List<Batiment> batiments)
+        {
+            // Read the file and display it line by line.
+            string mapString = "../../../Maps/" + MapName + ".txt";
+            string line;
+            int longueur = 0;
+            int hauteur = 0;
+            StreamReader file = new StreamReader(@mapString);
+            // On établit la longueur et la hauteur
+            while ((line = file.ReadLine()) != null)
+            {
+                char[] splitchar = { '|' };
+
+                if (line != null)
+                    longueur = line.Split(splitchar).Length - 1;
+                hauteur++;
+            }
+            // Creation de la carte
+            map = new Map(pack.map[0], new Vector2(longueur, hauteur), new Vector2(32, 32));
+            // Reset
+            file = new StreamReader(@mapString);
+            int j = 0;
+            while ((line = file.ReadLine()) != null)
+            {
+                char[] splitchar = { '|' };
+                string[] tiles = line.Split(splitchar);
+
+                for (int i = 0; i < longueur; i++)
+                {
+                    char[] splitchar2 = { ',' };
+                    int x = int.Parse((tiles[i].Split(splitchar2))[0]);
+                    int y = int.Parse((tiles[i].Split(splitchar2))[1]);
+                    map.Cellules[i, j] = new Vector2(x, y);
+                    if (Outil.ProhibedTiles().Contains(new Vector2(x, y)))
+                    {
+                        batiments.Add(new Mur(new Vector2(i, j), map, pack));
+                        batiments[batiments.Count - 1].PositionSprite = new Vector2(i, j);
+                        map.unitesStatic[i, j] = new Noeud(new Vector2(i, j), false, 1);
+
+                    }
+                }
+                j++;
+            }
+            file.Close();
+
+        }
+
+        public static List<Vector2> ProhibedTiles()
+        {
+            List<Vector2> pT = new List<Vector2> { };
+            for (int j = 0; j < 9; j++)
+                for (int i = 0; i < 19; i++)
+                    pT.Add(new Vector2(i, j));
+
+            for (int i = 0; i < 9; i++)
+                pT.Add(new Vector2(i, 9));
+
+            for (int i = 16; i < 19; i++)
+                pT.Add(new Vector2(i, 10));
+
+            for (int i = 0; i < 19; i++)
+                pT.Add(new Vector2(i, 11));
+
+            for (int i = 0; i < 10; i++)
+                pT.Add(new Vector2(i, 12));
+
+            for (int i = 15; i < 19; i++)
+                pT.Add(new Vector2(i, 15));
+
+            for (int i = 0; i < 19; i++)
+                pT.Add(new Vector2(i, 16));
+
+            for (int i = 0; i < 11; i++)
+                pT.Add(new Vector2(i, 17));
+            
+            return pT;
+        }
+
+        public static void LoadSprites(ref PackTexture pack, ContentManager content)
+        {
+            pack = new PackTexture(content.Load<Texture2D>("blank"));
+            pack.unites = new List<Texture2D> { content.Load<Texture2D>("knight"), content.Load<Texture2D>("grunt") };
+            pack.sorts.Add(content.Load<Texture2D>("Spells/Explosion"));
+            pack.sorts.Add(content.Load<Texture2D>("Spells/Soin"));
+            pack.boutons = new List<Texture2D> { content.Load<Texture2D>("Boutons/Explosion"), content.Load<Texture2D>("Boutons/Soin") };
+            pack.map.Add(content.Load<Texture2D>("summertiles"));
+        }
+
+        public static void LoadSounds(List<SoundEffect> listeSound,  ContentManager content)
+        {
+            // Les sons.
+            listeSound.Add(content.Load<SoundEffect>("Sons/sword3")); // Attaque cavalier
+            listeSound.Add(content.Load<SoundEffect>("Sons/Cavalierquimeurt"));
+            listeSound.Add(content.Load<SoundEffect>("Sons/GruntAttack"));
+            listeSound.Add(content.Load<SoundEffect>("Sons/Gruntquimeurt"));
+            // Sons des sorts.
+            listeSound.Add(content.Load<SoundEffect>("Sons/soin"));
+            listeSound.Add(content.Load<SoundEffect>("Sons/explosion"));
+
+            EffetSonore.InitEffects();
         }
     }
 }

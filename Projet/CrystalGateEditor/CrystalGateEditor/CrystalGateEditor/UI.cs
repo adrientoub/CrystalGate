@@ -109,25 +109,26 @@ namespace CrystalGateEditor
                 }
                     // Controle utilisateur
                 // ShowPalette
-                if (user.keyboardState.IsKeyDown(Keys.P))
+                if (user.keyboardState.IsKeyDown(Keys.P) && user.oldKeyboardState.IsKeyUp(Keys.P))
+                    if (!ShowPalette )
+                        ShowPalette = true;
+                    else
+                        ShowPalette = false;
+                    
+                // Selection tile
+                if (ShowPalette && user.mouse.LeftButton == ButtonState.Pressed && user.mouse.X >= PalettePosition.X && user.mouse.Y <= Palette.Height)
                 {
-                    ShowPalette = true;
-                    if (user.mouse.LeftButton == ButtonState.Pressed && user.mouse.X >= PalettePosition.X && user.mouse.Y <= Palette.Height)
-                    {
-                        int x = (int)(user.mouse.X - PalettePosition.X) / 32;
-                        int y = (int)(user.mouse.Y - PalettePosition.Y) / 32;
-                        Selection = new Vector2(x, y);
-                    }
+                    int x = (int)(user.mouse.X - PalettePosition.X) / 32;
+                    int y = (int)(user.mouse.Y - PalettePosition.Y) / 32;
+                    Selection = new Vector2(x, y);
                 }
-                else
-                    ShowPalette = false;
                 // ShowHelp
                 if (user.keyboardState.IsKeyDown(Keys.OemComma))
                     ShowHelp = true;
                 else
                     ShowHelp = false;
                 // SaveMap
-                if (user.keyboardState.IsKeyDown(Keys.LeftControl) && user.keyboardState.IsKeyDown(Keys.S) && user.oldKeyboardState.IsKeyUp(Keys.LeftControl) && user.oldKeyboardState.IsKeyUp(Keys.S))
+                if (user.keyboardState.IsKeyDown(Keys.LeftControl) && user.keyboardState.IsKeyDown(Keys.S))
                     SaveMap();
                 // Restart
                 if (user.keyboardState.IsKeyDown(Keys.R))
@@ -203,6 +204,7 @@ namespace CrystalGateEditor
                 current = "";
 
             thread++;
+            user.oldKeyboardState = user.keyboardState;
         }
 
         public void Initialiser(Vector2 tile)

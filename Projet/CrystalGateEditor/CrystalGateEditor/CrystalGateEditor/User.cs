@@ -23,7 +23,7 @@ namespace CrystalGateEditor
         }
 
         // Ecrit dans la string passée en paramètre, le bool verrouille les chiffres
-        public bool SaisirTexte(ref string text, bool WannaChiffre)
+        public bool SaisirTexte(ref string text, bool OnlyChiffre)
         {
             keyboardState = Keyboard.GetState();
             pressedKeys = keyboardState.GetPressedKeys();
@@ -41,20 +41,22 @@ namespace CrystalGateEditor
                 {
                     string keyString = key.ToString();
 
-                    if (keyString.Length == 1)
+                    if (!OnlyChiffre)
                     {
-                        char c = keyString[0];
-                        //
-                        // ATTENTION, PRENDRE EN COMPTE LES CHIFFRES!!!!
-                        //
-
-                        if (!shiftPressed)
-                            c += (char)('a' - 'A');
+                        char c = ' ';
+                        if (keyString.Length == 1)
+                        {
+                            c = keyString[0];
+                            if (!shiftPressed)
+                                c += (char)('a' - 'A');
+                        }
+                        if (keyString.Length == 7)
+                            c = keyString[6];
 
                         text += "" + c;
                     }
                     // SI WANNACHIFFRE
-                    if (keyString.Length == 7 && WannaChiffre)
+                    if (keyString.Length == 7 && OnlyChiffre)
                     {
                         char c = keyString[6];
                         //

@@ -20,7 +20,7 @@ namespace CrystalGate
 
         protected EffetSonore effetUnite;
         protected int nbFrameSonJoue;
-        protected Vector2 PositionSprite { get; set; }
+        public Vector2 PositionSprite { get; set; }
 
         public List<Spell> spells { get; set; }
         public bool Drawlife { get; set; }
@@ -49,7 +49,9 @@ namespace CrystalGate
         public override void Draw(SpriteBatch spriteBatch)
         {
             Rectangle rec = new Rectangle((int)(Tiles.X * PositionSprite.X + PositionSprite.X), (int)(Tiles.Y * PositionSprite.Y + PositionSprite.Y), (int)Tiles.X, (int)Tiles.Y);
-            spriteBatch.Draw(Sprite, ConvertUnits.ToDisplayUnits(body.Position), rec, Color.White, 0f, new Vector2(Tiles.X / 2, Tiles.Y / 2), 1f, FlipH ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 0);
+            //spriteBatch.Draw(Sprite, ConvertUnits.ToDisplayUnits(body.Position), rec, Color.White, 0f, new Vector2(Tiles.X / 2, Tiles.Y / 2), 1f, FlipH ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 0);
+
+            spriteBatch.Draw(Sprite, ConvertUnits.ToDisplayUnits(body.Position), new Rectangle(16 + (16 / 32), 0 + (0 / 32), 32, 32), Color.White);
         }
 
     }

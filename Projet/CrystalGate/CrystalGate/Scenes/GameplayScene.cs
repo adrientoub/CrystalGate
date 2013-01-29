@@ -58,60 +58,20 @@ namespace CrystalGate.Scenes
             pack.sorts.Add(content.Load<Texture2D>("Spells/Soin"));
             pack.boutons = new List<Texture2D> { content.Load<Texture2D>("Boutons/Explosion"), content.Load<Texture2D>("Boutons/Soin") };
             pack.map.Add(content.Load<Texture2D>("summertiles"));
-            //
+
             // Chargement de la carte
-            int counter = 0;
-            string line; // X
-            // Read the file and display it line by line.
-            string mapString = "../../../Map/Map1.txt";
-            StreamReader file = new StreamReader(@mapString);
-
-            line = file.ReadLine();
-            string line2;
-            file = new StreamReader(@mapString);
-            while ((line2 = file.ReadLine()) != null)
-                counter++;
-
-            // Creation de la carte
-            Texture2D SpriteMap = content.Load<Texture2D>("summertiles");
-            map = new Map(SpriteMap, new Vector2(line.Length + 1, counter) , new Vector2(32, 32));
-
-            counter = 0;
-            file = new StreamReader(@mapString);
-            while ((line2 = file.ReadLine()) != null)
-            {
-                for (int i = 0; i < line2.Length; i++)
-                {
-                    if (line2[i] == '1') // Mur
-                    {
-                        batiments.Add(new Mur(new Vector2(i, counter), map, pack));
-                        map.unitesStatic[i, counter] = new Noeud(new Vector2(i, counter), false, 1);
-                    }
-                    if (line2[i] == '2') // Arbre ( pas encore implanté)
-                    {
-                        map.Cellules[i, counter] = new Vector2(12, 6);
-                    }
-                }
-                counter++;
-            }
-            file.Close();
+            Outil.OuvrirMap("lol", ref map, pack, batiments);
 
             // Creation de la physique de la carte
             var bounds = GetBounds();
             boundary = BodyFactory.CreateLoopShape(map.world, bounds);
             boundary.CollisionCategories = Category.All;
             boundary.CollidesWith = Category.All;
-            
-            // Les sons.
-            _effetsSonores.Add(content.Load<SoundEffect>("Sons/sword3")); // Attaque cavalier
-            _effetsSonores.Add(content.Load<SoundEffect>("Sons/Cavalierquimeurt"));
-            _effetsSonores.Add(content.Load<SoundEffect>("Sons/GruntAttack")); 
-            _effetsSonores.Add(content.Load<SoundEffect>("Sons/Gruntquimeurt"));
-            // Sons des sorts.
-            _effetsSonores.Add(content.Load<SoundEffect>("Sons/soin"));
-            _effetsSonores.Add(content.Load<SoundEffect>("Sons/explosion"));
-            EffetSonore.InitEffects();
-            // ajout joueurs
+
+            // Chargement sons
+            Outil.LoadSounds(_effetsSonores, content);
+
+            // Ajout joueurs
             joueurs.Add(new Joueur(new Grunt(new Vector2(3, 7), map, pack)));
             unites.Add(joueurs[0].champion);
 
@@ -124,9 +84,9 @@ namespace CrystalGate.Scenes
                 unites[i].id = i;
 
             // La vague
-            waves.Add(new Wave(new List<Vector2>{new Vector2(8, 7), new Vector2(8, 8)}, new List<Vector2> { new Vector2(22,0), new Vector2(39,7), new Vector2(23,17) }, new Cavalier(Vector2.Zero, map, pack), 3, joueurs[0].champion));
-            waves.Add(new Wave(new List<Vector2> { new Vector2(40, 7), new Vector2(40, 8) }, new List<Vector2> { new Vector2(54, 0), new Vector2(68, 7), new Vector2(54, 17) }, new Cavalier(Vector2.Zero, map, pack), 3, joueurs[0].champion));
-            waves.Add(new Wave(new List<Vector2> { new Vector2(53, 17), new Vector2(54, 17) }, new List<Vector2> { new Vector2(68, 25), new Vector2(54, 34) }, new Cavalier(Vector2.Zero, map, pack), 3, joueurs[0].champion));
+            //waves.Add(new Wave(new List<Vector2>{new Vector2(8, 7), new Vector2(8, 8)}, new List<Vector2> { new Vector2(22,0), new Vector2(39,7), new Vector2(23,17) }, new Cavalier(Vector2.Zero, map, pack), 3, joueurs[0].champion));
+            //waves.Add(new Wave(new List<Vector2> { new Vector2(40, 7), new Vector2(40, 8) }, new List<Vector2> { new Vector2(54, 0), new Vector2(68, 7), new Vector2(54, 17) }, new Cavalier(Vector2.Zero, map, pack), 3, joueurs[0].champion));
+            //waves.Add(new Wave(new List<Vector2> { new Vector2(53, 17), new Vector2(54, 17) }, new List<Vector2> { new Vector2(68, 25), new Vector2(54, 34) }, new Cavalier(Vector2.Zero, map, pack), 3, joueurs[0].champion));
         }
 
         protected override void UnloadContent() 

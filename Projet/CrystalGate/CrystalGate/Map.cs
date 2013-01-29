@@ -80,35 +80,12 @@ namespace CrystalGate
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            for (int i = 0; i < Cellules.GetLength(0) + 2; i++) //On parcourt les lignes du tableau
-                for (int j = 0; j < Cellules.GetLength(1) + 1; j++) //On parcourt les colonnes du tableau
+            for (int i = 0; i < Cellules.GetLength(0); i++) //On parcourt les lignes du tableau
+                for (int j = 0; j < Cellules.GetLength(1); j++) //On parcourt les colonnes du tableau
                 {
-                    // Pour completer le bord droit et bas
-                    if (i >= Cellules.GetLength(0) || j == Cellules.GetLength(1) )
-                    {
-                        Random rand = new Random(i * j);
-                        int x = 32 * tab[rand.Next(1, tab.Length - 1)];
-                        int y = 32 * 19; // a choisir en fonction de ce qu'on veut
+                        int x = 32 * (int)Cellules[i, j].X;
+                        int y = 32 * (int)Cellules[i, j].Y;
                         spriteBatch.Draw(Sprite, new Vector2(i * (TailleTiles.X - 1), j * (TailleTiles.Y - 1)), new Rectangle(x + (x / 32), y + (y / 32), 32, 32), Color.White);
-                    }
-                    else
-                    {
-                        // Si y'a une texture prédéfini
-                        if (Cellules[i, j] != Vector2.Zero)
-                        {
-                            int x = 32 * (int)Cellules[i, j].X;
-                            int y = 32 * (int)Cellules[i, j].Y;
-                            spriteBatch.Draw(Sprite, new Vector2(i * (TailleTiles.X - 1), j * (TailleTiles.Y - 1)), new Rectangle(x + (x / 32), y + (y / 32), 32, 32), Color.White);
-                        }
-                        // Sinon texture par defaut
-                        else
-                        {
-                            Random rand = new Random(i * j);
-                            int x = 32 * tab[rand.Next(1, tab.Length - 1)];
-                            int y = 32 * 19; // a choisir en fonction de ce qu'on veut
-                            spriteBatch.Draw(Sprite, new Vector2(i * (TailleTiles.X - 1), j * (TailleTiles.Y - 1)), new Rectangle(x + (x / 32), y + (y / 32), 32, 32), Color.White);
-                        }
-                    }
                 }
         }
     }
