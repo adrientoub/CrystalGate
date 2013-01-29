@@ -41,7 +41,7 @@ namespace CrystalGateEditor
         int threadActuel;
 
         // La Map
-        Vector2[,] Map;
+        public Vector2[,] Map;
         int width = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width;
         int height =  System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height;
 
@@ -58,7 +58,6 @@ namespace CrystalGateEditor
 
         public void Update()
         {
-
             // NouvelleMap ou on Charge ?
             if (mode == Mode.LoadOrCreate)
             {
@@ -80,7 +79,7 @@ namespace CrystalGateEditor
                     {
                         // Creer la carte
                         Map = new Vector2[int.Parse(longueur), int.Parse(hauteur)];
-                        Initialiser(new Vector2(14, 13));
+                        Initialiser();
                         MenuString = "";
                         current = "";
                         mode = Mode.Draw;
@@ -91,7 +90,17 @@ namespace CrystalGateEditor
             // Si ChargerMap
             if (mode == Mode.ChargerMap)
             {
-                
+                if (sousmode == SousMode.Undone)
+                    sousmode = SousMode.Nom;
+
+                if (sousmode == SousMode.Done)
+                {
+                    OuvrirMap(MapName);
+                    MenuString = "";
+                    current = "";
+                    mode = Mode.Draw;
+                    ShowMap = true;
+                }
             }
             // Dessiner
             if (mode == Mode.Draw)
@@ -152,9 +161,15 @@ namespace CrystalGateEditor
 
                 if (b)
                 {
-                    sousmode = SousMode.TailleX;
-                    threadActuel = thread;
+                    if (mode == Mode.NouvelleMap)
+                    {
+                        sousmode = SousMode.TailleX;
+                        threadActuel = thread;
+                    }
+                    else
+                        sousmode = SousMode.Done;
                 }
+
             }
 
             if (sousmode == SousMode.TailleX)
@@ -213,7 +228,7 @@ namespace CrystalGateEditor
             user.oldKeyboardState = user.keyboardState;
         }
 
-        public void Initialiser(Vector2 tile)
+        public void Initialiser()
         {
             for (int i = 0; i < Map.GetLength(0); i++)
                 for (int j = 0; j < Map.GetLength(1); j++)
@@ -236,6 +251,46 @@ namespace CrystalGateEditor
 
                     Map[i, j] = new Vector2(x, y);
                 }
+
+        }
+
+        public void OuvrirMap(string MapName)
+        {
+            // Read the file and display it line by line.
+            string line;
+            int longueur = 0;
+            int hauteur = 0;
+            StreamReader file = new StreamReader("../../../Maps/" + MapName + ".txt");
+            // On établit la longueur et la hauteur
+            while ((line = file.ReadLine()) != null)
+            {
+                char[] splitchar = { '|' };
+
+                if (line != null)
+                    longueur = line.Split(splitchar).Length - 1;
+                hauteur++;
+            }
+            // Creation de la carte
+            Map = new Vector2[longueur, hauteur];
+            // Reset
+            file.Close();
+            file = new StreamReader("../../../Maps/" + MapName + ".txt");
+            int j = 0;
+            while ((line = file.ReadLine()) != null)
+            {
+                char[] splitchar = { '|' };
+                string[] tiles = line.Split(splitchar);
+
+                for (int i = 0; i < longueur; i++)
+                {
+                    char[] splitchar2 = { ',' };
+                    int x = int.Parse((tiles[i].Split(splitchar2))[0]);
+                    int y = int.Parse((tiles[i].Split(splitchar2))[1]);
+                    Map[i, j] = new Vector2(x, y);
+                }
+                j++;
+            }
+            file.Close();
 
         }
 

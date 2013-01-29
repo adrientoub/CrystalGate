@@ -28,8 +28,10 @@ namespace CrystalGateEditor
             graphics = new GraphicsDeviceManager(this);
             graphics.IsFullScreen = true;
             this.IsMouseVisible = true;
-            graphics.PreferredBackBufferWidth = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width;
-            graphics.PreferredBackBufferHeight = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height;
+            int width = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width;
+            int height = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height;
+            graphics.PreferredBackBufferWidth = width;
+            graphics.PreferredBackBufferHeight = height;
             Content.RootDirectory = "Content";
         }
 
