@@ -45,6 +45,8 @@ namespace CrystalGateEditor
         int width = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width;
         int height =  System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height;
 
+        Stack<Vector4> stack;
+
         public UI(User user, Texture2D Palette, SpriteFont spriteFont)
         {
             this.user = user;
@@ -54,6 +56,7 @@ namespace CrystalGateEditor
 
             this.PalettePosition = new Vector2(width - Palette.Width,0);
             this.sousmode = SousMode.Undone;
+            stack = new Stack<Vector4> { };
         }
 
         public void Update()
@@ -113,7 +116,11 @@ namespace CrystalGateEditor
                         {
                             int x = user.mouse.X / 32;
                             int y = user.mouse.Y / 32;
-                            Map[x, y] = Selection;
+                            if (Selection.X != Map[x, y].X && Selection.Y != Map[x, y].Y)
+                            {
+                                stack.Push(new Vector4(x, y, Selection.X, Selection.Y));
+                                Map[x, y] = Selection;
+                            }
                         }
                     }
                 }
@@ -140,6 +147,15 @@ namespace CrystalGateEditor
                 // SaveMap
                 if (user.keyboardState.IsKeyDown(Keys.LeftControl) && user.keyboardState.IsKeyDown(Keys.S))
                     SaveMap();
+                // Control Z
+                if (user.keyboardState.IsKeyDown(Keys.Z))
+                {
+                    if (stack.Count > 0)
+                    {
+                        Vector4 sommet = stack.Pop();
+                        Map[(int)sommet.X, (int)sommet.Y] = new Vector2(sommet.Z, sommet.W);
+                    }
+                }
                 // Restart
                 if (user.keyboardState.IsKeyDown(Keys.R))
                 {
