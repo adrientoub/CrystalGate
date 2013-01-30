@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework;
 
 namespace CrystalGateEditor
 {
@@ -12,14 +13,16 @@ namespace CrystalGateEditor
         public KeyboardState oldKeyboardState { get; set; }
         public Keys[] pressedKeys { get; set; }
         public Keys[] prevPressedKeys { get; set; }
-
         public MouseState mouse { get; set; }
+       
+        public Camera2D camera;
 
         public User()
         {
             keyboardState = Keyboard.GetState();
             pressedKeys = keyboardState.GetPressedKeys();
             prevPressedKeys = keyboardState.GetPressedKeys();
+            camera = new Camera2D(Vector2.Zero);
         }
 
         // Ecrit dans la string passée en paramètre, le bool verrouille les chiffres
@@ -64,6 +67,19 @@ namespace CrystalGateEditor
                 }
             }
 
+            // Delete
+            if (keyboardState.IsKeyDown(Keys.Back) && oldKeyboardState.IsKeyUp(Keys.Back))
+            {
+                oldKeyboardState = keyboardState;
+                prevPressedKeys = pressedKeys;
+                string text2 = "";
+                for (int i = 0; i < text.Length - 2; i++)
+                    text2 += text[i];
+
+                text = text2;
+            }
+
+            // Enter
             if (keyboardState.IsKeyDown(Keys.Enter) && oldKeyboardState.IsKeyUp(Keys.Enter))
             {
                 oldKeyboardState = keyboardState;

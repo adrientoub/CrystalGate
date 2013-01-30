@@ -26,7 +26,7 @@ namespace CrystalGateEditor
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
-            //graphics.IsFullScreen = true;
+            graphics.IsFullScreen = true;
             this.IsMouseVisible = true;
             int width = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width;
             int height = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height;
@@ -54,7 +54,7 @@ namespace CrystalGateEditor
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-            spriteBatch.Begin();
+            spriteBatch.Begin(0, null, null, null, null, null, user.camera.CameraMatrix);
             ui.Draw(spriteBatch);
             spriteBatch.End();
             base.Draw(gameTime);

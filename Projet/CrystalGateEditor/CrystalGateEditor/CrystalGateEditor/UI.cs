@@ -108,17 +108,19 @@ namespace CrystalGateEditor
             // Dessiner
             if (mode == Mode.Draw)
             {
+                CameraCheck();
+
                 if (user.mouse.LeftButton == ButtonState.Pressed)
                 {
                     if (user.mouse.X < width - Palette.Width && ShowPalette || !ShowPalette)
                     {
-                        if (user.mouse.X < Map.GetLength(0) * 32 && user.mouse.Y < Map.GetLength(1) * 32)
+                        if (user.mouse.X + user.camera.Position.X < Map.GetLength(0) * 32 && user.mouse.Y + user.camera.Position.Y < Map.GetLength(1) * 32)
                         {
-                            int x = user.mouse.X / 32;
-                            int y = user.mouse.Y / 32;
-                            if (Selection.X != Map[x, y].X && Selection.Y != Map[x, y].Y)
+                            int x = (int)(user.camera.Position.X + user.mouse.X) / 32;
+                            int y = (int)(user.camera.Position.Y + user.mouse.Y) / 32;
+                            if (Selection.X != Map[x, y].X || Selection.Y != Map[x, y].Y)
                             {
-                                stack.Push(new Vector4(x, y, Selection.X, Selection.Y));
+                                stack.Push(new Vector4(x, y, Map[x, y].X, Map[x, y].Y));
                                 Map[x, y] = Selection;
                             }
                         }
@@ -133,10 +135,13 @@ namespace CrystalGateEditor
                         ShowPalette = false;
                     
                 // Selection tile
-                if (ShowPalette && user.mouse.LeftButton == ButtonState.Pressed && user.mouse.X >= PalettePosition.X && user.mouse.Y <= Palette.Height)
+                if (ShowPalette && user.mouse.LeftButton == ButtonState.Pressed && user.mouse.X + user.camera.Position.X >= PalettePosition.X && user.mouse.Y <= Palette.Height)
                 {
-                    int x = (int)(user.mouse.X - PalettePosition.X) / 32;
-                    int y = (int)(user.mouse.Y - PalettePosition.Y) / 32;
+                    int varx = (int)(user.mouse.X + user.camera.Position.X - PalettePosition.X);
+                    int vary = (int)(user.mouse.Y + user.camera.Position.Y - PalettePosition.Y);
+
+                    int x = (int)(varx - varx / 32) / 32;
+                    int y = (int)(vary - vary / 32) / 32;
                     Selection = new Vector2(x, y);
                 }
                 // ShowHelp
@@ -324,6 +329,38 @@ namespace CrystalGateEditor
             thread = threadActuel;
         }
 
+        public void CameraCheck()
+        {
+            int width = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width;
+            int height = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height;
+            int vitesse = 10;
+            Vector2 vec = new Vector2();
+
+            // Si on déplace la caméra hors des bords de l'écran
+            if (user.mouse.X >= width - 1)
+                vec.X += vitesse;
+            if (user.mouse.X <= 1)
+                vec.X -= vitesse;
+            if (user.mouse.Y >= height - 15)
+                vec.Y += vitesse;
+            if (user.mouse.Y <= 1)
+                vec.Y -= vitesse;
+
+            // Si on sort de la map
+            if (user.camera.Position.X >= Map.GetLength(0) * 32 - width)
+                user.camera.Position = new Vector2(Map.GetLength(0) * 32 - width, user.camera.Position.Y);
+            if (user.camera.Position.X <= 0)
+                user.camera.Position = new Vector2(0, user.camera.Position.Y);
+            if (user.camera.Position.Y <= 0)
+                user.camera.Position = new Vector2(user.camera.Position.X, 0);
+            if (user.camera.Position.Y >= Map.GetLength(1) * 32 - height)
+                user.camera.Position = new Vector2(user.camera.Position.X, Map.GetLength(1) * 32 - height);
+
+            //Update de la position de la caméra et de l'interface
+            user.camera.Position = new Vector2(user.camera.Position.X, user.camera.Position.Y) + vec;
+            PalettePosition = new Vector2(user.camera.Position.X + width - Palette.Width, user.camera.Position.Y);
+        }
+
         public void Draw(SpriteBatch spriteBatch)
         {
             if (ShowMap)
@@ -335,13 +372,13 @@ namespace CrystalGateEditor
             if (ShowPalette)
                 spriteBatch.Draw(Palette, PalettePosition, Color.White);
             if (ShowCurrent)
-                spriteBatch.DrawString(SpriteFont, current, new Vector2(width / 2, height / 1.5f), Color.White, 0, SpriteFont.MeasureString(current) / 2, 1, SpriteEffects.None, 0);
+                spriteBatch.DrawString(SpriteFont, current, new Vector2(user.camera.Position.X + width / 2, user.camera.Position.Y + height / 1.5f), Color.White, 0, SpriteFont.MeasureString(current) / 2, 1, SpriteEffects.None, 0);
             if (ShowHelp)
             {
                 string str = "    Raccourcis claviers: \n Ctrl + S - Sauvegarde la carte \n P - Affiche la palette \n R - Redemarrer l'editeur \n ? - Affiche l'aide \n";
-                spriteBatch.DrawString(SpriteFont, str, new Vector2(width / 2, height / 2), Color.White, 0, SpriteFont.MeasureString(str) / 2, 1, SpriteEffects.None, 0);
+                spriteBatch.DrawString(SpriteFont, str, new Vector2(user.camera.Position.X + width / 2, user.camera.Position.Y + height / 2), Color.White, 0, SpriteFont.MeasureString(str) / 2, 1, SpriteEffects.None, 0);
             }
-            spriteBatch.DrawString(SpriteFont, MenuString, new Vector2(width / 2, height / 2), Color.White, 0, SpriteFont.MeasureString(MenuString) / 2, 1, SpriteEffects.None, 0);
+            spriteBatch.DrawString(SpriteFont, MenuString, new Vector2(user.camera.Position.X + width / 2, user.camera.Position.Y + height / 2), Color.White, 0, SpriteFont.MeasureString(MenuString) / 2, 1, SpriteEffects.None, 0);
         }
 
         public enum Mode

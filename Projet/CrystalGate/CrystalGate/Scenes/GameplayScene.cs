@@ -58,7 +58,7 @@ namespace CrystalGate.Scenes
             pack.map.Add(content.Load<Texture2D>("summertiles"));
 
             // Chargement de la carte
-            Outil.OuvrirMap("lol", ref map, pack);
+            Outil.OuvrirMap("sample1", ref map, pack);
 
             // Chargement sons
             Outil.LoadSounds(_effetsSonores, content);
