@@ -7,8 +7,10 @@ namespace CrystalGate
 {
     class GameText
     {
-        static string langue = "fr-FR";
-        const string defaultLanguage = "fr-FR";
+        static string langue = "french";
+        const string defaultLanguage = "default";
+
+        static List<string> autorisedLanguages = new List<string> { "french", "english" };
         
         private static List<string> nomDuTexte, texteCorrespondant;
         static bool isLoaded = false;
@@ -20,7 +22,10 @@ namespace CrystalGate
             System.IO.StreamReader file;
             try
             {
-                file = new System.IO.StreamReader(@"../../../Languages/" + langue + ".lng"); // Adresse à changer plus tard
+                if (autorisedLanguages.Contains(langue))
+                    file = new System.IO.StreamReader(@"../../../Languages/" + langue + ".lng"); // Adresse à changer plus tard
+                else
+                    file = new System.IO.StreamReader(@"../../../Languages/" + defaultLanguage + ".lng"); 
             }
             catch (Exception)
             {
