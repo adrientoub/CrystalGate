@@ -69,7 +69,7 @@ namespace CrystalGate
                 Mort = true;
                 effetUniteDeath.Play();
                 effetUniteAttaque.Dispose();
-                effets.Add(new Effet(Sprite, ConvertUnits.ToDisplayUnits(body.Position), PackAnimation.Mort(), new Vector2(370 / 5, 835 / 11), 1));
+                effets.Add(new Effet(Sprite, ConvertUnits.ToDisplayUnits(body.Position), packAnimation.Mort(), new Vector2(370 / 5, 835 / 11), 1));
                 Map.world.RemoveBody(body);
             }
         }
@@ -80,6 +80,7 @@ namespace CrystalGate
                 Suivre(unite);
             else
             {
+                ObjectifListe.Clear();
                 // Fais (au peu près) regarder l'unité vers l'unité attaqué
                 if (Animation.Count == 0)
                 {
@@ -106,7 +107,6 @@ namespace CrystalGate
                 {
                     body.LinearVelocity = Vector2.Zero;
                     LastAttack = (float)Map.gametime.TotalGameTime.TotalMilliseconds; // On met à jour "l'heure de la dernière attaque"
-                    // uniteSuivi = null;  Source de lags
 
                     effetUniteAttaque.Play();
 
@@ -120,23 +120,23 @@ namespace CrystalGate
 
                         if (unite.PositionTile.Y < this.PositionTile.Y)
                         {
-                            Animation = PackAnimation.AttaquerHaut();
+                            Animation = packAnimation.AttaquerHaut();
                             direction = Direction.Haut;
                         }
                         if (unite.PositionTile.X < this.PositionTile.X)
                         {
                             FlipH = true;
-                            Animation = PackAnimation.AttaquerDroite();
+                            Animation = packAnimation.AttaquerDroite();
                             direction = Direction.Gauche;
                         }
                         if (unite.PositionTile.Y >= this.PositionTile.Y)
                         {
-                            Animation = PackAnimation.AttaquerBas();
+                            Animation = packAnimation.AttaquerBas();
                             direction = Direction.Bas;
                         }
                         if (unite.PositionTile.Y >= this.PositionTile.Y)
                         {
-                            Animation = PackAnimation.AttaquerDroite();
+                            Animation = packAnimation.AttaquerDroite();
                             direction = Direction.Droite;
                         }
                     }
@@ -157,7 +157,7 @@ namespace CrystalGate
                     FlipH = true;
 
                     if (direction != Direction.HautGauche || Animation.Count == 0)
-                        Animation = PackAnimation.HautDroite();
+                        Animation = packAnimation.HautDroite();
                     direction = Direction.HautGauche;
                 }
                 // HAUT DROITE
@@ -167,7 +167,7 @@ namespace CrystalGate
                     FlipH = false;
 
                     if (direction != Direction.HautDroite || Animation.Count == 0)
-                        Animation = PackAnimation.HautDroite();
+                        Animation = packAnimation.HautDroite();
                     direction = Direction.HautDroite;
                 }
                 // BAS DROITE
@@ -177,7 +177,7 @@ namespace CrystalGate
                     FlipH = false;
 
                     if (direction != Direction.BasDroite || Animation.Count == 0)
-                        Animation = PackAnimation.BasDroite();
+                        Animation = packAnimation.BasDroite();
                     direction = Direction.BasDroite;
                 }
                 // BAS GAUCHE
@@ -187,7 +187,7 @@ namespace CrystalGate
                     FlipH = true;
 
                     if (direction != Direction.BasGauche || Animation.Count == 0)
-                        Animation = PackAnimation.BasDroite();
+                        Animation = packAnimation.BasDroite();
                     direction = Direction.BasGauche;
                 }
                 // GAUCHE
@@ -197,7 +197,7 @@ namespace CrystalGate
                     FlipH = true;
 
                     if (direction != Direction.Gauche || Animation.Count == 0)
-                        Animation = PackAnimation.Droite();
+                        Animation = packAnimation.Droite();
                     direction = Direction.Gauche;
                 }
                 // DROITE
@@ -207,7 +207,7 @@ namespace CrystalGate
                     FlipH = false;
 
                     if (direction != Direction.Droite || Animation.Count == 0)
-                        Animation = PackAnimation.Droite();
+                        Animation = packAnimation.Droite();
                     direction = Direction.Droite;
                 }
                 // HAUT
@@ -217,7 +217,7 @@ namespace CrystalGate
                     FlipH = false;
 
                     if (direction != Direction.Haut || Animation.Count == 0)
-                        Animation = PackAnimation.Haut();
+                        Animation = packAnimation.Haut();
                     direction = Direction.Haut;
                 }
                 // BAS
@@ -227,7 +227,7 @@ namespace CrystalGate
                     FlipH = false;
 
                     if (direction != Direction.Bas || Animation.Count == 0)
-                        Animation = PackAnimation.Bas();
+                        Animation = packAnimation.Bas();
                     direction = Direction.Bas;
                 }
                 else

@@ -89,25 +89,37 @@ namespace CrystalGate
                 voisins.Add(noeud);
             }
                 // TOP LEFT
-                if (current.Position.Y - 1 >= 0 && current.Position.X - 1 >= 0 && map[(int)current.Position.X - 1, (int)current.Position.Y - 1].IsWalkable)
+            if (current.Position.Y - 1 >= 0 && current.Position.X - 1 >= 0 
+                && map[(int)current.Position.X - 1, (int)current.Position.Y - 1].IsWalkable 
+                && map[(int)current.Position.X - 1, (int)current.Position.Y].IsWalkable
+                && map[(int)current.Position.X, (int)current.Position.Y - 1].IsWalkable)
                 {
                     noeud = map[(int)current.Position.X - 1, (int)current.Position.Y - 1];
                     voisins.Add(noeud);
                 }
                 // TOP RIGHT
-                if (current.Position.Y - 1 >= 0 && current.Position.X + 1 < map.GetLength(0) && map[(int)current.Position.X + 1, (int)current.Position.Y - 1].IsWalkable)
+                if (current.Position.Y - 1 >= 0 && current.Position.X + 1 < map.GetLength(0) 
+                    && map[(int)current.Position.X + 1, (int)current.Position.Y - 1].IsWalkable
+                    && map[(int)current.Position.X, (int)current.Position.Y - 1].IsWalkable
+                    && map[(int)current.Position.X + 1, (int)current.Position.Y].IsWalkable)
                 {
                     noeud = map[(int)current.Position.X + 1, (int)current.Position.Y - 1];
                     voisins.Add(noeud);
                 }
                 // BOT LEFT
-                if (current.Position.X - 1 >= 0 && current.Position.Y + 1 < map.GetLength(1) && map[(int)current.Position.X - 1, (int)current.Position.Y + 1].IsWalkable)
+                if (current.Position.X - 1 >= 0 && current.Position.Y + 1 < map.GetLength(1) 
+                    && map[(int)current.Position.X - 1, (int)current.Position.Y + 1].IsWalkable
+                    && map[(int)current.Position.X - 1, (int)current.Position.Y].IsWalkable
+                    && map[(int)current.Position.X, (int)current.Position.Y + 1].IsWalkable)
                 {
                     noeud = map[(int)current.Position.X - 1, (int)current.Position.Y + 1];
                     voisins.Add(noeud);
                 }
                 // BOT RIGHT
-                if (current.Position.X + 1 < map.GetLength(0) && current.Position.Y + 1 < map.GetLength(1) && map[(int)current.Position.X + 1, (int)current.Position.Y + 1].IsWalkable)
+                if (current.Position.X + 1 < map.GetLength(0) && current.Position.Y + 1 < map.GetLength(1) 
+                    && map[(int)current.Position.X + 1, (int)current.Position.Y + 1].IsWalkable
+                    && map[(int)current.Position.X, (int)current.Position.Y + 1].IsWalkable
+                    && map[(int)current.Position.X + 1, (int)current.Position.Y].IsWalkable)
                 {
                     noeud = map[(int)current.Position.X + 1, (int)current.Position.Y + 1];
                     voisins.Add(noeud);

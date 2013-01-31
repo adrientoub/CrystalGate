@@ -51,7 +51,7 @@ namespace CrystalGate.Scenes
 
             // Pack de texture (Contient toutes les sprites des unites et des sorts)
             pack = new PackTexture(content.Load<Texture2D>("blank"));
-            pack.unites = new List<Texture2D> { content.Load<Texture2D>("knight"), content.Load<Texture2D>("grunt") };
+            pack.unites = new List<Texture2D> { content.Load<Texture2D>("knight"), content.Load<Texture2D>("grunt") , content.Load<Texture2D>("archer")};
             pack.sorts.Add(content.Load<Texture2D>("Spells/Explosion"));
             pack.sorts.Add(content.Load<Texture2D>("Spells/Soin"));
             pack.boutons = new List<Texture2D> { content.Load<Texture2D>("Boutons/Explosion"), content.Load<Texture2D>("Boutons/Soin") };
@@ -64,7 +64,7 @@ namespace CrystalGate.Scenes
             Outil.LoadSounds(_effetsSonores, content);
 
             // Ajout joueurs
-            joueurs.Add(new Joueur(new Grunt(new Vector2(3, 7), map, pack)));
+            joueurs.Add(new Joueur(new Archer(new Vector2(3, 7), map, pack)));
             unites.Add(joueurs[0].champion);
 
             // Ajout Interface
@@ -76,7 +76,7 @@ namespace CrystalGate.Scenes
                 unites[i].id = i;
 
             // La vague
-            //waves.Add(new Wave(new List<Vector2>{new Vector2(8, 7), new Vector2(8, 8)}, new List<Vector2> { new Vector2(22,0), new Vector2(39,7), new Vector2(23,17) }, new Cavalier(Vector2.Zero, map, pack), 3, joueurs[0].champion));
+            waves.Add(new Wave(new List<Vector2>{new Vector2(0, 7), new Vector2(8, 8)}, new List<Vector2> { new Vector2(22,0), new Vector2(39,7), new Vector2(23,17) }, new Cavalier(Vector2.Zero, map, pack), 3, joueurs[0].champion));
             //waves.Add(new Wave(new List<Vector2> { new Vector2(40, 7), new Vector2(40, 8) }, new List<Vector2> { new Vector2(54, 0), new Vector2(68, 7), new Vector2(54, 17) }, new Cavalier(Vector2.Zero, map, pack), 3, joueurs[0].champion));
             //waves.Add(new Wave(new List<Vector2> { new Vector2(53, 17), new Vector2(54, 17) }, new List<Vector2> { new Vector2(68, 25), new Vector2(54, 34) }, new Cavalier(Vector2.Zero, map, pack), 3, joueurs[0].champion));
         }

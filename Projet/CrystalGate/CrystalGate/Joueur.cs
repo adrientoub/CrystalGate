@@ -31,7 +31,7 @@ namespace CrystalGate
             champion.Drawlife = true;
             champion.isAChamp = true;
 
-            camera = new Camera2D(Vector2.One);
+            camera = new Camera2D(Vector2.Zero);
         }
 
         public void Update(List<Unite> unites)

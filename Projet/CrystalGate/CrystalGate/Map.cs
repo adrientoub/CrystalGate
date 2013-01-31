@@ -87,7 +87,7 @@ namespace CrystalGate
                 {
                         int x = (int)TailleTiles.X * (int)Cellules[i, j].X;
                         int y = (int)TailleTiles.Y * (int)Cellules[i, j].Y;
-                        spriteBatch.Draw(Sprite, new Vector2(i * (TailleTiles.X - 1), j * (TailleTiles.Y - 1)), new Rectangle(x + (x / 32), y + (y / 32), 32, 32), Color.White);
+                        spriteBatch.Draw(Sprite, new Vector2(i * (TailleTiles.X), j * (TailleTiles.Y)), new Rectangle(x + (x / 32), y + (y / 32), 32, 32), Color.White);
                 }
         }
 

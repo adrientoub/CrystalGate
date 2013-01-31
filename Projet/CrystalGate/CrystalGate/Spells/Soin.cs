@@ -14,8 +14,8 @@ namespace CrystalGate
         {
             Cooldown = 1;
             Ticks = 1;
-            Animation = PackAnimation.Soin();
-            AnimationReset = PackAnimation.Soin();
+            Animation = unite.packAnimation.Soin();
+            AnimationReset = unite.packAnimation.Soin();
             Tiles = new Vector2(180 / 5, 35);
 
             NeedUnPoint = false;
@@ -30,11 +30,16 @@ namespace CrystalGate
             this.Point = Point;
             if (TickCurrent < Ticks)
             {
-                int ammount = 10;
-                if (unite.Vie + ammount <= unite.VieMax)
+                if (unite.Vie != unite.VieMax)
                 {
-                    unite.Vie += ammount;
-                    TickCurrent++;
+                    int ammount = 10;
+                    if (unite.Vie + ammount <= unite.VieMax)
+                    {
+                        unite.Vie += ammount;
+                        TickCurrent++;
+                    }
+                    else
+                        unite.Vie = unite.VieMax;
                 }
             }
         }

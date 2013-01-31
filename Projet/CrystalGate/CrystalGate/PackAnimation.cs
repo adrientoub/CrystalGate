@@ -15,10 +15,11 @@ namespace CrystalGate
     {
         /* Le packAnimation est un pack qui regroupe les differentes positions de la sprite
            à Draw pour afficher l'animation correspondante */
+        public bool isArcher;
 
         // STAND
 
-        public static List<Vector2> StandHaut()
+        public List<Vector2> StandHaut()
         {
             List<Vector2> liste = new List<Vector2> { };
                 liste.Add(new Vector2(0, 0));
@@ -26,7 +27,7 @@ namespace CrystalGate
             return liste;
         }
 
-        public static List<Vector2> StandBas()
+        public List<Vector2> StandBas()
         {
             List<Vector2> liste = new List<Vector2> { };
             liste.Add(new Vector2(4, 0));
@@ -34,7 +35,7 @@ namespace CrystalGate
             return liste;
         }
 
-        public static List<Vector2> StandGauche()
+        public List<Vector2> StandGauche()
         {
             List<Vector2> liste = new List<Vector2> { };
             liste.Add(new Vector2(2, 0));
@@ -42,7 +43,7 @@ namespace CrystalGate
             return liste;
         }
 
-        public static List<Vector2> StandDroite()
+        public List<Vector2> StandDroite()
         {
             List<Vector2> liste = new List<Vector2> { };
             liste.Add(new Vector2(2, 0));
@@ -53,7 +54,7 @@ namespace CrystalGate
 
         // MOUVEMENTS
 
-        public static List<Vector2> Haut()
+        public List<Vector2> Haut()
         {
             List<Vector2> liste = new List<Vector2>{};
             for (int j = 0; j <= 4; j++)
@@ -62,7 +63,7 @@ namespace CrystalGate
             return liste;
         }
 
-        public static List<Vector2> Bas()
+        public List<Vector2> Bas()
         {
             List<Vector2> liste = new List<Vector2> { };
             for (int j = 0; j <= 4; j++)
@@ -71,7 +72,7 @@ namespace CrystalGate
             return liste;
         }
 
-        public static List<Vector2> Droite()
+        public List<Vector2> Droite()
         {
             List<Vector2> liste = new List<Vector2> { };
             for (int j = 0; j <= 4; j++)
@@ -80,7 +81,7 @@ namespace CrystalGate
             return liste;
         }
 
-        public static List<Vector2> HautDroite()
+        public List<Vector2> HautDroite()
         {
             List<Vector2> liste = new List<Vector2> { };
             for (int j = 0; j <= 4; j++)
@@ -89,7 +90,7 @@ namespace CrystalGate
             return liste;
         }
 
-        public static List<Vector2> BasDroite()
+        public List<Vector2> BasDroite()
         {
             List<Vector2> liste = new List<Vector2> { };
             for (int j = 0; j <= 4; j++)
@@ -100,28 +101,29 @@ namespace CrystalGate
 
         // ATTAQUER
 
-        public static List<Vector2> AttaquerHaut()
+        // METTRE 7 POUR ARCHER
+        public List<Vector2> AttaquerHaut()
         {
             List<Vector2> liste = new List<Vector2> { };
-            for (int j = 5; j <= 8; j++)
+            for (int j = 5; j <= (isArcher ? 7 : 8) ; j++)
                 liste.Add(new Vector2(0, j));
 
             return liste;
         }
 
-        public static List<Vector2> AttaquerBas()
+        public List<Vector2> AttaquerBas()
         {
             List<Vector2> liste = new List<Vector2> { };
-            for (int j = 5; j <= 8; j++)
+            for (int j = 5; j <= (isArcher ? 7 : 8); j++)
                 liste.Add(new Vector2(4, j));
 
             return liste;
         }
 
-        public static List<Vector2> AttaquerDroite()
+        public List<Vector2> AttaquerDroite()
         {
             List<Vector2> liste = new List<Vector2> { };
-            for (int j = 5; j <= 8; j++)
+            for (int j = 5; j <= (isArcher ? 7 : 8); j++)
                 liste.Add(new Vector2(2, j));
 
             return liste;
@@ -129,7 +131,7 @@ namespace CrystalGate
 
         // MORT
 
-        public static List<Vector2> Mort()
+        public List<Vector2> Mort()
         {
             List<Vector2> liste = new List<Vector2> { };
                 liste.Add(new Vector2(0, 10));
@@ -137,7 +139,7 @@ namespace CrystalGate
             return liste;
         }
 
-        public static List<Vector2> Explosion()
+        public List<Vector2> Explosion()
         {
             List<Vector2> liste = new List<Vector2> { };
             for (int j = 0; j < 5; j++)
@@ -147,7 +149,7 @@ namespace CrystalGate
             return liste;
         }
 
-        public static List<Vector2> Soin()
+        public List<Vector2> Soin()
         {
             List<Vector2> liste = new List<Vector2> { };
                 for (int i = 0; i < 6; i++)
