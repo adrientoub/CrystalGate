@@ -51,7 +51,7 @@ namespace CrystalGate.Scenes
 
             // Pack de texture (Contient toutes les sprites des unites et des sorts)
             pack = new PackTexture(content.Load<Texture2D>("blank"));
-            pack.unites = new List<Texture2D> { content.Load<Texture2D>("knight"), content.Load<Texture2D>("grunt") , content.Load<Texture2D>("archer")};
+            pack.unites = new List<Texture2D> { content.Load<Texture2D>("knight"), content.Load<Texture2D>("grunt"), content.Load<Texture2D>("archer"), content.Load<Texture2D>("troll") };
             pack.sorts.Add(content.Load<Texture2D>("Spells/Explosion"));
             pack.sorts.Add(content.Load<Texture2D>("Spells/Soin"));
             pack.boutons = new List<Texture2D> { content.Load<Texture2D>("Boutons/Explosion"), content.Load<Texture2D>("Boutons/Soin") };
@@ -64,7 +64,7 @@ namespace CrystalGate.Scenes
             Outil.LoadSounds(_effetsSonores, content);
 
             // Ajout joueurs
-            joueurs.Add(new Joueur(new Archer(new Vector2(3, 7), map, pack)));
+            joueurs.Add(new Joueur(new Troll(new Vector2(3, 7), map, pack)));
             unites.Add(joueurs[0].champion);
 
             // Ajout Interface
