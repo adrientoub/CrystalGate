@@ -64,7 +64,7 @@ namespace CrystalGate.Scenes
             Outil.LoadSounds(_effetsSonores, content);
 
             // Ajout joueurs
-            joueurs.Add(new Joueur(new Troll(new Vector2(3, 7), map, pack)));
+            joueurs.Add(new Joueur(new Archer(new Vector2(3, 7), map, pack)));
             unites.Add(joueurs[0].champion);
 
             // Ajout Interface
@@ -135,7 +135,7 @@ namespace CrystalGate.Scenes
             // DRAW INTERFACE
             joueurs[0].Interface.Draw();
             // DRAW STRINGS
-            /* */
+            /**/
             spriteBatch.End();
 
             if (TransitionPosition > 0 || pauseAlpha > 0)

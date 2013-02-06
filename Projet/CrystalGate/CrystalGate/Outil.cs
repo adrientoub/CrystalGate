@@ -34,6 +34,7 @@ namespace CrystalGate
         {
             return (float)Math.Sqrt(Math.Pow(ConvertUnits.ToDisplayUnits(unite1.body.Position - unite2.body.Position).X, 2) + Math.Pow(ConvertUnits.ToDisplayUnits(unite1.body.Position - unite2.body.Position).Y, 2));
         }
+
         public static float DistancePoints(Vector2 point1, Vector2 point2)
         {
             return (float)Math.Sqrt( Math.Pow(32 * (point1.X - point2.X), 2) + Math.Pow(32 * (point1.Y - point2.Y), 2));
@@ -134,7 +135,7 @@ namespace CrystalGate
             return pT;
         }
 
-        public static void LoadSprites(ref PackTexture pack, ContentManager content)
+        /*public static void LoadSprites(ref PackTexture pack, ContentManager content)
         {
             pack = new PackTexture(content.Load<Texture2D>("blank"));
             pack.unites = new List<Texture2D> { content.Load<Texture2D>("knight"), content.Load<Texture2D>("grunt") };
@@ -142,7 +143,7 @@ namespace CrystalGate
             pack.sorts.Add(content.Load<Texture2D>("Spells/Soin"));
             pack.boutons = new List<Texture2D> { content.Load<Texture2D>("Boutons/Explosion"), content.Load<Texture2D>("Boutons/Soin") };
             pack.map.Add(content.Load<Texture2D>("summertiles"));
-        }
+        }*/
 
         public static void LoadSounds(List<SoundEffect> listeSound,  ContentManager content)
         {
@@ -157,6 +158,18 @@ namespace CrystalGate
             listeSound.Add(content.Load<SoundEffect>("Sons/ArcherAttack"));
 
             EffetSonore.InitEffects();
+        }
+
+        enum Direction
+        {
+            Haut,
+            Bas,
+            Gauche,
+            Droite,
+            HautDroite,
+            BasDroite,
+            HautGauche,
+            BasGauche
         }
     }
 }

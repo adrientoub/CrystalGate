@@ -61,6 +61,10 @@ namespace CrystalGate
                         unite.Map.unites.Add(new Cavalier(v, unite.Map, unite.packTexture));
                     if (unite is Grunt)
                         unite.Map.unites.Add(new Grunt(v, unite.Map, unite.packTexture));
+                    if (unite is Archer)
+                        unite.Map.unites.Add(new Archer(v, unite.Map, unite.packTexture));
+                    if (unite is Troll)
+                        unite.Map.unites.Add(new Grunt(v, unite.Map, unite.packTexture));
 
                     unite.Map.unites[unite.Map.unites.Count - 1].uniteAttacked = champ;
                     unite.Map.unites[unite.Map.unites.Count - 1].idWave = id;

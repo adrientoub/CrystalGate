@@ -81,63 +81,63 @@ namespace CrystalGate
             else
             {
                 ObjectifListe.Clear();
-                // Fais (au peu près) regarder l'unité vers l'unité attaqué
+                body.LinearVelocity = Vector2.Zero;
+                // Fait regarder l'unité vers l'unité attaqué
                 if (Animation.Count == 0)
                 {
                     AnimationCurrent = AnimationLimite;
                     FlipH = false;
                     float angle = Outil.AngleUnites(this, unite);
 
-                    if (unite.PositionTile.Y < this.PositionTile.Y)
+                    if (angle >= Math.PI / 4 && angle <= 3 * Math.PI / 4)
                         direction = Direction.Haut;
-
-                    if (unite.PositionTile.X < this.PositionTile.X)
-                    {
-                        FlipH = true;
-                        direction = Direction.Gauche;
-                    }
-                    if (unite.PositionTile.Y >= this.PositionTile.Y)
+                    if (angle >= - 3 * Math.PI / 4 && angle <= - Math.PI / 4)
                         direction = Direction.Bas;
-
-                    if (unite.PositionTile.Y >= this.PositionTile.Y)
+                    if (angle >= -Math.PI / 4 && angle <= Math.PI / 4)
+                    {
+                        direction = Direction.Gauche;
+                        FlipH = true;
+                    }
+                    if (angle >= 3 * Math.PI / 4 || angle <= Math.PI / 4)
                         direction = Direction.Droite;
+
                 }
 
                 if (Map.gametime.TotalGameTime.TotalMilliseconds - LastAttack > Vitesse_Attaque * 1000) // Si le cooldown est fini
                 {
-                    body.LinearVelocity = Vector2.Zero;
                     LastAttack = (float)Map.gametime.TotalGameTime.TotalMilliseconds; // On met à jour "l'heure de la dernière attaque"
 
                     effetUniteAttaque.Play();
 
                     unite.Vie -= Dommages - unite.Defense;
-
+                    
+                    // Fait regarder l'unité vers l'unité attaqué et l'anime
                     if (Animation.Count == 0)
                     {
                         AnimationCurrent = AnimationLimite;
                         FlipH = false;
                         float angle = Outil.AngleUnites(this, unite);
 
-                        if (unite.PositionTile.Y < this.PositionTile.Y)
+                        if (angle >= Math.PI / 4 && angle <= 3 * Math.PI / 4)
                         {
-                            Animation = packAnimation.AttaquerHaut();
                             direction = Direction.Haut;
+                            Animation = packAnimation.AttaquerHaut();
                         }
-                        if (unite.PositionTile.X < this.PositionTile.X)
+                        if (angle >= -3 * Math.PI / 4 && angle <= -Math.PI / 4)
                         {
+                            direction = Direction.Bas;
+                            Animation = packAnimation.AttaquerBas();
+                        }
+                        if (angle >= -Math.PI / 4 && angle <= Math.PI / 4)
+                        {
+                            direction = Direction.Gauche;
                             FlipH = true;
                             Animation = packAnimation.AttaquerDroite();
-                            direction = Direction.Gauche;
                         }
-                        if (unite.PositionTile.Y >= this.PositionTile.Y)
+                        if (angle >= 3 * Math.PI / 4 || angle <= Math.PI / 4)
                         {
-                            Animation = packAnimation.AttaquerBas();
-                            direction = Direction.Bas;
-                        }
-                        if (unite.PositionTile.Y >= this.PositionTile.Y)
-                        {
-                            Animation = packAnimation.AttaquerDroite();
                             direction = Direction.Droite;
+                            Animation = packAnimation.AttaquerDroite();
                         }
                     }
                 }

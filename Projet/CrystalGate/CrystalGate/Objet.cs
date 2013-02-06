@@ -68,20 +68,20 @@ namespace CrystalGate
 
         bool body_OnCollision(Fixture fixtureA, Fixture fixtureB, FarseerPhysics.Dynamics.Contacts.Contact contact)
         {
-                Unite objet1 = (Unite)(fixtureA.Body.UserData);
+            Unite objet1 = (Unite)(fixtureA.Body.UserData);
 
-                if (objet1.isAChamp)
+            if (objet1.isAChamp)
+            {
+                if (objet1.ObjectifListe.Count > 0)
                 {
-                    if (objet1.ObjectifListe.Count > 0)
-                    {
-                        Vector2 position = new Vector2((int)(ConvertUnits.ToDisplayUnits(objet1.body.Position.X) / 32), (int)(ConvertUnits.ToDisplayUnits(objet1.body.Position.Y) / 32));
-                        List<Noeud> chemin = PathFinding.TrouverChemin(position, objet1.ObjectifListe[objet1.ObjectifListe.Count - 1].Position, objet1.Map.Taille, Map.unites, Map.unitesStatic, false);
-                        if (chemin != null)
-                            objet1.ObjectifListe = chemin;
-                    }
+                    Vector2 position = new Vector2((int)(ConvertUnits.ToDisplayUnits(objet1.body.Position.X) / 32), (int)(ConvertUnits.ToDisplayUnits(objet1.body.Position.Y) / 32));
+                    List<Noeud> chemin = PathFinding.TrouverChemin(position, objet1.ObjectifListe[objet1.ObjectifListe.Count - 1].Position, objet1.Map.Taille, Map.unites, Map.unitesStatic, false);
+                    if (chemin != null)
+                        objet1.ObjectifListe = chemin;
                 }
-            
-                return true;
+            }
+
+            return true;
         }
 
         public virtual void Update(List<Unite> unitsOnMap, List<Effet> effets)
