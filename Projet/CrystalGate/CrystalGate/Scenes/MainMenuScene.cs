@@ -31,7 +31,7 @@ namespace CrystalGate.Scenes
 
             // Ajout des options du menu
             MenuItems.Add(playGameMenuItem);
-            //MenuItems.Add(optionsMenuItem);
+            MenuItems.Add(optionsMenuItem);
             MenuItems.Add(exitMenuItem);
         }
 

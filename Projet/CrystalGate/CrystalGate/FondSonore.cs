@@ -20,13 +20,14 @@ namespace CrystalGate
         static int idNext = 1;
         static ContentManager contentRef;
         static int _playingNow = 0; // prend les valeurs 1 et 0
+        public static float volume = 0.5f;
         
 
         public static void Play() 
         {
             if (_isLoaded)
             {
-                MediaPlayer.Volume = 0.5f; // Mets le volume à fond (nécessaire pour éviter un bug)
+                MediaPlayer.Volume = volume; // Mets le volume à fond (nécessaire pour éviter un bug)
                 MediaPlayer.Play(_musiqueDeFond[_playingNow]);
                 _finDeLaMusique = _musiqueDeFond[_playingNow].Duration;
             }

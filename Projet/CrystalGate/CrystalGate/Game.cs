@@ -12,13 +12,14 @@ namespace CrystalGate
     /// </summary>
     public class CrystalGateGame : Game
     {
+        public static GraphicsDeviceManager graphics;
         public CrystalGateGame()
         {
             Content.RootDirectory = "Content";
 
             // Initialisation du GraphicsDeviceManager
             // pour obtenir une fenêtre de dimensions 800*480
-            new GraphicsDeviceManager(this) { PreferredBackBufferWidth = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width, PreferredBackBufferHeight = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height , /*IsFullScreen = true*/};
+            graphics = new GraphicsDeviceManager(this) { PreferredBackBufferWidth = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width, PreferredBackBufferHeight = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height , /*IsFullScreen = true*/};
             
             // Création du gestionnaire de scènes
             var sceneMgr = new SceneManager(this);

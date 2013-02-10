@@ -19,16 +19,13 @@ namespace CrystalGate.Scenes
         {
             English,
             Francais,
-            Espanol,
-            Italiano,
-            Nihongo,
         }
 
         private static Language _currentLanguage = Language.Francais;
-        private static readonly string[] Resolutions = { "480x800", "800x600", "1024x768", "1280x1024", "1680x1050" };
+        private static readonly string[] Resolutions = { "480x800", "800x600", "1024x768", "1280x1024", "1680x1050", "1920x1080" };
         private static int _currentResolution;
         private static bool _fullscreen;
-        private static int _volume = 42;
+        private static int _volume = 50;
 
         #endregion
 
@@ -57,7 +54,7 @@ namespace CrystalGate.Scenes
             
             // Ajout des options au menu
             MenuItems.Add(_languageMenuItem);
-            MenuItems.Add(_resolutionMenuItem);
+            //MenuItems.Add(_resolutionMenuItem);
             MenuItems.Add(_fullscreenMenuItem);
             MenuItems.Add(_volumeMenuItem);
             MenuItems.Add(back);
@@ -82,8 +79,18 @@ namespace CrystalGate.Scenes
         {
             _currentLanguage++;
 
-            if (_currentLanguage > Language.Nihongo)
+            if (_currentLanguage > Language.Francais)
                 _currentLanguage = 0;
+
+            if (_currentLanguage == Language.Francais)
+            {
+                GameText.langue = "french";
+            }
+            else if (_currentLanguage == Language.English)
+            {
+                GameText.langue = "english";
+            }
+            GameText.initGameText();
 
             SetMenuItemText();
         }
@@ -98,11 +105,13 @@ namespace CrystalGate.Scenes
         {
             _fullscreen = !_fullscreen;
             SetMenuItemText();
+            CrystalGate.CrystalGateGame.graphics.ToggleFullScreen();
         }
 
         private void VolumeMenuItemSelected(object sender, EventArgs e)
         {
             _volume++;
+            FondSonore.volume = _volume * 0.01f;
             SetMenuItemText();
         }
 

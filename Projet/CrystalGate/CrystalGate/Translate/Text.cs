@@ -11,17 +11,17 @@ namespace CrystalGate
 
         public Text(string nameText)
         {
-            text = GameText.getText(nameText);
+            text = nameText;
         }
 
         public string get()
         {
-            return text;
+            return GameText.getText(text);
         }
 
         public override string ToString()
         {
-            return text;
+            return GameText.getText(text);
         }
     }
 }

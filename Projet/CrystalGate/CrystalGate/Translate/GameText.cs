@@ -7,7 +7,7 @@ namespace CrystalGate
 {
     class GameText
     {
-        static string langue = "french";
+        public static string langue = "french";
         const string defaultLanguage = "default";
 
         static List<string> autorisedLanguages = new List<string> { "french", "english" };
