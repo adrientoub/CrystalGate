@@ -17,14 +17,14 @@ namespace CrystalGate.Scenes
         #region Initialization
 
         public PauseMenuScene(SceneManager sceneMgr, AbstractGameScene parent)
-            : base(sceneMgr, "Pause")
+            : base(sceneMgr, new Text("Pause").get())
         {
             _parent = parent;
             FondSonore.Pause();
 
             // Création des options
-            var resumeGameMenuItem = new MenuItem("Revenir au jeu");
-            var quitGameMenuItem = new MenuItem("Quitter le jeu");
+            var resumeGameMenuItem = new MenuItem(new Text("BackToGame").get());
+            var quitGameMenuItem = new MenuItem(new Text("QuitGame").get());
             
             // Gestion des évènements
             resumeGameMenuItem.Selected += OnCancel;
@@ -41,7 +41,7 @@ namespace CrystalGate.Scenes
 
         private void QuitGameMenuItemSelected(object sender, EventArgs e)
         {
-            const string message = "Etes vous sur de vouloir quitter ce jeu?\n";
+            string message = new Text("QuitLevel").get() + "\n";
             var confirmQuitMessageBox = new MessageBoxScene(SceneManager, message, true);
 
             confirmQuitMessageBox.Accepted += ConfirmQuitMessageBoxAccepted;

@@ -18,5 +18,10 @@ namespace CrystalGate
         {
             return text;
         }
+
+        public override string ToString()
+        {
+            return text;
+        }
     }
 }

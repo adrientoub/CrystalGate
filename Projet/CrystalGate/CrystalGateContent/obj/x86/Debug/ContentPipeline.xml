@@ -161,16 +161,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\footman.xnb</Output>
-      <Time>2013-01-29T19:23:41.9065435+01:00</Time>
-    </Item>
-    <Item>
-      <Source>Sons\sword1.mp3</Source>
-      <Name>Sons\sword1</Name>
-      <Importer>Mp3Importer</Importer>
-      <Processor>SoundEffectProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Sons\sword1.xnb</Output>
-      <Time>2013-01-29T19:23:41.8805525+01:00</Time>
+      <Time>2013-02-03T12:01:24.6539527+01:00</Time>
     </Item>
     <Item>
       <Source>AviciiLevels.mp3</Source>
@@ -229,15 +220,6 @@
       <Time>2013-01-29T19:23:41.8785522+01:00</Time>
     </Item>
     <Item>
-      <Source>Sons\swords.wav</Source>
-      <Name>Sons\swords</Name>
-      <Importer>WavImporter</Importer>
-      <Processor>SoundEffectProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Sons\swords.xnb</Output>
-      <Time>2013-01-29T19:23:41.8845338+01:00</Time>
-    </Item>
-    <Item>
       <Source>Sons\Gruntquimeurt.WAV</Source>
       <Name>Sons\Gruntquimeurt</Name>
       <Importer>WavImporter</Importer>
@@ -254,6 +236,24 @@
       <Options>None</Options>
       <Output>C:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Sons\Cavalierquimeurt.xnb</Output>
       <Time>2013-01-29T19:23:41.7945219+01:00</Time>
+    </Item>
+    <Item>
+      <Source>troll.png</Source>
+      <Name>troll</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\troll.xnb</Output>
+      <Time>2013-02-03T12:01:24.785918+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Sons\ArcherAttack.mp3</Source>
+      <Name>Sons\ArcherAttack</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Sons\ArcherAttack.xnb</Output>
+      <Time>2013-02-03T12:01:24.6357626+01:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>

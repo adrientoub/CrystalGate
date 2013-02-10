@@ -74,7 +74,8 @@ namespace CrystalGate.Scenes
             {
                 SpriteBatch spriteBatch = SceneManager.SpriteBatch;
                 SpriteFont font = SceneManager.Font;
-                const string message = "Chargement...";
+                Text affichage = new Text("Loading");
+                string message = affichage.get();
                 Viewport viewport = SceneManager.GraphicsDevice.Viewport;
                 var viewportSize = new Vector2(viewport.Width, viewport.Height);
                 Vector2 textSize = font.MeasureString(message);

@@ -36,8 +36,8 @@ namespace CrystalGate.Scenes
         public MessageBoxScene(SceneManager sceneMgr, string message, bool includeUsageText)
             : base(sceneMgr)
         {
-            const string usageText = "\nBouton A, Espace, Entree = Ok" +
-                                     "\nBouton B, Echap = Annuler";
+            string usageText = "\n" + new Text("ButtonListOk").get() + " = " + new Text("Ok").get() +
+                               "\n" + new Text("ButtonListCancel").get() + " = " + new Text("Cancel").get();
 
             _message = message;
 
@@ -102,7 +102,7 @@ namespace CrystalGate.Scenes
 
             spriteBatch.Begin();
             spriteBatch.Draw(_gradientTexture, backgroundRectangle, color);
-            spriteBatch.DrawString(font, _message, textPosition, color, 0, Vector2.Zero, Scale,SpriteEffects.None, 0);
+            spriteBatch.DrawString(font, _message, textPosition, color, 0, Vector2.Zero, Scale, SpriteEffects.None, 0);
             spriteBatch.End();
         }
 

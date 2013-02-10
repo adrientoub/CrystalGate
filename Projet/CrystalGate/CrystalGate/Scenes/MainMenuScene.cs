@@ -52,7 +52,7 @@ namespace CrystalGate.Scenes
 
         protected override void OnCancel()
         {
-            const string message = "Etes vous sur de vouloir quitter le sample?\n";
+            string message = new Text("CloseGameMessage").get() + "\n";
             var confirmExitMessageBox = new MessageBoxScene(SceneManager, message, true);
 
             confirmExitMessageBox.Accepted += ConfirmExitMessageBoxAccepted;
