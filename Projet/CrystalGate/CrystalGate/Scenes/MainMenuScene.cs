@@ -19,10 +19,11 @@ namespace CrystalGate.Scenes
             GameText.initGameText();
             // Création des options
             Text launchGame = new Text("LaunchGame");
+            Text optionGame = new Text("OptionGame");
             Text quitGame = new Text("Quit");
-            var playGameMenuItem = new MenuItem(launchGame.get());
-            var optionsMenuItem = new MenuItem("Options");
-            var exitMenuItem = new MenuItem(quitGame.get());
+            var playGameMenuItem = new MenuItem(launchGame);
+            var optionsMenuItem = new MenuItem(optionGame);
+            var exitMenuItem = new MenuItem(quitGame);
 
             // Gestion des évènements
             playGameMenuItem.Selected += PlayGameMenuItemSelected;

@@ -5,23 +5,43 @@ using System.Text;
 
 namespace CrystalGate
 {
-    class Text
+    public class Text
     {
         string text;
+        bool showPlain;
 
         public Text(string nameText)
         {
             text = nameText;
+            showPlain = false;
+        }
+
+        public Text(string nameText, bool isPlainString)
+        {
+            text = nameText;
+            showPlain = isPlainString;
+        }
+
+        public Text()
+        {
+            text = "";
+            showPlain = false;
         }
 
         public string get()
         {
-            return GameText.getText(text);
+            if (!showPlain)
+                return GameText.getText(text);
+            else
+                return text;
         }
 
         public override string ToString()
         {
-            return GameText.getText(text);
+            if (!showPlain)
+                return GameText.getText(text);
+            else
+                return text;
         }
     }
 }

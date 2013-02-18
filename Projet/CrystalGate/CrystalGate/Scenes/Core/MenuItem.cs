@@ -12,7 +12,7 @@ namespace CrystalGate.Scenes.Core
         #region Fields
 
         private const float Scale = 0.8f;
-        private string _text;
+        private Text _text;
         private float _selectionFade;
         private Vector2 _position;
 
@@ -20,7 +20,7 @@ namespace CrystalGate.Scenes.Core
 
         #region Properties
 
-        public string Text
+        public Text Text
         {
             set { _text = value; }
         }
@@ -46,7 +46,7 @@ namespace CrystalGate.Scenes.Core
 
         #region Initialization
 
-        public MenuItem(string text)
+        public MenuItem(Text text)
         {
             _text = text;
         }
@@ -75,7 +75,7 @@ namespace CrystalGate.Scenes.Core
             SpriteBatch spriteBatch = sceneManager.SpriteBatch;
             SpriteFont font = sceneManager.Font;
             var origin = new Vector2(0, font.LineSpacing / 2f);
-            spriteBatch.DrawString(font, _text, _position, color, 0,
+            spriteBatch.DrawString(font, _text.get(), _position, color, 0,
                                    origin, scale, SpriteEffects.None, 0);
         }
 
@@ -86,7 +86,7 @@ namespace CrystalGate.Scenes.Core
 
         public int GetWidth(AbstractMenuScene scene)
         {
-            return (int)(scene.SceneManager.Font.MeasureString(_text).X * Scale);
+            return (int)(scene.SceneManager.Font.MeasureString(_text.get()).X * Scale);
         }
 
         #endregion

@@ -23,8 +23,8 @@ namespace CrystalGate.Scenes
             FondSonore.Pause();
 
             // Création des options
-            var resumeGameMenuItem = new MenuItem(new Text("BackToGame").get());
-            var quitGameMenuItem = new MenuItem(new Text("QuitGame").get());
+            var resumeGameMenuItem = new MenuItem(new Text("BackToGame"));
+            var quitGameMenuItem = new MenuItem(new Text("QuitGame"));
             
             // Gestion des évènements
             resumeGameMenuItem.Selected += OnCancel;

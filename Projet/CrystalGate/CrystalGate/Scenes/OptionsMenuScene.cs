@@ -26,6 +26,7 @@ namespace CrystalGate.Scenes
         private static int _currentResolution;
         private static bool _fullscreen;
         private static int _volume = 50;
+        Text fullscreenText, resolutionText, languageText, volumeText;
 
         #endregion
 
@@ -38,12 +39,19 @@ namespace CrystalGate.Scenes
             : base(sceneMgr, "Options")
         {
             // Création des options du menu
-            _languageMenuItem = new MenuItem(string.Empty);
-            _resolutionMenuItem = new MenuItem(string.Empty);
-            _fullscreenMenuItem = new MenuItem(string.Empty);
-            _volumeMenuItem = new MenuItem(string.Empty);
+            _languageMenuItem = new MenuItem(new Text());
+            _resolutionMenuItem = new MenuItem(new Text());
+            _fullscreenMenuItem = new MenuItem(new Text());
+            _volumeMenuItem = new MenuItem(new Text());
+
+            var back = new MenuItem(new Text("Back"));
+
+            fullscreenText = new Text("Fullscreen");
+            languageText = new Text("Language");
+            volumeText = new Text("Volume");
+            resolutionText = new Text("Resolution");
+
             SetMenuItemText();
-            var back = new MenuItem("Retour");
 
             // Gestion des évènements
             _languageMenuItem.Selected += LanguageMenuItemSelected;
@@ -65,10 +73,10 @@ namespace CrystalGate.Scenes
         /// </summary>
         private void SetMenuItemText()
         {
-            _languageMenuItem.Text = "Langue: " + _currentLanguage;
-            _resolutionMenuItem.Text = "Resolution: " + Resolutions[_currentResolution];
-            _fullscreenMenuItem.Text = "Plein ecran: " + (_fullscreen ? "oui" : "non");
-            _volumeMenuItem.Text = "Volume: " + _volume;
+            _languageMenuItem.Text = new Text(languageText.get() + ": " + _currentLanguage, true);
+            _resolutionMenuItem.Text = new Text(resolutionText.get() + ": " + Resolutions[_currentResolution], true);
+            _fullscreenMenuItem.Text = new Text(fullscreenText.get() + ": " + (_fullscreen ? "oui" : "non"), true);
+            _volumeMenuItem.Text = new Text(volumeText.get() + ": " + _volume, true);
         }
 
         #endregion

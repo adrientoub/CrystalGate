@@ -44,7 +44,7 @@ namespace CrystalGate
             isLoaded = true;
         }
 
-        public static string getText(string textName)
+        public static string getText(string textName) // A améliorer en utilisant les algos du cours, recherche dans une liste triée.
         {
             if (isLoaded)
             {
