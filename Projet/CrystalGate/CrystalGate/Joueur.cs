@@ -62,7 +62,7 @@ namespace CrystalGate
                 if (key.IsKeyDown(Keys.D1) || SourisCheck(0))
                 {
                     spell = 0;
-                    if (champion.Map.gametime.TotalGameTime.TotalMilliseconds - champion.spells[spell].LastCast > champion.spells[spell].Cooldown * 1000 && champion.spells[spell].NeedUnPoint)
+                    if (IsCastable(0) && champion.spells[0].NeedUnPoint)
                     {
                         Interface.DrawSelectPoint = true;
                         InWaitingPoint = true;
@@ -71,10 +71,8 @@ namespace CrystalGate
                 if (key.IsKeyDown(Keys.D2) || SourisCheck(1))
                 {
                     spell = 1;
-                    if (champion.Map.gametime.TotalGameTime.TotalMilliseconds - champion.spells[spell].LastCast > champion.spells[spell].Cooldown * 1000)
-                    {
+                    if(IsCastable(1))
                         champion.Cast(spell, point);
-                    }
                 }
                 // Pour Update et Draw les sorts
                 foreach (Spell s in champion.spells)
@@ -102,6 +100,11 @@ namespace CrystalGate
             CameraCheck();
             CheckWinandLose();
             Oldmouse = mouse;
+        }
+
+        public bool IsCastable(int idSort)
+        {
+            return champion.Map.gametime.TotalGameTime.TotalMilliseconds - champion.spells[idSort].LastCast > champion.spells[idSort].Cooldown * 1000;
         }
 
         public void DonnerOrdreDeplacer()
@@ -187,9 +190,7 @@ namespace CrystalGate
         public void CheckWinandLose()
         {
             if (champion.PositionTile == new Vector2(8, 25) || champion.PositionTile == new Vector2(8, 26))
-            {
                 Interface.Win = true;
-            }
             if (champion.Vie == 0)
                 Interface.Lost = true;
 

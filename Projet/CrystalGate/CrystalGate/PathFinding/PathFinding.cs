@@ -95,6 +95,7 @@ namespace CrystalGate
                 && map[(int)current.Position.X, (int)current.Position.Y - 1].IsWalkable)
                 {
                     noeud = map[(int)current.Position.X - 1, (int)current.Position.Y - 1];
+                    noeud.CoutF -= 1;
                     voisins.Add(noeud);
                 }
                 // TOP RIGHT
@@ -104,6 +105,7 @@ namespace CrystalGate
                     && map[(int)current.Position.X + 1, (int)current.Position.Y].IsWalkable)
                 {
                     noeud = map[(int)current.Position.X + 1, (int)current.Position.Y - 1];
+                    noeud.CoutF -= 1;
                     voisins.Add(noeud);
                 }
                 // BOT LEFT
@@ -113,6 +115,7 @@ namespace CrystalGate
                     && map[(int)current.Position.X, (int)current.Position.Y + 1].IsWalkable)
                 {
                     noeud = map[(int)current.Position.X - 1, (int)current.Position.Y + 1];
+                    noeud.CoutF -= 1;
                     voisins.Add(noeud);
                 }
                 // BOT RIGHT
@@ -122,6 +125,7 @@ namespace CrystalGate
                     && map[(int)current.Position.X + 1, (int)current.Position.Y].IsWalkable)
                 {
                     noeud = map[(int)current.Position.X + 1, (int)current.Position.Y + 1];
+                    noeud.CoutF -= 1;
                     voisins.Add(noeud);
                 }
 

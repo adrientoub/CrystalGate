@@ -12,6 +12,8 @@ namespace CrystalGate
     {
         public int Vie { get; set; }
         public int VieMax { get; set; }
+        public int Mana { get; set; }
+        public int ManaMax { get; set; }
         public float Vitesse { get; set; }
         public float Portee { get; set; }
         public int Dommages { get; set; }
@@ -32,6 +34,7 @@ namespace CrystalGate
         {
             // Constructeur par defaut d'une unité
             Vie = VieMax = 1;
+            Mana = ManaMax = 200;
             Vitesse = 1.0f;
             Portee = 2; // 2 = Corps à corps
             Dommages = 1;

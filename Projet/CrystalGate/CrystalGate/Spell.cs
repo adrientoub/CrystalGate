@@ -14,6 +14,7 @@ namespace CrystalGate
         public Texture2D SpriteEffect { get; set; } // Sprite de l'effet du sort
         public Unite unite { get; set; } // unite qui possède le sort
         public float Cooldown { get; set; } // temps de recharge
+        public int CoutMana { get; set; }
         public int Ticks { get; set; } // Le nombre de fois ou la méthode update sera appelé, (ex: le nombre de ticks pour un DOT), 1 par défaut pour un sort instantané
         protected int TickCurrent; // Tick actuel
         public bool NeedUnPoint { get; set; } // détermine si le sort a besoin d'un point
