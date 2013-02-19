@@ -18,7 +18,6 @@ namespace CrystalGate
         KeyboardState key { get; set; }
         public UI Interface { get; set; }
         bool InWaitingPoint;
-        Vector2 point;
         int spell;
 
         bool isRoaming;
@@ -38,16 +37,15 @@ namespace CrystalGate
         {
             if (!champion.Mort)
             {
-
                 mouse = Mouse.GetState();
                 key = Keyboard.GetState();
                 // Pour cibler un point pour un sort
                 if (mouse.LeftButton == ButtonState.Pressed && Oldmouse.LeftButton == ButtonState.Released && InWaitingPoint)
                 {
-                    point = new Vector2((int)((camera.Position.X + mouse.X) / 32), (int)((camera.Position.Y + mouse.Y) / 32));
+                    champion.pointCible = new Vector2((int)((camera.Position.X + mouse.X) / 32), (int)((camera.Position.Y + mouse.Y) / 32));
                     InWaitingPoint = false;
                     Interface.DrawSelectPoint = false;
-                    champion.Cast(spell, point);
+                    champion.Cast(spell, champion.pointCible);
                 }
                 // Pour se déplacer
                 if (mouse.RightButton == ButtonState.Pressed && !DonnerOrdreAttaquer())
@@ -62,7 +60,7 @@ namespace CrystalGate
                 if (key.IsKeyDown(Keys.D1) || SourisCheck(0))
                 {
                     spell = 0;
-                    if (IsCastable(0) && champion.spells[0].NeedUnPoint)
+                    if (champion.IsCastable(0) && champion.spells[0].NeedUnPoint)
                     {
                         Interface.DrawSelectPoint = true;
                         InWaitingPoint = true;
@@ -71,13 +69,9 @@ namespace CrystalGate
                 if (key.IsKeyDown(Keys.D2) || SourisCheck(1))
                 {
                     spell = 1;
-                    if(IsCastable(1))
-                        champion.Cast(spell, point);
+                    if (champion.IsCastable(1))
+                        champion.Cast(spell, champion.pointCible);
                 }
-                // Pour Update et Draw les sorts
-                foreach (Spell s in champion.spells)
-                    if (s.ToDraw)
-                        s.Update(point);
 
                 if (isRoaming)
                 {
@@ -100,11 +94,6 @@ namespace CrystalGate
             CameraCheck();
             CheckWinandLose();
             Oldmouse = mouse;
-        }
-
-        public bool IsCastable(int idSort)
-        {
-            return champion.Map.gametime.TotalGameTime.TotalMilliseconds - champion.spells[idSort].LastCast > champion.spells[idSort].Cooldown * 1000;
         }
 
         public void DonnerOrdreDeplacer()

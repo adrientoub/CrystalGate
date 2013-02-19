@@ -39,6 +39,7 @@ namespace CrystalGate
 
             Cooldown = 1;
             Ticks = 1;
+            CoutMana = 1;
             Animation = null;
             AnimationReset = null;
             Tiles = Vector2.Zero;
@@ -71,7 +72,7 @@ namespace CrystalGate
                 AnimationCurrent++;
         }
 
-        public virtual void Update(Vector2 Point)
+        public virtual void Update()
         {
             Animer();
         }
@@ -81,12 +82,14 @@ namespace CrystalGate
 
         }
 
-        public virtual void Reset()
+        public virtual void Begin(Vector2 p)
         {
             LastCast = (float)unite.Map.gametime.TotalGameTime.TotalMilliseconds;
             ToDraw = true;
             TickCurrent = 0;
             sonSort.Play();
+            unite.Mana -= CoutMana;
+            Point = p;
         }
     }
 }

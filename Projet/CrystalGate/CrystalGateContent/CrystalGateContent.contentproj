@@ -169,13 +169,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="UI\Perso and stats.jpg">
-      <Name>Perso and stats</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="UI\barre des sorts.png">
       <Name>barre des sorts</Name>
       <Importer>TextureImporter</Importer>

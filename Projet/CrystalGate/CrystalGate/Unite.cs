@@ -20,6 +20,7 @@ namespace CrystalGate
         public float Vitesse_Attaque { get; set; }
         public int Defense { get; set; }
         public Color color { get; set; }
+        public Vector2 pointCible;
 
         protected EffetSonore effetUniteAttaque;
         protected EffetSonore effetUniteDeath;
@@ -57,14 +58,29 @@ namespace CrystalGate
             Animer(); 
             Deplacer();
             TestMort(effets);
+            if(!isAChamp)
+                IA(unitsOnMap);
+
+            // Pour Update et Draw les sorts
+            foreach (Spell s in spells)
+                if (s.ToDraw)
+                    s.Update();
+
             // On rafraichit la propriete suivante, elle est juste indicative et n'affecte pas le draw, mais le pathfinding
-            PositionTile = new Vector2((int)(ConvertUnits.ToDisplayUnits(body.Position.X) / 32), (int)(ConvertUnits.ToDisplayUnits(body.Position.Y) / 32));
+            PositionTile = new Vector2((int)(ConvertUnits.ToDisplayUnits(body.Position.X) / Map.TailleTiles.X), (int)(ConvertUnits.ToDisplayUnits(body.Position.Y) / Map.TailleTiles.Y));
 
             if (uniteAttacked != null)
                 Attaquer(uniteAttacked);
         }
 
-        public virtual void TestMort(List<Effet> effets)
+        public void IA(List<Unite> unitsOnMap)
+        {
+            // Cast un heal si < à la moitié de vie
+            if (Vie <= VieMax / 2 && IsCastable(1))
+                Cast(1, Vector2.Zero);
+        }
+
+        public virtual void TestMort(List<Effet> effets) // aussi la mana
         {
             if (Vie <= 0 && !Mort)
             {
@@ -75,7 +91,15 @@ namespace CrystalGate
                 effets.Add(new Effet(Sprite, ConvertUnits.ToDisplayUnits(body.Position), packAnimation.Mort(), new Vector2(370 / 5, 835 / 11), 1));
                 Map.world.RemoveBody(body);
             }
+            // TEST MANA
+            if (Mana < 0)
+                Mana = 0;
         }
+
+        public bool IsCastable(int idSort)
+        {
+            return Map.gametime.TotalGameTime.TotalMilliseconds - spells[idSort].LastCast > spells[idSort].Cooldown * 1000 && Mana >= spells[idSort].CoutMana && Mana > 0;
+        } // Indique si un sort est castable
 
         public virtual void Attaquer(Unite unite)
         {
@@ -279,8 +303,8 @@ namespace CrystalGate
 
         public void Cast(int i, Vector2 point)
         {
-            // Active le sort, et le réinitialise si il a déjà été cast
-            spells[i].Reset();
+            // Cast ou initialise le sort
+            spells[i].Begin(point);
         }
 
         public override void Draw(SpriteBatch spriteBatch)

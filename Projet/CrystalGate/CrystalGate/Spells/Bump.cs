@@ -15,7 +15,7 @@ namespace CrystalGate
             SpriteBouton = unite.packTexture.sorts[0];
         }
 
-        public override void Update(Vector2 point)
+        public override void Update()
         {
             foreach (Unite u in unite.Map.unites)
                 if(u != unite && Outil.DistanceUnites(unite, u) <= 100)

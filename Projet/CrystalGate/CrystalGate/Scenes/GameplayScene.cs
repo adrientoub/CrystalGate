@@ -58,7 +58,7 @@ namespace CrystalGate.Scenes
             pack.map.Add(content.Load<Texture2D>("summertiles"));
 
             // Chargement de la carte
-            Outil.OuvrirMap("sample1", ref map, pack);
+            Outil.OuvrirMap("level1", ref map, pack);
 
             // Chargement sons
             Outil.LoadSounds(_effetsSonores, content);
@@ -68,7 +68,7 @@ namespace CrystalGate.Scenes
             unites.Add(joueurs[0].champion);
 
             // Ajout Interface
-            UI Interface = new UI(joueurs[0], content.Load<Texture2D>("UI/Perso and stats"), content.Load<Texture2D>("UI/barre des sorts"), content.Load<Texture2D>("Curseur"), content.Load<Texture2D>("gruntIcone"), content.Load<Texture2D>("blank"), spriteBatch, gameFont);
+            UI Interface = new UI(joueurs[0], content.Load<Texture2D>("UI/barre des sorts"), content.Load<Texture2D>("Curseur"), content.Load<Texture2D>("gruntIcone"), content.Load<Texture2D>("blank"), spriteBatch, gameFont);
             joueurs[0].Interface = Interface;
 
             // fixe l'id de toutes les unités (useless depuis spawn vagues)
@@ -76,9 +76,7 @@ namespace CrystalGate.Scenes
                 unites[i].id = i;
 
             // La vague
-            waves.Add(new Wave(new List<Vector2>{new Vector2(0, 7), new Vector2(8, 8)}, new List<Vector2> { new Vector2(22,0), new Vector2(39,7), new Vector2(23,17) }, new Cavalier(Vector2.Zero, map, pack), 3, joueurs[0].champion));
-            //waves.Add(new Wave(new List<Vector2> { new Vector2(40, 7), new Vector2(40, 8) }, new List<Vector2> { new Vector2(54, 0), new Vector2(68, 7), new Vector2(54, 17) }, new Cavalier(Vector2.Zero, map, pack), 3, joueurs[0].champion));
-            //waves.Add(new Wave(new List<Vector2> { new Vector2(53, 17), new Vector2(54, 17) }, new List<Vector2> { new Vector2(68, 25), new Vector2(54, 34) }, new Cavalier(Vector2.Zero, map, pack), 3, joueurs[0].champion));
+            waves.Add(new Wave(new List<Vector2>{new Vector2(1, 9), new Vector2(1, 10)}, new List<Vector2> { new Vector2(22,1), new Vector2(39,7), new Vector2(23,17) }, new Cavalier(Vector2.Zero, map, pack), 3, joueurs[0].champion));
         }
 
         protected override void UnloadContent() 

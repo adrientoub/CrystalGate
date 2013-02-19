@@ -110,6 +110,7 @@ namespace CrystalGate
             for (int j = 0; j < 9; j++)
                 for (int i = 0; i < 19; i++)
                     pT.Add(new Vector2(i, j));
+            pT.Remove(new Vector2(12, 6));
 
             for (int i = 0; i < 9; i++)
                 pT.Add(new Vector2(i, 9));

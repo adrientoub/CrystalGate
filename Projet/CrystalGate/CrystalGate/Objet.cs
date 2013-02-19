@@ -49,7 +49,7 @@ namespace CrystalGate
             this.ObjectifListe = new List<Noeud> { };
 
             // Physique
-            this.body = BodyFactory.CreateRectangle(this.Map.world, ConvertUnits.ToSimUnits(32), ConvertUnits.ToSimUnits(32), 100f);
+            this.body = BodyFactory.CreateRectangle(this.Map.world, ConvertUnits.ToSimUnits(25), ConvertUnits.ToSimUnits(25), 100f);
             this.body.Position = ConvertUnits.ToSimUnits(Position * Map.TailleTiles + new Vector2(16,16));
             this.body.IsStatic = false;
             this.body.OnCollision += new OnCollisionEventHandler(body_OnCollision);

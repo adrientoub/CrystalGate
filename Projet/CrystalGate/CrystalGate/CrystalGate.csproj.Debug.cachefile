@@ -10,7 +10,6 @@ Content\background.xnb
 Content\curseur.xnb
 Content\gruntIcone.xnb
 Content\Spells\Explosion.xnb
-Content\UI\Perso and stats.xnb
 Content\UI\barre des sorts.xnb
 Content\Boutons\Explosion.xnb
 Content\Spells\Soin.xnb
@@ -24,7 +23,7 @@ Content\Sons\explosion.xnb
 Content\Sons\soin.xnb
 Content\Sons\Gruntquimeurt.xnb
 Content\Sons\Cavalierquimeurt.xnb
-Content\troll.xnb
 Content\Sons\ArcherAttack.xnb
+Content\troll.xnb
 Content\AviciiLevels.wma
 Content\HOM4.wma

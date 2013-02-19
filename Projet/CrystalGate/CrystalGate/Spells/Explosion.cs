@@ -12,8 +12,9 @@ namespace CrystalGate
         public Explosion(Unite u)
             : base(u)  
         {
-            Cooldown = 1;
+            Cooldown = 2;
             Ticks = 1;
+            CoutMana = 10;
             Animation = unite.packAnimation.Explosion();
             AnimationReset = unite.packAnimation.Explosion();
             Tiles = new Vector2(320 / 5, 320 / 5);
@@ -24,10 +25,9 @@ namespace CrystalGate
             sonSort = new EffetSonore(5);
         }
 
-        public override void Update(Vector2 Point)
+        public override void Update()
         {
             Animer();
-            this.Point = Point;
             if (TickCurrent < Ticks)
             {
                 foreach (Unite u in unite.Map.unites)
@@ -35,7 +35,7 @@ namespace CrystalGate
                     float distance = Outil.DistancePoints(this.Point, u.PositionTile);
                     if (u != unite && distance <= 75)
                     {
-                        u.Vie -= 50;
+                        u.Vie -= 10;
                         //u.color = Color.Red;
                     }
                 }

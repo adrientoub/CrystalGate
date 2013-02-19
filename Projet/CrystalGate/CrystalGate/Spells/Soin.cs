@@ -14,6 +14,7 @@ namespace CrystalGate
         {
             Cooldown = 1;
             Ticks = 1;
+            CoutMana = 15;
             Animation = unite.packAnimation.Soin();
             AnimationReset = unite.packAnimation.Soin();
             Tiles = new Vector2(180 / 5, 35);
@@ -24,15 +25,14 @@ namespace CrystalGate
             sonSort = new EffetSonore(4);
         }
 
-        public override void Update(Vector2 Point)
+        public override void Update()
         {
             Animer();
-            this.Point = Point;
             if (TickCurrent < Ticks)
             {
                 if (unite.Vie != unite.VieMax)
                 {
-                    int ammount = 10;
+                    int ammount = 25;
                     if (unite.Vie + ammount <= unite.VieMax)
                     {
                         unite.Vie += ammount;
