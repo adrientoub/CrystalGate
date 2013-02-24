@@ -122,6 +122,7 @@
     <Compile Include="Effet.cs" />
     <Compile Include="FondSonore.cs" />
     <Compile Include="Camera\Input.cs" />
+    <Compile Include="Projectile.cs" />
     <Compile Include="Spell.cs" />
     <Compile Include="Spells\Bump.cs" />
     <Compile Include="Spells\Explosion.cs" />
@@ -155,6 +156,7 @@
     <Compile Include="Scenes\PauseMenuScene.cs" />
     <Compile Include="Unites\Cavalier.cs" />
     <Compile Include="Unites\Archer.cs" />
+    <Compile Include="Unites\Demon.cs" />
     <Compile Include="Unites\Troll.cs" />
     <Compile Include="Unites\Grunt.cs" />
     <Compile Include="Wave.cs" />

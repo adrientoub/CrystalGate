@@ -11,22 +11,24 @@ namespace CrystalGate
 {
     public class UI
     {
-        public Texture2D BarreDesSorts { get; set; }
+        // Images de l'UI
+        public Texture2D BarreDesSorts { get; set; } 
         public Texture2D Curseur { get; set; }
         public Texture2D Portrait { get; set; }
         public Texture2D blank{ get; set; }
-
+        // Position des images sur l'ecran
         public Rectangle CadrePosition { get; set; }
         public Rectangle BarreDesSortsPosition { get; set; }
         public Rectangle PortraitPosition { get; set; }
 
         public bool DrawSelectPoint;
-        public Joueur joueur { get; set; }
         SpriteBatch spritebatch { get; set; }
         SpriteFont gamefont { get; set; }
 
         public bool Win;
         public bool Lost;
+
+        public Joueur joueur { get; set; }
 
         int width = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width;
         int height = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height;
@@ -45,6 +47,7 @@ namespace CrystalGate
         public void Update()
         {
             int widthFondNoir = 350, heightFondNoir = 180;
+
             CadrePosition = new Rectangle((int)joueur.camera.Position.X, (int)joueur.camera.Position.Y + height - heightFondNoir, widthFondNoir, heightFondNoir);
             PortraitPosition = new Rectangle(CadrePosition.X + CadrePosition.Width - Portrait.Width, CadrePosition.Y + 50, Portrait.Width, Portrait.Height);
             BarreDesSortsPosition = new Rectangle((int)(joueur.camera.Position.X + width / 1.5), (int)(joueur.camera.Position.Y + height - BarreDesSorts.Height), BarreDesSorts.Width, BarreDesSorts.Height);
@@ -53,10 +56,10 @@ namespace CrystalGate
         public void Draw()
         {
             MouseState m = Mouse.GetState();
-            Text life = new Text("Life"), attack = new Text("Attack"), armor = new Text("Armor"), selectPoint = new Text("SelectPoint"), manaText = new Text("Mana"); // définition des mots traduisibles
+            Text life = new Text("Life"), attack = new Text("Attack"), armor = new Text("Armor"), selectPoint = new Text("SelectPoint"); // définition des mots traduisibles
 
             string str = life.get() + " : " + joueur.champion.Vie + " / " + joueur.champion.VieMax + "\n"
-                + manaText.get() + " : " + joueur.champion.Mana + " / " + joueur.champion.ManaMax + "\n"
+                + "Mana" + " : " + joueur.champion.Mana + " / " + joueur.champion.ManaMax + "\n"
                 + attack.get() + " : " + joueur.champion.Dommages + "\n"
                 + armor.get() + " : " + joueur.champion.Defense + "\n";
             string str2 = selectPoint.get();
@@ -69,7 +72,7 @@ namespace CrystalGate
             // Portrait et strings
             spritebatch.Draw(Portrait, PortraitPosition, Color.White);
             spritebatch.DrawString(gamefont, str, new Vector2(CadrePosition.X, CadrePosition.Y + 25), Color.White);
-            string strUnit = "Grunt";
+            string strUnit = joueur.champion.ToString().Split(new char[1] { '.' })[1];
             spritebatch.DrawString(gamefont, strUnit, new Vector2(CadrePosition.X + CadrePosition.Width - gamefont.MeasureString(strUnit).X / 2 - Portrait.Width / 2, CadrePosition.Y), Color.White);
             
             // Affichage de la victoire ou de la défaite

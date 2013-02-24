@@ -51,10 +51,11 @@ namespace CrystalGate.Scenes
 
             // Pack de texture (Contient toutes les sprites des unites et des sorts)
             pack = new PackTexture(content.Load<Texture2D>("blank"));
-            pack.unites = new List<Texture2D> { content.Load<Texture2D>("knight"), content.Load<Texture2D>("grunt"), content.Load<Texture2D>("archer"), content.Load<Texture2D>("troll") };
+            pack.unites = new List<Texture2D> { content.Load<Texture2D>("knight"), content.Load<Texture2D>("grunt"), content.Load<Texture2D>("archer"), content.Load<Texture2D>("troll"), content.Load<Texture2D>("demon")};
             pack.sorts.Add(content.Load<Texture2D>("Spells/Explosion"));
             pack.sorts.Add(content.Load<Texture2D>("Spells/Soin"));
             pack.boutons = new List<Texture2D> { content.Load<Texture2D>("Boutons/Explosion"), content.Load<Texture2D>("Boutons/Soin") };
+            pack.projectiles = new List<Texture2D> { content.Load<Texture2D>("Projectiles/arrow"), content.Load<Texture2D>("Projectiles/axe"), content.Load<Texture2D>("Projectiles/fireball") };
             pack.map.Add(content.Load<Texture2D>("summertiles"));
 
             // Chargement de la carte
@@ -64,11 +65,11 @@ namespace CrystalGate.Scenes
             Outil.LoadSounds(_effetsSonores, content);
 
             // Ajout joueurs
-            joueurs.Add(new Joueur(new Archer(new Vector2(3, 7), map, pack)));
+            joueurs.Add(new Joueur(new Archer(new Vector2(0, 9), map, pack)));
             unites.Add(joueurs[0].champion);
 
             // Ajout Interface
-            UI Interface = new UI(joueurs[0], content.Load<Texture2D>("UI/barre des sorts"), content.Load<Texture2D>("Curseur"), content.Load<Texture2D>("gruntIcone"), content.Load<Texture2D>("blank"), spriteBatch, gameFont);
+            UI Interface = new UI(joueurs[0], content.Load<Texture2D>("UI/barre des sorts"), content.Load<Texture2D>("Curseur"), content.Load<Texture2D>("archerIcone"), content.Load<Texture2D>("blank"), spriteBatch, gameFont);
             joueurs[0].Interface = Interface;
 
             // fixe l'id de toutes les unités (useless depuis spawn vagues)
@@ -76,12 +77,7 @@ namespace CrystalGate.Scenes
                 unites[i].id = i;
 
             // La vague
-            waves.Add(new Wave(new List<Vector2>{new Vector2(1, 9), new Vector2(1, 10)}, new List<Vector2> { new Vector2(22,1), new Vector2(39,7), new Vector2(23,17) }, new Cavalier(Vector2.Zero, map, pack), 3, joueurs[0].champion));
-        }
-
-        protected override void UnloadContent() 
-        {
-            content.Unload();
+            waves.Add(new Wave(new List<Vector2>{new Vector2(1, 9), new Vector2(1, 10)}, new List<Vector2> { new Vector2(22,1), new Vector2(39,7), new Vector2(23,17) }, new Demon(Vector2.Zero, map, pack), 3, joueurs[0].champion));
         }
 
         public override void Update(GameTime gameTime, bool othersceneHasFocus, bool coveredByOtherscene)

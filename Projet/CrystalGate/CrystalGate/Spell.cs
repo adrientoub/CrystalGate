@@ -24,7 +24,7 @@ namespace CrystalGate
         public List<Vector2> Animation { get; set; } // Animation du sort
         public List<Vector2> AnimationReset { get; set; } // Animation du sort (sert à reset l'animation)
         protected int AnimationCurrent { get; set; }
-        protected int AnimationLimite = 4;
+        protected int AnimationLimite = 2;
         protected Rectangle SpritePosition { get; set; } // Position a draw dans le sprite
         public Vector2 Tiles { get; set; } // Longueur et hauteur de la til à Draw
 

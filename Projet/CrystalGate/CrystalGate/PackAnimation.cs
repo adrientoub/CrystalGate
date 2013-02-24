@@ -131,10 +131,21 @@ namespace CrystalGate
 
         // MORT
 
-        public List<Vector2> Mort()
+        public List<Vector2> Mort(Unite unite)
         {
             List<Vector2> liste = new List<Vector2> { };
+            if(unite is Cavalier)
                 liste.Add(new Vector2(0, 10));
+            else if (unite is Archer)
+                liste.Add(new Vector2(4, 7));
+            else if (unite is Troll)
+                liste.Add(new Vector2(4, 9));
+            else if (unite is Grunt)
+                liste.Add(new Vector2(4, 9));
+            else if (unite is Demon)
+                liste.Add(new Vector2(0, 10));
+            else
+                throw new Exception("T'as pas modif la classe packanimation!");
 
             return liste;
         }

@@ -21,6 +21,7 @@ namespace CrystalGate
         public int Defense { get; set; }
         public Color color { get; set; }
         public Vector2 pointCible;
+        public bool IsRanged;
 
         protected EffetSonore effetUniteAttaque;
         protected EffetSonore effetUniteDeath;
@@ -65,6 +66,13 @@ namespace CrystalGate
             foreach (Spell s in spells)
                 if (s.ToDraw)
                     s.Update();
+            // Pour Update les projectiles
+            if (Projectile != null)
+            {
+                Projectile.Update();
+                if (Projectile.Timer <= 0)
+                    Projectile = null;
+            }
 
             // On rafraichit la propriete suivante, elle est juste indicative et n'affecte pas le draw, mais le pathfinding
             PositionTile = new Vector2((int)(ConvertUnits.ToDisplayUnits(body.Position.X) / Map.TailleTiles.X), (int)(ConvertUnits.ToDisplayUnits(body.Position.Y) / Map.TailleTiles.Y));
@@ -88,7 +96,7 @@ namespace CrystalGate
                 Mort = true;
                 effetUniteDeath.Play();
                 effetUniteAttaque.Dispose();
-                effets.Add(new Effet(Sprite, ConvertUnits.ToDisplayUnits(body.Position), packAnimation.Mort(), new Vector2(370 / 5, 835 / 11), 1));
+                effets.Add(new Effet(Sprite, ConvertUnits.ToDisplayUnits(body.Position), packAnimation.Mort(this), Tiles, 1));
                 Map.world.RemoveBody(body);
             }
             // TEST MANA
@@ -133,9 +141,12 @@ namespace CrystalGate
                 if (Map.gametime.TotalGameTime.TotalMilliseconds - LastAttack > Vitesse_Attaque * 1000) // Si le cooldown est fini
                 {
                     LastAttack = (float)Map.gametime.TotalGameTime.TotalMilliseconds; // On met à jour "l'heure de la dernière attaque"
-
+                    // projectile
+                    if(IsRanged)
+                        Projectile = new Projectile(this, uniteAttacked);
+                    // son
                     effetUniteAttaque.Play();
-
+                    // modif stats
                     unite.Vie -= Dommages - unite.Defense;
                     
                     // Fait regarder l'unité vers l'unité attaqué et l'anime
@@ -311,10 +322,13 @@ namespace CrystalGate
         {
             spriteBatch.Draw(Sprite, ConvertUnits.ToDisplayUnits(body.Position), SpritePosition, color, 0f, new Vector2(Tiles.X / 2, Tiles.Y / 2), 1f, FlipH ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 0);
             DrawVie(spriteBatch);
-
+            // Draw les sorts
             foreach (Spell s in spells)
                 if (s.ToDraw)
                     s.Draw(spriteBatch);
+            // Draw projectile
+            if(Projectile != null)
+                Projectile.Draw(spriteBatch);
         }
 
         private void DrawVie(SpriteBatch spriteBatch)

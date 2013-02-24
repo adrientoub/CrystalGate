@@ -18,14 +18,16 @@ namespace CrystalGate
             Sprite = packTexture.unites[2];
             Tiles = new Vector2( 295 / 5, 660 / 9);
             packAnimation.isArcher = true;
+            ProjectileSprite = packTexture.projectiles[0];
 
             // Statistiques
             Vie = VieMax = 200;
             Vitesse = 2.0f;
             Vitesse_Attaque = 1f;
-            Portee = 10f; // 2 = Corps à corps
-            Dommages = 70;
+            Portee = 15f; // 2 = Corps à corps
+            Dommages = 80;
             Defense = 5;
+            IsRanged = true;
 
             // Sons
             effetUniteAttaque = new EffetSonore(6);

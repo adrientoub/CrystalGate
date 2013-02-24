@@ -16,14 +16,14 @@ namespace CrystalGate
         {
             // Graphique
             Sprite = packTexture.unites[1];
-            Tiles = new Vector2( 380 / 5, 600 / 11);
+            Tiles = new Vector2( 380 / 5, 620 / 11);
 
             // Statistiques
             Vie = VieMax = 200;
             Vitesse = 2.0f;
             Vitesse_Attaque = 1f;
             Portee = 2f; // 2 = Corps à corps
-            Dommages = 70;
+            Dommages = 20;
             Defense = 5;
 
             // Sons

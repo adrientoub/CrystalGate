@@ -157,6 +157,9 @@ namespace CrystalGate
             listeSound.Add(content.Load<SoundEffect>("Sons/soin"));
             listeSound.Add(content.Load<SoundEffect>("Sons/explosion"));
             listeSound.Add(content.Load<SoundEffect>("Sons/ArcherAttack"));
+            listeSound.Add(content.Load<SoundEffect>("Sons/AxeMissileLaunch1"));
+            listeSound.Add(content.Load<SoundEffect>("Sons/DemonMissileLaunch1"));
+            listeSound.Add(content.Load<SoundEffect>("Sons/DemonDeath1"));
 
             EffetSonore.InitEffects();
         }

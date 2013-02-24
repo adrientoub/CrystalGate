@@ -29,33 +29,38 @@ namespace CrystalGate
             this.Position = Position;
             this.Tile = Tile;
             this.Taille = Taille;
-            this.AnimationOriginal = this.AnimationCurrent = Animation;
+            this.AnimationOriginal = Animation;
+            this.AnimationCurrent = Animation;
 
-            Duree = 3;
+            Duree = 180;
 
         }
 
         public void Update()
         {
             
-            if (Current >= Duree)
+            /*if (Current >= Duree)
             {
                 if (AnimationCurrent.Count > 1)
                     AnimationCurrent.RemoveAt(0);
                 else
-                    AnimationCurrent = AnimationOriginal;
+                {
+                    /*foreach (Vector2 v in AnimationOriginal)
+                        AnimationCurrent.Add(v); la ou on doit repeat l'anim
+                }
                 Current = 0;
             }
             else
-                Current++;
+                Current++;*/
+            Duree--;
 
         }
 
         public virtual void Draw(SpriteBatch spritebatch)
         {
             SpritePosition = new Rectangle((int)AnimationCurrent[0].X * (int)Tile.X, (int)AnimationCurrent[0].Y * (int)Tile.Y, (int)Tile.X, (int)Tile.Y);
-
-            spritebatch.Draw(Sprite, Position, SpritePosition, Color.White, 0, new Vector2(Tile.X / 2, Tile.Y / 2), Taille, SpriteEffects.None, 0);
+            if(Duree > 0)
+                spritebatch.Draw(Sprite, Position, SpritePosition, Color.White, 0, new Vector2(Tile.X / 2, Tile.Y / 2), Taille, SpriteEffects.None, 0);
         }
     }
 }

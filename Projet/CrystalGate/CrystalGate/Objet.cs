@@ -16,6 +16,8 @@ namespace CrystalGate
     public class Objet
     {
         public Texture2D Sprite { get; set; }
+        public Texture2D ProjectileSprite { get; set; }
+        public Projectile Projectile { get; set; }
         public Vector2 PositionTile { get; set; }
         public Map Map { get; set; }
         public Body body { get; set; }

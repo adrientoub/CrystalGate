@@ -35,7 +35,7 @@ namespace CrystalGate
                     float distance = Outil.DistancePoints(this.Point, u.PositionTile);
                     if (u != unite && distance <= 75)
                     {
-                        u.Vie -= 10;
+                        u.Vie -= 100;
                         //u.color = Color.Red;
                     }
                 }

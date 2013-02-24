@@ -1,0 +1,4 @@
+- Site (Design pour être dans le thème du jeu)
+- Sprites (Unités - Sorts - Interface [Timer / Compteur de vague / Barre de mana / Cooldown 
+/ Inventaire / Stats + bouton de stats / Barre d'exp] et L'interface du menu rajouter des choses)
+- nouveaux fond sonore / son nouvelles unités

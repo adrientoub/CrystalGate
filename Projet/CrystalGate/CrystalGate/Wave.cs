@@ -65,6 +65,8 @@ namespace CrystalGate
                         unite.Map.unites.Add(new Archer(v, unite.Map, unite.packTexture));
                     if (unite is Troll)
                         unite.Map.unites.Add(new Troll(v, unite.Map, unite.packTexture));
+                    if (unite is Demon)
+                        unite.Map.unites.Add(new Demon(v, unite.Map, unite.packTexture));
 
                     unite.Map.unites[unite.Map.unites.Count - 1].uniteAttacked = champ;
                     unite.Map.unites[unite.Map.unites.Count - 1].idWave = id;

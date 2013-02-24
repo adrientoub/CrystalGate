@@ -8,16 +8,16 @@ using Microsoft.Xna.Framework.Input;
 
 namespace CrystalGate
 {
-    public class Troll : Unite
+    public class Demon : Unite
     {
 
-        public Troll(Vector2 Position, Map map, PackTexture packTexture)
+        public Demon(Vector2 Position, Map map, PackTexture packTexture)
             : base(Position, map, packTexture)
         {
             // Graphique
-            Sprite = packTexture.unites[3];
-            Tiles = new Vector2( 311 / 5, 610 / 11);
-            ProjectileSprite = packTexture.projectiles[1];
+            Sprite = packTexture.unites[4];
+            Tiles = new Vector2( 385 / 5, 840 / 11);
+            ProjectileSprite = packTexture.projectiles[2];
 
             // Statistiques
             Vie = VieMax = 200;
@@ -29,8 +29,8 @@ namespace CrystalGate
             IsRanged = true;
 
             // Sons
-            effetUniteAttaque = new EffetSonore(7);
-            effetUniteDeath = new EffetSonore(3);
+            effetUniteAttaque = new EffetSonore(8);
+            effetUniteDeath = new EffetSonore(9);
         }
 
 
