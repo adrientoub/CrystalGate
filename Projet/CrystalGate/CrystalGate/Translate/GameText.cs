@@ -42,6 +42,7 @@ namespace CrystalGate
                 texteCorrespondant.Add(lineSplit[1]);
             }
             isLoaded = true;
+            file.Close();
         }
 
         public static string getText(string textName) // A améliorer en utilisant les algos du cours, recherche dans une liste triée.

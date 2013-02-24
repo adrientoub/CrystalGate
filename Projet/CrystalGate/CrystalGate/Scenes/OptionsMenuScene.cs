@@ -26,7 +26,7 @@ namespace CrystalGate.Scenes
         private static int _currentResolution;
         private static bool _fullscreen;
         private static int _volume = 50;
-        Text fullscreenText, resolutionText, languageText, volumeText;
+        Text fullscreenText, resolutionText, languageText, volumeText, yesText, noText;
 
         #endregion
 
@@ -50,6 +50,8 @@ namespace CrystalGate.Scenes
             languageText = new Text("Language");
             volumeText = new Text("Volume");
             resolutionText = new Text("Resolution");
+            noText = new Text("no");
+            yesText = new Text("yes");
 
             SetMenuItemText();
 
@@ -75,7 +77,7 @@ namespace CrystalGate.Scenes
         {
             _languageMenuItem.Text = new Text(languageText.get() + ": " + _currentLanguage, true);
             _resolutionMenuItem.Text = new Text(resolutionText.get() + ": " + Resolutions[_currentResolution], true);
-            _fullscreenMenuItem.Text = new Text(fullscreenText.get() + ": " + (_fullscreen ? "oui" : "non"), true);
+            _fullscreenMenuItem.Text = new Text(fullscreenText.get() + ": " + (_fullscreen ? yesText.get() : noText.get()), true);
             _volumeMenuItem.Text = new Text(volumeText.get() + ": " + _volume, true);
         }
 
