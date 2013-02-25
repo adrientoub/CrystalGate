@@ -14,7 +14,7 @@ namespace CrystalGate
         public Invisibilite(Unite u)
             : base(u)
         {
-            Cooldown = 2;
+            Cooldown = 5;
             Ticks = 300;
             CoutMana = 50;
             Tiles = new Vector2(320 / 5, 320 / 5);
@@ -22,7 +22,7 @@ namespace CrystalGate
             NeedUnPoint = false;
             SpriteBouton = unite.packTexture.boutons[0];
             SpriteEffect = unite.packTexture.sorts[0];
-            sonSort = new EffetSonore(5);
+            sonSort = new EffetSonore(10);
             uniteFollowing = new List<Unite>();
         }
 

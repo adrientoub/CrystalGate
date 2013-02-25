@@ -71,6 +71,10 @@ namespace CrystalGate
             foreach (Spell s in spells)
                 if (s.ToDraw)
                     s.Update();
+            // Pour Update et Draw les items de l'inventaire
+            foreach (Item i in Inventory)
+                if (i.spell.ToDraw)
+                    i.spell.Update();
             // Pour Update les projectiles
             if (Projectile != null)
             {
@@ -94,7 +98,7 @@ namespace CrystalGate
 
         public void manaUpdate()
         {
-            if (Map.gametime.TotalGameTime.TotalMilliseconds - lastManaAdd >= ManaRegen)
+            if (Map.gametime.TotalGameTime.TotalMilliseconds - lastManaAdd >= ManaRegen && Mana + 1 <= ManaMax)
             {
                 lastManaAdd = Map.gametime.TotalGameTime.TotalMilliseconds;
                 Mana++;
@@ -342,6 +346,9 @@ namespace CrystalGate
             foreach (Spell s in spells)
                 if (s.ToDraw)
                     s.Draw(spriteBatch);
+            foreach (Item i in Inventory)
+                if (i.spell.ToDraw)
+                    i.spell.Draw(spriteBatch);
             // Draw projectile
             if(Projectile != null)
                 Projectile.Draw(spriteBatch);

@@ -12,7 +12,7 @@ namespace CrystalGate
         public Soin(Unite u)
             : base(u)  
         {
-            Cooldown = 1;
+            Cooldown = 2;
             Ticks = 1;
             CoutMana = 15;
             Animation = unite.packAnimation.Soin();

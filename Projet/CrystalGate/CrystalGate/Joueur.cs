@@ -117,6 +117,9 @@ namespace CrystalGate
                 // Pour afficher/cacher le sac
                 if (key.IsKeyDown(Keys.B) && Oldkey.IsKeyUp(Keys.B))
                     Interface.DrawSac = !Interface.DrawSac;
+                // Pour utiliser les objets
+                if (key.IsKeyDown(Keys.NumPad1) && Oldkey.IsKeyUp(Keys.NumPad1))
+                    champion.Inventory[0].Utiliser();
                 
                 // Fait attaquer l'unité la plus proche
                 if (isRoaming)

@@ -12,6 +12,8 @@ namespace CrystalGate
         public Texture2D Icone;
         public Vector2 Position;
         public bool Disabled;
+        public Unite unite; // Unite qui possède l'objet
+        public Spell spell; // Spell qui sera appelé quand l'objet sera activé
 
         public Item(Vector2 position, PackTexture pack)
         {
@@ -26,9 +28,17 @@ namespace CrystalGate
                     if (Outil.DistancePoints(Position, u.PositionTile) <= 32)
                     {
                         u.Inventory.Add(this);
-                        Disabled = true;
+                        Disabled = true; // retire l'objet de la carte
+                        unite = u;
+                        spell = new Soin(unite);
                     }
                 }
+        }
+
+        public void Utiliser()
+        {
+            spell.Begin(unite.pointCible);
+           // unite.Inventory.Remove(this);
         }
     }
 }
