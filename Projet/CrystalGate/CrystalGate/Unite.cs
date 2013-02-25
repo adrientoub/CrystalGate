@@ -70,8 +70,12 @@ namespace CrystalGate
             if (Projectile != null)
             {
                 Projectile.Update();
-                if (Projectile.Timer <= 0)
+                if (Projectile.Timer <= 0) // quand le projectile atteint sa cible
+                {
                     Projectile = null;
+                    if(uniteAttacked != null)// Si la cible n'est pas morte entre temps
+                        uniteAttacked.Vie -= Dommages - uniteAttacked.Defense;
+                }
             }
 
             // On rafraichit la propriete suivante, elle est juste indicative et n'affecte pas le draw, mais le pathfinding
@@ -142,13 +146,13 @@ namespace CrystalGate
                 {
                     LastAttack = (float)Map.gametime.TotalGameTime.TotalMilliseconds; // On met à jour "l'heure de la dernière attaque"
                     // projectile
-                    if(IsRanged)
+                    if(IsRanged) // Si l'unité attaque à distance, on creer un projectile, sinon on attaque direct
                         Projectile = new Projectile(this, uniteAttacked);
+                    else
+                        unite.Vie -= Dommages - unite.Defense;
                     // son
                     effetUniteAttaque.Play();
-                    // modif stats
-                    unite.Vie -= Dommages - unite.Defense;
-                    
+
                     // Fait regarder l'unité vers l'unité attaqué et l'anime
                     if (Animation.Count == 0)
                     {
