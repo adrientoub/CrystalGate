@@ -45,7 +45,6 @@ namespace CrystalGate
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            // Sprite bouton
             spriteBatch.Draw(SpriteEffect, Point * unite.Map.TailleTiles, SpritePosition, Color.White, 0f, new Vector2(Tiles.X / 2, Tiles.Y / 2), 1f, SpriteEffects.None, 0);
         }
     }

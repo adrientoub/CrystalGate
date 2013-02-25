@@ -127,6 +127,7 @@
     <Compile Include="Spell.cs" />
     <Compile Include="Spells\Bump.cs" />
     <Compile Include="Spells\Explosion.cs" />
+    <Compile Include="Spells\Invisibilite.cs" />
     <Compile Include="Spells\Soin.cs" />
     <Compile Include="Translate\GameText.cs" />
     <Compile Include="Translate\Text.cs" />

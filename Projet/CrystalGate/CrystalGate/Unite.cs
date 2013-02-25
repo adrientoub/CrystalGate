@@ -52,7 +52,7 @@ namespace CrystalGate
             color = Color.White; 
             
             idWave = -1;
-            spells = new List<Spell> { new Explosion(this), new Soin(this) };
+            spells = new List<Spell> { new Explosion(this), new Soin(this), new Invisibilite(this) };
             Inventory = new List<Item> { };
         }
 

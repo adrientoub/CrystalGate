@@ -58,20 +58,61 @@ namespace CrystalGate
                 if (key.IsKeyDown(Keys.S))
                     DonnerOrdreStop();
                 // Pour lancer un sort
-                if (key.IsKeyDown(Keys.D1) || SourisCheck(0))
+                if (key.IsKeyDown(Keys.D1) || SourisCheck(0) && champion.spells.Count > 0)
                 {
                     spell = 0;
-                    if (champion.IsCastable(0) && champion.spells[0].NeedUnPoint)
+                    if (champion.IsCastable(0))
                     {
-                        Interface.DrawSelectPoint = true;
-                        InWaitingPoint = true;
+                        if (champion.spells[0].NeedUnPoint)
+                        {
+                            Interface.DrawSelectPoint = true;
+                            InWaitingPoint = true;
+                        }
+                        else
+                            champion.Cast(spell, champion.pointCible);
                     }
                 }
-                if (key.IsKeyDown(Keys.D2) || SourisCheck(1))
+                if (key.IsKeyDown(Keys.D2) || SourisCheck(1) && champion.spells.Count > 1)
                 {
                     spell = 1;
                     if (champion.IsCastable(1))
-                        champion.Cast(spell, champion.pointCible);
+                    {
+                        if (champion.spells[1].NeedUnPoint)
+                        {
+                            Interface.DrawSelectPoint = true;
+                            InWaitingPoint = true;
+                        }
+                        else
+                            champion.Cast(spell, champion.pointCible);
+                    }
+                }
+                if (key.IsKeyDown(Keys.D3) || SourisCheck(2) && champion.spells.Count > 2)
+                {
+                    spell = 2;
+                    if (champion.IsCastable(2))
+                    {
+                        if (champion.spells[2].NeedUnPoint)
+                        {
+                            Interface.DrawSelectPoint = true;
+                            InWaitingPoint = true;
+                        }
+                        else
+                            champion.Cast(spell, champion.pointCible);
+                    }
+                }
+                if (key.IsKeyDown(Keys.D4) || SourisCheck(3) && champion.spells.Count > 3)
+                {
+                    spell = 3;
+                    if (champion.IsCastable(3))
+                    {
+                        if (champion.spells[3].NeedUnPoint)
+                        {
+                            Interface.DrawSelectPoint = true;
+                            InWaitingPoint = true;
+                        }
+                        else
+                            champion.Cast(spell, champion.pointCible);
+                    }
                 }
                 // Pour afficher/cacher le sac
                 if (key.IsKeyDown(Keys.B) && Oldkey.IsKeyUp(Keys.B))
