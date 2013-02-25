@@ -8,29 +8,28 @@ using Microsoft.Xna.Framework.Input;
 
 namespace CrystalGate
 {
-    public class Archer : Unite
+    public class Ogre : Unite
     {
 
-        public Archer(Vector2 Position, Map map, PackTexture packTexture)
+        public Ogre(Vector2 Position, Map map, PackTexture packTexture)
             : base(Position, map, packTexture)
         {
             // Graphique
-            Sprite = packTexture.unites[2];
-            Tiles = new Vector2( 295 / 5, 660 / 9);
-            packAnimation.isArcher = true;
-            ProjectileSprite = packTexture.projectiles[0];
+            Sprite = packTexture.unites[5];
+            Tiles = new Vector2(370 / 5, 805 / 11);
+            ProjectileSprite = packTexture.projectiles[2];
 
             // Statistiques
             Vie = VieMax = 200;
             Vitesse = 2.0f;
             Vitesse_Attaque = 1f;
-            Portee = 15f; // 2 = Corps à corps
-            Dommages = 10;
+            Portee = 10f; // 2 = Corps à corps
+            Dommages = 20;
             Defense = 5;
             IsRanged = true;
 
             // Sons
-            effetUniteAttaque = new EffetSonore(6);
+            effetUniteAttaque = new EffetSonore(8);
             effetUniteDeath = new EffetSonore(3);
         }
 

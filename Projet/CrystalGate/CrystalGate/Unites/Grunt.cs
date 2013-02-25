@@ -16,7 +16,7 @@ namespace CrystalGate
         {
             // Graphique
             Sprite = packTexture.unites[1];
-            Tiles = new Vector2( 380 / 5, 620 / 11);
+            Tiles = new Vector2( 380 / 5, 605 / 11);
 
             // Statistiques
             Vie = VieMax = 200;

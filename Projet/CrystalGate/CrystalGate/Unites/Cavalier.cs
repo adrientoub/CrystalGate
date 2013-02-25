@@ -19,11 +19,12 @@ namespace CrystalGate
             Tiles = new Vector2(370 / 5, 835 / 11);
 
             // Statistiques
-            Vie = VieMax = 200;
+            Vie = VieMax = 300;
             Vitesse = 2.0f;
             Vitesse_Attaque = 1f;
             Portee = 2f; // 1 = Corps à corps
-            Dommages = 20;
+            Dommages = 80;
+            Defense = 10;
 
             // Sons
             effetUniteAttaque = new EffetSonore(0);

@@ -32,7 +32,7 @@ namespace CrystalGate
         protected int AnimationCurrent { get; set; }
         public PackAnimation packAnimation { get; set; }
 
-        protected const int AnimationLimite = 4;
+        protected const int AnimationLimite = 5;
         public const int suivrelimite = 20;
         public int suivreactuel = 20;
 

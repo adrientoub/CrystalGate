@@ -77,7 +77,7 @@ namespace CrystalGate.Scenes
         {
             _languageMenuItem.Text = new Text(languageText.get() + ": " + _currentLanguage, true);
             _resolutionMenuItem.Text = new Text(resolutionText.get() + ": " + Resolutions[_currentResolution], true);
-            _fullscreenMenuItem.Text = new Text(fullscreenText.get() + ": " + (_fullscreen ? yesText.get() : noText.get()), true);
+            _fullscreenMenuItem.Text = new Text(fullscreenText.get() + ": " + (_fullscreen ? noText.get() : yesText.get()), true);
             _volumeMenuItem.Text = new Text(volumeText.get() + ": " + _volume, true);
         }
 

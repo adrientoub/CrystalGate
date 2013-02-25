@@ -51,7 +51,7 @@ namespace CrystalGate.Scenes
 
             // Pack de texture (Contient toutes les sprites des unites et des sorts)
             pack = new PackTexture(content.Load<Texture2D>("blank"));
-            pack.unites = new List<Texture2D> { content.Load<Texture2D>("knight"), content.Load<Texture2D>("grunt"), content.Load<Texture2D>("archer"), content.Load<Texture2D>("troll"), content.Load<Texture2D>("demon")};
+            pack.unites = new List<Texture2D> { content.Load<Texture2D>("knight"), content.Load<Texture2D>("grunt"), content.Load<Texture2D>("archer"), content.Load<Texture2D>("troll"), content.Load<Texture2D>("demon"), content.Load<Texture2D>("ogre") };
             pack.sorts.Add(content.Load<Texture2D>("Spells/Explosion"));
             pack.sorts.Add(content.Load<Texture2D>("Spells/Soin"));
             pack.boutons = new List<Texture2D> { content.Load<Texture2D>("Boutons/Explosion"), content.Load<Texture2D>("Boutons/Soin") };
@@ -65,7 +65,7 @@ namespace CrystalGate.Scenes
             Outil.LoadSounds(_effetsSonores, content);
 
             // Ajout joueurs
-            joueurs.Add(new Joueur(new Archer(new Vector2(0, 9), map, pack)));
+            joueurs.Add(new Joueur(new Cavalier(new Vector2(0, 9), map, pack)));
             unites.Add(joueurs[0].champion);
 
             // Ajout Interface
@@ -77,7 +77,7 @@ namespace CrystalGate.Scenes
                 unites[i].id = i;
 
             // La vague
-            waves.Add(new Wave(new List<Vector2>{new Vector2(1, 9), new Vector2(1, 10)}, new List<Vector2> { new Vector2(22,1), new Vector2(39,7), new Vector2(23,17) }, new Demon(Vector2.Zero, map, pack), 3, joueurs[0].champion));
+            waves.Add(new Wave(new List<Vector2>{new Vector2(1, 9), new Vector2(1, 10)}, new List<Vector2> { new Vector2(11,0), new Vector2(30,1), new Vector2(23,21) }, new Ogre(Vector2.Zero, map, pack), 3, joueurs[0].champion));
         }
 
         public override void Update(GameTime gameTime, bool othersceneHasFocus, bool coveredByOtherscene)

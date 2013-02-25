@@ -124,20 +124,19 @@ namespace CrystalGate
                 // Fait regarder l'unité vers l'unité attaqué
                 if (Animation.Count == 0)
                 {
-                    AnimationCurrent = AnimationLimite;
                     FlipH = false;
                     float angle = Outil.AngleUnites(this, unite);
 
                     if (angle >= Math.PI / 4 && angle <= 3 * Math.PI / 4)
                         direction = Direction.Haut;
-                    if (angle >= - 3 * Math.PI / 4 && angle <= - Math.PI / 4)
+                    else if (angle >= - 3 * Math.PI / 4 && angle <= - Math.PI / 4)
                         direction = Direction.Bas;
-                    if (angle >= -Math.PI / 4 && angle <= Math.PI / 4)
+                    else if (angle >= -Math.PI / 4 && angle <= Math.PI / 4)
                     {
                         direction = Direction.Gauche;
                         FlipH = true;
                     }
-                    if (angle >= 3 * Math.PI / 4 || angle <= Math.PI / 4)
+                    else
                         direction = Direction.Droite;
 
                 }
@@ -165,18 +164,18 @@ namespace CrystalGate
                             direction = Direction.Haut;
                             Animation = packAnimation.AttaquerHaut();
                         }
-                        if (angle >= -3 * Math.PI / 4 && angle <= -Math.PI / 4)
+                        else if (angle >= -3 * Math.PI / 4 && angle <= -Math.PI / 4)
                         {
                             direction = Direction.Bas;
                             Animation = packAnimation.AttaquerBas();
                         }
-                        if (angle >= -Math.PI / 4 && angle <= Math.PI / 4)
+                        else if (angle >= -Math.PI / 4 && angle <= Math.PI / 4)
                         {
                             direction = Direction.Gauche;
                             FlipH = true;
                             Animation = packAnimation.AttaquerDroite();
                         }
-                        if (angle >= 3 * Math.PI / 4 || angle <= Math.PI / 4)
+                        else
                         {
                             direction = Direction.Droite;
                             Animation = packAnimation.AttaquerDroite();

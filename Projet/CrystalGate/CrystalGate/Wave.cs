@@ -59,14 +59,18 @@ namespace CrystalGate
                 {
                     if (unite is Cavalier)
                         unite.Map.unites.Add(new Cavalier(v, unite.Map, unite.packTexture));
-                    if (unite is Grunt)
+                    else if (unite is Grunt)
                         unite.Map.unites.Add(new Grunt(v, unite.Map, unite.packTexture));
-                    if (unite is Archer)
+                    else if (unite is Archer)
                         unite.Map.unites.Add(new Archer(v, unite.Map, unite.packTexture));
-                    if (unite is Troll)
+                    else if (unite is Troll)
                         unite.Map.unites.Add(new Troll(v, unite.Map, unite.packTexture));
-                    if (unite is Demon)
+                    else if (unite is Demon)
                         unite.Map.unites.Add(new Demon(v, unite.Map, unite.packTexture));
+                    else if (unite is Ogre)
+                        unite.Map.unites.Add(new Ogre(v, unite.Map, unite.packTexture));
+                    else
+                        throw new Exception("Modif la wave!");
 
                     unite.Map.unites[unite.Map.unites.Count - 1].uniteAttacked = champ;
                     unite.Map.unites[unite.Map.unites.Count - 1].idWave = id;

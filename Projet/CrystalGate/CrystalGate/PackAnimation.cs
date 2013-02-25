@@ -105,7 +105,7 @@ namespace CrystalGate
         public List<Vector2> AttaquerHaut()
         {
             List<Vector2> liste = new List<Vector2> { };
-            for (int j = 5; j <= (isArcher ? 7 : 8) ; j++)
+            for (int j = 5; j <= (isArcher ? 6 : 8) ; j++)
                 liste.Add(new Vector2(0, j));
 
             return liste;
@@ -114,7 +114,7 @@ namespace CrystalGate
         public List<Vector2> AttaquerBas()
         {
             List<Vector2> liste = new List<Vector2> { };
-            for (int j = 5; j <= (isArcher ? 7 : 8); j++)
+            for (int j = 5; j <= (isArcher ? 6 : 8); j++)
                 liste.Add(new Vector2(4, j));
 
             return liste;
@@ -123,7 +123,7 @@ namespace CrystalGate
         public List<Vector2> AttaquerDroite()
         {
             List<Vector2> liste = new List<Vector2> { };
-            for (int j = 5; j <= (isArcher ? 7 : 8); j++)
+            for (int j = 5; j <= (isArcher ? 6 : 8); j++)
                 liste.Add(new Vector2(2, j));
 
             return liste;
@@ -143,6 +143,8 @@ namespace CrystalGate
             else if (unite is Grunt)
                 liste.Add(new Vector2(4, 9));
             else if (unite is Demon)
+                liste.Add(new Vector2(0, 10));
+            else if (unite is Ogre)
                 liste.Add(new Vector2(0, 10));
             else
                 throw new Exception("T'as pas modif la classe packanimation!");
