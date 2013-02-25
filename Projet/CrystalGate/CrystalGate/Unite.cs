@@ -14,6 +14,7 @@ namespace CrystalGate
         public int VieMax { get; set; }
         public int Mana { get; set; }
         public int ManaMax { get; set; }
+        public int ManaRegen { get; set; } // Temps de régération du mana en ms
         public float Vitesse { get; set; }
         public float Portee { get; set; }
         public int Dommages { get; set; }
@@ -26,6 +27,7 @@ namespace CrystalGate
         protected EffetSonore effetUniteAttaque;
         protected EffetSonore effetUniteDeath;
         protected int nbFrameSonJoue;
+        protected double lastManaAdd;
 
         public List<Spell> spells { get; set; }
         public List<Item> Inventory { get; set; }
@@ -38,6 +40,7 @@ namespace CrystalGate
             // Constructeur par defaut d'une unité
             Vie = VieMax = 1;
             Mana = ManaMax = 200;
+            ManaRegen = 500;
             Vitesse = 1.0f;
             Portee = 2; // 2 = Corps à corps
             Dommages = 1;
@@ -79,12 +82,23 @@ namespace CrystalGate
                         uniteAttacked.Vie -= Dommages - uniteAttacked.Defense;
                 }
             }
+            // On ajoute du mana
+            manaUpdate();
 
             // On rafraichit la propriete suivante, elle est juste indicative et n'affecte pas le draw, mais le pathfinding
             PositionTile = new Vector2((int)(ConvertUnits.ToDisplayUnits(body.Position.X) / Map.TailleTiles.X), (int)(ConvertUnits.ToDisplayUnits(body.Position.Y) / Map.TailleTiles.Y));
 
             if (uniteAttacked != null)
                 Attaquer(uniteAttacked);
+        }
+
+        public void manaUpdate()
+        {
+            if (Map.gametime.TotalGameTime.TotalMilliseconds - lastManaAdd >= ManaRegen)
+            {
+                lastManaAdd = Map.gametime.TotalGameTime.TotalMilliseconds;
+                Mana++;
+            }
         }
 
         public void IA(List<Unite> unitsOnMap)

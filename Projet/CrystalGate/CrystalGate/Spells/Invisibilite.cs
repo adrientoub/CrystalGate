@@ -15,7 +15,7 @@ namespace CrystalGate
             : base(u)
         {
             Cooldown = 2;
-            Ticks = 240;
+            Ticks = 300;
             CoutMana = 50;
             Tiles = new Vector2(320 / 5, 320 / 5);
 
