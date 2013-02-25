@@ -21,7 +21,6 @@ namespace CrystalGate
         public Vector2 PositionTile { get; set; }
         public Map Map { get; set; }
         public Body body { get; set; }
-        public int id { get; set; }
         public bool isAChamp { get; set; }
 
         public List<Vector2> Animation { get; set; }

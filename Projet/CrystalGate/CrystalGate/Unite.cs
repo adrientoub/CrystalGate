@@ -28,6 +28,7 @@ namespace CrystalGate
         protected int nbFrameSonJoue;
 
         public List<Spell> spells { get; set; }
+        public List<Item> Inventory { get; set; }
         public bool Drawlife { get; set; }
         public double idWave { get; set; }
 
@@ -52,6 +53,7 @@ namespace CrystalGate
             
             idWave = -1;
             spells = new List<Spell> { new Explosion(this), new Soin(this) };
+            Inventory = new List<Item> { };
         }
 
         public override void Update(List<Unite> unitsOnMap, List<Effet> effets)
@@ -282,42 +284,39 @@ namespace CrystalGate
 
         public void Suivre(Unite unite)
         {
-            if (this.id >= Map.compteur && this.id <= Map.compteur + Map.pFParThread) // Si on a la possiblité d'obtnir un pF
+            List<Unite> liste = new List<Unite> { };
+            double distance = Outil.DistanceUnites(this, unite);
+            bool ok = distance > Portee * Map.TailleTiles.X;
+            if (ok)
             {
-                List<Unite> liste = new List<Unite> { };
-                double distance = Outil.DistanceUnites(this, unite);
-                bool ok = distance > Portee * Map.TailleTiles.X;
-                if (ok)
-                {
-                    foreach (Unite u in Map.unites)
-                        if (Outil.DistanceUnites(this, u) <= 1 * Map.TailleTiles.X)
-                        {
-                            if (u != unite && u != this)
-                                liste.Add(u);
-                        }
+                foreach (Unite u in Map.unites)
+                    if (Outil.DistanceUnites(this, u) <= 1 * Map.TailleTiles.X)
+                    {
+                        if (u != unite && u != this)
+                            liste.Add(u);
+                    }
 
-                    suivreactuel = 0;
-                    List<Noeud> chemin = PathFinding.TrouverChemin(PositionTile, unite.PositionTile, Map.Taille, liste, Map.unitesStatic, false);
-                    if (chemin != null)
-                    {
-                        ObjectifListe = chemin;
-                        ObjectifListe.RemoveAt(0);
-                    }
-                    else
-                    {
-                        ObjectifListe.Clear();
-                        body.LinearVelocity = Vector2.Zero;
-                    }
+                suivreactuel = 0;
+                List<Noeud> chemin = PathFinding.TrouverChemin(PositionTile, unite.PositionTile, Map.Taille, liste, Map.unitesStatic, false);
+                if (chemin != null)
+                {
+                    ObjectifListe = chemin;
+                    ObjectifListe.RemoveAt(0);
                 }
                 else
-                    suivreactuel++;
+                {
+                    ObjectifListe.Clear();
+                    body.LinearVelocity = Vector2.Zero;
+                }
             }
-            
+            else
+                suivreactuel++;           
         }
 
         public void Cast(int i, Vector2 point)
         {
             // Cast ou initialise le sort
+            spells[i].Color = Color.White;
             spells[i].Begin(point);
         }
 

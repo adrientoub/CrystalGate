@@ -17,14 +17,15 @@ namespace CrystalGate
         public Vector2[,] Cellules { get; set; }
         public Vector2 TailleTiles { get; set; }
         public Vector2 Taille { get; set; }
-        public List<Unite> unites { get; set; }
+        public List<Joueur> joueurs;
+        public List<Unite> unites;
+        public List<Effet> effets; // effets (cadavres) qui seront draw
+        public List<Item> items;
+        public List<Wave> waves;
         public Noeud[,] unitesStatic { get; set; }
         public World world { get; set; }
         Body boundary; // Les limites du monde physique
         public GameTime gametime { get; set; }
-
-        public int compteur = 0;
-        public int pFParThread = 5; // 10 unites par thread calculent leurs chemins
 
         public Map(Texture2D sprite, Vector2 taille, Vector2 tailleTiles)
         {
@@ -33,7 +34,11 @@ namespace CrystalGate
             TailleTiles = tailleTiles;
             Taille = taille;
             world = new World(Vector2.Zero);
+            joueurs = new List<Joueur> { };
             unites = new List<Unite> { };
+            effets = new List<Effet> { };
+            items = new List<Item> { };
+            waves = new List<Wave> { };
             unitesStatic = new Noeud[(int)taille.X, (int)taille.Y];
 
             // Creation de la physique de la carte
@@ -49,36 +54,20 @@ namespace CrystalGate
             this.unites = unites;
             Outil.RemoveDeadBodies(unites);
             gametime = GT;
-
-            compteur += pFParThread; // Update du compteur pour le pF
-            int temp = PLusGrosId(unites);
-            compteur %= (temp != 0) ? temp : 1; // pour eviter d'avoir des unités inactives
-
-            KeyboardState k = Keyboard.GetState();
             // Debug les unites qui attaquent des unites mortes
             foreach (Unite u in unites)
             {
-                // affiche la barre des sorts des unités attawquant un champion
+                // affiche la barre des sorts des unités attaquant un champion
                 if (u.uniteAttacked != null && u.uniteAttacked.isAChamp)
                     u.Drawlife = true;
                 if (u.uniteAttacked != null && !unites.Contains((Unite)u.uniteAttacked))
                     u.uniteAttacked = null;
             }
+            for (int i = 0; i < items.Count; i++)
+                if (items[i].Disabled)
+                    items.RemoveAt(i);
         }
 
-        static int PLusGrosId(List<Unite> liste)
-        {
-            List<int> newList = new List<int> { };
-
-            var requete = from u in liste
-                          orderby u.id
-                          select new { u.id };
-
-            foreach (var n in requete)
-                newList.Add(n.id);
-
-            return (newList.Count == 0) ? 0 : newList[newList.Count - 1];
-        }
 
         public void Draw(SpriteBatch spriteBatch)
         {

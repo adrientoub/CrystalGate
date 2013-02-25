@@ -64,7 +64,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="knight.png">
+    <Compile Include="Unites\knight.png">
       <Name>knight</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
@@ -78,14 +78,14 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="archer.png">
+    <Compile Include="Unites\archer.png">
       <Name>archer</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="grunt.png">
+    <Compile Include="Unites\grunt.png">
       <Name>grunt</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
@@ -120,14 +120,14 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="HOM4.mp3">
+    <Compile Include="Musiques\HOM4.mp3">
       <Name>HOM4</Name>
       <Importer>Mp3Importer</Importer>
       <Processor>SongProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="gruntIcone.jpg">
+    <Compile Include="UI\gruntIcone.jpg">
       <Name>gruntIcone</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
@@ -209,7 +209,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="footman.png">
+    <Compile Include="Unites\footman.png">
       <Name>footman</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
@@ -223,7 +223,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="troll.png">
+    <Compile Include="Unites\troll.png">
       <Name>troll</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
@@ -244,7 +244,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="demon.png">
+    <Compile Include="Unites\demon.png">
       <Name>demon</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
@@ -279,15 +279,22 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="archerIcone.jpg">
+    <Compile Include="UI\archerIcone.jpg">
       <Name>archerIcone</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ogre.png">
+    <Compile Include="Unites\ogre.png">
       <Name>ogre</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="UI\inventaire.png">
+      <Name>inventaire</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

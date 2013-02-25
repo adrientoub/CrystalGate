@@ -26,10 +26,8 @@ namespace CrystalGate.Scenes
         private Map map; // La map
 
         public static List<SoundEffect> _effetsSonores = new List<SoundEffect> { }; // Tous les effets sonores.
-        private List<Joueur> joueurs = new List<Joueur> { }; // joueurs sur la map
-        private List<Unite> unites = new List<Unite> { }; // unites sur la map
-        private List<Effet> effets = new List<Effet> { }; // effets qui seront draw
-        private List<Wave> waves = new List<Wave> { };
+
+
 
         public GameplayScene(SceneManager sceneMgr)
             : base(sceneMgr)
@@ -51,7 +49,7 @@ namespace CrystalGate.Scenes
 
             // Pack de texture (Contient toutes les sprites des unites et des sorts)
             pack = new PackTexture(content.Load<Texture2D>("blank"));
-            pack.unites = new List<Texture2D> { content.Load<Texture2D>("knight"), content.Load<Texture2D>("grunt"), content.Load<Texture2D>("archer"), content.Load<Texture2D>("troll"), content.Load<Texture2D>("demon"), content.Load<Texture2D>("ogre") };
+            pack.unites = new List<Texture2D> { content.Load<Texture2D>("Unites/knight"), content.Load<Texture2D>("Unites/grunt"), content.Load<Texture2D>("Unites/archer"), content.Load<Texture2D>("Unites/troll"), content.Load<Texture2D>("Unites/demon"), content.Load<Texture2D>("Unites/ogre") };
             pack.sorts.Add(content.Load<Texture2D>("Spells/Explosion"));
             pack.sorts.Add(content.Load<Texture2D>("Spells/Soin"));
             pack.boutons = new List<Texture2D> { content.Load<Texture2D>("Boutons/Explosion"), content.Load<Texture2D>("Boutons/Soin") };
@@ -65,19 +63,18 @@ namespace CrystalGate.Scenes
             Outil.LoadSounds(_effetsSonores, content);
 
             // Ajout joueurs
-            joueurs.Add(new Joueur(new Cavalier(new Vector2(0, 9), map, pack)));
-            unites.Add(joueurs[0].champion);
+            map.joueurs.Add(new Joueur(new Cavalier(new Vector2(0, 9), map, pack)));
+            map.unites.Add(map.joueurs[0].champion);
 
             // Ajout Interface
-            UI Interface = new UI(joueurs[0], content.Load<Texture2D>("UI/barre des sorts"), content.Load<Texture2D>("Curseur"), content.Load<Texture2D>("archerIcone"), content.Load<Texture2D>("blank"), spriteBatch, gameFont);
-            joueurs[0].Interface = Interface;
-
-            // fixe l'id de toutes les unités (useless depuis spawn vagues)
-            for (int i = 0; i < unites.Count; i++)
-                unites[i].id = i;
+            UI Interface = new UI(map.joueurs[0], content.Load<Texture2D>("UI/barre des sorts"), content.Load<Texture2D>("Curseur"), content.Load<Texture2D>("UI/archerIcone"), content.Load<Texture2D>("UI/inventaire"), content.Load<Texture2D>("blank"), spriteBatch, gameFont);
+            map.joueurs[0].Interface = Interface;
 
             // La vague
-            waves.Add(new Wave(new List<Vector2>{new Vector2(1, 9), new Vector2(1, 10)}, new List<Vector2> { new Vector2(11,0), new Vector2(30,1), new Vector2(23,21) }, new Ogre(Vector2.Zero, map, pack), 3, joueurs[0].champion));
+            map.waves.Add(new Wave(new List<Vector2> { new Vector2(1, 9), new Vector2(1, 10) }, new List<Vector2> { new Vector2(11, 0), new Vector2(30, 1), new Vector2(23, 21) }, new Ogre(Vector2.Zero, map, pack), 3, map.joueurs[0].champion));
+
+            // Ajout des items
+            map.items.Add(new Item(new Vector2(1,3), pack));
         }
 
         public override void Update(GameTime gameTime, bool othersceneHasFocus, bool coveredByOtherscene)
@@ -92,21 +89,24 @@ namespace CrystalGate.Scenes
             {
                 FondSonore.Update();
                 // On update les infos des joueurs
-                joueurs[0].Update(unites);
+                map.joueurs[0].Update(map.unites);
                 // On update les infos de la map
-                map.Update(unites, gameTime);
+                map.Update(map.unites, gameTime);
+                // On update les infos des items
+                foreach (Item i in map.items)
+                    i.Update(map.unites);
                 // On update les infos des unites
-                foreach (Unite u in unites)
-                    u.Update(unites, effets);
+                foreach (Unite u in map.unites)
+                    u.Update(map.unites, map.effets);
                 // On update les infos des joueurs
-                foreach (Joueur j in joueurs)
-                    j.Update(unites);
+                foreach (Joueur j in map.joueurs)
+                    j.Update(map.unites);
                 // On update les effets sur la carte
-                foreach (Effet e in effets)
+                foreach (Effet e in map.effets)
                     e.Update();
                 // On update les infos des vagues
-                foreach(Wave w in waves)
-                    w.Update(gameTime, joueurs[0].champion);
+                foreach(Wave w in map.waves)
+                    w.Update(gameTime, map.joueurs[0].champion);
                 // Update de la physique
                 map.world.Step(1 / 60f);
             }
@@ -117,17 +117,20 @@ namespace CrystalGate.Scenes
             SceneManager.GraphicsDevice.Clear(ClearOptions.Target, Color.Black, 0, 0);
             SpriteBatch spriteBatch = SceneManager.SpriteBatch;
 
-            spriteBatch.Begin(0, null, null, null, null, null, joueurs[0].camera.CameraMatrix);
+            spriteBatch.Begin(0, null, null, null, null, null, map.joueurs[0].camera.CameraMatrix);
             // DRAW MAP
             map.Draw(spriteBatch);
             // DRAW EFFETS
-            foreach (Effet e in effets)
+            foreach (Effet e in map.effets)
                 e.Draw(spriteBatch);
+            // DRAW ITEMS
+            foreach (Item i in map.items)
+                spriteBatch.Draw(pack.boutons[0], i.Position * map.TailleTiles, Color.White);
             // DRAW UNITES
-            foreach (Unite o in unites)
+            foreach (Unite o in map.unites)
                 o.Draw(spriteBatch);
             // DRAW INTERFACE
-            joueurs[0].Interface.Draw();
+            map.joueurs[0].Interface.Draw();
             // DRAW STRINGS
             /**/
             spriteBatch.End();

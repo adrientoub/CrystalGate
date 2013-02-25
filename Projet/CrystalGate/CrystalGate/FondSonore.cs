@@ -14,7 +14,7 @@ namespace CrystalGate
         static bool _isLoadedNext = false;
         static TimeSpan _finDeLaMusique = new TimeSpan();
         static string[] _musicList = new string[] {
-            "HOM4"
+            "Musiques/HOM4"
         };
         static int id = 0;
         static int idNext = 1;

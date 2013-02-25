@@ -16,6 +16,7 @@ namespace CrystalGate
         MouseState mouse { get; set; }
         MouseState Oldmouse { get; set; }
         KeyboardState key { get; set; }
+        KeyboardState Oldkey { get; set; }
         public UI Interface { get; set; }
         bool InWaitingPoint;
         int spell;
@@ -72,7 +73,11 @@ namespace CrystalGate
                     if (champion.IsCastable(1))
                         champion.Cast(spell, champion.pointCible);
                 }
-
+                // Pour afficher/cacher le sac
+                if (key.IsKeyDown(Keys.B) && Oldkey.IsKeyUp(Keys.B))
+                    Interface.DrawSac = !Interface.DrawSac;
+                
+                // Fait attaquer l'unité la plus proche
                 if (isRoaming)
                 {
                     float distanceInit = 9000;
@@ -94,6 +99,7 @@ namespace CrystalGate
             CameraCheck();
             CheckWinandLose();
             Oldmouse = mouse;
+            Oldkey = key;
         }
 
         public void DonnerOrdreDeplacer()

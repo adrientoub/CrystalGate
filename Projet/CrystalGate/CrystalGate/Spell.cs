@@ -26,6 +26,7 @@ namespace CrystalGate
         protected int AnimationCurrent { get; set; }
         protected int AnimationLimite = 2;
         protected Rectangle SpritePosition { get; set; } // Position a draw dans le sprite
+        public Color Color = Color.White;
         public Vector2 Tiles { get; set; } // Longueur et hauteur de la til à Draw
 
         public float LastCast { get; set; }
