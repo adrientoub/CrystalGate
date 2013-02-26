@@ -174,15 +174,6 @@
       <Time>2013-01-31T00:41:47.9866343+01:00</Time>
     </Item>
     <Item>
-      <Source>Sons\soin.MP3</Source>
-      <Name>Sons\soin</Name>
-      <Importer>Mp3Importer</Importer>
-      <Processor>SoundEffectProcessor</Processor>
-      <Options>None</Options>
-      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Sons\soin.xnb</Output>
-      <Time>2013-01-31T00:41:47.9876337+01:00</Time>
-    </Item>
-    <Item>
       <Source>Sons\ArcherAttack.mp3</Source>
       <Name>Sons\ArcherAttack</Name>
       <Importer>Mp3Importer</Importer>
@@ -335,6 +326,42 @@
       <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Musiques\HOM4.xnb</Output>
       <Extra>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Musiques\HOM4.wma</Extra>
       <Time>2013-02-25T18:54:11.5307401+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Boutons\Invisibility.JPG</Source>
+      <Name>Boutons\Invisibility</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Boutons\Invisibility.xnb</Output>
+      <Time>2013-02-26T19:54:56.0322131+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Boutons\potionDeVie.png</Source>
+      <Name>Boutons\potionDeVie</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Boutons\potionDeVie.xnb</Output>
+      <Time>2013-02-26T19:54:56.0332145+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Sons\InvisibilityTarget.wav</Source>
+      <Name>Sons\InvisibilityTarget</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Sons\InvisibilityTarget.xnb</Output>
+      <Time>2013-02-25T21:40:00.0195611+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Sons\soin.wav</Source>
+      <Name>Sons\soin</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Sons\soin.xnb</Output>
+      <Time>2013-02-25T21:40:00.0205622+01:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>

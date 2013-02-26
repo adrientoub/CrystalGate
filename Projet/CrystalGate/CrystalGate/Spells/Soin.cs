@@ -9,12 +9,15 @@ namespace CrystalGate
 {
     class Soin : Spell
     {
-        public Soin(Unite u)
+        public Soin(Unite u, bool useMana = true)
             : base(u)  
         {
             Cooldown = 2;
             Ticks = 1;
-            CoutMana = 15;
+            if (useMana)
+                CoutMana = 15;
+            else
+                CoutMana = 0;
             Animation = unite.packAnimation.Soin();
             AnimationReset = unite.packAnimation.Soin();
             Tiles = new Vector2(180 / 5, 35);

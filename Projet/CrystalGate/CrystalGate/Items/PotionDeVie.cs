@@ -12,13 +12,12 @@ namespace CrystalGate
 
         public PotionDeVie(Vector2 position, PackTexture pack) : base(position, pack)
         {
-            Position = position;
             Icone = pack.boutons[3];
         }
 
         public override void Effet(Unite unite)
         {
-            spell = new Soin(unite);
+            spell = new Soin(unite, false);
         }
     }
 }
