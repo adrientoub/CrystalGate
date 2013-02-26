@@ -41,7 +41,7 @@ namespace CrystalGateEditor
             spriteBatch = new SpriteBatch(GraphicsDevice);
             sp = Content.Load<SpriteFont>("Police");
             user = new User();
-            ui = new UI(user, Content.Load<Texture2D>("Palette"), sp);
+            ui = new UI(user, Content.Load<Texture2D>("Palette"), sp, Content.Load<Texture2D>("writing"));
             ui.mode = UI.Mode.LoadOrCreate;
         }
 

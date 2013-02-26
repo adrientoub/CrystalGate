@@ -12,7 +12,7 @@ namespace CrystalGateEditor
 {
     class UI
     {
-        Texture2D Palette;
+        Texture2D Palette, fondTexte;
         SpriteFont SpriteFont;
 
         Vector2 PalettePosition;
@@ -47,11 +47,12 @@ namespace CrystalGateEditor
 
         Stack<Vector4> stack;
 
-        public UI(User user, Texture2D Palette, SpriteFont spriteFont)
+        public UI(User user, Texture2D Palette, SpriteFont spriteFont, Texture2D fondTexte)
         {
             this.user = user;
 
             this.Palette = Palette;
+            this.fondTexte = fondTexte;
             this.SpriteFont = spriteFont;
 
             this.PalettePosition = new Vector2(width - Palette.Width,0);
@@ -238,11 +239,15 @@ namespace CrystalGateEditor
                             break;
                     }
                     sousmode = SousMode.Done;
+                    ShowCurrent = false;
                 }
             }
 
             if (thread - threadActuel > 100 && current == "Carte sauvegarde")
+            {
                 current = "";
+                ShowCurrent = false;
+            }
 
             thread++;
 
@@ -326,6 +331,7 @@ namespace CrystalGateEditor
             }
             stream.Close();
             current = "Carte sauvegarde";
+            ShowCurrent = true;
             thread = threadActuel;
         }
 
@@ -372,7 +378,10 @@ namespace CrystalGateEditor
             if (ShowPalette)
                 spriteBatch.Draw(Palette, PalettePosition, Color.White);
             if (ShowCurrent)
+            {
+                spriteBatch.Draw(fondTexte, new Vector2(width / 2 - 300, height / 1.5f - 15), Color.White);
                 spriteBatch.DrawString(SpriteFont, current, new Vector2(user.camera.Position.X + width / 2, user.camera.Position.Y + height / 1.5f), Color.White, 0, SpriteFont.MeasureString(current) / 2, 1, SpriteEffects.None, 0);
+            }
             if (ShowHelp)
             {
                 string str = "    Raccourcis claviers: \n Ctrl + S - Sauvegarde la carte \n P - Affiche la palette \n R - Redemarrer l'editeur \n ? - Affiche l'aide \n";
