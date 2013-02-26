@@ -51,7 +51,7 @@ namespace CrystalGate
 
         public void Update()
         {
-            int widthFondNoir = 350, heightFondNoir = 180;
+            int widthFondNoir = 380, heightFondNoir = 180;
 
             CadrePosition = new Rectangle((int)joueur.camera.Position.X, (int)joueur.camera.Position.Y + height - heightFondNoir, widthFondNoir, heightFondNoir);
             PortraitPosition = new Rectangle(CadrePosition.X + CadrePosition.Width - Portrait.Width, CadrePosition.Y + 50, Portrait.Width, Portrait.Height);
