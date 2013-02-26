@@ -11,12 +11,15 @@ namespace CrystalGate
     {
         List<Unite> uniteFollowing;
 
-        public Invisibilite(Unite u)
+        public Invisibilite(Unite u, bool useMana = true)
             : base(u)
         {
             Cooldown = 5;
             Ticks = 300;
-            CoutMana = 50;
+            if (useMana)
+                CoutMana = 50;
+            else
+                CoutMana = 0;
             Tiles = new Vector2(320 / 5, 320 / 5);
 
             NeedUnPoint = false;
