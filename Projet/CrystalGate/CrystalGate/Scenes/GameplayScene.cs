@@ -27,8 +27,6 @@ namespace CrystalGate.Scenes
 
         public static List<SoundEffect> _effetsSonores = new List<SoundEffect> { }; // Tous les effets sonores.
 
-
-
         public GameplayScene(SceneManager sceneMgr)
             : base(sceneMgr)
         {
@@ -52,7 +50,7 @@ namespace CrystalGate.Scenes
             pack.unites = new List<Texture2D> { content.Load<Texture2D>("Unites/knight"), content.Load<Texture2D>("Unites/grunt"), content.Load<Texture2D>("Unites/archer"), content.Load<Texture2D>("Unites/troll"), content.Load<Texture2D>("Unites/demon"), content.Load<Texture2D>("Unites/ogre") };
             pack.sorts.Add(content.Load<Texture2D>("Spells/Explosion"));
             pack.sorts.Add(content.Load<Texture2D>("Spells/Soin"));
-            pack.boutons = new List<Texture2D> { content.Load<Texture2D>("Boutons/Explosion"), content.Load<Texture2D>("Boutons/Soin") };
+            pack.boutons = new List<Texture2D> { content.Load<Texture2D>("Boutons/Explosion"), content.Load<Texture2D>("Boutons/Soin"), content.Load<Texture2D>("Boutons/Invisibility"), content.Load<Texture2D>("Boutons/PotionDeVie") };
             pack.projectiles = new List<Texture2D> { content.Load<Texture2D>("Projectiles/arrow"), content.Load<Texture2D>("Projectiles/axe"), content.Load<Texture2D>("Projectiles/fireball") };
             pack.map.Add(content.Load<Texture2D>("summertiles"));
 
@@ -74,7 +72,8 @@ namespace CrystalGate.Scenes
             map.waves.Add(new Wave(new List<Vector2> { new Vector2(1, 9), new Vector2(1, 10) }, new List<Vector2> { new Vector2(11, 0), new Vector2(30, 1), new Vector2(23, 21) }, new Ogre(Vector2.Zero, map, pack), 3, map.joueurs[0].champion));
 
             // Ajout des items
-            map.items.Add(new Item(new Vector2(1,3), pack));
+            for(int i = 0; i < 9; i++)
+                map.items.Add(new PotionDeVie(new Vector2(1, 3), pack));
         }
 
         public override void Update(GameTime gameTime, bool othersceneHasFocus, bool coveredByOtherscene)
@@ -88,10 +87,10 @@ namespace CrystalGate.Scenes
             if (IsActive) // Si le jeu tourne (en gros)
             {
                 FondSonore.Update();
-                // On update les infos des joueurs
-                map.joueurs[0].Update(map.unites);
                 // On update les infos de la map
                 map.Update(map.unites, gameTime);
+                // On update les infos des joueurs
+                map.joueurs[0].Update(map.unites);
                 // On update les infos des items
                 foreach (Item i in map.items)
                     i.Update(map.unites);

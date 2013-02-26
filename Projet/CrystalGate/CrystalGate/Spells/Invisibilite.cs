@@ -20,7 +20,7 @@ namespace CrystalGate
             Tiles = new Vector2(320 / 5, 320 / 5);
 
             NeedUnPoint = false;
-            SpriteBouton = unite.packTexture.boutons[0];
+            SpriteBouton = unite.packTexture.boutons[2];
             SpriteEffect = unite.packTexture.sorts[0];
             sonSort = new EffetSonore(10);
             uniteFollowing = new List<Unite>();
@@ -57,7 +57,7 @@ namespace CrystalGate
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(SpriteEffect, Point * unite.Map.TailleTiles, SpritePosition, Color.White, 0f, new Vector2(Tiles.X / 2, Tiles.Y / 2), 1f, SpriteEffects.None, 0);
+            
         }
     }
 }

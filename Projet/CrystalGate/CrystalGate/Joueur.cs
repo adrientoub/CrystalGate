@@ -118,8 +118,15 @@ namespace CrystalGate
                 if (key.IsKeyDown(Keys.B) && Oldkey.IsKeyUp(Keys.B))
                     Interface.DrawSac = !Interface.DrawSac;
                 // Pour utiliser les objets
-                if (key.IsKeyDown(Keys.NumPad1) && Oldkey.IsKeyUp(Keys.NumPad1))
-                    champion.Inventory[0].Utiliser();
+                if (mouse.X + camera.Position.X >= Interface.SacPosition.X && mouse.Y + camera.Position.Y >= Interface.SacPosition.Y)
+                    if (mouse.LeftButton == ButtonState.Pressed && Oldmouse.LeftButton == ButtonState.Released)
+                    {
+                        int marge = 7;
+                        Vector2 position = new Vector2(mouse.X - (Interface.width - Interface.Sac.Width), mouse.Y - (Interface.height- Interface.Sac.Height));
+                        int indice = (int)position.X / (32 + marge) + (int)Interface.TailleSac.X * ((int)position.Y / (32 + marge));
+                        if (champion.Inventory.Count > indice)
+                            champion.Inventory[indice].Utiliser();
+                    }
                 
                 // Fait attaquer l'unité la plus proche
                 if (isRoaming)
@@ -139,6 +146,7 @@ namespace CrystalGate
                     champion.uniteAttacked = focus;
                 }
             }
+
             // Pour déplacer la caméra
             CameraCheck();
             CheckWinandLose();

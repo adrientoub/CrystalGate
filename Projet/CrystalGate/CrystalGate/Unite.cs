@@ -31,6 +31,7 @@ namespace CrystalGate
 
         public List<Spell> spells { get; set; }
         public List<Item> Inventory { get; set; }
+        public int InventoryCapacity = 64;
         public bool Drawlife { get; set; }
         public double idWave { get; set; }
 
@@ -64,6 +65,7 @@ namespace CrystalGate
             Animer(); 
             Deplacer();
             TestMort(effets);
+            // Update l'IA
             if(!isAChamp)
                 IA(unitsOnMap);
 
@@ -76,36 +78,19 @@ namespace CrystalGate
                 if (i.spell.ToDraw)
                     i.spell.Update();
             // Pour Update les projectiles
-            if (Projectile != null)
-            {
-                Projectile.Update();
-                if (Projectile.Timer <= 0) // quand le projectile atteint sa cible
-                {
-                    Projectile = null;
-                    if(uniteAttacked != null)// Si la cible n'est pas morte entre temps
-                        uniteAttacked.Vie -= Dommages - uniteAttacked.Defense;
-                }
-            }
+            ProjectileUpdate();
             // On ajoute du mana
-            manaUpdate();
-
+            ManaUpdate();
+            // On Update l'inventaire de l'unité
+            InventoryUpdate();
             // On rafraichit la propriete suivante, elle est juste indicative et n'affecte pas le draw, mais le pathfinding
             PositionTile = new Vector2((int)(ConvertUnits.ToDisplayUnits(body.Position.X) / Map.TailleTiles.X), (int)(ConvertUnits.ToDisplayUnits(body.Position.Y) / Map.TailleTiles.Y));
-
+            // Refresh l'attaque et le pathfinding correspondant
             if (uniteAttacked != null)
                 Attaquer(uniteAttacked);
         }
 
-        public void manaUpdate()
-        {
-            if (Map.gametime.TotalGameTime.TotalMilliseconds - lastManaAdd >= ManaRegen && Mana + 1 <= ManaMax)
-            {
-                lastManaAdd = Map.gametime.TotalGameTime.TotalMilliseconds;
-                Mana++;
-            }
-        }
-
-        public void IA(List<Unite> unitsOnMap)
+        void IA(List<Unite> unitsOnMap)
         {
             // Cast un heal si < à la moitié de vie
             if (Vie <= VieMax / 2 && IsCastable(1))
@@ -132,6 +117,36 @@ namespace CrystalGate
         {
             return Map.gametime.TotalGameTime.TotalMilliseconds - spells[idSort].LastCast > spells[idSort].Cooldown * 1000 && Mana >= spells[idSort].CoutMana && Mana > 0;
         } // Indique si un sort est castable
+
+        void ProjectileUpdate()
+        {
+            if (Projectile != null)
+            {
+                Projectile.Update();
+                if (Projectile.Timer <= 0) // quand le projectile atteint sa cible
+                {
+                    Projectile = null;
+                    if (uniteAttacked != null)// Si la cible n'est pas morte entre temps
+                        uniteAttacked.Vie -= Dommages - uniteAttacked.Defense;
+                }
+            }
+        }
+
+        void InventoryUpdate()
+        {
+            for (int i = 0; i < Inventory.Count; i++)
+                if (Inventory[i].Disabled && !Inventory[i].spell.ToDraw)
+                    Inventory.Remove(Inventory[i]);
+        }
+       
+        void ManaUpdate()
+        {
+            if (Map.gametime.TotalGameTime.TotalMilliseconds - lastManaAdd >= ManaRegen && Mana + 1 <= ManaMax)
+            {
+                lastManaAdd = Map.gametime.TotalGameTime.TotalMilliseconds;
+                Mana++;
+            }
+        }
 
         public virtual void Attaquer(Unite unite)
         {
@@ -334,7 +349,6 @@ namespace CrystalGate
         public void Cast(int i, Vector2 point)
         {
             // Cast ou initialise le sort
-            spells[i].Color = Color.White;
             spells[i].Begin(point);
         }
 
@@ -354,7 +368,7 @@ namespace CrystalGate
                 Projectile.Draw(spriteBatch);
         }
 
-        private void DrawVie(SpriteBatch spriteBatch)
+        void DrawVie(SpriteBatch spriteBatch)
         {
             if (Drawlife)
             {

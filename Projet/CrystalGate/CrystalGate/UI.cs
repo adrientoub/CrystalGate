@@ -25,6 +25,7 @@ namespace CrystalGate
 
         public bool DrawSelectPoint;
         public bool DrawSac;
+        public Vector2 TailleSac = new Vector2(8, 8);
         SpriteBatch spritebatch { get; set; }
         SpriteFont gamefont { get; set; }
 
@@ -33,8 +34,8 @@ namespace CrystalGate
 
         public Joueur joueur { get; set; }
 
-        int width = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width;
-        int height = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height;
+        public int width = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width;
+        public int height = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height;
 
         public UI(Joueur joueur, Texture2D barreDesSorts, Texture2D curseur, Texture2D portrait, Texture2D sac, Texture2D blank, SpriteBatch sp, SpriteFont gf)
         {
@@ -84,12 +85,19 @@ namespace CrystalGate
             {
                 spritebatch.Draw(Sac, SacPosition, Color.White);
                 // Affichage des items
+                int x = 0;
                 int j = 0;
                 Vector2 marge = new Vector2(8, 8); // marge de l'inventaire
                 foreach (Item it in joueur.champion.Inventory)
                 {
-                    spritebatch.Draw(it.Icone, new Vector2(SacPosition.X, SacPosition.Y) + marge + new Vector2((32 + 7)* j, 0) , Color.White);
-                    j++;
+                    if(!it.Disabled)
+                        spritebatch.Draw(it.Icone, new Vector2(SacPosition.X, SacPosition.Y) + marge + new Vector2((32 + 7) * x, (32 + 7) * j), Color.White);
+                    x++;
+                    if (x >= TailleSac.X)
+                    {
+                        x = 0;
+                        j++;
+                    }
                 }
             }
             // Affichage de la victoire ou de la défaite
@@ -99,12 +107,20 @@ namespace CrystalGate
                 spritebatch.DrawString(gamefont, "Defaite!", new Vector2(joueur.camera.Position.X + width / 2 - gamefont.MeasureString("Defaite").X / 2, joueur.camera.Position.Y + height / 2 - gamefont.MeasureString("Defaite").Y / 2), Color.Black);
             if(DrawSelectPoint)
                 spritebatch.DrawString(gamefont, str2, new Vector2(BarreDesSortsPosition.X - gamefont.MeasureString(str2).X / 2, BarreDesSortsPosition.Y - BarreDesSorts.Height), Color.White);
+            
             // Affichage des spells
-            int i = 0;
-            foreach (Spell s in joueur.champion.spells)
+            for(int i = 0; i < joueur.champion.spells.Count;i++)
             {
-                spritebatch.Draw(s.SpriteBouton, new Vector2(BarreDesSortsPosition.X - 130 + i * (32 + 5), BarreDesSortsPosition.Y + 8), s.Color);
-                i++;
+                if (joueur.champion.Map.gametime != null)
+                {
+                    Color color;
+                    if (joueur.champion.IsCastable(i))
+                        color = Color.White;
+                    else
+                        color = Color.Red;
+                    spritebatch.Draw(joueur.champion.spells[i].SpriteBouton, new Vector2(BarreDesSortsPosition.X - 130 + i * (32 + 5), BarreDesSortsPosition.Y + 8), color);
+                }
+
             }
             spritebatch.Draw(Curseur, new Vector2(joueur.camera.Position.X + m.X, joueur.camera.Position.Y + m.Y), Color.White);
         }

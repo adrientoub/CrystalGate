@@ -64,7 +64,7 @@ namespace CrystalGate
                     u.uniteAttacked = null;
             }
             for (int i = 0; i < items.Count; i++)
-                if (items[i].Disabled)
+                if (items[i].InInventory)
                     items.RemoveAt(i);
         }
 

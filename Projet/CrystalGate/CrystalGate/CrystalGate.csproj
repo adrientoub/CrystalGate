@@ -123,6 +123,7 @@
     <Compile Include="FondSonore.cs" />
     <Compile Include="Camera\Input.cs" />
     <Compile Include="Item.cs" />
+    <Compile Include="Items\PotionDeVie.cs" />
     <Compile Include="Projectile.cs" />
     <Compile Include="Spell.cs" />
     <Compile Include="Spells\Bump.cs" />
