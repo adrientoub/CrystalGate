@@ -37,6 +37,7 @@ namespace CrystalGate
 
         protected Direction direction { get; set; }
         protected bool FlipH { get; set; }
+        public float Scale = 1;
         public bool Mort { get; set; }
         public List<Noeud> ObjectifListe { get; set; }
 
@@ -133,7 +134,7 @@ namespace CrystalGate
 
         public virtual void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(Sprite, ConvertUnits.ToDisplayUnits(body.Position), SpritePosition, Color.White, 0f, new Vector2(Tiles.X / 2, Tiles.Y / 2), 1f, FlipH ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 0);
+            spriteBatch.Draw(Sprite, ConvertUnits.ToDisplayUnits(body.Position), SpritePosition, Color.White, 0f, new Vector2(Tiles.X / 2, Tiles.Y / 2), Scale, FlipH ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 0);
         }
 
         protected enum Direction

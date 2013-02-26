@@ -20,7 +20,7 @@ namespace CrystalGate
         static int idNext = 1;
         static ContentManager contentRef;
         static int _playingNow = 0; // prend les valeurs 1 et 0
-        public static float volume = 0.5f;
+        public static float volume = 0.0f;
         
 
         public static void Play() 

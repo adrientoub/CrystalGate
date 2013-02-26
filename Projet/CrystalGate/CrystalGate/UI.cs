@@ -64,10 +64,10 @@ namespace CrystalGate
             MouseState m = Mouse.GetState();
             Text life = new Text("Life"), attack = new Text("Attack"), armor = new Text("Armor"), selectPoint = new Text("SelectPoint"), manaText = new Text("Mana"); // définition des mots traduisibles
 
-            string str = life.get() + " : " + joueur.champion.Vie + " / " + joueur.champion.VieMax + "\n"
-                + manaText.get() + " : " + joueur.champion.Mana + " / " + joueur.champion.ManaMax + "\n"
-                + attack.get() + " : " + joueur.champion.Dommages + "\n"
-                + armor.get() + " : " + joueur.champion.Defense + "\n";
+            string str = " " + life.get() + " : " + joueur.champion.Vie + " / " + joueur.champion.VieMax + "\n "
+                + manaText.get() + " : " + joueur.champion.Mana + " / " + joueur.champion.ManaMax + "\n "
+                + attack.get() + " : " + joueur.champion.Dommages + "\n "
+                + armor.get() + " : " + joueur.champion.Defense + "\n ";
             string str2 = selectPoint.get();
 
             spritebatch.Draw(BarreDesSorts, BarreDesSortsPosition, null, Color.White, 0, new Vector2(BarreDesSorts.Width / 2, 0), SpriteEffects.None, 1);

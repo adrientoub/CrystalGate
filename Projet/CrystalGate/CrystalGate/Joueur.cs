@@ -58,7 +58,7 @@ namespace CrystalGate
                 if (key.IsKeyDown(Keys.S))
                     DonnerOrdreStop();
                 // Pour lancer un sort
-                if (key.IsKeyDown(Keys.D1) || SourisCheck(0) && champion.spells.Count > 0)
+                if (key.IsKeyDown(Keys.D1) && champion.spells.Count > 0 || SourisCheck(0) && champion.spells.Count > 0)
                 {
                     spell = 0;
                     if (champion.IsCastable(0))
@@ -72,7 +72,7 @@ namespace CrystalGate
                             champion.Cast(spell, champion.pointCible);
                     }
                 }
-                if (key.IsKeyDown(Keys.D2) || SourisCheck(1) && champion.spells.Count > 1)
+                if (key.IsKeyDown(Keys.D2) && champion.spells.Count > 1 || SourisCheck(1) && champion.spells.Count > 1)
                 {
                     spell = 1;
                     if (champion.IsCastable(1))
@@ -86,7 +86,7 @@ namespace CrystalGate
                             champion.Cast(spell, champion.pointCible);
                     }
                 }
-                if (key.IsKeyDown(Keys.D3) || SourisCheck(2) && champion.spells.Count > 2)
+                if (key.IsKeyDown(Keys.D3) && champion.spells.Count > 2 || SourisCheck(2) && champion.spells.Count > 2)
                 {
                     spell = 2;
                     if (champion.IsCastable(2))
@@ -100,7 +100,7 @@ namespace CrystalGate
                             champion.Cast(spell, champion.pointCible);
                     }
                 }
-                if (key.IsKeyDown(Keys.D4) || SourisCheck(3) && champion.spells.Count > 3)
+                if (key.IsKeyDown(Keys.D4) && champion.spells.Count > 3 || SourisCheck(3) && champion.spells.Count > 3)
                 {
                     spell = 3;
                     if (champion.IsCastable(3))

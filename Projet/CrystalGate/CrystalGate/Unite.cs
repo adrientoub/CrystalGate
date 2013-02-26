@@ -127,7 +127,10 @@ namespace CrystalGate
                 {
                     Projectile = null;
                     if (uniteAttacked != null)// Si la cible n'est pas morte entre temps
-                        uniteAttacked.Vie -= Dommages - uniteAttacked.Defense;
+                        if (Dommages - uniteAttacked.Defense <= 0)
+                            uniteAttacked.Vie -= 1;
+                        else
+                            uniteAttacked.Vie -= Dommages - uniteAttacked.Defense;
                 }
             }
         }
@@ -183,7 +186,10 @@ namespace CrystalGate
                     if(IsRanged) // Si l'unité attaque à distance, on creer un projectile, sinon on attaque direct
                         Projectile = new Projectile(this, uniteAttacked);
                     else
-                        unite.Vie -= Dommages - unite.Defense;
+                        if (Dommages - unite.Defense <= 0)
+                            unite.Vie -= 1;
+                        else
+                            unite.Vie -= Dommages - unite.Defense;
                     // son
                     effetUniteAttaque.Play();
 
