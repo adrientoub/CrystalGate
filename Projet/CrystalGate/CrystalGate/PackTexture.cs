@@ -13,6 +13,7 @@ namespace CrystalGate
     public class PackTexture
     {
         public Texture2D blank { get; set; }
+        public Texture2D tresor { get; set; }
         public List<Texture2D> unites { get; set; }
         public List<Texture2D> sorts { get; set; }
         public List<Texture2D> boutons { get; set; }
@@ -28,8 +29,5 @@ namespace CrystalGate
             map = new List<Texture2D> { };
             projectiles = new List<Texture2D> { };
         }
-        
-
-
     }
 }

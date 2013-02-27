@@ -47,6 +47,7 @@ namespace CrystalGate.Scenes
 
             // Pack de texture (Contient toutes les sprites des unites et des sorts)
             pack = new PackTexture(content.Load<Texture2D>("blank"));
+            pack.tresor = content.Load<Texture2D>("tresor");
             pack.unites = new List<Texture2D> { content.Load<Texture2D>("Unites/knight"), content.Load<Texture2D>("Unites/grunt"), content.Load<Texture2D>("Unites/archer"), content.Load<Texture2D>("Unites/troll"), content.Load<Texture2D>("Unites/demon"), content.Load<Texture2D>("Unites/ogre"), content.Load<Texture2D>("Unites/champion")};
             pack.sorts.Add(content.Load<Texture2D>("Spells/Explosion"));
             pack.sorts.Add(content.Load<Texture2D>("Spells/Soin"));
@@ -75,8 +76,9 @@ namespace CrystalGate.Scenes
             map.waves.Add(packWave.Level1Wave3());
             map.waves.Add(packWave.Level1Wave4());
             // Ajout des items
-            for(int i = 0; i < 9; i++)
-                map.items.Add(new PotionDeVie(new Vector2(1, 3), pack));
+            map.items.Add(new PotionDeVie(new Vector2(22, 24), pack));
+            map.items.Add(new PotionDeVie(new Vector2(23, 24), pack));
+            //map.items.Add(new PotionDeVie(new Vector2(40, 32), pack));
         }
 
         public override void Update(GameTime gameTime, bool othersceneHasFocus, bool coveredByOtherscene)
@@ -127,7 +129,7 @@ namespace CrystalGate.Scenes
                 e.Draw(spriteBatch);
             // DRAW ITEMS
             foreach (Item i in map.items)
-                spriteBatch.Draw(pack.boutons[0], i.Position * map.TailleTiles, Color.White);
+                spriteBatch.Draw(pack.tresor, i.Position * map.TailleTiles, Color.White);
             // DRAW UNITES
             foreach (Unite o in map.unites)
                 o.Draw(spriteBatch);
