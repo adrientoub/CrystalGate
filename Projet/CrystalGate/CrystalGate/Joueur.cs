@@ -220,8 +220,8 @@ namespace CrystalGate
                 camera.Position = new Vector2(0, camera.Position.Y);
             if (camera.Position.Y < 0)
                 camera.Position = new Vector2(camera.Position.X, 0);
-            if (camera.Position.Y > champion.Map.Taille.Y * champion.Map.TailleTiles.Y - height + Interface.BarreDesSorts.Height)
-                camera.Position = new Vector2(camera.Position.X, champion.Map.Taille.Y * champion.Map.TailleTiles.Y - height + Interface.BarreDesSorts.Height);
+            if (camera.Position.Y > champion.Map.Taille.Y * champion.Map.TailleTiles.Y - height + Interface.CadrePosition.Height)
+                camera.Position = new Vector2(camera.Position.X, champion.Map.Taille.Y * champion.Map.TailleTiles.Y - height + Interface.CadrePosition.Height);
             
             //Update de la position de la caméra et de l'interface
             camera.Position = new Vector2(camera.Position.X, camera.Position.Y) + vec;

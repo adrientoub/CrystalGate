@@ -70,9 +70,10 @@ namespace CrystalGate.Scenes
 
             // La vague
             PackWave packWave = new PackWave(map, pack, map.joueurs[0].champion);
-
             map.waves.Add(packWave.Level1Wave1());
-
+            map.waves.Add(packWave.Level1Wave2());
+            map.waves.Add(packWave.Level1Wave3());
+            map.waves.Add(packWave.Level1Wave4());
             // Ajout des items
             for(int i = 0; i < 9; i++)
                 map.items.Add(new PotionDeVie(new Vector2(1, 3), pack));

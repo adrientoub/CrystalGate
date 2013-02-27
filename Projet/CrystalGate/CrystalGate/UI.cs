@@ -122,6 +122,7 @@ namespace CrystalGate
                 }
 
             }
+            // Curseur
             spritebatch.Draw(Curseur, new Vector2(joueur.camera.Position.X + m.X, joueur.camera.Position.Y + m.Y), Color.White);
         }
     }
