@@ -44,7 +44,6 @@ namespace CrystalGate
                         }
                     }
                     unite.color = new Color(255, 255, 255, 0);
-                    unite.Scale = 1.5f;
                 }
                 else if (TickCurrent == Ticks - 1)
                 {

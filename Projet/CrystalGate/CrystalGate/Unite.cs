@@ -186,7 +186,7 @@ namespace CrystalGate
                     if(IsRanged) // Si l'unité attaque à distance, on creer un projectile, sinon on attaque direct
                         Projectile = new Projectile(this, uniteAttacked);
                     else
-                        if (Dommages - unite.Defense <= 0)
+                        if (Dommages - unite.Defense <= 0) // Si armure > Dommages , degats = 1
                             unite.Vie -= 1;
                         else
                             unite.Vie -= Dommages - unite.Defense;
@@ -194,34 +194,33 @@ namespace CrystalGate
                     effetUniteAttaque.Play();
 
                     // Fait regarder l'unité vers l'unité attaqué et l'anime
-                    if (Animation.Count == 0)
-                    {
-                        AnimationCurrent = AnimationLimite;
-                        FlipH = false;
-                        float angle = Outil.AngleUnites(this, unite);
 
-                        if (angle >= Math.PI / 4 && angle <= 3 * Math.PI / 4)
-                        {
-                            direction = Direction.Haut;
-                            Animation = packAnimation.AttaquerHaut();
-                        }
-                        else if (angle >= -3 * Math.PI / 4 && angle <= -Math.PI / 4)
-                        {
-                            direction = Direction.Bas;
-                            Animation = packAnimation.AttaquerBas();
-                        }
-                        else if (angle >= -Math.PI / 4 && angle <= Math.PI / 4)
-                        {
-                            direction = Direction.Gauche;
-                            FlipH = true;
-                            Animation = packAnimation.AttaquerDroite();
-                        }
-                        else
-                        {
-                            direction = Direction.Droite;
-                            Animation = packAnimation.AttaquerDroite();
-                        }
+                    AnimationCurrent = AnimationLimite;
+                    FlipH = false;
+                    float angle = Outil.AngleUnites(this, unite);
+
+                    if (angle >= Math.PI / 4 && angle <= 3 * Math.PI / 4)
+                    {
+                        direction = Direction.Haut;
+                        Animation = packAnimation.AttaquerHaut();
                     }
+                    else if (angle >= -3 * Math.PI / 4 && angle <= -Math.PI / 4)
+                    {
+                        direction = Direction.Bas;
+                        Animation = packAnimation.AttaquerBas();
+                    }
+                    else if (angle >= -Math.PI / 4 && angle <= Math.PI / 4)
+                    {
+                        direction = Direction.Gauche;
+                        FlipH = true;
+                        Animation = packAnimation.AttaquerDroite();
+                    }
+                    else
+                    {
+                        direction = Direction.Droite;
+                        Animation = packAnimation.AttaquerDroite();
+                    }
+                    
                 }
             }
         }
@@ -360,7 +359,7 @@ namespace CrystalGate
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(Sprite, ConvertUnits.ToDisplayUnits(body.Position), SpritePosition, color, 0f, new Vector2(Tiles.X / 2, Tiles.Y / 2), 1f, FlipH ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 0);
+            spriteBatch.Draw(Sprite, ConvertUnits.ToDisplayUnits(body.Position), SpritePosition, color, 0f, new Vector2(Tiles.X / 2, Tiles.Y / 2), Scale, FlipH ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 0);
             DrawVie(spriteBatch);
             // Draw les sorts
             foreach (Spell s in spells)

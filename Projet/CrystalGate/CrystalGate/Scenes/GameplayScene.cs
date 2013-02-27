@@ -65,11 +65,13 @@ namespace CrystalGate.Scenes
             map.unites.Add(map.joueurs[0].champion);
 
             // Ajout Interface
-            UI Interface = new UI(map.joueurs[0], content.Load<Texture2D>("UI/barre des sorts"), content.Load<Texture2D>("Curseur"), content.Load<Texture2D>("UI/archerIcone"), content.Load<Texture2D>("UI/inventaire"), content.Load<Texture2D>("blank"), spriteBatch, gameFont);
+            UI Interface = new UI(map.joueurs[0], content.Load<Texture2D>("UI/barre des sorts"), content.Load<Texture2D>("Curseur"), content.Load<Texture2D>("UI/GuerrierIcone"), content.Load<Texture2D>("UI/inventaire"), content.Load<Texture2D>("blank"), spriteBatch, gameFont);
             map.joueurs[0].Interface = Interface;
 
             // La vague
-            map.waves.Add(new Wave(new List<Vector2> { new Vector2(1, 9), new Vector2(1, 10) }, new List<Vector2> { new Vector2(11, 0), new Vector2(30, 1), new Vector2(23, 21) }, new Ogre(Vector2.Zero, map, pack), 3, map.joueurs[0].champion));
+            PackWave packWave = new PackWave(map, pack, map.joueurs[0].champion);
+
+            map.waves.Add(packWave.Level1Wave1());
 
             // Ajout des items
             for(int i = 0; i < 9; i++)
