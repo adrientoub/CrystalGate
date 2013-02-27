@@ -38,7 +38,7 @@ namespace CrystalGate
         public bool Drawlife { get; set; }
         public double idWave { get; set; }
 
-        public float byLevelAdd = 1.1f;
+        public float byLevelAdd = 1.05f;
 
         public Unite(Vector2 Position, Map map, PackTexture packTexture, int Level = 1)
             : base(Position, map, packTexture)
@@ -71,9 +71,11 @@ namespace CrystalGate
         {
             Defense = (int)(Defense * Math.Pow(byLevelAdd, Level - 1));
             Dommages = (int)(Dommages * Math.Pow(byLevelAdd, Level - 1));
-            Vitesse = (int)(Vitesse * Math.Pow(byLevelAdd, Level - 1));
+            Vitesse = (float)(Vitesse * Math.Pow(byLevelAdd, Level - 1));
             ManaMax = (int)(ManaMax * Math.Pow(byLevelAdd, Level - 1));
+            Mana = ManaMax;
             VieMax = (int)(VieMax * Math.Pow(byLevelAdd, Level - 1));
+            Vie = VieMax;
             ManaRegen = (int)(ManaRegen / Math.Pow(byLevelAdd, Level - 1));
             XPUnite = (int)(XPUnite / Math.Pow(byLevelAdd, Level - 1));
         }
