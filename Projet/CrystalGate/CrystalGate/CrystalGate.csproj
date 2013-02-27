@@ -159,6 +159,7 @@
     <Compile Include="Scenes\PauseMenuScene.cs" />
     <Compile Include="Unites\Cavalier.cs" />
     <Compile Include="Unites\Archer.cs" />
+    <Compile Include="Unites\Guerrier.cs" />
     <Compile Include="Unites\Ogre.cs" />
     <Compile Include="Unites\Demon.cs" />
     <Compile Include="Unites\Troll.cs" />

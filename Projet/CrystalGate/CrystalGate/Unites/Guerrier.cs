@@ -8,22 +8,22 @@ using Microsoft.Xna.Framework.Input;
 
 namespace CrystalGate
 {
-    public class Cavalier : Unite
+    public class Guerrier : Unite
     {
 
-        public Cavalier(Vector2 Position, Map map, PackTexture packTexture)
+        public Guerrier(Vector2 Position, Map map, PackTexture packTexture)
             : base(Position, map, packTexture)
         {
             // Graphique
-            Sprite = packTexture.unites[0];
-            Tiles = new Vector2(370 / 5, 835 / 11);
+            Sprite = packTexture.unites[6];
+            Tiles = new Vector2(530 / 5, 930 / 11);
 
             // Statistiques
             Vie = VieMax = 300;
             Vitesse = 2.5f;
             Vitesse_Attaque = 1f;
             Portee = 2f; // 1 = Corps à corps
-            Dommages = 10;
+            Dommages = 50;
             Defense = 10;
 
             // Sons

@@ -32,7 +32,7 @@ namespace CrystalGate
             this.AnimationOriginal = Animation;
             this.AnimationCurrent = Animation;
 
-            Duree = 180;
+            Duree = 300;
 
         }
 
