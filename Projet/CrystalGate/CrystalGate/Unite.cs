@@ -391,7 +391,6 @@ namespace CrystalGate
         {
             spriteBatch.Draw(Sprite, ConvertUnits.ToDisplayUnits(body.Position), SpritePosition, color, 0f, new Vector2(Tiles.X / 2, Tiles.Y / 2), Scale, FlipH ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 0);
             DrawVie(spriteBatch);
-            DrawXP(spriteBatch);
             // Draw les sorts
             foreach (Spell s in spells)
                 if (s.ToDraw)
@@ -412,16 +411,6 @@ namespace CrystalGate
                 int longueur = (int)((float)Vie / (float)VieMax * 50);
                 spriteBatch.Draw(packTexture.blank, ConvertUnits.ToDisplayUnits(body.Position) + new Vector2(0, -30), new Rectangle(0, 0, longueur, largeur), Color.Green, 0f, new Vector2(longueur / 2, largeur / 2), 1f, SpriteEffects.None, 0);
 
-            }
-        }
-
-        void DrawXP(SpriteBatch spriteBatch)
-        {
-            if (DrawExp)
-            {
-                int largeur = 10;
-                int longueur = (int)(((float)XP / (float)(Level * 1000)) * 50);
-                spriteBatch.Draw(packTexture.blank, ConvertUnits.ToDisplayUnits(body.Position) + new Vector2(0, -40), new Rectangle(0, 0, longueur, largeur), Color.Aqua, 0f, new Vector2(longueur / 2, largeur / 2), 1f, SpriteEffects.None, 0);
             }
         }
 

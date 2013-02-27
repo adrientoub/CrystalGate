@@ -61,7 +61,9 @@ namespace CrystalGate
 
         public void Draw()
         {
+            int hauteurBarre = 30;
             MouseState m = Mouse.GetState();
+            // Affichage des textes
             Text life = new Text("Life"), attack = new Text("Attack"), armor = new Text("Armor"), selectPoint = new Text("SelectPoint"), manaText = new Text("Mana"), levelText = new Text("Level"); // définition des mots traduisibles
 
             string str = " " + life.get() + " : " + joueur.champion.Vie + " / " + joueur.champion.VieMax + "\n "
@@ -76,10 +78,24 @@ namespace CrystalGate
             
             // Fond bas gauche noir
             spritebatch.Draw(blank, new Rectangle((int)joueur.camera.Position.X, (int)joueur.camera.Position.Y + height - CadrePosition.Height, CadrePosition.Width, CadrePosition.Height), Color.Black);
-            
-            // Portrait et strings
+
+            // Portrait
             spritebatch.Draw(Portrait, PortraitPosition, Color.White);
+
+            int margeGaucheVie = 75, margeGaucheMana = 100, longueurBarre = 150;
+            // Affichage de la barre de vie
+            spritebatch.Draw(blank, new Rectangle(CadrePosition.X + margeGaucheVie, CadrePosition.Y + CadrePosition.Height - (int)gamefont.MeasureString(str).Y, (int)(((float)joueur.champion.Vie / (float)(joueur.champion.VieMax)) * longueurBarre), hauteurBarre), Color.Green);
+            // Affichage de la barre de mana
+            spritebatch.Draw(blank, new Rectangle(CadrePosition.X + margeGaucheMana, CadrePosition.Y + CadrePosition.Height - (int)gamefont.MeasureString(str).Y + (int)gamefont.MeasureString("char").Y, (int)(((float)joueur.champion.Mana / (float)(joueur.champion.ManaMax)) * longueurBarre), hauteurBarre), new Color(0,0,178));
+            // Affichage de la barre d'XP
+            spritebatch.Draw(blank, new Rectangle(CadrePosition.X, CadrePosition.Y + CadrePosition.Height - hauteurBarre, (int)(((float)joueur.champion.XP / (float)(joueur.champion.Level * 1000)) * CadrePosition.Width), hauteurBarre), Color.LightSalmon);
+
+            // Affichage du texte
             spritebatch.DrawString(gamefont, str, new Vector2(CadrePosition.X, CadrePosition.Y + 25), Color.White);
+            string xp = joueur.champion.XP + " / " + joueur.champion.Level * 1000;
+            spritebatch.DrawString(gamefont, xp, new Vector2(CadrePosition.X + CadrePosition.Width / 2 - gamefont.MeasureString(xp).X / 2, CadrePosition.Y + CadrePosition.Height - hauteurBarre), Color.White);
+
+            // Nom du personnage
             Text strUnit = new Text(joueur.champion.ToString().Split(new char[1] { '.' })[1]);
             spritebatch.DrawString(gamefont, strUnit.get(), new Vector2(CadrePosition.X + CadrePosition.Width - gamefont.MeasureString(strUnit.get()).X / 2 - Portrait.Width / 2, CadrePosition.Y), Color.White);
             // Sac
@@ -102,6 +118,7 @@ namespace CrystalGate
                     }
                 }
             }
+
             // Affichage de la victoire ou de la défaite
             if(Win)
                 spritebatch.DrawString(gamefont, "Victoire!", new Vector2(joueur.camera.Position.X + width / 2 - gamefont.MeasureString("Victoire").X / 2, joueur.camera.Position.Y + height / 2 - gamefont.MeasureString("Victoire").Y / 2), Color.Black);
