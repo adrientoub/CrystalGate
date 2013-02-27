@@ -11,8 +11,8 @@ namespace CrystalGate
     public class Guerrier : Unite
     {
 
-        public Guerrier(Vector2 Position, Map map, PackTexture packTexture, bool DrawExp = false)
-            : base(Position, map, packTexture, DrawExp)
+        public Guerrier(Vector2 Position, Map map, PackTexture packTexture, int Level = 1)
+            : base(Position, map, packTexture, Level)
         {
             // Graphique
             Sprite = packTexture.unites[6];
@@ -30,6 +30,7 @@ namespace CrystalGate
             // Sons
             effetUniteAttaque = new EffetSonore(0);
             effetUniteDeath = new EffetSonore(1);
+            statsLevelUpdate();
         }
 
     }

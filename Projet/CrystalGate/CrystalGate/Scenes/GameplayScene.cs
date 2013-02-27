@@ -61,7 +61,7 @@ namespace CrystalGate.Scenes
             Outil.LoadSounds(_effetsSonores, content);
 
             // Ajout joueurs
-            map.joueurs.Add(new Joueur(new Guerrier(new Vector2(0, 9), map, pack, true)));
+            map.joueurs.Add(new Joueur(new Guerrier(new Vector2(0, 9), map, pack)));
             map.unites.Add(map.joueurs[0].champion);
 
             // Ajout Interface

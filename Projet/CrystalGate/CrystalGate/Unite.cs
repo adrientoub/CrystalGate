@@ -36,12 +36,11 @@ namespace CrystalGate
         public List<Item> Inventory { get; set; }
         public int InventoryCapacity = 64;
         public bool Drawlife { get; set; }
-        public bool DrawExp { get; set; }
         public double idWave { get; set; }
 
         public float byLevelAdd = 1.1f;
 
-        public Unite(Vector2 Position, Map map, PackTexture packTexture, bool DrawExp = false)
+        public Unite(Vector2 Position, Map map, PackTexture packTexture, int Level = 1)
             : base(Position, map, packTexture)
         {
             // Constructeur par defaut d'une unité
@@ -57,8 +56,7 @@ namespace CrystalGate
             Vitesse_Attaque = 1.00f;
             Defense = 0;
             XPUnite = 0;
-            Level = 1;
-            this.DrawExp = DrawExp;
+            this.Level = Level;
             // Graphique par defaut
             Sprite = packTexture.blank;
             Tiles = Vector2.One;
@@ -67,6 +65,16 @@ namespace CrystalGate
             idWave = -1;
             spells = new List<Spell> { new Explosion(this), new Soin(this), new Invisibilite(this) };
             Inventory = new List<Item> { };
+        }
+
+        public void statsLevelUpdate()
+        {
+            Defense = (int)(Defense * Math.Pow(byLevelAdd, Level - 1));
+            Dommages = (int)(Dommages * Math.Pow(byLevelAdd, Level - 1));
+            Vitesse = (int)(Vitesse * Math.Pow(byLevelAdd, Level - 1));
+            ManaMax = (int)(ManaMax * Math.Pow(byLevelAdd, Level - 1));
+            VieMax = (int)(VieMax * Math.Pow(byLevelAdd, Level - 1));
+            ManaRegen = (int)(ManaRegen / Math.Pow(byLevelAdd, Level - 1));
         }
 
         public override void Update(List<Unite> unitsOnMap, List<Effet> effets)

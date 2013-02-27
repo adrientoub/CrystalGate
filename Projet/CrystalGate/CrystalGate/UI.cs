@@ -88,12 +88,16 @@ namespace CrystalGate
             // Affichage de la barre de mana
             spritebatch.Draw(blank, new Rectangle(CadrePosition.X + margeGaucheMana, CadrePosition.Y + CadrePosition.Height - (int)gamefont.MeasureString(str).Y + (int)gamefont.MeasureString("char").Y, (int)(((float)joueur.champion.Mana / (float)(joueur.champion.ManaMax)) * longueurBarre), hauteurBarre), new Color(0,0,178));
             // Affichage de la barre d'XP
-            spritebatch.Draw(blank, new Rectangle(CadrePosition.X, CadrePosition.Y + CadrePosition.Height - hauteurBarre, (int)(((float)joueur.champion.XP / (float)(joueur.champion.Level * 1000)) * CadrePosition.Width), hauteurBarre), Color.LightSalmon);
+            int xpToDraw = (int)(((float)joueur.champion.XP / (float)(joueur.champion.Level * 1000)) * CadrePosition.Width);
+            if (xpToDraw != 0)
+                spritebatch.Draw(blank, new Rectangle(CadrePosition.X, CadrePosition.Y + CadrePosition.Height - hauteurBarre, xpToDraw, hauteurBarre), Color.IndianRed);
+            else
+                spritebatch.Draw(blank, new Rectangle(CadrePosition.X, CadrePosition.Y + CadrePosition.Height - hauteurBarre, 1, hauteurBarre), Color.IndianRed);
 
             // Affichage du texte
             spritebatch.DrawString(gamefont, str, new Vector2(CadrePosition.X, CadrePosition.Y + 25), Color.White);
             string xp = joueur.champion.XP + " / " + joueur.champion.Level * 1000;
-            spritebatch.DrawString(gamefont, xp, new Vector2(CadrePosition.X + CadrePosition.Width / 2 - gamefont.MeasureString(xp).X / 2, CadrePosition.Y + CadrePosition.Height - hauteurBarre), Color.White);
+            spritebatch.DrawString(gamefont, xp, new Vector2(CadrePosition.X + CadrePosition.Width / 2 - gamefont.MeasureString(xp).X / 2, CadrePosition.Y + CadrePosition.Height - hauteurBarre - 2), Color.White);
 
             // Nom du personnage
             Text strUnit = new Text(joueur.champion.ToString().Split(new char[1] { '.' })[1]);

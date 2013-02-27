@@ -11,8 +11,8 @@ namespace CrystalGate
     public class Cavalier : Unite
     {
 
-        public Cavalier(Vector2 Position, Map map, PackTexture packTexture)
-            : base(Position, map, packTexture)
+        public Cavalier(Vector2 Position, Map map, PackTexture packTexture, int Level = 1)
+            : base(Position, map, packTexture, Level)
         {
             // Graphique
             Sprite = packTexture.unites[0];
@@ -30,6 +30,7 @@ namespace CrystalGate
             // Sons
             effetUniteAttaque = new EffetSonore(0);
             effetUniteDeath = new EffetSonore(1);
+            statsLevelUpdate();
         }
 
     }

@@ -59,17 +59,17 @@ namespace CrystalGate
                         if (unites[0].Count != 0)
                         {
                             if (unites[0][0] is Cavalier)
-                                unites[0][0].Map.unites.Add(new Cavalier(v, unites[0][0].Map, unites[0][0].packTexture));
+                                unites[0][0].Map.unites.Add(new Cavalier(v, unites[0][0].Map, unites[0][0].packTexture, unites[0][0].Level));
                             else if (unites[0][0] is Grunt)
-                                unites[0][0].Map.unites.Add(new Grunt(v, unites[0][0].Map, unites[0][0].packTexture));
+                                unites[0][0].Map.unites.Add(new Grunt(v, unites[0][0].Map, unites[0][0].packTexture, unites[0][0].Level));
                             else if (unites[0][0] is Archer)
-                                unites[0][0].Map.unites.Add(new Archer(v, unites[0][0].Map, unites[0][0].packTexture));
+                                unites[0][0].Map.unites.Add(new Archer(v, unites[0][0].Map, unites[0][0].packTexture, unites[0][0].Level));
                             else if (unites[0][0] is Troll)
-                                unites[0][0].Map.unites.Add(new Troll(v, unites[0][0].Map, unites[0][0].packTexture));
+                                unites[0][0].Map.unites.Add(new Troll(v, unites[0][0].Map, unites[0][0].packTexture, unites[0][0].Level));
                             else if (unites[0][0] is Demon)
-                                unites[0][0].Map.unites.Add(new Demon(v, unites[0][0].Map, unites[0][0].packTexture));
+                                unites[0][0].Map.unites.Add(new Demon(v, unites[0][0].Map, unites[0][0].packTexture, unites[0][0].Level));
                             else if (unites[0][0] is Ogre)
-                                unites[0][0].Map.unites.Add(new Ogre(v, unites[0][0].Map, unites[0][0].packTexture));
+                                unites[0][0].Map.unites.Add(new Ogre(v, unites[0][0].Map, unites[0][0].packTexture, unites[0][0].Level));
                             else
                                 throw new Exception("Modif la wave!");
 

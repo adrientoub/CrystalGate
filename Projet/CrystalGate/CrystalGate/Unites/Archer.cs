@@ -11,8 +11,8 @@ namespace CrystalGate
     public class Archer : Unite
     {
 
-        public Archer(Vector2 Position, Map map, PackTexture packTexture)
-            : base(Position, map, packTexture)
+        public Archer(Vector2 Position, Map map, PackTexture packTexture, int Level = 1)
+            : base(Position, map, packTexture, Level)
         {
             // Graphique
             Sprite = packTexture.unites[2];
@@ -33,6 +33,7 @@ namespace CrystalGate
             // Sons
             effetUniteAttaque = new EffetSonore(6);
             effetUniteDeath = new EffetSonore(3);
+            statsLevelUpdate();
         }
 
 
