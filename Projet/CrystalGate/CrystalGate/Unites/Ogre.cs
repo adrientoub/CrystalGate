@@ -16,7 +16,7 @@ namespace CrystalGate
         {
             // Graphique
             Sprite = packTexture.unites[5];
-            Tiles = new Vector2(370 / 5, 805 / 11);
+            Tiles = new Vector2(370 / 5, 800 / 11);
             ProjectileSprite = packTexture.projectiles[2];
 
             // Statistiques

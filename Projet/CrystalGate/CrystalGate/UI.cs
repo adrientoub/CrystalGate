@@ -78,8 +78,8 @@ namespace CrystalGate
             // Portrait et strings
             spritebatch.Draw(Portrait, PortraitPosition, Color.White);
             spritebatch.DrawString(gamefont, str, new Vector2(CadrePosition.X, CadrePosition.Y + 25), Color.White);
-            string strUnit = joueur.champion.ToString().Split(new char[1] { '.' })[1];
-            spritebatch.DrawString(gamefont, strUnit, new Vector2(CadrePosition.X + CadrePosition.Width - gamefont.MeasureString(strUnit).X / 2 - Portrait.Width / 2, CadrePosition.Y), Color.White);
+            Text strUnit = new Text(joueur.champion.ToString().Split(new char[1] { '.' })[1]);
+            spritebatch.DrawString(gamefont, strUnit.get(), new Vector2(CadrePosition.X + CadrePosition.Width - gamefont.MeasureString(strUnit.get()).X / 2 - Portrait.Width / 2, CadrePosition.Y), Color.White);
             // Sac
             if (DrawSac)
             {

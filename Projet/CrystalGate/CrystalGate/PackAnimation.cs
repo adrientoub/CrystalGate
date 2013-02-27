@@ -141,7 +141,7 @@ namespace CrystalGate
             else if (unite is Troll)
                 liste.Add(new Vector2(4, 9));
             else if (unite is Grunt)
-                liste.Add(new Vector2(3, 9));
+                liste.Add(new Vector2(0, 10));
             else if (unite is Demon)
                 liste.Add(new Vector2(0, 10));
             else if (unite is Ogre)

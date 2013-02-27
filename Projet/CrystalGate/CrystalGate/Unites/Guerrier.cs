@@ -24,7 +24,7 @@ namespace CrystalGate
             Vitesse_Attaque = 0.5f;
             Portee = 2f; // 1 = Corps à corps
             Dommages = 70;
-            Defense = 10;
+            Defense = 5;
 
             // Sons
             effetUniteAttaque = new EffetSonore(0);
