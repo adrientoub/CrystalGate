@@ -51,7 +51,8 @@ namespace CrystalGate.Scenes
             pack.unites = new List<Texture2D> { content.Load<Texture2D>("Unites/knight"), content.Load<Texture2D>("Unites/grunt"), content.Load<Texture2D>("Unites/archer"), content.Load<Texture2D>("Unites/troll"), content.Load<Texture2D>("Unites/demon"), content.Load<Texture2D>("Unites/ogre"), content.Load<Texture2D>("Unites/champion")};
             pack.sorts.Add(content.Load<Texture2D>("Spells/Explosion"));
             pack.sorts.Add(content.Load<Texture2D>("Spells/Soin"));
-            pack.boutons = new List<Texture2D> { content.Load<Texture2D>("Boutons/Explosion"), content.Load<Texture2D>("Boutons/Soin"), content.Load<Texture2D>("Boutons/Invisibility"), content.Load<Texture2D>("Boutons/PotionDeVie") };
+            pack.sorts.Add(content.Load<Texture2D>("Spells/ManaRegen"));
+            pack.boutons = new List<Texture2D> { content.Load<Texture2D>("Boutons/Explosion"), content.Load<Texture2D>("Boutons/Soin"), content.Load<Texture2D>("Boutons/Invisibility"), content.Load<Texture2D>("Boutons/PotionDeVie"), content.Load<Texture2D>("Boutons/PotionMana") };
             pack.projectiles = new List<Texture2D> { content.Load<Texture2D>("Projectiles/arrow"), content.Load<Texture2D>("Projectiles/axe"), content.Load<Texture2D>("Projectiles/fireball") };
             pack.map.Add(content.Load<Texture2D>("summertiles"));
 
@@ -78,6 +79,7 @@ namespace CrystalGate.Scenes
             // Ajout des items
             map.items.Add(new PotionDeVie(new Vector2(22, 24), pack));
             map.items.Add(new PotionDeVie(new Vector2(23, 24), pack));
+            map.items.Add(new PotionDeMana(new Vector2(23, 5), pack));
             //map.items.Add(new PotionDeVie(new Vector2(40, 32), pack));
         }
 
