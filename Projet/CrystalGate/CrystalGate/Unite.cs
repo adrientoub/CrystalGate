@@ -75,6 +75,7 @@ namespace CrystalGate
             ManaMax = (int)(ManaMax * Math.Pow(byLevelAdd, Level - 1));
             VieMax = (int)(VieMax * Math.Pow(byLevelAdd, Level - 1));
             ManaRegen = (int)(ManaRegen / Math.Pow(byLevelAdd, Level - 1));
+            XPUnite = (int)(XPUnite / Math.Pow(byLevelAdd, Level - 1));
         }
 
         public override void Update(List<Unite> unitsOnMap, List<Effet> effets)
