@@ -28,6 +28,7 @@ namespace CrystalGate
             Dommages = 10;
             Defense = 5;
             IsRanged = true;
+            XPUnite = 200;
 
             // Sons
             effetUniteAttaque = new EffetSonore(6);

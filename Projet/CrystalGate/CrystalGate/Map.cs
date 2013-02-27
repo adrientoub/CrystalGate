@@ -66,6 +66,18 @@ namespace CrystalGate
             for (int i = 0; i < items.Count; i++)
                 if (items[i].InInventory)
                     items.RemoveAt(i);
+
+            if (waves[waves.Count - 1].unites.Count == 0)
+            {
+                foreach (Unite u in unites)
+                    if (u.isAChamp)
+                        joueurs[0].Interface.Win = true;
+                    else
+                    {
+                        joueurs[0].Interface.Win = false;
+                        break;
+                    }
+            }
         }
 
 

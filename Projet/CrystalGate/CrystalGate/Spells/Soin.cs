@@ -35,7 +35,7 @@ namespace CrystalGate
             {
                 if (unite.Vie != unite.VieMax)
                 {
-                    int ammount = 25;
+                    int ammount = unite.VieMax / 10;
                     if (unite.Vie + ammount <= unite.VieMax)
                     {
                         unite.Vie += ammount;

@@ -51,7 +51,7 @@ namespace CrystalGate
 
         public void Update()
         {
-            int widthFondNoir = 380, heightFondNoir = 180;
+            int widthFondNoir = 380, heightFondNoir = 250;
 
             CadrePosition = new Rectangle((int)joueur.camera.Position.X, (int)joueur.camera.Position.Y + height - heightFondNoir, widthFondNoir, heightFondNoir);
             PortraitPosition = new Rectangle(CadrePosition.X + CadrePosition.Width - Portrait.Width, CadrePosition.Y + 50, Portrait.Width, Portrait.Height);
@@ -62,12 +62,14 @@ namespace CrystalGate
         public void Draw()
         {
             MouseState m = Mouse.GetState();
-            Text life = new Text("Life"), attack = new Text("Attack"), armor = new Text("Armor"), selectPoint = new Text("SelectPoint"), manaText = new Text("Mana"); // définition des mots traduisibles
+            Text life = new Text("Life"), attack = new Text("Attack"), armor = new Text("Armor"), selectPoint = new Text("SelectPoint"), manaText = new Text("Mana"), levelText = new Text("Level"); // définition des mots traduisibles
 
             string str = " " + life.get() + " : " + joueur.champion.Vie + " / " + joueur.champion.VieMax + "\n "
                 + manaText.get() + " : " + joueur.champion.Mana + " / " + joueur.champion.ManaMax + "\n "
                 + attack.get() + " : " + joueur.champion.Dommages + "\n "
-                + armor.get() + " : " + joueur.champion.Defense + "\n ";
+                + armor.get() + " : " + joueur.champion.Defense + "\n "
+                + levelText.get() + " : " + joueur.champion.Level + "\n "
+                ;
             string str2 = selectPoint.get();
 
             spritebatch.Draw(BarreDesSorts, BarreDesSortsPosition, null, Color.White, 0, new Vector2(BarreDesSorts.Width / 2, 0), SpriteEffects.None, 1);

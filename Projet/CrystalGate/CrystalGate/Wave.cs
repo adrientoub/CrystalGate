@@ -10,7 +10,7 @@ namespace CrystalGate
     {
         List<Vector2> PointsInit; // Les points ou le joueur marche pour initialiser la vague
         List<Vector2> PointsSpawn;
-        List<List<Unite>> unites; // Listes de listes d'unités à pop
+        public List<List<Unite>> unites; // Listes de listes d'unités à pop
         Unite champ; // le champion à focus
         double id; // l'id de cette vague
         public bool enabled; // définit si la vague est activé

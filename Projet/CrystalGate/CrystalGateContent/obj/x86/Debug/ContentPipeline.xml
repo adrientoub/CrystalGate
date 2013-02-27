@@ -8,7 +8,7 @@
       <Processor>FontDescriptionProcessor</Processor>
       <Options>None</Options>
       <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Polices\menufont.xnb</Output>
-      <Time>2013-01-31T00:41:47.9816297+01:00</Time>
+      <Time>2013-02-27T18:01:03.4599809+01:00</Time>
     </Item>
     <Item>
       <Source>Polices\gamefont.spritefont</Source>
@@ -17,7 +17,7 @@
       <Processor>FontDescriptionProcessor</Processor>
       <Options>None</Options>
       <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Polices\gamefont.xnb</Output>
-      <Time>2013-01-31T00:41:47.9816297+01:00</Time>
+      <Time>2013-02-27T18:00:57.0683686+01:00</Time>
     </Item>
     <Item>
       <Source>blank.png</Source>
@@ -362,6 +362,24 @@
       <Options>None</Options>
       <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Sons\soin.xnb</Output>
       <Time>2013-02-25T21:40:00.0205622+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Unites\champion.png</Source>
+      <Name>Unites\champion</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Unites\champion.xnb</Output>
+      <Time>2013-02-27T16:55:25.7022416+01:00</Time>
+    </Item>
+    <Item>
+      <Source>UI\guerrierIcone.jpg</Source>
+      <Name>UI\guerrierIcone</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\UI\guerrierIcone.xnb</Output>
+      <Time>2013-02-27T16:20:30.6197229+01:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>

@@ -15,6 +15,9 @@ namespace CrystalGate
         public int Mana { get; set; }
         public int ManaMax { get; set; }
         public int ManaRegen { get; set; } // Temps de régération du mana en ms
+        public int XPUnite; // Expérience que donne l'unité quand on la tue
+        public int XP { get; set; }// Expérience que possède l'unité
+        public int Level;
         public float Vitesse { get; set; }
         public float Portee { get; set; }
         public int Dommages { get; set; }
@@ -33,9 +36,12 @@ namespace CrystalGate
         public List<Item> Inventory { get; set; }
         public int InventoryCapacity = 64;
         public bool Drawlife { get; set; }
+        public bool DrawExp { get; set; }
         public double idWave { get; set; }
 
-        public Unite(Vector2 Position, Map map, PackTexture packTexture)
+        public float byLevelAdd = 1.1f;
+
+        public Unite(Vector2 Position, Map map, PackTexture packTexture, bool DrawExp = false)
             : base(Position, map, packTexture)
         {
             // Constructeur par defaut d'une unité
@@ -50,6 +56,9 @@ namespace CrystalGate
             nbFrameSonJoue = 0;
             Vitesse_Attaque = 1.00f;
             Defense = 0;
+            XPUnite = 0;
+            Level = 1;
+            this.DrawExp = DrawExp;
             // Graphique par defaut
             Sprite = packTexture.blank;
             Tiles = Vector2.One;
@@ -103,6 +112,13 @@ namespace CrystalGate
             {
                 Vie = 0;
                 Mort = true;
+                if (Map.joueurs[0].champion.XP + XPUnite < Map.joueurs[0].champion.Level * 1000)
+                    Map.joueurs[0].champion.XP += XPUnite;
+                else
+                {
+                    Map.joueurs[0].champion.XP = Map.joueurs[0].champion.XP + XPUnite - Map.joueurs[0].champion.Level * 1000;
+                    Map.joueurs[0].champion.newLevel();
+                }
                 effetUniteDeath.Play();
                 effetUniteAttaque.Dispose();
                 effets.Add(new Effet(Sprite, ConvertUnits.ToDisplayUnits(body.Position), packAnimation.Mort(this), Tiles, 1));
@@ -111,6 +127,20 @@ namespace CrystalGate
             // TEST MANA
             if (Mana < 0)
                 Mana = 0;
+        }
+
+        public void newLevel()
+        {
+            Level++;
+            if ((int)(Defense * byLevelAdd) == Defense)
+                Defense++;
+            else
+                Defense = (int)(Defense * byLevelAdd);
+            Dommages = (int)(Dommages * byLevelAdd);
+            Vitesse = (int)(Vitesse * byLevelAdd);
+            ManaMax = (int)(ManaMax * byLevelAdd);
+            VieMax = (int)(VieMax * byLevelAdd);
+            ManaRegen = (int)(ManaRegen / byLevelAdd);
         }
 
         public bool IsCastable(int idSort)
@@ -361,6 +391,7 @@ namespace CrystalGate
         {
             spriteBatch.Draw(Sprite, ConvertUnits.ToDisplayUnits(body.Position), SpritePosition, color, 0f, new Vector2(Tiles.X / 2, Tiles.Y / 2), Scale, FlipH ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 0);
             DrawVie(spriteBatch);
+            DrawXP(spriteBatch);
             // Draw les sorts
             foreach (Spell s in spells)
                 if (s.ToDraw)
@@ -381,6 +412,16 @@ namespace CrystalGate
                 int longueur = (int)((float)Vie / (float)VieMax * 50);
                 spriteBatch.Draw(packTexture.blank, ConvertUnits.ToDisplayUnits(body.Position) + new Vector2(0, -30), new Rectangle(0, 0, longueur, largeur), Color.Green, 0f, new Vector2(longueur / 2, largeur / 2), 1f, SpriteEffects.None, 0);
 
+            }
+        }
+
+        void DrawXP(SpriteBatch spriteBatch)
+        {
+            if (DrawExp)
+            {
+                int largeur = 10;
+                int longueur = (int)(((float)XP / (float)(Level * 1000)) * 50);
+                spriteBatch.Draw(packTexture.blank, ConvertUnits.ToDisplayUnits(body.Position) + new Vector2(0, -40), new Rectangle(0, 0, longueur, largeur), Color.Aqua, 0f, new Vector2(longueur / 2, largeur / 2), 1f, SpriteEffects.None, 0);
             }
         }
 
