@@ -129,6 +129,7 @@
     <Compile Include="Projectile.cs" />
     <Compile Include="Spell.cs" />
     <Compile Include="Spells\Bump.cs" />
+    <Compile Include="Spells\FurieSanguinaire.cs" />
     <Compile Include="Spells\RegenMana.cs" />
     <Compile Include="Spells\Explosion.cs" />
     <Compile Include="Spells\Invisibilite.cs" />

@@ -66,7 +66,7 @@ namespace CrystalGate
             color = Color.White; 
             
             idWave = -1;
-            spells = new List<Spell> { new Explosion(this), new Soin(this), new Invisibilite(this) };
+            spells = new List<Spell> { new Explosion(this), new Soin(this), new Invisibilite(this), new FurieSanguinaire(this) };
             Inventory = new List<Item> { };
         }
 
