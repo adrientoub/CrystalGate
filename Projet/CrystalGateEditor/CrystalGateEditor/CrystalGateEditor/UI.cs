@@ -104,6 +104,7 @@ namespace CrystalGateEditor
                     current = "";
                     mode = Mode.Draw;
                     ShowMap = true;
+                    ShowCurrent = false;
                 }
             }
             // Dessiner
@@ -171,6 +172,7 @@ namespace CrystalGateEditor
                     longueur = "";
                     hauteur = "";
                     textBase = "";
+                    ShowCurrent = true;
                 }
             }
 
