@@ -32,6 +32,9 @@ namespace CrystalGate
         public bool Win;
         public bool Lost;
 
+        string tempsDeJeuActuel, compteurDeVague;
+        int nombreDeVagues = 10;
+
         public Joueur joueur { get; set; }
 
         public int width = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width;
@@ -46,6 +49,8 @@ namespace CrystalGate
             Curseur = curseur;
             spritebatch = sp;
             gamefont = gf;
+            tempsDeJeuActuel = "0:00";
+            compteurDeVague = "0/" + nombreDeVagues.ToString();
             this.blank = blank;
         }
 
@@ -57,6 +62,12 @@ namespace CrystalGate
             PortraitPosition = new Rectangle(CadrePosition.X + CadrePosition.Width - Portrait.Width, CadrePosition.Y + 50, Portrait.Width, Portrait.Height);
             SacPosition = new Rectangle((int)joueur.camera.Position.X + width - Sac.Width, (int)joueur.camera.Position.Y + height - Sac.Height, Sac.Width, Sac.Height);
             BarreDesSortsPosition = new Rectangle((int)(joueur.camera.Position.X + width / 1.5), (int)(joueur.camera.Position.Y + height - BarreDesSorts.Height), BarreDesSorts.Width, BarreDesSorts.Height);
+            if (joueur.champion.Map.gametime.TotalGameTime.Seconds < 10)
+                tempsDeJeuActuel = joueur.champion.Map.gametime.TotalGameTime.Minutes.ToString() + ":0" + joueur.champion.Map.gametime.TotalGameTime.Seconds.ToString();
+            else
+                tempsDeJeuActuel = joueur.champion.Map.gametime.TotalGameTime.Minutes.ToString() + ":" + joueur.champion.Map.gametime.TotalGameTime.Seconds.ToString();
+
+            compteurDeVague = Wave.waveNumber.ToString() + "/" + nombreDeVagues.ToString();
         }
 
         public void Draw()
@@ -122,12 +133,12 @@ namespace CrystalGate
                     }
                 }
             }
-
+            Text Victoire = new Text("Win"), Defaite = new Text("Lose");
             // Affichage de la victoire ou de la défaite
-            if(Win)
-                spritebatch.DrawString(gamefont, "Victoire!", new Vector2(joueur.camera.Position.X + width / 2 - gamefont.MeasureString("Victoire").X / 2, joueur.camera.Position.Y + height / 2 - gamefont.MeasureString("Victoire").Y / 2), Color.Black);
+            if (Win)
+                spritebatch.DrawString(gamefont, Victoire.get(), new Vector2(joueur.camera.Position.X + width / 2 - gamefont.MeasureString(Victoire.get()).X / 2, joueur.camera.Position.Y + height / 2 - gamefont.MeasureString(Defaite.get()).Y / 2), Color.Black);
             if (Lost)
-                spritebatch.DrawString(gamefont, "Defaite!", new Vector2(joueur.camera.Position.X + width / 2 - gamefont.MeasureString("Defaite").X / 2, joueur.camera.Position.Y + height / 2 - gamefont.MeasureString("Defaite").Y / 2), Color.Black);
+                spritebatch.DrawString(gamefont, Defaite.get(), new Vector2(joueur.camera.Position.X + width / 2 - gamefont.MeasureString(Defaite.get()).X / 2, joueur.camera.Position.Y + height / 2 - gamefont.MeasureString(Defaite.get()).Y / 2), Color.Black);
             if(DrawSelectPoint)
                 spritebatch.DrawString(gamefont, str2, new Vector2(BarreDesSortsPosition.X - gamefont.MeasureString(str2).X / 2, BarreDesSortsPosition.Y - BarreDesSorts.Height), Color.White);
             
@@ -145,6 +156,12 @@ namespace CrystalGate
                 }
 
             }
+            // Timer
+            spritebatch.DrawString(gamefont, tempsDeJeuActuel, new Vector2(joueur.camera.Position.X + width - gamefont.MeasureString(tempsDeJeuActuel).X - 5, joueur.camera.Position.Y + 4), Color.Black);
+
+            // Compteur de vagues
+            spritebatch.DrawString(gamefont, compteurDeVague, new Vector2(joueur.camera.Position.X + width - gamefont.MeasureString(compteurDeVague).X - 5, gamefont.MeasureString(tempsDeJeuActuel).Y + joueur.camera.Position.Y + 4), Color.Black);
+
             // Curseur
             spritebatch.Draw(Curseur, new Vector2(joueur.camera.Position.X + m.X, joueur.camera.Position.Y + m.Y), Color.White);
         }

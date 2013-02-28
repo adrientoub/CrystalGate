@@ -14,6 +14,7 @@ namespace CrystalGate
         Unite champ; // le champion à focus
         double id; // l'id de cette vague
         public bool enabled; // définit si la vague est activé
+        public static int waveNumber = 0;
 
         public Wave(List<Vector2> pointsInit, List<Vector2> pointsSpawn, List<List<Unite>> unites, Unite champion)
         {
@@ -52,6 +53,7 @@ namespace CrystalGate
             // Sinon on pop
             if (NextWave && unites.Count > 0)
             {
+                waveNumber++;
                 while(unites[0].Count != 0) // Tant qu'il y'a des unités a pop
                 {
                     foreach (Vector2 v in PointsSpawn) // on les dispatche sur les points de spawn

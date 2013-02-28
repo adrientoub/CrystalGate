@@ -70,6 +70,7 @@ namespace CrystalGate.Scenes
             UI Interface = new UI(map.joueurs[0], content.Load<Texture2D>("UI/barre des sorts"), content.Load<Texture2D>("Curseur"), content.Load<Texture2D>("UI/GuerrierIcone"), content.Load<Texture2D>("UI/inventaire"), content.Load<Texture2D>("blank"), spriteBatch, gameFont);
             map.joueurs[0].Interface = Interface;
 
+            Wave.waveNumber = 0;
             // La vague
             PackWave packWave = new PackWave(map, pack, map.joueurs[0].champion);
             map.waves.Add(packWave.Level1Wave1());
