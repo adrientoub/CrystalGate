@@ -21,6 +21,7 @@ namespace CrystalGate.Scenes
         {
             _parent = parent;
             FondSonore.Pause();
+            GameplayScene.timer.Stop();
 
             // Création des options
             var resumeGameMenuItem = new MenuItem(new Text("BackToGame"));

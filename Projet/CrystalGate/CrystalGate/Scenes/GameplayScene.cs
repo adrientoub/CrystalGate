@@ -24,6 +24,7 @@ namespace CrystalGate.Scenes
         private PackTexture pack; // Toutes les textures
         private float pauseAlpha;
         private Map map; // La map
+        public static System.Diagnostics.Stopwatch timer;
 
         public static List<SoundEffect> _effetsSonores = new List<SoundEffect> { }; // Tous les effets sonores.
 
@@ -81,6 +82,8 @@ namespace CrystalGate.Scenes
             map.items.Add(new PotionDeVie(new Vector2(22, 24), pack));
             map.items.Add(new PotionDeVie(new Vector2(23, 24), pack));
             map.items.Add(new PotionDeMana(new Vector2(23, 5), pack));
+            timer = new System.Diagnostics.Stopwatch();
+            timer.Start();
             //map.items.Add(new PotionDeVie(new Vector2(40, 32), pack));
         }
 
