@@ -21,8 +21,10 @@ namespace CrystalGate
         public float Vitesse { get; set; }
         public float Portee { get; set; }
         public int Dommages { get; set; }
+        public int Puissance { get; set; }
         public float Vitesse_Attaque { get; set; }
         public int Defense { get; set; }
+        public int DefenseMagique { get; set; }
         public Color color { get; set; }
         public Vector2 pointCible;
         public bool IsRanged;
@@ -70,7 +72,9 @@ namespace CrystalGate
         public void statsLevelUpdate()
         {
             Defense = (int)(Defense * Math.Pow(byLevelAdd, Level - 1));
+            DefenseMagique = (int)(DefenseMagique * Math.Pow(byLevelAdd, Level - 1));
             Dommages = (int)(Dommages * Math.Pow(byLevelAdd, Level - 1));
+            Puissance = (int)(Puissance * Math.Pow(byLevelAdd, Level - 1));
             Vitesse = (float)(Vitesse * Math.Pow(byLevelAdd, Level - 1));
             ManaMax = (int)(ManaMax * Math.Pow(byLevelAdd, Level - 1));
             Mana = ManaMax;
@@ -147,7 +151,12 @@ namespace CrystalGate
                 Defense++;
             else
                 Defense = (int)(Defense * byLevelAdd);
+            if ((int)(DefenseMagique * byLevelAdd) == DefenseMagique)
+                DefenseMagique++;
+            else
+                DefenseMagique = (int)(DefenseMagique * byLevelAdd);
             Dommages = (int)(Dommages * byLevelAdd);
+            Puissance = (int)(Puissance * byLevelAdd);
             Vitesse = (int)(Vitesse * byLevelAdd);
             ManaMax = (int)(ManaMax * byLevelAdd);
             VieMax = (int)(VieMax * byLevelAdd);

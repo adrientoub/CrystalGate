@@ -115,7 +115,7 @@ namespace CrystalGate
                     }
                 }
                 // Pour afficher/cacher le sac
-                if (key.IsKeyDown(Keys.B) && Oldkey.IsKeyUp(Keys.B))
+                if (key.IsKeyDown(Keys.B) && Oldkey.IsKeyUp(Keys.B) || key.IsKeyDown(Keys.I) && Oldkey.IsKeyUp(Keys.I))
                     Interface.DrawSac = !Interface.DrawSac;
                 // Pour utiliser les objets
                 if (mouse.X + camera.Position.X >= Interface.SacPosition.X && mouse.Y + camera.Position.Y >= Interface.SacPosition.Y)
@@ -149,6 +149,7 @@ namespace CrystalGate
 
             // Pour déplacer la caméra
             CameraCheck();
+            CurseurCheck();
             CheckWinandLose();
             Oldmouse = mouse;
             Oldkey = key;
@@ -172,14 +173,17 @@ namespace CrystalGate
             Vector2 ObjectifPoint = new Vector2(camera.Position.X + mouse.X, camera.Position.Y + mouse.Y) / champion.Map.TailleTiles;
             ObjectifPoint = new Vector2((int)ObjectifPoint.X, (int)ObjectifPoint.Y);
             foreach(Unite u in champion.Map.unites)
-                if(u != champion && u.PositionTile == ObjectifPoint)
+                if(u != champion && Outil.DistancePoints(ObjectifPoint, u .PositionTile) <= 64)
                 {
-                    //champion.Attaquer(u);
-                    champion.uniteAttacked = u;
-                    List<Noeud> chemin = PathFinding.TrouverChemin(champion.PositionTile, ObjectifPoint, champion.Map.Taille, new List<Unite> { }, champion.Map.unitesStatic, false);
-                    if (chemin != null)
-                        champion.ObjectifListe = chemin;
-                    return true;
+                    if (true)
+                    {
+                        //champion.Attaquer(u);
+                        champion.uniteAttacked = u;
+                        List<Noeud> chemin = PathFinding.TrouverChemin(champion.PositionTile, ObjectifPoint, champion.Map.Taille, new List<Unite> { }, champion.Map.unitesStatic, false);
+                        if (chemin != null)
+                            champion.ObjectifListe = chemin;
+                        return true;
+                    }
                 }
             return false;
         }
@@ -226,6 +230,22 @@ namespace CrystalGate
             //Update de la position de la caméra et de l'interface
             camera.Position = new Vector2(camera.Position.X, camera.Position.Y) + vec;
             Interface.Update();
+        }
+
+        public bool CurseurCheck()
+        {
+            Vector2 ObjectifPoint = new Vector2(camera.Position.X + mouse.X, camera.Position.Y + mouse.Y) / champion.Map.TailleTiles;
+            ObjectifPoint = new Vector2((int)ObjectifPoint.X, (int)ObjectifPoint.Y);
+
+            foreach (Unite u in champion.Map.unites)
+                if (Outil.DistancePoints(ObjectifPoint, u.PositionTile) <= 32)
+                {
+                    Interface.CurseurOffensif = true;
+                    return true;
+                }
+
+            Interface.CurseurOffensif = false;
+            return false;
         }
 
         public bool SourisCheck(int i)

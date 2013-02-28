@@ -14,6 +14,7 @@ namespace CrystalGate
         // Images de l'UI
         public Texture2D BarreDesSorts { get; set; } 
         public Texture2D Curseur { get; set; }
+        public Texture2D CurseurRouge { get; set; }
         public Texture2D Portrait { get; set; }
         public Texture2D Sac { get; set; }
         public Texture2D blank{ get; set; }
@@ -31,6 +32,7 @@ namespace CrystalGate
 
         public bool Win;
         public bool Lost;
+        public bool CurseurOffensif;
 
         string tempsDeJeuActuel, compteurDeVague;
         int nombreDeVagues = 10;
@@ -40,13 +42,14 @@ namespace CrystalGate
         public int width = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width;
         public int height = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height;
 
-        public UI(Joueur joueur, Texture2D barreDesSorts, Texture2D curseur, Texture2D portrait, Texture2D sac, Texture2D blank, SpriteBatch sp, SpriteFont gf)
+        public UI(Joueur joueur, Texture2D barreDesSorts, Texture2D curseur, Texture2D curseurRouge, Texture2D portrait, Texture2D sac, Texture2D blank, SpriteBatch sp, SpriteFont gf)
         {
             this.joueur = joueur;
             Portrait = portrait;
             Sac = sac;
             BarreDesSorts = barreDesSorts;
             Curseur = curseur;
+            CurseurRouge = curseurRouge;
             spritebatch = sp;
             gamefont = gf;
             tempsDeJeuActuel = "0:00";
@@ -80,7 +83,7 @@ namespace CrystalGate
             string str = " " + life.get() + " : " + joueur.champion.Vie + " / " + joueur.champion.VieMax + "\n "
                 + manaText.get() + " : " + joueur.champion.Mana + " / " + joueur.champion.ManaMax + "\n "
                 + attack.get() + " : " + joueur.champion.Dommages + "\n "
-                + armor.get() + " : " + joueur.champion.Defense + "\n "
+                + armor.get() + "/RM : " + joueur.champion.Defense + " / " + joueur.champion.DefenseMagique + "\n "
                 + levelText.get() + " : " + joueur.champion.Level + "\n "
                 ;
             string str2 = selectPoint.get();
@@ -163,7 +166,7 @@ namespace CrystalGate
             spritebatch.DrawString(gamefont, compteurDeVague, new Vector2(joueur.camera.Position.X + width - gamefont.MeasureString(compteurDeVague).X - 5, gamefont.MeasureString(tempsDeJeuActuel).Y + joueur.camera.Position.Y + 4), Color.Black);
 
             // Curseur
-            spritebatch.Draw(Curseur, new Vector2(joueur.camera.Position.X + m.X, joueur.camera.Position.Y + m.Y), Color.White);
+            spritebatch.Draw(CurseurOffensif ? CurseurRouge : Curseur, new Vector2(joueur.camera.Position.X + m.X, joueur.camera.Position.Y + m.Y), Color.White);
         }
     }
 }
