@@ -17,7 +17,7 @@ namespace CrystalGate
             Cooldown = 5;
             Ticks = 300;
             if (useMana)
-                CoutMana = 50;
+                CoutMana = 30;
             else
                 CoutMana = 0;
             Tiles = new Vector2(320 / 5, 320 / 5);

@@ -83,7 +83,7 @@ namespace CrystalGate
             string str = " " + life.get() + " : " + joueur.champion.Vie + " / " + joueur.champion.VieMax + "\n "
                 + manaText.get() + " : " + joueur.champion.Mana + " / " + joueur.champion.ManaMax + "\n "
                 + attack.get() + " : " + joueur.champion.Dommages + "\n "
-                + armor.get() + "/RM : " + joueur.champion.Defense + " / " + joueur.champion.DefenseMagique + "\n "
+                + armor.get() + " : " + joueur.champion.Defense + " / " + joueur.champion.DefenseMagique + "\n "
                 + levelText.get() + " : " + joueur.champion.Level + "\n "
                 ;
             string str2 = selectPoint.get();

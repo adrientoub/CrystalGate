@@ -9,15 +9,13 @@ namespace CrystalGate
 {
     class FurieSanguinaire : Spell
     {
-        List<Unite> uniteFollowing;
-
         public FurieSanguinaire(Unite u, bool useMana = true)
             : base(u)
         {
             Cooldown = 5;
             Ticks = 300;
             if (useMana)
-                CoutMana = 50;
+                CoutMana = 30;
             else
                 CoutMana = 0;
             Tiles = new Vector2(320 / 5, 320 / 5);
@@ -26,7 +24,6 @@ namespace CrystalGate
             SpriteBouton = unite.packTexture.boutons[5];
             SpriteEffect = unite.packTexture.sorts[0];
             sonSort = new EffetSonore(11);
-            uniteFollowing = new List<Unite>();
         }
 
         public override void Update()
