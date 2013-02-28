@@ -162,6 +162,7 @@ namespace CrystalGate
             listeSound.Add(content.Load<SoundEffect>("Sons/DemonDeath1"));
             listeSound.Add(content.Load<SoundEffect>("Sons/InvisibilityTarget"));
             listeSound.Add(content.Load<SoundEffect>("Sons/BloodlustTarget"));
+            listeSound.Add(content.Load<SoundEffect>("Sons/OgreDeath1"));
 
             EffetSonore.InitEffects();
         }

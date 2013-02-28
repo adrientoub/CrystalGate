@@ -33,7 +33,7 @@ namespace CrystalGate
 
             // Sons
             effetUniteAttaque = new EffetSonore(8);
-            effetUniteDeath = new EffetSonore(3);
+            effetUniteDeath = new EffetSonore(12);
             statsLevelUpdate();
         }
 
