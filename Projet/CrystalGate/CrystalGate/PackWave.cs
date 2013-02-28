@@ -26,7 +26,7 @@ namespace CrystalGate
             List<Vector2> PointsSpawn = new List<Vector2> { new Vector2(11, 0), new Vector2(31, 0), new Vector2(22, 20) };
 
             List<List<Unite>> Mobs = new List<List<Unite>> { 
-                new List<Unite> { new Ogre(Vector2.Zero, map, pack), new Demon(Vector2.Zero, map, pack), new Troll(Vector2.Zero, map, pack) },
+                new List<Unite> { new Ogre(Vector2.Zero, map, pack), new Demon(Vector2.Zero, map, pack), new Grunt(Vector2.Zero, map, pack) },
                 new List<Unite> { new Grunt(Vector2.Zero, map, pack), new Cavalier(Vector2.Zero, map, pack), new Archer(Vector2.Zero, map, pack) }
             };
 
@@ -41,7 +41,7 @@ namespace CrystalGate
             List<Vector2> PointsSpawn = new List<Vector2> { new Vector2(0, 39), new Vector2(21, 49), new Vector2(37, 49) };
 
             List<List<Unite>> Mobs = new List<List<Unite>> { 
-                new List<Unite> { new Ogre(Vector2.Zero, map, pack,level), new Demon(Vector2.Zero, map, pack,level), new Troll(Vector2.Zero, map, pack,level) },
+                new List<Unite> { new Ogre(Vector2.Zero, map, pack,level), new Demon(Vector2.Zero, map, pack,level), new Ogre(Vector2.Zero, map, pack,level) },
                 new List<Unite> { new Grunt(Vector2.Zero, map, pack,level), new Cavalier(Vector2.Zero, map, pack,level), new Archer(Vector2.Zero, map, pack,level) }
             };
 
@@ -69,7 +69,7 @@ namespace CrystalGate
             List<Vector2> PointsSpawn = new List<Vector2> { new Vector2(66, 0), new Vector2(85, 0) };
 
             List<List<Unite>> Mobs = new List<List<Unite>> { 
-                new List<Unite> { new Ogre(Vector2.Zero, map, pack), new Demon(Vector2.Zero, map, pack), new Troll(Vector2.Zero, map, pack), new Cavalier(Vector2.Zero, map, pack), new Archer(Vector2.Zero, map, pack), new Cavalier(Vector2.Zero, map, pack), new Archer(Vector2.Zero, map, pack), new Cavalier(Vector2.Zero, map, pack), new Archer(Vector2.Zero, map, pack), new Cavalier(Vector2.Zero, map, pack), new Archer(Vector2.Zero, map, pack) },
+                new List<Unite> { new Ogre(Vector2.Zero, map, pack), new Demon(Vector2.Zero, map, pack), new Grunt(Vector2.Zero, map, pack), new Cavalier(Vector2.Zero, map, pack), new Archer(Vector2.Zero, map, pack), new Cavalier(Vector2.Zero, map, pack), new Archer(Vector2.Zero, map, pack), new Cavalier(Vector2.Zero, map, pack), new Archer(Vector2.Zero, map, pack), new Cavalier(Vector2.Zero, map, pack), new Archer(Vector2.Zero, map, pack) },
                 new List<Unite> { new Grunt(Vector2.Zero, map, pack), new Cavalier(Vector2.Zero, map, pack), new Archer(Vector2.Zero, map, pack), new Cavalier(Vector2.Zero, map, pack), new Archer(Vector2.Zero, map, pack), new Cavalier(Vector2.Zero, map, pack), new Archer(Vector2.Zero, map, pack), new Cavalier(Vector2.Zero, map, pack), new Archer(Vector2.Zero, map, pack), new Cavalier(Vector2.Zero, map, pack), new Archer(Vector2.Zero, map, pack) }
             };
 

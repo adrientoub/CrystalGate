@@ -100,7 +100,7 @@ namespace CrystalGate
                     s.Update();
             // Pour Update et Draw les items de l'inventaire
             foreach (Item i in Inventory)
-                if (i.spell.ToDraw)
+                if (i.Disabled)
                     i.spell.Update();
             // Pour Update les projectiles
             ProjectileUpdate();
@@ -139,6 +139,7 @@ namespace CrystalGate
                 effetUniteAttaque.Dispose();
                 effets.Add(new Effet(Sprite, ConvertUnits.ToDisplayUnits(body.Position), packAnimation.Mort(this), Tiles, 1));
                 Map.world.RemoveBody(body);
+                Drop();
             }
             // TEST MANA
             if (Mana < 0)
@@ -402,6 +403,20 @@ namespace CrystalGate
                 suivreactuel++;           
         }
 
+        public void Drop()
+        {
+            for (int i = 0; i < Inventory.Count; i++)
+            {
+                Random rand = new Random();
+                if (rand.Next(0,100) <= 60)
+                {
+                    Inventory[i].Position = PositionTile;
+                    Map.items.Add(Inventory[i]);
+                    Inventory.RemoveAt(i);
+                }
+            }
+        }
+
         public void Cast(int i, Vector2 point)
         {
             // Cast ou initialise le sort
@@ -417,7 +432,7 @@ namespace CrystalGate
                 if (s.ToDraw)
                     s.Draw(spriteBatch);
             foreach (Item i in Inventory)
-                if (i.spell.ToDraw)
+                if (i.Disabled)
                     i.spell.Draw(spriteBatch);
             // Draw projectile
             if(Projectile != null)

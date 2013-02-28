@@ -27,6 +27,7 @@ namespace CrystalGate
             Puissance = 5;
             Defense = 5;
             XPUnite = 200;
+            Inventory = new List<Item> { new PotionDeVie(Vector2.Zero, packTexture) };
 
             // Sons
             effetUniteAttaque = new EffetSonore(2);

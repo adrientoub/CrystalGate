@@ -30,6 +30,7 @@ namespace CrystalGate
             Defense = 5;
             IsRanged = true;
             XPUnite = 200;
+            Inventory = new List<Item> { new PotionDeVie(Vector2.Zero, packTexture) };
 
             // Sons
             effetUniteAttaque = new EffetSonore(6);
