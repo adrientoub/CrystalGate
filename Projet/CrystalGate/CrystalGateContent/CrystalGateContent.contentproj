@@ -114,13 +114,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AviciiLevels.mp3">
-      <Name>AviciiLevels</Name>
-      <Importer>Mp3Importer</Importer>
-      <Processor>SongProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Musiques\HOM4.mp3">
       <Name>HOM4</Name>
       <Importer>Mp3Importer</Importer>
@@ -396,6 +389,23 @@
       <Name>OgreDeath1</Name>
       <Importer>WavImporter</Importer>
       <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Musiques\CelticBallad-Riversong.mp3">
+      <Name>CelticBallad-Riversong</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SongProcessor</Processor>
+    </Compile>
+    <Compile Include="Musiques\CelticMusic-FortheKing.mp3">
+      <Name>CelticMusic-FortheKing</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SongProcessor</Processor>
+    </Compile>
+    <Compile Include="Musiques\CelticMusic-Ode to the Fallen.mp3">
+      <Name>CelticMusic-Ode to the Fallen</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SongProcessor</Processor>
     </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />

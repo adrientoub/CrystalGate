@@ -137,16 +137,6 @@
       <Time>2013-02-24T18:42:48.2771647+01:00</Time>
     </Item>
     <Item>
-      <Source>AviciiLevels.mp3</Source>
-      <Name>AviciiLevels</Name>
-      <Importer>Mp3Importer</Importer>
-      <Processor>SongProcessor</Processor>
-      <Options>None</Options>
-      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\AviciiLevels.xnb</Output>
-      <Extra>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\AviciiLevels.wma</Extra>
-      <Time>2013-01-31T00:41:47.9105833+01:00</Time>
-    </Item>
-    <Item>
       <Source>Sons\GruntAttack.mp3</Source>
       <Name>Sons\GruntAttack</Name>
       <Importer>Mp3Importer</Importer>
@@ -380,6 +370,119 @@
       <Options>None</Options>
       <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\UI\guerrierIcone.xnb</Output>
       <Time>2013-02-27T16:20:30.6197229+01:00</Time>
+    </Item>
+    <Item>
+      <Source>tresor.png</Source>
+      <Name>tresor</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\tresor.xnb</Output>
+      <Time>2013-02-27T22:55:52.0661835+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Boutons\PotionMana.png</Source>
+      <Name>Boutons\PotionMana</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Boutons\PotionMana.xnb</Output>
+      <Time>2013-02-27T22:58:47.2147621+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Spells\ManaRegen.png</Source>
+      <Name>Spells\ManaRegen</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Spells\ManaRegen.xnb</Output>
+      <Time>2013-02-27T23:14:10.5852341+01:00</Time>
+    </Item>
+    <Item>
+      <Source>UI\curseurRouge.png</Source>
+      <Name>UI\curseurRouge</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\UI\curseurRouge.xnb</Output>
+      <Time>2013-02-28T16:06:56.9359082+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Boutons\BloodLust.BMP</Source>
+      <Name>Boutons\BloodLust</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Boutons\BloodLust.xnb</Output>
+      <Time>2013-02-28T17:06:04.9743414+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Musiques\CelticMusic-Prophecy.mp3</Source>
+      <Name>Musiques\CelticMusic-Prophecy</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SongProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Musiques\CelticMusic-Prophecy.xnb</Output>
+      <Extra>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Musiques\CelticMusic-Prophecy.wma</Extra>
+      <Time>2013-02-27T22:14:46.2791092+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Musiques\CeltiqueIrishFolk.mp3</Source>
+      <Name>Musiques\CeltiqueIrishFolk</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SongProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Musiques\CeltiqueIrishFolk.xnb</Output>
+      <Extra>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Musiques\CeltiqueIrishFolk.wma</Extra>
+      <Time>2013-02-27T22:14:46.2891162+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Musiques\CelticBallad-Riversong.mp3</Source>
+      <Name>Musiques\CelticBallad-Riversong</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SongProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Musiques\CelticBallad-Riversong.xnb</Output>
+      <Extra>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Musiques\CelticBallad-Riversong.wma</Extra>
+      <Time>2013-02-28T23:11:33.0059731+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Sons\BloodlustTarget.wav</Source>
+      <Name>Sons\BloodlustTarget</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Sons\BloodlustTarget.xnb</Output>
+      <Time>2013-02-28T17:06:04.9783437+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Sons\OgreDeath1.wav</Source>
+      <Name>Sons\OgreDeath1</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Sons\OgreDeath1.xnb</Output>
+      <Time>2013-02-28T20:15:02.2396977+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Musiques\CelticMusic-FortheKing.mp3</Source>
+      <Name>Musiques\CelticMusic-FortheKing</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SongProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Musiques\CelticMusic-FortheKing.xnb</Output>
+      <Extra>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Musiques\CelticMusic-FortheKing.wma</Extra>
+      <Time>2013-02-28T23:11:33.0343563+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Musiques\CelticMusic-Ode to the Fallen.mp3</Source>
+      <Name>Musiques\CelticMusic-Ode to the Fallen</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SongProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Musiques\CelticMusic-Ode to the Fallen.xnb</Output>
+      <Extra>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Musiques\CelticMusic-Ode to the Fallen.wma</Extra>
+      <Time>2013-02-28T23:11:33.058429+01:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>

@@ -14,7 +14,9 @@ namespace CrystalGate
         static bool _isLoadedNext = false;
         static TimeSpan _finDeLaMusique = new TimeSpan();
         static string[] _musicList = new string[] {
-            "Musiques/CeltiqueIrishFolk",
+            "Musiques/CelticMusic-FortheKing",
+            "Musiques/CelticMusic-Ode to the Fallen",
+            "Musiques/CelticBallad-Riversong",
             "Musiques/CelticMusic-Prophecy",
             "Musiques/HOM4"
         };
@@ -22,7 +24,7 @@ namespace CrystalGate
         static int idNext = 1;
         static ContentManager contentRef;
         static int _playingNow = 0; // prend les valeurs 1 et 0
-        public static float volume = 0.1f;
+        public static float volume = 0.5f;
         
 
         public static void Play() 
