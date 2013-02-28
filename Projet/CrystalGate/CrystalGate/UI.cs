@@ -35,7 +35,7 @@ namespace CrystalGate
         public bool CurseurOffensif;
 
         string tempsDeJeuActuel, compteurDeVague;
-        int nombreDeVagues = 10;
+        int nombreDeVagues = 8;
 
         public Joueur joueur { get; set; }
 

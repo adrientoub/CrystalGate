@@ -54,6 +54,21 @@ namespace CrystalGate
                     }
                     uniteFollowing = new List<Unite>();
                 }
+                /*else
+                {
+                    if (TickCurrent % 60 == 0)
+                    {
+                        foreach (Unite u in unite.Map.unites)
+                        {
+                            if (unite != u)
+                            {
+                                Random rand = new Random();
+                                u.ObjectifListe.Add(new Noeud(u.PositionTile + new Vector2(1, 1) * rand.Next(-1, 2), true, 0));
+                            }
+                        }
+                    }
+
+                }*/
                 TickCurrent++;
             }
         }

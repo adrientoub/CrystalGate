@@ -238,7 +238,7 @@ namespace CrystalGate
             ObjectifPoint = new Vector2((int)ObjectifPoint.X, (int)ObjectifPoint.Y);
 
             foreach (Unite u in champion.Map.unites)
-                if (Outil.DistancePoints(ObjectifPoint, u.PositionTile) <= 32)
+                if (champion != u && Outil.DistancePoints(ObjectifPoint, u.PositionTile) <= 32)
                 {
                     Interface.CurseurOffensif = true;
                     return true;
