@@ -17,15 +17,21 @@ namespace CrystalGate
 
         public static void initGameText() // lancer cette fonction au lancement du jeu et à chaque changement de langue.
         {
+            string baseDirectory;
+            if (CrystalGateGame.isTest)
+                baseDirectory = "../../../";
+            else
+                baseDirectory = "";
+
             nomDuTexte = new List<string>();
             texteCorrespondant = new List<string>();
             System.IO.StreamReader file;
             try
             {
                 if (autorisedLanguages.Contains(langue))
-                    file = new System.IO.StreamReader(@"../../../Languages/" + langue + ".lng"); // Adresse à changer plus tard
+                    file = new System.IO.StreamReader(baseDirectory + "Languages/" + langue + ".lng"); // Adresse à changer plus tard
                 else
-                    file = new System.IO.StreamReader(@"../../../Languages/" + defaultLanguage + ".lng"); 
+                    file = new System.IO.StreamReader(baseDirectory + "Languages/" + defaultLanguage + ".lng"); 
             }
             catch (Exception)
             {

@@ -59,7 +59,12 @@ namespace CrystalGate
         public static void OuvrirMap(string MapName, ref Map map, PackTexture pack)
         {
             // Read the file and display it line by line.
-            string mapString = "../../../Maps/" + MapName + ".txt";
+            string mapString;
+            if (CrystalGateGame.isTest)
+                mapString = "../../../Maps/" + MapName + ".txt";
+            else
+                mapString = "Maps/" + MapName + ".txt";
+
             string line;
             int longueur = 0;
             int hauteur = 0;

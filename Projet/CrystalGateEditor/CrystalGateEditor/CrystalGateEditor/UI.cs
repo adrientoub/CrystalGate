@@ -288,7 +288,9 @@ namespace CrystalGateEditor
             string line;
             int longueur = 0;
             int hauteur = 0;
-            StreamReader file = new StreamReader("../../../Maps/" + MapName + ".txt");
+
+            StreamReader file = new StreamReader(Game1.baseDirectory + "Maps/" + MapName + ".txt");
+            
             // On établit la longueur et la hauteur
             while ((line = file.ReadLine()) != null)
             {
@@ -302,7 +304,7 @@ namespace CrystalGateEditor
             Map = new Vector2[longueur, hauteur];
             // Reset
             file.Close();
-            file = new StreamReader("../../../Maps/" + MapName + ".txt");
+            file = new StreamReader(Game1.baseDirectory + "Maps/" + MapName + ".txt");
             int j = 0;
             while ((line = file.ReadLine()) != null)
             {
@@ -324,7 +326,7 @@ namespace CrystalGateEditor
 
         public void SaveMap()
         {
-            StreamWriter stream = new StreamWriter("../../../Maps/" + MapName + ".txt");
+            StreamWriter stream = new StreamWriter(Game1.baseDirectory + "Maps/" + MapName + ".txt");
             for (int j = 0; j < Map.GetLength(1); j++)
             {
                 for (int i = 0; i < Map.GetLength(0); i++)

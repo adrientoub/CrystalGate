@@ -24,19 +24,19 @@ namespace CrystalGate
 
         public void Update(List<Unite> unites) // Appelé quand l'objet est sur la map
         {
-                foreach (Unite u in unites)
+            foreach (Unite u in unites)
+            {
+                if (u.isAChamp && Outil.DistancePoints(Position, u.PositionTile) <= 32 && !InInventory)
                 {
-                    if (u.isAChamp && Outil.DistancePoints(Position, u.PositionTile) <= 32 && !InInventory)
+                    if (u.Inventory.Count + 1 <= u.InventoryCapacity)
                     {
-                        if (u.Inventory.Count + 1 <= u.InventoryCapacity)
-                        {
-                            u.Inventory.Add(this);
-                            InInventory = true; // retire l'objet de la carte et l'ajoute a l'inventaire de l'unité proche
-                            unite = u;
-                            Effet(u);
-                        }
+                        u.Inventory.Add(this);
+                        InInventory = true; // retire l'objet de la carte et l'ajoute a l'inventaire de l'unité proche
+                        unite = u;
+                        Effet(u);
                     }
                 }
+            }
         }
 
         public virtual void Effet(Unite unite)
