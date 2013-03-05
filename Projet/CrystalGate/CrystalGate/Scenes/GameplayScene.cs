@@ -40,7 +40,7 @@ namespace CrystalGate.Scenes
             if (content == null)
                 content = new ContentManager(SceneManager.Game.Services, "Content");
 
-            FondSonore.Load(ref content);
+            FondSonore.Load(content);
             FondSonore.Play();
 
             SpriteBatch spriteBatch = SceneManager.SpriteBatch;

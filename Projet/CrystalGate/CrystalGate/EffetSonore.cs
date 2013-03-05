@@ -17,6 +17,7 @@ namespace CrystalGate
         static bool[] isPlaying = new bool[nbSonSimult];
         static TimeSpan[] duree = new TimeSpan[nbSonSimult];
         int id;
+        public static float volume = 0.5f;
         static bool hasHP;
 
         static public void InitEffects()
@@ -62,7 +63,7 @@ namespace CrystalGate
                         {
                             if (!son.IsDisposed)
                             {
-                                son.Volume = 0.1f; // a modif plus tard
+                                son.Volume = volume; 
                                 son.Play();
                                 duree[i] = time.Elapsed + CrystalGate.Scenes.GameplayScene._effetsSonores[id].Duration;
                                 isPlaying[i] = true;

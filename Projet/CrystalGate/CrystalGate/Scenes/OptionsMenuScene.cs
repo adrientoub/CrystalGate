@@ -14,6 +14,7 @@ namespace CrystalGate.Scenes
         private readonly MenuItem _resolutionMenuItem;
         private readonly MenuItem _fullscreenMenuItem;
         private readonly MenuItem _volumeMenuItem;
+        private readonly MenuItem _volumeEffectsMenuItem;
 
         private enum Language
         {
@@ -25,8 +26,8 @@ namespace CrystalGate.Scenes
         private static readonly string[] Resolutions = { "480x800", "800x600", "1024x768", "1280x1024", "1680x1050", "1920x1080" };
         private static int _currentResolution;
         public static bool _fullscreen;
-        private static int _volume = 50;
-        Text fullscreenText, resolutionText, languageText, volumeText, yesText, noText;
+        private static int _volume = (int)(FondSonore.volume * 100), _volumeEffects = (int)(EffetSonore.volume * 100);
+        Text fullscreenText, resolutionText, languageText, volumeText, volumeEffectsText, yesText, noText;
 
         #endregion
 
@@ -43,12 +44,14 @@ namespace CrystalGate.Scenes
             _resolutionMenuItem = new MenuItem(new Text());
             _fullscreenMenuItem = new MenuItem(new Text());
             _volumeMenuItem = new MenuItem(new Text());
+            _volumeEffectsMenuItem = new MenuItem(new Text());
 
             var back = new MenuItem(new Text("Back"));
 
             fullscreenText = new Text("Fullscreen");
             languageText = new Text("Language");
             volumeText = new Text("Volume");
+            volumeEffectsText = new Text("VolumeEffects");
             resolutionText = new Text("Resolution");
             noText = new Text("no");
             yesText = new Text("yes");
@@ -60,6 +63,7 @@ namespace CrystalGate.Scenes
             _resolutionMenuItem.Selected += ResolutionMenuItemSelected;
             _fullscreenMenuItem.Selected += FullscreenMenuItemSelected;
             _volumeMenuItem.Selected += VolumeMenuItemSelected;
+            _volumeEffectsMenuItem.Selected += VolumeEffectsMenuItemSelected;
             back.Selected += OnCancel;
             
             // Ajout des options au menu
@@ -67,6 +71,7 @@ namespace CrystalGate.Scenes
             //MenuItems.Add(_resolutionMenuItem);
             MenuItems.Add(_fullscreenMenuItem);
             MenuItems.Add(_volumeMenuItem);
+            MenuItems.Add(_volumeEffectsMenuItem);
             MenuItems.Add(back);
         }
 
@@ -79,6 +84,7 @@ namespace CrystalGate.Scenes
             _resolutionMenuItem.Text = new Text(resolutionText.get() + ": " + Resolutions[_currentResolution], true);
             _fullscreenMenuItem.Text = new Text(fullscreenText.get() + ": " + (_fullscreen ? noText.get() : yesText.get()), true);
             _volumeMenuItem.Text = new Text(volumeText.get() + ": " + _volume, true);
+            _volumeEffectsMenuItem.Text = new Text(volumeEffectsText.get() + ": " + _volumeEffects, true);
         }
 
         #endregion
@@ -122,6 +128,13 @@ namespace CrystalGate.Scenes
         {
             _volume++;
             FondSonore.volume = _volume * 0.01f;
+            SetMenuItemText();
+        }
+
+        private void VolumeEffectsMenuItemSelected(object sender, EventArgs e)
+        {
+            _volumeEffects++;
+            EffetSonore.volume = _volumeEffects * 0.01f;
             SetMenuItemText();
         }
 
