@@ -8,7 +8,7 @@
       <Processor>FontDescriptionProcessor</Processor>
       <Options>None</Options>
       <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Polices\menufont.xnb</Output>
-      <Time>2013-02-27T18:01:03.4599809+01:00</Time>
+      <Time>2013-03-05T21:52:23.3260261+01:00</Time>
     </Item>
     <Item>
       <Source>Polices\gamefont.spritefont</Source>
@@ -17,7 +17,7 @@
       <Processor>FontDescriptionProcessor</Processor>
       <Options>None</Options>
       <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Polices\gamefont.xnb</Output>
-      <Time>2013-02-27T18:00:57.0683686+01:00</Time>
+      <Time>2013-03-05T21:53:22.2450127+01:00</Time>
     </Item>
     <Item>
       <Source>blank.png</Source>
@@ -44,7 +44,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\summertiles.xnb</Output>
-      <Time>2013-01-31T00:41:48.0119409+01:00</Time>
+      <Time>2013-03-05T13:14:38.938045+01:00</Time>
     </Item>
     <Item>
       <Source>background.jpg</Source>

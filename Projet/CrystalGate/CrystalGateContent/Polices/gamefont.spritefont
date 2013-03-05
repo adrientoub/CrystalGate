@@ -5,10 +5,11 @@
 		<Size>20</Size>
 		<Spacing>2</Spacing>
 		<Style>Bold</Style>
+    <DefaultCharacter>*</DefaultCharacter>
 		<CharacterRegions>
 			<CharacterRegion>
 				<Start>&#32;</Start>
-				<End>&#126;</End>
+				<End>&#256;</End>
 			</CharacterRegion>
 		</CharacterRegions>
 	</Asset>

@@ -29,9 +29,9 @@ namespace CrystalGate
             try
             {
                 if (autorisedLanguages.Contains(langue))
-                    file = new System.IO.StreamReader(baseDirectory + "Languages/" + langue + ".lng"); // Adresse à changer plus tard
+                    file = new System.IO.StreamReader(baseDirectory + "Languages/" + langue + ".lng", System.Text.Encoding.GetEncoding("iso-8859-1")); 
                 else
-                    file = new System.IO.StreamReader(baseDirectory + "Languages/" + defaultLanguage + ".lng"); 
+                    file = new System.IO.StreamReader(baseDirectory + "Languages/" + defaultLanguage + ".lng", System.Text.Encoding.GetEncoding("iso-8859-1")); 
             }
             catch (Exception)
             {

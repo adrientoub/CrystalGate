@@ -18,10 +18,10 @@ namespace CrystalGate.Scenes
         private enum Language
         {
             English,
-            Francais,
+            Français,
         }
 
-        private static Language _currentLanguage = Language.Francais;
+        private static Language _currentLanguage = Language.Français;
         private static readonly string[] Resolutions = { "480x800", "800x600", "1024x768", "1280x1024", "1680x1050", "1920x1080" };
         private static int _currentResolution;
         public static bool _fullscreen;
@@ -89,10 +89,10 @@ namespace CrystalGate.Scenes
         {
             _currentLanguage++;
 
-            if (_currentLanguage > Language.Francais)
+            if (_currentLanguage > Language.Français)
                 _currentLanguage = 0;
 
-            if (_currentLanguage == Language.Francais)
+            if (_currentLanguage == Language.Français)
             {
                 GameText.langue = "french";
             }
