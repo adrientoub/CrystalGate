@@ -22,11 +22,11 @@ namespace CrystalGateEditor
         bool ShowPalette;
         bool ShowMap;
         bool ShowHelp;
-        
+
         public Mode mode;
         public SousMode sousmode;
         public TextureStart textureStart;
-        
+
         User user;
 
         string MenuString = "";
@@ -43,7 +43,7 @@ namespace CrystalGateEditor
         // La Map
         public Vector2[,] Map;
         int width = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width;
-        int height =  System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height;
+        int height = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height;
 
         Stack<Vector4> stack;
 
@@ -55,7 +55,7 @@ namespace CrystalGateEditor
             this.fondTexte = fondTexte;
             this.SpriteFont = spriteFont;
 
-            this.PalettePosition = new Vector2(width - Palette.Width,0);
+            this.PalettePosition = new Vector2(width - Palette.Width, 0);
             this.sousmode = SousMode.Undone;
             stack = new Stack<Vector4> { };
         }
@@ -76,19 +76,19 @@ namespace CrystalGateEditor
             // Si NouvelleMap
             if (mode == Mode.NouvelleMap)
             {
-                if(sousmode == SousMode.Undone)
+                if (sousmode == SousMode.Undone)
                     sousmode = SousMode.Nom;
 
-                    if (sousmode == SousMode.Done)
-                    {
-                        // Creer la carte
-                        Map = new Vector2[int.Parse(longueur), int.Parse(hauteur)];
-                        Initialiser();
-                        MenuString = "";
-                        current = "";
-                        mode = Mode.Draw;
-                        ShowMap = true;
-                    }
+                if (sousmode == SousMode.Done)
+                {
+                    // Creer la carte
+                    Map = new Vector2[int.Parse(longueur), int.Parse(hauteur)];
+                    Initialiser();
+                    MenuString = "";
+                    current = "";
+                    mode = Mode.Draw;
+                    ShowMap = true;
+                }
             }
 
             // Si ChargerMap
@@ -128,14 +128,14 @@ namespace CrystalGateEditor
                         }
                     }
                 }
-                    // Controle utilisateur
+                // Controle utilisateur
                 // ShowPalette
                 if (user.keyboardState.IsKeyDown(Keys.P) && user.oldKeyboardState.IsKeyUp(Keys.P))
-                    if (!ShowPalette )
+                    if (!ShowPalette)
                         ShowPalette = true;
                     else
                         ShowPalette = false;
-                    
+
                 // Selection tile
                 if (ShowPalette && user.mouse.LeftButton == ButtonState.Pressed && user.mouse.X + user.camera.Position.X >= PalettePosition.X && user.mouse.Y <= Palette.Height)
                 {
@@ -229,7 +229,7 @@ namespace CrystalGateEditor
                 else if (user.keyboardState.IsKeyDown(Keys.D2))
                     textBase = "2";
 
-                else if(textBase.Length == 1)
+                else if (textBase.Length == 1)
                 {
                     switch (int.Parse(textBase))
                     {
@@ -290,7 +290,7 @@ namespace CrystalGateEditor
             int hauteur = 0;
 
             StreamReader file = new StreamReader(Game1.baseDirectory + "Maps/" + MapName + ".txt");
-            
+
             // On établit la longueur et la hauteur
             while ((line = file.ReadLine()) != null)
             {
@@ -330,7 +330,7 @@ namespace CrystalGateEditor
             for (int j = 0; j < Map.GetLength(1); j++)
             {
                 for (int i = 0; i < Map.GetLength(0); i++)
-                    stream.Write(Map[i,j].X + "," + Map[i,j].Y + "|");
+                    stream.Write(Map[i, j].X + "," + Map[i, j].Y + "|");
                 stream.WriteLine();
             }
             stream.Close();
@@ -375,7 +375,7 @@ namespace CrystalGateEditor
         {
             if (ShowMap)
             {
-                for(int j = 0; j < Map.GetLength(1); j++)
+                for (int j = 0; j < Map.GetLength(1); j++)
                     for (int i = 0; i < Map.GetLength(0); i++)
                         spriteBatch.Draw(Palette, new Vector2(i * 32, j * 32), new Rectangle((int)Map[i, j].X * 32 + (int)Map[i, j].X, (int)Map[i, j].Y * 32 + (int)Map[i, j].Y, 32, 32), Color.White);
             }
@@ -383,7 +383,7 @@ namespace CrystalGateEditor
                 spriteBatch.Draw(Palette, PalettePosition, Color.White);
             if (ShowCurrent)
             {
-                spriteBatch.Draw(fondTexte, new Vector2(width / 2 - 300, height / 1.5f - 15), Color.White);
+                spriteBatch.Draw(fondTexte, new Vector2(user.camera.Position.X + width / 2 - 300, user.camera.Position.Y + height / 1.5f - 15), Color.White);
                 spriteBatch.DrawString(SpriteFont, current, new Vector2(user.camera.Position.X + width / 2, user.camera.Position.Y + height / 1.5f), Color.White, 0, SpriteFont.MeasureString(current) / 2, 1, SpriteEffects.None, 0);
             }
             if (ShowHelp)
