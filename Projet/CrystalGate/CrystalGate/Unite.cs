@@ -174,15 +174,21 @@ namespace CrystalGate
         {
             if (Projectile != null)
             {
-                Projectile.Update();
-                if (Projectile.Timer <= 0) // quand le projectile atteint sa cible
-                {
+                // On verifie si le projectile n'est pas dans un mur
+                if (Projectile.IsInWall())
                     Projectile = null;
-                    if (uniteAttacked != null)// Si la cible n'est pas morte entre temps
-                        if (Dommages - uniteAttacked.Defense <= 0)
-                            uniteAttacked.Vie -= 1;
-                        else
-                            uniteAttacked.Vie -= Dommages - uniteAttacked.Defense;
+                else
+                {
+                    Projectile.Update();
+                    if (Projectile.Timer <= 0) // quand le projectile atteint sa cible
+                    {
+                        Projectile = null;
+                        if (uniteAttacked != null)// Si la cible n'est pas morte entre temps
+                            if (Dommages - uniteAttacked.Defense <= 0)
+                                uniteAttacked.Vie -= 1;
+                            else
+                                uniteAttacked.Vie -= Dommages - uniteAttacked.Defense;
+                    }
                 }
             }
         }

@@ -32,6 +32,12 @@ namespace CrystalGate
             Timer--;
         }
 
+        public bool IsInWall()
+        {
+            // Toutes les sprites dont l'Y est <= 4 sont des murs (cf la sprite des tiles)
+            return Tireur.Map.Cellules[(int)(Position.X / Tireur.Map.TailleTiles.X), (int)(Position.Y / Tireur.Map.TailleTiles.Y)].Y <= 4;
+        }
+
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(Sprite, Position, null, Color.White, Outil.AngleUnites(Target, Tireur), new Vector2(Sprite.Width / 2, Sprite.Height / 2), 1f, SpriteEffects.None, 0);
