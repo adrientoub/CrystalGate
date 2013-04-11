@@ -484,6 +484,15 @@
       <Extra>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Musiques\CelticMusic-Ode to the Fallen.wma</Extra>
       <Time>2013-02-28T23:11:33.058429+01:00</Time>
     </Item>
+    <Item>
+      <Source>Polices\SpellFont.spritefont</Source>
+      <Name>Polices\SpellFont</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Polices\SpellFont.xnb</Output>
+      <Time>2013-04-11T21:10:19.2936266+02:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>

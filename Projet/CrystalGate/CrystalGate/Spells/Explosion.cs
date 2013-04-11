@@ -11,6 +11,7 @@ namespace CrystalGate
     {
         const int Portée = 75;
         const float ratio = 2.5f;
+        Text description1, description2, description3;
 
         public Explosion(Unite u)
             : base(u)  
@@ -26,6 +27,10 @@ namespace CrystalGate
             SpriteBouton = unite.packTexture.boutons[0];
             SpriteEffect = unite.packTexture.sorts[0];
             sonSort = new EffetSonore(5);
+
+            description1 = new Text("DescriptionExplosion1");
+            description2 = new Text("DescriptionExplosion2");
+            description3 = new Text("DescriptionExplosion3");
         }
 
         public override void Update()
@@ -53,7 +58,7 @@ namespace CrystalGate
 
         public override string DescriptionSpell()
         {
-            return "Creer une explosion dans un rayon de " + Portée + " pixels, infligeant   " + unite.Puissance * ratio + " points de degats magiques.";
+            return description1.get() + " " + Portée + " " + description2.get() + " " + unite.Puissance * ratio + " " + description3.get();
         }
     }
 }

@@ -10,6 +10,7 @@ namespace CrystalGate
     class Invisibilite : Spell
     {
         List<Unite> uniteFollowing;
+        Text description1, description2;
 
         public Invisibilite(Unite u, bool useMana = true)
             : base(u)
@@ -27,6 +28,9 @@ namespace CrystalGate
             SpriteEffect = unite.packTexture.sorts[0];
             sonSort = new EffetSonore(10);
             uniteFollowing = new List<Unite>();
+
+            description1 = new Text("DescriptionInvisibilite1");
+            description2 = new Text("DescriptionInvisibilite2");
         }
 
         public override void Update()
@@ -75,7 +79,7 @@ namespace CrystalGate
 
         public override string DescriptionSpell()
         {
-            return "Rend le héros invisible pendant " + Ticks / 60 + " secondes, l'immunisant contre toutes attaques directes. Si le héros attaque ou utilise une competence, il redevient visible.";
+            return description1.get() + " " + Ticks / 60 + " " + description2.get();
         }
     }
 }

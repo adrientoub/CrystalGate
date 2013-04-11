@@ -15,6 +15,8 @@ namespace CrystalGate
         private static List<string> nomDuTexte, texteCorrespondant;
         static bool isLoaded = false;
 
+        public static System.IO.StreamWriter logWriter;
+
         public static void initGameText() // lancer cette fonction au lancement du jeu et à chaque changement de langue.
         {
             string baseDirectory;
@@ -62,6 +64,9 @@ namespace CrystalGate
                     if (textName == nomDuTexte[i])
                         return texteCorrespondant[i];
                 }
+                logWriter = new System.IO.StreamWriter("logfile.log");
+                logWriter.WriteLine("Texte \""+ textName + "\" non trouvé, devrait être ajouté au fichier de langue : " + langue);
+                logWriter.Close();
                 return texteCorrespondant[0];
             }
             else
