@@ -29,6 +29,7 @@ namespace CrystalGate
         public Vector2 TailleSac = new Vector2(8, 8);
         SpriteBatch spritebatch { get; set; }
         SpriteFont gamefont { get; set; }
+        SpriteFont spellfont { get; set; }
 
         public bool Win;
         public bool Lost;
@@ -42,7 +43,7 @@ namespace CrystalGate
         public int width = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width;
         public int height = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height;
 
-        public UI(Joueur joueur, Texture2D barreDesSorts, Texture2D curseur, Texture2D curseurRouge, Texture2D portrait, Texture2D sac, Texture2D blank, SpriteBatch sp, SpriteFont gf)
+        public UI(Joueur joueur, Texture2D barreDesSorts, Texture2D curseur, Texture2D curseurRouge, Texture2D portrait, Texture2D sac, Texture2D blank, SpriteBatch sp, SpriteFont gf, SpriteFont sf)
         {
             this.joueur = joueur;
             Portrait = portrait;
@@ -52,6 +53,7 @@ namespace CrystalGate
             CurseurRouge = curseurRouge;
             spritebatch = sp;
             gamefont = gf;
+            spellfont = sf;
             tempsDeJeuActuel = "0:00";
             compteurDeVague = "0/" + nombreDeVagues.ToString();
             this.blank = blank;
@@ -107,6 +109,19 @@ namespace CrystalGate
                 spritebatch.Draw(blank, new Rectangle(CadrePosition.X, CadrePosition.Y + CadrePosition.Height - hauteurBarre, xpToDraw, hauteurBarre), Color.IndianRed);
             else
                 spritebatch.Draw(blank, new Rectangle(CadrePosition.X, CadrePosition.Y + CadrePosition.Height - hauteurBarre, 1, hauteurBarre), Color.IndianRed);
+            
+            // Affichage de l'aide des sorts
+            for (int i = 0; i < joueur.champion.spells.Count; i++)
+            {
+                if (joueur.SourisHoverCheck(i))
+                {
+                    int widthCadre = 250;
+                    // Le cadre noir, le nom du sort, la description
+                    //spritebatch.Draw(blank, new Rectangle(BarreDesSortsPosition.X - widthCadre / 2, BarreDesSortsPosition.Y - 100, widthCadre, heightCadre), Color.Black);
+                    spritebatch.DrawString(spellfont, Outil.Normalize(joueur.champion.spells[i].DescriptionSpell()), new Vector2(BarreDesSortsPosition.X - widthCadre / 2, BarreDesSortsPosition.Y - 120 + 25), Color.White);
+                    spritebatch.DrawString(spellfont, joueur.champion.spells[i].ToString(), new Vector2(BarreDesSortsPosition.X - spellfont.MeasureString(joueur.champion.spells[i].ToString()).X / 2, BarreDesSortsPosition.Y - 120), Color.White);
+                }
+            }
 
             // Affichage du texte
             spritebatch.DrawString(gamefont, str, new Vector2(CadrePosition.X, CadrePosition.Y + 25), Color.White);

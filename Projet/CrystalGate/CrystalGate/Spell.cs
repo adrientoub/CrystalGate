@@ -92,5 +92,15 @@ namespace CrystalGate
             unite.Mana -= CoutMana;
             Point = p;
         }
+
+        public virtual string DescriptionSpell()
+        {
+            return "null";
+        }
+
+        public override string ToString()
+        {
+            return base.ToString().Split(new char[1] { '.' })[1];;
+        }
     }
 }

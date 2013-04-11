@@ -73,9 +73,9 @@ namespace CrystalGate
             }
         }
 
-        public override void Draw(SpriteBatch spriteBatch)
+        public override string DescriptionSpell()
         {
-            
+            return "Rend le héros invisible pendant " + Ticks / 60 + " secondes, l'immunisant contre toutes attaques directes. Si le héros attaque ou utilise une competence, il redevient visible.";
         }
     }
 }

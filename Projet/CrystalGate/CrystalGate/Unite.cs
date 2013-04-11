@@ -49,7 +49,7 @@ namespace CrystalGate
             Vie = VieMax = 1;
             Mana = ManaMax = 200;
             ManaRegen = 500;
-            Vitesse = 1.0f;
+            Vitesse = 0.1f;
             Portee = 2; // 2 = Corps à corps
             Dommages = 1;
             Puissance = 1;
@@ -159,7 +159,7 @@ namespace CrystalGate
                 DefenseMagique = (int)(DefenseMagique * byLevelAdd);
             Dommages = (int)(Dommages * byLevelAdd);
             Puissance = (int)(Puissance * byLevelAdd);
-            Vitesse = (int)(Vitesse * byLevelAdd);
+            Vitesse = Vitesse * byLevelAdd;
             ManaMax = (int)(ManaMax * byLevelAdd);
             VieMax = (int)(VieMax * byLevelAdd);
             ManaRegen = (int)(ManaRegen / byLevelAdd);
@@ -288,11 +288,10 @@ namespace CrystalGate
             if (ObjectifListe.Count > 0)
             {  // Bug, je sais pas pourquoi
                 // body.Position = ConvertUnits.ToSimUnits(new Vector2((float)Math.Round(ConvertUnits.ToDisplayUnits(body.Position.X)), (float)Math.Round(ConvertUnits.ToDisplayUnits(body.Position.Y) )));
-                Vector2 VecMap = new Vector2(0, 0);
                 // HAUT GAUCHE
                 if (PositionTile.X > ObjectifListe[0].Position.X && PositionTile.Y > ObjectifListe[0].Position.Y)
                 {
-                    body.LinearVelocity = new Vector2(-Vitesse / 1.41f, -Vitesse / 1.41f);
+                    body.LinearVelocity = new Vector2(-Vitesse / 1.41f, -Vitesse / 1.41f) * Map.gametime.ElapsedGameTime.Milliseconds;
                     FlipH = true;
 
                     if (direction != Direction.HautGauche || Animation.Count == 0)
@@ -302,7 +301,7 @@ namespace CrystalGate
                 // HAUT DROITE
                 else if (PositionTile.X < ObjectifListe[0].Position.X && PositionTile.Y > ObjectifListe[0].Position.Y)
                 {
-                    body.LinearVelocity = new Vector2(Vitesse / 1.41f, -Vitesse / 1.41f);
+                    body.LinearVelocity = new Vector2(Vitesse / 1.41f, -Vitesse / 1.41f) * Map.gametime.ElapsedGameTime.Milliseconds;
                     FlipH = false;
 
                     if (direction != Direction.HautDroite || Animation.Count == 0)
@@ -312,7 +311,7 @@ namespace CrystalGate
                 // BAS DROITE
                 else if (PositionTile.X < ObjectifListe[0].Position.X && PositionTile.Y < ObjectifListe[0].Position.Y)
                 {
-                    body.LinearVelocity = new Vector2(Vitesse / 1.41f, Vitesse / 1.41f);
+                    body.LinearVelocity = new Vector2(Vitesse / 1.41f, Vitesse / 1.41f) * Map.gametime.ElapsedGameTime.Milliseconds;
                     FlipH = false;
 
                     if (direction != Direction.BasDroite || Animation.Count == 0)
@@ -322,7 +321,7 @@ namespace CrystalGate
                 // BAS GAUCHE
                 else if (PositionTile.X > ObjectifListe[0].Position.X && PositionTile.Y < ObjectifListe[0].Position.Y)
                 {
-                    body.LinearVelocity = new Vector2(-Vitesse / 1.41f, Vitesse / 1.41f);
+                    body.LinearVelocity = new Vector2(-Vitesse / 1.41f, Vitesse / 1.41f) * Map.gametime.ElapsedGameTime.Milliseconds;
                     FlipH = true;
 
                     if (direction != Direction.BasGauche || Animation.Count == 0)
@@ -332,7 +331,7 @@ namespace CrystalGate
                 // GAUCHE
                 else if (PositionTile.X > ObjectifListe[0].Position.X)
                 {
-                    body.LinearVelocity = new Vector2(-Vitesse, 0);
+                    body.LinearVelocity = new Vector2(-Vitesse, 0) * Map.gametime.ElapsedGameTime.Milliseconds;
                     FlipH = true;
 
                     if (direction != Direction.Gauche || Animation.Count == 0)
@@ -342,7 +341,7 @@ namespace CrystalGate
                 // DROITE
                 else if (PositionTile.X < ObjectifListe[0].Position.X)
                 {
-                    body.LinearVelocity = new Vector2(Vitesse, 0);
+                    body.LinearVelocity = new Vector2(Vitesse, 0) * Map.gametime.ElapsedGameTime.Milliseconds;
                     FlipH = false;
 
                     if (direction != Direction.Droite || Animation.Count == 0)
@@ -352,7 +351,7 @@ namespace CrystalGate
                 // HAUT
                 else if (PositionTile.Y > ObjectifListe[0].Position.Y)
                 {
-                    body.LinearVelocity = new Vector2(0, -Vitesse);
+                    body.LinearVelocity = new Vector2(0, -Vitesse) * Map.gametime.ElapsedGameTime.Milliseconds;
                     FlipH = false;
 
                     if (direction != Direction.Haut || Animation.Count == 0)
@@ -362,7 +361,7 @@ namespace CrystalGate
                 // BAS
                 else if (PositionTile.Y < ObjectifListe[0].Position.Y)
                 {
-                    body.LinearVelocity = new Vector2(0, Vitesse);
+                    body.LinearVelocity = new Vector2(0, Vitesse) * Map.gametime.ElapsedGameTime.Milliseconds;
                     FlipH = false;
 
                     if (direction != Direction.Bas || Animation.Count == 0)

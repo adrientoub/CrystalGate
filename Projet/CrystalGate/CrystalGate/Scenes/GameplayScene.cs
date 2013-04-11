@@ -68,7 +68,7 @@ namespace CrystalGate.Scenes
             map.unites.Add(map.joueurs[0].champion);
 
             // Ajout Interface
-            UI Interface = new UI(map.joueurs[0], content.Load<Texture2D>("UI/barre des sorts"), content.Load<Texture2D>("Curseur"), content.Load<Texture2D>("UI/curseurRouge"), content.Load<Texture2D>("UI/GuerrierIcone"), content.Load<Texture2D>("UI/inventaire"), content.Load<Texture2D>("blank"), spriteBatch, gameFont);
+            UI Interface = new UI(map.joueurs[0], content.Load<Texture2D>("UI/barre des sorts"), content.Load<Texture2D>("Curseur"), content.Load<Texture2D>("UI/curseurRouge"), content.Load<Texture2D>("UI/GuerrierIcone"), content.Load<Texture2D>("UI/inventaire"), content.Load<Texture2D>("blank"), spriteBatch, gameFont, content.Load<SpriteFont>("Polices/SpellFont"));
             map.joueurs[0].Interface = Interface;
 
             Wave.waveNumber = 0;

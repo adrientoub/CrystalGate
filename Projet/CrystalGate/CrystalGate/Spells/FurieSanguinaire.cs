@@ -9,6 +9,8 @@ namespace CrystalGate
 {
     class FurieSanguinaire : Spell
     {
+        const float ratio = 0.2f;
+
         public FurieSanguinaire(Unite u, bool useMana = true)
             : base(u)
         {
@@ -32,13 +34,13 @@ namespace CrystalGate
             {
                 if (TickCurrent == 0)
                 {
-                    unite.Vitesse_Attaque -= 0.2f;
+                    unite.Vitesse_Attaque -= ratio;
                     unite.Scale = 1.25f;
                     unite.color = Color.LightPink;
                 }
                 else if (TickCurrent == Ticks - 1)
                 {
-                    unite.Vitesse_Attaque += 0.2f;
+                    unite.Vitesse_Attaque += ratio;
                     unite.Scale = 1f;
                     unite.color = Color.White;
                 }
@@ -46,9 +48,9 @@ namespace CrystalGate
             }
         }
 
-        public override void Draw(SpriteBatch spriteBatch)
+        public override string DescriptionSpell()
         {
-            
+            return "Augmente la vitesse d'attaque du héros de " + ratio * 100 + "%.";
         }
     }
 }

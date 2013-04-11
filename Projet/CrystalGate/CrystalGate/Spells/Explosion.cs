@@ -9,6 +9,9 @@ namespace CrystalGate
 {
     class Explosion : Spell
     {
+        const int Portée = 75;
+        const float ratio = 2.5f;
+
         public Explosion(Unite u)
             : base(u)  
         {
@@ -33,9 +36,9 @@ namespace CrystalGate
                 foreach (Unite u in unite.Map.unites)
                 {
                     float distance = Outil.DistancePoints(this.Point, u.PositionTile);
-                    if (u != unite && distance <= 75)
+                    if (u != unite && distance <= Portée)
                     {
-                        u.Vie -= (int)(unite.Puissance * 2.5f - u.DefenseMagique);
+                        u.Vie -= (int)(unite.Puissance * ratio - u.DefenseMagique);
                         //u.color = Color.Red;
                     }
                 }
@@ -46,6 +49,11 @@ namespace CrystalGate
         public override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(SpriteEffect, Point * unite.Map.TailleTiles, SpritePosition, Color.White, 0f, new Vector2(Tiles.X / 2, Tiles.Y / 2), 1f, SpriteEffects.None, 0);
+        }
+
+        public override string DescriptionSpell()
+        {
+            return "Creer une explosion dans un rayon de " + Portée + " pixels, infligeant   " + unite.Puissance * ratio + " points de degats magiques.";
         }
     }
 }

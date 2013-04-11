@@ -9,6 +9,8 @@ namespace CrystalGate
 {
     class Soin : Spell
     {
+        const float ratio = 1.25f;
+
         public Soin(Unite u, bool useMana = true)
             : base(u)  
         {
@@ -35,7 +37,7 @@ namespace CrystalGate
             {
                 if (unite.Vie != unite.VieMax)
                 {
-                    int ammount = (int)(unite.Puissance * 1.25f);
+                    int ammount = (int)(unite.Puissance * ratio);
                     if (unite.Vie + ammount <= unite.VieMax)
                     {
                         unite.Vie += ammount;
@@ -50,6 +52,11 @@ namespace CrystalGate
         public override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(SpriteEffect, unite.PositionTile * unite.Map.TailleTiles, SpritePosition, Color.White, 0f, new Vector2(Tiles.X / 2, Tiles.Y / 2), 1f, SpriteEffects.None, 0);
+        }
+
+        public override string DescriptionSpell()
+        {
+            return "Soigne le joueur d'un montant de " + (int)(unite.Puissance * ratio) + " points de vie.";
         }
     }
 }

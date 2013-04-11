@@ -248,10 +248,16 @@ namespace CrystalGate
             return false;
         }
 
-        public bool SourisCheck(int i)
+        public bool SourisCheck(int i) // Renvoie vrai si le joueur clique sur le bouton i
         {
             int largeurBoutonSort = 32;
             return mouse.X + camera.Position.X >= Interface.BarreDesSortsPosition.X - 130 + i * largeurBoutonSort && mouse.X + camera.Position.X <= Interface.BarreDesSortsPosition.X - 130 + i * largeurBoutonSort + largeurBoutonSort && mouse.Y + camera.Position.Y >= Interface.BarreDesSortsPosition.Y + 8 && mouse.Y + camera.Position.Y <= Interface.BarreDesSortsPosition.Y + 8 + largeurBoutonSort && mouse.LeftButton == ButtonState.Pressed && Oldmouse.LeftButton == ButtonState.Released;
+        }
+
+        public bool SourisHoverCheck(int i) // Renvoie vrai si le joueur a la souris sur le bouton i
+        {
+            int largeurBoutonSort = 32;
+            return mouse.X + camera.Position.X >= Interface.BarreDesSortsPosition.X - 130 + i * largeurBoutonSort && mouse.X + camera.Position.X <= Interface.BarreDesSortsPosition.X - 130 + i * largeurBoutonSort + largeurBoutonSort && mouse.Y + camera.Position.Y >= Interface.BarreDesSortsPosition.Y + 8 && mouse.Y + camera.Position.Y <= Interface.BarreDesSortsPosition.Y + 8 + largeurBoutonSort;
         }
 
         public void CheckWinandLose()

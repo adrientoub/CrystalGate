@@ -172,6 +172,25 @@ namespace CrystalGate
             EffetSonore.InitEffects();
         }
 
+        public static string Normalize(string description)
+        {
+            string rendu = "";
+            int maxParLigne = 30;
+            int i = 0;
+            foreach (char c in description)
+                if (i < maxParLigne)
+                {
+                    rendu += c;
+                    i++;
+                }
+                else
+                {
+                    i = 0;
+                    rendu += '\n' + Char.ToString(c);
+                }
+            return rendu;
+        }
+
         enum Direction
         {
             Haut,
