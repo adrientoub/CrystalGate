@@ -493,6 +493,24 @@
       <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Polices\SpellFont.xnb</Output>
       <Time>2013-04-11T21:10:19.2936266+02:00</Time>
     </Item>
+    <Item>
+      <Source>Menu\Boutons.png</Source>
+      <Name>Menu\Boutons</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Menu\Boutons.xnb</Output>
+      <Time>2013-04-17T23:04:37.2815404+02:00</Time>
+    </Item>
+    <Item>
+      <Source>Polices\sceneengine2font.spritefont</Source>
+      <Name>Polices\sceneengine2font</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Polices\sceneengine2font.xnb</Output>
+      <Time>2013-04-17T23:32:42.2324803+02:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>

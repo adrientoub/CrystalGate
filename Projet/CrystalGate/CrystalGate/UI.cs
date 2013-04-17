@@ -67,10 +67,10 @@ namespace CrystalGate
             PortraitPosition = new Rectangle(CadrePosition.X + CadrePosition.Width - Portrait.Width, CadrePosition.Y + 50, Portrait.Width, Portrait.Height);
             SacPosition = new Rectangle((int)joueur.camera.Position.X + width - Sac.Width, (int)joueur.camera.Position.Y + height - Sac.Height, Sac.Width, Sac.Height);
             BarreDesSortsPosition = new Rectangle((int)(joueur.camera.Position.X + width / 1.5), (int)(joueur.camera.Position.Y + height - BarreDesSorts.Height), BarreDesSorts.Width, BarreDesSorts.Height);
-            if (Scenes.GameplayScene.timer.Elapsed.Seconds < 10)
-                tempsDeJeuActuel = Scenes.GameplayScene.timer.Elapsed.Minutes.ToString() + ":0" + Scenes.GameplayScene.timer.Elapsed.Seconds.ToString();
+            if (SceneEngine2.GamePlay.timer.Elapsed.Seconds < 10)
+                tempsDeJeuActuel = SceneEngine2.GamePlay.timer.Elapsed.Minutes.ToString() + ":0" + SceneEngine2.GamePlay.timer.Elapsed.Seconds.ToString();
             else
-                tempsDeJeuActuel = Scenes.GameplayScene.timer.Elapsed.Minutes.ToString() + ":" + Scenes.GameplayScene.timer.Elapsed.Seconds.ToString();
+                tempsDeJeuActuel = SceneEngine2.GamePlay.timer.Elapsed.Minutes.ToString() + ":" + SceneEngine2.GamePlay.timer.Elapsed.Seconds.ToString();
 
             compteurDeVague = Wave.waveNumber.ToString() + "/" + nombreDeVagues.ToString();
         }

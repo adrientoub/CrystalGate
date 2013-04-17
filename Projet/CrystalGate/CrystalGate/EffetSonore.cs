@@ -34,7 +34,7 @@ namespace CrystalGate
         {
             try
             {
-                son = CrystalGate.Scenes.GameplayScene._effetsSonores[i].CreateInstance();
+                son = SceneEngine2.GamePlay._effetsSonores[i].CreateInstance();
                 id = i;
             }
             catch (Exception)
@@ -65,7 +65,7 @@ namespace CrystalGate
                             {
                                 son.Volume = volume; 
                                 son.Play();
-                                duree[i] = time.Elapsed + CrystalGate.Scenes.GameplayScene._effetsSonores[id].Duration;
+                                duree[i] = time.Elapsed + SceneEngine2.GamePlay._effetsSonores[id].Duration;
                                 isPlaying[i] = true;
                                 effectLaunch = true;
                             }

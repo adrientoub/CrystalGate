@@ -2,6 +2,7 @@ using CrystalGate.Inputs;
 using CrystalGate.Scenes;
 using CrystalGate.Scenes.Core;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace CrystalGate
 {
@@ -14,29 +15,56 @@ namespace CrystalGate
     {
         public static GraphicsDeviceManager graphics;
         public static bool isTest = true;
+        public static bool exit;
+        SceneEngine2.SceneHandler scene;
+
         public CrystalGateGame()
         {
             Content.RootDirectory = "Content";
 
             // Initialisation du GraphicsDeviceManager
             // pour obtenir une fenêtre de dimensions 800*480
-            graphics = new GraphicsDeviceManager(this) { PreferredBackBufferWidth = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width, PreferredBackBufferHeight = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height , /*IsFullScreen = true*/};
+            graphics = new GraphicsDeviceManager(this) { 
+                PreferredBackBufferWidth = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width,
+                PreferredBackBufferHeight = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height
+            };
             if (!isTest)
                 graphics.IsFullScreen = true;
-            
+
             Scenes.OptionsMenuScene._fullscreen = !graphics.IsFullScreen;
+        }
 
-            // Création du gestionnaire de scènes
-            var sceneMgr = new SceneManager(this);
+        protected override void Initialize()
+        {
+            GameText.initGameText();
+            scene = new SceneEngine2.SceneHandler();
+            SceneEngine2.SceneHandler.content = Content;
+            exit = false;
+            base.Initialize();
+        }
 
-            // Mise à jour automatique de Win... des entrées utilisateur
-            // et du gestionnaire de scènes
-            Components.Add(new InputState(this));
-            Components.Add(sceneMgr);
+        protected override void LoadContent()
+        {
+            // Create a new SpriteBatch, which can be used to draw textures.
+            SceneEngine2.SceneHandler.spriteBatch = new SpriteBatch(GraphicsDevice);
+            scene.Load();
+        }
 
-            // Activation des premières scènes
-            new BackgroundScene(sceneMgr).Add();
-            new MainMenuScene(sceneMgr).Add();
+        protected override void Update(GameTime gameTime)
+        {
+            scene.Update(gameTime);
+            if (exit)
+                Exit();
+        }
+
+        protected override void Draw(GameTime gameTime)
+        {
+            scene.Draw();
+        }
+
+        protected override void UnloadContent()
+        {
+            // TODO: Unload any non ContentManager content here
         }
 
         public static void Main()

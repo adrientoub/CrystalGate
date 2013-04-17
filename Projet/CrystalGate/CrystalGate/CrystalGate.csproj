@@ -118,10 +118,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Camera\Camera.cs" />
+    <Compile Include="SceneEngine2\BaseScene.cs" />
+    <Compile Include="SceneEngine2\MainMenu.cs" />
     <Compile Include="ConvertUnits.cs" />
     <Compile Include="Effet.cs" />
     <Compile Include="FondSonore.cs" />
     <Compile Include="Camera\Input.cs" />
+    <Compile Include="SceneEngine2\GamePlay.cs" />
+    <Compile Include="SceneEngine2\SceneHandler.cs" />
     <Compile Include="Item.cs" />
     <Compile Include="Items\PotionDeMana.cs" />
     <Compile Include="Items\PotionDeVie.cs" />
