@@ -10,6 +10,7 @@ namespace CrystalGate
     class Soin : Spell
     {
         const float ratio = 1.25f;
+        Text description1, description2;
 
         public Soin(Unite u, bool useMana = true)
             : base(u)  
@@ -28,6 +29,9 @@ namespace CrystalGate
             SpriteBouton = unite.packTexture.boutons[1];
             SpriteEffect = unite.packTexture.sorts[1];
             sonSort = new EffetSonore(4);
+
+            description1 = new Text("DescriptionSoin1");
+            description2 = new Text("DescriptionSoin2");
         }
 
         public override void Update()
@@ -56,7 +60,7 @@ namespace CrystalGate
 
         public override string DescriptionSpell()
         {
-            return "Soigne le joueur d'un montant de " + (int)(unite.Puissance * ratio) + " points de vie.";
+            return description1 + " " + (int)(unite.Puissance * ratio) + " " + description2;
         }
     }
 }

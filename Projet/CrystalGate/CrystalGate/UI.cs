@@ -116,9 +116,10 @@ namespace CrystalGate
                 if (joueur.SourisHoverCheck(i))
                 {
                     int widthCadre = 250;
+                    int heightCadre = 100;
                     string nomDuSort = new Text(joueur.champion.spells[i].ToString()).get();
                     // Le cadre noir, le nom du sort, la description
-                    //spritebatch.Draw(blank, new Rectangle(BarreDesSortsPosition.X - widthCadre / 2, BarreDesSortsPosition.Y - 100, widthCadre, heightCadre), Color.Black);
+                    spritebatch.Draw(blank, new Rectangle(BarreDesSortsPosition.X - widthCadre / 2, BarreDesSortsPosition.Y - 100, widthCadre, heightCadre), Color.Black);
                     spritebatch.DrawString(spellfont, Outil.Normalize(joueur.champion.spells[i].DescriptionSpell()), new Vector2(BarreDesSortsPosition.X - widthCadre / 2, BarreDesSortsPosition.Y - 120 + 25), Color.White);
                     spritebatch.DrawString(spellfont, nomDuSort, new Vector2(BarreDesSortsPosition.X - spellfont.MeasureString(nomDuSort).X / 2, BarreDesSortsPosition.Y - 120), Color.White);
                 }

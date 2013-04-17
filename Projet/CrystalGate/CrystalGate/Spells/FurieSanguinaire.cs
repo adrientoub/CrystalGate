@@ -10,6 +10,7 @@ namespace CrystalGate
     class FurieSanguinaire : Spell
     {
         const float ratio = 0.2f;
+        Text description;
 
         public FurieSanguinaire(Unite u, bool useMana = true)
             : base(u)
@@ -26,6 +27,7 @@ namespace CrystalGate
             SpriteBouton = unite.packTexture.boutons[5];
             SpriteEffect = unite.packTexture.sorts[0];
             sonSort = new EffetSonore(11);
+            description = new Text("DescriptionFurieSanguinaire");
         }
 
         public override void Update()
@@ -50,7 +52,7 @@ namespace CrystalGate
 
         public override string DescriptionSpell()
         {
-            return "Augmente la vitesse d'attaque du héros de " + ratio * 100 + "%.";
+            return description.get() + " " + ratio * 100 + "%.";
         }
     }
 }

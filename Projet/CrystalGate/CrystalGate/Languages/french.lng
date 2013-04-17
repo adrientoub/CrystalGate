@@ -41,3 +41,6 @@ Explosion=Explosion
 Invisibilite=Invisibilité
 FurieSanguinaire=Furie Sanginaire
 Soin=Soin
+DescriptionFurieSanguinaire=Augmente la vitesse d'attaque du héros de
+DescriptionSoin1=Soigne le joueur d'un montant de
+DescriptionSoin2=points de vie.
