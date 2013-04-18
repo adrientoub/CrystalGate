@@ -57,6 +57,9 @@ namespace CrystalGate
             tempsDeJeuActuel = "0:00";
             compteurDeVague = "0/" + nombreDeVagues.ToString();
             this.blank = blank;
+
+            // evite le crash de debut en initialisant la var des la premiere frame
+            SacPosition = new Rectangle((int)joueur.camera.Position.X + width - Sac.Width, (int)joueur.camera.Position.Y + height - Sac.Height, Sac.Width, Sac.Height);
         }
 
         public void Update()
