@@ -31,6 +31,7 @@ namespace CrystalGate.SceneEngine2
 
         public static GamePlay gameplayScene;
         public static MainMenu mainmenuScene;
+        public static MenuOptions menuoptionScene;
 
         public SceneHandler()
         {
@@ -38,11 +39,13 @@ namespace CrystalGate.SceneEngine2
             
             gameplayScene = new GamePlay();
             mainmenuScene = new MainMenu();
+            menuoptionScene = new MenuOptions();
         }
 
         public void Initialize()
         {
             mainmenuScene.Initialize();
+            menuoptionScene.Initialize();
         }
 
         public void Update(GameTime gameTime)
@@ -53,7 +56,7 @@ namespace CrystalGate.SceneEngine2
                     mainmenuScene.Update(gameTime);
                     break;
                 case GameState.Setting:
-
+                    menuoptionScene.Update(gameTime);
                     break;
                 case GameState.Gameplay:
                     gameplayScene.Update(gameTime);
@@ -68,6 +71,7 @@ namespace CrystalGate.SceneEngine2
         {
             gameplayScene.LoadContent();
             mainmenuScene.LoadContent();
+            menuoptionScene.LoadContent();
         }
 
         public void Draw()
@@ -78,7 +82,7 @@ namespace CrystalGate.SceneEngine2
                     mainmenuScene.Draw(spriteBatch);
                     break;
                 case GameState.Setting:
-
+                    menuoptionScene.Draw(spriteBatch);
                     break;
                 case GameState.Gameplay:
                     gameplayScene.Draw(spriteBatch);

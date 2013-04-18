@@ -31,6 +31,7 @@ namespace CrystalGate
             if (!isTest)
                 graphics.IsFullScreen = true;
 
+            SceneEngine2.MenuOptions.isFullscreen = !graphics.IsFullScreen;
             Scenes.OptionsMenuScene._fullscreen = !graphics.IsFullScreen;
         }
 
@@ -48,6 +49,7 @@ namespace CrystalGate
             // Create a new SpriteBatch, which can be used to draw textures.
             SceneEngine2.SceneHandler.spriteBatch = new SpriteBatch(GraphicsDevice);
             scene.Load();
+            scene.Initialize();
         }
 
         protected override void Update(GameTime gameTime)

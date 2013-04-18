@@ -125,6 +125,7 @@
     <Compile Include="FondSonore.cs" />
     <Compile Include="Camera\Input.cs" />
     <Compile Include="SceneEngine2\GamePlay.cs" />
+    <Compile Include="SceneEngine2\MenuOptions.cs" />
     <Compile Include="SceneEngine2\SceneHandler.cs" />
     <Compile Include="Item.cs" />
     <Compile Include="Items\PotionDeMana.cs" />
