@@ -21,7 +21,6 @@ namespace CrystalGate.SceneEngine2
 
         private SpriteFont spriteFont;
 
-        private MouseState mouse;
         private Rectangle mouseRec;
         private KeyboardState keyboardState;
 
@@ -60,7 +59,7 @@ namespace CrystalGate.SceneEngine2
             keyboardState = InputState.CurrentKeyboardState;
             mouse = Mouse.GetState();
             mouseRec = new Rectangle(mouse.X, mouse.Y, 5, 5);
-            if (mouse.LeftButton == ButtonState.Pressed)
+            if (mouse.LeftButton == ButtonState.Pressed && oldMouse.LeftButton == ButtonState.Released)
             {
                 if (mouseRec.Intersects(boutonPlay))
                 {
@@ -75,10 +74,7 @@ namespace CrystalGate.SceneEngine2
                     CrystalGateGame.exit = true;
                 }
             }
-            else if (mouse.RightButton == ButtonState.Pressed)
-            {
-                SceneHandler.gameState = GameState.Gameplay;
-            }
+            oldMouse = mouse;
         }
 
         public override void Draw(SpriteBatch spriteBatch)

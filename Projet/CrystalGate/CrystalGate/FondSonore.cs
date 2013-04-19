@@ -42,7 +42,10 @@ namespace CrystalGate
                 _finDeLaMusique = _musiqueDeFond[_playingNow].Duration + EffetSonore.time.Elapsed;
             }
         }
-
+        public static void UpdateVolume()
+        {
+            MediaPlayer.Volume = volume;
+        }
         public static void Pause() // Pause pour quand dans les menus
         {
             MediaPlayer.Pause();

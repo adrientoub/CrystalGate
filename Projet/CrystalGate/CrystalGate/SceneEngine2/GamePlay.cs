@@ -137,5 +137,9 @@ namespace CrystalGate.SceneEngine2
                 SceneHandler.gameState = GameState.Pause;
         }
 
+        public void Initialize()
+        {
+
+        }
     }
 }

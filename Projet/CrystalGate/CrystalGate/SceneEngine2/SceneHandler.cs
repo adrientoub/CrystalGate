@@ -46,6 +46,7 @@ namespace CrystalGate.SceneEngine2
         {
             mainmenuScene.Initialize();
             menuoptionScene.Initialize();
+            gameplayScene.Initialize();
         }
 
         public void Update(GameTime gameTime)
