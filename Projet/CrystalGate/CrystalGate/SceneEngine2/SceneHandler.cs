@@ -32,6 +32,7 @@ namespace CrystalGate.SceneEngine2
         public static GamePlay gameplayScene;
         public static MainMenu mainmenuScene;
         public static MenuOptions menuoptionScene;
+        public static PauseScene pauseScene;
 
         public SceneHandler()
         {
@@ -40,6 +41,7 @@ namespace CrystalGate.SceneEngine2
             gameplayScene = new GamePlay();
             mainmenuScene = new MainMenu();
             menuoptionScene = new MenuOptions();
+            pauseScene = new PauseScene();
         }
 
         public void Initialize()
@@ -47,10 +49,13 @@ namespace CrystalGate.SceneEngine2
             mainmenuScene.Initialize();
             menuoptionScene.Initialize();
             gameplayScene.Initialize();
+            pauseScene.Initialize();
         }
 
         public void Update(GameTime gameTime)
         {
+            BaseScene.mouse = Mouse.GetState();
+            BaseScene.keyboardState = Keyboard.GetState();
             switch (gameState)
             {
                 case GameState.MainMenu:
@@ -63,16 +68,19 @@ namespace CrystalGate.SceneEngine2
                     gameplayScene.Update(gameTime);
                     break;
                 case GameState.Pause:
-
+                    pauseScene.Update(gameTime);
                     break;
             }
+            BaseScene.oldMouse = BaseScene.mouse;
+            BaseScene.oldKeyboardState = BaseScene.keyboardState;
         }
 
         public void Load()
         {
-            gameplayScene.LoadContent();
             mainmenuScene.LoadContent();
             menuoptionScene.LoadContent();
+            pauseScene.LoadContent();
+            gameplayScene.LoadContent();
         }
 
         public void Draw()
@@ -83,15 +91,25 @@ namespace CrystalGate.SceneEngine2
                     mainmenuScene.Draw(spriteBatch);
                     break;
                 case GameState.Setting:
+                    if (MenuOptions.isPauseOption)
+                        gameplayScene.Draw(spriteBatch);
                     menuoptionScene.Draw(spriteBatch);
                     break;
                 case GameState.Gameplay:
                     gameplayScene.Draw(spriteBatch);
                     break;
                 case GameState.Pause:
-
+                    gameplayScene.Draw(spriteBatch);
+                    pauseScene.Draw(spriteBatch);
                     break;
             }
+        }
+
+        public static void ResetGameplay()
+        {
+            gameplayScene = new GamePlay();
+            gameplayScene.Initialize();
+            gameplayScene.LoadContent();
         }
     }
 }

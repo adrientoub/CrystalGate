@@ -32,7 +32,6 @@ namespace CrystalGate.SceneEngine2
                 content = SceneHandler.content;
 
             FondSonore.Load(content);
-            FondSonore.Play();
 
             gameFont = content.Load<SpriteFont>("Polices/gamefont");
 
@@ -58,7 +57,7 @@ namespace CrystalGate.SceneEngine2
             map.unites.Add(map.joueurs[0].champion);
 
             // Ajout Interface
-            UI Interface = new UI(map.joueurs[0], content.Load<Texture2D>("UI/barre des sorts"), content.Load<Texture2D>("Curseur"), content.Load<Texture2D>("UI/curseurRouge"), content.Load<Texture2D>("UI/GuerrierIcone"), content.Load<Texture2D>("UI/inventaire"), content.Load<Texture2D>("blank"), SceneHandler.spriteBatch, gameFont, content.Load<SpriteFont>("Polices/SpellFont"));
+            UI Interface = new UI(map.joueurs[0], content.Load<Texture2D>("UI/barre des sorts"), curseur, content.Load<Texture2D>("UI/curseurRouge"), content.Load<Texture2D>("UI/GuerrierIcone"), content.Load<Texture2D>("UI/inventaire"), content.Load<Texture2D>("blank"), SceneHandler.spriteBatch, gameFont, content.Load<SpriteFont>("Polices/SpellFont"));
             map.joueurs[0].Interface = Interface;
 
             Wave.waveNumber = 0;
@@ -101,6 +100,13 @@ namespace CrystalGate.SceneEngine2
                 w.Update(gameTime, map.joueurs[0].champion);
             // Update de la physique
             map.world.Step(1 / 60f);
+
+            if (SceneEngine2.BaseScene.keyboardState.IsKeyDown(Keys.Escape) && !SceneEngine2.BaseScene.oldKeyboardState.IsKeyDown(Keys.Escape))
+            {
+                FondSonore.Pause();
+                GamePlay.timer.Stop();
+                SceneHandler.gameState = GameState.Pause;
+            }
         }
 
         public override void Draw(SpriteBatch spriteBatch)
@@ -124,20 +130,8 @@ namespace CrystalGate.SceneEngine2
             /**/
             spriteBatch.End();
         }
-        // Gestion des raccourcis des menus
-        public void HandleInput()
-        {
-            KeyboardState keyboardState = InputState.CurrentKeyboardState;
-            GamePadState gamePadState = InputState.CurrentGamePadState;
 
-            bool gamePadDisconnected = !gamePadState.IsConnected &&
-                                       InputState.GamePadWasConnected;
-
-            if (InputState.IsPauseGame() || gamePadDisconnected)
-                SceneHandler.gameState = GameState.Pause;
-        }
-
-        public void Initialize()
+        public override void Initialize()
         {
 
         }

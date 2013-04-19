@@ -15,20 +15,13 @@ namespace CrystalGate.SceneEngine2
     {
         private ContentManager content;
 
-        private Texture2D background;
-        private Texture2D boutons;
-        private Texture2D curseur;
-
-        private SpriteFont spriteFont;
-
         private Rectangle mouseRec;
-        private KeyboardState keyboardState;
 
         private Rectangle boutonPlay, boutonOptions, boutonQuitter;
 
         private Text lancerJeu, optionsJeu, quitterJeu;
 
-        public void Initialize()
+        public override void Initialize()
         {
             
         }
@@ -56,25 +49,25 @@ namespace CrystalGate.SceneEngine2
         public override void Update(GameTime gameTime)
         {
             // Handle mouse and keyboard to use the menu.
-            keyboardState = InputState.CurrentKeyboardState;
-            mouse = Mouse.GetState();
             mouseRec = new Rectangle(mouse.X, mouse.Y, 5, 5);
             if (mouse.LeftButton == ButtonState.Pressed && oldMouse.LeftButton == ButtonState.Released)
             {
                 if (mouseRec.Intersects(boutonPlay))
                 {
                     SceneHandler.gameState = GameState.Gameplay;
+                    FondSonore.Play();
+                    GamePlay.timer.Restart();
                 }
                 else if (mouseRec.Intersects(boutonOptions))
                 {
                     SceneHandler.gameState = GameState.Setting;
+                    MenuOptions.isPauseOption = false;
                 }
                 else if (mouseRec.Intersects(boutonQuitter))
                 {
                     CrystalGateGame.exit = true;
                 }
             }
-            oldMouse = mouse;
         }
 
         public override void Draw(SpriteBatch spriteBatch)

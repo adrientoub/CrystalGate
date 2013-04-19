@@ -22,16 +22,13 @@ namespace CrystalGate.SceneEngine2
 
         private ContentManager content;
 
-        private Texture2D background;
-        private Texture2D boutons;
-        private Texture2D curseur;
         private Texture2D volume;
         private Texture2D volumeVide;
-
-        private SpriteFont spriteFont;
+        private Texture2D blank;
 
         private Rectangle mouseRec;
-        private KeyboardState keyboardState;
+
+        public static bool isPauseOption;
 
         private Rectangle boutonPleinEcran, boutonLangue, boutonRetour, volumeEffects, volumeFondSonore;
 
@@ -40,10 +37,11 @@ namespace CrystalGate.SceneEngine2
         private static Language _currentLanguage = Language.Français;
         string fullscreenText, langueText;
 
-        public void Initialize()
+        public override void Initialize()
         {
             fullscreenText = pleinEcranT.get() + " : " + (isFullscreen ? noT.get() : yesT.get());
             langueText = langueT.get() + " : " + _currentLanguage.ToString();
+            isPauseOption = false;
         }
 
         public override void LoadContent()
@@ -51,19 +49,16 @@ namespace CrystalGate.SceneEngine2
             if (content == null)
                 content = SceneHandler.content;
 
-            background = content.Load<Texture2D>("background");
-            boutons = content.Load<Texture2D>("Menu/Boutons");
             volume = content.Load<Texture2D>("Menu/Volume");
-            volumeVide = content.Load<Texture2D>("Menu/VolumeVide");   
-            curseur = content.Load<Texture2D>("Curseur");         
+            volumeVide = content.Load<Texture2D>("Menu/VolumeVide");
+            curseur = content.Load<Texture2D>("Curseur");
+            blank = content.Load<Texture2D>("blank");
 
             pleinEcranT = new Text("Fullscreen");
             langueT = new Text("Language");
             retourT = new Text("Back");
             noT = new Text("no");
             yesT = new Text("yes");
-
-            spriteFont = content.Load<SpriteFont>("Polices/sceneengine2font");
 
             boutonPleinEcran = new Rectangle((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width - boutons.Width) / 2, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height / 2 - 200, boutons.Width, boutons.Height);
             boutonLangue = new Rectangle((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width - boutons.Width) / 2, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height / 2 - 100, boutons.Width, boutons.Height);
@@ -74,9 +69,6 @@ namespace CrystalGate.SceneEngine2
 
         public override void Update(GameTime gameTime)
         {
-            // Handle mouse and keyboard to use the menu.
-            keyboardState = InputState.CurrentKeyboardState;
-            mouse = Mouse.GetState();
             mouseRec = new Rectangle(mouse.X, mouse.Y, 5, 5);
             if (mouse.LeftButton == ButtonState.Pressed)
             {
@@ -115,21 +107,26 @@ namespace CrystalGate.SceneEngine2
                     }
                     else if (mouseRec.Intersects(boutonRetour))
                     {
-                        SceneHandler.gameState = GameState.MainMenu;
+                        if (isPauseOption)
+                            SceneHandler.gameState = GameState.Pause;
+                        else
+                            SceneHandler.gameState = GameState.MainMenu;
                         // TODO : Retourner au jeu si options du jeu
                     }
                 }
             }
             fullscreenText = pleinEcranT.get() + " : " + (isFullscreen ? noT.get() : yesT.get());
             langueText = langueT.get() + " : " + _currentLanguage.ToString();
-            oldMouse = mouse;
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
             var fullscene = new Rectangle(0, 0, CrystalGateGame.graphics.GraphicsDevice.Viewport.Width, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height);
             spriteBatch.Begin();
-            spriteBatch.Draw(background, fullscene, Color.White);
+            if (isPauseOption)
+                spriteBatch.Draw(blank, fullscene, new Color(0, 0, 0, 127));
+            else
+                spriteBatch.Draw(background, fullscene, Color.White);
 
             if (mouseRec.Intersects(boutonPleinEcran))
                 spriteBatch.Draw(boutons, boutonPleinEcran, Color.Gray);

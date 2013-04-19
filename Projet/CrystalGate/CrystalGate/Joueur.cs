@@ -13,10 +13,10 @@ namespace CrystalGate
 
         public Camera2D camera { get; set; }
 
-        MouseState mouse { get; set; }
-        MouseState Oldmouse { get; set; }
-        KeyboardState key { get; set; }
-        KeyboardState Oldkey { get; set; }
+        public MouseState mouse { get; set; }
+        public MouseState Oldmouse { get; set; }
+        public KeyboardState key { get; set; }
+        public KeyboardState Oldkey { get; set; }
         public UI Interface { get; set; }
         bool InWaitingPoint;
         int spell;

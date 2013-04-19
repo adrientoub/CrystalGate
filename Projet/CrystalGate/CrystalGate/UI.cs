@@ -81,7 +81,8 @@ namespace CrystalGate
         public void Draw()
         {
             int hauteurBarre = 30;
-            MouseState m = Mouse.GetState();
+
+            MouseState m = SceneEngine2.BaseScene.mouse;
             // Affichage des textes
             Text life = new Text("Life"), attack = new Text("Attack"), armor = new Text("Armor"), selectPoint = new Text("SelectPoint"), manaText = new Text("Mana"), levelText = new Text("Level"); // définition des mots traduisibles
 
