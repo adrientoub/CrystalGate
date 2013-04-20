@@ -115,6 +115,11 @@ namespace CrystalGate.SceneEngine2
                     }
                 }
             }
+
+            if (isPauseOption && keyboardState.IsKeyDown(Keys.Escape))
+            {
+                SceneHandler.gameState = GameState.Gameplay;
+            }
             fullscreenText = pleinEcranT.get() + " : " + (isFullscreen ? noT.get() : yesT.get());
             langueText = langueT.get() + " : " + _currentLanguage.ToString();
         }
