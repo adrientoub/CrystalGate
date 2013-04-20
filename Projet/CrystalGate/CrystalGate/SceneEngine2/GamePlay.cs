@@ -73,12 +73,12 @@ namespace CrystalGate.SceneEngine2
 
             timer = new System.Diagnostics.Stopwatch();
             timer.Start();
-            //map.items.Add(new PotionDeVie(new Vector2(40, 32), pack));
         }
 
         public override void Update(GameTime gameTime)
         {
             FondSonore.Update();
+
             // On update les infos de la map
             map.Update(map.unites, gameTime);
             // On update les infos des joueurs

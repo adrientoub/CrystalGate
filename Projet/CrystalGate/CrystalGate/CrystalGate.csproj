@@ -156,17 +156,6 @@
     <Compile Include="Inputs\InputState.cs" />
     <Compile Include="Objet.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Scenes\BackgroundScene.cs" />
-    <Compile Include="Scenes\Core\AbstractGameScene.cs" />
-    <Compile Include="Scenes\Core\AbstractMenuScene.cs" />
-    <Compile Include="Scenes\Core\MenuItem.cs" />
-    <Compile Include="Scenes\Core\SceneManager.cs" />
-    <Compile Include="Scenes\GameplayScene.cs" />
-    <Compile Include="Scenes\LoadingScene.cs" />
-    <Compile Include="Scenes\MainMenuScene.cs" />
-    <Compile Include="Scenes\MessageBoxScene.cs" />
-    <Compile Include="Scenes\OptionsMenuScene.cs" />
-    <Compile Include="Scenes\PauseMenuScene.cs" />
     <Compile Include="Unites\Cavalier.cs" />
     <Compile Include="Unites\Archer.cs" />
     <Compile Include="Unites\Guerrier.cs" />

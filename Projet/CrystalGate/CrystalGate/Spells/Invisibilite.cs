@@ -37,6 +37,7 @@ namespace CrystalGate
         {
             if (TickCurrent < Ticks)
             {
+                unite.isInvisible = true;
                 if (TickCurrent == 0)
                 {
                     foreach (Unite u in unite.Map.unites)
@@ -44,6 +45,7 @@ namespace CrystalGate
                         if (u != unite && u.uniteAttacked == unite)
                         {
                             u.uniteAttacked = null;
+                            u.OlduniteAttacked = null;
                             uniteFollowing.Add(u);
                         }
                     }
@@ -57,6 +59,7 @@ namespace CrystalGate
                         u.uniteAttacked = unite;
                     }
                     uniteFollowing = new List<Unite>();
+                    unite.isInvisible = false;
                 }
                 /*else
                 {

@@ -28,6 +28,7 @@ namespace CrystalGate
         public Color color { get; set; }
         public Vector2 pointCible;
         public bool IsRanged;
+        int NiveauDeBrain;
 
         protected EffetSonore effetUniteAttaque;
         protected EffetSonore effetUniteDeath;
@@ -113,6 +114,9 @@ namespace CrystalGate
             // Refresh l'attaque et le pathfinding correspondant
             if (uniteAttacked != null)
                 Attaquer(uniteAttacked);
+            else
+                if (OlduniteAttacked != null && ObjectifListe.Count == 0) // si l'unité se déplacait pour tirer
+                    uniteAttacked = OlduniteAttacked;
         }
 
         void IA(List<Unite> unitsOnMap)
@@ -120,6 +124,37 @@ namespace CrystalGate
             // Cast un heal si < à la moitié de vie
             if (Vie <= VieMax / 2 && IsCastable(1))
                 Cast(1, Vector2.Zero);
+
+            if (uniteAttacked != null)
+            {
+                if (IsRanged && NiveauDeBrain >= 3)
+                {
+                    NiveauDeBrain = 0;
+                    // represente tous les noeuds possibles pour se rapprocher de la cible
+                    List<Noeud> Chemin = PathFinding.TrouverChemin(PositionTile, uniteAttacked.PositionTile, Map.Taille, new List<Unite> { }, Map.unitesStatic, false);
+                    Projectile = new Projectile(this, uniteAttacked);
+                    foreach (Noeud n in Chemin) // Pour chaque noeud possible
+                    {
+                        if (Projectile.CanReach(n.Position)) // Si on peut atteindre sa cible depuis ce noeud
+                        {
+                            ObjectifListe = new List<Noeud>{};
+                            foreach (Noeud n2 in Chemin) // Alors on se déplace sur ce noeud
+                            {
+                                if (n2 != n)
+                                    ObjectifListe.Add(n2);
+                                else
+                                {
+                                    ObjectifListe.Add(n2);
+                                    break;
+                                }
+                            }
+                            break;
+                        }
+                    }
+                    OlduniteAttacked = uniteAttacked;
+                    uniteAttacked = null;
+                }
+            }
         }
 
         public virtual void TestMort(List<Effet> effets) // aussi la mana
@@ -174,9 +209,12 @@ namespace CrystalGate
         {
             if (Projectile != null)
             {
-                // On verifie si le projectile n'est pas dans un mur
+                // On verifie si le projectile n'est pas dans un mur, on augmente la variable si c'est le cas
                 if (Projectile.IsInWall())
+                {
                     Projectile = null;
+                    NiveauDeBrain++;
+                }
                 else
                 {
                     Projectile.Update();
@@ -215,70 +253,74 @@ namespace CrystalGate
                 Suivre(unite);
             else
             {
-                ObjectifListe.Clear();
-                body.LinearVelocity = Vector2.Zero;
-                // Fait regarder l'unité vers l'unité attaqué
-                if (Animation.Count == 0)
+                if (!uniteAttacked.isInvisible)
                 {
-                    FlipH = false;
-                    float angle = Outil.AngleUnites(this, unite);
-
-                    if (angle >= Math.PI / 4 && angle <= 3 * Math.PI / 4)
-                        direction = Direction.Haut;
-                    else if (angle >= - 3 * Math.PI / 4 && angle <= - Math.PI / 4)
-                        direction = Direction.Bas;
-                    else if (angle >= -Math.PI / 4 && angle <= Math.PI / 4)
+                    OlduniteAttacked = uniteAttacked;
+                    ObjectifListe.Clear();
+                    body.LinearVelocity = Vector2.Zero;
+                    // Fait regarder l'unité vers l'unité attaqué
+                    if (Animation.Count == 0)
                     {
-                        direction = Direction.Gauche;
-                        FlipH = true;
-                    }
-                    else
-                        direction = Direction.Droite;
+                        FlipH = false;
+                        float angle = Outil.AngleUnites(this, unite);
 
-                }
-
-                if (Map.gametime.TotalGameTime.TotalMilliseconds - LastAttack > Vitesse_Attaque * 1000) // Si le cooldown est fini
-                {
-                    LastAttack = (float)Map.gametime.TotalGameTime.TotalMilliseconds; // On met à jour "l'heure de la dernière attaque"
-                    // projectile
-                    if(IsRanged) // Si l'unité attaque à distance, on creer un projectile, sinon on attaque direct
-                        Projectile = new Projectile(this, uniteAttacked);
-                    else
-                        if (Dommages - unite.Defense <= 0) // Si armure > Dommages , degats = 1
-                            unite.Vie -= 1;
+                        if (angle >= Math.PI / 4 && angle <= 3 * Math.PI / 4)
+                            direction = Direction.Haut;
+                        else if (angle >= -3 * Math.PI / 4 && angle <= -Math.PI / 4)
+                            direction = Direction.Bas;
+                        else if (angle >= -Math.PI / 4 && angle <= Math.PI / 4)
+                        {
+                            direction = Direction.Gauche;
+                            FlipH = true;
+                        }
                         else
-                            unite.Vie -= Dommages - unite.Defense;
-                    // son
-                    effetUniteAttaque.Play();
+                            direction = Direction.Droite;
 
-                    // Fait regarder l'unité vers l'unité attaqué et l'anime
+                    }
 
-                    AnimationCurrent = AnimationLimite;
-                    FlipH = false;
-                    float angle = Outil.AngleUnites(this, unite);
+                    if (Map.gametime.TotalGameTime.TotalMilliseconds - LastAttack > Vitesse_Attaque * 1000) // Si le cooldown est fini
+                    {
+                        LastAttack = (float)Map.gametime.TotalGameTime.TotalMilliseconds; // On met à jour "l'heure de la dernière attaque"
+                        // projectile
+                        if (IsRanged) // Si l'unité attaque à distance, on creer un projectile, sinon on attaque direct
+                            Projectile = new Projectile(this, uniteAttacked);
+                        else
+                            if (Dommages - unite.Defense <= 0) // Si armure > Dommages , degats = 1
+                                unite.Vie -= 1;
+                            else
+                                unite.Vie -= Dommages - unite.Defense;
+                        // son
+                        effetUniteAttaque.Play();
 
-                    if (angle >= Math.PI / 4 && angle <= 3 * Math.PI / 4)
-                    {
-                        direction = Direction.Haut;
-                        Animation = packAnimation.AttaquerHaut();
+                        // Fait regarder l'unité vers l'unité attaqué et l'anime
+
+                        AnimationCurrent = AnimationLimite;
+                        FlipH = false;
+                        float angle = Outil.AngleUnites(this, unite);
+
+                        if (angle >= Math.PI / 4 && angle <= 3 * Math.PI / 4)
+                        {
+                            direction = Direction.Haut;
+                            Animation = packAnimation.AttaquerHaut();
+                        }
+                        else if (angle >= -3 * Math.PI / 4 && angle <= -Math.PI / 4)
+                        {
+                            direction = Direction.Bas;
+                            Animation = packAnimation.AttaquerBas();
+                        }
+                        else if (angle >= -Math.PI / 4 && angle <= Math.PI / 4)
+                        {
+                            direction = Direction.Gauche;
+                            FlipH = true;
+                            Animation = packAnimation.AttaquerDroite();
+                        }
+                        else
+                        {
+                            direction = Direction.Droite;
+                            Animation = packAnimation.AttaquerDroite();
+                        }
+
                     }
-                    else if (angle >= -3 * Math.PI / 4 && angle <= -Math.PI / 4)
-                    {
-                        direction = Direction.Bas;
-                        Animation = packAnimation.AttaquerBas();
-                    }
-                    else if (angle >= -Math.PI / 4 && angle <= Math.PI / 4)
-                    {
-                        direction = Direction.Gauche;
-                        FlipH = true;
-                        Animation = packAnimation.AttaquerDroite();
-                    }
-                    else
-                    {
-                        direction = Direction.Droite;
-                        Animation = packAnimation.AttaquerDroite();
-                    }
-                    
                 }
             }
         }

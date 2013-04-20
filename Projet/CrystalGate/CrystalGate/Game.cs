@@ -1,6 +1,5 @@
 using CrystalGate.Inputs;
-using CrystalGate.Scenes;
-using CrystalGate.Scenes.Core;
+
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -31,8 +30,6 @@ namespace CrystalGate
             if (!isTest)
                 graphics.IsFullScreen = true;
 
-            SceneEngine2.MenuOptions.isFullscreen = !graphics.IsFullScreen;
-            Scenes.OptionsMenuScene._fullscreen = !graphics.IsFullScreen;
         }
 
         protected override void Initialize()

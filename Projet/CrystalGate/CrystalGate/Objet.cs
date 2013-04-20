@@ -22,6 +22,7 @@ namespace CrystalGate
         public Map Map { get; set; }
         public Body body { get; set; }
         public bool isAChamp { get; set; }
+        public bool isInvisible { get; set; }
 
         public List<Vector2> Animation { get; set; }
         public PackTexture packTexture { get; set; }
@@ -42,6 +43,7 @@ namespace CrystalGate
         public List<Noeud> ObjectifListe { get; set; }
 
         public float LastAttack { get; set; }
+        public Unite OlduniteAttacked { get; set; }
         public Unite uniteAttacked { get; set; }
 
         public Objet(Vector2 Position, Map Map, PackTexture packTexture)
