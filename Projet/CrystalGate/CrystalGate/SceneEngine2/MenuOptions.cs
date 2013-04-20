@@ -29,6 +29,7 @@ namespace CrystalGate.SceneEngine2
         private Rectangle mouseRec;
 
         public static bool isPauseOption;
+        public static bool endFirstClic;
 
         private Rectangle boutonPleinEcran, boutonLangue, boutonRetour, volumeEffects, volumeFondSonore;
 
@@ -42,6 +43,7 @@ namespace CrystalGate.SceneEngine2
             fullscreenText = pleinEcranT.get() + " : " + (isFullscreen ? noT.get() : yesT.get());
             langueText = langueT.get() + " : " + _currentLanguage.ToString();
             isPauseOption = false;
+            endFirstClic = false;
         }
 
         public override void LoadContent()
@@ -70,7 +72,7 @@ namespace CrystalGate.SceneEngine2
         public override void Update(GameTime gameTime)
         {
             mouseRec = new Rectangle(mouse.X, mouse.Y, 5, 5);
-            if (mouse.LeftButton == ButtonState.Pressed)
+            if (endFirstClic && mouse.LeftButton == ButtonState.Pressed)
             {
                 if (mouseRec.Intersects(volumeEffects))
                 {
@@ -111,9 +113,14 @@ namespace CrystalGate.SceneEngine2
                             SceneHandler.gameState = GameState.Pause;
                         else
                             SceneHandler.gameState = GameState.MainMenu;
+                        endFirstClic = false;
                         // TODO : Retourner au jeu si options du jeu
                     }
                 }
+            }
+            else if (!endFirstClic && mouse.LeftButton == ButtonState.Released)
+            {
+                endFirstClic = true;
             }
 
             if (isPauseOption && keyboardState.IsKeyDown(Keys.Escape))

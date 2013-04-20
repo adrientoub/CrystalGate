@@ -30,6 +30,7 @@ namespace CrystalGate
             if (!isTest)
                 graphics.IsFullScreen = true;
 
+            SceneEngine2.MenuOptions.isFullscreen = !graphics.IsFullScreen;
         }
 
         protected override void Initialize()
