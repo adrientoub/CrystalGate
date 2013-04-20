@@ -15,6 +15,8 @@ namespace CrystalGate
         private static List<string> nomDuTexte, texteCorrespondant;
         static bool isLoaded = false;
 
+        public static TimeSpan lastReinit;
+
         public static System.IO.StreamWriter logWriter;
 
         public static void initGameText() // lancer cette fonction au lancement du jeu et à chaque changement de langue.
@@ -51,6 +53,7 @@ namespace CrystalGate
             }
             isLoaded = true;
             file.Close();
+            lastReinit = EffetSonore.time.Elapsed;
         }
 
         public static string getText(string textName) // A améliorer en utilisant les algos du cours, recherche dans une liste triée.
