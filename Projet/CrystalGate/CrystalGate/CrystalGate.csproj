@@ -118,8 +118,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Camera\Camera.cs" />
+    <Compile Include="Items\Stuff\BottesDacier.cs" />
+    <Compile Include="Items\Stuff\RingLionHead.cs" />
+    <Compile Include="Items\Stuff\HelmetPurple.cs" />
+    <Compile Include="Items\Stuff\Epaulieres.cs" />
+    <Compile Include="Items\Stuff\GantsDeDevotion.cs" />
+    <Compile Include="Items\Stuff\EpeeSolari.cs" />
+    <Compile Include="Stuff.cs" />
     <Compile Include="SceneEngine2\BaseScene.cs" />
-    <Compile Include="SceneEngine2\DefeatScene.cs" />
     <Compile Include="SceneEngine2\MainMenu.cs" />
     <Compile Include="ConvertUnits.cs" />
     <Compile Include="Effet.cs" />
@@ -134,7 +140,6 @@
     <Compile Include="Items\PotionDeVie.cs" />
     <Compile Include="PackWave.cs" />
     <Compile Include="Projectile.cs" />
-    <Compile Include="SceneEngine2\VictoryScene.cs" />
     <Compile Include="Spell.cs" />
     <Compile Include="Spells\Bump.cs" />
     <Compile Include="Spells\FurieSanguinaire.cs" />

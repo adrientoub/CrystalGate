@@ -37,6 +37,7 @@ namespace CrystalGate
 
         public List<Spell> spells { get; set; }
         public List<Item> Inventory { get; set; }
+        public List<Item> Stuff { get; set; }
         public int InventoryCapacity = 64;
         public bool Drawlife { get; set; }
         public double idWave { get; set; }
@@ -69,6 +70,7 @@ namespace CrystalGate
             idWave = -1;
             spells = new List<Spell> { new Explosion(this), new Soin(this), new Invisibilite(this), new FurieSanguinaire(this) };
             Inventory = new List<Item> { };
+            Stuff = new List<Item> { };
         }
 
         public void statsLevelUpdate()
@@ -101,7 +103,7 @@ namespace CrystalGate
                     s.Update();
             // Pour Update et Draw les items de l'inventaire
             foreach (Item i in Inventory)
-                if (i.Disabled)
+                if (i.Activated)
                     i.spell.Update();
             // Pour Update les projectiles
             ProjectileUpdate();
@@ -234,7 +236,7 @@ namespace CrystalGate
         void InventoryUpdate()
         {
             for (int i = 0; i < Inventory.Count; i++)
-                if (Inventory[i].Disabled && !Inventory[i].spell.ToDraw)
+                if (Inventory[i].Activated && !Inventory[i].spell.ToDraw)
                     Inventory.Remove(Inventory[i]);
         }
        
@@ -479,7 +481,7 @@ namespace CrystalGate
                 if (s.ToDraw)
                     s.Draw(spriteBatch);
             foreach (Item i in Inventory)
-                if (i.Disabled)
+                if (i.Activated)
                     i.spell.Draw(spriteBatch);
             // Draw projectile
             if(Projectile != null)

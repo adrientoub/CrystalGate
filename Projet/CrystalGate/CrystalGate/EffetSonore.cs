@@ -63,7 +63,7 @@ namespace CrystalGate
                         {
                             if (!son.IsDisposed)
                             {
-                                son.Volume = volume; 
+                                son.Volume = (volume >= 0) ? volume : 0; 
                                 son.Play();
                                 duree[i] = time.Elapsed + SceneEngine2.GamePlay._effetsSonores[id].Duration;
                                 isPlaying[i] = true;

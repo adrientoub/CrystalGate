@@ -20,9 +20,7 @@ namespace CrystalGate.SceneEngine2
         MainMenu,
         Setting, 
         Gameplay,
-        Pause,
-        Victory,
-        Defeat
+        Pause
     }
 
     class SceneHandler
@@ -35,8 +33,6 @@ namespace CrystalGate.SceneEngine2
         public static MainMenu mainmenuScene;
         public static MenuOptions menuoptionScene;
         public static PauseScene pauseScene;
-        public static VictoryScene victoryScene;
-        public static DefeatScene defeatScene;
 
         public SceneHandler()
         {
@@ -46,8 +42,6 @@ namespace CrystalGate.SceneEngine2
             mainmenuScene = new MainMenu();
             menuoptionScene = new MenuOptions();
             pauseScene = new PauseScene();
-            victoryScene = new VictoryScene();
-            defeatScene = new DefeatScene();
         }
 
         public void Initialize()
@@ -56,8 +50,6 @@ namespace CrystalGate.SceneEngine2
             menuoptionScene.Initialize();
             gameplayScene.Initialize();
             pauseScene.Initialize();
-            victoryScene.Initialize();
-            defeatScene.Initialize();
         }
 
         public void Update(GameTime gameTime)
@@ -78,12 +70,6 @@ namespace CrystalGate.SceneEngine2
                 case GameState.Pause:
                     pauseScene.Update(gameTime);
                     break;
-                case GameState.Victory:
-                    victoryScene.Update(gameTime);
-                    break;
-                case GameState.Defeat:
-                    defeatScene.Update(gameTime);
-                    break;
             }
             BaseScene.oldMouse = BaseScene.mouse;
             BaseScene.oldKeyboardState = BaseScene.keyboardState;
@@ -95,8 +81,6 @@ namespace CrystalGate.SceneEngine2
             menuoptionScene.LoadContent();
             pauseScene.LoadContent();
             gameplayScene.LoadContent();
-            victoryScene.LoadContent();
-            defeatScene.LoadContent();
         }
 
         public void Draw()
@@ -117,14 +101,6 @@ namespace CrystalGate.SceneEngine2
                 case GameState.Pause:
                     gameplayScene.Draw(spriteBatch);
                     pauseScene.Draw(spriteBatch);
-                    break;
-                case GameState.Victory:
-                    gameplayScene.Draw(spriteBatch);
-                    victoryScene.Draw(spriteBatch);
-                    break;
-                case GameState.Defeat:
-                    gameplayScene.Draw(spriteBatch);
-                    defeatScene.Draw(spriteBatch);
                     break;
             }
         }

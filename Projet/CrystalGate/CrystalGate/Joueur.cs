@@ -9,15 +9,10 @@ namespace CrystalGate
 {
     public class Joueur
     {
-        public Unite champion { get; set; }
+        public Unite champion;
 
-        public Camera2D camera { get; set; }
-
-        public MouseState mouse { get; set; }
-        public MouseState Oldmouse { get; set; }
-        public KeyboardState key { get; set; }
-        public KeyboardState Oldkey { get; set; }
-        public UI Interface { get; set; }
+        public Camera2D camera;
+        public UI Interface;
         bool InWaitingPoint;
         int spell;
 
@@ -38,27 +33,27 @@ namespace CrystalGate
         {
             if (!champion.Mort)
             {
-                mouse = Mouse.GetState();
-                key = Keyboard.GetState();
+                Interface.mouse = Mouse.GetState();
+                Interface.key = Keyboard.GetState();
                 // Pour cibler un point pour un sort
-                if (mouse.LeftButton == ButtonState.Pressed && Oldmouse.LeftButton == ButtonState.Released && InWaitingPoint)
+                if (Interface.mouse.LeftButton == ButtonState.Pressed && Interface.Oldmouse.LeftButton == ButtonState.Released && InWaitingPoint)
                 {
-                    champion.pointCible = new Vector2((int)((camera.Position.X + mouse.X) / 32), (int)((camera.Position.Y + mouse.Y) / 32));
+                    champion.pointCible = new Vector2((int)((camera.Position.X + Interface.mouse.X) / 32), (int)((camera.Position.Y + Interface.mouse.Y) / 32));
                     InWaitingPoint = false;
                     Interface.DrawSelectPoint = false;
                     champion.Cast(spell, champion.pointCible);
                 }
                 // Pour se déplacer
-                if (mouse.RightButton == ButtonState.Pressed && !DonnerOrdreAttaquer())
+                if (Interface.mouse.RightButton == ButtonState.Pressed && !DonnerOrdreAttaquer() && (OnInventory() && !Interface.DrawSac || !OnInventory()))
                     DonnerOrdreDeplacer();
                 // Pour attaquer un point
-                if (key.IsKeyDown(Keys.A))
+                if (Interface.key.IsKeyDown(Keys.A))
                     DonnerOrdreAttaquerPoint();
                 // Pour arreter les déplacements
-                if (key.IsKeyDown(Keys.S))
+                if (Interface.key.IsKeyDown(Keys.S))
                     DonnerOrdreStop();
                 // Pour lancer un sort
-                if (key.IsKeyDown(Keys.D1) && champion.spells.Count > 0 || SourisCheck(0) && champion.spells.Count > 0)
+                if (Interface.key.IsKeyDown(Keys.D1) && champion.spells.Count > 0 || ClickCheck(0) && champion.spells.Count > 0)
                 {
                     spell = 0;
                     if (champion.IsCastable(0))
@@ -72,7 +67,7 @@ namespace CrystalGate
                             champion.Cast(spell, champion.pointCible);
                     }
                 }
-                if (key.IsKeyDown(Keys.D2) && champion.spells.Count > 1 || SourisCheck(1) && champion.spells.Count > 1)
+                if (Interface.key.IsKeyDown(Keys.D2) && champion.spells.Count > 1 || ClickCheck(1) && champion.spells.Count > 1)
                 {
                     spell = 1;
                     if (champion.IsCastable(1))
@@ -86,7 +81,7 @@ namespace CrystalGate
                             champion.Cast(spell, champion.pointCible);
                     }
                 }
-                if (key.IsKeyDown(Keys.D3) && champion.spells.Count > 2 || SourisCheck(2) && champion.spells.Count > 2)
+                if (Interface.key.IsKeyDown(Keys.D3) && champion.spells.Count > 2 || ClickCheck(2) && champion.spells.Count > 2)
                 {
                     spell = 2;
                     if (champion.IsCastable(2))
@@ -100,7 +95,7 @@ namespace CrystalGate
                             champion.Cast(spell, champion.pointCible);
                     }
                 }
-                if (key.IsKeyDown(Keys.D4) && champion.spells.Count > 3 || SourisCheck(3) && champion.spells.Count > 3)
+                if (Interface.key.IsKeyDown(Keys.D4) && champion.spells.Count > 3 || ClickCheck(3) && champion.spells.Count > 3)
                 {
                     spell = 3;
                     if (champion.IsCastable(3))
@@ -115,18 +110,12 @@ namespace CrystalGate
                     }
                 }
                 // Pour afficher/cacher le sac
-                if (key.IsKeyDown(Keys.B) && Oldkey.IsKeyUp(Keys.B) || key.IsKeyDown(Keys.I) && Oldkey.IsKeyUp(Keys.I))
+                if (Interface.key.IsKeyDown(Keys.B) && Interface.Oldkey.IsKeyUp(Keys.B) || Interface.key.IsKeyDown(Keys.I) && Interface.Oldkey.IsKeyUp(Keys.I))
                     Interface.DrawSac = !Interface.DrawSac;
-                // Pour utiliser les objets
-                if (mouse.X + camera.Position.X >= Interface.SacPosition.X && mouse.Y + camera.Position.Y >= Interface.SacPosition.Y)
-                    if (mouse.LeftButton == ButtonState.Pressed && Oldmouse.LeftButton == ButtonState.Released)
-                    {
-                        int marge = 7;
-                        Vector2 position = new Vector2(mouse.X - (Interface.width - Interface.Sac.Width), mouse.Y - (Interface.height- Interface.Sac.Height));
-                        int indice = (int)position.X / (32 + marge) + (int)Interface.TailleSac.X * ((int)position.Y / (32 + marge));
-                        if (champion.Inventory.Count > indice)
-                            champion.Inventory[indice].Utiliser();
-                    }
+                // Pour afficher/cacher le sac
+                if (Interface.key.IsKeyDown(Keys.C) && Interface.Oldkey.IsKeyUp(Keys.C))
+                    Interface.DrawEquipement = !Interface.DrawEquipement;
+                
                 
                 // Fait attaquer l'unité la plus proche
                 if (isRoaming)
@@ -151,14 +140,14 @@ namespace CrystalGate
             CameraCheck();
             CurseurCheck();
             CheckWinandLose();
-            Oldmouse = mouse;
-            Oldkey = key;
+            Interface.Oldmouse = Interface.mouse;
+            Interface.Oldkey = Interface.key;
         }
 
         public void DonnerOrdreDeplacer()
         {
             isRoaming = false;
-            Vector2 ObjectifPoint = new Vector2(camera.Position.X + mouse.X, camera.Position.Y + mouse.Y) / champion.Map.TailleTiles;
+            Vector2 ObjectifPoint = new Vector2(camera.Position.X + Interface.mouse.X, camera.Position.Y + Interface.mouse.Y) / champion.Map.TailleTiles;
             ObjectifPoint = new Vector2((int)ObjectifPoint.X, (int)ObjectifPoint.Y);
                 
             List<Noeud> chemin = PathFinding.TrouverChemin(champion.PositionTile, ObjectifPoint, champion.Map.Taille, new List<Unite> { }, champion.Map.unitesStatic, false);
@@ -170,7 +159,7 @@ namespace CrystalGate
         public bool DonnerOrdreAttaquer()
         {
             isRoaming = false;
-            Vector2 ObjectifPoint = new Vector2(camera.Position.X + mouse.X, camera.Position.Y + mouse.Y) / champion.Map.TailleTiles;
+            Vector2 ObjectifPoint = new Vector2(camera.Position.X + Interface.mouse.X, camera.Position.Y + Interface.mouse.Y) / champion.Map.TailleTiles;
             ObjectifPoint = new Vector2((int)ObjectifPoint.X, (int)ObjectifPoint.Y);
             foreach(Unite u in champion.Map.unites)
                 if(u != champion && Outil.DistancePoints(ObjectifPoint, u .PositionTile) <= 64)
@@ -208,13 +197,13 @@ namespace CrystalGate
             Vector2 vec = new Vector2();
 
             // Si on déplace la caméra hors des bords de l'écran
-            if (mouse.X >= width - 1)
+            if (Interface.mouse.X >= width - 1)
                 vec.X += vitesse;
-            if (mouse.X <= 1)
+            if (Interface.mouse.X <= 1)
                 vec.X -= vitesse;
-            if (mouse.Y >= height - 15)
+            if (Interface.mouse.Y >= height - 15)
                 vec.Y += vitesse;
-            if (mouse.Y <= 1)
+            if (Interface.mouse.Y <= 1)
                 vec.Y -= vitesse;
 
             // Si on sort de la map
@@ -234,7 +223,7 @@ namespace CrystalGate
 
         public bool CurseurCheck()
         {
-            Vector2 ObjectifPoint = new Vector2(camera.Position.X + mouse.X, camera.Position.Y + mouse.Y) / champion.Map.TailleTiles;
+            Vector2 ObjectifPoint = new Vector2(camera.Position.X + Interface.mouse.X, camera.Position.Y + Interface.mouse.Y) / champion.Map.TailleTiles;
             ObjectifPoint = new Vector2((int)ObjectifPoint.X, (int)ObjectifPoint.Y);
 
             foreach (Unite u in champion.Map.unites)
@@ -246,18 +235,23 @@ namespace CrystalGate
 
             Interface.CurseurOffensif = false;
             return false;
+        } // Renvoie vrai si le curseur est sur un méchant :p
+
+        public bool OnInventory()
+        {
+            return Interface.SacPosition.Intersects(new Rectangle(Interface.mouse.X, Interface.mouse.Y, 1, 1));
         }
 
-        public bool SourisCheck(int i) // Renvoie vrai si le joueur clique sur le bouton i
+        public bool ClickCheck(int i) // Renvoie vrai si le joueur clique sur le bouton i
         {
             int largeurBoutonSort = 32;
-            return mouse.X + camera.Position.X >= Interface.BarreDesSortsPosition.X - 130 + i * largeurBoutonSort && mouse.X + camera.Position.X <= Interface.BarreDesSortsPosition.X - 130 + i * largeurBoutonSort + largeurBoutonSort && mouse.Y + camera.Position.Y >= Interface.BarreDesSortsPosition.Y + 8 && mouse.Y + camera.Position.Y <= Interface.BarreDesSortsPosition.Y + 8 + largeurBoutonSort && mouse.LeftButton == ButtonState.Pressed && Oldmouse.LeftButton == ButtonState.Released;
+            return Interface.mouse.X >= Interface.BarreDesSortsPosition.X - 130 + i * largeurBoutonSort && Interface.mouse.X <= Interface.BarreDesSortsPosition.X - 130 + i * largeurBoutonSort + largeurBoutonSort && Interface.mouse.Y >= Interface.BarreDesSortsPosition.Y + 8 && Interface.mouse.Y <= Interface.BarreDesSortsPosition.Y + 8 + largeurBoutonSort && Interface.mouse.LeftButton == ButtonState.Pressed && Interface.Oldmouse.LeftButton == ButtonState.Released;
         }
 
         public bool SourisHoverCheck(int i) // Renvoie vrai si le joueur a la souris sur le bouton i
         {
             int largeurBoutonSort = 32;
-            return mouse.X + camera.Position.X >= Interface.BarreDesSortsPosition.X - 130 + i * largeurBoutonSort && mouse.X + camera.Position.X <= Interface.BarreDesSortsPosition.X - 130 + i * largeurBoutonSort + largeurBoutonSort && mouse.Y + camera.Position.Y >= Interface.BarreDesSortsPosition.Y + 8 && mouse.Y + camera.Position.Y <= Interface.BarreDesSortsPosition.Y + 8 + largeurBoutonSort;
+            return Interface.mouse.X >= Interface.BarreDesSortsPosition.X - 130 + i * largeurBoutonSort && Interface.mouse.X <= Interface.BarreDesSortsPosition.X - 130 + i * largeurBoutonSort + largeurBoutonSort && Interface.mouse.Y >= Interface.BarreDesSortsPosition.Y + 8 && Interface.mouse.Y <= Interface.BarreDesSortsPosition.Y + 8 + largeurBoutonSort;
         }
 
         public void CheckWinandLose()

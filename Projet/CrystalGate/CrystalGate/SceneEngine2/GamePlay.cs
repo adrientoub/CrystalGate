@@ -42,7 +42,7 @@ namespace CrystalGate.SceneEngine2
             pack.sorts.Add(content.Load<Texture2D>("Spells/Explosion"));
             pack.sorts.Add(content.Load<Texture2D>("Spells/Soin"));
             pack.sorts.Add(content.Load<Texture2D>("Spells/ManaRegen"));
-            pack.boutons = new List<Texture2D> { content.Load<Texture2D>("Boutons/Explosion"), content.Load<Texture2D>("Boutons/Soin"), content.Load<Texture2D>("Boutons/Invisibility"), content.Load<Texture2D>("Boutons/PotionDeVie"), content.Load<Texture2D>("Boutons/PotionMana"), content.Load<Texture2D>("Boutons/BloodLust") };
+            pack.boutons = new List<Texture2D> { content.Load<Texture2D>("Boutons/Explosion"), content.Load<Texture2D>("Boutons/Soin"), content.Load<Texture2D>("Boutons/Invisibility"), content.Load<Texture2D>("Boutons/PotionDeVie"), content.Load<Texture2D>("Boutons/PotionMana"), content.Load<Texture2D>("Boutons/BloodLust"), content.Load<Texture2D>("Boutons/EpeeSolari"), content.Load<Texture2D>("Boutons/BottesDacier"), content.Load<Texture2D>("Boutons/Epaulieres"), content.Load<Texture2D>("Boutons/GantsDeDevotion"), content.Load<Texture2D>("Boutons/HelmutPurple"), content.Load<Texture2D>("Boutons/RingLionHead") };
             pack.projectiles = new List<Texture2D> { content.Load<Texture2D>("Projectiles/arrow"), content.Load<Texture2D>("Projectiles/axe"), content.Load<Texture2D>("Projectiles/fireball") };
             pack.map.Add(content.Load<Texture2D>("summertiles"));
 
@@ -57,7 +57,7 @@ namespace CrystalGate.SceneEngine2
             map.unites.Add(map.joueurs[0].champion);
 
             // Ajout Interface
-            UI Interface = new UI(map.joueurs[0], content.Load<Texture2D>("UI/barre des sorts"), curseur, content.Load<Texture2D>("UI/curseurRouge"), content.Load<Texture2D>("UI/GuerrierIcone"), content.Load<Texture2D>("UI/inventaire"), content.Load<Texture2D>("blank"), SceneHandler.spriteBatch, gameFont, content.Load<SpriteFont>("Polices/SpellFont"));
+            UI Interface = new UI(map.joueurs[0], content.Load<Texture2D>("UI/barre des sorts"), curseur, content.Load<Texture2D>("UI/curseurRouge"), content.Load<Texture2D>("UI/GuerrierIcone"), content.Load<Texture2D>("UI/inventaire"), content.Load<Texture2D>("UI/Equipement"), content.Load<Texture2D>("blank"), SceneHandler.spriteBatch, gameFont, content.Load<SpriteFont>("Polices/SpellFont"));
             map.joueurs[0].Interface = Interface;
 
             Wave.waveNumber = 0;
@@ -70,6 +70,12 @@ namespace CrystalGate.SceneEngine2
             // Ajout des items
             map.items.Add(new PotionDeVie(new Vector2(22, 24), pack));
             map.items.Add(new PotionDeVie(new Vector2(23, 24), pack));
+            map.items.Add(new EpeeSolari(Vector2.One, pack));
+            map.items.Add(new GantsDeDevotion(Vector2.One, pack));
+            map.items.Add(new BottesDacier(Vector2.One, pack));
+            map.items.Add(new Epaulieres(Vector2.One, pack));
+            map.items.Add(new HelmetPurple(Vector2.One, pack));
+            map.items.Add(new RingLionHead(Vector2.One, pack));
 
             timer = new System.Diagnostics.Stopwatch();
             timer.Start();

@@ -12,14 +12,16 @@ namespace CrystalGate
         public Texture2D Icone;
         public Vector2 Position;
         public bool InInventory;
-        public bool Disabled; // true quand l'objet est utilisé
+        public bool Activated; // true quand l'objet est utilisé
         public Unite unite; // Unite qui possède l'objet
         public Spell spell; // Spell qui sera appelé quand l'objet sera activé
+        public Type type;
 
         public Item(Vector2 position, PackTexture pack)
         {
             Position = position;
             Icone = pack.blank; // definir l'icone ici
+            type = Type.Consommable;
         }
 
         public void Update(List<Unite> unites) // Appelé quand l'objet est sur la map
@@ -41,13 +43,25 @@ namespace CrystalGate
 
         public virtual void Effet(Unite unite)
         {
-
+            
         }
 
         public void Utiliser()
         {
             spell.Begin(unite.pointCible); // Lance le sort de l'objet et le marque comme désactivé , pour qu'il soit retiré de l'inventaire dans le methode InventoryUpdate()
-            Disabled = true;
+            Activated = true;
         }
+    }
+
+    public enum Type
+    {
+        Casque,
+        Epaulieres,
+        Gants,
+        Plastron,
+        Anneau,
+        Bottes,
+        Arme,
+        Consommable
     }
 }
