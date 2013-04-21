@@ -176,18 +176,41 @@ namespace CrystalGate
         {
             string rendu = "";
             int maxParLigne = 30;
+
             int i = 0;
-            foreach (char c in description)
-                if (i < maxParLigne)
+            string[] descriptionWords = description.Split(new char[] { ' ' });
+
+            for (int j = 0; j < descriptionWords.Length; j++)
+            {
+                if (descriptionWords[j].Length + i <= maxParLigne)
                 {
-                    rendu += c;
-                    i++;
+                    rendu += descriptionWords[j] + " ";
+                    i += descriptionWords[j].Length + 1;
+                }
+                else if (descriptionWords[j].Length <= maxParLigne)
+                {
+                    rendu += "\n" + descriptionWords[j] + " ";
+                    i = descriptionWords[j].Length + 1;
                 }
                 else
                 {
+                    rendu += "\n";
                     i = 0;
-                    rendu += '\n' + Char.ToString(c);
+                    foreach (char c in descriptionWords[j])
+                    {
+                        if (i < maxParLigne)
+                        {
+                            rendu += c;
+                            i++;
+                        }
+                        else
+                        {
+                            rendu += "\n" + c.ToString();
+                            i = 0;
+                        }
+                    }
                 }
+            }
             return rendu;
         }
 
