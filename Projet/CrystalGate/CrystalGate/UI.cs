@@ -19,7 +19,7 @@ namespace CrystalGate
         public Texture2D Sac;
         public Texture2D Equipement;
         public Texture2D blank;
-        
+
         // Position des images sur l'ecran
         public Rectangle CadrePosition;
         public Rectangle BarreDesSortsPosition;
@@ -29,7 +29,7 @@ namespace CrystalGate
 
         // Position des pièces d'équipement
         const int decalage = 44;
-        public Vector2 CasquePosition = new Vector2(35,25); // 42
+        public Vector2 CasquePosition = new Vector2(35, 25); // 42
         public Vector2 EpaulieresPosition = new Vector2(35, 25 + decalage * 1);
         public Vector2 GantsPosition = new Vector2(35, 25 + decalage * 2);
         public Vector2 PlastronPosition = new Vector2(35, 25 + decalage * 3);
@@ -88,7 +88,7 @@ namespace CrystalGate
         {
             int widthFondNoir = 380, heightFondNoir = 250;
 
-            CadrePosition = new Rectangle(0,height - heightFondNoir, widthFondNoir, heightFondNoir);
+            CadrePosition = new Rectangle(0, height - heightFondNoir, widthFondNoir, heightFondNoir);
             PortraitPosition = new Rectangle(CadrePosition.X + CadrePosition.Width - Portrait.Width, CadrePosition.Y + 50, Portrait.Width, Portrait.Height);
             SacPosition = new Rectangle(width - Sac.Width, height - Sac.Height, Sac.Width, Sac.Height);
             EquipementPosition = new Rectangle(width / 2 - Equipement.Width / 2, height / 2 - Equipement.Height / 2, Equipement.Width, Equipement.Height);
@@ -236,7 +236,7 @@ namespace CrystalGate
                 spritebatch.Draw(blank, new Rectangle((int)joueur.camera.Position.X + CadrePosition.X, (int)joueur.camera.Position.Y + CadrePosition.Y + CadrePosition.Height - hauteurBarre, xpToDraw, hauteurBarre), Color.IndianRed);
             else
                 spritebatch.Draw(blank, new Rectangle((int)joueur.camera.Position.X + CadrePosition.X, (int)joueur.camera.Position.Y + CadrePosition.Y + CadrePosition.Height - hauteurBarre, 1, hauteurBarre), Color.IndianRed);
-            
+
             // Affichage de l'aide des sorts
             for (int i = 0; i < joueur.champion.spells.Count; i++)
             {
@@ -280,18 +280,16 @@ namespace CrystalGate
                     }
                 }
             }
-            
-            Text Victoire = new Text("Win"), Defaite = new Text("Lose");
-            // Affichage de la victoire ou de la défaite
+                
             if (Win)
-                spritebatch.DrawString(gamefont, Victoire.get(), new Vector2(joueur.camera.Position.X + width / 2 - gamefont.MeasureString(Victoire.get()).X / 2, joueur.camera.Position.Y + height / 2 - gamefont.MeasureString(Defaite.get()).Y / 2), Color.Black);
-            if (Lost)
-                spritebatch.DrawString(gamefont, Defaite.get(), new Vector2(joueur.camera.Position.X + width / 2 - gamefont.MeasureString(Defaite.get()).X / 2, joueur.camera.Position.Y + height / 2 - gamefont.MeasureString(Defaite.get()).Y / 2), Color.Black);
-            if(DrawSelectPoint)
+                SceneEngine2.SceneHandler.gameState = SceneEngine2.GameState.Victory;
+            else if (Lost)
+                SceneEngine2.SceneHandler.gameState = SceneEngine2.GameState.Defeat;
+            if (DrawSelectPoint)
                 spritebatch.DrawString(gamefont, str2, new Vector2(BarreDesSortsPosition.X - gamefont.MeasureString(str2).X / 2, BarreDesSortsPosition.Y - BarreDesSorts.Height), Color.White);
-            
+
             // Affichage des spells
-            for(int i = 0; i < joueur.champion.spells.Count; i++)
+            for (int i = 0; i < joueur.champion.spells.Count; i++)
             {
                 if (joueur.champion.Map.gametime != null)
                 {

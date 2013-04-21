@@ -529,6 +529,69 @@
       <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Menu\VolumeVide.xnb</Output>
       <Time>2013-04-19T20:51:45.6357503+02:00</Time>
     </Item>
+    <Item>
+      <Source>UI\Equipement.jpg</Source>
+      <Name>UI\Equipement</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\UI\Equipement.xnb</Output>
+      <Time>2013-04-21T23:41:45.3347428+02:00</Time>
+    </Item>
+    <Item>
+      <Source>Boutons\EpeeSolari.BMP</Source>
+      <Name>Boutons\EpeeSolari</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Boutons\EpeeSolari.xnb</Output>
+      <Time>2013-04-21T23:41:45.3284734+02:00</Time>
+    </Item>
+    <Item>
+      <Source>Boutons\BottesDacier.BMP</Source>
+      <Name>Boutons\BottesDacier</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Boutons\BottesDacier.xnb</Output>
+      <Time>2013-04-21T23:41:45.3264712+02:00</Time>
+    </Item>
+    <Item>
+      <Source>Boutons\Epaulieres.BMP</Source>
+      <Name>Boutons\Epaulieres</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Boutons\Epaulieres.xnb</Output>
+      <Time>2013-04-21T23:41:45.3274729+02:00</Time>
+    </Item>
+    <Item>
+      <Source>Boutons\GantsDeDevotion.BMP</Source>
+      <Name>Boutons\GantsDeDevotion</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Boutons\GantsDeDevotion.xnb</Output>
+      <Time>2013-04-21T23:41:45.3294766+02:00</Time>
+    </Item>
+    <Item>
+      <Source>Boutons\HelmutPurple.BMP</Source>
+      <Name>Boutons\HelmutPurple</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Boutons\HelmutPurple.xnb</Output>
+      <Time>2013-04-21T23:41:45.3304739+02:00</Time>
+    </Item>
+    <Item>
+      <Source>Boutons\RingLionHead.BMP</Source>
+      <Name>Boutons\RingLionHead</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Boutons\RingLionHead.xnb</Output>
+      <Time>2013-04-21T23:41:45.3314744+02:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>
