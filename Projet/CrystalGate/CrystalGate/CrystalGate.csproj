@@ -119,6 +119,7 @@
   <ItemGroup>
     <Compile Include="Camera\Camera.cs" />
     <Compile Include="SceneEngine2\BaseScene.cs" />
+    <Compile Include="SceneEngine2\DefeatScene.cs" />
     <Compile Include="SceneEngine2\MainMenu.cs" />
     <Compile Include="ConvertUnits.cs" />
     <Compile Include="Effet.cs" />
@@ -133,6 +134,7 @@
     <Compile Include="Items\PotionDeVie.cs" />
     <Compile Include="PackWave.cs" />
     <Compile Include="Projectile.cs" />
+    <Compile Include="SceneEngine2\VictoryScene.cs" />
     <Compile Include="Spell.cs" />
     <Compile Include="Spells\Bump.cs" />
     <Compile Include="Spells\FurieSanguinaire.cs" />

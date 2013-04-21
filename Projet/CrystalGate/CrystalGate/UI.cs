@@ -157,12 +157,12 @@ namespace CrystalGate
                     }
                 }
             }
-            Text Victoire = new Text("Win"), Defaite = new Text("Lose");
-            // Affichage de la victoire ou de la défaite
+
             if (Win)
-                spritebatch.DrawString(gamefont, Victoire.get(), new Vector2(joueur.camera.Position.X + width / 2 - gamefont.MeasureString(Victoire.get()).X / 2, joueur.camera.Position.Y + height / 2 - gamefont.MeasureString(Defaite.get()).Y / 2), Color.Black);
-            if (Lost)
-                spritebatch.DrawString(gamefont, Defaite.get(), new Vector2(joueur.camera.Position.X + width / 2 - gamefont.MeasureString(Defaite.get()).X / 2, joueur.camera.Position.Y + height / 2 - gamefont.MeasureString(Defaite.get()).Y / 2), Color.Black);
+                SceneEngine2.SceneHandler.gameState = SceneEngine2.GameState.Victory;
+            else if (Lost)
+                SceneEngine2.SceneHandler.gameState = SceneEngine2.GameState.Defeat;
+
             if(DrawSelectPoint)
                 spritebatch.DrawString(gamefont, str2, new Vector2(BarreDesSortsPosition.X - gamefont.MeasureString(str2).X / 2, BarreDesSortsPosition.Y - BarreDesSorts.Height), Color.White);
             
