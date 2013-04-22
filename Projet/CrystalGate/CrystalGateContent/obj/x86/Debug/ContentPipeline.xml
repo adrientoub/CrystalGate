@@ -7,8 +7,8 @@
       <Importer>FontDescriptionImporter</Importer>
       <Processor>FontDescriptionProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Polices\menufont.xnb</Output>
-      <Time>2013-03-05T21:52:23.3260261+01:00</Time>
+      <Output>C:\Users\Adrientoub\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Polices\menufont.xnb</Output>
+      <Time>2013-03-28T14:49:45.5231879+01:00</Time>
     </Item>
     <Item>
       <Source>Polices\gamefont.spritefont</Source>
@@ -16,473 +16,8 @@
       <Importer>FontDescriptionImporter</Importer>
       <Processor>FontDescriptionProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Polices\gamefont.xnb</Output>
-      <Time>2013-03-05T21:53:22.2450127+01:00</Time>
-    </Item>
-    <Item>
-      <Source>blank.png</Source>
-      <Name>blank</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\blank.xnb</Output>
-      <Time>2013-01-31T00:41:48.0006431+01:00</Time>
-    </Item>
-    <Item>
-      <Source>gradient.png</Source>
-      <Name>gradient</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\gradient.xnb</Output>
-      <Time>2013-01-31T00:41:48.0026447+01:00</Time>
-    </Item>
-    <Item>
-      <Source>summertiles.png</Source>
-      <Name>summertiles</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\summertiles.xnb</Output>
-      <Time>2013-03-05T13:14:38.938045+01:00</Time>
-    </Item>
-    <Item>
-      <Source>background.jpg</Source>
-      <Name>background</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\background.xnb</Output>
-      <Time>2013-01-31T00:41:48.0006431+01:00</Time>
-    </Item>
-    <Item>
-      <Source>curseur.png</Source>
-      <Name>curseur</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\curseur.xnb</Output>
-      <Time>2013-01-31T00:41:48.0006431+01:00</Time>
-    </Item>
-    <Item>
-      <Source>Spells\Explosion.png</Source>
-      <Name>Spells\Explosion</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Spells\Explosion.xnb</Output>
-      <Time>2013-01-31T00:41:47.9926381+01:00</Time>
-    </Item>
-    <Item>
-      <Source>UI\barre des sorts.png</Source>
-      <Name>UI\barre des sorts</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\UI\barre des sorts.xnb</Output>
-      <Time>2013-01-31T00:41:47.9936383+01:00</Time>
-    </Item>
-    <Item>
-      <Source>Boutons\Explosion.JPG</Source>
-      <Name>Boutons\Explosion</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Boutons\Explosion.xnb</Output>
-      <Time>2013-01-31T00:41:47.9125835+01:00</Time>
-    </Item>
-    <Item>
-      <Source>Spells\Soin.png</Source>
-      <Name>Spells\Soin</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Spells\Soin.xnb</Output>
-      <Time>2013-01-31T00:41:47.9926381+01:00</Time>
-    </Item>
-    <Item>
-      <Source>Boutons\Soin.JPG</Source>
-      <Name>Boutons\Soin</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Boutons\Soin.xnb</Output>
-      <Time>2013-01-31T00:41:47.9125835+01:00</Time>
-    </Item>
-    <Item>
-      <Source>Projectiles\arrow.png</Source>
-      <Name>Projectiles\arrow</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Projectiles\arrow.xnb</Output>
-      <Time>2013-02-25T18:15:02.9760035+01:00</Time>
-    </Item>
-    <Item>
-      <Source>Projectiles\axe.png</Source>
-      <Name>Projectiles\axe</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Projectiles\axe.xnb</Output>
-      <Time>2013-02-24T18:42:48.276168+01:00</Time>
-    </Item>
-    <Item>
-      <Source>Projectiles\fireball.png</Source>
-      <Name>Projectiles\fireball</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Projectiles\fireball.xnb</Output>
-      <Time>2013-02-24T18:42:48.2771647+01:00</Time>
-    </Item>
-    <Item>
-      <Source>Sons\GruntAttack.mp3</Source>
-      <Name>Sons\GruntAttack</Name>
-      <Importer>Mp3Importer</Importer>
-      <Processor>SoundEffectProcessor</Processor>
-      <Options>None</Options>
-      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Sons\GruntAttack.xnb</Output>
-      <Time>2013-01-31T00:41:47.9836319+01:00</Time>
-    </Item>
-    <Item>
-      <Source>Sons\sword3.mp3</Source>
-      <Name>Sons\sword3</Name>
-      <Importer>Mp3Importer</Importer>
-      <Processor>SoundEffectProcessor</Processor>
-      <Options>None</Options>
-      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Sons\sword3.xnb</Output>
-      <Time>2013-01-31T00:41:47.9896362+01:00</Time>
-    </Item>
-    <Item>
-      <Source>Sons\explosion.mp3</Source>
-      <Name>Sons\explosion</Name>
-      <Importer>Mp3Importer</Importer>
-      <Processor>SoundEffectProcessor</Processor>
-      <Options>None</Options>
-      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Sons\explosion.xnb</Output>
-      <Time>2013-01-31T00:41:47.9866343+01:00</Time>
-    </Item>
-    <Item>
-      <Source>Sons\ArcherAttack.mp3</Source>
-      <Name>Sons\ArcherAttack</Name>
-      <Importer>Mp3Importer</Importer>
-      <Processor>SoundEffectProcessor</Processor>
-      <Options>None</Options>
-      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Sons\ArcherAttack.xnb</Output>
-      <Time>2013-02-19T00:40:01.235943+01:00</Time>
-    </Item>
-    <Item>
-      <Source>Sons\Gruntquimeurt.WAV</Source>
-      <Name>Sons\Gruntquimeurt</Name>
-      <Importer>WavImporter</Importer>
-      <Processor>SoundEffectProcessor</Processor>
-      <Options>None</Options>
-      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Sons\Gruntquimeurt.xnb</Output>
-      <Time>2013-01-31T00:41:47.9846324+01:00</Time>
-    </Item>
-    <Item>
-      <Source>Sons\Cavalierquimeurt.wav</Source>
-      <Name>Sons\Cavalierquimeurt</Name>
-      <Importer>WavImporter</Importer>
-      <Processor>SoundEffectProcessor</Processor>
-      <Options>None</Options>
-      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Sons\Cavalierquimeurt.xnb</Output>
-      <Time>2013-01-31T00:41:47.9826317+01:00</Time>
-    </Item>
-    <Item>
-      <Source>Sons\AxeMissileLaunch1.wav</Source>
-      <Name>Sons\AxeMissileLaunch1</Name>
-      <Importer>WavImporter</Importer>
-      <Processor>SoundEffectProcessor</Processor>
-      <Options>None</Options>
-      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Sons\AxeMissileLaunch1.xnb</Output>
-      <Time>2013-02-24T18:42:48.2801707+01:00</Time>
-    </Item>
-    <Item>
-      <Source>Sons\DemonMissileLaunch1.wav</Source>
-      <Name>Sons\DemonMissileLaunch1</Name>
-      <Importer>WavImporter</Importer>
-      <Processor>SoundEffectProcessor</Processor>
-      <Options>None</Options>
-      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Sons\DemonMissileLaunch1.xnb</Output>
-      <Time>2013-02-24T18:42:48.289173+01:00</Time>
-    </Item>
-    <Item>
-      <Source>Sons\DemonDeath1.wav</Source>
-      <Name>Sons\DemonDeath1</Name>
-      <Importer>WavImporter</Importer>
-      <Processor>SoundEffectProcessor</Processor>
-      <Options>None</Options>
-      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Sons\DemonDeath1.xnb</Output>
-      <Time>2013-02-24T18:42:48.2851703+01:00</Time>
-    </Item>
-    <Item>
-      <Source>Unites\knight.png</Source>
-      <Name>Unites\knight</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Unites\knight.xnb</Output>
-      <Time>2013-02-25T18:54:11.7868751+01:00</Time>
-    </Item>
-    <Item>
-      <Source>Unites\archer.png</Source>
-      <Name>Unites\archer</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Unites\archer.xnb</Output>
-      <Time>2013-02-25T18:54:11.7218108+01:00</Time>
-    </Item>
-    <Item>
-      <Source>Unites\grunt.png</Source>
-      <Name>Unites\grunt</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Unites\grunt.xnb</Output>
-      <Time>2013-02-25T18:54:11.7627363+01:00</Time>
-    </Item>
-    <Item>
-      <Source>UI\gruntIcone.jpg</Source>
-      <Name>UI\gruntIcone</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\UI\gruntIcone.xnb</Output>
-      <Time>2013-02-25T18:54:11.7198171+01:00</Time>
-    </Item>
-    <Item>
-      <Source>Unites\footman.png</Source>
-      <Name>Unites\footman</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Unites\footman.xnb</Output>
-      <Time>2013-02-25T18:54:11.7607305+01:00</Time>
-    </Item>
-    <Item>
-      <Source>Unites\troll.png</Source>
-      <Name>Unites\troll</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Unites\troll.xnb</Output>
-      <Time>2013-02-25T18:54:11.8574538+01:00</Time>
-    </Item>
-    <Item>
-      <Source>Unites\demon.png</Source>
-      <Name>Unites\demon</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Unites\demon.xnb</Output>
-      <Time>2013-02-25T18:54:11.7572111+01:00</Time>
-    </Item>
-    <Item>
-      <Source>UI\archerIcone.jpg</Source>
-      <Name>UI\archerIcone</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\UI\archerIcone.xnb</Output>
-      <Time>2013-02-25T18:54:11.5970006+01:00</Time>
-    </Item>
-    <Item>
-      <Source>Unites\ogre.png</Source>
-      <Name>Unites\ogre</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Unites\ogre.xnb</Output>
-      <Time>2013-02-25T18:54:11.7878751+01:00</Time>
-    </Item>
-    <Item>
-      <Source>UI\inventaire.png</Source>
-      <Name>UI\inventaire</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\UI\inventaire.xnb</Output>
-      <Time>2013-02-25T18:54:11.7208112+01:00</Time>
-    </Item>
-    <Item>
-      <Source>Musiques\HOM4.mp3</Source>
-      <Name>Musiques\HOM4</Name>
-      <Importer>Mp3Importer</Importer>
-      <Processor>SongProcessor</Processor>
-      <Options>None</Options>
-      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Musiques\HOM4.xnb</Output>
-      <Extra>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Musiques\HOM4.wma</Extra>
-      <Time>2013-02-25T18:54:11.5307401+01:00</Time>
-    </Item>
-    <Item>
-      <Source>Boutons\Invisibility.JPG</Source>
-      <Name>Boutons\Invisibility</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Boutons\Invisibility.xnb</Output>
-      <Time>2013-02-26T19:54:56.0322131+01:00</Time>
-    </Item>
-    <Item>
-      <Source>Boutons\potionDeVie.png</Source>
-      <Name>Boutons\potionDeVie</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Boutons\potionDeVie.xnb</Output>
-      <Time>2013-02-26T19:54:56.0332145+01:00</Time>
-    </Item>
-    <Item>
-      <Source>Sons\InvisibilityTarget.wav</Source>
-      <Name>Sons\InvisibilityTarget</Name>
-      <Importer>WavImporter</Importer>
-      <Processor>SoundEffectProcessor</Processor>
-      <Options>None</Options>
-      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Sons\InvisibilityTarget.xnb</Output>
-      <Time>2013-02-25T21:40:00.0195611+01:00</Time>
-    </Item>
-    <Item>
-      <Source>Sons\soin.wav</Source>
-      <Name>Sons\soin</Name>
-      <Importer>WavImporter</Importer>
-      <Processor>SoundEffectProcessor</Processor>
-      <Options>None</Options>
-      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Sons\soin.xnb</Output>
-      <Time>2013-02-25T21:40:00.0205622+01:00</Time>
-    </Item>
-    <Item>
-      <Source>Unites\champion.png</Source>
-      <Name>Unites\champion</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Unites\champion.xnb</Output>
-      <Time>2013-02-27T16:55:25.7022416+01:00</Time>
-    </Item>
-    <Item>
-      <Source>UI\guerrierIcone.jpg</Source>
-      <Name>UI\guerrierIcone</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\UI\guerrierIcone.xnb</Output>
-      <Time>2013-02-27T16:20:30.6197229+01:00</Time>
-    </Item>
-    <Item>
-      <Source>tresor.png</Source>
-      <Name>tresor</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\tresor.xnb</Output>
-      <Time>2013-02-27T22:55:52.0661835+01:00</Time>
-    </Item>
-    <Item>
-      <Source>Boutons\PotionMana.png</Source>
-      <Name>Boutons\PotionMana</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Boutons\PotionMana.xnb</Output>
-      <Time>2013-02-27T22:58:47.2147621+01:00</Time>
-    </Item>
-    <Item>
-      <Source>Spells\ManaRegen.png</Source>
-      <Name>Spells\ManaRegen</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Spells\ManaRegen.xnb</Output>
-      <Time>2013-02-27T23:14:10.5852341+01:00</Time>
-    </Item>
-    <Item>
-      <Source>UI\curseurRouge.png</Source>
-      <Name>UI\curseurRouge</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\UI\curseurRouge.xnb</Output>
-      <Time>2013-02-28T16:06:56.9359082+01:00</Time>
-    </Item>
-    <Item>
-      <Source>Boutons\BloodLust.BMP</Source>
-      <Name>Boutons\BloodLust</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Boutons\BloodLust.xnb</Output>
-      <Time>2013-02-28T17:06:04.9743414+01:00</Time>
-    </Item>
-    <Item>
-      <Source>Musiques\CelticMusic-Prophecy.mp3</Source>
-      <Name>Musiques\CelticMusic-Prophecy</Name>
-      <Importer>Mp3Importer</Importer>
-      <Processor>SongProcessor</Processor>
-      <Options>None</Options>
-      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Musiques\CelticMusic-Prophecy.xnb</Output>
-      <Extra>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Musiques\CelticMusic-Prophecy.wma</Extra>
-      <Time>2013-02-27T22:14:46.2791092+01:00</Time>
-    </Item>
-    <Item>
-      <Source>Musiques\CeltiqueIrishFolk.mp3</Source>
-      <Name>Musiques\CeltiqueIrishFolk</Name>
-      <Importer>Mp3Importer</Importer>
-      <Processor>SongProcessor</Processor>
-      <Options>None</Options>
-      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Musiques\CeltiqueIrishFolk.xnb</Output>
-      <Extra>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Musiques\CeltiqueIrishFolk.wma</Extra>
-      <Time>2013-02-27T22:14:46.2891162+01:00</Time>
-    </Item>
-    <Item>
-      <Source>Musiques\CelticBallad-Riversong.mp3</Source>
-      <Name>Musiques\CelticBallad-Riversong</Name>
-      <Importer>Mp3Importer</Importer>
-      <Processor>SongProcessor</Processor>
-      <Options>None</Options>
-      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Musiques\CelticBallad-Riversong.xnb</Output>
-      <Extra>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Musiques\CelticBallad-Riversong.wma</Extra>
-      <Time>2013-02-28T23:11:33.0059731+01:00</Time>
-    </Item>
-    <Item>
-      <Source>Sons\BloodlustTarget.wav</Source>
-      <Name>Sons\BloodlustTarget</Name>
-      <Importer>WavImporter</Importer>
-      <Processor>SoundEffectProcessor</Processor>
-      <Options>None</Options>
-      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Sons\BloodlustTarget.xnb</Output>
-      <Time>2013-02-28T17:06:04.9783437+01:00</Time>
-    </Item>
-    <Item>
-      <Source>Sons\OgreDeath1.wav</Source>
-      <Name>Sons\OgreDeath1</Name>
-      <Importer>WavImporter</Importer>
-      <Processor>SoundEffectProcessor</Processor>
-      <Options>None</Options>
-      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Sons\OgreDeath1.xnb</Output>
-      <Time>2013-02-28T20:15:02.2396977+01:00</Time>
-    </Item>
-    <Item>
-      <Source>Musiques\CelticMusic-FortheKing.mp3</Source>
-      <Name>Musiques\CelticMusic-FortheKing</Name>
-      <Importer>Mp3Importer</Importer>
-      <Processor>SongProcessor</Processor>
-      <Options>None</Options>
-      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Musiques\CelticMusic-FortheKing.xnb</Output>
-      <Extra>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Musiques\CelticMusic-FortheKing.wma</Extra>
-      <Time>2013-02-28T23:11:33.0343563+01:00</Time>
-    </Item>
-    <Item>
-      <Source>Musiques\CelticMusic-Ode to the Fallen.mp3</Source>
-      <Name>Musiques\CelticMusic-Ode to the Fallen</Name>
-      <Importer>Mp3Importer</Importer>
-      <Processor>SongProcessor</Processor>
-      <Options>None</Options>
-      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Musiques\CelticMusic-Ode to the Fallen.xnb</Output>
-      <Extra>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Musiques\CelticMusic-Ode to the Fallen.wma</Extra>
-      <Time>2013-02-28T23:11:33.058429+01:00</Time>
+      <Output>C:\Users\Adrientoub\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Polices\gamefont.xnb</Output>
+      <Time>2013-03-28T14:49:45.5211878+01:00</Time>
     </Item>
     <Item>
       <Source>Polices\SpellFont.spritefont</Source>
@@ -490,17 +25,8 @@
       <Importer>FontDescriptionImporter</Importer>
       <Processor>FontDescriptionProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Polices\SpellFont.xnb</Output>
-      <Time>2013-04-11T21:10:19.2936266+02:00</Time>
-    </Item>
-    <Item>
-      <Source>Menu\Boutons.png</Source>
-      <Name>Menu\Boutons</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Menu\Boutons.xnb</Output>
-      <Time>2013-04-17T23:04:37.2815404+02:00</Time>
+      <Output>C:\Users\Adrientoub\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Polices\SpellFont.xnb</Output>
+      <Time>2013-04-19T12:58:30.1562708+02:00</Time>
     </Item>
     <Item>
       <Source>Polices\sceneengine2font.spritefont</Source>
@@ -508,8 +34,305 @@
       <Importer>FontDescriptionImporter</Importer>
       <Processor>FontDescriptionProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Polices\sceneengine2font.xnb</Output>
-      <Time>2013-04-17T23:32:42.2324803+02:00</Time>
+      <Output>C:\Users\Adrientoub\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Polices\sceneengine2font.xnb</Output>
+      <Time>2013-04-19T12:58:30.1572708+02:00</Time>
+    </Item>
+    <Item>
+      <Source>blank.png</Source>
+      <Name>blank</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Adrientoub\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\blank.xnb</Output>
+      <Time>2012-12-12T12:47:44.8307645+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Unites\knight.png</Source>
+      <Name>Unites\knight</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Adrientoub\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Unites\knight.xnb</Output>
+      <Time>2013-03-28T14:49:45.7392002+01:00</Time>
+    </Item>
+    <Item>
+      <Source>gradient.png</Source>
+      <Name>gradient</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Adrientoub\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\gradient.xnb</Output>
+      <Time>2012-12-12T12:47:44.8317645+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Unites\archer.png</Source>
+      <Name>Unites\archer</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Adrientoub\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Unites\archer.xnb</Output>
+      <Time>2013-03-28T14:49:45.683197+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Unites\grunt.png</Source>
+      <Name>Unites\grunt</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Adrientoub\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Unites\grunt.xnb</Output>
+      <Time>2013-03-28T14:49:45.7362001+01:00</Time>
+    </Item>
+    <Item>
+      <Source>summertiles.png</Source>
+      <Name>summertiles</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Adrientoub\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\summertiles.xnb</Output>
+      <Time>2013-03-28T14:49:45.7932033+01:00</Time>
+    </Item>
+    <Item>
+      <Source>background.jpg</Source>
+      <Name>background</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Adrientoub\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\background.xnb</Output>
+      <Time>2013-02-20T14:04:45.7737474+01:00</Time>
+    </Item>
+    <Item>
+      <Source>curseur.png</Source>
+      <Name>curseur</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Adrientoub\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\curseur.xnb</Output>
+      <Time>2013-01-14T14:40:46.0129873+01:00</Time>
+    </Item>
+    <Item>
+      <Source>UI\gruntIcone.jpg</Source>
+      <Name>UI\gruntIcone</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Adrientoub\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\UI\gruntIcone.xnb</Output>
+      <Time>2013-03-28T14:49:45.6491951+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Spells\Explosion.png</Source>
+      <Name>Spells\Explosion</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Adrientoub\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Spells\Explosion.xnb</Output>
+      <Time>2013-01-14T14:40:46.0049868+01:00</Time>
+    </Item>
+    <Item>
+      <Source>UI\barre des sorts.png</Source>
+      <Name>UI\barre des sorts</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Adrientoub\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\UI\barre des sorts.xnb</Output>
+      <Time>2013-01-14T14:40:46.0069869+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Boutons\Explosion.JPG</Source>
+      <Name>Boutons\Explosion</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Adrientoub\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Boutons\Explosion.xnb</Output>
+      <Time>2013-01-14T14:40:45.9289825+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Spells\Soin.png</Source>
+      <Name>Spells\Soin</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Adrientoub\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Spells\Soin.xnb</Output>
+      <Time>2013-01-14T14:40:46.0049868+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Boutons\Soin.JPG</Source>
+      <Name>Boutons\Soin</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Adrientoub\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Boutons\Soin.xnb</Output>
+      <Time>2013-01-14T14:40:45.9289825+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Unites\footman.png</Source>
+      <Name>Unites\footman</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Adrientoub\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Unites\footman.xnb</Output>
+      <Time>2013-03-28T14:49:45.7331999+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Unites\troll.png</Source>
+      <Name>Unites\troll</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Adrientoub\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Unites\troll.xnb</Output>
+      <Time>2013-03-28T14:49:45.7612015+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Projectiles\arrow.png</Source>
+      <Name>Projectiles\arrow</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Adrientoub\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Projectiles\arrow.xnb</Output>
+      <Time>2013-03-28T14:49:45.5231879+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Projectiles\axe.png</Source>
+      <Name>Projectiles\axe</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Adrientoub\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Projectiles\axe.xnb</Output>
+      <Time>2013-03-28T14:49:45.5241879+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Unites\demon.png</Source>
+      <Name>Unites\demon</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Adrientoub\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Unites\demon.xnb</Output>
+      <Time>2013-03-28T14:49:45.718199+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Projectiles\fireball.png</Source>
+      <Name>Projectiles\fireball</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Adrientoub\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Projectiles\fireball.xnb</Output>
+      <Time>2013-03-28T14:49:45.5241879+01:00</Time>
+    </Item>
+    <Item>
+      <Source>UI\archerIcone.jpg</Source>
+      <Name>UI\archerIcone</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Adrientoub\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\UI\archerIcone.xnb</Output>
+      <Time>2013-03-28T14:49:45.5571898+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Unites\ogre.png</Source>
+      <Name>Unites\ogre</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Adrientoub\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Unites\ogre.xnb</Output>
+      <Time>2013-03-28T14:49:45.7592014+01:00</Time>
+    </Item>
+    <Item>
+      <Source>UI\inventaire.png</Source>
+      <Name>UI\inventaire</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Adrientoub\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\UI\inventaire.xnb</Output>
+      <Time>2013-03-28T14:49:45.6661961+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Boutons\Invisibility.JPG</Source>
+      <Name>Boutons\Invisibility</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Adrientoub\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Boutons\Invisibility.xnb</Output>
+      <Time>2013-03-28T14:49:44.5561326+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Boutons\potionDeVie.png</Source>
+      <Name>Boutons\potionDeVie</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Adrientoub\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Boutons\potionDeVie.xnb</Output>
+      <Time>2013-03-28T14:49:44.5571326+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Unites\champion.png</Source>
+      <Name>Unites\champion</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Adrientoub\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Unites\champion.xnb</Output>
+      <Time>2013-03-28T14:49:45.7131987+01:00</Time>
+    </Item>
+    <Item>
+      <Source>UI\guerrierIcone.jpg</Source>
+      <Name>UI\guerrierIcone</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Adrientoub\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\UI\guerrierIcone.xnb</Output>
+      <Time>2013-03-28T14:49:45.6511952+01:00</Time>
+    </Item>
+    <Item>
+      <Source>tresor.png</Source>
+      <Name>tresor</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Adrientoub\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\tresor.xnb</Output>
+      <Time>2013-03-28T14:49:45.7932033+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Boutons\PotionMana.png</Source>
+      <Name>Boutons\PotionMana</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Adrientoub\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Boutons\PotionMana.xnb</Output>
+      <Time>2013-03-28T14:49:44.5571326+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Spells\ManaRegen.png</Source>
+      <Name>Spells\ManaRegen</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Adrientoub\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Spells\ManaRegen.xnb</Output>
+      <Time>2013-03-28T14:49:45.5561898+01:00</Time>
+    </Item>
+    <Item>
+      <Source>UI\curseurRouge.png</Source>
+      <Name>UI\curseurRouge</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Adrientoub\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\UI\curseurRouge.xnb</Output>
+      <Time>2013-03-28T14:49:45.5581899+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Boutons\BloodLust.BMP</Source>
+      <Name>Boutons\BloodLust</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Adrientoub\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Boutons\BloodLust.xnb</Output>
+      <Time>2013-03-28T14:49:44.5551325+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Menu\Boutons.png</Source>
+      <Name>Menu\Boutons</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Adrientoub\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Menu\Boutons.xnb</Output>
+      <Time>2013-04-19T12:58:30.1552707+02:00</Time>
     </Item>
     <Item>
       <Source>Menu\Volume.png</Source>
@@ -517,8 +340,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Menu\Volume.xnb</Output>
-      <Time>2013-04-19T20:51:29.9438792+02:00</Time>
+      <Output>C:\Users\Adrientoub\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Menu\Volume.xnb</Output>
+      <Time>2013-04-22T13:19:27.474036+02:00</Time>
     </Item>
     <Item>
       <Source>Menu\VolumeVide.png</Source>
@@ -526,8 +349,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Menu\VolumeVide.xnb</Output>
-      <Time>2013-04-19T20:51:45.6357503+02:00</Time>
+      <Output>C:\Users\Adrientoub\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Menu\VolumeVide.xnb</Output>
+      <Time>2013-04-22T13:19:27.474036+02:00</Time>
     </Item>
     <Item>
       <Source>UI\Equipement.jpg</Source>
@@ -535,8 +358,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\UI\Equipement.xnb</Output>
-      <Time>2013-04-21T23:41:45.3347428+02:00</Time>
+      <Output>C:\Users\Adrientoub\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\UI\Equipement.xnb</Output>
+      <Time>2013-04-22T13:19:27.475036+02:00</Time>
     </Item>
     <Item>
       <Source>Boutons\EpeeSolari.BMP</Source>
@@ -544,8 +367,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Boutons\EpeeSolari.xnb</Output>
-      <Time>2013-04-21T23:41:45.3284734+02:00</Time>
+      <Output>C:\Users\Adrientoub\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Boutons\EpeeSolari.xnb</Output>
+      <Time>2013-04-22T13:19:27.4690357+02:00</Time>
     </Item>
     <Item>
       <Source>Boutons\BottesDacier.BMP</Source>
@@ -553,8 +376,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Boutons\BottesDacier.xnb</Output>
-      <Time>2013-04-21T23:41:45.3264712+02:00</Time>
+      <Output>C:\Users\Adrientoub\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Boutons\BottesDacier.xnb</Output>
+      <Time>2013-04-22T13:19:27.4670356+02:00</Time>
     </Item>
     <Item>
       <Source>Boutons\Epaulieres.BMP</Source>
@@ -562,8 +385,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Boutons\Epaulieres.xnb</Output>
-      <Time>2013-04-21T23:41:45.3274729+02:00</Time>
+      <Output>C:\Users\Adrientoub\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Boutons\Epaulieres.xnb</Output>
+      <Time>2013-04-22T13:19:27.4680356+02:00</Time>
     </Item>
     <Item>
       <Source>Boutons\GantsDeDevotion.BMP</Source>
@@ -571,8 +394,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Boutons\GantsDeDevotion.xnb</Output>
-      <Time>2013-04-21T23:41:45.3294766+02:00</Time>
+      <Output>C:\Users\Adrientoub\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Boutons\GantsDeDevotion.xnb</Output>
+      <Time>2013-04-22T13:19:27.4700357+02:00</Time>
     </Item>
     <Item>
       <Source>Boutons\HelmutPurple.BMP</Source>
@@ -580,8 +403,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Boutons\HelmutPurple.xnb</Output>
-      <Time>2013-04-21T23:41:45.3304739+02:00</Time>
+      <Output>C:\Users\Adrientoub\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Boutons\HelmutPurple.xnb</Output>
+      <Time>2013-04-22T13:19:27.4710358+02:00</Time>
     </Item>
     <Item>
       <Source>Boutons\RingLionHead.BMP</Source>
@@ -589,8 +412,185 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Boutons\RingLionHead.xnb</Output>
-      <Time>2013-04-21T23:41:45.3314744+02:00</Time>
+      <Output>C:\Users\Adrientoub\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Boutons\RingLionHead.xnb</Output>
+      <Time>2013-04-22T13:19:27.4710358+02:00</Time>
+    </Item>
+    <Item>
+      <Source>Musiques\HOM4.mp3</Source>
+      <Name>Musiques\HOM4</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SongProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Adrientoub\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Musiques\HOM4.xnb</Output>
+      <Extra>C:\Users\Adrientoub\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Musiques\HOM4.wma</Extra>
+      <Time>2013-03-28T14:49:45.5191877+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Sons\GruntAttack.mp3</Source>
+      <Name>Sons\GruntAttack</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Adrientoub\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Sons\GruntAttack.xnb</Output>
+      <Time>2013-01-14T14:40:45.9989865+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Sons\sword3.mp3</Source>
+      <Name>Sons\sword3</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Adrientoub\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Sons\sword3.xnb</Output>
+      <Time>2013-01-14T14:40:46.0019867+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Sons\explosion.mp3</Source>
+      <Name>Sons\explosion</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Adrientoub\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Sons\explosion.xnb</Output>
+      <Time>2013-01-23T13:55:16.269808+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Sons\ArcherAttack.mp3</Source>
+      <Name>Sons\ArcherAttack</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Adrientoub\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Sons\ArcherAttack.xnb</Output>
+      <Time>2013-02-13T14:09:53.8562299+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Musiques\CelticMusic-Prophecy.mp3</Source>
+      <Name>Musiques\CelticMusic-Prophecy</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SongProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Adrientoub\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Musiques\CelticMusic-Prophecy.xnb</Output>
+      <Extra>C:\Users\Adrientoub\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Musiques\CelticMusic-Prophecy.wma</Extra>
+      <Time>2013-03-28T14:49:45.2851743+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Musiques\CeltiqueIrishFolk.mp3</Source>
+      <Name>Musiques\CeltiqueIrishFolk</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SongProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Adrientoub\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Musiques\CeltiqueIrishFolk.xnb</Output>
+      <Extra>C:\Users\Adrientoub\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Musiques\CeltiqueIrishFolk.wma</Extra>
+      <Time>2013-03-28T14:49:45.3471778+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Musiques\CelticBallad-Riversong.mp3</Source>
+      <Name>Musiques\CelticBallad-Riversong</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SongProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Adrientoub\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Musiques\CelticBallad-Riversong.xnb</Output>
+      <Extra>C:\Users\Adrientoub\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Musiques\CelticBallad-Riversong.wma</Extra>
+      <Time>2013-03-28T14:49:44.7461434+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Musiques\CelticMusic-FortheKing.mp3</Source>
+      <Name>Musiques\CelticMusic-FortheKing</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SongProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Adrientoub\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Musiques\CelticMusic-FortheKing.xnb</Output>
+      <Extra>C:\Users\Adrientoub\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Musiques\CelticMusic-FortheKing.wma</Extra>
+      <Time>2013-03-28T14:49:44.8651502+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Musiques\CelticMusic-Ode to the Fallen.mp3</Source>
+      <Name>Musiques\CelticMusic-Ode to the Fallen</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SongProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Adrientoub\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Musiques\CelticMusic-Ode to the Fallen.xnb</Output>
+      <Extra>C:\Users\Adrientoub\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Musiques\CelticMusic-Ode to the Fallen.wma</Extra>
+      <Time>2013-03-28T14:49:45.0211592+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Sons\Gruntquimeurt.WAV</Source>
+      <Name>Sons\Gruntquimeurt</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Adrientoub\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Sons\Gruntquimeurt.xnb</Output>
+      <Time>2013-01-14T14:40:46.0009866+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Sons\Cavalierquimeurt.wav</Source>
+      <Name>Sons\Cavalierquimeurt</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Adrientoub\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Sons\Cavalierquimeurt.xnb</Output>
+      <Time>2013-01-14T14:40:45.9989865+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Sons\AxeMissileLaunch1.wav</Source>
+      <Name>Sons\AxeMissileLaunch1</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Adrientoub\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Sons\AxeMissileLaunch1.xnb</Output>
+      <Time>2013-03-28T14:49:45.525188+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Sons\DemonMissileLaunch1.wav</Source>
+      <Name>Sons\DemonMissileLaunch1</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Adrientoub\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Sons\DemonMissileLaunch1.xnb</Output>
+      <Time>2013-03-28T14:49:45.5461892+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Sons\DemonDeath1.wav</Source>
+      <Name>Sons\DemonDeath1</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Adrientoub\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Sons\DemonDeath1.xnb</Output>
+      <Time>2013-03-28T14:49:45.5441891+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Sons\InvisibilityTarget.wav</Source>
+      <Name>Sons\InvisibilityTarget</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Adrientoub\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Sons\InvisibilityTarget.xnb</Output>
+      <Time>2013-03-28T14:49:45.5501894+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Sons\soin.wav</Source>
+      <Name>Sons\soin</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Adrientoub\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Sons\soin.xnb</Output>
+      <Time>2013-03-28T14:49:45.5551897+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Sons\BloodlustTarget.wav</Source>
+      <Name>Sons\BloodlustTarget</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Adrientoub\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Sons\BloodlustTarget.xnb</Output>
+      <Time>2013-03-28T14:49:45.542189+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Sons\OgreDeath1.wav</Source>
+      <Name>Sons\OgreDeath1</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Adrientoub\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Sons\OgreDeath1.xnb</Output>
+      <Time>2013-03-28T14:49:45.5531896+01:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
@@ -598,10 +598,10 @@
       <TargetProfile>HiDef</TargetProfile>
       <BuildConfiguration>Debug</BuildConfiguration>
       <CompressContent>false</CompressContent>
-      <RootDirectory>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGateContent\</RootDirectory>
-      <LoggerRootDirectory>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\</LoggerRootDirectory>
-      <IntermediateDirectory>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGateContent\obj\x86\Debug\</IntermediateDirectory>
-      <OutputDirectory>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\</OutputDirectory>
+      <RootDirectory>C:\Users\Adrientoub\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGateContent\</RootDirectory>
+      <LoggerRootDirectory>C:\Users\Adrientoub\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\</LoggerRootDirectory>
+      <IntermediateDirectory>C:\Users\Adrientoub\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGateContent\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>C:\Users\Adrientoub\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\</OutputDirectory>
     </Settings>
     <Assemblies>
       <Assembly>
@@ -629,8 +629,8 @@
         <Value>2010-08-23T12:41:18+02:00</Value>
       </Assembly>
       <Assembly>
-        <Key>C:\WINDOWS\Microsoft.Net\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\v4.0_4.0.0.0__842cf8be1de50553\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
-        <Value>2012-12-16T18:17:54.3223905+01:00</Value>
+        <Key>C:\Windows\Microsoft.Net\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\v4.0_4.0.0.0__842cf8be1de50553\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
+        <Value>2011-08-03T17:33:58.6222029+02:00</Value>
       </Assembly>
     </Assemblies>
   </Asset>

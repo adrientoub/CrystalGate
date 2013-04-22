@@ -1,7 +1,7 @@
 using CrystalGate.Inputs;
-
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 
 namespace CrystalGate
 {
@@ -38,6 +38,7 @@ namespace CrystalGate
             GameText.initGameText();
             scene = new SceneEngine2.SceneHandler();
             SceneEngine2.SceneHandler.content = Content;
+            Unite.rand = new Random();
             exit = false;
             base.Initialize();
         }

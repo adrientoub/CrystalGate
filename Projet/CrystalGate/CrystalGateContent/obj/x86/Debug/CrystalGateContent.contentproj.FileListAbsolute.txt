@@ -4,3 +4,4 @@ C:\Users\René\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGateConten
 D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGateContent\obj\x86\Debug\CrystalGateContent.contentprojResolveAssemblyReference.cache
 C:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGateContent\obj\x86\Debug\CrystalGateContent.contentprojResolveAssemblyReference.cache
 C:\Users\René\Documents\CrystalGate\Projet\CrystalGate\CrystalGateContent\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Adrientoub\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGateContent\obj\x86\Debug\ResolveAssemblyReference.cache

@@ -44,6 +44,8 @@ namespace CrystalGate
 
         public float byLevelAdd = 1.05f;
 
+        public static Random rand;
+
         public Unite(Vector2 Position, Map map, PackTexture packTexture, int Level = 1)
             : base(Position, map, packTexture)
         {
@@ -456,8 +458,7 @@ namespace CrystalGate
         {
             for (int i = 0; i < Inventory.Count; i++)
             {
-                Random rand = new Random();
-                if (rand.Next(0,100) <= 60)
+                if (rand.Next(0,100) <= 25)
                 {
                     Inventory[i].Position = PositionTile;
                     Map.items.Add(Inventory[i]);

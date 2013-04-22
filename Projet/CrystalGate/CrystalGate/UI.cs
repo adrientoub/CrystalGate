@@ -51,6 +51,8 @@ namespace CrystalGate
         public bool IsDrag;
         public Item ItemSelected;
 
+        int widthFondNoir, heightFondNoir;
+
         public MouseState mouse;
         public MouseState Oldmouse;
         public KeyboardState key;
@@ -82,12 +84,18 @@ namespace CrystalGate
 
             // evite le crash de debut en initialisant la var des la premiere frame
             SacPosition = new Rectangle((int)joueur.camera.Position.X + width - Sac.Width, (int)joueur.camera.Position.Y + height - Sac.Height, Sac.Width, Sac.Height);
+            widthFondNoir = 380;
+            heightFondNoir = 250;
+
+            CadrePosition = new Rectangle(0, height - heightFondNoir, widthFondNoir, heightFondNoir);
+            PortraitPosition = new Rectangle(CadrePosition.X + CadrePosition.Width - Portrait.Width, CadrePosition.Y + 50, Portrait.Width, Portrait.Height);
+            SacPosition = new Rectangle(width - Sac.Width, height - Sac.Height, Sac.Width, Sac.Height);
+            EquipementPosition = new Rectangle(width / 2 - Equipement.Width / 2, height / 2 - Equipement.Height / 2, Equipement.Width, Equipement.Height);
+            BarreDesSortsPosition = new Rectangle(width / 2, height - BarreDesSorts.Height, BarreDesSorts.Width, BarreDesSorts.Height);
         }
 
         public void Update()
         {
-            int widthFondNoir = 380, heightFondNoir = 250;
-
             CadrePosition = new Rectangle(0, height - heightFondNoir, widthFondNoir, heightFondNoir);
             PortraitPosition = new Rectangle(CadrePosition.X + CadrePosition.Width - Portrait.Width, CadrePosition.Y + 50, Portrait.Width, Portrait.Height);
             SacPosition = new Rectangle(width - Sac.Width, height - Sac.Height, Sac.Width, Sac.Height);
@@ -286,7 +294,7 @@ namespace CrystalGate
             else if (Lost)
                 SceneEngine2.SceneHandler.gameState = SceneEngine2.GameState.Defeat;
             if (DrawSelectPoint)
-                spritebatch.DrawString(gamefont, str2, new Vector2(BarreDesSortsPosition.X - gamefont.MeasureString(str2).X / 2, BarreDesSortsPosition.Y - BarreDesSorts.Height), Color.White);
+                spritebatch.DrawString(gamefont, str2, new Vector2(BarreDesSortsPosition.X - gamefont.MeasureString(str2).X / 2 , BarreDesSortsPosition.Y - BarreDesSorts.Height) + joueur.camera.Position, Color.White);
 
             // Affichage des spells
             for (int i = 0; i < joueur.champion.spells.Count; i++)

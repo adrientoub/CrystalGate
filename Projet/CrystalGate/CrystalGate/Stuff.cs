@@ -9,9 +9,13 @@ namespace CrystalGate
 {
     public class Stuff : Item
     {
-        public int VieBonus = 42;
-        public int DegatsBonus = 42;
-        public int DommagesBonus = 42;
+        public int VieBonus;
+        public int DommagesBonus;
+        public int ManaBonus;
+        public int ArmureBonus;
+        public int ManaRegenBonus;
+        public int PuissanceBonus;
+        public float VitesseBonus;
 
         public Stuff(Vector2 position, PackTexture pack)
             : base(position, pack)
@@ -27,6 +31,12 @@ namespace CrystalGate
             unite.Vie += VieBonus;
             unite.VieMax += VieBonus;
             unite.Dommages += DommagesBonus;
+            unite.Puissance += PuissanceBonus;
+            unite.Vitesse -= VitesseBonus;
+            unite.Defense += ArmureBonus;
+            unite.DefenseMagique += ArmureBonus;
+            unite.ManaRegen -= ManaRegenBonus;
+            unite.Puissance += PuissanceBonus;
         }
 
         public void Desequiper()
@@ -37,6 +47,12 @@ namespace CrystalGate
             unite.Vie -= VieBonus;
             unite.VieMax -= VieBonus;
             unite.Dommages -= DommagesBonus;
+            unite.Puissance -= PuissanceBonus;
+            unite.Vitesse += VitesseBonus;
+            unite.Defense -= ArmureBonus;
+            unite.DefenseMagique -= ArmureBonus;
+            unite.ManaRegen += ManaRegenBonus;
+            unite.Puissance -= PuissanceBonus;
         }
     }
 }
