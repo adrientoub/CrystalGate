@@ -18,6 +18,7 @@ namespace CrystalGate.SceneEngine2
     public enum GameState
     {
         MainMenu,
+        CoopSettings,
         Setting,
         Gameplay,
         Pause,
@@ -37,6 +38,7 @@ namespace CrystalGate.SceneEngine2
         public static PauseScene pauseScene;
         public static VictoryScene victoryScene;
         public static DefeatScene defeatScene;
+        public static CoopSettingsScene coopSettingsScene;
 
         public SceneHandler()
         {
@@ -48,6 +50,7 @@ namespace CrystalGate.SceneEngine2
             pauseScene = new PauseScene();
             victoryScene = new VictoryScene();
             defeatScene = new DefeatScene();
+            coopSettingsScene = new CoopSettingsScene();
         }
 
         public void Initialize()
@@ -58,6 +61,7 @@ namespace CrystalGate.SceneEngine2
             pauseScene.Initialize();
             victoryScene.Initialize();
             defeatScene.Initialize();
+            coopSettingsScene.Initialize();
         }
 
         public void Update(GameTime gameTime)
@@ -68,6 +72,9 @@ namespace CrystalGate.SceneEngine2
             {
                 case GameState.MainMenu:
                     mainmenuScene.Update(gameTime);
+                    break;
+                case GameState.CoopSettings:
+                    coopSettingsScene.Update(gameTime);
                     break;
                 case GameState.Setting:
                     menuoptionScene.Update(gameTime);
@@ -93,6 +100,7 @@ namespace CrystalGate.SceneEngine2
         {
             mainmenuScene.LoadContent();
             menuoptionScene.LoadContent();
+            coopSettingsScene.LoadContent();
             pauseScene.LoadContent();
             gameplayScene.LoadContent();
             victoryScene.LoadContent();
@@ -110,6 +118,9 @@ namespace CrystalGate.SceneEngine2
                     if (MenuOptions.isPauseOption)
                         gameplayScene.Draw(spriteBatch);
                     menuoptionScene.Draw(spriteBatch);
+                    break;
+                case GameState.CoopSettings:
+                    coopSettingsScene.Draw(spriteBatch);
                     break;
                 case GameState.Gameplay:
                     gameplayScene.Draw(spriteBatch);

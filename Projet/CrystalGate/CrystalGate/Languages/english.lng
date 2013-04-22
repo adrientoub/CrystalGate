@@ -44,3 +44,5 @@ Soin=Heal
 DescriptionFurieSanguinaire=Increase attack speed of the hero by
 DescriptionSoin1=Heal the player by an amount of
 DescriptionSoin2=life points.
+Coop=Play coop
+BackToMenu=Back to the menu
