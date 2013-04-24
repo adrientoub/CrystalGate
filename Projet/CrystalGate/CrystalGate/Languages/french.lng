@@ -46,3 +46,5 @@ DescriptionSoin1=Soigne le joueur d'un montant de
 DescriptionSoin2=points de vie.
 Coop=Jouer en coop
 BackToMenu=Retour au menu
+Server=Serveur
+Client=Client

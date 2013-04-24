@@ -16,15 +16,18 @@ namespace CrystalGate.SceneEngine2
 
         private Rectangle mouseRec;
         private Rectangle fullscene;
-        private Rectangle champIP, boutonLancerLeJeu, boutonRetour;
+        private Rectangle boutonServeurOuClient, champIP, boutonLancerLeJeu, boutonRetour;
 
-        private Text lancerJeuT, retourJeuT;
+        private Text serveurT, clientT, lancerJeuT, retourJeuT;
 
         private string textAsWrited;
+
+        private bool isServer;
 
         public override void Initialize()
         {
             textAsWrited = "";
+            isServer = false;
         }
 
         public override void LoadContent()
@@ -34,9 +37,13 @@ namespace CrystalGate.SceneEngine2
 
             lancerJeuT = new Text("LaunchGame");
             retourJeuT = new Text("BackToMenu");
+            serveurT = new Text("Server");
+            clientT = new Text("Client");
 
             fullscene = new Rectangle(0, 0, CrystalGateGame.graphics.GraphicsDevice.Viewport.Width, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height);
-            champIP = new Rectangle((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width - boutons.Width) / 2, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height / 2 - 100, boutons.Width, boutons.Height);
+
+            boutonServeurOuClient = new Rectangle((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width - boutons.Width) / 2, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height / 2 - 100, boutons.Width, boutons.Height);
+            champIP = new Rectangle((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width - boutons.Width) / 2, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height / 2 - 200, boutons.Width, boutons.Height);
             boutonLancerLeJeu = new Rectangle((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width - boutons.Width) / 2, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height / 2, boutons.Width, boutons.Height);
             boutonRetour = new Rectangle((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width - boutons.Width) / 2, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height / 2 + 100, boutons.Width, boutons.Height);
         }
@@ -52,6 +59,10 @@ namespace CrystalGate.SceneEngine2
                     FondSonore.Play();
                     GamePlay.timer.Restart();
                 }
+                else if (mouseRec.Intersects(boutonServeurOuClient))
+                {
+                    isServer = !isServer;
+                }
                 else if (mouseRec.Intersects(boutonRetour))
                 {
                     SceneHandler.gameState = GameState.MainMenu;
@@ -65,10 +76,18 @@ namespace CrystalGate.SceneEngine2
             spriteBatch.Begin();
             spriteBatch.Draw(background, fullscene, Color.White);
 
-            if (mouseRec.Intersects(champIP))
-                spriteBatch.Draw(boutons, champIP, Color.Gray);
+            if (mouseRec.Intersects(boutonServeurOuClient))
+                spriteBatch.Draw(boutons, boutonServeurOuClient, Color.Gray);
             else
-                spriteBatch.Draw(boutons, champIP, Color.White);
+                spriteBatch.Draw(boutons, boutonServeurOuClient, Color.White);
+
+            if (!isServer)
+            {
+                if (mouseRec.Intersects(champIP))
+                    spriteBatch.Draw(boutons, champIP, Color.Gray);
+                else
+                    spriteBatch.Draw(boutons, champIP, Color.White);
+            }
 
             if (mouseRec.Intersects(boutonLancerLeJeu))
                 spriteBatch.Draw(boutons, boutonLancerLeJeu, Color.Gray);
@@ -78,6 +97,13 @@ namespace CrystalGate.SceneEngine2
                 spriteBatch.Draw(boutons, boutonRetour, Color.Gray);
             else
                 spriteBatch.Draw(boutons, boutonRetour, Color.White);
+
+            spriteBatch.DrawString(
+                spriteFont,
+                isServer ? serveurT.get() : clientT.get(),
+                new Vector2((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width) / 2 - spriteFont.MeasureString(isServer ? serveurT.get() : clientT.get()).X / 2,
+                    boutonServeurOuClient.Top + 10),
+                Color.White);
 
             spriteBatch.DrawString(
                 spriteFont,
