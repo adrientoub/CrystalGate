@@ -16,13 +16,13 @@ namespace CrystalGate.SceneEngine2
 
         private Rectangle mouseRec;
         private Rectangle fullscene;
-        private Rectangle boutonServeurOuClient, champIP, boutonLancerLeJeu, boutonRetour;
+        private Rectangle boutonServeurOuClient, champIP, boutonConnexion, boutonRetour;
 
         private Text serveurT, clientT, lancerJeuT, retourJeuT;
 
-        private string textAsWrited;
+        public string textAsWrited;
 
-        private bool isServer;
+        public bool isServer;
 
         public override void Initialize()
         {
@@ -35,7 +35,7 @@ namespace CrystalGate.SceneEngine2
             if (content == null)
                 content = SceneHandler.content;
 
-            lancerJeuT = new Text("LaunchGame");
+            lancerJeuT = new Text("LaunchConnexion");
             retourJeuT = new Text("BackToMenu");
             serveurT = new Text("Server");
             clientT = new Text("Client");
@@ -44,7 +44,7 @@ namespace CrystalGate.SceneEngine2
 
             boutonServeurOuClient = new Rectangle((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width - boutons.Width) / 2, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height / 2 - 100, boutons.Width, boutons.Height);
             champIP = new Rectangle((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width - boutons.Width) / 2, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height / 2 - 200, boutons.Width, boutons.Height);
-            boutonLancerLeJeu = new Rectangle((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width - boutons.Width) / 2, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height / 2, boutons.Width, boutons.Height);
+            boutonConnexion = new Rectangle((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width - boutons.Width) / 2, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height / 2, boutons.Width, boutons.Height);
             boutonRetour = new Rectangle((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width - boutons.Width) / 2, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height / 2 + 100, boutons.Width, boutons.Height);
         }
 
@@ -53,11 +53,9 @@ namespace CrystalGate.SceneEngine2
             mouseRec = new Rectangle(mouse.X, mouse.Y, 5, 5);
             if (mouse.LeftButton == ButtonState.Pressed && oldMouse.LeftButton == ButtonState.Released)
             {
-                if (mouseRec.Intersects(boutonLancerLeJeu))
+                if (mouseRec.Intersects(boutonConnexion))
                 {
-                    SceneHandler.gameState = GameState.Gameplay;
-                    FondSonore.Play();
-                    GamePlay.timer.Restart();
+                    SceneHandler.gameState = GameState.CoopConnexion;
                 }
                 else if (mouseRec.Intersects(boutonServeurOuClient))
                 {
@@ -89,10 +87,10 @@ namespace CrystalGate.SceneEngine2
                     spriteBatch.Draw(boutons, champIP, Color.White);
             }
 
-            if (mouseRec.Intersects(boutonLancerLeJeu))
-                spriteBatch.Draw(boutons, boutonLancerLeJeu, Color.Gray);
+            if (mouseRec.Intersects(boutonConnexion))
+                spriteBatch.Draw(boutons, boutonConnexion, Color.Gray);
             else
-                spriteBatch.Draw(boutons, boutonLancerLeJeu, Color.White);
+                spriteBatch.Draw(boutons, boutonConnexion, Color.White);
             if (mouseRec.Intersects(boutonRetour))
                 spriteBatch.Draw(boutons, boutonRetour, Color.Gray);
             else
@@ -116,7 +114,7 @@ namespace CrystalGate.SceneEngine2
                 spriteFont,
                 lancerJeuT.get(),
                 new Vector2((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width) / 2 - spriteFont.MeasureString(lancerJeuT.get()).X / 2,
-                    boutonLancerLeJeu.Top + 10),
+                    boutonConnexion.Top + 10),
                 Color.White);
 
             spriteBatch.DrawString(

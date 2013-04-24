@@ -24,6 +24,9 @@ namespace CrystalGate.SceneEngine2
         private Map map; // La map
         public static System.Diagnostics.Stopwatch timer;
 
+        public bool isCoopPlay;
+        public bool isServer;
+
         public static List<SoundEffect> _effetsSonores = new List<SoundEffect> { }; // Tous les effets sonores.
 
         public override void LoadContent()
@@ -139,7 +142,8 @@ namespace CrystalGate.SceneEngine2
 
         public override void Initialize()
         {
-
+            isCoopPlay = false;
+            isServer = false;
         }
     }
 }

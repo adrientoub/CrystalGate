@@ -82,8 +82,6 @@ namespace CrystalGate
             compteurDeVague = "0/" + nombreDeVagues.ToString();
             this.blank = blank;
 
-            // evite le crash de debut en initialisant la var des la premiere frame
-            SacPosition = new Rectangle((int)joueur.camera.Position.X + width - Sac.Width, (int)joueur.camera.Position.Y + height - Sac.Height, Sac.Width, Sac.Height);
             widthFondNoir = 380;
             heightFondNoir = 250;
 
@@ -110,7 +108,6 @@ namespace CrystalGate
                 tempsDeJeuActuel = SceneEngine2.GamePlay.timer.Elapsed.Minutes.ToString() + ":" + SceneEngine2.GamePlay.timer.Elapsed.Seconds.ToString();
 
             compteurDeVague = Wave.waveNumber.ToString() + "/" + nombreDeVagues.ToString();
-
         }
 
         public bool EquipementClick()
