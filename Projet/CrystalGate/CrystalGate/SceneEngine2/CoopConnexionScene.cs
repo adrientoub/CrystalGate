@@ -18,7 +18,7 @@ namespace CrystalGate.SceneEngine2
 
         private Rectangle mouseRec;
         private Rectangle fullscene;
-        private Rectangle champIP, boutonLancerLeJeu, boutonRetour;
+        private Rectangle champPseudo, boutonLancerLeJeu, boutonRetour;
 
         private Text lancerJeuT, retourJeuT;
 
@@ -26,8 +26,7 @@ namespace CrystalGate.SceneEngine2
 
         private bool isServer, lancerJeuActive, firstTime;
 
-        Socket soc, clientSoc;
-        SocketAsyncEventArgs socEvent;
+        public Socket soc, clientSoc;
 
         public override void Initialize()
         {
@@ -46,26 +45,21 @@ namespace CrystalGate.SceneEngine2
 
             fullscene = new Rectangle(0, 0, CrystalGateGame.graphics.GraphicsDevice.Viewport.Width, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height);
 
-            champIP = new Rectangle((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width - boutons.Width) / 2, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height / 2 - 100, boutons.Width, boutons.Height);
+            champPseudo = new Rectangle((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width - boutons.Width) / 2, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height / 2 - 100, boutons.Width, boutons.Height);
             boutonLancerLeJeu = new Rectangle((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width - boutons.Width) / 2, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height / 2, boutons.Width, boutons.Height);
             boutonRetour = new Rectangle((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width - boutons.Width) / 2, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height / 2 + 100, boutons.Width, boutons.Height);
         }
 
         public void ClientConnected(IAsyncResult result)
         {
-            if (result.CompletedSynchronously)
-            {
-                lancerJeuActive = true;
-            }
+            soc.EndConnect(result);
+            lancerJeuActive = true;
         }
 
         public void ServerConnected(IAsyncResult result)
         {
-            if (result.CompletedSynchronously)
-            {
-                clientSoc = (Socket)result.AsyncState;
-                lancerJeuActive = true;
-            }
+            clientSoc = ((Socket)result.AsyncState).EndAccept(result);
+            lancerJeuActive = true;
         }
 
         public override void Update(GameTime gameTime)
@@ -74,25 +68,19 @@ namespace CrystalGate.SceneEngine2
             {
                 isServer = SceneHandler.coopSettingsScene.isServer;
                 soc = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-                socEvent = new SocketAsyncEventArgs();
 
                 if (isServer)
                 {
                     AsyncCallback sc = new AsyncCallback(ServerConnected);
                     soc.Bind(new IPEndPoint(IPAddress.Any, 6060));
                     soc.Listen(1);
-                    soc.BeginAccept(sc, "serv");
-                    socEvent.AcceptSocket = clientSoc;
+                    soc.BeginAccept(sc, soc);
                 }
                 else
                 {
                     AsyncCallback cc = new AsyncCallback(ClientConnected);
-                    soc.BeginConnect(IPAddress.Parse(SceneHandler.coopSettingsScene.textAsWrited), 5050, cc, "clie");
+                    soc.BeginConnect(IPAddress.Parse(SceneHandler.coopSettingsScene.textAsWrited), 6060, cc, soc);
                 }
-                socEvent.Completed += delegate
-                {
-                    lancerJeuActive = true;
-                };
                 firstTime = false;
             }
 
@@ -121,10 +109,10 @@ namespace CrystalGate.SceneEngine2
             spriteBatch.Begin();
             spriteBatch.Draw(background, fullscene, Color.White);
 
-            if (mouseRec.Intersects(champIP))
-                spriteBatch.Draw(boutons, champIP, Color.Gray);
+            if (mouseRec.Intersects(champPseudo))
+                spriteBatch.Draw(boutons, champPseudo, Color.Gray);
             else
-                spriteBatch.Draw(boutons, champIP, Color.White);
+                spriteBatch.Draw(boutons, champPseudo, Color.White);
 
             if (lancerJeuActive)
             {
@@ -147,7 +135,7 @@ namespace CrystalGate.SceneEngine2
                 spriteFont,
                 textAsWrited,
                 new Vector2((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width) / 2 - spriteFont.MeasureString(textAsWrited).X / 2,
-                    champIP.Top + 10),
+                    champPseudo.Top + 10),
                 Color.White);
 
             Color c;
