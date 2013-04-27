@@ -44,7 +44,7 @@ namespace CrystalGate
                     champion.Cast(spell, champion.pointCible);
                 }
                 // Pour se déplacer
-                if (Interface.mouse.RightButton == ButtonState.Pressed && !DonnerOrdreAttaquer() && (OnInventory() && !Interface.DrawSac || !OnInventory()))
+                if (Interface.mouse.RightButton == ButtonState.Pressed && !DonnerOrdreAttaquer() && (OnInventory() && !Interface.DrawSac || !OnInventory()) && (OnEquipement() && !Interface.DrawEquipement || !OnEquipement()))
                     DonnerOrdreDeplacer();
                 // Pour attaquer un point
                 if (Interface.key.IsKeyDown(Keys.A))
@@ -221,7 +221,7 @@ namespace CrystalGate
             Interface.Update();
         }
 
-        public bool CurseurCheck()
+        public bool CurseurCheck() // Renvoie vrai si le curseur est sur un méchant :p
         {
             Vector2 ObjectifPoint = new Vector2(camera.Position.X + Interface.mouse.X, camera.Position.Y + Interface.mouse.Y) / champion.Map.TailleTiles;
             ObjectifPoint = new Vector2((int)ObjectifPoint.X, (int)ObjectifPoint.Y);
@@ -235,11 +235,16 @@ namespace CrystalGate
 
             Interface.CurseurOffensif = false;
             return false;
-        } // Renvoie vrai si le curseur est sur un méchant :p
+        }
 
         public bool OnInventory()
         {
             return Interface.SacPosition.Intersects(new Rectangle(Interface.mouse.X, Interface.mouse.Y, 1, 1));
+        }
+
+        public bool OnEquipement()
+        {
+            return Interface.EquipementPosition.Intersects(new Rectangle(Interface.mouse.X, Interface.mouse.Y, 1, 1));
         }
 
         public bool ClickCheck(int i) // Renvoie vrai si le joueur clique sur le bouton i

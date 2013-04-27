@@ -28,31 +28,33 @@ namespace CrystalGate
             unite.Stuff.Add(this);
             unite.Inventory.Remove(this);
 
-            unite.Vie += VieBonus;
-            unite.VieMax += VieBonus;
-            unite.Dommages += DommagesBonus;
-            unite.Puissance += PuissanceBonus;
-            unite.Vitesse -= VitesseBonus;
-            unite.Defense += ArmureBonus;
-            unite.DefenseMagique += ArmureBonus;
-            unite.ManaRegen -= ManaRegenBonus;
-            unite.Puissance += PuissanceBonus;
+            unite.VieBonus += VieBonus;
+            unite.VieMaxBonus += VieBonus;
+            unite.DommagesBonus += DommagesBonus;
+            unite.PuissanceBonus += PuissanceBonus;
+            unite.VitesseBonus -= VitesseBonus;
+            unite.DefenseBonus += ArmureBonus;
+            unite.DefenseMagiqueBonus += ArmureBonus;
+            unite.ManaRegenBonus -= ManaRegenBonus;
+            unite.PuissanceBonus += PuissanceBonus;
         }
 
         public void Desequiper()
         {
-            unite.Inventory.Add(this);
-            unite.Stuff.Remove(this);
-
-            unite.Vie -= VieBonus;
-            unite.VieMax -= VieBonus;
-            unite.Dommages -= DommagesBonus;
-            unite.Puissance -= PuissanceBonus;
-            unite.Vitesse += VitesseBonus;
-            unite.Defense -= ArmureBonus;
-            unite.DefenseMagique -= ArmureBonus;
-            unite.ManaRegen += ManaRegenBonus;
-            unite.Puissance -= PuissanceBonus;
+            if (unite.Vie - VieBonus > 0)
+            {
+                unite.Inventory.Add(this);
+                unite.Stuff.Remove(this);
+                unite.VieBonus -= VieBonus;
+                unite.VieMaxBonus -= VieBonus;
+                unite.DommagesBonus -= DommagesBonus;
+                unite.PuissanceBonus -= PuissanceBonus;
+                unite.VitesseBonus += VitesseBonus;
+                unite.DefenseBonus -= ArmureBonus;
+                unite.DefenseMagiqueBonus -= ArmureBonus;
+                unite.ManaRegenBonus += ManaRegenBonus;
+                unite.PuissanceBonus -= PuissanceBonus;
+            }
         }
     }
 }

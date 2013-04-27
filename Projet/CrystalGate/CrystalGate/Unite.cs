@@ -10,22 +10,51 @@ namespace CrystalGate
 {
     public class Unite : Objet
     {
-        public int Vie { get; set; }
-        public int VieMax { get; set; }
-        public int Mana { get; set; }
-        public int ManaMax { get; set; }
-        public int ManaRegen { get; set; } // Temps de régération du mana en ms
+        public int Vie { get { return vie + VieBonus; } set { vie = value - VieBonus; } }
+        public int VieMax { get { return vieMax + VieMaxBonus; } set { vieMax = value - VieMaxBonus; } }
+        public int Mana { get { return mana + ManaBonus; } set { mana = value - ManaBonus; } }
+        public int ManaMax { get { return manaMax + ManaMaxBonus; } set { manaMax = value - ManaMaxBonus; } }
+        public int ManaRegen { get { return manaRegen + ManaRegenBonus; } set { manaRegen = value - ManaRegenBonus; } }  // Temps de régération du mana en ms
         public int XPUnite; // Expérience que donne l'unité quand on la tue
-        public int XP { get; set; }// Expérience que possède l'unité
+        public int XP; // Expérience que possède l'unité
         public int Level;
-        public float Vitesse { get; set; }
-        public float Portee { get; set; }
-        public int Dommages { get; set; }
-        public int Puissance { get; set; }
-        public float Vitesse_Attaque { get; set; }
-        public int Defense { get; set; }
-        public int DefenseMagique { get; set; }
-        public Color color { get; set; }
+        public float Vitesse { get { return vitesse + VitesseBonus; } set { vitesse = value - VitesseBonus; } }
+        public float Portee { get { return portee + PorteeBonus; } set { portee = value - PorteeBonus; } }
+        public int Dommages { get { return dommages + DommagesBonus; } set { dommages = value - DommagesBonus; } }
+        public int Puissance { get { return puissance + PuissanceBonus; } set { puissance = value - PuissanceBonus; } }
+        public float Vitesse_Attaque { get { return vitesse_Attaque + Vitesse_AttaqueBonus; } set { vitesse_Attaque = value - Vitesse_AttaqueBonus; } }
+        public int Defense { get { return defense + DefenseBonus; } set { defense = value - DefenseBonus; } }
+        public int DefenseMagique { get { return defenseMagique + DefenseMagiqueBonus; } set { defenseMagique = value - DefenseMagiqueBonus; } } 
+
+        // Stats private
+        int vie;
+        int vieMax;
+        int mana;
+        int manaMax;
+        int manaRegen; // Temps de régération du mana en ms
+        float vitesse;
+        float portee;
+        int dommages;
+        int puissance;
+        float vitesse_Attaque;
+        int defense;
+        int defenseMagique;
+
+        // Stats Bonus
+        public int VieBonus;
+        public int VieMaxBonus;
+        public int ManaBonus;
+        public int ManaMaxBonus;
+        public int ManaRegenBonus; // Temps de régération du mana en ms
+        public float VitesseBonus;
+        public float PorteeBonus;
+        public int DommagesBonus;
+        public int PuissanceBonus;
+        public float Vitesse_AttaqueBonus;
+        public int DefenseBonus;
+        public int DefenseMagiqueBonus;
+
+        public Color color;
         public Vector2 pointCible;
         public bool IsRanged;
         int NiveauDeBrain;
@@ -35,12 +64,12 @@ namespace CrystalGate
         protected int nbFrameSonJoue;
         protected double lastManaAdd;
 
-        public List<Spell> spells { get; set; }
-        public List<Item> Inventory { get; set; }
-        public List<Item> Stuff { get; set; }
+        public List<Spell> spells;
+        public List<Item> Inventory;
+        public List<Item> Stuff;
         public int InventoryCapacity = 64;
-        public bool Drawlife { get; set; }
-        public double idWave { get; set; }
+        public bool Drawlife;
+        public double idWave;
 
         public float byLevelAdd = 1.05f;
 
@@ -77,16 +106,16 @@ namespace CrystalGate
 
         public void statsLevelUpdate()
         {
-            Defense = (int)(Defense * Math.Pow(byLevelAdd, Level - 1));
-            DefenseMagique = (int)(DefenseMagique * Math.Pow(byLevelAdd, Level - 1));
-            Dommages = (int)(Dommages * Math.Pow(byLevelAdd, Level - 1));
-            Puissance = (int)(Puissance * Math.Pow(byLevelAdd, Level - 1));
-            Vitesse = (float)(Vitesse * Math.Pow(byLevelAdd, Level - 1));
-            ManaMax = (int)(ManaMax * Math.Pow(byLevelAdd, Level - 1));
-            Mana = ManaMax;
-            VieMax = (int)(VieMax * Math.Pow(byLevelAdd, Level - 1));
-            Vie = VieMax;
-            ManaRegen = (int)(ManaRegen / Math.Pow(byLevelAdd, Level - 1));
+            defense = (int)(defense * Math.Pow(byLevelAdd, Level - 1));
+            defenseMagique = (int)(defenseMagique * Math.Pow(byLevelAdd, Level - 1));
+            dommages = (int)(dommages * Math.Pow(byLevelAdd, Level - 1));
+            puissance = (int)(puissance * Math.Pow(byLevelAdd, Level - 1));
+            vitesse = (float)(vitesse * Math.Pow(byLevelAdd, Level - 1));
+            manaMax = (int)(manaMax * Math.Pow(byLevelAdd, Level - 1));
+            mana = manaMax;
+            vieMax = (int)(vieMax * Math.Pow(byLevelAdd, Level - 1));
+            vie = vieMax;
+            manaRegen = (int)(manaRegen / Math.Pow(byLevelAdd, Level - 1));
             XPUnite = (int)(XPUnite / Math.Pow(byLevelAdd, Level - 1));
         }
 
@@ -188,20 +217,20 @@ namespace CrystalGate
         public void newLevel()
         {
             Level++;
-            if ((int)(Defense * byLevelAdd) == Defense)
-                Defense++;
+            if ((int)(defense * byLevelAdd) == defense)
+                defense++;
             else
-                Defense = (int)(Defense * byLevelAdd);
-            if ((int)(DefenseMagique * byLevelAdd) == DefenseMagique)
-                DefenseMagique++;
+                defense = (int)(defense * byLevelAdd);
+            if ((int)(defenseMagique * byLevelAdd) == defenseMagique)
+                defenseMagique++;
             else
-                DefenseMagique = (int)(DefenseMagique * byLevelAdd);
-            Dommages = (int)(Dommages * byLevelAdd);
-            Puissance = (int)(Puissance * byLevelAdd);
-            Vitesse = Vitesse * byLevelAdd;
-            ManaMax = (int)(ManaMax * byLevelAdd);
-            VieMax = (int)(VieMax * byLevelAdd);
-            ManaRegen = (int)(ManaRegen / byLevelAdd);
+                defenseMagique = (int)(defenseMagique * byLevelAdd);
+            dommages = (int)(dommages * byLevelAdd);
+            puissance = (int)(puissance * byLevelAdd);
+            vitesse = vitesse * byLevelAdd;
+            manaMax = (int)(manaMax * byLevelAdd);
+            vieMax = (int)(vieMax * byLevelAdd);
+            manaRegen = (int)(manaRegen / byLevelAdd);
         }
 
         public bool IsCastable(int idSort)

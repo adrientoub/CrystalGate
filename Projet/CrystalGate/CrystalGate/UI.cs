@@ -101,6 +101,7 @@ namespace CrystalGate
             BarreDesSortsPosition = new Rectangle(width / 2, height - BarreDesSorts.Height, BarreDesSorts.Width, BarreDesSorts.Height);
 
             UtiliserInventaire();
+            DesequiperUpdate();
             // Timer et vagues
             if (SceneEngine2.GamePlay.timer.Elapsed.Seconds < 10)
                 tempsDeJeuActuel = SceneEngine2.GamePlay.timer.Elapsed.Minutes.ToString() + ":0" + SceneEngine2.GamePlay.timer.Elapsed.Seconds.ToString();
@@ -173,6 +174,37 @@ namespace CrystalGate
                 IsDrag = false;
                 ItemSelected = null;
             }
+        }
+
+        public void DesequiperUpdate()
+        {
+            if (DrawEquipement && EquipementPosition.Intersects(new Rectangle(mouse.X, mouse.Y, 1, 1)) && mouse.RightButton == ButtonState.Pressed)
+                if (SourisHoverStuff())
+                    ((Stuff)ItemSelected).Desequiper();
+        }
+
+        public bool SourisHoverStuff() // Renvoie vrai si la souris est sur une piece de stuff de l'equipement
+        {
+            int t = 40;
+            if (new Rectangle(EquipementPosition.X + (int)ArmePosition.X, EquipementPosition.Y + (int)ArmePosition.Y, t, t).Intersects(new Rectangle(mouse.X, mouse.Y, 1, 1)) && joueur.champion.Stuff.Where(i => i.type == Type.Arme).Count() > 0)
+                ItemSelected = joueur.champion.Stuff.Where(i => i.type == Type.Arme).ToList()[0];
+            else if (new Rectangle(EquipementPosition.X + (int)CasquePosition.X, EquipementPosition.Y + (int)CasquePosition.Y, t, t).Intersects(new Rectangle(mouse.X, mouse.Y, 1, 1)) && joueur.champion.Stuff.Where(i => i.type == Type.Casque).Count() > 0)
+                ItemSelected = joueur.champion.Stuff.Where(i => i.type == Type.Casque).ToList()[0];
+            else if (new Rectangle(EquipementPosition.X + (int)AnneauPosition.X, EquipementPosition.Y + (int)AnneauPosition.Y, t, t).Intersects(new Rectangle(mouse.X, mouse.Y, 1, 1)) && joueur.champion.Stuff.Where(i => i.type == Type.Anneau).Count() > 0)
+                ItemSelected = joueur.champion.Stuff.Where(i => i.type == Type.Anneau).ToList()[0];
+            else if (new Rectangle(EquipementPosition.X + (int)EpaulieresPosition.X, EquipementPosition.Y + (int)EpaulieresPosition.Y, t, t).Intersects(new Rectangle(mouse.X, mouse.Y, 1, 1)) && joueur.champion.Stuff.Where(i => i.type == Type.Epaulieres).Count() > 0)
+                ItemSelected = joueur.champion.Stuff.Where(i => i.type == Type.Epaulieres).ToList()[0];
+            else if (new Rectangle(EquipementPosition.X + (int)GantsPosition.X, EquipementPosition.Y + (int)GantsPosition.Y, t, t).Intersects(new Rectangle(mouse.X, mouse.Y, 1, 1)) && joueur.champion.Stuff.Where(i => i.type == Type.Gants).Count() > 0)
+                ItemSelected = joueur.champion.Stuff.Where(i => i.type == Type.Gants).ToList()[0];
+            else if (new Rectangle(EquipementPosition.X + (int)PlastronPosition.X, EquipementPosition.Y + (int)PlastronPosition.Y, t, t).Intersects(new Rectangle(mouse.X, mouse.Y, 1, 1)) && joueur.champion.Stuff.Where(i => i.type == Type.Plastron).Count() > 0)
+                ItemSelected = joueur.champion.Stuff.Where(i => i.type == Type.Plastron).ToList()[0];
+            else if (new Rectangle(EquipementPosition.X + (int)BottesPosition.X, EquipementPosition.Y + (int)BottesPosition.Y, t, t).Intersects(new Rectangle(mouse.X, mouse.Y, 1, 1)) && joueur.champion.Stuff.Where(i => i.type == Type.Bottes).Count() > 0)
+                ItemSelected = joueur.champion.Stuff.Where(i => i.type == Type.Bottes).ToList()[0];
+            else
+
+                return false;
+
+            return true;
         }
 
         public void Draw()
