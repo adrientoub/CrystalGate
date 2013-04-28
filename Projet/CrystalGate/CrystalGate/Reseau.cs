@@ -11,7 +11,6 @@ namespace CrystalGate
     {
         static List<ArraySegment<byte>> buffer = new List<ArraySegment<byte>>();
         static int tailleDeLaString = 0;
-        
 
         public static void ReceiveCallback(IAsyncResult result)
         {

@@ -90,8 +90,6 @@ namespace CrystalGate.SceneEngine2
 
             // On update les infos de la map
             map.Update(map.unites, gameTime);
-            // On update les infos des joueurs
-            map.joueurs[0].Update(map.unites);
             // On update les infos des items
             foreach (Item i in map.items)
                 i.Update(map.unites);
