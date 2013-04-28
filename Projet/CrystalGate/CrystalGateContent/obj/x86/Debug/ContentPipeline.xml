@@ -116,7 +116,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\UI\gruntIcone.xnb</Output>
-      <Time>2013-02-25T18:54:11.7198171+01:00</Time>
+      <Time>2013-04-28T22:26:27.3898583+02:00</Time>
     </Item>
     <Item>
       <Source>Spells\Explosion.png</Source>
@@ -278,7 +278,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\UI\guerrierIcone.xnb</Output>
-      <Time>2013-02-27T16:20:30.6197229+01:00</Time>
+      <Time>2013-04-28T22:26:27.3908589+02:00</Time>
     </Item>
     <Item>
       <Source>tresor.png</Source>
@@ -591,6 +591,24 @@
       <Options>None</Options>
       <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\Sons\OgreDeath1.xnb</Output>
       <Time>2013-02-28T20:15:02.2396977+01:00</Time>
+    </Item>
+    <Item>
+      <Source>UI\dialogueFond.png</Source>
+      <Name>UI\dialogueFond</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\UI\dialogueFond.xnb</Output>
+      <Time>2013-04-28T22:26:27.3878564+02:00</Time>
+    </Item>
+    <Item>
+      <Source>UI\knightIcone.jpg</Source>
+      <Name>UI\knightIcone</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\Users\Adrien\Documents\GitHub\CrystalGate\Projet\CrystalGate\CrystalGate\bin\x86\Debug\Content\UI\knightIcone.xnb</Output>
+      <Time>2013-04-28T22:26:27.3928936+02:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
