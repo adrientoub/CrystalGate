@@ -17,6 +17,7 @@ namespace CrystalGate
             // Graphique
             Sprite = PackTexture.unites[1];
             Tiles = new Vector2( 380 / 5, 620 / 11);
+            Portrait = PackTexture.GruntPortrait;
 
             // Statistiques
             Vie = VieMax = 200;

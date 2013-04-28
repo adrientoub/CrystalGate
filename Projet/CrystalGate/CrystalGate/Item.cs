@@ -33,9 +33,9 @@ namespace CrystalGate
                 {
                     if (u.Inventory.Count + 1 <= u.InventoryCapacity)
                     {
+                        unite = u;
                         u.Inventory.Add(this);
                         InInventory = true; // retire l'objet de la carte et l'ajoute a l'inventaire de l'unité proche
-                        unite = u;
                         Effet(u);
                     }
                 }
@@ -49,7 +49,7 @@ namespace CrystalGate
 
         public void Utiliser()
         {
-            spell.Begin(unite.pointCible); // Lance le sort de l'objet et le marque comme désactivé , pour qu'il soit retiré de l'inventaire dans le methode InventoryUpdate()
+            spell.Begin(unite.pointCible); // Lance le sort de l'objet et le marque comme activé , pour qu'il soit retiré de l'inventaire dans le methode InventoryUpdate()
             Activated = true;
         }
     }

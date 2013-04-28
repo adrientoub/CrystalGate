@@ -17,6 +17,7 @@ namespace CrystalGate
             // Graphique
             Sprite = PackTexture.unites[2];
             Tiles = new Vector2( 295 / 5, 660 / 9);
+            Portrait = PackTexture.ArcherPortrait;
             //PackAnimation.isArcher = true; // ca va faire buger tout le monde!
             ProjectileSprite = PackTexture.projectiles[0];
 

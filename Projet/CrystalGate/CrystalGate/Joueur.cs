@@ -127,7 +127,7 @@ namespace CrystalGate
                     {
                         float distance = Outil.DistanceUnites(champion, u);
 
-                        if (champion != u && distance <= distanceInit)
+                        if (champion != u && !u.isApnj && distance <= distanceInit)
                         {
                             distanceInit = distance;
                             focus = u;
@@ -237,24 +237,14 @@ namespace CrystalGate
 
         public bool SpeakToPNJ() // Renvoie si on parle a un PNJ, et modifie l'UI si c'est le cas
         {
-            if (Interface.mouse.RightButton == ButtonState.Pressed) // Si on clique sur un pnj, PNJSelected = le pnj cliqué
-            {
-                Vector2 Point = new Vector2(camera.Position.X + Interface.mouse.X, camera.Position.Y + Interface.mouse.Y) / Map.TailleTiles;
-                Point = new Vector2((int)Point.X, (int)Point.Y);
-                List<Unite> result = Map.unites.Where(i => i.PositionTile == Point && i.isApnj).ToList();
-                if (result.Count > 0)
-                    PNJSelected = result[0];
-                else
-                    PNJSelected = null;
-
-                if (PNJSelected != null)
-                {
-
-                    champion.ObjectifListe = PathFinding.TrouverChemin(champion.PositionTile, PNJSelected.PositionTile, Map.Taille, new List<Unite> { }, Map.unitesStatic, true);
-                    champion.ObjectifListe.RemoveAt(champion.ObjectifListe.Count - 1);
-                }
-            }
-            Interface.DrawDialogue = PNJSelected != null && Outil.DistancePoints(champion.PositionTile, PNJSelected.PositionTile) <= 40;
+            // Stoque les PNJ pres du joueurs dans une liste
+            List<Unite> result = Map.unites.Where(i => Outil.DistanceUnites(i, champion) <= 64 && i.isApnj).ToList();
+            PNJSelected = (result.Count > 0) ? result[0] : null; // prend le premier et le met dans la variable PNJSelected
+            
+            if (PNJSelected != null) // Si on est assez proche du PNJ, on draw le dialogue
+                Interface.DrawDialogue = Outil.DistancePoints(champion.PositionTile, PNJSelected.PositionTile) <= 46;
+            else
+                Interface.DrawDialogue = false;
             return Interface.DrawDialogue;
         }
 

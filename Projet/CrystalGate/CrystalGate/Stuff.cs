@@ -28,8 +28,10 @@ namespace CrystalGate
             unite.Stuff.Add(this);
             unite.Inventory.Remove(this);
 
-            unite.VieBonus += VieBonus;
+            unite.VieBonus += 0;
             unite.VieMaxBonus += VieBonus;
+            unite.ManaBonus += 0;
+            unite.ManaMaxBonus += ManaBonus;
             unite.DommagesBonus += DommagesBonus;
             unite.PuissanceBonus += PuissanceBonus;
             unite.VitesseBonus -= VitesseBonus;

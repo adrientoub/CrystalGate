@@ -16,6 +16,7 @@ namespace CrystalGate
     public class Objet
     {
         public Texture2D Sprite;
+        public Texture2D Portrait;
         public Texture2D ProjectileSprite;
         public Projectile Projectile;
         public Vector2 PositionTile;
@@ -25,6 +26,7 @@ namespace CrystalGate
         public bool isApnj;
 
         public List<Vector2> Animation;
+        public List<string> Dialogue;
         public Vector2 Tiles;
 
         protected Rectangle SpritePosition;
@@ -61,6 +63,7 @@ namespace CrystalGate
             // Graphique
             this.Sprite = PackTexture.blank;
             this.Animation = new List<Vector2> { };
+            this.Dialogue = new List<string> { };
 
 
             this.direction = Direction.Bas;

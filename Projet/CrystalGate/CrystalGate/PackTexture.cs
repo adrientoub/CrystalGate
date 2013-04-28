@@ -20,6 +20,17 @@ namespace CrystalGate
         public static List<Texture2D> projectiles;
         // UI
         public static Texture2D Dialogue;
+        public static Texture2D BarreDesSorts;
+        public static Texture2D Curseur;
+        public static Texture2D CurseurRouge;
+        public static Texture2D Portrait;
+        public static Texture2D Sac;
+        public static Texture2D Equipement;
+        // Portraits
+        public static Texture2D CavalierPortrait;
+        public static Texture2D GruntPortrait;
+        public static Texture2D ArcherPortrait;
+
 
         public static void Initialize(ContentManager content)
         {
@@ -41,7 +52,18 @@ namespace CrystalGate
             Map.Add(content.Load<Texture2D>("summertiles"));
 
             // UI
-            Dialogue = content.Load<Texture2D>("blank");
+            Dialogue = content.Load<Texture2D>("UI/DialogueFond");
+            BarreDesSorts = content.Load<Texture2D>("UI/barre des sorts");
+            Curseur = content.Load<Texture2D>("curseur");
+            CurseurRouge = content.Load<Texture2D>("UI/curseurRouge");
+            Portrait = content.Load<Texture2D>("UI/GuerrierIcone");
+            Sac = content.Load<Texture2D>("UI/inventaire");
+            Equipement = content.Load<Texture2D>("UI/Equipement");
+
+            // Portraits
+            CavalierPortrait = content.Load<Texture2D>("UI/knightIcone");
+            GruntPortrait = content.Load<Texture2D>("UI/gruntIcone");
+            ArcherPortrait = content.Load<Texture2D>("UI/archerIcone");
         }
     }
 }

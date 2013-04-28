@@ -38,7 +38,7 @@ namespace CrystalGate
         public Vector2 ArmePosition = new Vector2(356, 115);
 
         public bool DrawSelectPoint, DrawSac, DrawEquipement, DrawDialogue, OldDrawDialogue;
-        public bool DrawCadreInfo = true;
+        public bool DrawUI = true;
 
         public Vector2 TailleSac = new Vector2(8, 8);
         SpriteBatch spritebatch;
@@ -50,6 +50,7 @@ namespace CrystalGate
 
         bool isWriting = false;
         string message = "";
+        List<string> dialogue = new List<string> { };
 
         int MaxChar;
 
@@ -70,21 +71,21 @@ namespace CrystalGate
         public int width = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width;
         public int height = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height;
 
-        public UI(Joueur joueur, Texture2D barreDesSorts, Texture2D curseur, Texture2D curseurRouge, Texture2D portrait, Texture2D sac, Texture2D equipement, Texture2D blank, SpriteBatch sp, SpriteFont gf, SpriteFont sf)
+        public UI(Joueur joueur, SpriteBatch sp, SpriteFont gf, SpriteFont sf)
         {
             this.joueur = joueur;
-            Portrait = portrait;
-            Sac = sac;
-            Equipement = equipement;
-            BarreDesSorts = barreDesSorts;
-            Curseur = curseur;
-            CurseurRouge = curseurRouge;
+            Portrait = PackTexture.Portrait;
+            Sac = PackTexture.Sac;
+            Equipement = PackTexture.Equipement;
+            BarreDesSorts = PackTexture.BarreDesSorts;
+            Curseur = PackTexture.Curseur;
+            CurseurRouge = PackTexture.CurseurRouge;
+            this.blank = PackTexture.blank;
             spritebatch = sp;
             gamefont = gf;
             spellfont = sf;
             tempsDeJeuActuel = "0:00";
             compteurDeVague = "0/" + nombreDeVagues.ToString();
-            this.blank = blank;
 
             widthFondNoir = 380;
             heightFondNoir = 250;
@@ -130,12 +131,21 @@ namespace CrystalGate
 
             if (isWriting)
                 SaisirTexte(ref message);
+
+            if (dialogue.Count > 0) // pour passer les dialogues
+            {
+                if (key.IsKeyDown(Keys.Enter) && Oldkey.IsKeyUp(Keys.Enter)) // Si on est a la fin de la replique, on passe a la suivante.
+                {
+                    dialogue.RemoveAt(0);
+                    MaxChar = 0;
+                }
+            }
         }
 
         public void UtiliserInventaire() // Fonction qui s'occupe de l'utilisation de l'inventaire
         {
             // Si on clique sur le cadre de l'inventaire
-            if (mouse.X >= SacPosition.X && mouse.Y >= SacPosition.Y)
+            if (mouse.X >= SacPosition.X && mouse.Y >= SacPosition.Y && DrawSac)
             {
                 int marge = 7;
                 Vector2 position = new Vector2(mouse.X - (width - Sac.Width), mouse.Y - (height - Sac.Height));
@@ -270,10 +280,7 @@ namespace CrystalGate
             int hauteurBarre = 30;
 
             MouseState m = SceneEngine2.BaseScene.mouse;
-                
-            // Affichage de la barre des sorts
-            spritebatch.Draw(BarreDesSorts, new Rectangle(BarreDesSortsPosition.X + (int)joueur.camera.Position.X, BarreDesSortsPosition.Y + (int)joueur.camera.Position.Y, BarreDesSortsPosition.Width, BarreDesSortsPosition.Height), null, Color.White, 0, new Vector2(BarreDesSorts.Width / 2, 0), SpriteEffects.None, 1);
-
+            
             // Affichage de l'équipement
             if (DrawEquipement)
             {
@@ -312,25 +319,43 @@ namespace CrystalGate
             // Affichage du dialogue avec les PNJ
             if (DrawDialogue)
             {
-                if (DrawDialogue != OldDrawDialogue)
-                    MaxChar = 0;
+                if (DrawDialogue != OldDrawDialogue) // Si on va pres du pnj ( et que l'on ne l'etait pas avant)
+                {
+                    MaxChar = 0; // On reset tout
+                    dialogue.Clear();
+                    foreach (string s in joueur.PNJSelected.Dialogue)
+                        dialogue.Add(s);
+                }
 
-                int HeightBDialogue = 300;
-                int tailleCadre = 100;
-                int margeCadre = 100;
-                spritebatch.Draw(PackTexture.blank, new Rectangle((int)joueur.camera.Position.X, (int)joueur.camera.Position.Y + height - HeightBDialogue, width, HeightBDialogue), Color.White);
-                spritebatch.Draw(Portrait, new Rectangle((int)joueur.camera.Position.X + margeCadre, (int)joueur.camera.Position.Y + height - HeightBDialogue / 2 - tailleCadre / 2, tailleCadre, tailleCadre), Color.White);
-                string strDiag = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.est laborum.";
-                string strDraw = "";
-                for (int i = 0; i < MaxChar && i < strDiag.Count(); i++)
-                    strDraw += strDiag[i];
+                if (dialogue.Count() > 0) // Si le dialogue est en cours on le draw
+                {
+                    string strDiag = dialogue[0];
+                    string strDraw = "";
+                    int HeightBDialogue = 200;
+                    int tailleCadre = 150;
+                    int margeCadre = 100;
+                    spritebatch.Draw(PackTexture.Dialogue, new Rectangle((int)joueur.camera.Position.X + margeCadre, (int)joueur.camera.Position.Y + height - HeightBDialogue, width - 2 * margeCadre, HeightBDialogue), Color.White);
+                    spritebatch.Draw(Portrait, new Rectangle((int)joueur.camera.Position.X + margeCadre, (int)joueur.camera.Position.Y + height - tailleCadre, tailleCadre, tailleCadre), Color.White);
+                    spritebatch.Draw(joueur.PNJSelected.Portrait, new Rectangle((int)joueur.camera.Position.X + width - tailleCadre - margeCadre, (int)joueur.camera.Position.Y + height - tailleCadre, tailleCadre, tailleCadre), Color.White);
+                    Text l1 = new Text(joueur.champion.ToString().Split(new char[1] { '.' })[1]);
+                    string l2 = joueur.PNJSelected.ToString().Split(new char[1] { '.' })[1];
+                    spritebatch.DrawString(gamefont, l1.get(), new Vector2( 3 * margeCadre / 2 - gamefont.MeasureString(l1.get()).X / 2, height - HeightBDialogue) + joueur.camera.Position, Color.BurlyWood);
+                    spritebatch.DrawString(gamefont, l2, new Vector2(width - 3 * margeCadre / 2 - gamefont.MeasureString(l2).X / 2, height - HeightBDialogue) + joueur.camera.Position, Color.BurlyWood);
 
-                MaxChar++;
-                spritebatch.DrawString(gamefont, Outil.Normalize((width - margeCadre - tailleCadre) / (int)gamefont.MeasureString("a").X, strDraw), new Vector2(margeCadre + tailleCadre, height - HeightBDialogue / 2 - tailleCadre / 2) + joueur.camera.Position, Color.Black);
+                    for (int i = 0; i < MaxChar && i < strDiag.Count(); i++)
+                        strDraw += strDiag[i];
+
+
+                    MaxChar++;
+                    spritebatch.DrawString(gamefont, Outil.Normalize((width - 2 * (margeCadre + tailleCadre)) / 13, strDraw), new Vector2(margeCadre + tailleCadre, height - HeightBDialogue / 2 - tailleCadre / 2) + joueur.camera.Position, Color.BurlyWood);
+                }
             }
-            DrawCadreInfo = !DrawDialogue;
+            if (dialogue.Count() > 0) // Si le dialogue est en cours on cache l'UI
+                DrawUI = !DrawDialogue;
+            else // Sinon si c'est fini on l'affiche
+                DrawUI = true;
 
-            if (DrawCadreInfo)
+            if (DrawUI)
             {
                 string str = " " + life.get() + " : " + joueur.champion.Vie + " / " + joueur.champion.VieMax + "\n "
                     + manaText.get() + " : " + joueur.champion.Mana + " / " + joueur.champion.ManaMax + "\n "
@@ -363,20 +388,36 @@ namespace CrystalGate
                 spritebatch.DrawString(gamefont, str, new Vector2(CadrePosition.X, CadrePosition.Y + 25) + joueur.camera.Position, Color.White);
                 string xp = joueur.champion.XP + " / " + joueur.champion.Level * 1000;
                 spritebatch.DrawString(gamefont, xp, new Vector2(CadrePosition.X + CadrePosition.Width / 2 - gamefont.MeasureString(xp).X / 2, CadrePosition.Y + CadrePosition.Height - hauteurBarre - 2) + joueur.camera.Position, Color.White);
-            }
 
-            // Affichage de l'aide des sorts
-            for (int i = 0; i < joueur.champion.spells.Count; i++)
-            {
-                if (joueur.SourisHoverCheck(i))
+                // Affichage de la barre des sorts
+                spritebatch.Draw(BarreDesSorts, new Rectangle(BarreDesSortsPosition.X + (int)joueur.camera.Position.X, BarreDesSortsPosition.Y + (int)joueur.camera.Position.Y, BarreDesSortsPosition.Width, BarreDesSortsPosition.Height), null, Color.White, 0, new Vector2(BarreDesSorts.Width / 2, 0), SpriteEffects.None, 1);
+                // Affichage des spells
+                for (int i = 0; i < joueur.champion.spells.Count; i++)
                 {
-                    int widthCadre = 250;
-                    int heightCadre = 100;
-                    string nomDuSort = new Text(joueur.champion.spells[i].ToString()).get();
-                    // Le cadre noir, le nom du sort, la description
-                    spritebatch.Draw(blank, new Rectangle((int)joueur.camera.Position.X + BarreDesSortsPosition.X - widthCadre / 2, (int)joueur.camera.Position.Y + BarreDesSortsPosition.Y - 100, widthCadre, heightCadre), Color.Black);
-                    spritebatch.DrawString(spellfont, Outil.Normalize(30, joueur.champion.spells[i].DescriptionSpell()), new Vector2((int)joueur.camera.Position.X + BarreDesSortsPosition.X - widthCadre / 2, (int)joueur.camera.Position.Y + BarreDesSortsPosition.Y - 120 + 25), Color.White);
-                    spritebatch.DrawString(spellfont, nomDuSort, new Vector2((int)joueur.camera.Position.X + BarreDesSortsPosition.X - spellfont.MeasureString(nomDuSort).X / 2, (int)joueur.camera.Position.Y + BarreDesSortsPosition.Y - 120), Color.White);
+                    if (Map.gametime != null)
+                    {
+                        Color color;
+                        if (joueur.champion.IsCastable(i))
+                            color = Color.White;
+                        else
+                            color = Color.Red;
+                        spritebatch.Draw(joueur.champion.spells[i].SpriteBouton, new Vector2(BarreDesSortsPosition.X - 130 + i * (32 + 5), BarreDesSortsPosition.Y + 8) + joueur.camera.Position, color);
+                    }
+
+                }
+                // Affichage de l'aide des sorts
+                for (int i = 0; i < joueur.champion.spells.Count; i++)
+                {
+                    if (joueur.SourisHoverCheck(i))
+                    {
+                        int widthCadre = 250;
+                        int heightCadre = 100;
+                        string nomDuSort = new Text(joueur.champion.spells[i].ToString()).get();
+                        // Le cadre noir, le nom du sort, la description
+                        spritebatch.Draw(blank, new Rectangle((int)joueur.camera.Position.X + BarreDesSortsPosition.X - widthCadre / 2, (int)joueur.camera.Position.Y + BarreDesSortsPosition.Y - 100, widthCadre, heightCadre), Color.Black);
+                        spritebatch.DrawString(spellfont, Outil.Normalize(30, joueur.champion.spells[i].DescriptionSpell()), new Vector2((int)joueur.camera.Position.X + BarreDesSortsPosition.X - widthCadre / 2, (int)joueur.camera.Position.Y + BarreDesSortsPosition.Y - 120 + 25), Color.White);
+                        spritebatch.DrawString(spellfont, nomDuSort, new Vector2((int)joueur.camera.Position.X + BarreDesSortsPosition.X - spellfont.MeasureString(nomDuSort).X / 2, (int)joueur.camera.Position.Y + BarreDesSortsPosition.Y - 120), Color.White);
+                    }
                 }
             }
 
@@ -408,21 +449,6 @@ namespace CrystalGate
                 SceneEngine2.SceneHandler.gameState = SceneEngine2.GameState.Defeat;
             if (DrawSelectPoint)
                 spritebatch.DrawString(gamefont, str2, new Vector2(BarreDesSortsPosition.X - gamefont.MeasureString(str2).X / 2 , BarreDesSortsPosition.Y - BarreDesSorts.Height) + joueur.camera.Position, Color.White);
-
-            // Affichage des spells
-            for (int i = 0; i < joueur.champion.spells.Count; i++)
-            {
-                if (Map.gametime != null)
-                {
-                    Color color;
-                    if (joueur.champion.IsCastable(i))
-                        color = Color.White;
-                    else
-                        color = Color.Red;
-                    spritebatch.Draw(joueur.champion.spells[i].SpriteBouton, new Vector2(BarreDesSortsPosition.X - 130 + i * (32 + 5), BarreDesSortsPosition.Y + 8) + joueur.camera.Position, color);
-                }
-
-            }
 
 
             if (isWriting)
