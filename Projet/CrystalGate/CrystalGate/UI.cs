@@ -51,6 +51,11 @@ namespace CrystalGate
         public bool IsDrag;
         public Item ItemSelected;
 
+        bool isWriting = false;
+        string message = "";
+
+        public static string messageRecu = "";
+
         int widthFondNoir, heightFondNoir;
 
         public MouseState mouse;
@@ -109,6 +114,27 @@ namespace CrystalGate
                 tempsDeJeuActuel = SceneEngine2.GamePlay.timer.Elapsed.Minutes.ToString() + ":" + SceneEngine2.GamePlay.timer.Elapsed.Seconds.ToString();
 
             compteurDeVague = Wave.waveNumber.ToString() + "/" + nombreDeVagues.ToString();
+
+            if (SceneEngine2.BaseScene.keyboardState.IsKeyDown(Keys.Enter) &&
+                SceneEngine2.BaseScene.oldKeyboardState.IsKeyUp(Keys.Enter) && 
+                SceneEngine2.CoopConnexionScene.isOnlinePlay)
+            {
+                if (isWriting && message != "")
+                {
+                    Reseau.SendData(SceneEngine2.CoopConnexionScene.textAsWrited + " : " + message);
+                    message = "";
+                    isWriting = false;
+                }
+                else
+                {
+                    isWriting = true;
+                }
+            }
+
+            if (isWriting)
+            {
+                SaisirTexte(ref message);
+            }
         }
 
         public bool EquipementClick()
@@ -205,6 +231,49 @@ namespace CrystalGate
                 return false;
 
             return true;
+        }
+
+
+        public void SaisirTexte(ref string text)
+        {
+            Keys[] pressedKeys = SceneEngine2.BaseScene.keyboardState.GetPressedKeys();
+            Keys[] prevPressedKeys = SceneEngine2.BaseScene.oldKeyboardState.GetPressedKeys();
+
+            char c;
+
+            if (text.Length < 15)
+            {
+                bool shiftPressed = pressedKeys.Contains(Keys.LeftShift) || pressedKeys.Contains(Keys.RightShift);
+                foreach (Keys key in pressedKeys)
+                {
+                    if (!prevPressedKeys.Contains(key))
+                    {
+                        string keyString = key.ToString();
+
+                        if (keyString.Length == 1)
+                        {
+                            c = keyString[0];
+                            if (c >= 'A' && c <= 'Z')
+                                if (shiftPressed)
+                                    text += c;
+                                else
+                                    text += (char)(c - 'A' + 'a');
+                        }
+                    }
+                }
+            }
+
+            // Delete
+            if (SceneEngine2.BaseScene.keyboardState.IsKeyDown(Keys.Back) && SceneEngine2.BaseScene.oldKeyboardState.IsKeyUp(Keys.Back))
+            {
+                SceneEngine2.BaseScene.oldKeyboardState = SceneEngine2.BaseScene.keyboardState;
+                prevPressedKeys = pressedKeys;
+                string text2 = "";
+                for (int i = 0; i < text.Length - 1; i++)
+                    text2 += text[i];
+
+                text = text2;
+            }
         }
 
         public void Draw()
@@ -339,6 +408,21 @@ namespace CrystalGate
                 }
 
             }
+
+            if (isWriting)
+            {
+                spritebatch.Draw(blank,
+                    new Rectangle((int)joueur.camera.Position.X + widthFondNoir + 10, (int)joueur.camera.Position.Y + CrystalGateGame.graphics.GraphicsDevice.Viewport.Height - heightFondNoir, 
+                        CrystalGateGame.graphics.GraphicsDevice.Viewport.Width - widthFondNoir * 2 - 20, 30),
+                    new Color(0, 0, 0, 127));
+                spritebatch.DrawString(gamefont, message, joueur.camera.Position + new Vector2(widthFondNoir, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height - heightFondNoir), Color.White);
+            }
+
+            if (messageRecu != "")
+            {
+                spritebatch.DrawString(gamefont, messageRecu, joueur.camera.Position + new Vector2(widthFondNoir, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height - heightFondNoir - 50), Color.White);
+            }
+
             // Timer
             spritebatch.DrawString(gamefont, tempsDeJeuActuel, new Vector2(joueur.camera.Position.X + width - gamefont.MeasureString(tempsDeJeuActuel).X - 5, joueur.camera.Position.Y + 4), Color.Black);
 

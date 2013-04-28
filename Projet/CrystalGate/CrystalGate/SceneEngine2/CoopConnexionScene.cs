@@ -22,9 +22,11 @@ namespace CrystalGate.SceneEngine2
 
         private Text lancerJeuT, retourJeuT;
 
-        private string textAsWrited;
+        public static string textAsWrited;
 
         private bool isServer, lancerJeuActive, firstTime;
+
+        public static bool isOnlinePlay;
 
         public Socket soc, clientSoc;
 
@@ -33,6 +35,7 @@ namespace CrystalGate.SceneEngine2
             textAsWrited = "";
             lancerJeuActive = false;
             firstTime = true;
+            isOnlinePlay = false;
         }
 
         public override void LoadContent()
@@ -94,6 +97,8 @@ namespace CrystalGate.SceneEngine2
                     GamePlay.timer.Restart();
                     SceneHandler.gameplayScene.isCoopPlay = true;
                     SceneHandler.gameplayScene.isServer = isServer;
+                    isOnlinePlay = true;
+                    Reseau.ReceiveData();
                 }
                 else if (mouseRec.Intersects(boutonRetour))
                 {
