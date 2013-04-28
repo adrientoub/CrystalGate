@@ -48,6 +48,8 @@ namespace CrystalGate.SceneEngine2
             // Ajout joueurs
             Map.joueurs.Add(new Joueur(new Guerrier(new Vector2(0, 9))));
             Map.unites.Add(Map.joueurs[0].champion);
+            Map.unites.Add(new Cavalier(Vector2.One));
+            Map.unites[Map.unites.Count - 1].isApnj = true;
 
             // Ajout Interface
             UI Interface = new UI(Map.joueurs[0], content.Load<Texture2D>("UI/barre des sorts"), curseur, content.Load<Texture2D>("UI/curseurRouge"), content.Load<Texture2D>("UI/GuerrierIcone"), content.Load<Texture2D>("UI/inventaire"), content.Load<Texture2D>("UI/Equipement"), content.Load<Texture2D>("blank"), SceneHandler.spriteBatch, gameFont, content.Load<SpriteFont>("Polices/SpellFont"));

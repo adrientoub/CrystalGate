@@ -10,6 +10,7 @@ namespace CrystalGate
     public class Joueur
     {
         public Unite champion;
+        public Unite PNJSelected;
 
         public Camera2D camera;
         public UI Interface;
@@ -135,9 +136,11 @@ namespace CrystalGate
                     champion.uniteAttacked = focus;
                 }
             }
-
+            // Pour verifier si on parle a un pnj
+            SpeakToPNJ();
             // Pour déplacer la caméra
-            CameraCheck();
+            CameraUpdate();
+            Interface.Update();
             CurseurCheck();
             CheckWinandLose();
             Interface.Oldmouse = Interface.mouse;
@@ -162,17 +165,13 @@ namespace CrystalGate
             Vector2 ObjectifPoint = new Vector2(camera.Position.X + Interface.mouse.X, camera.Position.Y + Interface.mouse.Y) / Map.TailleTiles;
             ObjectifPoint = new Vector2((int)ObjectifPoint.X, (int)ObjectifPoint.Y);
             foreach (Unite u in Map.unites)
-                if(u != champion && Outil.DistancePoints(ObjectifPoint, u .PositionTile) <= 64)
+                if(u != champion && !u.isApnj && Outil.DistancePoints(ObjectifPoint, u .PositionTile) <= 64)
                 {
-                    if (true)
-                    {
-                        //champion.Attaquer(u);
-                        champion.uniteAttacked = u;
-                        List<Noeud> chemin = PathFinding.TrouverChemin(champion.PositionTile, ObjectifPoint, Map.Taille, new List<Unite> { }, Map.unitesStatic, false);
-                        if (chemin != null)
-                            champion.ObjectifListe = chemin;
-                        return true;
-                    }
+                    champion.uniteAttacked = u;
+                    List<Noeud> chemin = PathFinding.TrouverChemin(champion.PositionTile, ObjectifPoint, Map.Taille, new List<Unite> { }, Map.unitesStatic, false);
+                    if (chemin != null)
+                        champion.ObjectifListe = chemin;
+                    return true;
                 }
             return false;
         }
@@ -189,7 +188,7 @@ namespace CrystalGate
             champion.ObjectifListe.Clear();
         }
 
-        public void CameraCheck()
+        public void CameraUpdate()
         {
             int width = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width;
             int height = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height;
@@ -218,7 +217,6 @@ namespace CrystalGate
             
             //Update de la position de la caméra et de l'interface
             camera.Position = new Vector2(camera.Position.X, camera.Position.Y) + vec;
-            Interface.Update();
         }
 
         public bool CurseurCheck() // Renvoie vrai si le curseur est sur un méchant :p
@@ -235,6 +233,29 @@ namespace CrystalGate
 
             Interface.CurseurOffensif = false;
             return false;
+        }
+
+        public bool SpeakToPNJ() // Renvoie si on parle a un PNJ, et modifie l'UI si c'est le cas
+        {
+            if (Interface.mouse.RightButton == ButtonState.Pressed) // Si on clique sur un pnj, PNJSelected = le pnj cliqué
+            {
+                Vector2 Point = new Vector2(camera.Position.X + Interface.mouse.X, camera.Position.Y + Interface.mouse.Y) / Map.TailleTiles;
+                Point = new Vector2((int)Point.X, (int)Point.Y);
+                List<Unite> result = Map.unites.Where(i => i.PositionTile == Point && i.isApnj).ToList();
+                if (result.Count > 0)
+                    PNJSelected = result[0];
+                else
+                    PNJSelected = null;
+
+                if (PNJSelected != null)
+                {
+
+                    champion.ObjectifListe = PathFinding.TrouverChemin(champion.PositionTile, PNJSelected.PositionTile, Map.Taille, new List<Unite> { }, Map.unitesStatic, true);
+                    champion.ObjectifListe.RemoveAt(champion.ObjectifListe.Count - 1);
+                }
+            }
+            Interface.DrawDialogue = PNJSelected != null && Outil.DistancePoints(champion.PositionTile, PNJSelected.PositionTile) <= 40;
+            return Interface.DrawDialogue;
         }
 
         public bool OnInventory()

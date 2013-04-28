@@ -18,6 +18,8 @@ namespace CrystalGate
         public static List<Texture2D> boutons;
         public static List<Texture2D> Map;
         public static List<Texture2D> projectiles;
+        // UI
+        public static Texture2D Dialogue;
 
         public static void Initialize(ContentManager content)
         {
@@ -37,6 +39,9 @@ namespace CrystalGate
             boutons = new List<Texture2D> { content.Load<Texture2D>("Boutons/Explosion"), content.Load<Texture2D>("Boutons/Soin"), content.Load<Texture2D>("Boutons/Invisibility"), content.Load<Texture2D>("Boutons/PotionDeVie"), content.Load<Texture2D>("Boutons/PotionMana"), content.Load<Texture2D>("Boutons/BloodLust"), content.Load<Texture2D>("Boutons/EpeeSolari"), content.Load<Texture2D>("Boutons/BottesDacier"), content.Load<Texture2D>("Boutons/Epaulieres"), content.Load<Texture2D>("Boutons/GantsDeDevotion"), content.Load<Texture2D>("Boutons/HelmutPurple"), content.Load<Texture2D>("Boutons/RingLionHead") };
             projectiles = new List<Texture2D> { content.Load<Texture2D>("Projectiles/arrow"), content.Load<Texture2D>("Projectiles/axe"), content.Load<Texture2D>("Projectiles/fireball") };
             Map.Add(content.Load<Texture2D>("summertiles"));
+
+            // UI
+            Dialogue = content.Load<Texture2D>("blank");
         }
     }
 }

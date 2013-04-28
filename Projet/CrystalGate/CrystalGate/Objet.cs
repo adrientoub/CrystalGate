@@ -15,33 +15,34 @@ namespace CrystalGate
 {
     public class Objet
     {
-        public Texture2D Sprite { get; set; }
-        public Texture2D ProjectileSprite { get; set; }
-        public Projectile Projectile { get; set; }
-        public Vector2 PositionTile { get; set; }
-        public Body body { get; set; }
-        public bool isAChamp { get; set; }
-        public bool isInvisible { get; set; }
+        public Texture2D Sprite;
+        public Texture2D ProjectileSprite;
+        public Projectile Projectile;
+        public Vector2 PositionTile;
+        public Body body;
+        public bool isAChamp;
+        public bool isInvisible;
+        public bool isApnj;
 
-        public List<Vector2> Animation { get; set; }
-        public Vector2 Tiles { get; set; }
+        public List<Vector2> Animation;
+        public Vector2 Tiles;
 
-        protected Rectangle SpritePosition { get; set; }
-        protected int AnimationCurrent { get; set; }
+        protected Rectangle SpritePosition;
+        protected int AnimationCurrent;
 
         protected const int AnimationLimite = 5;
         public const int suivrelimite = 20;
         public int suivreactuel = 20;
 
-        protected Direction direction { get; set; }
-        protected bool FlipH { get; set; }
+        protected Direction direction;
+        protected bool FlipH;
         public float Scale = 1;
-        public bool Mort { get; set; }
-        public List<Noeud> ObjectifListe { get; set; }
+        public bool Mort;
+        public List<Noeud> ObjectifListe;
 
-        public float LastAttack { get; set; }
-        public Unite OlduniteAttacked { get; set; }
-        public Unite uniteAttacked { get; set; }
+        public float LastAttack;
+        public Unite OlduniteAttacked;
+        public Unite uniteAttacked;
 
         public Objet(Vector2 Position)
         {

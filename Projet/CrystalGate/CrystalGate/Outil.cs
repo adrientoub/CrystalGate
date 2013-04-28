@@ -172,10 +172,9 @@ namespace CrystalGate
             EffetSonore.InitEffects();
         }
 
-        public static string Normalize(string description)
+        public static string Normalize(int maxParLigne, string description)
         {
             string rendu = "";
-            int maxParLigne = 30;
 
             int i = 0;
             string[] descriptionWords = description.Split(new char[] { ' ' });

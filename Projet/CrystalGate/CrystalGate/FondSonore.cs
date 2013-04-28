@@ -19,7 +19,7 @@ namespace CrystalGate
         };
         static Song[] _musiqueDeFond = new Song[_musicList.Length];
         static int _playingNow = 0;
-        public static float volume = 0.5f;
+        public static float volume = 0.1f;
         static bool isLoaded = false;
 
 

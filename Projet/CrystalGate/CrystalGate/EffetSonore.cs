@@ -17,7 +17,7 @@ namespace CrystalGate
         static bool[] isPlaying = new bool[nbSonSimult];
         static TimeSpan[] duree = new TimeSpan[nbSonSimult];
         int id;
-        public static float volume = 0.5f;
+        public static float volume = 0.1f;
         static bool hasHP;
 
         static public void InitEffects()
