@@ -10,10 +10,10 @@ namespace CrystalGate
     public class RingLionHead : Stuff
     {
 
-        public RingLionHead(Vector2 position, PackTexture pack)
-            : base(position, pack)
+        public RingLionHead(Unite unite, Vector2 position)
+            : base(unite, position)
         {
-            Icone = pack.boutons[11];
+            Icone = PackTexture.boutons[11];
             type = Type.Anneau;
             VieBonus = 50;
             DommagesBonus = 50;

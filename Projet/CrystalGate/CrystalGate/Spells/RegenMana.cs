@@ -18,13 +18,13 @@ namespace CrystalGate
                 CoutMana = 500;
             else
                 CoutMana = 0;
-            Animation = unite.packAnimation.Soin();
-            AnimationReset = unite.packAnimation.Soin();
+            Animation = PackAnimation.Soin();
+            AnimationReset = PackAnimation.Soin();
             Tiles = new Vector2(180 / 5, 35);
 
             NeedUnPoint = false;
-            SpriteBouton = unite.packTexture.boutons[2];
-            SpriteEffect = unite.packTexture.sorts[2];
+            SpriteBouton = PackTexture.boutons[2];
+            SpriteEffect = PackTexture.sorts[2];
             sonSort = new EffetSonore(4);
         }
 
@@ -49,7 +49,7 @@ namespace CrystalGate
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(SpriteEffect, unite.PositionTile * unite.Map.TailleTiles, SpritePosition, Color.White, 0f, new Vector2(Tiles.X / 2, Tiles.Y / 2), 1f, SpriteEffects.None, 0);
+            spriteBatch.Draw(SpriteEffect, unite.PositionTile * Map.TailleTiles, SpritePosition, Color.White, 0f, new Vector2(Tiles.X / 2, Tiles.Y / 2), 1f, SpriteEffects.None, 0);
         }
     }
 }

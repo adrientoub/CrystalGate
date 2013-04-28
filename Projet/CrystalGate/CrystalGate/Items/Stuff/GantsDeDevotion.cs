@@ -10,10 +10,10 @@ namespace CrystalGate
     public class GantsDeDevotion : Stuff
     {
 
-        public GantsDeDevotion(Vector2 position, PackTexture pack)
-            : base(position, pack)
+        public GantsDeDevotion(Unite unite, Vector2 position)
+            : base(unite, position)
         {
-            Icone = pack.boutons[9];
+            Icone = PackTexture.boutons[9];
             type = Type.Gants;
             VieBonus = 50;
             DommagesBonus = 50;

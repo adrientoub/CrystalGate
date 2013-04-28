@@ -11,13 +11,13 @@ namespace CrystalGate
     public class Troll : Unite
     {
 
-        public Troll(Vector2 Position, Map map, PackTexture packTexture, int Level = 1)
-            : base(Position, map, packTexture, Level)
+        public Troll(Vector2 Position, int Level = 1)
+            : base(Position, Level)
         {
             // Graphique
-            Sprite = packTexture.unites[3];
+            Sprite = PackTexture.unites[3];
             Tiles = new Vector2( 311 / 5, 620 / 11);
-            ProjectileSprite = packTexture.projectiles[1];
+            ProjectileSprite = PackTexture.projectiles[1];
 
             // Statistiques
             Vie = VieMax = 200;

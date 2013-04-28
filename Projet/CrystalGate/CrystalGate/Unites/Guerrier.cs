@@ -11,11 +11,11 @@ namespace CrystalGate
     public class Guerrier : Unite
     {
 
-        public Guerrier(Vector2 Position, Map map, PackTexture packTexture, int Level = 1)
-            : base(Position, map, packTexture, Level)
+        public Guerrier(Vector2 Position, int Level = 1)
+            : base(Position, Level)
         {
             // Graphique
-            Sprite = packTexture.unites[6];
+            Sprite = PackTexture.unites[6];
             Tiles = new Vector2(530 / 5, 930 / 11);
 
             // Statistiques

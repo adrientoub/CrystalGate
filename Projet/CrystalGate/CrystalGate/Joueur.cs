@@ -122,7 +122,7 @@ namespace CrystalGate
                 {
                     float distanceInit = 9000;
                     Unite focus = null;
-                    foreach (Unite u in champion.Map.unites)
+                    foreach (Unite u in Map.unites)
                     {
                         float distance = Outil.DistanceUnites(champion, u);
 
@@ -147,10 +147,10 @@ namespace CrystalGate
         public void DonnerOrdreDeplacer()
         {
             isRoaming = false;
-            Vector2 ObjectifPoint = new Vector2(camera.Position.X + Interface.mouse.X, camera.Position.Y + Interface.mouse.Y) / champion.Map.TailleTiles;
+            Vector2 ObjectifPoint = new Vector2(camera.Position.X + Interface.mouse.X, camera.Position.Y + Interface.mouse.Y) / Map.TailleTiles;
             ObjectifPoint = new Vector2((int)ObjectifPoint.X, (int)ObjectifPoint.Y);
-                
-            List<Noeud> chemin = PathFinding.TrouverChemin(champion.PositionTile, ObjectifPoint, champion.Map.Taille, new List<Unite> { }, champion.Map.unitesStatic, false);
+
+            List<Noeud> chemin = PathFinding.TrouverChemin(champion.PositionTile, ObjectifPoint, Map.Taille, new List<Unite> { }, Map.unitesStatic, false);
                 if (chemin != null)
                     champion.ObjectifListe = chemin;
                 champion.uniteAttacked = null;
@@ -159,16 +159,16 @@ namespace CrystalGate
         public bool DonnerOrdreAttaquer()
         {
             isRoaming = false;
-            Vector2 ObjectifPoint = new Vector2(camera.Position.X + Interface.mouse.X, camera.Position.Y + Interface.mouse.Y) / champion.Map.TailleTiles;
+            Vector2 ObjectifPoint = new Vector2(camera.Position.X + Interface.mouse.X, camera.Position.Y + Interface.mouse.Y) / Map.TailleTiles;
             ObjectifPoint = new Vector2((int)ObjectifPoint.X, (int)ObjectifPoint.Y);
-            foreach(Unite u in champion.Map.unites)
+            foreach (Unite u in Map.unites)
                 if(u != champion && Outil.DistancePoints(ObjectifPoint, u .PositionTile) <= 64)
                 {
                     if (true)
                     {
                         //champion.Attaquer(u);
                         champion.uniteAttacked = u;
-                        List<Noeud> chemin = PathFinding.TrouverChemin(champion.PositionTile, ObjectifPoint, champion.Map.Taille, new List<Unite> { }, champion.Map.unitesStatic, false);
+                        List<Noeud> chemin = PathFinding.TrouverChemin(champion.PositionTile, ObjectifPoint, Map.Taille, new List<Unite> { }, Map.unitesStatic, false);
                         if (chemin != null)
                             champion.ObjectifListe = chemin;
                         return true;
@@ -206,15 +206,15 @@ namespace CrystalGate
             if (Interface.mouse.Y <= 1)
                 vec.Y -= vitesse;
 
-            // Si on sort de la map
-            if (camera.Position.X > champion.Map.Taille.X * champion.Map.TailleTiles.X - width)
-                camera.Position = new Vector2(champion.Map.Taille.X * champion.Map.TailleTiles.X - width, camera.Position.Y);
+            // Si on sort de la Map
+            if (camera.Position.X > Map.Taille.X * Map.TailleTiles.X - width)
+                camera.Position = new Vector2(Map.Taille.X * Map.TailleTiles.X - width, camera.Position.Y);
             if (camera.Position.X < 0)
                 camera.Position = new Vector2(0, camera.Position.Y);
             if (camera.Position.Y < 0)
                 camera.Position = new Vector2(camera.Position.X, 0);
-            if (camera.Position.Y > champion.Map.Taille.Y * champion.Map.TailleTiles.Y - height + Interface.CadrePosition.Height)
-                camera.Position = new Vector2(camera.Position.X, champion.Map.Taille.Y * champion.Map.TailleTiles.Y - height + Interface.CadrePosition.Height);
+            if (camera.Position.Y > Map.Taille.Y * Map.TailleTiles.Y - height + Interface.CadrePosition.Height)
+                camera.Position = new Vector2(camera.Position.X, Map.Taille.Y * Map.TailleTiles.Y - height + Interface.CadrePosition.Height);
             
             //Update de la position de la caméra et de l'interface
             camera.Position = new Vector2(camera.Position.X, camera.Position.Y) + vec;
@@ -223,10 +223,10 @@ namespace CrystalGate
 
         public bool CurseurCheck() // Renvoie vrai si le curseur est sur un méchant :p
         {
-            Vector2 ObjectifPoint = new Vector2(camera.Position.X + Interface.mouse.X, camera.Position.Y + Interface.mouse.Y) / champion.Map.TailleTiles;
+            Vector2 ObjectifPoint = new Vector2(camera.Position.X + Interface.mouse.X, camera.Position.Y + Interface.mouse.Y) / Map.TailleTiles;
             ObjectifPoint = new Vector2((int)ObjectifPoint.X, (int)ObjectifPoint.Y);
 
-            foreach (Unite u in champion.Map.unites)
+            foreach (Unite u in Map.unites)
                 if (champion != u && Outil.DistancePoints(ObjectifPoint, u.PositionTile) <= 32)
                 {
                     Interface.CurseurOffensif = true;

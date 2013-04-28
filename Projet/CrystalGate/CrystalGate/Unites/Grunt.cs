@@ -11,11 +11,11 @@ namespace CrystalGate
     public class Grunt : Unite
     {
 
-        public Grunt(Vector2 Position, Map map, PackTexture packTexture, int Level = 1)
-            : base(Position, map, packTexture, Level)
+        public Grunt(Vector2 Position, int Level = 1)
+            : base(Position, Level)
         {
             // Graphique
-            Sprite = packTexture.unites[1];
+            Sprite = PackTexture.unites[1];
             Tiles = new Vector2( 380 / 5, 620 / 11);
 
             // Statistiques
@@ -27,7 +27,7 @@ namespace CrystalGate
             Puissance = 5;
             Defense = 5;
             XPUnite = 200;
-            Inventory = new List<Item> { new PotionDeVie(Vector2.Zero, packTexture) };
+            Inventory = new List<Item> { new PotionDeVie(this, Vector2.Zero) };
 
             // Sons
             effetUniteAttaque = new EffetSonore(2);

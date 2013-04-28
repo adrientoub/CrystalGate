@@ -11,11 +11,11 @@ namespace CrystalGate
     public class Cavalier : Unite
     {
 
-        public Cavalier(Vector2 Position, Map map, PackTexture packTexture, int Level = 1)
-            : base(Position, map, packTexture, Level)
+        public Cavalier(Vector2 Position, int Level = 1)
+            : base(Position, Level)
         {
             // Graphique
-            Sprite = packTexture.unites[0];
+            Sprite = PackTexture.unites[0];
             Tiles = new Vector2(370 / 5, 835 / 11);
 
             // Statistiques
@@ -27,7 +27,7 @@ namespace CrystalGate
             Puissance = 10;
             Defense = 10;
             XPUnite = 200;
-            Inventory = new List<Item> { new PotionDeVie(Vector2.Zero, packTexture) };
+            Inventory = new List<Item> { new PotionDeVie(this, Vector2.Zero) };
 
             // Sons
             effetUniteAttaque = new EffetSonore(0);

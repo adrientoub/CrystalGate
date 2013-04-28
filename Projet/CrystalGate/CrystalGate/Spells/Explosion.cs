@@ -19,13 +19,13 @@ namespace CrystalGate
             Cooldown = 2;
             Ticks = 1;
             CoutMana = 10;
-            Animation = unite.packAnimation.Explosion();
-            AnimationReset = unite.packAnimation.Explosion();
+            Animation = PackAnimation.Explosion();
+            AnimationReset = PackAnimation.Explosion();
             Tiles = new Vector2(320 / 5, 320 / 5);
 
             NeedUnPoint = true;
-            SpriteBouton = unite.packTexture.boutons[0];
-            SpriteEffect = unite.packTexture.sorts[0];
+            SpriteBouton = PackTexture.boutons[0];
+            SpriteEffect = PackTexture.sorts[0];
             sonSort = new EffetSonore(5);
 
             description1 = new Text("DescriptionExplosion1");
@@ -38,7 +38,7 @@ namespace CrystalGate
             Animer();
             if (TickCurrent < Ticks)
             {
-                foreach (Unite u in unite.Map.unites)
+                foreach (Unite u in Map.unites)
                 {
                     float distance = Outil.DistancePoints(this.Point, u.PositionTile);
                     if (u != unite && distance <= Portée)
@@ -53,7 +53,7 @@ namespace CrystalGate
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(SpriteEffect, Point * unite.Map.TailleTiles, SpritePosition, Color.White, 0f, new Vector2(Tiles.X / 2, Tiles.Y / 2), 1f, SpriteEffects.None, 0);
+            spriteBatch.Draw(SpriteEffect, Point * Map.TailleTiles, SpritePosition, Color.White, 0f, new Vector2(Tiles.X / 2, Tiles.Y / 2), 1f, SpriteEffects.None, 0);
         }
 
         public override string DescriptionSpell()

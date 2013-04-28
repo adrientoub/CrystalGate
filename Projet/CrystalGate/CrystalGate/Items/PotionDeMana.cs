@@ -9,15 +9,16 @@ namespace CrystalGate
 {
     public class PotionDeMana : Item
     {
-        public PotionDeMana(Vector2 position, PackTexture pack)
-            : base(position, pack)
+        public PotionDeMana(Unite unite, Vector2 position)
+            : base(unite, position)
         {
-            Icone = pack.boutons[4];
+            Icone = PackTexture.boutons[4];
+            spell = new RegenMana(unite, false);
         }
 
         public override void Effet(Unite unite)
         {
-            spell = new RegenMana(unite, false);
+
         }
     }
 }

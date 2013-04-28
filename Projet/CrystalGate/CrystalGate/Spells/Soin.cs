@@ -21,13 +21,13 @@ namespace CrystalGate
                 CoutMana = 15;
             else
                 CoutMana = 0;
-            Animation = unite.packAnimation.Soin();
-            AnimationReset = unite.packAnimation.Soin();
+            Animation = PackAnimation.Soin();
+            AnimationReset = PackAnimation.Soin();
             Tiles = new Vector2(180 / 5, 35);
 
             NeedUnPoint = false;
-            SpriteBouton = unite.packTexture.boutons[1];
-            SpriteEffect = unite.packTexture.sorts[1];
+            SpriteBouton = PackTexture.boutons[1];
+            SpriteEffect = PackTexture.sorts[1];
             sonSort = new EffetSonore(4);
 
             description1 = new Text("DescriptionSoin1");
@@ -55,7 +55,7 @@ namespace CrystalGate
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(SpriteEffect, unite.PositionTile * unite.Map.TailleTiles, SpritePosition, Color.White, 0f, new Vector2(Tiles.X / 2, Tiles.Y / 2), 1f, SpriteEffects.None, 0);
+            spriteBatch.Draw(SpriteEffect, unite.PositionTile * Map.TailleTiles, SpritePosition, Color.White, 0f, new Vector2(Tiles.X / 2, Tiles.Y / 2), 1f, SpriteEffects.None, 0);
         }
 
         public override string DescriptionSpell()

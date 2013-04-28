@@ -10,10 +10,10 @@ namespace CrystalGate
     public class HelmetPurple : Stuff
     {
 
-        public HelmetPurple(Vector2 position, PackTexture pack)
-            : base(position, pack)
+        public HelmetPurple(Unite unite, Vector2 position)
+            : base(unite, position)
         {
-            Icone = pack.boutons[10];
+            Icone = PackTexture.boutons[10];
             type = Type.Casque;
             VieBonus = 50;
             DommagesBonus = 50;

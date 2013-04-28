@@ -11,13 +11,13 @@ namespace CrystalGate
     public class Demon : Unite
     {
 
-        public Demon(Vector2 Position, Map map, PackTexture packTexture, int Level = 1)
-            : base(Position, map, packTexture, Level)
+        public Demon(Vector2 Position, int Level = 1)
+            : base(Position, Level)
         {
             // Graphique
-            Sprite = packTexture.unites[4];
+            Sprite = PackTexture.unites[4];
             Tiles = new Vector2( 385 / 5, 840 / 11);
-            ProjectileSprite = packTexture.projectiles[2];
+            ProjectileSprite = PackTexture.projectiles[2];
 
             // Statistiques
             Vie = VieMax = 200;
@@ -29,7 +29,7 @@ namespace CrystalGate
             Defense = 5;
             IsRanged = true;
             XPUnite = 200;
-            Inventory = new List<Item> { new PotionDeMana(Vector2.Zero, packTexture) };
+            Inventory = new List<Item> { new PotionDeMana(this, Vector2.Zero) };
 
             // Sons
             effetUniteAttaque = new EffetSonore(8);

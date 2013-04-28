@@ -8,40 +8,40 @@ namespace CrystalGate
 {
     public class PathFinding
     {
-        public static Noeud[,] Initialiser(Noeud[,] map, Vector2 taille, Vector2 arrivee, List<Unite> unites)
+        public static Noeud[,] Initialiser(Noeud[,] Map, Vector2 taille, Vector2 arrivee, List<Unite> unites)
         {
             // Prend en compte les unites
                 foreach (Unite o in unites)
                     if (o != null)
-                        if (map[(int)o.PositionTile.X, (int)o.PositionTile.Y] == null)
-                            map[(int)o.PositionTile.X, (int)o.PositionTile.Y] = new Noeud(o.PositionTile, false, 1);
+                        if (Map[(int)o.PositionTile.X, (int)o.PositionTile.Y] == null)
+                            Map[(int)o.PositionTile.X, (int)o.PositionTile.Y] = new Noeud(o.PositionTile, false, 1);
             
             // Remplis les cases qui sont "marchables"
                 AForge.Parallel.For(0, (int)taille.Y, delegate(int j)
                         {
                             for (int i = 0; i < taille.X; i++)
-                                if (map[i, j] == null)
-                                        map[i, j] = new Noeud(new Vector2(i, j), true, GetHeuristic(arrivee, new Vector2(i, j)));
+                                if (Map[i, j] == null)
+                                        Map[i, j] = new Noeud(new Vector2(i, j), true, GetHeuristic(arrivee, new Vector2(i, j)));
                         });
         
-            return map;
+            return Map;
         }
         // Aide à deboguer
-        public static string Draw(Noeud[,] map)
+        public static string Draw(Noeud[,] Map)
         {
-            string mapString = "";
-            for (int j = 0; j < map.GetLength(1); j++)
+            string MapString = "";
+            for (int j = 0; j < Map.GetLength(1); j++)
             {
-                for (int i = 0; i < map.GetLength(0); i++)
-                    if (map[i,j].IsWalkable)
-                        mapString += " ";
+                for (int i = 0; i < Map.GetLength(0); i++)
+                    if (Map[i,j].IsWalkable)
+                        MapString += " ";
                     else
-                        mapString += "X";
+                        MapString += "X";
 
-                mapString += "\n";
+                MapString += "\n";
             }
-            mapString += "\n";
-            return mapString;
+            MapString += "\n";
+            return MapString;
         }
 
         static int GetHeuristic(Vector2 depart, Vector2 arrivee)
@@ -60,71 +60,71 @@ namespace CrystalGate
             return result;
         }
 
-        static List<Noeud> Voisins(Noeud current, Noeud[,] map, bool enableDiagonales)
+        static List<Noeud> Voisins(Noeud current, Noeud[,] Map, bool enableDiagonales)
         {
             Noeud noeud = null;
             List<Noeud> voisins = new List<Noeud> { };
             // TOP
-            if (current.Position.Y - 1 >= 0 && map[(int)current.Position.X, (int)current.Position.Y - 1].IsWalkable)
+            if (current.Position.Y - 1 >= 0 && Map[(int)current.Position.X, (int)current.Position.Y - 1].IsWalkable)
             {
-                noeud = map[(int)current.Position.X, (int)current.Position.Y - 1];
+                noeud = Map[(int)current.Position.X, (int)current.Position.Y - 1];
                 voisins.Add(noeud);
             }
             // RIGHT
-            if (current.Position.X + 1 < map.GetLength(0) && map[(int)current.Position.X + 1, (int)current.Position.Y].IsWalkable)
+            if (current.Position.X + 1 < Map.GetLength(0) && Map[(int)current.Position.X + 1, (int)current.Position.Y].IsWalkable)
             {
-                noeud = map[(int)current.Position.X + 1, (int)current.Position.Y];
+                noeud = Map[(int)current.Position.X + 1, (int)current.Position.Y];
                 voisins.Add(noeud);
             }
             // BOT
-            if (current.Position.Y + 1 < map.GetLength(1) && map[(int)current.Position.X, (int)current.Position.Y + 1].IsWalkable)
+            if (current.Position.Y + 1 < Map.GetLength(1) && Map[(int)current.Position.X, (int)current.Position.Y + 1].IsWalkable)
             {
-                noeud = map[(int)current.Position.X, (int)current.Position.Y + 1];
+                noeud = Map[(int)current.Position.X, (int)current.Position.Y + 1];
                 voisins.Add(noeud);
             }
             // LEFT
-            if (current.Position.X - 1 >= 0 && map[(int)current.Position.X - 1, (int)current.Position.Y].IsWalkable)
+            if (current.Position.X - 1 >= 0 && Map[(int)current.Position.X - 1, (int)current.Position.Y].IsWalkable)
             {
-                noeud = map[(int)current.Position.X - 1, (int)current.Position.Y];
+                noeud = Map[(int)current.Position.X - 1, (int)current.Position.Y];
                 voisins.Add(noeud);
             }
                 // TOP LEFT
             if (current.Position.Y - 1 >= 0 && current.Position.X - 1 >= 0 
-                && map[(int)current.Position.X - 1, (int)current.Position.Y - 1].IsWalkable 
-                && map[(int)current.Position.X - 1, (int)current.Position.Y].IsWalkable
-                && map[(int)current.Position.X, (int)current.Position.Y - 1].IsWalkable)
+                && Map[(int)current.Position.X - 1, (int)current.Position.Y - 1].IsWalkable 
+                && Map[(int)current.Position.X - 1, (int)current.Position.Y].IsWalkable
+                && Map[(int)current.Position.X, (int)current.Position.Y - 1].IsWalkable)
                 {
-                    noeud = map[(int)current.Position.X - 1, (int)current.Position.Y - 1];
+                    noeud = Map[(int)current.Position.X - 1, (int)current.Position.Y - 1];
                     noeud.CoutF -= 1;
                     voisins.Add(noeud);
                 }
                 // TOP RIGHT
-                if (current.Position.Y - 1 >= 0 && current.Position.X + 1 < map.GetLength(0) 
-                    && map[(int)current.Position.X + 1, (int)current.Position.Y - 1].IsWalkable
-                    && map[(int)current.Position.X, (int)current.Position.Y - 1].IsWalkable
-                    && map[(int)current.Position.X + 1, (int)current.Position.Y].IsWalkable)
+                if (current.Position.Y - 1 >= 0 && current.Position.X + 1 < Map.GetLength(0) 
+                    && Map[(int)current.Position.X + 1, (int)current.Position.Y - 1].IsWalkable
+                    && Map[(int)current.Position.X, (int)current.Position.Y - 1].IsWalkable
+                    && Map[(int)current.Position.X + 1, (int)current.Position.Y].IsWalkable)
                 {
-                    noeud = map[(int)current.Position.X + 1, (int)current.Position.Y - 1];
+                    noeud = Map[(int)current.Position.X + 1, (int)current.Position.Y - 1];
                     noeud.CoutF -= 1;
                     voisins.Add(noeud);
                 }
                 // BOT LEFT
-                if (current.Position.X - 1 >= 0 && current.Position.Y + 1 < map.GetLength(1) 
-                    && map[(int)current.Position.X - 1, (int)current.Position.Y + 1].IsWalkable
-                    && map[(int)current.Position.X - 1, (int)current.Position.Y].IsWalkable
-                    && map[(int)current.Position.X, (int)current.Position.Y + 1].IsWalkable)
+                if (current.Position.X - 1 >= 0 && current.Position.Y + 1 < Map.GetLength(1) 
+                    && Map[(int)current.Position.X - 1, (int)current.Position.Y + 1].IsWalkable
+                    && Map[(int)current.Position.X - 1, (int)current.Position.Y].IsWalkable
+                    && Map[(int)current.Position.X, (int)current.Position.Y + 1].IsWalkable)
                 {
-                    noeud = map[(int)current.Position.X - 1, (int)current.Position.Y + 1];
+                    noeud = Map[(int)current.Position.X - 1, (int)current.Position.Y + 1];
                     noeud.CoutF -= 1;
                     voisins.Add(noeud);
                 }
                 // BOT RIGHT
-                if (current.Position.X + 1 < map.GetLength(0) && current.Position.Y + 1 < map.GetLength(1) 
-                    && map[(int)current.Position.X + 1, (int)current.Position.Y + 1].IsWalkable
-                    && map[(int)current.Position.X, (int)current.Position.Y + 1].IsWalkable
-                    && map[(int)current.Position.X + 1, (int)current.Position.Y].IsWalkable)
+                if (current.Position.X + 1 < Map.GetLength(0) && current.Position.Y + 1 < Map.GetLength(1) 
+                    && Map[(int)current.Position.X + 1, (int)current.Position.Y + 1].IsWalkable
+                    && Map[(int)current.Position.X, (int)current.Position.Y + 1].IsWalkable
+                    && Map[(int)current.Position.X + 1, (int)current.Position.Y].IsWalkable)
                 {
-                    noeud = map[(int)current.Position.X + 1, (int)current.Position.Y + 1];
+                    noeud = Map[(int)current.Position.X + 1, (int)current.Position.Y + 1];
                     noeud.CoutF -= 1;
                     voisins.Add(noeud);
                 }
@@ -173,16 +173,16 @@ namespace CrystalGate
 
         public static List<Noeud> TrouverChemin(Vector2 depart, Vector2 arrivee, Vector2 taille, List<Unite> unites, Noeud[,] batiments, bool champion)
         {
-            Noeud[,] map = (Noeud[,])batiments.Clone(); // INITIALISATION DU POIDS DES NOEUDS ET DES OBSTACLES
-            Initialiser(map, taille, arrivee, unites);
+            Noeud[,] Map = (Noeud[,])batiments.Clone(); // INITIALISATION DU POIDS DES NOEUDS ET DES OBSTACLES
+            Initialiser(Map, taille, arrivee, unites);
             List<Noeud> closedList = new List<Noeud> { };
 
-            List<Noeud> openList = new List<Noeud> { map[(int)depart.X,(int)depart.Y] };
+            List<Noeud> openList = new List<Noeud> { Map[(int)depart.X,(int)depart.Y] };
 
-            if (arrivee.X >= 0 && arrivee.Y >= 0 && arrivee.X < taille.X && arrivee.Y < taille.Y && map[(int)arrivee.X, (int)arrivee.Y].IsWalkable) // SI ON NE SORT PAS DE LA MAP ET QUE L'ON PEUT MARCHER SUR LE POINT D'ARRIVEE
+            if (arrivee.X >= 0 && arrivee.Y >= 0 && arrivee.X < taille.X && arrivee.Y < taille.Y && Map[(int)arrivee.X, (int)arrivee.Y].IsWalkable) // SI ON NE SORT PAS DE LA Map ET QUE L'ON PEUT MARCHER SUR LE POINT D'ARRIVEE
             {
-                Noeud noeudDepart = map[(int)depart.X, (int)depart.Y];
-                Noeud noeudArrivee = map[(int)arrivee.X, (int)arrivee.Y];
+                Noeud noeudDepart = Map[(int)depart.X, (int)depart.Y];
+                Noeud noeudArrivee = Map[(int)arrivee.X, (int)arrivee.Y];
 
                 noeudDepart.CoutG = 0;
                 noeudDepart.CoutF = noeudDepart.CoutG + GetHeuristic(depart, arrivee);
@@ -202,7 +202,7 @@ namespace CrystalGate
                     openList.RemoveAt(0);
                     closedList.Add(current);
 
-                    List<Noeud> voisins = Voisins(current, map, champion);
+                    List<Noeud> voisins = Voisins(current, Map, champion);
                     foreach (Noeud v in voisins)
                         if (NoeudInList(v, closedList))
                             continue;

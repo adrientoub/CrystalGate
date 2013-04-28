@@ -10,10 +10,10 @@ namespace CrystalGate
     public class BottesDacier : Stuff
     {
 
-        public BottesDacier(Vector2 position, PackTexture pack)
-            : base(position, pack)
+        public BottesDacier(Unite unite, Vector2 position)
+            : base(unite, position)
         {
-            Icone = pack.boutons[7];
+            Icone = PackTexture.boutons[7];
             type = Type.Bottes;
             VieBonus = 50;
             DommagesBonus = 50;

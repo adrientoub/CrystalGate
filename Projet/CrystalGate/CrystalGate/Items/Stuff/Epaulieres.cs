@@ -10,10 +10,10 @@ namespace CrystalGate
     public class Epaulieres : Stuff
     {
 
-        public Epaulieres(Vector2 position, PackTexture pack)
-            : base(position, pack)
+        public Epaulieres(Unite unite, Vector2 position)
+            : base(unite, position)
         {
-            Icone = pack.boutons[8];
+            Icone = PackTexture.boutons[8];
             type = Type.Epaulieres;
             VieBonus = 50;
             DommagesBonus = 50;

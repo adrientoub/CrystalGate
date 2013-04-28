@@ -17,10 +17,10 @@ namespace CrystalGate
         public int PuissanceBonus;
         public float VitesseBonus;
 
-        public Stuff(Vector2 position, PackTexture pack)
-            : base(position, pack)
+        public Stuff(Unite unite, Vector2 position)
+            : base(unite, position)
         {
-            Icone = pack.boutons[0];
+            Icone = PackTexture.boutons[0];
         }
 
         public void Equiper()

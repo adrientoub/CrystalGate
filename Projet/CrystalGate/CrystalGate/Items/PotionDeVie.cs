@@ -10,14 +10,15 @@ namespace CrystalGate
     public class PotionDeVie : Item
     {
 
-        public PotionDeVie(Vector2 position, PackTexture pack) : base(position, pack)
+        public PotionDeVie(Unite unite, Vector2 position) : base(unite, position)
         {
-            Icone = pack.boutons[3];
+            Icone = PackTexture.boutons[3];
+            spell = new Soin(unite, false);
         }
 
         public override void Effet(Unite unite)
         {
-            spell = new Soin(unite, false);
+
         }
     }
 }

@@ -24,8 +24,8 @@ namespace CrystalGate
             Tiles = new Vector2(320 / 5, 320 / 5);
 
             NeedUnPoint = false;
-            SpriteBouton = unite.packTexture.boutons[2];
-            SpriteEffect = unite.packTexture.sorts[0];
+            SpriteBouton = PackTexture.boutons[2];
+            SpriteEffect = PackTexture.sorts[0];
             sonSort = new EffetSonore(10);
             uniteFollowing = new List<Unite>();
 
@@ -40,7 +40,7 @@ namespace CrystalGate
                 unite.isInvisible = true;
                 if (TickCurrent == 0)
                 {
-                    foreach (Unite u in unite.Map.unites)
+                    foreach (Unite u in Map.unites)
                     {
                         if (u != unite && u.uniteAttacked == unite)
                         {

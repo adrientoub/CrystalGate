@@ -397,7 +397,7 @@ namespace CrystalGate
             // Affichage des spells
             for (int i = 0; i < joueur.champion.spells.Count; i++)
             {
-                if (joueur.champion.Map.gametime != null)
+                if (Map.gametime != null)
                 {
                     Color color;
                     if (joueur.champion.IsCastable(i))

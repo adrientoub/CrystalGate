@@ -19,18 +19,15 @@ namespace CrystalGate
         public Texture2D ProjectileSprite { get; set; }
         public Projectile Projectile { get; set; }
         public Vector2 PositionTile { get; set; }
-        public Map Map { get; set; }
         public Body body { get; set; }
         public bool isAChamp { get; set; }
         public bool isInvisible { get; set; }
 
         public List<Vector2> Animation { get; set; }
-        public PackTexture packTexture { get; set; }
         public Vector2 Tiles { get; set; }
 
         protected Rectangle SpritePosition { get; set; }
         protected int AnimationCurrent { get; set; }
-        public PackAnimation packAnimation { get; set; }
 
         protected const int AnimationLimite = 5;
         public const int suivrelimite = 20;
@@ -46,14 +43,13 @@ namespace CrystalGate
         public Unite OlduniteAttacked { get; set; }
         public Unite uniteAttacked { get; set; }
 
-        public Objet(Vector2 Position, Map Map, PackTexture packTexture)
+        public Objet(Vector2 Position)
         {
             // Général
-            this.Map = Map;
             this.ObjectifListe = new List<Noeud> { };
 
             // Physique
-            this.body = BodyFactory.CreateRectangle(this.Map.world, ConvertUnits.ToSimUnits(25), ConvertUnits.ToSimUnits(25), 100f);
+            this.body = BodyFactory.CreateRectangle(Map.world, ConvertUnits.ToSimUnits(25), ConvertUnits.ToSimUnits(25), 100f);
             this.body.Position = ConvertUnits.ToSimUnits(Position * Map.TailleTiles + new Vector2(16,16));
             this.body.IsStatic = false;
             this.body.OnCollision += new OnCollisionEventHandler(body_OnCollision);
@@ -62,10 +58,10 @@ namespace CrystalGate
             this.PositionTile = Position;
             
             // Graphique
-            this.Sprite = packTexture.blank;
+            this.Sprite = PackTexture.blank;
             this.Animation = new List<Vector2> { };
-            this.packTexture = packTexture;
-            this.packAnimation = new PackAnimation();
+
+
             this.direction = Direction.Bas;
             this.FlipH = false;
         }
@@ -79,7 +75,7 @@ namespace CrystalGate
                 if (objet1.ObjectifListe.Count > 0)
                 {
                     Vector2 position = new Vector2((int)(ConvertUnits.ToDisplayUnits(objet1.body.Position.X) / 32), (int)(ConvertUnits.ToDisplayUnits(objet1.body.Position.Y) / 32));
-                    List<Noeud> chemin = PathFinding.TrouverChemin(position, objet1.ObjectifListe[objet1.ObjectifListe.Count - 1].Position, objet1.Map.Taille, Map.unites, Map.unitesStatic, false);
+                    List<Noeud> chemin = PathFinding.TrouverChemin(position, objet1.ObjectifListe[objet1.ObjectifListe.Count - 1].Position, Map.Taille, Map.unites, Map.unitesStatic, false);
                     if (chemin != null)
                         objet1.ObjectifListe = chemin;
                 }
@@ -113,23 +109,23 @@ namespace CrystalGate
         {
             switch (direction)
             {
-                case Direction.Haut: Animation = packAnimation.StandHaut();
+                case Direction.Haut: Animation = PackAnimation.StandHaut();
                     break;
-                case Direction.Bas: Animation = packAnimation.StandBas();
+                case Direction.Bas: Animation = PackAnimation.StandBas();
                     break;
-                case Direction.Gauche: Animation = packAnimation.StandGauche();
+                case Direction.Gauche: Animation = PackAnimation.StandGauche();
                     break;
-                case Direction.Droite: Animation = packAnimation.StandDroite();
+                case Direction.Droite: Animation = PackAnimation.StandDroite();
                     break;
-                case Direction.BasDroite: Animation = packAnimation.StandDroite();
+                case Direction.BasDroite: Animation = PackAnimation.StandDroite();
                     break;
-                case Direction.BasGauche: Animation = packAnimation.StandDroite();
+                case Direction.BasGauche: Animation = PackAnimation.StandDroite();
                     break;
-                case Direction.HautDroite: Animation = packAnimation.StandDroite();
+                case Direction.HautDroite: Animation = PackAnimation.StandDroite();
                     break;
-                case Direction.HautGauche: Animation = packAnimation.StandDroite();
+                case Direction.HautGauche: Animation = PackAnimation.StandDroite();
                     break;
-                default: Animation = packAnimation.StandBas();
+                default: Animation = PackAnimation.StandBas();
                     break;
             }
         }

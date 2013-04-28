@@ -11,23 +11,23 @@ using FarseerPhysics.Factories;
 
 namespace CrystalGate
 {
-    public class Map
+    public static class Map
     {
-        Texture2D Sprite { get; set; }
-        public Vector2[,] Cellules { get; set; }
-        public Vector2 TailleTiles { get; set; }
-        public Vector2 Taille { get; set; }
-        public List<Joueur> joueurs;
-        public List<Unite> unites;
-        public List<Effet> effets; // effets (cadavres) qui seront draw
-        public List<Item> items;
-        public List<Wave> waves;
-        public Noeud[,] unitesStatic { get; set; }
-        public World world { get; set; }
-        Body boundary; // Les limites du monde physique
-        public GameTime gametime { get; set; }
+        static Texture2D Sprite;
+        public static Vector2[,] Cellules;
+        public static Vector2 TailleTiles;
+        public static Vector2 Taille;
+        public static List<Joueur> joueurs;
+        public static List<Unite> unites;
+        public static List<Effet> effets; // effets (cadavres) qui seront draw
+        public static List<Item> items;
+        public static List<Wave> waves;
+        public static Noeud[,] unitesStatic;
+        public static World world;
+        static Body boundary; // Les limites du monde physique
+        public static GameTime gametime;
 
-        public Map(Texture2D sprite, Vector2 taille, Vector2 tailleTiles)
+        public static void Initialize(Texture2D sprite, Vector2 taille, Vector2 tailleTiles)
         {
             Sprite = sprite;
             Cellules = new Vector2[(int)taille.X, (int)taille.Y];
@@ -49,9 +49,8 @@ namespace CrystalGate
 
         }
 
-        public void Update(List<Unite> unites, GameTime GT)
+        public static void Update(GameTime GT)
         {
-            this.unites = unites;
             Outil.RemoveDeadBodies(unites);
             gametime = GT;
             // Debug les unites qui attaquent des unites mortes
@@ -81,7 +80,7 @@ namespace CrystalGate
         }
 
 
-        public void Draw(SpriteBatch spriteBatch)
+        public static void Draw(SpriteBatch spriteBatch)
         {
             for (int i = 0; i < Cellules.GetLength(0); i++) //On parcourt les lignes du tableau
                 for (int j = 0; j < Cellules.GetLength(1); j++) //On parcourt les colonnes du tableau
@@ -93,7 +92,7 @@ namespace CrystalGate
         }
 
         // Utilisé pour creer le monde physique
-        private Vertices GetBounds()
+        private static Vertices GetBounds()
         {
             float width = ConvertUnits.ToSimUnits(Taille.X * TailleTiles.X);
             float height = ConvertUnits.ToSimUnits(Taille.Y * TailleTiles.Y);

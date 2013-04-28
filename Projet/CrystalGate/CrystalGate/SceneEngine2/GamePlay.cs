@@ -20,8 +20,6 @@ namespace CrystalGate.SceneEngine2
     {
         private ContentManager content;
         private SpriteFont gameFont; // Police d'ecriture
-        private PackTexture pack; // Toutes les textures
-        private Map map; // La map
         public static System.Diagnostics.Stopwatch timer;
 
         public bool isCoopPlay;
@@ -39,46 +37,38 @@ namespace CrystalGate.SceneEngine2
             gameFont = content.Load<SpriteFont>("Polices/gamefont");
 
             // Pack de texture (Contient toutes les sprites des unites et des sorts)
-            pack = new PackTexture(content.Load<Texture2D>("blank"));
-            pack.tresor = content.Load<Texture2D>("tresor");
-            pack.unites = new List<Texture2D> { content.Load<Texture2D>("Unites/knight"), content.Load<Texture2D>("Unites/grunt"), content.Load<Texture2D>("Unites/archer"), content.Load<Texture2D>("Unites/troll"), content.Load<Texture2D>("Unites/demon"), content.Load<Texture2D>("Unites/ogre"), content.Load<Texture2D>("Unites/champion") };
-            pack.sorts.Add(content.Load<Texture2D>("Spells/Explosion"));
-            pack.sorts.Add(content.Load<Texture2D>("Spells/Soin"));
-            pack.sorts.Add(content.Load<Texture2D>("Spells/ManaRegen"));
-            pack.boutons = new List<Texture2D> { content.Load<Texture2D>("Boutons/Explosion"), content.Load<Texture2D>("Boutons/Soin"), content.Load<Texture2D>("Boutons/Invisibility"), content.Load<Texture2D>("Boutons/PotionDeVie"), content.Load<Texture2D>("Boutons/PotionMana"), content.Load<Texture2D>("Boutons/BloodLust"), content.Load<Texture2D>("Boutons/EpeeSolari"), content.Load<Texture2D>("Boutons/BottesDacier"), content.Load<Texture2D>("Boutons/Epaulieres"), content.Load<Texture2D>("Boutons/GantsDeDevotion"), content.Load<Texture2D>("Boutons/HelmutPurple"), content.Load<Texture2D>("Boutons/RingLionHead") };
-            pack.projectiles = new List<Texture2D> { content.Load<Texture2D>("Projectiles/arrow"), content.Load<Texture2D>("Projectiles/axe"), content.Load<Texture2D>("Projectiles/fireball") };
-            pack.map.Add(content.Load<Texture2D>("summertiles"));
+            PackTexture.Initialize(content);
 
             // Chargement de la carte
-            Outil.OuvrirMap("level1", ref map, pack);
+            Outil.OuvrirMap("level1");
 
             // Chargement sons
             Outil.LoadSounds(_effetsSonores, content);
 
             // Ajout joueurs
-            map.joueurs.Add(new Joueur(new Guerrier(new Vector2(0, 9), map, pack)));
-            map.unites.Add(map.joueurs[0].champion);
+            Map.joueurs.Add(new Joueur(new Guerrier(new Vector2(0, 9))));
+            Map.unites.Add(Map.joueurs[0].champion);
 
             // Ajout Interface
-            UI Interface = new UI(map.joueurs[0], content.Load<Texture2D>("UI/barre des sorts"), curseur, content.Load<Texture2D>("UI/curseurRouge"), content.Load<Texture2D>("UI/GuerrierIcone"), content.Load<Texture2D>("UI/inventaire"), content.Load<Texture2D>("UI/Equipement"), content.Load<Texture2D>("blank"), SceneHandler.spriteBatch, gameFont, content.Load<SpriteFont>("Polices/SpellFont"));
-            map.joueurs[0].Interface = Interface;
+            UI Interface = new UI(Map.joueurs[0], content.Load<Texture2D>("UI/barre des sorts"), curseur, content.Load<Texture2D>("UI/curseurRouge"), content.Load<Texture2D>("UI/GuerrierIcone"), content.Load<Texture2D>("UI/inventaire"), content.Load<Texture2D>("UI/Equipement"), content.Load<Texture2D>("blank"), SceneHandler.spriteBatch, gameFont, content.Load<SpriteFont>("Polices/SpellFont"));
+            Map.joueurs[0].Interface = Interface;
 
             Wave.waveNumber = 0;
             // La vague
-            PackWave packWave = new PackWave(map, pack, map.joueurs[0].champion);
-            map.waves.Add(packWave.Level1Wave1());
-            map.waves.Add(packWave.Level1Wave2());
-            map.waves.Add(packWave.Level1Wave3());
-            map.waves.Add(packWave.Level1Wave4());
+            PackWave packWave = new PackWave(Map.joueurs[0].champion);
+            Map.waves.Add(packWave.Level1Wave1());
+            Map.waves.Add(packWave.Level1Wave2());
+            Map.waves.Add(packWave.Level1Wave3());
+            Map.waves.Add(packWave.Level1Wave4());
             // Ajout des items
-            map.items.Add(new PotionDeVie(new Vector2(22, 24), pack));
-            map.items.Add(new PotionDeVie(new Vector2(23, 24), pack));
-            map.items.Add(new EpeeSolari(Vector2.One, pack));
-            map.items.Add(new GantsDeDevotion(Vector2.One, pack));
-            map.items.Add(new BottesDacier(Vector2.One, pack));
-            map.items.Add(new Epaulieres(Vector2.One, pack));
-            map.items.Add(new HelmetPurple(Vector2.One, pack));
-            map.items.Add(new RingLionHead(Vector2.One, pack));
+            Map.items.Add(new PotionDeVie(null, new Vector2(22, 24)));
+            Map.items.Add(new PotionDeVie(null, new Vector2(23, 24)));
+            Map.items.Add(new EpeeSolari(null, Vector2.One));
+            Map.items.Add(new GantsDeDevotion(null, Vector2.One));
+            Map.items.Add(new BottesDacier(null, Vector2.One));
+            Map.items.Add(new Epaulieres(null, Vector2.One));
+            Map.items.Add(new HelmetPurple(null, Vector2.One));
+            Map.items.Add(new RingLionHead(null, Vector2.One));
 
             timer = new System.Diagnostics.Stopwatch();
             timer.Start();
@@ -88,25 +78,25 @@ namespace CrystalGate.SceneEngine2
         {
             FondSonore.Update();
 
-            // On update les infos de la map
-            map.Update(map.unites, gameTime);
+            // On update les infos de la Map
+            Map.Update(gameTime);
             // On update les infos des items
-            foreach (Item i in map.items)
-                i.Update(map.unites);
+            foreach (Item i in Map.items)
+                i.Update(Map.unites);
             // On update les infos des unites
-            foreach (Unite u in map.unites)
-                u.Update(map.unites, map.effets);
+            foreach (Unite u in Map.unites)
+                u.Update(Map.unites, Map.effets);
             // On update les infos des joueurs
-            foreach (Joueur j in map.joueurs)
-                j.Update(map.unites);
+            foreach (Joueur j in Map.joueurs)
+                j.Update(Map.unites);
             // On update les effets sur la carte
-            foreach (Effet e in map.effets)
+            foreach (Effet e in Map.effets)
                 e.Update();
             // On update les infos des vagues
-            foreach (Wave w in map.waves)
-                w.Update(gameTime, map.joueurs[0].champion);
+            foreach (Wave w in Map.waves)
+                w.Update(gameTime, Map.joueurs[0].champion);
             // Update de la physique
-            map.world.Step(1 / 60f);
+            Map.world.Step(1 / 60f);
 
             if (SceneEngine2.BaseScene.keyboardState.IsKeyDown(Keys.Escape) && !SceneEngine2.BaseScene.oldKeyboardState.IsKeyDown(Keys.Escape))
             {
@@ -119,20 +109,20 @@ namespace CrystalGate.SceneEngine2
         public override void Draw(SpriteBatch spriteBatch)
         {
             CrystalGateGame.graphics.GraphicsDevice.Clear(ClearOptions.Target, Color.Black, 0, 0);
-            spriteBatch.Begin(0, null, null, null, null, null, map.joueurs[0].camera.CameraMatrix);
-            // DRAW MAP
-            map.Draw(spriteBatch);
+            spriteBatch.Begin(0, null, null, null, null, null, Map.joueurs[0].camera.CameraMatrix);
+            // DRAW Map
+            Map.Draw(spriteBatch);
             // DRAW EFFETS
-            foreach (Effet e in map.effets)
+            foreach (Effet e in Map.effets)
                 e.Draw(spriteBatch);
             // DRAW ITEMS
-            foreach (Item i in map.items)
-                spriteBatch.Draw(pack.tresor, i.Position * map.TailleTiles, Color.White);
+            foreach (Item i in Map.items)
+                spriteBatch.Draw(PackTexture.tresor, i.Position * Map.TailleTiles, Color.White);
             // DRAW UNITES
-            foreach (Unite o in map.unites)
+            foreach (Unite o in Map.unites)
                 o.Draw(spriteBatch);
             // DRAW INTERFACE
-            map.joueurs[0].Interface.Draw();
+            Map.joueurs[0].Interface.Draw();
             // DRAW STRINGS
             /**/
             spriteBatch.End();

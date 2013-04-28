@@ -24,8 +24,8 @@ namespace CrystalGate
             Tiles = new Vector2(320 / 5, 320 / 5);
 
             NeedUnPoint = false;
-            SpriteBouton = unite.packTexture.boutons[5];
-            SpriteEffect = unite.packTexture.sorts[0];
+            SpriteBouton = PackTexture.boutons[5];
+            SpriteEffect = PackTexture.sorts[0];
             sonSort = new EffetSonore(11);
             description = new Text("DescriptionFurieSanguinaire");
         }

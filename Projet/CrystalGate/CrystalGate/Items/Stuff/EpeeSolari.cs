@@ -10,10 +10,10 @@ namespace CrystalGate
     public class EpeeSolari : Stuff
     {
 
-        public EpeeSolari(Vector2 position, PackTexture pack)
-            : base(position, pack)
+        public EpeeSolari(Unite unite, Vector2 position)
+            : base(unite, position)
         {
-            Icone = pack.boutons[6];
+            Icone = PackTexture.boutons[6];
             type = Type.Arme;
             VieBonus = 50;
             DommagesBonus = 50;

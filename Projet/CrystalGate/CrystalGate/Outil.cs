@@ -56,19 +56,19 @@ namespace CrystalGate
             return u;
         }
 
-        public static void OuvrirMap(string MapName, ref Map map, PackTexture pack)
+        public static void OuvrirMap(string MapName)
         {
             // Read the file and display it line by line.
-            string mapString;
+            string MapString;
             if (CrystalGateGame.isTest)
-                mapString = "../../../Maps/" + MapName + ".txt";
+                MapString = "../../../Maps/" + MapName + ".txt";
             else
-                mapString = "Maps/" + MapName + ".txt";
+                MapString = "Maps/" + MapName + ".txt";
 
             string line;
             int longueur = 0;
             int hauteur = 0;
-            StreamReader file = new StreamReader(@mapString);
+            StreamReader file = new StreamReader(@MapString);
             // On établit la longueur et la hauteur
             while ((line = file.ReadLine()) != null)
             {
@@ -79,9 +79,9 @@ namespace CrystalGate
                 hauteur++;
             }
             // Creation de la carte
-            map = new Map(pack.map[0], new Vector2(longueur, hauteur), new Vector2(32, 32));
+            Map.Initialize(PackTexture.Map[0], new Vector2(longueur, hauteur), new Vector2(32, 32));
             // Reset
-            file = new StreamReader(@mapString);
+            file = new StreamReader(@MapString);
             int j = 0;
             while ((line = file.ReadLine()) != null)
             {
@@ -93,14 +93,14 @@ namespace CrystalGate
                     char[] splitchar2 = { ',' };
                     int x = int.Parse((tiles[i].Split(splitchar2))[0]);
                     int y = int.Parse((tiles[i].Split(splitchar2))[1]);
-                    map.Cellules[i, j] = new Vector2(x, y);
+                    Map.Cellules[i, j] = new Vector2(x, y);
                     // Si c'est une tile infranchissable
                     if (Outil.ProhibedTiles().Contains(new Vector2(x, y)))
                     {
                         // On ajoute l'obstacle au monde physique
-                        Body bodyTemp = BodyFactory.CreateRectangle(map.world, ConvertUnits.ToSimUnits(32), ConvertUnits.ToSimUnits(32), 100f);
-                        bodyTemp.Position = ConvertUnits.ToSimUnits(new Vector2(i, j) * map.TailleTiles + new Vector2(16, 16));
-                        map.unitesStatic[i, j] = new Noeud(new Vector2(i, j), false, 1);
+                        Body bodyTemp = BodyFactory.CreateRectangle(Map.world, ConvertUnits.ToSimUnits(32), ConvertUnits.ToSimUnits(32), 100f);
+                        bodyTemp.Position = ConvertUnits.ToSimUnits(new Vector2(i, j) * Map.TailleTiles + new Vector2(16, 16));
+                        Map.unitesStatic[i, j] = new Noeud(new Vector2(i, j), false, 1);
                     }
                 }
                 j++;
@@ -148,7 +148,7 @@ namespace CrystalGate
             pack.sorts.Add(content.Load<Texture2D>("Spells/Explosion"));
             pack.sorts.Add(content.Load<Texture2D>("Spells/Soin"));
             pack.boutons = new List<Texture2D> { content.Load<Texture2D>("Boutons/Explosion"), content.Load<Texture2D>("Boutons/Soin") };
-            pack.map.Add(content.Load<Texture2D>("summertiles"));
+            pack.Map.Add(content.Load<Texture2D>("summertiles"));
         }*/
 
         public static void LoadSounds(List<SoundEffect> listeSound,  ContentManager content)

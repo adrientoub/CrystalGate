@@ -75,8 +75,8 @@ namespace CrystalGate
 
         public static Random rand;
 
-        public Unite(Vector2 Position, Map map, PackTexture packTexture, int Level = 1)
-            : base(Position, map, packTexture)
+        public Unite(Vector2 Position, int Level = 1)
+            : base(Position)
         {
             // Constructeur par defaut d'une unité
             Vie = VieMax = 1;
@@ -94,7 +94,7 @@ namespace CrystalGate
             XPUnite = 0;
             this.Level = Level;
             // Graphique par defaut
-            Sprite = packTexture.blank;
+            Sprite = PackTexture.blank;
             Tiles = Vector2.One;
             color = Color.White; 
             
@@ -205,7 +205,7 @@ namespace CrystalGate
                 }
                 effetUniteDeath.Play();
                 effetUniteAttaque.Dispose();
-                effets.Add(new Effet(Sprite, ConvertUnits.ToDisplayUnits(body.Position), packAnimation.Mort(this), Tiles, 1));
+                effets.Add(new Effet(Sprite, ConvertUnits.ToDisplayUnits(body.Position), PackAnimation.Mort(this), Tiles, 1));
                 Map.world.RemoveBody(body);
                 Drop();
             }
@@ -334,23 +334,23 @@ namespace CrystalGate
                         if (angle >= Math.PI / 4 && angle <= 3 * Math.PI / 4)
                         {
                             direction = Direction.Haut;
-                            Animation = packAnimation.AttaquerHaut();
+                            Animation = PackAnimation.AttaquerHaut();
                         }
                         else if (angle >= -3 * Math.PI / 4 && angle <= -Math.PI / 4)
                         {
                             direction = Direction.Bas;
-                            Animation = packAnimation.AttaquerBas();
+                            Animation = PackAnimation.AttaquerBas();
                         }
                         else if (angle >= -Math.PI / 4 && angle <= Math.PI / 4)
                         {
                             direction = Direction.Gauche;
                             FlipH = true;
-                            Animation = packAnimation.AttaquerDroite();
+                            Animation = PackAnimation.AttaquerDroite();
                         }
                         else
                         {
                             direction = Direction.Droite;
-                            Animation = packAnimation.AttaquerDroite();
+                            Animation = PackAnimation.AttaquerDroite();
                         }
 
                     }
@@ -370,7 +370,7 @@ namespace CrystalGate
                     FlipH = true;
 
                     if (direction != Direction.HautGauche || Animation.Count == 0)
-                        Animation = packAnimation.HautDroite();
+                        Animation = PackAnimation.HautDroite();
                     direction = Direction.HautGauche;
                 }
                 // HAUT DROITE
@@ -380,7 +380,7 @@ namespace CrystalGate
                     FlipH = false;
 
                     if (direction != Direction.HautDroite || Animation.Count == 0)
-                        Animation = packAnimation.HautDroite();
+                        Animation = PackAnimation.HautDroite();
                     direction = Direction.HautDroite;
                 }
                 // BAS DROITE
@@ -390,7 +390,7 @@ namespace CrystalGate
                     FlipH = false;
 
                     if (direction != Direction.BasDroite || Animation.Count == 0)
-                        Animation = packAnimation.BasDroite();
+                        Animation = PackAnimation.BasDroite();
                     direction = Direction.BasDroite;
                 }
                 // BAS GAUCHE
@@ -400,7 +400,7 @@ namespace CrystalGate
                     FlipH = true;
 
                     if (direction != Direction.BasGauche || Animation.Count == 0)
-                        Animation = packAnimation.BasDroite();
+                        Animation = PackAnimation.BasDroite();
                     direction = Direction.BasGauche;
                 }
                 // GAUCHE
@@ -410,7 +410,7 @@ namespace CrystalGate
                     FlipH = true;
 
                     if (direction != Direction.Gauche || Animation.Count == 0)
-                        Animation = packAnimation.Droite();
+                        Animation = PackAnimation.Droite();
                     direction = Direction.Gauche;
                 }
                 // DROITE
@@ -420,7 +420,7 @@ namespace CrystalGate
                     FlipH = false;
 
                     if (direction != Direction.Droite || Animation.Count == 0)
-                        Animation = packAnimation.Droite();
+                        Animation = PackAnimation.Droite();
                     direction = Direction.Droite;
                 }
                 // HAUT
@@ -430,7 +430,7 @@ namespace CrystalGate
                     FlipH = false;
 
                     if (direction != Direction.Haut || Animation.Count == 0)
-                        Animation = packAnimation.Haut();
+                        Animation = PackAnimation.Haut();
                     direction = Direction.Haut;
                 }
                 // BAS
@@ -440,7 +440,7 @@ namespace CrystalGate
                     FlipH = false;
 
                     if (direction != Direction.Bas || Animation.Count == 0)
-                        Animation = packAnimation.Bas();
+                        Animation = PackAnimation.Bas();
                     direction = Direction.Bas;
                 }
                 else
@@ -524,7 +524,7 @@ namespace CrystalGate
             {
                 int largeur = 10;
                 int longueur = (int)((float)Vie / (float)VieMax * 50);
-                spriteBatch.Draw(packTexture.blank, ConvertUnits.ToDisplayUnits(body.Position) + new Vector2(0, -30), new Rectangle(0, 0, longueur, largeur), Color.Green, 0f, new Vector2(longueur / 2, largeur / 2), 1f, SpriteEffects.None, 0);
+                spriteBatch.Draw(PackTexture.blank, ConvertUnits.ToDisplayUnits(body.Position) + new Vector2(0, -30), new Rectangle(0, 0, longueur, largeur), Color.Green, 0f, new Vector2(longueur / 2, largeur / 2), 1f, SpriteEffects.None, 0);
 
             }
         }

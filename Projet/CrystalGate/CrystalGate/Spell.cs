@@ -46,8 +46,8 @@ namespace CrystalGate
             Tiles = Vector2.Zero;
 
             NeedUnPoint = false;
-            SpriteBouton = unite.packTexture.blank;
-            SpriteEffect = unite.packTexture.blank;
+            SpriteBouton = PackTexture.blank;
+            SpriteEffect = PackTexture.blank;
             sonSort = null;
         }
 
@@ -85,7 +85,7 @@ namespace CrystalGate
 
         public virtual void Begin(Vector2 p)
         {
-            LastCast = (float)unite.Map.gametime.TotalGameTime.TotalMilliseconds;
+            LastCast = (float)Map.gametime.TotalGameTime.TotalMilliseconds;
             ToDraw = true;
             TickCurrent = 0;
             sonSort.Play();

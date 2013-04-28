@@ -11,13 +11,13 @@ namespace CrystalGate
     public class Ogre : Unite
     {
 
-        public Ogre(Vector2 Position, Map map, PackTexture packTexture, int Level = 1)
-            : base(Position, map, packTexture, Level)
+        public Ogre(Vector2 Position, int Level = 1)
+            : base(Position, Level)
         {
             // Graphique
-            Sprite = packTexture.unites[5];
+            Sprite = PackTexture.unites[5];
             Tiles = new Vector2(370 / 5, 800 / 11);
-            ProjectileSprite = packTexture.projectiles[2];
+            ProjectileSprite = PackTexture.projectiles[2];
 
             // Statistiques
             Vie = VieMax = 200;
@@ -29,7 +29,7 @@ namespace CrystalGate
             Defense = 5;
             IsRanged = true;
             XPUnite = 200;
-            Inventory = new List<Item> { new PotionDeMana(Vector2.Zero, packTexture) };
+            Inventory = new List<Item> { new PotionDeMana(this, Vector2.Zero) };
 
             // Sons
             effetUniteAttaque = new EffetSonore(8);

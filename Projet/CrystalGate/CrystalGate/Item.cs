@@ -17,14 +17,15 @@ namespace CrystalGate
         public Spell spell; // Spell qui sera appelé quand l'objet sera activé
         public Type type;
 
-        public Item(Vector2 position, PackTexture pack)
+        public Item(Unite unite, Vector2 position)
         {
+            this.unite = unite;
             Position = position;
-            Icone = pack.blank; // definir l'icone ici
+            Icone = PackTexture.blank; // definir l'icone ici
             type = Type.Consommable;
         }
 
-        public void Update(List<Unite> unites) // Appelé quand l'objet est sur la map
+        public void Update(List<Unite> unites) // Appelé quand l'objet est sur la Map
         {
             foreach (Unite u in unites)
             {

@@ -35,15 +35,15 @@ namespace CrystalGate
         public bool IsInWall()
         {
             // Toutes les sprites dont l'Y est <= 4 sont des murs (cf la sprite des tiles)
-            return Outil.ProhibedTiles().Contains(Tireur.Map.Cellules[(int)(Position.X / Tireur.Map.TailleTiles.X), (int)(Position.Y / Tireur.Map.TailleTiles.Y)]);
+            return Outil.ProhibedTiles().Contains(Map.Cellules[(int)(Position.X / Map.TailleTiles.X), (int)(Position.Y / Map.TailleTiles.Y)]);
         }
 
         public bool CanReach(Vector2 Position) // renvoie vrai si le projectile peut atteindre sa cible
         {
             // le chemin du projectile
-            List<Noeud> trajectoire = PathFinding.TrouverChemin(Position, Tireur.uniteAttacked.PositionTile, Tireur.Map.Taille, new List<Unite> { }, new Noeud[(int)Tireur.Map.Taille.X, (int)Tireur.Map.Taille.Y], false);
+            List<Noeud> trajectoire = PathFinding.TrouverChemin(Position, Tireur.uniteAttacked.PositionTile, Map.Taille, new List<Unite> { }, new Noeud[(int)Map.Taille.X, (int)Map.Taille.Y], false);
             foreach (Noeud n in trajectoire)
-                if (Tireur.Map.unitesStatic[(int)n.Position.X, (int)n.Position.Y] != null)
+                if (Map.unitesStatic[(int)n.Position.X, (int)n.Position.Y] != null)
                     return false;
             return true;
         }
