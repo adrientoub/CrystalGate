@@ -19,7 +19,7 @@ namespace CrystalGateEditor
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         SpriteFont sp;
-        public static bool isTest = false;
+        public static bool isTest = true;
         public static string baseDirectory;
 
         User user;
@@ -28,8 +28,8 @@ namespace CrystalGateEditor
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
-            /*if (!isTest)
-                graphics.IsFullScreen = true;*/
+            if (!isTest)
+                graphics.IsFullScreen = true;
             this.IsMouseVisible = true;
             int width = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width;
             int height = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height;

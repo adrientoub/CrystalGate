@@ -129,6 +129,7 @@
     <Compile Include="SceneEngine2\CoopSettingsScene.cs" />
     <Compile Include="SceneEngine2\CoopConnexionScene.cs" />
     <Compile Include="SceneEngine2\DefeatScene.cs" />
+    <Compile Include="SceneEngine2\SplashScreenScene.cs" />
     <Compile Include="SceneEngine2\VictoryScene.cs" />
     <Compile Include="Stuff.cs" />
     <Compile Include="SceneEngine2\BaseScene.cs" />

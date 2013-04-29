@@ -17,6 +17,7 @@ namespace CrystalGate.SceneEngine2
 {
     public enum GameState
     {
+        SplashScreen,
         MainMenu,
         CoopSettings,
         CoopConnexion,
@@ -41,10 +42,11 @@ namespace CrystalGate.SceneEngine2
         public static DefeatScene defeatScene;
         public static CoopSettingsScene coopSettingsScene;
         public static CoopConnexionScene coopConnexionScene;
+        public static SplashScreenScene splashScreenScene;
 
         public SceneHandler()
         {
-            gameState = GameState.MainMenu;
+            gameState = GameState.SplashScreen;
 
             gameplayScene = new GamePlay();
             mainmenuScene = new MainMenu();
@@ -54,6 +56,7 @@ namespace CrystalGate.SceneEngine2
             defeatScene = new DefeatScene();
             coopSettingsScene = new CoopSettingsScene();
             coopConnexionScene = new CoopConnexionScene();
+            splashScreenScene = new SplashScreenScene();
         }
 
         public void Initialize()
@@ -66,6 +69,7 @@ namespace CrystalGate.SceneEngine2
             defeatScene.Initialize();
             coopSettingsScene.Initialize();
             coopConnexionScene.Initialize();
+            splashScreenScene.Initialize();
         }
 
         public void Update(GameTime gameTime)
@@ -98,6 +102,9 @@ namespace CrystalGate.SceneEngine2
                 case GameState.Defeat:
                     defeatScene.Update(gameTime);
                     break;
+                case GameState.SplashScreen:
+                    splashScreenScene.Update(gameTime);
+                    break;
             }
             BaseScene.oldMouse = BaseScene.mouse;
             BaseScene.oldKeyboardState = BaseScene.keyboardState;
@@ -113,6 +120,7 @@ namespace CrystalGate.SceneEngine2
             gameplayScene.LoadContent();
             victoryScene.LoadContent();
             defeatScene.LoadContent();
+            splashScreenScene.LoadContent();
         }
 
         public void Draw()
@@ -147,6 +155,9 @@ namespace CrystalGate.SceneEngine2
                 case GameState.Defeat:
                     gameplayScene.Draw(spriteBatch);
                     defeatScene.Draw(spriteBatch);
+                    break;
+                case GameState.SplashScreen:
+                    splashScreenScene.Draw(spriteBatch);
                     break;
             }
         }
