@@ -12,7 +12,7 @@ namespace CrystalGateEditor
 {
     class UI
     {
-        Texture2D Palette, fondTexte;
+        Texture2D Palette, PaletteHiver, PaletteVolcanique, fondTexte;
         SpriteFont SpriteFont;
 
         Vector2 PalettePosition;
@@ -22,6 +22,7 @@ namespace CrystalGateEditor
         bool ShowPalette;
         bool ShowMap;
         bool ShowHelp;
+        bool ShowAlert;
 
         public Mode mode;
         public SousMode sousmode;
@@ -47,11 +48,13 @@ namespace CrystalGateEditor
 
         Stack<Vector4> stack;
 
-        public UI(User user, Texture2D Palette, SpriteFont spriteFont, Texture2D fondTexte)
+        public UI(User user, Texture2D Palette, Texture2D PaletteHiver, Texture2D PaletteVolcanique, SpriteFont spriteFont, Texture2D fondTexte)
         {
             this.user = user;
 
             this.Palette = Palette;
+            this.PaletteHiver = PaletteHiver;
+            this.PaletteVolcanique = PaletteVolcanique;
             this.fondTexte = fondTexte;
             this.SpriteFont = spriteFont;
 
@@ -99,12 +102,20 @@ namespace CrystalGateEditor
 
                 if (sousmode == SousMode.Done)
                 {
-                    OuvrirMap(MapName);
-                    MenuString = "";
-                    current = "";
-                    mode = Mode.Draw;
-                    ShowMap = true;
-                    ShowCurrent = false;
+                    if (!OuvrirMap(MapName))
+                    {
+                        sousmode = SousMode.Nom;
+                        ShowAlert = true;
+                    }
+                    else
+                    {
+                        MenuString = "";
+                        current = "";
+                        mode = Mode.Draw;
+                        ShowMap = true;
+                        ShowCurrent = false;
+                        ShowAlert = false;
+                    }
                 }
             }
             // Dessiner
@@ -221,13 +232,17 @@ namespace CrystalGateEditor
 
             if (sousmode == SousMode.TextureBase)
             {
-                MenuString = "    Choisir le type de sol : \n 1 - Herbe \n 2 - Desert";
+                MenuString = "    Choisir le type de sol : \n 1 - Herbe \n 2 - Desert \n 3 - Hiver \n 4 - Volcanique";
                 current = "";
 
                 if (user.keyboardState.IsKeyDown(Keys.D1))
                     textBase = "1";
                 else if (user.keyboardState.IsKeyDown(Keys.D2))
                     textBase = "2";
+                else if (user.keyboardState.IsKeyDown(Keys.D3))
+                    textBase = "3";
+                else if (user.keyboardState.IsKeyDown(Keys.D4))
+                    textBase = "4";
 
                 else if (textBase.Length == 1)
                 {
@@ -236,6 +251,10 @@ namespace CrystalGateEditor
                         case 1: textureStart = TextureStart.Herbe;
                             break;
                         case 2: textureStart = TextureStart.Desert;
+                            break;
+                        case 3: textureStart = TextureStart.Hiver;
+                            break;
+                        case 4: textureStart = TextureStart.Volcanique;
                             break;
                         default: textureStart = TextureStart.Herbe;
                             break;
@@ -258,6 +277,7 @@ namespace CrystalGateEditor
 
         public void Initialiser()
         {
+            Random rand = new Random();
             for (int i = 0; i < Map.GetLength(0); i++)
                 for (int j = 0; j < Map.GetLength(1); j++)
                 {
@@ -265,16 +285,25 @@ namespace CrystalGateEditor
                     int y = 0;
                     if (textureStart == TextureStart.Herbe)
                     {
-                        Random rand = new Random(i * j);
                         x = rand.Next(14, 18);
                         y = 18;
                     }
-
+                    if (textureStart == TextureStart.Volcanique)
+                    {
+                        x = rand.Next(4, 11);
+                        y = 18;
+                        this.Palette = PaletteVolcanique;
+                    }
                     if (textureStart == TextureStart.Desert)
                     {
-                        Random rand = new Random(i * j);
                         x = rand.Next(11, 14);
                         y = 17;
+                    }
+                    if (textureStart == TextureStart.Hiver)
+                    {
+                        x = rand.Next(7, 13);
+                        y = 18;
+                        this.Palette = PaletteHiver;
                     }
 
                     Map[i, j] = new Vector2(x, y);
@@ -282,51 +311,90 @@ namespace CrystalGateEditor
 
         }
 
-        public void OuvrirMap(string MapName)
+        public bool OuvrirMap(string MapName)
         {
-            // Read the file and display it line by line.
-            string line;
-            int longueur = 0;
-            int hauteur = 0;
-
-            StreamReader file = new StreamReader(Game1.baseDirectory + "Maps/" + MapName + ".txt");
-
-            // On établit la longueur et la hauteur
-            while ((line = file.ReadLine()) != null)
+            try
             {
-                char[] splitchar = { '|' };
+                // Read the file and display it line by line.
+                string line;
+                int longueur = 0;
+                int hauteur = 0;
 
-                if (line != null)
-                    longueur = line.Split(splitchar).Length - 1;
-                hauteur++;
-            }
-            // Creation de la carte
-            Map = new Vector2[longueur, hauteur];
-            // Reset
-            file.Close();
-            file = new StreamReader(Game1.baseDirectory + "Maps/" + MapName + ".txt");
-            int j = 0;
-            while ((line = file.ReadLine()) != null)
-            {
-                char[] splitchar = { '|' };
-                string[] tiles = line.Split(splitchar);
+                StreamReader file = new StreamReader(Game1.baseDirectory + "../../../Maps/" + MapName + ".txt");
+                // On regarde quel type de sol c'est grace au header
 
-                for (int i = 0; i < longueur; i++)
+                switch (int.Parse(file.ReadLine()))
                 {
-                    char[] splitchar2 = { ',' };
-                    int x = int.Parse((tiles[i].Split(splitchar2))[0]);
-                    int y = int.Parse((tiles[i].Split(splitchar2))[1]);
-                    Map[i, j] = new Vector2(x, y);
+                    case 1: textureStart = TextureStart.Herbe;
+                        break;
+                    case 2: textureStart = TextureStart.Desert;
+                        break;
+                    case 3: textureStart = TextureStart.Hiver;
+                        break;
+                    case 4: textureStart = TextureStart.Volcanique;
+                        break;
+                    default: textureStart = TextureStart.Herbe;
+                        break;
                 }
-                j++;
+
+                // On établit la longueur et la hauteur
+                while ((line = file.ReadLine()) != null)
+                {
+                    char[] splitchar = { '|' };
+
+                    if (line != null)
+                        longueur = line.Split(splitchar).Length - 1;
+                    hauteur++;
+                }
+                // Creation de la carte
+                Map = new Vector2[longueur, hauteur];
+                // Reset
+                file.Close();
+                file = new StreamReader(Game1.baseDirectory + "../../../Maps/" + MapName + ".txt");
+                int j = 0;
+                file.ReadLine(); // pour passer le header
+                while ((line = file.ReadLine()) != null)
+                {
+                    char[] splitchar = { '|' };
+                    string[] tiles = line.Split(splitchar);
+
+                    for (int i = 0; i < longueur; i++)
+                    {
+                        char[] splitchar2 = { ',' };
+                        int x = int.Parse((tiles[i].Split(splitchar2))[0]);
+                        int y = int.Parse((tiles[i].Split(splitchar2))[1]);
+                        Map[i, j] = new Vector2(x, y);
+                    }
+                    j++;
+                }
+                file.Close();
+                return true;
             }
-            file.Close();
+            catch
+            {
+                return false;
+            }
 
         }
 
         public void SaveMap()
         {
-            StreamWriter stream = new StreamWriter(Game1.baseDirectory + "Maps/" + MapName + ".txt");
+            StreamWriter stream = new StreamWriter(Game1.baseDirectory + "../../../Maps/" + MapName + ".txt");
+
+            switch (this.textureStart)
+            {
+                case TextureStart.Herbe: stream.WriteLine(1);
+                    break;
+                case TextureStart.Desert: stream.WriteLine(2);
+                    break;
+                case TextureStart.Hiver: stream.WriteLine(3);
+                    break;
+                case TextureStart.Volcanique: stream.WriteLine(4);
+                    break;
+                default: stream.WriteLine(1);
+                    break;
+            }
+
             for (int j = 0; j < Map.GetLength(1); j++)
             {
                 for (int i = 0; i < Map.GetLength(0); i++)
@@ -391,6 +459,12 @@ namespace CrystalGateEditor
                 string str = "    Raccourcis claviers: \n Ctrl + S - Sauvegarde la carte \n P - Affiche la palette \n R - Redemarrer l'editeur \n ? - Affiche l'aide \n";
                 spriteBatch.DrawString(SpriteFont, str, new Vector2(user.camera.Position.X + width / 2, user.camera.Position.Y + height / 2), Color.White, 0, SpriteFont.MeasureString(str) / 2, 1, SpriteEffects.None, 0);
             }
+            if (ShowAlert)
+            {
+                string str = "Nom de carte incorrect!";
+                spriteBatch.DrawString(SpriteFont, str, new Vector2(user.camera.Position.X + width / 2, user.camera.Position.Y + height / 2 + 20), Color.Red, 0, SpriteFont.MeasureString(str) / 2, 1, SpriteEffects.None, 0);
+            }
+
             spriteBatch.DrawString(SpriteFont, MenuString, new Vector2(user.camera.Position.X + width / 2, user.camera.Position.Y + height / 2), Color.White, 0, SpriteFont.MeasureString(MenuString) / 2, 1, SpriteEffects.None, 0);
         }
 
@@ -415,7 +489,9 @@ namespace CrystalGateEditor
         public enum TextureStart
         {
             Herbe,
-            Desert
+            Volcanique,
+            Desert,
+            Hiver
         }
     }
 }

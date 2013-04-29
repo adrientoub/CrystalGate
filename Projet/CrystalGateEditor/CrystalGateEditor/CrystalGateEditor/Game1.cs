@@ -28,8 +28,8 @@ namespace CrystalGateEditor
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
-            if (!isTest)
-                graphics.IsFullScreen = true;
+            /*if (!isTest)
+                graphics.IsFullScreen = true;*/
             this.IsMouseVisible = true;
             int width = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width;
             int height = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height;
@@ -44,7 +44,7 @@ namespace CrystalGateEditor
             spriteBatch = new SpriteBatch(GraphicsDevice);
             sp = Content.Load<SpriteFont>("Police");
             user = new User();
-            ui = new UI(user, Content.Load<Texture2D>("Palette"), sp, Content.Load<Texture2D>("writing"));
+            ui = new UI(user, Content.Load<Texture2D>("Palette"), Content.Load<Texture2D>("PaletteHiver"), Content.Load<Texture2D>("PaletteVolcanique"), sp, Content.Load<Texture2D>("writing"));
             ui.mode = UI.Mode.LoadOrCreate;
             if (Game1.isTest)
                 baseDirectory = "../../../";
