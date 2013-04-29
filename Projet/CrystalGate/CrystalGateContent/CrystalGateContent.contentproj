@@ -93,8 +93,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="summertiles.png">
-      <Name>summertiles</Name>
+    <Compile Include="PaletteEte.png">
+      <Name>PaletteEte</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
@@ -497,6 +497,18 @@
   <ItemGroup>
     <Compile Include="UI\knightIcone.jpg">
       <Name>knightIcone</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="PaletteHiver.png">
+      <Name>PaletteHiver</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="PaletteVolcanique.png">
+      <Name>PaletteVolcanique</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

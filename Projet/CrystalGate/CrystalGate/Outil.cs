@@ -69,6 +69,26 @@ namespace CrystalGate
             int longueur = 0;
             int hauteur = 0;
             StreamReader file = new StreamReader(@MapString);
+            // On lit le header pour determiner la palette et le type de terrain
+            Texture2D TileSelected;
+            switch (int.Parse(file.ReadLine()))
+            {
+                case 1: Map.typeDeTerrain = Map.TypeDeTerrain.Herbe;
+                    TileSelected = PackTexture.SummerTiles;
+                    break;
+                case 2: Map.typeDeTerrain = Map.TypeDeTerrain.Desert;
+                    TileSelected = PackTexture.SummerTiles;
+                    break;
+                case 3: Map.typeDeTerrain = Map.TypeDeTerrain.Hiver;
+                    TileSelected = PackTexture.WinterTiles;
+                    break;
+                case 4: Map.typeDeTerrain = Map.TypeDeTerrain.Volcanique;
+                    TileSelected = PackTexture.VolcanicTiles;
+                    break;
+                default: Map.typeDeTerrain = Map.TypeDeTerrain.Herbe;
+                    TileSelected = PackTexture.SummerTiles;
+                    break;
+            }
             // On établit la longueur et la hauteur
             while ((line = file.ReadLine()) != null)
             {
@@ -79,9 +99,10 @@ namespace CrystalGate
                 hauteur++;
             }
             // Creation de la carte
-            Map.Initialize(PackTexture.Map[0], new Vector2(longueur, hauteur), new Vector2(32, 32));
+            Map.Initialize(TileSelected, new Vector2(longueur, hauteur), new Vector2(32, 32));
             // Reset
             file = new StreamReader(@MapString);
+            file.ReadLine(); // On saute le header
             int j = 0;
             while ((line = file.ReadLine()) != null)
             {

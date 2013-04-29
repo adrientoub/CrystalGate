@@ -16,8 +16,11 @@ namespace CrystalGate
         public static List<Texture2D> unites;
         public static List<Texture2D> sorts;
         public static List<Texture2D> boutons;
-        public static List<Texture2D> Map;
         public static List<Texture2D> projectiles;
+        // Tiles
+        public static Texture2D SummerTiles;
+        public static Texture2D WinterTiles;
+        public static Texture2D VolcanicTiles;
         // UI
         public static Texture2D Dialogue;
         public static Texture2D BarreDesSorts;
@@ -38,7 +41,6 @@ namespace CrystalGate
             unites = new List<Texture2D> { };
             sorts = new List<Texture2D> { };
             boutons = new List<Texture2D> { };
-            Map = new List<Texture2D> { };
             projectiles = new List<Texture2D> { };
 
             blank = content.Load<Texture2D>("blank");
@@ -49,7 +51,11 @@ namespace CrystalGate
             sorts.Add(content.Load<Texture2D>("Spells/ManaRegen"));
             boutons = new List<Texture2D> { content.Load<Texture2D>("Boutons/Explosion"), content.Load<Texture2D>("Boutons/Soin"), content.Load<Texture2D>("Boutons/Invisibility"), content.Load<Texture2D>("Boutons/PotionDeVie"), content.Load<Texture2D>("Boutons/PotionMana"), content.Load<Texture2D>("Boutons/BloodLust"), content.Load<Texture2D>("Boutons/EpeeSolari"), content.Load<Texture2D>("Boutons/BottesDacier"), content.Load<Texture2D>("Boutons/Epaulieres"), content.Load<Texture2D>("Boutons/GantsDeDevotion"), content.Load<Texture2D>("Boutons/HelmutPurple"), content.Load<Texture2D>("Boutons/RingLionHead") };
             projectiles = new List<Texture2D> { content.Load<Texture2D>("Projectiles/arrow"), content.Load<Texture2D>("Projectiles/axe"), content.Load<Texture2D>("Projectiles/fireball") };
-            Map.Add(content.Load<Texture2D>("summertiles"));
+            
+            // Tiles
+            SummerTiles = content.Load<Texture2D>("PaletteEte");
+            WinterTiles = content.Load<Texture2D>("PaletteHiver");
+            VolcanicTiles = content.Load<Texture2D>("PaletteVolcanique");
 
             // UI
             Dialogue = content.Load<Texture2D>("UI/DialogueFond");

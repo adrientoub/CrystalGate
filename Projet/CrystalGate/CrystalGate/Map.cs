@@ -26,6 +26,7 @@ namespace CrystalGate
         public static World world;
         static Body boundary; // Les limites du monde physique
         public static GameTime gametime;
+        public static TypeDeTerrain typeDeTerrain;
 
         public static void Initialize(Texture2D sprite, Vector2 taille, Vector2 tailleTiles)
         {
@@ -104,6 +105,14 @@ namespace CrystalGate
             bounds.Add(new Vector2(0, height));
 
             return bounds;
+        }
+
+        public enum TypeDeTerrain
+        {
+            Herbe,
+            Desert,
+            Hiver,
+            Volcanique
         }
     }
 
