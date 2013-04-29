@@ -20,7 +20,9 @@ namespace CrystalGate.SceneEngine2
         private Rectangle fullscene;
         private Rectangle champPseudo, boutonLancerLeJeu, boutonRetour;
 
-        private Text lancerJeuT, retourJeuT;
+        private Text lancerJeuT, retourJeuT, pseudoT;
+
+        private Vector2 positionTextePseudo;
 
         public static string textAsWrited;
 
@@ -45,12 +47,15 @@ namespace CrystalGate.SceneEngine2
 
             lancerJeuT = new Text("LaunchGame");
             retourJeuT = new Text("BackToMenu");
+            pseudoT = new Text("Pseudo");
 
             fullscene = new Rectangle(0, 0, CrystalGateGame.graphics.GraphicsDevice.Viewport.Width, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height);
 
             champPseudo = new Rectangle((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width - boutons.Width) / 2, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height / 2 - 100, boutons.Width, boutons.Height);
             boutonLancerLeJeu = new Rectangle((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width - boutons.Width) / 2, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height / 2, boutons.Width, boutons.Height);
             boutonRetour = new Rectangle((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width - boutons.Width) / 2, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height / 2 + 100, boutons.Width, boutons.Height);
+
+            positionTextePseudo = new Vector2(champPseudo.Left - spriteFont.MeasureString(pseudoT.get()).X, champPseudo.Center.Y - spriteFont.MeasureString(pseudoT.get()).Y / 2);
         }
 
         public void ClientConnected(IAsyncResult result)
@@ -107,6 +112,7 @@ namespace CrystalGate.SceneEngine2
                 }
             }
             SaisirTexte(ref textAsWrited);
+            positionTextePseudo = new Vector2(champPseudo.Left - spriteFont.MeasureString(pseudoT.get()).X, champPseudo.Center.Y - spriteFont.MeasureString(pseudoT.get()).Y / 2);
         }
 
         public override void Draw(SpriteBatch spriteBatch)
@@ -162,6 +168,8 @@ namespace CrystalGate.SceneEngine2
                 new Vector2((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width) / 2 - spriteFont.MeasureString(retourJeuT.get()).X / 2,
                     boutonRetour.Top + 10),
                 Color.White);
+
+            spriteBatch.DrawString(spriteFont, pseudoT.get(), positionTextePseudo, Color.Blue);
 
             spriteBatch.Draw(curseur, new Vector2(mouse.X, mouse.Y), Color.White);
 

@@ -32,16 +32,16 @@ namespace CrystalGate.SceneEngine2
         public static bool endFirstClic;
 
         private Rectangle boutonPleinEcran, boutonLangue, boutonRetour, volumeEffects, volumeFondSonore;
+        private Vector2 positionTexteVolumeEffects, positionTexteVolumeFondSonore, positionTexteFullscreen, positionTexteLangue;
 
-        private Text pleinEcranT, langueT, retourT, noT, yesT;
+        private Text pleinEcranT, langueT, retourT, noT, yesT, effetSonoreT, fondSonoreT;
 
         private static Language _currentLanguage = Language.Français;
-        string fullscreenText, langueText;
+        string fullscreenText;
 
         public override void Initialize()
         {
-            fullscreenText = pleinEcranT.get() + " : " + (isFullscreen ? noT.get() : yesT.get());
-            langueText = langueT.get() + " : " + _currentLanguage.ToString();
+            fullscreenText = isFullscreen ? noT.get() : yesT.get();
             isPauseOption = false;
             endFirstClic = false;
         }
@@ -61,6 +61,8 @@ namespace CrystalGate.SceneEngine2
             retourT = new Text("Back");
             noT = new Text("no");
             yesT = new Text("yes");
+            effetSonoreT = new Text("VolumeEffects");
+            fondSonoreT = new Text("Volume");
 
             boutonPleinEcran = new Rectangle((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width - boutons.Width) / 2, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height / 2 - 200, boutons.Width, boutons.Height);
             boutonLangue = new Rectangle((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width - boutons.Width) / 2, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height / 2 - 100, boutons.Width, boutons.Height);
@@ -68,6 +70,11 @@ namespace CrystalGate.SceneEngine2
             volumeFondSonore = new Rectangle((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width - boutons.Width) / 2, 
                 CrystalGateGame.graphics.GraphicsDevice.Viewport.Height / 2 + 100, volume.Width, volume.Height);
             boutonRetour = new Rectangle((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width - boutons.Width) / 2, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height / 2 + 200, boutons.Width, boutons.Height);
+
+            positionTexteVolumeEffects = new Vector2(volumeEffects.Left - spriteFont.MeasureString(effetSonoreT.get()).X, volumeEffects.Center.Y - spriteFont.MeasureString(effetSonoreT.get()).Y / 2);
+            positionTexteVolumeFondSonore = new Vector2(volumeFondSonore.Left - spriteFont.MeasureString(fondSonoreT.get()).X, volumeFondSonore.Center.Y - spriteFont.MeasureString(fondSonoreT.get()).Y / 2);
+            positionTexteFullscreen = new Vector2(boutonPleinEcran.Left - spriteFont.MeasureString(pleinEcranT.get()).X, boutonPleinEcran.Center.Y - spriteFont.MeasureString(pleinEcranT.get()).Y / 2);
+            positionTexteLangue = new Vector2(boutonLangue.Left - spriteFont.MeasureString(langueT.get()).X, boutonLangue.Center.Y - spriteFont.MeasureString(langueT.get()).Y / 2);
         }
 
         public override void Update(GameTime gameTime)
@@ -127,8 +134,11 @@ namespace CrystalGate.SceneEngine2
             {
                 SceneHandler.gameState = GameState.Gameplay;
             }
-            fullscreenText = pleinEcranT.get() + " : " + (isFullscreen ? noT.get() : yesT.get());
-            langueText = langueT.get() + " : " + _currentLanguage.ToString();
+            fullscreenText = (isFullscreen ? noT.get() : yesT.get());
+            positionTexteVolumeEffects = new Vector2(volumeEffects.Left - spriteFont.MeasureString(effetSonoreT.get()).X, volumeEffects.Center.Y - spriteFont.MeasureString(effetSonoreT.get()).Y / 2);
+            positionTexteVolumeFondSonore = new Vector2(volumeFondSonore.Left - spriteFont.MeasureString(fondSonoreT.get()).X, volumeFondSonore.Center.Y - spriteFont.MeasureString(fondSonoreT.get()).Y / 2);
+            positionTexteFullscreen = new Vector2(boutonPleinEcran.Left - spriteFont.MeasureString(pleinEcranT.get()).X, boutonPleinEcran.Center.Y - spriteFont.MeasureString(pleinEcranT.get()).Y / 2);
+            positionTexteLangue = new Vector2(boutonLangue.Left - spriteFont.MeasureString(langueT.get()).X, boutonLangue.Center.Y - spriteFont.MeasureString(langueT.get()).Y / 2);
         }
 
         public override void Draw(SpriteBatch spriteBatch)
@@ -173,8 +183,8 @@ namespace CrystalGate.SceneEngine2
                 Color.White);
             spriteBatch.DrawString(
                 spriteFont,
-                langueText,
-                new Vector2((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width) / 2 - spriteFont.MeasureString(langueText).X / 2,
+                _currentLanguage.ToString(),
+                new Vector2((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width) / 2 - spriteFont.MeasureString(_currentLanguage.ToString()).X / 2,
                     boutonLangue.Top + 10),
                 Color.White);
             spriteBatch.DrawString(
@@ -183,6 +193,11 @@ namespace CrystalGate.SceneEngine2
                 new Vector2((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width) / 2 - spriteFont.MeasureString(retourT.get()).X / 2,
                     boutonRetour.Top + 10),
                 Color.White);
+
+            spriteBatch.DrawString(spriteFont, effetSonoreT.get(), positionTexteVolumeEffects, Color.Blue);
+            spriteBatch.DrawString(spriteFont, fondSonoreT.get(), positionTexteVolumeFondSonore, Color.Blue);
+            spriteBatch.DrawString(spriteFont, pleinEcranT.get(), positionTexteFullscreen, Color.Blue);
+            spriteBatch.DrawString(spriteFont, langueT.get(), positionTexteLangue, Color.Blue);
 
             spriteBatch.Draw(curseur, new Vector2(mouse.X, mouse.Y), Color.White);
 

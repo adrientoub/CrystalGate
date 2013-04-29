@@ -18,9 +18,11 @@ namespace CrystalGate.SceneEngine2
         private Rectangle fullscene;
         private Rectangle boutonServeurOuClient, champIP, boutonConnexion, boutonRetour;
 
-        private Text serveurT, clientT, lancerJeuT, retourJeuT;
+        private Text serveurT, clientT, lancerJeuT, retourJeuT, ipT, modeT;
 
         public string textAsWrited;
+
+        private Vector2 positionTexteIP, positionTexteMode;
 
         public bool isServer;
 
@@ -39,6 +41,8 @@ namespace CrystalGate.SceneEngine2
             retourJeuT = new Text("BackToMenu");
             serveurT = new Text("Server");
             clientT = new Text("Client");
+            ipT = new Text("IP");
+            modeT = new Text("Mode");
 
             fullscene = new Rectangle(0, 0, CrystalGateGame.graphics.GraphicsDevice.Viewport.Width, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height);
 
@@ -46,6 +50,9 @@ namespace CrystalGate.SceneEngine2
             champIP = new Rectangle((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width - boutons.Width) / 2, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height / 2 - 200, boutons.Width, boutons.Height);
             boutonConnexion = new Rectangle((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width - boutons.Width) / 2, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height / 2, boutons.Width, boutons.Height);
             boutonRetour = new Rectangle((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width - boutons.Width) / 2, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height / 2 + 100, boutons.Width, boutons.Height);
+
+            positionTexteIP = new Vector2(champIP.Left - spriteFont.MeasureString(ipT.get()).X, champIP.Center.Y - spriteFont.MeasureString(ipT.get()).Y / 2);
+            positionTexteMode = new Vector2(boutonServeurOuClient.Left - spriteFont.MeasureString(modeT.get()).X, boutonServeurOuClient.Center.Y - spriteFont.MeasureString(modeT.get()).Y / 2);
         }
 
         public override void Update(GameTime gameTime)
@@ -66,7 +73,11 @@ namespace CrystalGate.SceneEngine2
                     SceneHandler.gameState = GameState.MainMenu;
                 }
             }
-            SaisirTexte(ref textAsWrited);
+            if (!isServer)
+                SaisirTexte(ref textAsWrited);
+
+            positionTexteIP = new Vector2(champIP.Left - spriteFont.MeasureString(ipT.get()).X, champIP.Center.Y - spriteFont.MeasureString(ipT.get()).Y / 2);
+            positionTexteMode = new Vector2(boutonServeurOuClient.Left - spriteFont.MeasureString(modeT.get()).X, boutonServeurOuClient.Center.Y - spriteFont.MeasureString(modeT.get()).Y / 2);
         }
 
         public override void Draw(SpriteBatch spriteBatch)
@@ -85,6 +96,15 @@ namespace CrystalGate.SceneEngine2
                     spriteBatch.Draw(boutons, champIP, Color.Gray);
                 else
                     spriteBatch.Draw(boutons, champIP, Color.White);
+
+                spriteBatch.DrawString(
+                    spriteFont,
+                    textAsWrited,
+                    new Vector2((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width) / 2 - spriteFont.MeasureString(textAsWrited).X / 2,
+                        champIP.Top + 10),
+                    Color.White);
+
+                spriteBatch.DrawString(spriteFont, ipT.get(), positionTexteIP, Color.Blue);
             }
 
             if (mouseRec.Intersects(boutonConnexion))
@@ -105,13 +125,6 @@ namespace CrystalGate.SceneEngine2
 
             spriteBatch.DrawString(
                 spriteFont,
-                textAsWrited,
-                new Vector2((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width) / 2 - spriteFont.MeasureString(textAsWrited).X / 2,
-                    champIP.Top + 10),
-                Color.White);
-
-            spriteBatch.DrawString(
-                spriteFont,
                 lancerJeuT.get(),
                 new Vector2((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width) / 2 - spriteFont.MeasureString(lancerJeuT.get()).X / 2,
                     boutonConnexion.Top + 10),
@@ -123,6 +136,8 @@ namespace CrystalGate.SceneEngine2
                 new Vector2((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width) / 2 - spriteFont.MeasureString(retourJeuT.get()).X / 2,
                     boutonRetour.Top + 10),
                 Color.White);
+
+            spriteBatch.DrawString(spriteFont, modeT.get(), positionTexteMode, Color.Blue);
 
             spriteBatch.Draw(curseur, new Vector2(mouse.X, mouse.Y), Color.White);
 
