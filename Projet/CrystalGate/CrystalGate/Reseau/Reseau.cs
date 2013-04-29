@@ -4,13 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Net;
 using System.Net.Sockets;
+using System.Threading;
 
-namespace CrystalGate
+namespace CrystalGate.Reseau
 {
     class Reseau
     {
         static List<ArraySegment<byte>> buffer = new List<ArraySegment<byte>>();
         static int tailleDeLaString = 0;
+        public static List<Message> discution = new List<Message>();
 
         public static void ReceiveCallback(IAsyncResult result)
         {
@@ -30,7 +32,8 @@ namespace CrystalGate
             Socket soc = (Socket)result.AsyncState;
             soc.EndReceive(result);
             // Traitement :
-            UI.messageRecu = Encoding.UTF8.GetString(buffer[0].Array);
+            //UI.messageRecu = Encoding.UTF8.GetString(buffer[0].Array);
+            discution.Add(new Message(EffetSonore.time.Elapsed ,Encoding.UTF8.GetString(buffer[0].Array)));
 
             buffer.Clear();
             buffer.Add(new ArraySegment<byte>(new byte[4]));
@@ -51,6 +54,8 @@ namespace CrystalGate
             {
                 soc = SceneEngine2.SceneHandler.coopConnexionScene.soc;
             }
+            discution.Add(new Message(EffetSonore.time.Elapsed, texte));
+
             byte[] messageLength = BitConverter.GetBytes(texte.Length);
             soc.Send(messageLength);
 

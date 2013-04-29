@@ -103,7 +103,7 @@ namespace CrystalGate.SceneEngine2
                     SceneHandler.gameplayScene.isCoopPlay = true;
                     SceneHandler.gameplayScene.isServer = isServer;
                     isOnlinePlay = true;
-                    Reseau.ReceiveData();
+                    Reseau.Reseau.ReceiveData();
                 }
                 else if (mouseRec.Intersects(boutonRetour))
                 {

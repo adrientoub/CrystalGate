@@ -124,7 +124,8 @@
     <Compile Include="Items\Stuff\Epaulieres.cs" />
     <Compile Include="Items\Stuff\GantsDeDevotion.cs" />
     <Compile Include="Items\Stuff\EpeeSolari.cs" />
-    <Compile Include="Reseau.cs" />
+    <Compile Include="Reseau\Message.cs" />
+    <Compile Include="Reseau\Reseau.cs" />
     <Compile Include="SceneEngine2\CoopSettingsScene.cs" />
     <Compile Include="SceneEngine2\CoopConnexionScene.cs" />
     <Compile Include="SceneEngine2\DefeatScene.cs" />

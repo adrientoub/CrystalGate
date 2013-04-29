@@ -55,6 +55,7 @@ namespace CrystalGate
         int MaxChar;
 
         public static string messageRecu = "";
+        public Vector2 positionChat;
 
         int widthFondNoir, heightFondNoir;
 
@@ -121,7 +122,7 @@ namespace CrystalGate
             {
                 if (isWriting && message != "")
                 {
-                    Reseau.SendData(SceneEngine2.CoopConnexionScene.textAsWrited + " : " + message);
+                    Reseau.Reseau.SendData(SceneEngine2.CoopConnexionScene.textAsWrited + " : " + message);
                     message = "";
                     isWriting = false;
                 }
@@ -140,8 +141,24 @@ namespace CrystalGate
                     MaxChar = 0;
                 }
             }
+
+            messageRecu = "";
+            for (int i = 0; i < Reseau.Reseau.discution.Count; i++)
+			{
+                if (Reseau.Reseau.discution[i].dateEnvoi + new TimeSpan(0, 0, 10) < EffetSonore.time.Elapsed)
+                {
+                    Reseau.Reseau.discution.RemoveAt(i);
+                    i--;
+                }
+                else
+                {
+                    messageRecu += "\n" + Reseau.Reseau.discution[i].message;
+                }
+			} 
+            positionChat = new Vector2(widthFondNoir, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height - heightFondNoir - spellfont.MeasureString(messageRecu).Y - 50);
         }
 
+        #region fonctionsSupl
         public void UtiliserInventaire() // Fonction qui s'occupe de l'utilisation de l'inventaire
         {
             // Si on clique sur le cadre de l'inventaire
@@ -240,24 +257,25 @@ namespace CrystalGate
 
             char c;
 
-            if (text.Length < 15)
+            bool shiftPressed = pressedKeys.Contains(Keys.LeftShift) || pressedKeys.Contains(Keys.RightShift);
+            foreach (Keys key in pressedKeys)
             {
-                bool shiftPressed = pressedKeys.Contains(Keys.LeftShift) || pressedKeys.Contains(Keys.RightShift);
-                foreach (Keys key in pressedKeys)
+                if (!prevPressedKeys.Contains(key))
                 {
-                    if (!prevPressedKeys.Contains(key))
-                    {
-                        string keyString = key.ToString();
+                    string keyString = key.ToString();
 
-                        if (keyString.Length == 1)
-                        {
-                            c = keyString[0];
-                            if (c >= 'A' && c <= 'Z')
-                                if (shiftPressed)
-                                    text += c;
-                                else
-                                    text += (char)(c - 'A' + 'a');
-                        }
+                    if (keyString.Length == 1)
+                    {
+                        c = keyString[0];
+                        if (c >= 'A' && c <= 'Z')
+                            if (shiftPressed)
+                                text += c;
+                            else
+                                text += (char)(c - 'A' + 'a');
+                    }
+                    else if (keyString == "Space")
+                    {
+                        text += " ";
                     }
                 }
             }
@@ -274,7 +292,9 @@ namespace CrystalGate
                 text = text2;
             }
         }
+        #endregion fonctionsSupl
 
+        #region draw
         public void Draw()
         {
             int hauteurBarre = 30;
@@ -462,7 +482,8 @@ namespace CrystalGate
 
             if (messageRecu != "")
             {
-                spritebatch.DrawString(gamefont, messageRecu, joueur.camera.Position + new Vector2(widthFondNoir, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height - heightFondNoir - 50), Color.White);
+                spritebatch.DrawString(gamefont, messageRecu, joueur.camera.Position +
+                    positionChat, Color.White);
             }
 
             // Timer
@@ -476,5 +497,6 @@ namespace CrystalGate
 
             OldDrawDialogue = DrawDialogue;
         }
+        #endregion draw
     }
 }
