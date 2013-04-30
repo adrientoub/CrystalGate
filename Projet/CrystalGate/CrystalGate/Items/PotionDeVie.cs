@@ -17,7 +17,7 @@ namespace CrystalGate
 
         public override void Effet(Unite unite)
         {
-            spell = new Soin(unite, false);
+            spell = new Soin(unite, null, false);
         }
     }
 }

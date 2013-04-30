@@ -22,7 +22,7 @@ namespace CrystalGate
             Vie = VieMax = 500;
             Vitesse = 0.15f;
             Vitesse_Attaque = 0.5f;
-            Portee = 2f; // 1 = Corps à corps
+            Portee = 1f; // 1 = Corps à corps
             Dommages = 70;
             Puissance = 50;
             Defense = 5;

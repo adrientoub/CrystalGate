@@ -11,7 +11,7 @@ namespace CrystalGate.Animations
         public override List<Vector2> StandHaut()
         {
             List<Vector2> liste = new List<Vector2> { };
-            for (int j = 0; j < 3; j++)
+            for (int j = 0; j < 1; j++)
                 liste.Add(new Vector2(j, 0));
 
             return liste;
@@ -20,7 +20,7 @@ namespace CrystalGate.Animations
         public override List<Vector2> StandBas()
         {
             List<Vector2> liste = new List<Vector2> { };
-            for (int j = 0; j < 3; j++)
+            for (int j = 0; j < 1; j++)
                 liste.Add(new Vector2(j, 0));
 
             return liste;
@@ -29,7 +29,7 @@ namespace CrystalGate.Animations
         public override List<Vector2> StandGauche()
         {
             List<Vector2> liste = new List<Vector2> { };
-            for (int j = 0; j < 3; j++)
+            for (int j = 0; j < 1; j++)
                 liste.Add(new Vector2(j, 0));
 
             return liste;
@@ -38,7 +38,7 @@ namespace CrystalGate.Animations
         public override List<Vector2> StandDroite()
         {
             List<Vector2> liste = new List<Vector2> { };
-            for (int j = 0; j < 3; j++)
+            for (int j = 0; j < 1; j++)
                 liste.Add(new Vector2(j, 0));
 
             return liste;
@@ -59,7 +59,7 @@ namespace CrystalGate.Animations
         public override List<Vector2> Bas()
         {
             List<Vector2> liste = new List<Vector2> { };
-            for (int j = 0; j < 3; j++)
+            for (int j = 0; j < 1; j++)
                 liste.Add(new Vector2(j, 0));
 
             return liste;
@@ -68,7 +68,7 @@ namespace CrystalGate.Animations
         public override List<Vector2> Droite()
         {
             List<Vector2> liste = new List<Vector2> { };
-            for (int j = 0; j < 3; j++)
+            for (int j = 0; j < 1; j++)
                 liste.Add(new Vector2(j, 0));
 
             return liste;
@@ -77,7 +77,7 @@ namespace CrystalGate.Animations
         public override List<Vector2> HautDroite()
         {
             List<Vector2> liste = new List<Vector2> { };
-            for (int j = 0; j < 3; j++)
+            for (int j = 0; j < 1; j++)
                 liste.Add(new Vector2(j, 0));
 
             return liste;
@@ -86,7 +86,7 @@ namespace CrystalGate.Animations
         public override List<Vector2> BasDroite()
         {
             List<Vector2> liste = new List<Vector2> { };
-            for (int j = 0; j < 3; j++)
+            for (int j = 0; j < 1; j++)
                 liste.Add(new Vector2(j, 0));
 
             return liste;

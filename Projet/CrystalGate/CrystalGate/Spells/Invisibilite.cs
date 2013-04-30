@@ -10,10 +10,11 @@ namespace CrystalGate
     class Invisibilite : Spell
     {
         List<Unite> uniteFollowing;
+        Random rand = new Random();
         Text description1, description2;
 
-        public Invisibilite(Unite u, bool useMana = true)
-            : base(u)
+        public Invisibilite(Unite u, Unite cible, bool useMana = true)
+            : base(u, cible)
         {
             Cooldown = 5;
             Ticks = 300;
@@ -33,10 +34,8 @@ namespace CrystalGate
             description2 = new Text("DescriptionInvisibilite2");
         }
 
-        public override void Update()
+        public override void UpdateSort()
         {
-            if (TickCurrent < Ticks)
-            {
                 unite.isInvisible = true;
                 if (TickCurrent == 0)
                 {
@@ -61,23 +60,20 @@ namespace CrystalGate
                     uniteFollowing = new List<Unite>();
                     unite.isInvisible = false;
                 }
-                /*else
+                else
                 {
                     if (TickCurrent % 60 == 0)
                     {
-                        foreach (Unite u in unite.Map.unites)
+                        foreach (Unite u in Map.unites)
                         {
                             if (unite != u)
                             {
-                                Random rand = new Random();
                                 u.ObjectifListe.Add(new Noeud(u.PositionTile + new Vector2(1, 1) * rand.Next(-1, 2), true, 0));
                             }
                         }
                     }
 
-                }*/
-                TickCurrent++;
-            }
+                }
         }
 
         public override string DescriptionSpell()

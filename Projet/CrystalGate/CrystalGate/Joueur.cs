@@ -149,6 +149,25 @@ namespace CrystalGate
                             champion.Cast(spell, champion.pointCible, SelectedUnit);
                     }
                 }
+                if (Interface.key.IsKeyDown(Keys.D6) && champion.spells.Count > 5 || Interface.SourisClickSpellCheck(5) && champion.spells.Count > 5)
+                {
+                    spell = 5;
+                    if (champion.IsCastable(5))
+                    {
+                        if (champion.spells[5].NeedUnPoint)
+                        {
+                            Interface.DrawSelectPoint = true;
+                            InWaitingPoint = true;
+                        }
+                        if (champion.spells[5].NeedAUnit)
+                        {
+                            Interface.DrawSelectUnit = true;
+                            InWaitingUnit = true;
+                        }
+                        else
+                            champion.Cast(spell, champion.pointCible, SelectedUnit);
+                    }
+                }
 
                 // Pour afficher/cacher le sac
                 if (Interface.key.IsKeyDown(Keys.B) && Interface.Oldkey.IsKeyUp(Keys.B) || Interface.key.IsKeyDown(Keys.I) && Interface.Oldkey.IsKeyUp(Keys.I))
@@ -219,7 +238,7 @@ namespace CrystalGate
         public void DonnerOrdreAttaquerPoint()
         {
             //DonnerOrdreDeplacer();
-            isRoaming = true;
+            //isRoaming = true;
         }
 
         public void DonnerOrdreStop()

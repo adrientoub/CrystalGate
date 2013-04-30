@@ -17,7 +17,7 @@ namespace CrystalGate
 
         public override void Effet(Unite unite)
         {
-            spell = new RegenMana(unite, false);
+            spell = new RegenMana(unite, null, false);
         }
     }
 }

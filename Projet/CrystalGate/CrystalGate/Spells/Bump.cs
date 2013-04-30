@@ -8,14 +8,14 @@ namespace CrystalGate
 {
     class Bump : Spell
     {
-        public Bump(Unite u)
-            : base(u)
+        public Bump(Unite u, Unite cible, bool useMana = true)
+            : base(u, cible)
             
         {
             SpriteBouton = PackTexture.sorts[0];
         }
 
-        public override void Update()
+        public override void UpdateSort()
         {
             foreach (Unite u in Map.unites)
                 if(u != unite && Outil.DistanceUnites(unite, u) <= 100)

@@ -14,7 +14,7 @@ namespace CrystalGate
         Text description;
 
         public Polymorphe(Unite u, Unite cible, bool useMana = true)
-            : base(u)
+            : base(u, cible)
         {
             Cooldown = 2;
             Ticks = 1;
@@ -31,17 +31,13 @@ namespace CrystalGate
             description = new Text("DescriptionPolymorph");
         }
 
-        public override void Update()
+        public override void UpdateSort()
         {
-            if (TickCurrent < Ticks)
-            {
                 UniteCible.packAnimation = new AnimationCritters();
                 UniteCible.Sprite = PackTexture.Critters;
                 UniteCible.Tiles = new Vector2(225 / 6, 177 / 4);
                 UniteCible.effetUniteDeath = new EffetSonore(PackSon.SheepDeath);
                 UniteCible.CanAttack = false;
-                TickCurrent++;
-            }
         }
 
         public override string DescriptionSpell()

@@ -36,6 +36,7 @@ namespace CrystalGate
         protected const int AnimationLimite = 5;
         public const int suivrelimite = 20;
         public int suivreactuel = 20;
+        public int largeurPhysique;
 
         protected Direction direction;
         protected bool FlipH;
@@ -54,13 +55,8 @@ namespace CrystalGate
             CanAttack = true;
 
             // Physique
-            this.body = BodyFactory.CreateRectangle(Map.world, ConvertUnits.ToSimUnits(25), ConvertUnits.ToSimUnits(25), 100f);
-            this.body.Position = ConvertUnits.ToSimUnits(Position * Map.TailleTiles + new Vector2(16,16));
-            this.body.IsStatic = false;
-            this.body.OnCollision += new OnCollisionEventHandler(body_OnCollision);
-            this.body.UserData = this;
-            this.body.Mass = 100;
-            this.PositionTile = Position;
+            largeurPhysique = 1;
+            CreateBody(largeurPhysique, Position);
             
             // Graphique
             this.Sprite = PackTexture.blank;
@@ -140,6 +136,17 @@ namespace CrystalGate
         public virtual void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(Sprite, ConvertUnits.ToDisplayUnits(body.Position), SpritePosition, Color.White, 0f, new Vector2(Tiles.X / 2, Tiles.Y / 2), Scale, FlipH ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 0);
+        }
+
+        public void CreateBody(int echelle, Vector2 Position)
+        {
+            this.body = BodyFactory.CreateRectangle(Map.world, ConvertUnits.ToSimUnits(25 * echelle), ConvertUnits.ToSimUnits(25 * echelle), 100f);
+            this.body.Position = ConvertUnits.ToSimUnits(Position * Map.TailleTiles + new Vector2(16, 16));
+            this.body.IsStatic = false;
+            this.body.OnCollision += new OnCollisionEventHandler(body_OnCollision);
+            this.body.UserData = this;
+            this.body.Mass = 100;
+            this.PositionTile = Position;
         }
 
         protected enum Direction

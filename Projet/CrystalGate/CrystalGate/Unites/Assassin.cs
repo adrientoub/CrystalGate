@@ -9,20 +9,19 @@ using CrystalGate.Animations;
 
 namespace CrystalGate
 {
-    public class Odin : Unite
+    public class Assassin : Unite
     {
 
-        public Odin(Vector2 Position, int Level = 1)
+        public Assassin(Vector2 Position, int Level = 1)
             : base(Position, Level)
         {
             // Physique
-            largeurPhysique = 5;
-            CreateBody(largeurPhysique, Position);
+            Scale = 0.4f;
             // Graphique
-            Sprite = PackTexture.Odin;
-            Tiles = new Vector2(160, 160);
+            Sprite = PackTexture.Assassin;
+            Tiles = new Vector2(1757 / 5, 1400 / 5);
             Portrait = PackTexture.CavalierPortrait;
-            packAnimation = new AnimationOdin();
+            packAnimation = new PackAnimation();
             // Statistiques
             Vie = VieMax = 3000;
             Vitesse = 0.2f;

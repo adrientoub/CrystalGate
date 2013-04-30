@@ -12,8 +12,8 @@ namespace CrystalGate
         const float ratio = 1.25f;
         Text description1, description2;
 
-        public Soin(Unite u, bool useMana = true)
-            : base(u)  
+        public Soin(Unite u, Unite cible, bool useMana = true)
+            : base(u, cible)  
         {
             Cooldown = 2;
             Ticks = 1;
@@ -34,22 +34,17 @@ namespace CrystalGate
             description2 = new Text("DescriptionSoin2");
         }
 
-        public override void Update()
+        public override void UpdateSort()
         {
-            Animer();
-            if (TickCurrent < Ticks)
+            if (unite.Vie != unite.VieMax)
             {
-                if (unite.Vie != unite.VieMax)
+                int ammount = (int)(unite.Puissance * ratio);
+                if (unite.Vie + ammount <= unite.VieMax)
                 {
-                    int ammount = (int)(unite.Puissance * ratio);
-                    if (unite.Vie + ammount <= unite.VieMax)
-                    {
-                        unite.Vie += ammount;
-                        TickCurrent++;
-                    }
-                    else
-                        unite.Vie = unite.VieMax;
+                    unite.Vie += ammount;
                 }
+                else
+                    unite.Vie = unite.VieMax;
             }
         }
 

@@ -9,8 +9,8 @@ namespace CrystalGate
 {
     class RegenMana : Spell
     {
-        public RegenMana(Unite u, bool useMana = true)
-            : base(u)  
+        public RegenMana(Unite u, Unite cible, bool useMana = true)
+            : base(u, cible)  
         {
             Cooldown = 2;
             Ticks = 1;
@@ -28,22 +28,17 @@ namespace CrystalGate
             sonSort = new EffetSonore(PackSon.Soin);
         }
 
-        public override void Update()
+        public override void UpdateSort()
         {
-            Animer();
-            if (TickCurrent < Ticks)
+            if (unite.Mana != unite.ManaMax)
             {
-                if (unite.Mana != unite.ManaMax)
+                int ammount = unite.ManaMax / 10;
+                if (unite.Mana + ammount <= unite.ManaMax)
                 {
-                    int ammount = unite.ManaMax / 10;
-                    if (unite.Mana + ammount <= unite.ManaMax)
-                    {
-                        unite.Mana += ammount;
-                        TickCurrent++;
-                    }
-                    else
-                        unite.Vie = unite.ManaMax;
+                    unite.Mana += ammount;
                 }
+                else
+                    unite.Vie = unite.ManaMax;
             }
         }
 

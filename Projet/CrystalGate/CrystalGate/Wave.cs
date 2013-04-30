@@ -72,6 +72,10 @@ namespace CrystalGate
                                 Map.unites.Add(new Demon(v, unites[0][0].Level));
                             else if (unites[0][0] is Ogre)
                                 Map.unites.Add(new Ogre(v, unites[0][0].Level));
+                            else if (unites[0][0] is Odin)
+                                Map.unites.Add(new Odin(v, unites[0][0].Level));
+                            else if (unites[0][0] is Assassin)
+                                Map.unites.Add(new Assassin(v, unites[0][0].Level));
                             else
                                 throw new Exception("Modif la wave!");
 

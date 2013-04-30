@@ -83,7 +83,7 @@ namespace CrystalGate
             Mana = ManaMax = 200;
             ManaRegen = 500;
             Vitesse = 0.1f;
-            Portee = 2; // 2 = Corps à corps
+            Portee = 1; // 1 = Corps à corps
             Dommages = 1;
             Puissance = 1;
             effetUniteAttaque = new EffetSonore(PackSon.Epee);
@@ -99,12 +99,12 @@ namespace CrystalGate
             color = Color.White; 
             
             idWave = -1;
-            spells = new List<Spell> { new Explosion(this), new Soin(this), new Invisibilite(this), new FurieSanguinaire(this), new Polymorphe(this, this) };
+            spells = new List<Spell> { new Explosion(this, null), new Soin(this, null), new Invisibilite(this, null), new FurieSanguinaire(this, null), new Polymorphe(this, this), new Tempete(this, this) };
             Inventory = new List<Item> { };
             Stuff = new List<Item> { };
 
-            Dialogue.Add("Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.");
-            Dialogue.Add("Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.");
+            Dialogue.Add("Dans la prochaine salle t'attends Odin, soit sur tes gardes!");
+            //Dialogue.Add("Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.");
         }
 
         public void statsLevelUpdate()
@@ -133,7 +133,7 @@ namespace CrystalGate
 
             // Pour Update et Draw les sorts
             foreach (Spell s in spells)
-                if (s.ToDraw)
+                if (s.Activated)
                     s.Update();
             // Pour Update et Draw les items de l'inventaire
             foreach (Item i in Inventory)
@@ -155,11 +155,11 @@ namespace CrystalGate
                     uniteAttacked = OlduniteAttacked;
         }
 
-        void IA(List<Unite> unitsOnMap)
+        protected virtual void IA(List<Unite> unitsOnMap)
         {
             // Cast un heal si < à la moitié de vie
             if (Vie <= VieMax / 2 && IsCastable(1))
-                Cast(1, Vector2.Zero, null);
+                Cast(1, PositionTile, null);
 
             if (uniteAttacked != null)
             {
@@ -270,7 +270,7 @@ namespace CrystalGate
         void InventoryUpdate()
         {
             for (int i = 0; i < Inventory.Count; i++)
-                if (Inventory[i].Activated && !Inventory[i].spell.ToDraw)
+                if (Inventory[i].Activated && !Inventory[i].spell.Activated)
                     Inventory.Remove(Inventory[i]);
         }
        
@@ -285,7 +285,8 @@ namespace CrystalGate
 
         public virtual void Attaquer(Unite unite)
         {
-            if (Outil.DistanceUnites(this, unite) >= Portee * Map.TailleTiles.X)
+            float calcule = Outil.DistanceUnites(this, unite) - (25 * (unite.largeurPhysique + this.largeurPhysique) / 2);
+            if (Outil.DistanceUnites(this, unite) - (25 * (unite.largeurPhysique + this.largeurPhysique) / 2) >= Portee * Map.TailleTiles.X)
                 Suivre(unite);
             else
             {
@@ -410,7 +411,7 @@ namespace CrystalGate
                     direction = Direction.BasGauche;
                 }
                 // GAUCHE
-                else if (PositionTile.X > ObjectifListe[0].Position.X)
+                /*else if (PositionTile.X > ObjectifListe[0].Position.X)
                 {
                     body.LinearVelocity = new Vector2(-Vitesse, 0) * Map.gametime.ElapsedGameTime.Milliseconds;
                     FlipH = true;
@@ -448,7 +449,7 @@ namespace CrystalGate
                     if (direction != Direction.Bas || Animation.Count == 0)
                         Animation = packAnimation.Bas();
                     direction = Direction.Bas;
-                }
+                }*/
                 else
                     ObjectifListe.RemoveAt(0);
 
@@ -514,7 +515,7 @@ namespace CrystalGate
             DrawVie(spriteBatch);
             // Draw les sorts
             foreach (Spell s in spells)
-                if (s.ToDraw)
+                if (s.Activated)
                     s.Draw(spriteBatch);
             foreach (Item i in Inventory)
                 if (i.Activated)

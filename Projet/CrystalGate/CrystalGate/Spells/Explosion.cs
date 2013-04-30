@@ -9,12 +9,12 @@ namespace CrystalGate
 {
     class Explosion : Spell
     {
-        const int Portée = 75;
+        const int Portée = 100;
         const float ratio = 2.5f;
         Text description1, description2, description3;
 
-        public Explosion(Unite u)
-            : base(u)  
+        public Explosion(Unite u, Unite cible, bool useMana = true)
+            : base(u, cible)  
         {
             Cooldown = 2;
             Ticks = 1;
@@ -33,21 +33,16 @@ namespace CrystalGate
             description3 = new Text("DescriptionExplosion3");
         }
 
-        public override void Update()
+        public override void UpdateSort()
         {
-            Animer();
-            if (TickCurrent < Ticks)
+            foreach (Unite u in Map.unites)
             {
-                foreach (Unite u in Map.unites)
+                float distance = Outil.DistancePoints(this.Point, u.PositionTile);
+                if (u != unite && distance <= Portée)
                 {
-                    float distance = Outil.DistancePoints(this.Point, u.PositionTile);
-                    if (u != unite && distance <= Portée)
-                    {
-                        u.Vie -= (int)(unite.Puissance * ratio - u.DefenseMagique);
-                        //u.color = Color.Red;
-                    }
+                    u.Vie -= (int)(unite.Puissance * ratio - u.DefenseMagique);
+                    //u.color = Color.Red;
                 }
-                TickCurrent++;
             }
         }
 

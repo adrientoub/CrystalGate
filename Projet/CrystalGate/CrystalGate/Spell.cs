@@ -21,8 +21,8 @@ namespace CrystalGate
         public bool NeedAUnit;
         public Vector2 Point; // Point de cible (facultatif) pour le sort
         public Unite UniteCible; // Unite a cibler (facultatif) pour le sort
-        public bool ToDraw; // Determine si le sort doit etre dessiné
-
+        public bool Activated; // Determine si le sort doit etre dessiné
+        public bool FinDuDrawAtteint; // Determine si on a draw toute l'animation du sort
         public List<Vector2> Animation;// Animation du sort
         public List<Vector2> AnimationReset; // Animation du sort (sert à reset l'animation)
         protected int AnimationCurrent;
@@ -35,7 +35,7 @@ namespace CrystalGate
 
         public EffetSonore sonSort;
 
-        public Spell(Unite u)
+        public Spell(Unite u, Unite cible, bool useMana = true)
         {
             unite = u;
             AnimationCurrent = AnimationLimite;
@@ -55,29 +55,45 @@ namespace CrystalGate
 
         public void Animer()
         {
-            if (AnimationCurrent >= AnimationLimite)
+            if (Animation != null)
             {
-                if (Animation.Count == 0)
+                if (AnimationCurrent >= AnimationLimite)
                 {
-                    ToDraw = false;
-                    foreach (Vector2 v in AnimationReset)
-                        Animation.Add(v);
+                    if (Animation.Count == 0)
+                    {
+                        FinDuDrawAtteint = true;
+                        foreach (Vector2 v in AnimationReset)
+                            Animation.Add(v);
+                    }
+                    else
+                    {
+                        AnimationCurrent = 0;
+                        SpritePosition = new Rectangle((int)Animation[0].X * (int)Tiles.X, (int)Animation[0].Y * (int)Tiles.Y, (int)Tiles.X, (int)Tiles.Y);
+                        Animation.RemoveAt(0);
+                    }
                 }
-                else
-                {
-                    AnimationCurrent = 0;
-                    SpritePosition = new Rectangle((int)Animation[0].X * (int)Tiles.X, (int)Animation[0].Y * (int)Tiles.Y, (int)Tiles.X, (int)Tiles.Y);
-                    Animation.RemoveAt(0);
-                }
-            }
 
-            else
-                AnimationCurrent++;
+                else
+                    AnimationCurrent++;
+            }
         }
 
         public virtual void Update()
         {
             Animer();
+            if (TickCurrent < Ticks)
+            {
+                UpdateSort();
+                TickCurrent++;
+            }
+            else
+                if(FinDuDrawAtteint)
+                    Activated = false;
+        }
+
+        public virtual void UpdateSort()
+        {
+
         }
 
         public virtual void Draw(SpriteBatch spriteBatch)
@@ -88,7 +104,7 @@ namespace CrystalGate
         public virtual void Begin(Vector2 p, Unite unit)
         {
             LastCast = (float)Map.gametime.TotalGameTime.TotalMilliseconds;
-            ToDraw = true;
+            Activated = true;
             TickCurrent = 0;
             sonSort.Play();
             unite.Mana -= CoutMana;

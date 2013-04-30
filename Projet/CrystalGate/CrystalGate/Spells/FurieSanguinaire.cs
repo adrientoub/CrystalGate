@@ -12,8 +12,8 @@ namespace CrystalGate
         const float ratio = 0.2f;
         Text description;
 
-        public FurieSanguinaire(Unite u, bool useMana = true)
-            : base(u)
+        public FurieSanguinaire(Unite u, Unite cible, bool useMana = true)
+            : base(u, cible)
         {
             Cooldown = 5;
             Ticks = 300;
@@ -30,24 +30,20 @@ namespace CrystalGate
             description = new Text("DescriptionFurieSanguinaire");
         }
 
-        public override void Update()
+        public override void UpdateSort()
         {
-            if (TickCurrent < Ticks)
-            {
                 if (TickCurrent == 0)
                 {
                     unite.Vitesse_Attaque -= ratio;
-                    unite.Scale = 1.25f;
+                    unite.Scale *= 1.25f;
                     unite.color = Color.LightPink;
                 }
                 else if (TickCurrent == Ticks - 1)
                 {
                     unite.Vitesse_Attaque += ratio;
-                    unite.Scale = 1f;
+                    unite.Scale /= 1.25f;
                     unite.color = Color.White;
                 }
-                TickCurrent++;
-            }
         }
 
         public override string DescriptionSpell()
