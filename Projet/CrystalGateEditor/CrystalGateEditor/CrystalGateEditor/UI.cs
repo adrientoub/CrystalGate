@@ -24,16 +24,12 @@ namespace CrystalGateEditor
         bool ShowHelp;
         bool ShowAlert;
 
-        public Mode mode;
-        public SousMode sousmode;
         public TextureStart textureStart;
 
         public User user;
 
         string MenuString = "";
         public string MapName = "";
-        string longueur = "";
-        string hauteur = "";
         string current = "";
         string textBase = "";
 
@@ -60,7 +56,6 @@ namespace CrystalGateEditor
             this.SpriteFont = spriteFont;
 
             this.PalettePosition = new Vector2(width - Palette.Width, 0);
-            this.sousmode = SousMode.Undone;
             stack = new Stack<Vector4> { };
             ShowMap = true;
 
@@ -69,198 +64,64 @@ namespace CrystalGateEditor
 
         public void Update()
         {
-            // NouvelleMap ou on Charge ?
-            if (mode == Mode.LoadOrCreate)
+            CameraCheck();
+
+            if (user.mouse.LeftButton == ButtonState.Pressed)
             {
-                MenuString = "    Creer/Ouvrir: \n 1 - Creer une nouvelle carte \n 2 - Charge la carte specifie";
-
-                if (user.keyboardState.IsKeyDown(Keys.D1))
-                    mode = Mode.NouvelleMap;
-                if (user.keyboardState.IsKeyDown(Keys.D2))
-                    mode = Mode.ChargerMap;
-            }
-
-            // Si NouvelleMap
-            if (mode == Mode.NouvelleMap)
-            {
-                if (sousmode == SousMode.Undone)
-                    sousmode = SousMode.Nom;
-
-                if (sousmode == SousMode.Done)
+                if (user.mouse.X < width - Palette.Width && ShowPalette || !ShowPalette)
                 {
-                    // Creer la carte
-                    Map = new Vector2[int.Parse(longueur), int.Parse(hauteur)];
-                    Initialiser();
-                    MenuString = "";
-                    current = "";
-                    mode = Mode.Draw;
-                    ShowMap = true;
-                }
-            }
-
-            // Si ChargerMap
-            if (mode == Mode.ChargerMap)
-            {
-                if (sousmode == SousMode.Undone)
-                    sousmode = SousMode.Nom;
-
-                if (sousmode == SousMode.Done)
-                {
-                    if (!OuvrirMap(MapName))
+                    if (user.mouse.X + user.camera.Position.X < Map.GetLength(0) * 32 && user.mouse.Y + user.camera.Position.Y < Map.GetLength(1) * 32)
                     {
-                        sousmode = SousMode.Nom;
-                        ShowAlert = true;
-                    }
-                    else
-                    {
-                        MenuString = "";
-                        current = "";
-                        mode = Mode.Draw;
-                        ShowMap = true;
-                        ShowCurrent = false;
-                        ShowAlert = false;
-                    }
-                }
-            }
-            // Dessiner
-            if (mode == Mode.Draw)
-            {
-                CameraCheck();
-
-                if (user.mouse.LeftButton == ButtonState.Pressed)
-                {
-                    if (user.mouse.X < width - Palette.Width && ShowPalette || !ShowPalette)
-                    {
-                        if (user.mouse.X + user.camera.Position.X < Map.GetLength(0) * 32 && user.mouse.Y + user.camera.Position.Y < Map.GetLength(1) * 32)
+                        int x = (int)(user.camera.Position.X + user.mouse.X) / 32;
+                        int y = (int)(user.camera.Position.Y + user.mouse.Y) / 32;
+                        if (Selection.X != Map[x, y].X || Selection.Y != Map[x, y].Y)
                         {
-                            int x = (int)(user.camera.Position.X + user.mouse.X) / 32;
-                            int y = (int)(user.camera.Position.Y + user.mouse.Y) / 32;
-                            if (Selection.X != Map[x, y].X || Selection.Y != Map[x, y].Y)
-                            {
-                                stack.Push(new Vector4(x, y, Map[x, y].X, Map[x, y].Y));
-                                Map[x, y] = Selection;
-                            }
+                            stack.Push(new Vector4(x, y, Map[x, y].X, Map[x, y].Y));
+                            Map[x, y] = Selection;
                         }
                     }
                 }
-                // Controle utilisateur
-                // ShowPalette
-                if (user.keyboardState.IsKeyDown(Keys.P) && user.oldKeyboardState.IsKeyUp(Keys.P))
-                    ShowPalette = !ShowPalette;
+            }
+            // Controle utilisateur
+            // ShowPalette
+            if (user.keyboardState.IsKeyDown(Keys.P) && user.oldKeyboardState.IsKeyUp(Keys.P))
+                ShowPalette = !ShowPalette;
 
-                // Selection tile
-                if (ShowPalette && user.mouse.LeftButton == ButtonState.Pressed && user.mouse.X + user.camera.Position.X >= PalettePosition.X && user.mouse.Y <= Palette.Height)
-                {
-                    int varx = (int)(user.mouse.X + user.camera.Position.X - PalettePosition.X);
-                    int vary = (int)(user.mouse.Y + user.camera.Position.Y - PalettePosition.Y);
+            // Selection tile
+            if (ShowPalette && user.mouse.LeftButton == ButtonState.Pressed && user.mouse.X + user.camera.Position.X >= PalettePosition.X && user.mouse.Y <= Palette.Height)
+            {
+                int varx = (int)(user.mouse.X + user.camera.Position.X - PalettePosition.X);
+                int vary = (int)(user.mouse.Y + user.camera.Position.Y - PalettePosition.Y);
 
-                    int x = (int)(varx - varx / 32) / 32;
-                    int y = (int)(vary - vary / 32) / 32;
-                    Selection = new Vector2(x, y);
-                }
-                // ShowHelp
-                if (user.keyboardState.IsKeyDown(Keys.OemComma))
-                    ShowHelp = true;
-                else
-                    ShowHelp = false;
-                // SaveMap
-                if (user.keyboardState.IsKeyDown(Keys.LeftControl) && user.keyboardState.IsKeyDown(Keys.S))
-                    SaveMap();
-                // Control Z
-                if (user.keyboardState.IsKeyDown(Keys.Z))
+                int x = (int)(varx - varx / 32) / 32;
+                int y = (int)(vary - vary / 32) / 32;
+                Selection = new Vector2(x, y);
+            }
+            // ShowHelp
+            if (user.keyboardState.IsKeyDown(Keys.OemComma))
+                ShowHelp = true;
+            else
+                ShowHelp = false;
+            // SaveMap
+            if (user.keyboardState.IsKeyDown(Keys.LeftControl) && user.keyboardState.IsKeyDown(Keys.S))
+                SaveMap();
+            // Control Z
+            if (user.keyboardState.IsKeyDown(Keys.Z))
+            {
+                if (stack.Count > 0)
                 {
-                    if (stack.Count > 0)
-                    {
-                        Vector4 sommet = stack.Pop();
-                        Map[(int)sommet.X, (int)sommet.Y] = new Vector2(sommet.Z, sommet.W);
-                    }
-                }
-                // Restart
-                if (user.keyboardState.IsKeyDown(Keys.R))
-                {
-                    SceneEngine2.SceneHandler.gameState = SceneEngine2.GameState.EditorSettings;
-                    MapName = "";
-                    stack = new Stack<Vector4>();
-                    ShowCurrent = false;
-                    Game1.scene.ReinitilizeEditor();
+                    Vector4 sommet = stack.Pop();
+                    Map[(int)sommet.X, (int)sommet.Y] = new Vector2(sommet.Z, sommet.W);
                 }
             }
-
-            // SousMode
-            if (sousmode == SousMode.Nom)
+            // Restart
+            if (user.keyboardState.IsKeyDown(Keys.R))
             {
-                MenuString = "Entrez le nom de la carte :";
-                bool b = user.SaisirTexte(ref MapName, false);
-                current = MapName;
-
-                if (b)
-                {
-                    if (mode == Mode.NouvelleMap)
-                    {
-                        sousmode = SousMode.TailleX;
-                        threadActuel = thread;
-                    }
-                    else
-                        sousmode = SousMode.Done;
-                }
-
-            }
-
-            if (sousmode == SousMode.TailleX)
-            {
-                MenuString = "Entrez la longueur de la carte :";
-                bool b = user.SaisirTexte(ref longueur, true) && longueur.Length > 0;
-                current = longueur;
-
-                if (b && threadActuel != thread)
-                {
-                    sousmode = SousMode.TailleY;
-                    threadActuel = thread;
-                }
-            }
-
-            if (sousmode == SousMode.TailleY)
-            {
-                MenuString = "Entrez la largeur de la carte :";
-                bool b = user.SaisirTexte(ref hauteur, true) && hauteur.Length > 0;
-                current = hauteur;
-
-                if (b && threadActuel != thread)
-                    sousmode = SousMode.TextureBase;
-            }
-
-            if (sousmode == SousMode.TextureBase)
-            {
-                MenuString = "    Choisir le type de sol : \n 1 - Herbe \n 2 - Desert \n 3 - Hiver \n 4 - Volcanique";
-                current = "";
-
-                if (user.keyboardState.IsKeyDown(Keys.D1))
-                    textBase = "1";
-                else if (user.keyboardState.IsKeyDown(Keys.D2))
-                    textBase = "2";
-                else if (user.keyboardState.IsKeyDown(Keys.D3))
-                    textBase = "3";
-                else if (user.keyboardState.IsKeyDown(Keys.D4))
-                    textBase = "4";
-
-                else if (textBase.Length == 1)
-                {
-                    switch (int.Parse(textBase))
-                    {
-                        case 1: textureStart = TextureStart.Herbe;
-                            break;
-                        case 2: textureStart = TextureStart.Desert;
-                            break;
-                        case 3: textureStart = TextureStart.Hiver;
-                            break;
-                        case 4: textureStart = TextureStart.Volcanique;
-                            break;
-                        default: textureStart = TextureStart.Herbe;
-                            break;
-                    }
-                    sousmode = SousMode.Done;
-                    ShowCurrent = false;
-                }
+                SceneEngine2.SceneHandler.gameState = SceneEngine2.GameState.EditorSettings;
+                MapName = "";
+                stack = new Stack<Vector4>();
+                ShowCurrent = false;
+                Game1.scene.ReinitilizeEditor();
             }
 
             if (thread - threadActuel > 100 && current == "Carte sauvegarde")
@@ -465,24 +326,6 @@ namespace CrystalGateEditor
             }
 
             spriteBatch.DrawString(SpriteFont, MenuString, new Vector2(user.camera.Position.X + width / 2, user.camera.Position.Y + height / 2), Color.White, 0, SpriteFont.MeasureString(MenuString) / 2, 1, SpriteEffects.None, 0);
-        }
-
-        public enum Mode
-        {
-            LoadOrCreate,
-            NouvelleMap,
-            ChargerMap,
-            Draw
-        }
-
-        public enum SousMode
-        {
-            Undone,
-            Nom,
-            TailleX,
-            TailleY,
-            TextureBase,
-            Done
         }
 
         public enum TextureStart

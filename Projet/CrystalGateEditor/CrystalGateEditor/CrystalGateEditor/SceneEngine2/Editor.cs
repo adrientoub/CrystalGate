@@ -39,7 +39,6 @@ namespace CrystalGateEditor.SceneEngine2
             sp = content.Load<SpriteFont>("Police");
             user = new User();
             ui = new UI(user, content.Load<Texture2D>("Palette"), content.Load<Texture2D>("PaletteHiver"), content.Load<Texture2D>("PaletteVolcanique"), sp, content.Load<Texture2D>("writing"));
-            ui.mode = UI.Mode.Draw;
             if (Game1.isTest)
                 baseDirectory = "../../../";
             else
