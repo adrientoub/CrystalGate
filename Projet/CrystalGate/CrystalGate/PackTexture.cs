@@ -40,6 +40,7 @@ namespace CrystalGate
         public static Texture2D Guerrier;
         public static Texture2D Ogre;
         public static Texture2D Troll;
+        public static Texture2D Odin;
         // Autres
         public static Texture2D Critters;
 
@@ -87,6 +88,7 @@ namespace CrystalGate
             Ogre = content.Load<Texture2D>("Unites/ogre");
             Troll = content.Load<Texture2D>("Unites/troll");
             Critters = content.Load<Texture2D>("Unites/critters");
+            Odin = content.Load<Texture2D>("Unites/Odin");
         }
     }
 }

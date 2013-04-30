@@ -119,6 +119,7 @@
   <ItemGroup>
     <Compile Include="Animations\AnimationArcher.cs" />
     <Compile Include="Animations\AnimationCritters.cs" />
+    <Compile Include="Animations\AnimationOdin.cs" />
     <Compile Include="Camera\Camera.cs" />
     <Compile Include="Items\Stuff\BottesDacier.cs" />
     <Compile Include="Items\Stuff\RingLionHead.cs" />
@@ -176,6 +177,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Unites\Cavalier.cs" />
     <Compile Include="Unites\Archer.cs" />
+    <Compile Include="Unites\Odin.cs" />
     <Compile Include="Unites\Guerrier.cs" />
     <Compile Include="Unites\Ogre.cs" />
     <Compile Include="Unites\Demon.cs" />

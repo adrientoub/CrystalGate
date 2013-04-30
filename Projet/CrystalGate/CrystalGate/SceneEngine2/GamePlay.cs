@@ -43,7 +43,7 @@ namespace CrystalGate.SceneEngine2
             FondSonore.Load(content);
 
             // Ajout joueurs
-            Map.joueurs.Add(new Joueur(new Guerrier(new Vector2(0, 9))));
+            Map.joueurs.Add(new Joueur(new Odin(new Vector2(0, 9))));
             Map.unites.Add(Map.joueurs[0].champion);
             Map.unites.Add(new Grunt(Vector2.One));
             Map.unites[Map.unites.Count - 1].isApnj = true;
