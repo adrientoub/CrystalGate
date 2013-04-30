@@ -47,13 +47,13 @@ namespace CrystalGate.SceneEngine2
         {
             if (pictureTime)
             {
-                if (gameTime.TotalGameTime.Seconds >= 5)
+                if ((mouse.LeftButton == ButtonState.Pressed & oldMouse.LeftButton == ButtonState.Released) || gameTime.TotalGameTime.Seconds >= 5)
                 {
                     pictureTime = false;
                     videoTime = true;
                 }
             }
-            if (videoTime)
+            else if (videoTime)
             {
                 if (firstTime)
                 {
@@ -61,7 +61,12 @@ namespace CrystalGate.SceneEngine2
                     firstTime = false;
                 }
 
-                if (videoPlayer.State == MediaState.Stopped)
+                if (mouse.LeftButton == ButtonState.Pressed & oldMouse.LeftButton == ButtonState.Released)
+                {
+                    videoPlayer.Stop();
+                    SceneHandler.gameState = GameState.MainMenu;
+                }
+                else if (videoPlayer.State == MediaState.Stopped)
                 {
                     SceneHandler.gameState = GameState.MainMenu;
                 }
