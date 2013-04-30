@@ -12,7 +12,7 @@ namespace CrystalGateEditor
 {
     public class UI
     {
-        Texture2D Palette, PaletteHiver, PaletteVolcanique, fondTexte;
+        Texture2D Palette, PaletteEte, PaletteHiver, PaletteVolcanique, fondTexte;
         SpriteFont SpriteFont;
 
         Vector2 PalettePosition;
@@ -48,11 +48,12 @@ namespace CrystalGateEditor
 
         Stack<Vector4> stack;
 
-        public UI(User user, Texture2D Palette, Texture2D PaletteHiver, Texture2D PaletteVolcanique, SpriteFont spriteFont, Texture2D fondTexte)
+        public UI(User user, Texture2D PaletteEte, Texture2D PaletteHiver, Texture2D PaletteVolcanique, SpriteFont spriteFont, Texture2D fondTexte)
         {
             this.user = user;
 
-            this.Palette = Palette;
+            this.Palette = PaletteEte;
+            this.PaletteEte = PaletteEte;
             this.PaletteHiver = PaletteHiver;
             this.PaletteVolcanique = PaletteVolcanique;
             this.fondTexte = fondTexte;
@@ -208,7 +209,7 @@ namespace CrystalGateEditor
             if (sousmode == SousMode.TailleX)
             {
                 MenuString = "Entrez la longueur de la carte :";
-                bool b = user.SaisirTexte(ref longueur, true);
+                bool b = user.SaisirTexte(ref longueur, true) && longueur.Length > 0;
                 current = longueur;
 
                 if (b && threadActuel != thread)
@@ -221,7 +222,7 @@ namespace CrystalGateEditor
             if (sousmode == SousMode.TailleY)
             {
                 MenuString = "Entrez la largeur de la carte :";
-                bool b = user.SaisirTexte(ref hauteur, true);
+                bool b = user.SaisirTexte(ref hauteur, true) && hauteur.Length > 0;
                 current = hauteur;
 
                 if (b && threadActuel != thread)
@@ -283,6 +284,7 @@ namespace CrystalGateEditor
                     {
                         x = rand.Next(14, 18);
                         y = 18;
+                        this.Palette = PaletteEte;
                     }
                     if (textureStart == TextureStart.Volcanique)
                     {
@@ -294,6 +296,7 @@ namespace CrystalGateEditor
                     {
                         x = rand.Next(11, 14);
                         y = 17;
+                        this.Palette = PaletteEte;
                     }
                     if (textureStart == TextureStart.Hiver)
                     {
