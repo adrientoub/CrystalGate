@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Net.Sockets;
+using System.Net;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -24,12 +26,13 @@ namespace CrystalGate.SceneEngine2
 
         private Vector2 positionTexteIP, positionTexteMode;
 
-        public bool isServer;
+        public bool isServer, validIpAddress;
 
         public override void Initialize()
         {
             textAsWrited = "";
             isServer = false;
+            validIpAddress = false;
         }
 
         public override void LoadContent()
@@ -58,9 +61,18 @@ namespace CrystalGate.SceneEngine2
         public override void Update(GameTime gameTime)
         {
             mouseRec = new Rectangle(mouse.X, mouse.Y, 5, 5);
+            if (isServer || IPAddress.TryParse(textAsWrited, out CoopConnexionScene.ip))
+            {
+                validIpAddress = true;
+            }
+            else
+            {
+                validIpAddress = false;
+            }
+
             if (mouse.LeftButton == ButtonState.Pressed && oldMouse.LeftButton == ButtonState.Released)
             {
-                if (mouseRec.Intersects(boutonConnexion))
+                if (mouseRec.Intersects(boutonConnexion) && validIpAddress)
                 {
                     SceneHandler.gameState = GameState.CoopConnexion;
                 }
@@ -107,10 +119,17 @@ namespace CrystalGate.SceneEngine2
                 spriteBatch.DrawString(spriteFont, ipT.get(), positionTexteIP, Color.Blue);
             }
 
+            Color c;
+            if (validIpAddress)
+                c = Color.White;
+            else
+                c = Color.Gray;
+
             if (mouseRec.Intersects(boutonConnexion))
                 spriteBatch.Draw(boutons, boutonConnexion, Color.Gray);
             else
-                spriteBatch.Draw(boutons, boutonConnexion, Color.White);
+                spriteBatch.Draw(boutons, boutonConnexion, c);
+
             if (mouseRec.Intersects(boutonRetour))
                 spriteBatch.Draw(boutons, boutonRetour, Color.Gray);
             else
@@ -128,7 +147,7 @@ namespace CrystalGate.SceneEngine2
                 lancerJeuT.get(),
                 new Vector2((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width) / 2 - spriteFont.MeasureString(lancerJeuT.get()).X / 2,
                     boutonConnexion.Top + 10),
-                Color.White);
+                c);
 
             spriteBatch.DrawString(
                 spriteFont,

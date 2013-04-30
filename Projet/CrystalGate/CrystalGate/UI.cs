@@ -117,18 +117,20 @@ namespace CrystalGate
             compteurDeVague = Wave.waveNumber.ToString() + "/" + nombreDeVagues.ToString();
 
             if (SceneEngine2.BaseScene.keyboardState.IsKeyDown(Keys.Enter) &&
-                SceneEngine2.BaseScene.oldKeyboardState.IsKeyUp(Keys.Enter) && 
+                SceneEngine2.BaseScene.oldKeyboardState.IsKeyUp(Keys.Enter) &&
                 SceneEngine2.CoopConnexionScene.isOnlinePlay)
             {
                 if (isWriting && message != "")
                 {
-                    Reseau.Reseau.SendData(SceneEngine2.CoopConnexionScene.textAsWrited + " : " + message);
+                    Reseau.Reseau.SendData(SceneEngine2.CoopConnexionScene.textAsWrited + " : " + message, 1);
                     message = "";
                     isWriting = false;
                 }
                 else
                     isWriting = true;
             }
+            if (!SceneEngine2.CoopConnexionScene.isOnlinePlay)
+                isWriting = false;
 
             if (isWriting)
                 SaisirTexte(ref message);
@@ -154,8 +156,8 @@ namespace CrystalGate
                 {
                     messageRecu += "\n" + Reseau.Reseau.discution[i].message;
                 }
-			} 
-            positionChat = new Vector2(widthFondNoir, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height - heightFondNoir - spellfont.MeasureString(messageRecu).Y - 50);
+			}
+            positionChat = new Vector2(widthFondNoir, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height - heightFondNoir - gamefont.MeasureString(messageRecu).Y - 50);
         }
 
         #region fonctionsSupl

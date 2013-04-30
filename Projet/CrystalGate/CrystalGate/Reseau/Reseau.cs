@@ -16,6 +16,34 @@ namespace CrystalGate.Reseau
 
         public static void ReceiveCallback(IAsyncResult result)
         {
+            try
+            {
+                Socket soc = (Socket)result.AsyncState;
+                soc.EndReceive(result);
+                // Traitement : 
+                if (buffer[0].Array[0] == 1) // Si on reçoit une string
+                {
+                    buffer.Clear();
+                    buffer.Add(new ArraySegment<byte>(new byte[4]));
+                    soc.BeginReceive(buffer, SocketFlags.None, receiveStringLengthCallback, soc);
+                    tailleDeLaString = 0;
+                }
+                else // On reçoit autre chose :)
+                {
+
+                }
+            }
+            catch (Exception)
+            {
+                discution.Add(new Message(EffetSonore.time.Elapsed, "Connexion perdue"));
+                SceneEngine2.CoopConnexionScene.isOnlinePlay = false;
+                
+                // On essaie de se reconnecter
+            }
+        }
+
+        public static void ReceiveStringLengthCallback(IAsyncResult result)
+        {
             Socket soc = (Socket)result.AsyncState;
             soc.EndReceive(result);
             // Traitement : 
@@ -32,7 +60,6 @@ namespace CrystalGate.Reseau
             Socket soc = (Socket)result.AsyncState;
             soc.EndReceive(result);
             // Traitement :
-            //UI.messageRecu = Encoding.UTF8.GetString(buffer[0].Array);
             discution.Add(new Message(EffetSonore.time.Elapsed ,Encoding.UTF8.GetString(buffer[0].Array)));
 
             buffer.Clear();
@@ -41,9 +68,10 @@ namespace CrystalGate.Reseau
         }
 
         static AsyncCallback receiveCallback = new AsyncCallback(ReceiveCallback);
+        static AsyncCallback receiveStringLengthCallback = new AsyncCallback(ReceiveStringLengthCallback);
         static AsyncCallback receiveStringCallback = new AsyncCallback(ReceiveStringCallback);
 
-        public static void SendData(string texte)
+        public static void SendData(object envoi, int type)
         {
             Socket soc;
             if (SceneEngine2.SceneHandler.coopSettingsScene.isServer)
@@ -54,13 +82,20 @@ namespace CrystalGate.Reseau
             {
                 soc = SceneEngine2.SceneHandler.coopConnexionScene.soc;
             }
-            discution.Add(new Message(EffetSonore.time.Elapsed, texte));
+            if (type == 1)
+            {
+                string texte = (string)envoi;
+                discution.Add(new Message(EffetSonore.time.Elapsed, texte));
 
-            byte[] messageLength = BitConverter.GetBytes(texte.Length);
-            soc.Send(messageLength);
+                byte[] sendingString = new byte[] { 1 };
+                soc.Send(sendingString);
 
-            byte[] messageData = System.Text.Encoding.UTF8.GetBytes(texte);
-            soc.Send(messageData);
+                byte[] messageLength = BitConverter.GetBytes(texte.Length);
+                soc.Send(messageLength);
+
+                byte[] messageData = System.Text.Encoding.UTF8.GetBytes(texte);
+                soc.Send(messageData);
+            }
         }
 
         public static void ReceiveData()
@@ -74,7 +109,7 @@ namespace CrystalGate.Reseau
             {
                 soc = SceneEngine2.SceneHandler.coopConnexionScene.soc;
             }
-            buffer.Add(new ArraySegment<byte>(new byte[4]));
+            buffer.Add(new ArraySegment<byte>(new byte[1]));
             soc.BeginReceive(buffer, SocketFlags.None, receiveCallback, soc);
         }
     }

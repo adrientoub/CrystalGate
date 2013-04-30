@@ -26,6 +26,8 @@ namespace CrystalGate.SceneEngine2
 
         public static string textAsWrited;
 
+        public static IPAddress ip;
+
         private bool isServer, lancerJeuActive, firstTime;
 
         public static bool isOnlinePlay;
@@ -60,8 +62,16 @@ namespace CrystalGate.SceneEngine2
 
         public void ClientConnected(IAsyncResult result)
         {
-            soc.EndConnect(result);
-            lancerJeuActive = true;
+            try
+            {
+                soc.EndConnect(result);
+                lancerJeuActive = true;
+            }
+            catch (Exception)
+            {
+                AsyncCallback cc = new AsyncCallback(ClientConnected);
+                soc.BeginConnect(ip, 6060, cc, soc);
+            }
         }
 
         public void ServerConnected(IAsyncResult result)
@@ -87,7 +97,7 @@ namespace CrystalGate.SceneEngine2
                 else
                 {
                     AsyncCallback cc = new AsyncCallback(ClientConnected);
-                    soc.BeginConnect(IPAddress.Parse(SceneHandler.coopSettingsScene.textAsWrited), 6060, cc, soc);
+                    soc.BeginConnect(ip, 6060, cc, soc);
                 }
                 firstTime = false;
             }
