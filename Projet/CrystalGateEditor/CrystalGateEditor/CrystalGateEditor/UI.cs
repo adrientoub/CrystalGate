@@ -320,7 +320,7 @@ namespace CrystalGateEditor
                 int longueur = 0;
                 int hauteur = 0;
 
-                StreamReader file = new StreamReader(Game1.baseDirectory + "../../../Maps/" + MapName + ".txt");
+                StreamReader file = new StreamReader(SceneEngine2.Editor.baseDirectory + "Maps/" + MapName + ".txt");
                 // On regarde quel type de sol c'est grace au header
 
                 switch (int.Parse(file.ReadLine()))
@@ -350,7 +350,7 @@ namespace CrystalGateEditor
                 Map = new Vector2[longueur, hauteur];
                 // Reset
                 file.Close();
-                file = new StreamReader(Game1.baseDirectory + "../../../Maps/" + MapName + ".txt");
+                file = new StreamReader(SceneEngine2.Editor.baseDirectory + "Maps/" + MapName + ".txt");
                 int j = 0;
                 file.ReadLine(); // pour passer le header
                 while ((line = file.ReadLine()) != null)
@@ -379,7 +379,7 @@ namespace CrystalGateEditor
 
         public void SaveMap()
         {
-            StreamWriter stream = new StreamWriter(Game1.baseDirectory + "../../../Maps/" + MapName + ".txt");
+            StreamWriter stream = new StreamWriter(SceneEngine2.Editor.baseDirectory + "Maps/" + MapName + ".txt");
 
             switch (this.textureStart)
             {

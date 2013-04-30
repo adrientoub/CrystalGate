@@ -16,14 +16,11 @@ namespace CrystalGateEditor
     /// </summary>
     public class Game1 : Microsoft.Xna.Framework.Game
     {
-        GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
-        SpriteFont sp;
+        public static GraphicsDeviceManager graphics;
         public static bool isTest = true;
-        public static string baseDirectory;
+        SceneEngine2.SceneHandler scene;
 
-        User user;
-        UI ui;
+        public static bool exit;
 
         public Game1()
         {
@@ -36,34 +33,34 @@ namespace CrystalGateEditor
             graphics.PreferredBackBufferWidth = width;
             graphics.PreferredBackBufferHeight = height;
             Content.RootDirectory = "Content";
+
+            scene = new SceneEngine2.SceneHandler();
+            SceneEngine2.SceneHandler.content = Content;
+            exit = false;
+
+            SceneEngine2.MenuOptions.isFullscreen = !graphics.IsFullScreen;
+
+            GameText.initGameText();
         }
 
         protected override void LoadContent()
         {
             // Créer un SpriteBatch, qui peut être utilisé pour dessiner des textures.
-            spriteBatch = new SpriteBatch(GraphicsDevice);
-            sp = Content.Load<SpriteFont>("Police");
-            user = new User();
-            ui = new UI(user, Content.Load<Texture2D>("Palette"), Content.Load<Texture2D>("PaletteHiver"), Content.Load<Texture2D>("PaletteVolcanique"), sp, Content.Load<Texture2D>("writing"));
-            ui.mode = UI.Mode.LoadOrCreate;
-            if (Game1.isTest)
-                baseDirectory = "../../../";
-            else
-                baseDirectory = "./";
+            SceneEngine2.SceneHandler.spriteBatch = new SpriteBatch(GraphicsDevice);
+            scene.Load();
+            scene.Initialize();
         }
 
         protected override void Update(GameTime gameTime)
         {
-            user.Update();
-            ui.Update();
+            scene.Update(gameTime);
+            if (exit)
+                Exit();
         }
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
-            spriteBatch.Begin(0, null, null, null, null, null, user.camera.CameraMatrix);
-            ui.Draw(spriteBatch);
-            spriteBatch.End();
+            scene.Draw();
             base.Draw(gameTime);
         }
     }
