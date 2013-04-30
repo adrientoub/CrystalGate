@@ -35,18 +35,27 @@ namespace CrystalGate.SceneEngine2
             // Chargement des textures : Pack de texture (Contient toutes les sprites des unites et des sorts)
             PackTexture.Initialize(content);
 
-            // Chargement de la carte
-            Outil.OuvrirMap("level1");
-
             // Chargement sons
             PackSon.Initialize(content);
             FondSonore.Load(content);
 
+            // Chargement de la carte
+            Outil.OuvrirMap(SceneHandler.level);
+
             // Ajout joueurs
-            Map.joueurs.Add(new Joueur(new Assassin(new Vector2(0, 9))));
-            Map.unites.Add(Map.joueurs[0].champion);
-            Map.unites.Add(new Grunt(Vector2.One));
-            Map.unites[Map.unites.Count - 1].isApnj = true;
+            if (SceneHandler.joueur == null) // Si c'est la premier fois qu'on boot le jeu
+            {
+                Map.joueurs.Add(new Joueur(new Assassin(new Vector2(0, 9))));
+                Map.unites.Add(Map.joueurs[0].champion);
+            }
+            else // Sinon on recupere le heros
+            {
+                Map.joueurs.Add(SceneHandler.joueur);
+                Map.unites.Add(SceneHandler.joueur.champion);
+            }
+
+            // Map.unites.Add(new Grunt(Vector2.One));
+            // Map.unites[Map.unites.Count - 1].isApnj = true;
 
             // Ajout Interface
             UI Interface = new UI(Map.joueurs[0], SceneHandler.spriteBatch, gameFont, content.Load<SpriteFont>("Polices/SpellFont"));

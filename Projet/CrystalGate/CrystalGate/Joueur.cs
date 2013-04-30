@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework;
+using CrystalGate.SceneEngine2;
 
 namespace CrystalGate
 {
@@ -73,6 +74,10 @@ namespace CrystalGate
                 // Pour arreter les déplacements
                 if (Interface.key.IsKeyDown(Keys.S))
                     DonnerOrdreStop();
+                // Pour se teleporter!
+                if (Interface.key.IsKeyDown(Keys.T))
+                    SceneHandler.ResetGameplay("level2");
+
                 // Pour lancer un sort
                 if (Interface.key.IsKeyDown(Keys.D1) && champion.spells.Count > 0 || Interface.SourisClickSpellCheck(0) && champion.spells.Count > 0)
                 {
@@ -201,7 +206,6 @@ namespace CrystalGate
             CameraUpdate();
             Interface.Update();
             CurseurCheck();
-            CheckWinandLose();
             Interface.Oldmouse = Interface.mouse;
             Interface.Oldkey = Interface.key;
         }
@@ -316,14 +320,5 @@ namespace CrystalGate
         {
             return Interface.EquipementPosition.Intersects(new Rectangle(Interface.mouse.X, Interface.mouse.Y, 1, 1));
         } // Renvoie si la souris est sur l'equipement
-
-        public void CheckWinandLose()
-        {
-            if (champion.PositionTile == new Vector2(8, 25) || champion.PositionTile == new Vector2(8, 26))
-                Interface.Win = true;
-            if (champion.Vie == 0)
-                Interface.Lost = true;
-
-        }
     }
 }

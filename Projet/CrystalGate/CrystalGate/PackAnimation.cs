@@ -149,6 +149,8 @@ namespace CrystalGate
                 liste.Add(new Vector2(0, 10));
             else if (unite is Odin)
                 liste.Add(new Vector2(3, 0));
+            else if (unite is Assassin)
+                liste.Add(new Vector2(0, 6));
             else
                 throw new Exception("T'as pas modif la classe packanimation!");
 
