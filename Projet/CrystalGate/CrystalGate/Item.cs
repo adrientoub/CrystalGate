@@ -49,7 +49,7 @@ namespace CrystalGate
 
         public void Utiliser()
         {
-            spell.Begin(unite.pointCible); // Lance le sort de l'objet et le marque comme activé , pour qu'il soit retiré de l'inventaire dans le methode InventoryUpdate()
+            spell.Begin(unite.pointCible, null); // Lance le sort de l'objet et le marque comme activé , pour qu'il soit retiré de l'inventaire dans le methode InventoryUpdate()
             Activated = true;
         }
     }

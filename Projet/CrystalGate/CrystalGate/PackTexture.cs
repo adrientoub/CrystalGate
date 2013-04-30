@@ -13,7 +13,6 @@ namespace CrystalGate
     {
         public static Texture2D blank;
         public static Texture2D tresor;
-        public static List<Texture2D> unites;
         public static List<Texture2D> sorts;
         public static List<Texture2D> boutons;
         public static List<Texture2D> projectiles;
@@ -33,23 +32,31 @@ namespace CrystalGate
         public static Texture2D CavalierPortrait;
         public static Texture2D GruntPortrait;
         public static Texture2D ArcherPortrait;
+        // Unites
+        public static Texture2D Archer;
+        public static Texture2D Cavalier;
+        public static Texture2D Demon;
+        public static Texture2D Grunt;
+        public static Texture2D Guerrier;
+        public static Texture2D Ogre;
+        public static Texture2D Troll;
+        // Autres
+        public static Texture2D Critters;
 
 
         public static void Initialize(ContentManager content)
         {
-
-            unites = new List<Texture2D> { };
             sorts = new List<Texture2D> { };
             boutons = new List<Texture2D> { };
             projectiles = new List<Texture2D> { };
 
             blank = content.Load<Texture2D>("blank");
             tresor = content.Load<Texture2D>("tresor");
-            unites = new List<Texture2D> { content.Load<Texture2D>("Unites/knight"), content.Load<Texture2D>("Unites/grunt"), content.Load<Texture2D>("Unites/archer"), content.Load<Texture2D>("Unites/troll"), content.Load<Texture2D>("Unites/demon"), content.Load<Texture2D>("Unites/ogre"), content.Load<Texture2D>("Unites/champion") };
+           
             sorts.Add(content.Load<Texture2D>("Spells/Explosion"));
             sorts.Add(content.Load<Texture2D>("Spells/Soin"));
             sorts.Add(content.Load<Texture2D>("Spells/ManaRegen"));
-            boutons = new List<Texture2D> { content.Load<Texture2D>("Boutons/Explosion"), content.Load<Texture2D>("Boutons/Soin"), content.Load<Texture2D>("Boutons/Invisibility"), content.Load<Texture2D>("Boutons/PotionDeVie"), content.Load<Texture2D>("Boutons/PotionMana"), content.Load<Texture2D>("Boutons/BloodLust"), content.Load<Texture2D>("Boutons/EpeeSolari"), content.Load<Texture2D>("Boutons/BottesDacier"), content.Load<Texture2D>("Boutons/Epaulieres"), content.Load<Texture2D>("Boutons/GantsDeDevotion"), content.Load<Texture2D>("Boutons/HelmutPurple"), content.Load<Texture2D>("Boutons/RingLionHead") };
+            boutons = new List<Texture2D> { content.Load<Texture2D>("Boutons/Explosion"), content.Load<Texture2D>("Boutons/Soin"), content.Load<Texture2D>("Boutons/Invisibility"), content.Load<Texture2D>("Boutons/PotionDeVie"), content.Load<Texture2D>("Boutons/PotionMana"), content.Load<Texture2D>("Boutons/BloodLust"), content.Load<Texture2D>("Boutons/EpeeSolari"), content.Load<Texture2D>("Boutons/BottesDacier"), content.Load<Texture2D>("Boutons/Epaulieres"), content.Load<Texture2D>("Boutons/GantsDeDevotion"), content.Load<Texture2D>("Boutons/HelmutPurple"), content.Load<Texture2D>("Boutons/RingLionHead"), content.Load<Texture2D>("Boutons/Polymorph") };
             projectiles = new List<Texture2D> { content.Load<Texture2D>("Projectiles/arrow"), content.Load<Texture2D>("Projectiles/axe"), content.Load<Texture2D>("Projectiles/fireball") };
             
             // Tiles
@@ -70,6 +77,16 @@ namespace CrystalGate
             CavalierPortrait = content.Load<Texture2D>("UI/knightIcone");
             GruntPortrait = content.Load<Texture2D>("UI/gruntIcone");
             ArcherPortrait = content.Load<Texture2D>("UI/archerIcone");
+
+            // Unites
+            Archer = content.Load<Texture2D>("Unites/archer");
+            Cavalier = content.Load<Texture2D>("Unites/knight");
+            Demon = content.Load<Texture2D>("Unites/demon");
+            Grunt = content.Load<Texture2D>("Unites/grunt");
+            Guerrier = content.Load<Texture2D>("Unites/champion");
+            Ogre = content.Load<Texture2D>("Unites/ogre");
+            Troll = content.Load<Texture2D>("Unites/troll");
+            Critters = content.Load<Texture2D>("Unites/critters");
         }
     }
 }

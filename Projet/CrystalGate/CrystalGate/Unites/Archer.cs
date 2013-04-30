@@ -5,6 +5,7 @@ using System.Text;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using CrystalGate.Animations;
 
 namespace CrystalGate
 {
@@ -15,10 +16,10 @@ namespace CrystalGate
             : base(Position, Level)
         {
             // Graphique
-            Sprite = PackTexture.unites[2];
+            Sprite = PackTexture.Archer;
             Tiles = new Vector2( 295 / 5, 660 / 9);
             Portrait = PackTexture.ArcherPortrait;
-            //PackAnimation.isArcher = true; // ca va faire buger tout le monde!
+            packAnimation = new AnimationArcher();
             ProjectileSprite = PackTexture.projectiles[0];
 
             // Statistiques

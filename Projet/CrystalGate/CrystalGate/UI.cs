@@ -37,7 +37,7 @@ namespace CrystalGate
         public Vector2 BottesPosition = new Vector2(35, 25 + decalage * 5);
         public Vector2 ArmePosition = new Vector2(356, 115);
 
-        public bool DrawSelectPoint, DrawSac, DrawEquipement, DrawDialogue, OldDrawDialogue;
+        public bool DrawSelectPoint, DrawSelectUnit, DrawSac, DrawEquipement, DrawDialogue, OldDrawDialogue;
         public bool DrawUI = true;
 
         public Vector2 TailleSac = new Vector2(8, 8);
@@ -250,6 +250,18 @@ namespace CrystalGate
             return true;
         }
 
+        public bool SourisHoverSpellCheck(int i) // Renvoie vrai si le joueur a la souris sur le bouton i
+        {
+            int largeurBoutonSort = 32;
+            return mouse.X >= BarreDesSortsPosition.X - 130 + i * largeurBoutonSort && mouse.X <= BarreDesSortsPosition.X - 130 + i * largeurBoutonSort + largeurBoutonSort && mouse.Y >= BarreDesSortsPosition.Y + 8 && mouse.Y <= BarreDesSortsPosition.Y + 8 + largeurBoutonSort;
+        }
+
+        public bool SourisClickSpellCheck(int i) // Renvoie vrai si le joueur clique sur le bouton i
+        {
+            int largeurBoutonSort = 32;
+            return mouse.X >= BarreDesSortsPosition.X - 130 + i * largeurBoutonSort && mouse.X <= BarreDesSortsPosition.X - 130 + i * largeurBoutonSort + largeurBoutonSort && mouse.Y >= BarreDesSortsPosition.Y + 8 && mouse.Y <= BarreDesSortsPosition.Y + 8 + largeurBoutonSort && mouse.LeftButton == ButtonState.Pressed && Oldmouse.LeftButton == ButtonState.Released;
+        }
+
         public void SaisirTexte(ref string text)
         {
             Keys[] pressedKeys = SceneEngine2.BaseScene.keyboardState.GetPressedKeys();
@@ -334,7 +346,7 @@ namespace CrystalGate
                 spritebatch.Draw(ItemSelected.Icone, new Vector2(mouse.X, mouse.Y) + joueur.camera.Position, Color.White);
 
             // Textes
-            Text life = new Text("Life"), attack = new Text("Attack"), armor = new Text("Armor"), selectPoint = new Text("SelectPoint"), manaText = new Text("Mana"), levelText = new Text("Level"); // définition des mots traduisibles
+            Text life = new Text("Life"), attack = new Text("Attack"), armor = new Text("Armor"), selectPoint = new Text("SelectPoint"), selectUnit = new Text("SelectUnit"), manaText = new Text("Mana"), levelText = new Text("Level"); // définition des mots traduisibles
 
             // Affichage du dialogue avec les PNJ
             if (DrawDialogue)
@@ -428,7 +440,7 @@ namespace CrystalGate
                 // Affichage de l'aide des sorts
                 for (int i = 0; i < joueur.champion.spells.Count; i++)
                 {
-                    if (joueur.SourisHoverCheck(i))
+                    if (SourisHoverSpellCheck(i))
                     {
                         int widthCadre = 250;
                         int heightCadre = 100;
@@ -463,13 +475,16 @@ namespace CrystalGate
             }
 
             string str2 = selectPoint.get();
+            string str3 = selectUnit.get();
             if (Win)
                 SceneEngine2.SceneHandler.gameState = SceneEngine2.GameState.Victory;
             else if (Lost)
                 SceneEngine2.SceneHandler.gameState = SceneEngine2.GameState.Defeat;
+            // Selections d'unités et de points
             if (DrawSelectPoint)
                 spritebatch.DrawString(gamefont, str2, new Vector2(BarreDesSortsPosition.X - gamefont.MeasureString(str2).X / 2 , BarreDesSortsPosition.Y - BarreDesSorts.Height) + joueur.camera.Position, Color.White);
-
+            if (DrawSelectUnit)
+                spritebatch.DrawString(gamefont, str3, new Vector2(BarreDesSortsPosition.X - gamefont.MeasureString(str2).X / 2, BarreDesSortsPosition.Y - BarreDesSorts.Height) + joueur.camera.Position, Color.White);
 
             if (isWriting)
             {

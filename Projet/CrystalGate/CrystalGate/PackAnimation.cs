@@ -11,15 +11,14 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace CrystalGate
 {
-    public static class PackAnimation
+    public class PackAnimation
     {
         /* Le packAnimation est un pack qui regroupe les differentes positions de la sprite
            à Draw pour afficher l'animation correspondante */
-        public static bool isArcher;
 
         // STAND
 
-        public static List<Vector2> StandHaut()
+        public virtual List<Vector2> StandHaut()
         {
             List<Vector2> liste = new List<Vector2> { };
                 liste.Add(new Vector2(0, 0));
@@ -27,7 +26,7 @@ namespace CrystalGate
             return liste;
         }
 
-        public static List<Vector2> StandBas()
+        public virtual List<Vector2> StandBas()
         {
             List<Vector2> liste = new List<Vector2> { };
             liste.Add(new Vector2(4, 0));
@@ -35,7 +34,7 @@ namespace CrystalGate
             return liste;
         }
 
-        public static List<Vector2> StandGauche()
+        public virtual List<Vector2> StandGauche()
         {
             List<Vector2> liste = new List<Vector2> { };
             liste.Add(new Vector2(2, 0));
@@ -43,7 +42,7 @@ namespace CrystalGate
             return liste;
         }
 
-        public static List<Vector2> StandDroite()
+        public virtual List<Vector2> StandDroite()
         {
             List<Vector2> liste = new List<Vector2> { };
             liste.Add(new Vector2(2, 0));
@@ -54,7 +53,7 @@ namespace CrystalGate
 
         // MOUVEMENTS
 
-        public static List<Vector2> Haut()
+        public virtual List<Vector2> Haut()
         {
             List<Vector2> liste = new List<Vector2>{};
             for (int j = 0; j <= 4; j++)
@@ -63,7 +62,7 @@ namespace CrystalGate
             return liste;
         }
 
-        public static List<Vector2> Bas()
+        public virtual List<Vector2> Bas()
         {
             List<Vector2> liste = new List<Vector2> { };
             for (int j = 0; j <= 4; j++)
@@ -72,7 +71,7 @@ namespace CrystalGate
             return liste;
         }
 
-        public static List<Vector2> Droite()
+        public virtual List<Vector2> Droite()
         {
             List<Vector2> liste = new List<Vector2> { };
             for (int j = 0; j <= 4; j++)
@@ -81,7 +80,7 @@ namespace CrystalGate
             return liste;
         }
 
-        public static List<Vector2> HautDroite()
+        public virtual List<Vector2> HautDroite()
         {
             List<Vector2> liste = new List<Vector2> { };
             for (int j = 0; j <= 4; j++)
@@ -90,7 +89,7 @@ namespace CrystalGate
             return liste;
         }
 
-        public static List<Vector2> BasDroite()
+        public virtual List<Vector2> BasDroite()
         {
             List<Vector2> liste = new List<Vector2> { };
             for (int j = 0; j <= 4; j++)
@@ -102,28 +101,28 @@ namespace CrystalGate
         // ATTAQUER
 
         // METTRE 7 POUR ARCHER
-        public static List<Vector2> AttaquerHaut()
+        public virtual List<Vector2> AttaquerHaut()
         {
             List<Vector2> liste = new List<Vector2> { };
-            for (int j = 5; j <= (isArcher ? 6 : 8) ; j++)
+            for (int j = 5; j <= 8 ; j++)
                 liste.Add(new Vector2(0, j));
 
             return liste;
         }
 
-        public static List<Vector2> AttaquerBas()
+        public virtual List<Vector2> AttaquerBas()
         {
             List<Vector2> liste = new List<Vector2> { };
-            for (int j = 5; j <= (isArcher ? 6 : 8); j++)
+            for (int j = 5; j <= 8; j++)
                 liste.Add(new Vector2(4, j));
 
             return liste;
         }
 
-        public static List<Vector2> AttaquerDroite()
+        public virtual List<Vector2> AttaquerDroite()
         {
             List<Vector2> liste = new List<Vector2> { };
-            for (int j = 5; j <= (isArcher ? 6 : 8); j++)
+            for (int j = 5; j <= 8; j++)
                 liste.Add(new Vector2(2, j));
 
             return liste;
@@ -131,7 +130,7 @@ namespace CrystalGate
 
         // MORT
 
-        public static List<Vector2> Mort(Unite unite)
+        public virtual List<Vector2> Mort(Unite unite)
         {
             List<Vector2> liste = new List<Vector2> { };
             if(unite is Cavalier)

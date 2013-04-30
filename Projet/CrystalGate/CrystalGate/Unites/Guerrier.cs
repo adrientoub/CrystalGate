@@ -15,7 +15,7 @@ namespace CrystalGate
             : base(Position, Level)
         {
             // Graphique
-            Sprite = PackTexture.unites[6];
+            Sprite = PackTexture.Guerrier;
             Tiles = new Vector2(530 / 5, 930 / 11);
 
             // Statistiques

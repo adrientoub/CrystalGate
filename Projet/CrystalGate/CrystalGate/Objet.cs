@@ -31,6 +31,7 @@ namespace CrystalGate
 
         protected Rectangle SpritePosition;
         protected int AnimationCurrent;
+        public PackAnimation packAnimation;
 
         protected const int AnimationLimite = 5;
         public const int suivrelimite = 20;
@@ -39,7 +40,7 @@ namespace CrystalGate
         protected Direction direction;
         protected bool FlipH;
         public float Scale = 1;
-        public bool Mort;
+        public bool Mort, CanAttack;
         public List<Noeud> ObjectifListe;
 
         public float LastAttack;
@@ -50,6 +51,7 @@ namespace CrystalGate
         {
             // Général
             this.ObjectifListe = new List<Noeud> { };
+            CanAttack = true;
 
             // Physique
             this.body = BodyFactory.CreateRectangle(Map.world, ConvertUnits.ToSimUnits(25), ConvertUnits.ToSimUnits(25), 100f);
@@ -64,6 +66,7 @@ namespace CrystalGate
             this.Sprite = PackTexture.blank;
             this.Animation = new List<Vector2> { };
             this.Dialogue = new List<string> { };
+            this.packAnimation = new PackAnimation();
 
 
             this.direction = Direction.Bas;
@@ -113,23 +116,23 @@ namespace CrystalGate
         {
             switch (direction)
             {
-                case Direction.Haut: Animation = PackAnimation.StandHaut();
+                case Direction.Haut: Animation = packAnimation.StandHaut();
                     break;
-                case Direction.Bas: Animation = PackAnimation.StandBas();
+                case Direction.Bas: Animation = packAnimation.StandBas();
                     break;
-                case Direction.Gauche: Animation = PackAnimation.StandGauche();
+                case Direction.Gauche: Animation = packAnimation.StandGauche();
                     break;
-                case Direction.Droite: Animation = PackAnimation.StandDroite();
+                case Direction.Droite: Animation = packAnimation.StandDroite();
                     break;
-                case Direction.BasDroite: Animation = PackAnimation.StandDroite();
+                case Direction.BasDroite: Animation = packAnimation.StandDroite();
                     break;
-                case Direction.BasGauche: Animation = PackAnimation.StandDroite();
+                case Direction.BasGauche: Animation = packAnimation.StandDroite();
                     break;
-                case Direction.HautDroite: Animation = PackAnimation.StandDroite();
+                case Direction.HautDroite: Animation = packAnimation.StandDroite();
                     break;
-                case Direction.HautGauche: Animation = PackAnimation.StandDroite();
+                case Direction.HautGauche: Animation = packAnimation.StandDroite();
                     break;
-                default: Animation = PackAnimation.StandBas();
+                default: Animation = packAnimation.StandBas();
                     break;
             }
         }

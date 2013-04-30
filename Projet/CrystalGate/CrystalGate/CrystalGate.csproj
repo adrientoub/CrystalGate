@@ -117,6 +117,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Animations\AnimationArcher.cs" />
+    <Compile Include="Animations\AnimationCritters.cs" />
     <Compile Include="Camera\Camera.cs" />
     <Compile Include="Items\Stuff\BottesDacier.cs" />
     <Compile Include="Items\Stuff\RingLionHead.cs" />
@@ -131,6 +133,7 @@
     <Compile Include="SceneEngine2\DefeatScene.cs" />
     <Compile Include="SceneEngine2\SplashScreenScene.cs" />
     <Compile Include="SceneEngine2\VictoryScene.cs" />
+    <Compile Include="Spells\Polymorphe.cs" />
     <Compile Include="Stuff.cs" />
     <Compile Include="SceneEngine2\BaseScene.cs" />
     <Compile Include="SceneEngine2\MainMenu.cs" />

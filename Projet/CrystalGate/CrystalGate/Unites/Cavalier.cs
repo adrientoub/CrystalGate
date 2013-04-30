@@ -15,7 +15,7 @@ namespace CrystalGate
             : base(Position, Level)
         {
             // Graphique
-            Sprite = PackTexture.unites[0];
+            Sprite = PackTexture.Cavalier;
             Tiles = new Vector2(370 / 5, 835 / 11);
             Portrait = PackTexture.CavalierPortrait;
 

@@ -14,16 +14,6 @@ namespace CrystalGate
 {
     class Outil
     {
-        public static bool Collision(Objet box1, Objet box2)
-        {
-            if ((box2.body.Position.X >= box1.body.Position.X + ConvertUnits.ToSimUnits(32))      // trop à droite
-             || (box2.body.Position.X + ConvertUnits.ToSimUnits(32) <= box1.body.Position.X) // trop à gauche
-             || (box2.body.Position.Y >= box1.body.Position.Y + ConvertUnits.ToSimUnits(32)) // trop en bas
-             || (box2.body.Position.Y + ConvertUnits.ToSimUnits(32) <= box1.body.Position.Y))  // trop en haut
-                return false;
-            else
-                return true;
-        }
 
         public static float AngleUnites(Objet unite1, Objet unite2)
         {
@@ -189,6 +179,8 @@ namespace CrystalGate
             listeSound.Add(content.Load<SoundEffect>("Sons/InvisibilityTarget"));
             listeSound.Add(content.Load<SoundEffect>("Sons/BloodlustTarget"));
             listeSound.Add(content.Load<SoundEffect>("Sons/OgreDeath1"));
+            listeSound.Add(content.Load<SoundEffect>("Sons/PolymorphTarget"));
+            listeSound.Add(content.Load<SoundEffect>("Sons/SheepDeath"));
 
             EffetSonore.InitEffects();
         }
