@@ -26,7 +26,7 @@ namespace CrystalGate
             NeedUnPoint = false;
             SpriteBouton = PackTexture.boutons[2];
             SpriteEffect = PackTexture.sorts[0];
-            sonSort = new EffetSonore(10);
+            sonSort = new EffetSonore(PackSon.InvisibiliteCible);
             uniteFollowing = new List<Unite>();
 
             description1 = new Text("DescriptionInvisibilite1");

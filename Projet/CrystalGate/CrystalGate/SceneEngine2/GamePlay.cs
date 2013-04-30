@@ -25,25 +25,22 @@ namespace CrystalGate.SceneEngine2
         public bool isCoopPlay;
         public bool isServer;
 
-        public static List<SoundEffect> _effetsSonores = new List<SoundEffect> { }; // Tous les effets sonores.
-
         public override void LoadContent()
         {
             if (content == null)
                 content = SceneHandler.content;
 
-            FondSonore.Load(content);
-
             gameFont = content.Load<SpriteFont>("Polices/gamefont");
 
-            // Pack de texture (Contient toutes les sprites des unites et des sorts)
+            // Chargement des textures : Pack de texture (Contient toutes les sprites des unites et des sorts)
             PackTexture.Initialize(content);
 
             // Chargement de la carte
             Outil.OuvrirMap("level1");
 
             // Chargement sons
-            Outil.LoadSounds(_effetsSonores, content);
+            PackSon.Initialize(content);
+            FondSonore.Load(content);
 
             // Ajout joueurs
             Map.joueurs.Add(new Joueur(new Guerrier(new Vector2(0, 9))));

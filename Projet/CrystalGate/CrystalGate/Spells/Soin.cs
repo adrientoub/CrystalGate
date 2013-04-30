@@ -28,7 +28,7 @@ namespace CrystalGate
             NeedUnPoint = false;
             SpriteBouton = PackTexture.boutons[1];
             SpriteEffect = PackTexture.sorts[1];
-            sonSort = new EffetSonore(4);
+            sonSort = new EffetSonore(PackSon.Soin);
 
             description1 = new Text("DescriptionSoin1");
             description2 = new Text("DescriptionSoin2");

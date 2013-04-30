@@ -16,9 +16,9 @@ namespace CrystalGate
         public static System.Diagnostics.Stopwatch time = new System.Diagnostics.Stopwatch();
         static bool[] isPlaying = new bool[nbSonSimult];
         static TimeSpan[] duree = new TimeSpan[nbSonSimult];
-        int id;
         public static float volume = CrystalGateGame.isTest ? 0.1f : 0.5f;
         static bool hasHP;
+        SoundEffect SonChoisi;
 
         static public void InitEffects()
         {
@@ -30,12 +30,12 @@ namespace CrystalGate
             hasHP = true;
         }
 
-        public EffetSonore(int i)
+        public EffetSonore(SoundEffect i)
         {
             try
             {
-                son = SceneEngine2.GamePlay._effetsSonores[i].CreateInstance();
-                id = i;
+                son = i.CreateInstance();
+                SonChoisi = i;
             }
             catch (Exception)
             {
@@ -65,7 +65,7 @@ namespace CrystalGate
                             {
                                 son.Volume = (volume >= 0) ? volume : 0; 
                                 son.Play();
-                                duree[i] = time.Elapsed + SceneEngine2.GamePlay._effetsSonores[id].Duration;
+                                duree[i] = time.Elapsed + SonChoisi.Duration;
                                 isPlaying[i] = true;
                                 effectLaunch = true;
                             }

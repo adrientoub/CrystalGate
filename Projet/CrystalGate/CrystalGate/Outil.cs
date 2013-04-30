@@ -152,39 +152,6 @@ namespace CrystalGate
             return pT;
         }
 
-        /*public static void LoadSprites(ref PackTexture pack, ContentManager content)
-        {
-            pack = new PackTexture(content.Load<Texture2D>("blank"));
-            pack.unites = new List<Texture2D> { content.Load<Texture2D>("knight"), content.Load<Texture2D>("grunt") };
-            pack.sorts.Add(content.Load<Texture2D>("Spells/Explosion"));
-            pack.sorts.Add(content.Load<Texture2D>("Spells/Soin"));
-            pack.boutons = new List<Texture2D> { content.Load<Texture2D>("Boutons/Explosion"), content.Load<Texture2D>("Boutons/Soin") };
-            pack.Map.Add(content.Load<Texture2D>("summertiles"));
-        }*/
-
-        public static void LoadSounds(List<SoundEffect> listeSound,  ContentManager content)
-        {
-            // Les sons.
-            listeSound.Add(content.Load<SoundEffect>("Sons/sword3")); // Attaque cavalier
-            listeSound.Add(content.Load<SoundEffect>("Sons/Cavalierquimeurt"));
-            listeSound.Add(content.Load<SoundEffect>("Sons/GruntAttack"));
-            listeSound.Add(content.Load<SoundEffect>("Sons/Gruntquimeurt"));
-            // Sons des sorts.
-            listeSound.Add(content.Load<SoundEffect>("Sons/soin"));
-            listeSound.Add(content.Load<SoundEffect>("Sons/explosion"));
-            listeSound.Add(content.Load<SoundEffect>("Sons/ArcherAttack"));
-            listeSound.Add(content.Load<SoundEffect>("Sons/AxeMissileLaunch1"));
-            listeSound.Add(content.Load<SoundEffect>("Sons/DemonMissileLaunch1"));
-            listeSound.Add(content.Load<SoundEffect>("Sons/DemonDeath1"));
-            listeSound.Add(content.Load<SoundEffect>("Sons/InvisibilityTarget"));
-            listeSound.Add(content.Load<SoundEffect>("Sons/BloodlustTarget"));
-            listeSound.Add(content.Load<SoundEffect>("Sons/OgreDeath1"));
-            listeSound.Add(content.Load<SoundEffect>("Sons/PolymorphTarget"));
-            listeSound.Add(content.Load<SoundEffect>("Sons/SheepDeath"));
-
-            EffetSonore.InitEffects();
-        }
-
         public static string Normalize(int maxParLigne, string description)
         {
             string rendu = "";

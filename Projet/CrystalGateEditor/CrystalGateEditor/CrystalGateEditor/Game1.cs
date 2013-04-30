@@ -25,7 +25,7 @@ namespace CrystalGateEditor
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
-            if (!isTest)
+            if (isTest)
                 graphics.IsFullScreen = true;
             this.IsMouseVisible = true;
             int width = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width;

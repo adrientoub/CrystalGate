@@ -27,7 +27,7 @@ namespace CrystalGate
             NeedAUnit = true;
             SpriteBouton = PackTexture.boutons[12];
             SpriteEffect = PackTexture.sorts[0];
-            sonSort = new EffetSonore(13);
+            sonSort = new EffetSonore(PackSon.PolymorphCible);
             description = new Text("DescriptionPolymorph");
         }
 
@@ -38,7 +38,7 @@ namespace CrystalGate
                 UniteCible.packAnimation = new AnimationCritters();
                 UniteCible.Sprite = PackTexture.Critters;
                 UniteCible.Tiles = new Vector2(225 / 6, 177 / 4);
-                UniteCible.effetUniteDeath = new EffetSonore(14);
+                UniteCible.effetUniteDeath = new EffetSonore(PackSon.SheepDeath);
                 UniteCible.CanAttack = false;
                 TickCurrent++;
             }

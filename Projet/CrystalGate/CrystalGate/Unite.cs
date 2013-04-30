@@ -86,8 +86,8 @@ namespace CrystalGate
             Portee = 2; // 2 = Corps à corps
             Dommages = 1;
             Puissance = 1;
-            effetUniteAttaque = new EffetSonore(0);
-            effetUniteDeath = new EffetSonore(1);
+            effetUniteAttaque = new EffetSonore(PackSon.Epee);
+            effetUniteDeath = new EffetSonore(PackSon.GruntDeath);
             nbFrameSonJoue = 0;
             Vitesse_Attaque = 1.00f;
             Defense = 0;

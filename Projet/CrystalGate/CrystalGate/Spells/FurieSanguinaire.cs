@@ -26,7 +26,7 @@ namespace CrystalGate
             NeedUnPoint = false;
             SpriteBouton = PackTexture.boutons[5];
             SpriteEffect = PackTexture.sorts[0];
-            sonSort = new EffetSonore(11);
+            sonSort = new EffetSonore(PackSon.FurieSanguinaireCible);
             description = new Text("DescriptionFurieSanguinaire");
         }
 

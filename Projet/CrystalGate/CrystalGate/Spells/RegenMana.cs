@@ -25,7 +25,7 @@ namespace CrystalGate
             NeedUnPoint = false;
             SpriteBouton = PackTexture.boutons[2];
             SpriteEffect = PackTexture.sorts[2];
-            sonSort = new EffetSonore(4);
+            sonSort = new EffetSonore(PackSon.Soin);
         }
 
         public override void Update()

@@ -31,8 +31,8 @@ namespace CrystalGate
             XPUnite = 200;
 
             // Sons
-            effetUniteAttaque = new EffetSonore(7);
-            effetUniteDeath = new EffetSonore(3);
+            effetUniteAttaque = new EffetSonore(PackSon.TrollAttack);
+            effetUniteDeath = new EffetSonore(PackSon.GruntDeath);
             statsLevelUpdate();
         }
 

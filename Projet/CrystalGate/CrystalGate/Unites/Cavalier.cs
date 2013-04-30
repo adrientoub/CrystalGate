@@ -31,8 +31,8 @@ namespace CrystalGate
             Inventory = new List<Item> { new PotionDeVie(this, Vector2.Zero) };
 
             // Sons
-            effetUniteAttaque = new EffetSonore(0);
-            effetUniteDeath = new EffetSonore(1);
+            effetUniteAttaque = new EffetSonore(PackSon.Epee);
+            effetUniteDeath = new EffetSonore(PackSon.CavalierDeath);
             statsLevelUpdate();
         }
 
