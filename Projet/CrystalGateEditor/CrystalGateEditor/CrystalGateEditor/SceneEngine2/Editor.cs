@@ -12,15 +12,15 @@ using Microsoft.Xna.Framework.Media;
 
 namespace CrystalGateEditor.SceneEngine2
 {
-    class Editor : BaseScene
+    public class Editor : BaseScene
     {
         ContentManager content;
 
         SpriteFont sp;
         public static string baseDirectory;
 
-        User user;
-        UI ui;
+        public User user;
+        public UI ui;
 
         public Editor()
         {
@@ -39,7 +39,7 @@ namespace CrystalGateEditor.SceneEngine2
             sp = content.Load<SpriteFont>("Police");
             user = new User();
             ui = new UI(user, content.Load<Texture2D>("Palette"), content.Load<Texture2D>("PaletteHiver"), content.Load<Texture2D>("PaletteVolcanique"), sp, content.Load<Texture2D>("writing"));
-            ui.mode = UI.Mode.LoadOrCreate;
+            ui.mode = UI.Mode.Draw;
             if (Game1.isTest)
                 baseDirectory = "../../../";
             else

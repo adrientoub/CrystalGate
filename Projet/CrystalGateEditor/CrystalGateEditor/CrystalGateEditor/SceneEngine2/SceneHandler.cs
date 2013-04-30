@@ -15,16 +15,12 @@ namespace CrystalGateEditor.SceneEngine2
     {
         MainMenu,
         Editor,
-        CoopSettings,
-        CoopConnexion,
+        EditorSettings,
         Setting,
-        Gameplay,
         Pause,
-        Victory,
-        Defeat
     }
 
-    class SceneHandler
+    public class SceneHandler
     {
         public static GameState gameState;
         public static SpriteBatch spriteBatch;
@@ -32,6 +28,7 @@ namespace CrystalGateEditor.SceneEngine2
 
         public static Editor editorScene;
         public static MainMenu mainMenuScene;
+        public static EditorSettings editorSettingsScene;
         public static MenuOptions menuOptionsScene;
 
         public SceneHandler()
@@ -41,6 +38,7 @@ namespace CrystalGateEditor.SceneEngine2
             editorScene = new Editor();
             mainMenuScene = new MainMenu();
             menuOptionsScene = new MenuOptions();
+            editorSettingsScene = new EditorSettings();
         }
 
         public void Initialize()
@@ -48,6 +46,7 @@ namespace CrystalGateEditor.SceneEngine2
             mainMenuScene.Initialize();
             menuOptionsScene.Initialize();
             editorScene.Initialize();
+            editorSettingsScene.Initialize();
         }
 
         public void Update(GameTime gameTime)
@@ -65,6 +64,9 @@ namespace CrystalGateEditor.SceneEngine2
                 case GameState.Setting:
                     menuOptionsScene.Update(gameTime);
                     break;
+                case GameState.EditorSettings:
+                    editorSettingsScene.Update(gameTime);
+                    break;
             }
             BaseScene.oldMouse = BaseScene.mouse;
             BaseScene.oldKeyboardState = BaseScene.keyboardState;
@@ -75,6 +77,7 @@ namespace CrystalGateEditor.SceneEngine2
             mainMenuScene.LoadContent();
             menuOptionsScene.LoadContent();
             editorScene.LoadContent();
+            editorSettingsScene.LoadContent();
         }
 
         public void Draw()
@@ -90,7 +93,15 @@ namespace CrystalGateEditor.SceneEngine2
                 case GameState.Editor:
                     editorScene.Draw(spriteBatch);
                     break;
+                case GameState.EditorSettings:
+                    editorSettingsScene.Draw(spriteBatch);
+                    break;
             }
+        }
+
+        public void ReinitilizeEditor()
+        {
+            editorSettingsScene.Initialize();
         }
     }
 }

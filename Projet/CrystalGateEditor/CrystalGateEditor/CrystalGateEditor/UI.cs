@@ -10,7 +10,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace CrystalGateEditor
 {
-    class UI
+    public class UI
     {
         Texture2D Palette, PaletteHiver, PaletteVolcanique, fondTexte;
         SpriteFont SpriteFont;
@@ -18,7 +18,7 @@ namespace CrystalGateEditor
         Vector2 PalettePosition;
         Vector2 Selection = new Vector2(0, 0);
 
-        bool ShowCurrent = true;
+        bool ShowCurrent = false;
         bool ShowPalette;
         bool ShowMap;
         bool ShowHelp;
@@ -28,10 +28,10 @@ namespace CrystalGateEditor
         public SousMode sousmode;
         public TextureStart textureStart;
 
-        User user;
+        public User user;
 
         string MenuString = "";
-        string MapName = "";
+        public string MapName = "";
         string longueur = "";
         string hauteur = "";
         string current = "";
@@ -61,6 +61,9 @@ namespace CrystalGateEditor
             this.PalettePosition = new Vector2(width - Palette.Width, 0);
             this.sousmode = SousMode.Undone;
             stack = new Stack<Vector4> { };
+            ShowMap = true;
+
+            textureStart = TextureStart.Desert;
         }
 
         public void Update()
@@ -142,10 +145,7 @@ namespace CrystalGateEditor
                 // Controle utilisateur
                 // ShowPalette
                 if (user.keyboardState.IsKeyDown(Keys.P) && user.oldKeyboardState.IsKeyUp(Keys.P))
-                    if (!ShowPalette)
-                        ShowPalette = true;
-                    else
-                        ShowPalette = false;
+                    ShowPalette = !ShowPalette;
 
                 // Selection tile
                 if (ShowPalette && user.mouse.LeftButton == ButtonState.Pressed && user.mouse.X + user.camera.Position.X >= PalettePosition.X && user.mouse.Y <= Palette.Height)
@@ -177,13 +177,11 @@ namespace CrystalGateEditor
                 // Restart
                 if (user.keyboardState.IsKeyDown(Keys.R))
                 {
-                    mode = Mode.LoadOrCreate;
-                    sousmode = SousMode.Undone;
+                    SceneEngine2.SceneHandler.gameState = SceneEngine2.GameState.EditorSettings;
                     MapName = "";
-                    longueur = "";
-                    hauteur = "";
-                    textBase = "";
-                    ShowCurrent = true;
+                    stack = new Stack<Vector4>();
+                    ShowCurrent = false;
+                    Game1.scene.ReinitilizeEditor();
                 }
             }
 
@@ -271,8 +269,6 @@ namespace CrystalGateEditor
             }
 
             thread++;
-
-            user.oldKeyboardState = user.keyboardState;
         }
 
         public void Initialiser()

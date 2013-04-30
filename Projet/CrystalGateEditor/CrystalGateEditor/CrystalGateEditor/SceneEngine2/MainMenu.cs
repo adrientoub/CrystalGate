@@ -10,7 +10,7 @@ using Microsoft.Xna.Framework.Audio;
 
 namespace CrystalGateEditor.SceneEngine2
 {
-    class MainMenu : BaseScene
+    public class MainMenu : BaseScene
     {
         private ContentManager content;
 
@@ -52,7 +52,7 @@ namespace CrystalGateEditor.SceneEngine2
             {
                 if (mouseRec.Intersects(boutonPlay))
                 {
-                    SceneHandler.gameState = GameState.Editor;
+                    SceneHandler.gameState = GameState.EditorSettings;
                 }
                 else if (mouseRec.Intersects(boutonOptions))
                 {

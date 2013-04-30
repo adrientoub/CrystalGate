@@ -7,29 +7,28 @@ using Microsoft.Xna.Framework;
 
 namespace CrystalGateEditor
 {
-    class User
+    public class User
     {
-        public KeyboardState keyboardState { get; set; }
-        public KeyboardState oldKeyboardState { get; set; }
-        public Keys[] pressedKeys { get; set; }
-        public Keys[] prevPressedKeys { get; set; }
-        public MouseState mouse { get; set; }
+        public KeyboardState keyboardState;
+        public KeyboardState oldKeyboardState;
+        public Keys[] pressedKeys;
+        public Keys[] prevPressedKeys;
+        public MouseState mouse;
        
         public Camera2D camera;
 
         public User()
         {
-            keyboardState = Keyboard.GetState();
-            pressedKeys = keyboardState.GetPressedKeys();
-            prevPressedKeys = keyboardState.GetPressedKeys();
             camera = new Camera2D(Vector2.Zero);
         }
 
         // Ecrit dans la string passée en paramètre, le bool verrouille les chiffres
         public bool SaisirTexte(ref string text, bool OnlyChiffre)
         {
-            keyboardState = Keyboard.GetState();
+            keyboardState = SceneEngine2.BaseScene.keyboardState;
+            oldKeyboardState = SceneEngine2.BaseScene.oldKeyboardState;
             pressedKeys = keyboardState.GetPressedKeys();
+            prevPressedKeys = oldKeyboardState.GetPressedKeys();
 
             char c = ' ';
             bool shiftPressed;
@@ -82,8 +81,6 @@ namespace CrystalGateEditor
             // Enter
             if (keyboardState.IsKeyDown(Keys.Enter) && oldKeyboardState.IsKeyUp(Keys.Enter))
             {
-                oldKeyboardState = keyboardState;
-                prevPressedKeys = pressedKeys;
                 string text2 = "";
                 for (int i = 0; i < text.Length; i++)
                 {
@@ -99,17 +96,15 @@ namespace CrystalGateEditor
             }
             else
             {
-                oldKeyboardState = keyboardState;
-                prevPressedKeys = pressedKeys;
                 return false;
             }
         }
 
         public void Update()
         {
-            keyboardState = Keyboard.GetState();
-            mouse = Mouse.GetState();
+            mouse = SceneEngine2.BaseScene.mouse;
+            keyboardState = SceneEngine2.BaseScene.keyboardState;
+            oldKeyboardState = SceneEngine2.BaseScene.oldKeyboardState;
         }
-        
     }
 }

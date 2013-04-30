@@ -18,14 +18,14 @@ namespace CrystalGateEditor
     {
         public static GraphicsDeviceManager graphics;
         public static bool isTest = true;
-        SceneEngine2.SceneHandler scene;
+        public static SceneEngine2.SceneHandler scene;
 
         public static bool exit;
 
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
-            if (isTest)
+            if (!isTest)
                 graphics.IsFullScreen = true;
             this.IsMouseVisible = true;
             int width = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width;
@@ -47,8 +47,8 @@ namespace CrystalGateEditor
         {
             // Créer un SpriteBatch, qui peut être utilisé pour dessiner des textures.
             SceneEngine2.SceneHandler.spriteBatch = new SpriteBatch(GraphicsDevice);
-            scene.Load();
             scene.Initialize();
+            scene.Load();
         }
 
         protected override void Update(GameTime gameTime)

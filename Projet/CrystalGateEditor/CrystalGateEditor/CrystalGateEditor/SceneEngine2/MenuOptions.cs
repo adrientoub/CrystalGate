@@ -10,7 +10,7 @@ using Microsoft.Xna.Framework.Audio;
 
 namespace CrystalGateEditor.SceneEngine2
 {
-    class MenuOptions : BaseScene
+    public class MenuOptions : BaseScene
     {
         private enum Language
         {
@@ -38,7 +38,6 @@ namespace CrystalGateEditor.SceneEngine2
 
         public override void Initialize()
         {
-            fullscreenText = isFullscreen ? noT.get() : yesT.get();
             isPauseOption = false;
             endFirstClic = false;
         }
@@ -55,6 +54,7 @@ namespace CrystalGateEditor.SceneEngine2
             retourT = new Text("Back");
             noT = new Text("no");
             yesT = new Text("yes");
+            fullscreenText = isFullscreen ? noT.get() : yesT.get();
 
             boutonPleinEcran = new Rectangle((Game1.graphics.GraphicsDevice.Viewport.Width - boutons.Width) / 2, Game1.graphics.GraphicsDevice.Viewport.Height / 2 - 100, boutons.Width, boutons.Height);
             boutonLangue = new Rectangle((Game1.graphics.GraphicsDevice.Viewport.Width - boutons.Width) / 2, Game1.graphics.GraphicsDevice.Viewport.Height / 2, boutons.Width, boutons.Height);
@@ -110,7 +110,7 @@ namespace CrystalGateEditor.SceneEngine2
 
             if (isPauseOption && keyboardState.IsKeyDown(Keys.Escape))
             {
-                SceneHandler.gameState = GameState.Gameplay;
+                SceneHandler.gameState = GameState.Editor;
             }
             fullscreenText = (isFullscreen ? noT.get() : yesT.get());
             positionTexteFullscreen = new Vector2(boutonPleinEcran.Left - spriteFont.MeasureString(pleinEcranT.get()).X, boutonPleinEcran.Center.Y - spriteFont.MeasureString(pleinEcranT.get()).Y / 2);
