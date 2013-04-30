@@ -56,9 +56,9 @@ namespace CrystalGateEditor.SceneEngine2
             noT = new Text("no");
             yesT = new Text("yes");
 
-            boutonPleinEcran = new Rectangle((Game1.graphics.GraphicsDevice.Viewport.Width - boutons.Width) / 2, Game1.graphics.GraphicsDevice.Viewport.Height / 2 - 200, boutons.Width, boutons.Height);
-            boutonLangue = new Rectangle((Game1.graphics.GraphicsDevice.Viewport.Width - boutons.Width) / 2, Game1.graphics.GraphicsDevice.Viewport.Height / 2 - 100, boutons.Width, boutons.Height);
-            boutonRetour = new Rectangle((Game1.graphics.GraphicsDevice.Viewport.Width - boutons.Width) / 2, Game1.graphics.GraphicsDevice.Viewport.Height / 2 + 200, boutons.Width, boutons.Height);
+            boutonPleinEcran = new Rectangle((Game1.graphics.GraphicsDevice.Viewport.Width - boutons.Width) / 2, Game1.graphics.GraphicsDevice.Viewport.Height / 2 - 100, boutons.Width, boutons.Height);
+            boutonLangue = new Rectangle((Game1.graphics.GraphicsDevice.Viewport.Width - boutons.Width) / 2, Game1.graphics.GraphicsDevice.Viewport.Height / 2, boutons.Width, boutons.Height);
+            boutonRetour = new Rectangle((Game1.graphics.GraphicsDevice.Viewport.Width - boutons.Width) / 2, Game1.graphics.GraphicsDevice.Viewport.Height / 2 + 100, boutons.Width, boutons.Height);
 
             positionTexteFullscreen = new Vector2(boutonPleinEcran.Left - spriteFont.MeasureString(pleinEcranT.get()).X, boutonPleinEcran.Center.Y - spriteFont.MeasureString(pleinEcranT.get()).Y / 2);
             positionTexteLangue = new Vector2(boutonLangue.Left - spriteFont.MeasureString(langueT.get()).X, boutonLangue.Center.Y - spriteFont.MeasureString(langueT.get()).Y / 2);

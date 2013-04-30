@@ -39,9 +39,9 @@ namespace CrystalGateEditor.SceneEngine2
 
             spriteFont = content.Load<SpriteFont>("sceneengine2font");
 
-            boutonPlay = new Rectangle((Game1.graphics.GraphicsDevice.Viewport.Width - boutons.Width) / 2, Game1.graphics.GraphicsDevice.Viewport.Height / 2 - 150, boutons.Width, boutons.Height);
-            boutonOptions = new Rectangle((Game1.graphics.GraphicsDevice.Viewport.Width - boutons.Width) / 2, Game1.graphics.GraphicsDevice.Viewport.Height / 2 + 50, boutons.Width, boutons.Height);
-            boutonQuitter = new Rectangle((Game1.graphics.GraphicsDevice.Viewport.Width - boutons.Width) / 2, Game1.graphics.GraphicsDevice.Viewport.Height / 2 + 150, boutons.Width, boutons.Height);
+            boutonPlay = new Rectangle((Game1.graphics.GraphicsDevice.Viewport.Width - boutons.Width) / 2, Game1.graphics.GraphicsDevice.Viewport.Height / 2 - 100, boutons.Width, boutons.Height);
+            boutonOptions = new Rectangle((Game1.graphics.GraphicsDevice.Viewport.Width - boutons.Width) / 2, Game1.graphics.GraphicsDevice.Viewport.Height / 2, boutons.Width, boutons.Height);
+            boutonQuitter = new Rectangle((Game1.graphics.GraphicsDevice.Viewport.Width - boutons.Width) / 2, Game1.graphics.GraphicsDevice.Viewport.Height / 2 + 100, boutons.Width, boutons.Height);
         }
 
         public override void Update(GameTime gameTime)
@@ -91,19 +91,19 @@ namespace CrystalGateEditor.SceneEngine2
                 spriteFont,
                 lancerJeu.get(),
                 new Vector2((Game1.graphics.GraphicsDevice.Viewport.Width) / 2 - spriteFont.MeasureString(lancerJeu.get()).X / 2,
-                    Game1.graphics.GraphicsDevice.Viewport.Height / 2 - 140),
+                    Game1.graphics.GraphicsDevice.Viewport.Height / 2 - 90),
                 Color.White);
             spriteBatch.DrawString(
                 spriteFont,
                 optionsJeu.get(),
                 new Vector2((Game1.graphics.GraphicsDevice.Viewport.Width) / 2 - spriteFont.MeasureString(optionsJeu.get()).X / 2,
-                    Game1.graphics.GraphicsDevice.Viewport.Height / 2 + 60),
+                    Game1.graphics.GraphicsDevice.Viewport.Height / 2 + 10),
                 Color.White);
             spriteBatch.DrawString(
                 spriteFont,
                 quitterJeu.get(),
                 new Vector2((Game1.graphics.GraphicsDevice.Viewport.Width) / 2 - spriteFont.MeasureString(quitterJeu.get()).X / 2,
-                    Game1.graphics.GraphicsDevice.Viewport.Height / 2 + 160),
+                    Game1.graphics.GraphicsDevice.Viewport.Height / 2 + 110),
                 Color.White);
 
             spriteBatch.End();
