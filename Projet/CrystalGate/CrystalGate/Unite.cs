@@ -371,7 +371,7 @@ namespace CrystalGate
             {  // Bug, je sais pas pourquoi
                 // body.Position = ConvertUnits.ToSimUnits(new Vector2((float)Math.Round(ConvertUnits.ToDisplayUnits(body.Position.X)), (float)Math.Round(ConvertUnits.ToDisplayUnits(body.Position.Y) )));
                 // HAUT GAUCHE
-                if (PositionTile.X > ObjectifListe[0].Position.X && PositionTile.Y < ObjectifListe[0].Position.Y)
+                if (PositionTile.X > ObjectifListe[0].Position.X && PositionTile.Y > ObjectifListe[0].Position.Y)
                 {
                     body.LinearVelocity = new Vector2(-Vitesse / 1.41f, -Vitesse / 1.41f) * Map.gametime.ElapsedGameTime.Milliseconds;
                     FlipH = true;
@@ -381,7 +381,7 @@ namespace CrystalGate
                     direction = Direction.HautGauche;
                 }
                 // HAUT DROITE
-                else if (PositionTile.X < ObjectifListe[0].Position.X && PositionTile.Y < ObjectifListe[0].Position.Y)
+                else if (PositionTile.X < ObjectifListe[0].Position.X && PositionTile.Y > ObjectifListe[0].Position.Y)
                 {
                     body.LinearVelocity = new Vector2(Vitesse / 1.41f, -Vitesse / 1.41f) * Map.gametime.ElapsedGameTime.Milliseconds;
                     FlipH = false;
@@ -524,9 +524,9 @@ namespace CrystalGate
             if(Projectile != null)
                 Projectile.Draw(spriteBatch);
             // Pour voir le pathfinding
-            foreach (Noeud n in ObjectifListe)
+            /*foreach (Noeud n in ObjectifListe)
                 spriteBatch.Draw(PackTexture.blank, new Rectangle((int)n.Position.X * 32, (int)n.Position.Y * 32, 32, 32), Color.White);
-        }
+        */}
 
         void DrawVie(SpriteBatch spriteBatch)
         {

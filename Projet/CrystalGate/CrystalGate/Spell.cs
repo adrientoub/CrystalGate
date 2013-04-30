@@ -87,8 +87,11 @@ namespace CrystalGate
                 TickCurrent++;
             }
             else
-                if(FinDuDrawAtteint)
+                if (FinDuDrawAtteint) // Si le sort est fini et a fini d'etre dessiné, on désactive le sort et on remet FinduDraw a false pour une prochaine utilisation
+                {
+                    FinDuDrawAtteint = false;
                     Activated = false;
+                }
         }
 
         public virtual void UpdateSort()
