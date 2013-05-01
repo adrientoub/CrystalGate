@@ -19,9 +19,9 @@ namespace CrystalGate
         public Tempete(Unite u, Unite cible, bool useMana = true)
             : base(u, cible)
         {
-            Cooldown = 2;
-            Ticks = 300;
-            CoutMana = 10;
+            Cooldown = 5;
+            Ticks = 200;
+            CoutMana = 50;
             Animation = PackAnimation.Explosion();
             AnimationReset = PackAnimation.Explosion();
             Tiles = new Vector2(320 / 5, 320 / 5);

@@ -15,7 +15,8 @@ namespace CrystalGate
             "Musiques/CelticMusic-Ode to the Fallen",
             "Musiques/CelticBallad-Riversong",
             "Musiques/CelticMusic-Prophecy",
-            "Musiques/HOM4"
+            "Musiques/HOM4",
+            "Musiques/TES"
         };
         static Song Victory; 
         static Song Defeat;

@@ -43,6 +43,11 @@ namespace CrystalGate
             Items[i] = Map.items;
             Waves[i] = Map.waves;
             Effets[i] = Map.effets;
+            // Pas tres propre
+            if (SceneHandler.level == "level1")
+                FondSonore.Play(5);
+            else
+                FondSonore.Play(0);
         }
 
         public static void LoadLevel(string level)
@@ -80,8 +85,8 @@ namespace CrystalGate
             Waves[0] = PackWave.PackWaveLevel1();
             Unite Pnj = new Syndra(new Vector2(49, 39));
             Pnj.Dialogue.Clear();
-            Pnj.Dialogue.Add("La dernière vague d'ennemie de ce niveau sera plus tenace que tu le pense, tu vas avoir besoin d'aide.");
-            Pnj.Dialogue.Add("Tu trouveras derrière moi l'Epee Solari, elle te permettera d'infliger plus de dégats et augmentera ta résistance, soit beni Guerrier!");
+            Pnj.Dialogue.Add(new Text("Dialogue1a").get());
+            Pnj.Dialogue.Add(new Text("Dialogue1b").get());
             Unites[0].Add(Pnj);
             Items[0].Add(new PotionDeVie(null, new Vector2(22, 24)));
             Items[0].Add(new PotionDeVie(null, new Vector2(23, 24)));
@@ -98,8 +103,11 @@ namespace CrystalGate
         {
             Unite Pnj = new Syndra(new Vector2(7, 18));
             Pnj.Dialogue.Clear();
-            Pnj.Dialogue.Add("Tu te trouves actuellement dans le Pôle Glaciaire, les distances à parcourir seront plutôt longues.");
-            Pnj.Dialogue.Add("Prends les bottes derrière moi, elles te permettront de te déplacer plus vite");
+            Text a = new Text("Dialogue2a");
+            Text b = new Text("Dialogue2b");
+            Pnj.Dialogue.Add(a.get());
+            Pnj.Dialogue.Add(b.get());
+            
             Unites[1].Add(Pnj);
             Items[1].Add(new BottesDacier(j.champion, new Vector2(10,15)));
             Waves[1] = PackWave.PackWaveLevel2();
