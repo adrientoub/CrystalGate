@@ -16,11 +16,11 @@ namespace CrystalGate
             Icone = PackTexture.boutons[11];
             type = Type.Anneau;
             VieBonus = 50;
-            DommagesBonus = 50;
-            ManaBonus = 50;
-            ArmureBonus = 50;
-            ManaRegenBonus = 50;
-            PuissanceBonus = 50;
+            DommagesBonus = 0;
+            ManaBonus = 0;
+            ArmureBonus = 0;
+            ManaRegenBonus = 0;
+            PuissanceBonus = 10;
             VitesseBonus = 0;
         }
     }

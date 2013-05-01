@@ -36,7 +36,7 @@ namespace CrystalGate
                 unite.ManaMaxBonus += ManaBonus;
                 unite.DommagesBonus += DommagesBonus;
                 unite.PuissanceBonus += PuissanceBonus;
-                unite.VitesseBonus -= VitesseBonus;
+                unite.VitesseBonus += VitesseBonus;
                 unite.DefenseBonus += ArmureBonus;
                 unite.DefenseMagiqueBonus += ArmureBonus;
                 unite.ManaRegenBonus -= ManaRegenBonus;
@@ -54,7 +54,7 @@ namespace CrystalGate
                 unite.VieMaxBonus -= VieBonus;
                 unite.DommagesBonus -= DommagesBonus;
                 unite.PuissanceBonus -= PuissanceBonus;
-                unite.VitesseBonus += VitesseBonus;
+                unite.VitesseBonus -= VitesseBonus;
                 unite.DefenseBonus -= ArmureBonus;
                 unite.DefenseMagiqueBonus -= ArmureBonus;
                 unite.ManaRegenBonus += ManaRegenBonus;

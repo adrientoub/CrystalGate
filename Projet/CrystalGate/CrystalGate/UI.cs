@@ -404,7 +404,7 @@ namespace CrystalGate
 
             if (DrawUI)
             {
-                string str = " " + life.get() + " : " + joueur.champion.Vie + " / " + joueur.champion.VieMax + "\n "
+                string str = " " + life.get() + " : " + joueur.champion.PositionTile + " / " + joueur.champion.VieMax + "\n "
                     + manaText.get() + " : " + joueur.champion.Mana + " / " + joueur.champion.ManaMax + "\n "
                     + attack.get() + " : " + joueur.champion.Dommages + "\n "
                     + armor.get() + " : " + joueur.champion.Defense + " / " + joueur.champion.DefenseMagique + "\n "

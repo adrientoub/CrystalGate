@@ -27,7 +27,7 @@ namespace CrystalGate
 
         public static float DistancePoints(Vector2 point1, Vector2 point2)
         {
-            return (float)Math.Sqrt( Math.Pow(32 * (point1.X - point2.X), 2) + Math.Pow(32 * (point1.Y - point2.Y), 2));
+            return (float)Math.Sqrt(Math.Pow(32 * (point1.X - point2.X), 2) + Math.Pow(32 * (point1.Y - point2.Y), 2));
         }
 
         public static void RemoveDeadBodies(List<Unite> unites)
@@ -123,32 +123,49 @@ namespace CrystalGate
         public static List<Vector2> ProhibedTiles()
         {
             List<Vector2> pT = new List<Vector2> { };
-            for (int j = 0; j < 9; j++)
+
+            if (Map.typeDeTerrain == Map.TypeDeTerrain.Herbe)
+            {
+                for (int j = 0; j < 9; j++)
+                    for (int i = 0; i < 19; i++)
+                        pT.Add(new Vector2(i, j));
+                pT.Remove(new Vector2(12, 6));
+
+                for (int i = 0; i < 9; i++)
+                    pT.Add(new Vector2(i, 9));
+
+                for (int i = 16; i < 19; i++)
+                    pT.Add(new Vector2(i, 10));
+
                 for (int i = 0; i < 19; i++)
-                    pT.Add(new Vector2(i, j));
-            pT.Remove(new Vector2(12, 6));
+                    pT.Add(new Vector2(i, 11));
 
-            for (int i = 0; i < 9; i++)
-                pT.Add(new Vector2(i, 9));
+                for (int i = 0; i < 10; i++)
+                    pT.Add(new Vector2(i, 12));
 
-            for (int i = 16; i < 19; i++)
-                pT.Add(new Vector2(i, 10));
+                for (int i = 15; i < 19; i++)
+                    pT.Add(new Vector2(i, 15));
 
-            for (int i = 0; i < 19; i++)
-                pT.Add(new Vector2(i, 11));
+                for (int i = 0; i < 19; i++)
+                    pT.Add(new Vector2(i, 16));
 
-            for (int i = 0; i < 10; i++)
-                pT.Add(new Vector2(i, 12));
+                for (int i = 0; i < 11; i++)
+                    pT.Add(new Vector2(i, 17));
+            }
+            else
+            {
+                for (int j = 0; j < 9; j++)
+                    for (int i = 0; i < 19; i++)
+                        pT.Add(new Vector2(i, j));
+                pT.Remove(new Vector2(12, 6));
+                
 
-            for (int i = 15; i < 19; i++)
-                pT.Add(new Vector2(i, 15));
+                // Eau
+                for (int j = 15; j < 16; j++)
+                    for (int i = 0; i < 19; i++)
+                        pT.Add(new Vector2(i, j));
+            }
 
-            for (int i = 0; i < 19; i++)
-                pT.Add(new Vector2(i, 16));
-
-            for (int i = 0; i < 11; i++)
-                pT.Add(new Vector2(i, 17));
-            
             return pT;
         }
 

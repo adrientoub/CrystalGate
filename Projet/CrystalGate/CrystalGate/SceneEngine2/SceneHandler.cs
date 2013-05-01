@@ -169,6 +169,7 @@ namespace CrystalGate.SceneEngine2
         public static void ResetGameplay()
         {
             PackMap.j = null;
+            level = "level1";
             gameplayScene = new GamePlay();
             gameplayScene.Initialize();
             gameplayScene.LoadContent();

@@ -10,7 +10,7 @@ namespace CrystalGate
     class Tempete : Spell
     {
         const int Portée = 50; // Portée de l'explosion
-        const float ratio = 0.1f;
+        const float ratio = 0.05f;
         float rayon = 3;
         Text description1, description2;
         List<Vector2> Positions = new List<Vector2> { };
@@ -20,7 +20,7 @@ namespace CrystalGate
             : base(u, cible)
         {
             Cooldown = 2;
-            Ticks = 500;
+            Ticks = 400;
             CoutMana = 10;
             Animation = PackAnimation.Explosion();
             AnimationReset = PackAnimation.Explosion();

@@ -10,6 +10,7 @@ namespace CrystalGate
     {
         static Unite champion = PackMap.j.champion;
 
+        // LEVEL 1
 
         static Wave Level1Wave1()
         {
@@ -67,9 +68,59 @@ namespace CrystalGate
             return new Wave(PointsInit, PointsSpawn, Mobs, champion);
         }
 
+        // LEVEL 2
+
+        static Wave Level2Wave1()
+        {
+            List<Vector2> PointsInit = new List<Vector2> { new Vector2(13, 12), new Vector2(13, 13), new Vector2(13, 14), new Vector2(13, 15), };
+            List<Vector2> PointsSpawn = new List<Vector2> { new Vector2(23, 0)};
+
+            List<List<Unite>> Mobs = new List<List<Unite>> { 
+                new List<Unite> { new Ogre(Vector2.Zero), new Demon(Vector2.Zero), new Grunt(Vector2.Zero) },
+                new List<Unite> { new Grunt(Vector2.Zero), new Cavalier(Vector2.Zero), new Archer(Vector2.Zero) }
+            };
+
+            return new Wave(PointsInit, PointsSpawn, Mobs, champion);
+        }
+
+        static Wave Level2Wave2()
+        {
+            int level = 2;
+
+            List<Vector2> PointsInit = new List<Vector2> { new Vector2(47, 21), new Vector2(47, 22), new Vector2(47, 23) };
+            List<Vector2> PointsSpawn = new List<Vector2> { new Vector2(44, 31), new Vector2(58, 32), new Vector2(73, 32) };
+
+            List<List<Unite>> Mobs = new List<List<Unite>> { 
+                new List<Unite> { new Ogre(Vector2.Zero, level), new Demon(Vector2.Zero, level), new Ogre(Vector2.Zero,level) },
+                new List<Unite> { new Grunt(Vector2.Zero, level), new Cavalier(Vector2.Zero, level), new Archer(Vector2.Zero,level) }
+            };
+
+            return new Wave(PointsInit, PointsSpawn, Mobs, champion);
+        }
+
+        static Wave Level2Wave3()
+        {
+            int level = 2;
+
+            List<Vector2> PointsInit = new List<Vector2> { new Vector2(91, 6), new Vector2(91, 7), new Vector2(91, 8), new Vector2(91, 9), new Vector2(91, 10) };
+            List<Vector2> PointsSpawn = new List<Vector2> { new Vector2(103, 2), new Vector2(121, 12), new Vector2(106, 33), new Vector2(91, 31) };
+
+            List<List<Unite>> Mobs = new List<List<Unite>> { 
+                new List<Unite> { new Ogre(Vector2.Zero, level), new Demon(Vector2.Zero, level), new Grunt(Vector2.Zero, level), new Cavalier(Vector2.Zero, level), new Archer(Vector2.Zero, level), new Cavalier(Vector2.Zero, level), new Archer(Vector2.Zero, level), new Cavalier(Vector2.Zero, level), new Archer(Vector2.Zero, level), new Cavalier(Vector2.Zero, level), new Archer(Vector2.Zero, level) },
+                new List<Unite> { new Grunt(Vector2.Zero, level), new Cavalier(Vector2.Zero, level), new Archer(Vector2.Zero, level), new Cavalier(Vector2.Zero, level), new Archer(Vector2.Zero, level), new Cavalier(Vector2.Zero, level), new Archer(Vector2.Zero, level), new Cavalier(Vector2.Zero, level), new Archer(Vector2.Zero, level), new Cavalier(Vector2.Zero, level), new Archer(Vector2.Zero, level) }
+            };
+
+            return new Wave(PointsInit, PointsSpawn, Mobs, champion);
+        }
+
         public static List<Wave> PackWaveLevel1()
         {
             return new List<Wave> { Level1Wave1(), Level1Wave2(), Level1Wave3(), Level1Wave4()};
+        }
+
+        public static List<Wave> PackWaveLevel2()
+        {
+            return new List<Wave> { Level2Wave1(), Level2Wave2(), Level2Wave3() };
         }
 
     }

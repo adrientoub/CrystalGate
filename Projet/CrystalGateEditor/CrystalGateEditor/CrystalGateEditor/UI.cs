@@ -186,14 +186,19 @@ namespace CrystalGateEditor
                 switch (int.Parse(file.ReadLine()))
                 {
                     case 1: textureStart = TextureStart.Herbe;
+                        Palette = PaletteEte;
                         break;
                     case 2: textureStart = TextureStart.Desert;
+                        Palette = PaletteEte;
                         break;
                     case 3: textureStart = TextureStart.Hiver;
+                        Palette = PaletteHiver;
                         break;
                     case 4: textureStart = TextureStart.Volcanique;
+                        Palette = PaletteVolcanique;
                         break;
                     default: textureStart = TextureStart.Herbe;
+                        Palette = PaletteEte;
                         break;
                 }
 

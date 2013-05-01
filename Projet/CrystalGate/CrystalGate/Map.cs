@@ -54,13 +54,6 @@ namespace CrystalGate
             boundary.CollisionCategories = Category.All;
             boundary.CollidesWith = Category.All;
 
-            /*switch (SceneHandler.level)
-            {
-                case "level1": unites.Add(new Odin(Vector2.One).uniteAttacked = unites[0]);
-                    break;
-                case "level2": unites.Add(new Assassin(Vector2.One).uniteAttacked = unites[0]);
-                    break;
-            }*/
         }
 
         public static void Update(GameTime GT)
@@ -80,17 +73,15 @@ namespace CrystalGate
                 if (items[i].InInventory)
                     items.RemoveAt(i);
 
-            if (waves.Count > 0 && waves[waves.Count - 1].unites.Count == 0)
-            {
-                foreach (Unite u in unites)
-                    if (u.isAChamp || u.isApnj)
-                        joueurs[0].Interface.Win = true;
-                    else
-                    {
-                        joueurs[0].Interface.Win = false;
-                        break;
-                    }
-            }
+            bool OnaWin = true;
+            foreach(Wave w in waves)
+                if (w.unites.Count != 0)
+                {
+                    OnaWin = false;
+                    break;
+                }
+            if (OnaWin && SceneHandler.level == "level2")
+                joueurs[0].Interface.Win = true;
         }
 
         public static void Draw(SpriteBatch spriteBatch)

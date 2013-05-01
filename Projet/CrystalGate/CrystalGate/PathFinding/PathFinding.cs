@@ -13,8 +13,14 @@ namespace CrystalGate
             // Prend en compte les unites
                 foreach (Unite o in unites)
                     if (o != null)
+                    {// debug osutenance 3
+                        if (o.PositionTile.X < 0)
+                            o.PositionTile = new Vector2(0, o.PositionTile.Y);
+                        if (o.PositionTile.Y < 0)
+                            o.PositionTile = new Vector2(o.PositionTile.X, 0);
                         if (Map[(int)o.PositionTile.X, (int)o.PositionTile.Y] == null)
                             Map[(int)o.PositionTile.X, (int)o.PositionTile.Y] = new Noeud(o.PositionTile, false, 1);
+                    }
             
             // Remplis les cases qui sont "marchables"
                 AForge.Parallel.For(0, (int)taille.Y, delegate(int j)
@@ -176,7 +182,11 @@ namespace CrystalGate
             Noeud[,] Map = (Noeud[,])batiments.Clone(); // INITIALISATION DU POIDS DES NOEUDS ET DES OBSTACLES
             Initialiser(Map, taille, arrivee, unites);
             List<Noeud> closedList = new List<Noeud> { };
-
+            // DEBUG SOUTENANCE PAS LE TEMPS
+            if(depart.X < 0)
+                depart = new Vector2(0, depart.Y);
+            if (depart.Y < 0)
+                depart = new Vector2(depart.X, 0);
             List<Noeud> openList = new List<Noeud> { Map[(int)depart.X,(int)depart.Y] };
 
             if (arrivee.X >= 0 && arrivee.Y >= 0 && arrivee.X < taille.X && arrivee.Y < taille.Y && Map[(int)arrivee.X, (int)arrivee.Y].IsWalkable) // SI ON NE SORT PAS DE LA Map ET QUE L'ON PEUT MARCHER SUR LE POINT D'ARRIVEE

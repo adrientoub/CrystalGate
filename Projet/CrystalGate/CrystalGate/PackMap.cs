@@ -29,7 +29,7 @@ namespace CrystalGate
             j = new Joueur(new Guerrier(new Vector2(0, 9)));
             // Chargement des items et waves du level1
             InitializeLevel1();
-            
+            InitializeLevel2();
 
         }
 
@@ -74,15 +74,21 @@ namespace CrystalGate
         static void InitializeLevel1()
         {
             Waves[0] = PackWave.PackWaveLevel1();
-            Unites[0].Add(new RobertLePNJ(Vector2.One));
+            Unites[0].Add(new RobertLePNJ(new Vector2(49,39)));
             Items[0].Add(new PotionDeVie(null, new Vector2(22, 24)));
             Items[0].Add(new PotionDeVie(null, new Vector2(23, 24)));
-            Items[0].Add(new EpeeSolari(null, Vector2.One));
-            Items[0].Add(new GantsDeDevotion(null, Vector2.One));
-            Items[0].Add(new BottesDacier(null, Vector2.One));
-            Items[0].Add(new Epaulieres(null, Vector2.One));
-            Items[0].Add(new HelmetPurple(null, Vector2.One));
-            Items[0].Add(new RingLionHead(null, Vector2.One));
+            j.champion.Inventory.Add(new EpeeSolari(j.champion, new Vector2(2,2)));
+            j.champion.Inventory.Add(new GantsDeDevotion(j.champion, Vector2.One));
+            j.champion.Inventory.Add(new BottesDacier(j.champion, Vector2.One));
+            j.champion.Inventory.Add(new Epaulieres(j.champion, Vector2.One));
+            j.champion.Inventory.Add(new HelmetPurple(j.champion, Vector2.One));
+            j.champion.Inventory.Add(new RingLionHead(j.champion, Vector2.One));
+        }
+
+        static void InitializeLevel2()
+        {
+            Waves[1] = PackWave.PackWaveLevel2();
+            //Unites[0].Add(new RobertLePNJ(Vector2.One));
         }
     }
 }

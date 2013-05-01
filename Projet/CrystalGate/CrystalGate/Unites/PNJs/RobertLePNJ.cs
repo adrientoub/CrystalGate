@@ -11,6 +11,7 @@ namespace CrystalGate.Unites
         public RobertLePNJ(Vector2 Position)
             : base(Position)
         {
+            Vie = 550000;
             isApnj = true;
             Dialogue.Add("Dans la prochaine salle t'attends Odin, soit sur tes gardes!");
             Dialogue.Add("Wesh la famille et tout ?");

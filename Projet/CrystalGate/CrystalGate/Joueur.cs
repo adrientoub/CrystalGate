@@ -82,6 +82,17 @@ namespace CrystalGate
                     else
                         SceneHandler.ResetGameplay("level1");
                 }
+                if (champion.PositionTile == new Vector2(97, 8) || champion.PositionTile == new Vector2(97, 7) || champion.PositionTile == new Vector2(97, 9))
+                {
+                    if (SceneHandler.level == "level1")
+                    {
+                        champion.PositionTile = new Vector2(5, 20);
+                        champion.ObjectifListe = new List<Noeud> { };
+                        camera.Position = new Vector2(0, 250);
+                        SceneHandler.ResetGameplay("level2");
+                    }
+                }
+
 
                 // Pour lancer un sort
                 if (Interface.key.IsKeyDown(Keys.D1) && champion.spells.Count > 0 || Interface.SourisClickSpellCheck(0) && champion.spells.Count > 0)
