@@ -74,7 +74,7 @@ namespace CrystalGate
         static void InitializeLevel1()
         {
             Waves[0] = PackWave.PackWaveLevel1();
-            Unites[0].Add(new RobertLePNJ(new Vector2(49,39)));
+            Unites[0].Add(new Syndra(new Vector2(49, 39)));
             Items[0].Add(new PotionDeVie(null, new Vector2(22, 24)));
             Items[0].Add(new PotionDeVie(null, new Vector2(23, 24)));
             j.champion.Inventory.Add(new EpeeSolari(j.champion, new Vector2(2,2)));

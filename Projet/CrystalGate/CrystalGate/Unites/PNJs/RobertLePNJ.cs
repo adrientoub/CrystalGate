@@ -6,9 +6,9 @@ using Microsoft.Xna.Framework;
 
 namespace CrystalGate.Unites
 {
-    class RobertLePNJ : Grunt
+    class Syndra : Assassin
     {
-        public RobertLePNJ(Vector2 Position)
+        public Syndra(Vector2 Position)
             : base(Position)
         {
             Vie = 550000;

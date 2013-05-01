@@ -35,6 +35,7 @@ namespace CrystalGate
         public static Texture2D CavalierPortrait;
         public static Texture2D GruntPortrait;
         public static Texture2D ArcherPortrait;
+        public static Texture2D AssassinPortrait;
         // Unites
         public static Texture2D Archer;
         public static Texture2D Cavalier;
@@ -61,7 +62,8 @@ namespace CrystalGate
             sorts.Add(content.Load<Texture2D>("Spells/Explosion"));
             sorts.Add(content.Load<Texture2D>("Spells/Soin"));
             sorts.Add(content.Load<Texture2D>("Spells/ManaRegen"));
-            boutons = new List<Texture2D> { content.Load<Texture2D>("Boutons/Explosion"), content.Load<Texture2D>("Boutons/Soin"), content.Load<Texture2D>("Boutons/Invisibility"), content.Load<Texture2D>("Boutons/PotionDeVie"), content.Load<Texture2D>("Boutons/PotionMana"), content.Load<Texture2D>("Boutons/BloodLust"), content.Load<Texture2D>("Boutons/EpeeSolari"), content.Load<Texture2D>("Boutons/BottesDacier"), content.Load<Texture2D>("Boutons/Epaulieres"), content.Load<Texture2D>("Boutons/GantsDeDevotion"), content.Load<Texture2D>("Boutons/HelmutPurple"), content.Load<Texture2D>("Boutons/RingLionHead"), content.Load<Texture2D>("Boutons/Polymorph") };
+            boutons = new List<Texture2D> { content.Load<Texture2D>("Boutons/Explosion"), content.Load<Texture2D>("Boutons/Soin"), content.Load<Texture2D>("Boutons/Invisibility"), content.Load<Texture2D>("Boutons/PotionDeVie"), content.Load<Texture2D>("Boutons/PotionMana"), content.Load<Texture2D>("Boutons/BloodLust"), content.Load<Texture2D>("Boutons/EpeeSolari"), content.Load<Texture2D>("Boutons/BottesDacier"), content.Load<Texture2D>("Boutons/Epaulieres"), content.Load<Texture2D>("Boutons/GantsDeDevotion"), content.Load<Texture2D>("Boutons/HelmutPurple"), content.Load<Texture2D>("Boutons/RingLionHead"), content.Load<Texture2D>("Boutons/Polymorph"), content.Load<Texture2D>("Boutons/Tempete") };
+
             projectiles = new List<Texture2D> { content.Load<Texture2D>("Projectiles/arrow"), content.Load<Texture2D>("Projectiles/axe"), content.Load<Texture2D>("Projectiles/fireball") };
             
             // Fonts
@@ -86,6 +88,7 @@ namespace CrystalGate
             CavalierPortrait = content.Load<Texture2D>("UI/knightIcone");
             GruntPortrait = content.Load<Texture2D>("UI/gruntIcone");
             ArcherPortrait = content.Load<Texture2D>("UI/archerIcone");
+            AssassinPortrait = content.Load<Texture2D>("UI/assassinIcone");
 
             // Unites
             Archer = content.Load<Texture2D>("Unites/archer");

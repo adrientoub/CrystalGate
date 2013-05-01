@@ -20,7 +20,7 @@ namespace CrystalGate
             // Graphique
             Sprite = PackTexture.Assassin;
             Tiles = new Vector2(1757 / 5, 1400 / 5);
-            Portrait = PackTexture.CavalierPortrait;
+            Portrait = PackTexture.AssassinPortrait;
             packAnimation = new PackAnimation();
             // Statistiques
             Vie = VieMax = 3000;

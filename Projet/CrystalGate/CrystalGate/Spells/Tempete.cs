@@ -27,7 +27,7 @@ namespace CrystalGate
             Tiles = new Vector2(320 / 5, 320 / 5);
 
             NeedUnPoint = false;
-            SpriteBouton = PackTexture.boutons[0];
+            SpriteBouton = PackTexture.boutons[13];
             SpriteEffect = PackTexture.sorts[0];
             sonSort = new EffetSonore(PackSon.Explosion);
 
