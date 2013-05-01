@@ -57,7 +57,7 @@ namespace CrystalGate.SceneEngine2
             boutonLancerLeJeu = new Rectangle((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width - boutons.Width) / 2, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height / 2, boutons.Width, boutons.Height);
             boutonRetour = new Rectangle((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width - boutons.Width) / 2, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height / 2 + 100, boutons.Width, boutons.Height);
 
-            positionTextePseudo = new Vector2(champPseudo.Left - spriteFont.MeasureString(pseudoT.get()).X, champPseudo.Center.Y - spriteFont.MeasureString(pseudoT.get()).Y / 2);
+            positionTextePseudo = new Vector2(champPseudo.Left - spriteFont.MeasureString(pseudoT.get() + " :").X, champPseudo.Center.Y - spriteFont.MeasureString(pseudoT.get() + " :").Y / 2);
         }
 
         public void ClientConnected(IAsyncResult result)
@@ -122,7 +122,7 @@ namespace CrystalGate.SceneEngine2
                 }
             }
             SaisirTexte(ref textAsWrited);
-            positionTextePseudo = new Vector2(champPseudo.Left - spriteFont.MeasureString(pseudoT.get()).X, champPseudo.Center.Y - spriteFont.MeasureString(pseudoT.get()).Y / 2);
+            positionTextePseudo = new Vector2(champPseudo.Left - spriteFont.MeasureString(pseudoT.get() + " :").X, champPseudo.Center.Y - spriteFont.MeasureString(pseudoT.get() + " :").Y / 2);
         }
 
         public override void Draw(SpriteBatch spriteBatch)
@@ -179,7 +179,7 @@ namespace CrystalGate.SceneEngine2
                     boutonRetour.Top + 10),
                 Color.White);
 
-            spriteBatch.DrawString(spriteFont, pseudoT.get(), positionTextePseudo, Color.Blue);
+            spriteBatch.DrawString(spriteFont, pseudoT.get() + " :", positionTextePseudo, Color.Gold);
 
             spriteBatch.Draw(curseur, new Vector2(mouse.X, mouse.Y), Color.White);
 

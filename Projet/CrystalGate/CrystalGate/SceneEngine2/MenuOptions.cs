@@ -71,10 +71,10 @@ namespace CrystalGate.SceneEngine2
                 CrystalGateGame.graphics.GraphicsDevice.Viewport.Height / 2 + 100, volume.Width, volume.Height);
             boutonRetour = new Rectangle((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width - boutons.Width) / 2, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height / 2 + 200, boutons.Width, boutons.Height);
 
-            positionTexteVolumeEffects = new Vector2(volumeEffects.Left - spriteFont.MeasureString(effetSonoreT.get()).X, volumeEffects.Center.Y - spriteFont.MeasureString(effetSonoreT.get()).Y / 2);
-            positionTexteVolumeFondSonore = new Vector2(volumeFondSonore.Left - spriteFont.MeasureString(fondSonoreT.get()).X, volumeFondSonore.Center.Y - spriteFont.MeasureString(fondSonoreT.get()).Y / 2);
-            positionTexteFullscreen = new Vector2(boutonPleinEcran.Left - spriteFont.MeasureString(pleinEcranT.get()).X, boutonPleinEcran.Center.Y - spriteFont.MeasureString(pleinEcranT.get()).Y / 2);
-            positionTexteLangue = new Vector2(boutonLangue.Left - spriteFont.MeasureString(langueT.get()).X, boutonLangue.Center.Y - spriteFont.MeasureString(langueT.get()).Y / 2);
+            positionTexteVolumeEffects = new Vector2(volumeEffects.Left - spriteFont.MeasureString(effetSonoreT.get() + " :").X, volumeEffects.Center.Y - spriteFont.MeasureString(effetSonoreT.get() + " :").Y / 2);
+            positionTexteVolumeFondSonore = new Vector2(volumeFondSonore.Left - spriteFont.MeasureString(fondSonoreT.get() + " :").X, volumeFondSonore.Center.Y - spriteFont.MeasureString(fondSonoreT.get() + " :").Y / 2);
+            positionTexteFullscreen = new Vector2(boutonPleinEcran.Left - spriteFont.MeasureString(pleinEcranT.get() + " :").X, boutonPleinEcran.Center.Y - spriteFont.MeasureString(pleinEcranT.get() + " :").Y / 2);
+            positionTexteLangue = new Vector2(boutonLangue.Left - spriteFont.MeasureString(langueT.get() + " :").X, boutonLangue.Center.Y - spriteFont.MeasureString(langueT.get() + " :").Y / 2);
         }
 
         public override void Update(GameTime gameTime)
@@ -135,10 +135,10 @@ namespace CrystalGate.SceneEngine2
                 SceneHandler.gameState = GameState.Gameplay;
             }
             fullscreenText = (isFullscreen ? noT.get() : yesT.get());
-            positionTexteVolumeEffects = new Vector2(volumeEffects.Left - spriteFont.MeasureString(effetSonoreT.get()).X, volumeEffects.Center.Y - spriteFont.MeasureString(effetSonoreT.get()).Y / 2);
-            positionTexteVolumeFondSonore = new Vector2(volumeFondSonore.Left - spriteFont.MeasureString(fondSonoreT.get()).X, volumeFondSonore.Center.Y - spriteFont.MeasureString(fondSonoreT.get()).Y / 2);
-            positionTexteFullscreen = new Vector2(boutonPleinEcran.Left - spriteFont.MeasureString(pleinEcranT.get()).X, boutonPleinEcran.Center.Y - spriteFont.MeasureString(pleinEcranT.get()).Y / 2);
-            positionTexteLangue = new Vector2(boutonLangue.Left - spriteFont.MeasureString(langueT.get()).X, boutonLangue.Center.Y - spriteFont.MeasureString(langueT.get()).Y / 2);
+            positionTexteVolumeEffects = new Vector2(volumeEffects.Left - spriteFont.MeasureString(effetSonoreT.get() + " :").X, volumeEffects.Center.Y - spriteFont.MeasureString(effetSonoreT.get() + " :").Y / 2);
+            positionTexteVolumeFondSonore = new Vector2(volumeFondSonore.Left - spriteFont.MeasureString(fondSonoreT.get() + " :").X, volumeFondSonore.Center.Y - spriteFont.MeasureString(fondSonoreT.get() + " :").Y / 2);
+            positionTexteFullscreen = new Vector2(boutonPleinEcran.Left - spriteFont.MeasureString(pleinEcranT.get() + " :").X, boutonPleinEcran.Center.Y - spriteFont.MeasureString(pleinEcranT.get() + " :").Y / 2);
+            positionTexteLangue = new Vector2(boutonLangue.Left - spriteFont.MeasureString(langueT.get() + " :").X, boutonLangue.Center.Y - spriteFont.MeasureString(langueT.get() + " :").Y / 2);
         }
 
         public override void Draw(SpriteBatch spriteBatch)
@@ -194,10 +194,10 @@ namespace CrystalGate.SceneEngine2
                     boutonRetour.Top + 10),
                 Color.White);
 
-            spriteBatch.DrawString(spriteFont, effetSonoreT.get(), positionTexteVolumeEffects, Color.Blue);
-            spriteBatch.DrawString(spriteFont, fondSonoreT.get(), positionTexteVolumeFondSonore, Color.Blue);
-            spriteBatch.DrawString(spriteFont, pleinEcranT.get(), positionTexteFullscreen, Color.Blue);
-            spriteBatch.DrawString(spriteFont, langueT.get(), positionTexteLangue, Color.Blue);
+            spriteBatch.DrawString(spriteFont, effetSonoreT.get() + " :", positionTexteVolumeEffects, Color.Gold);
+            spriteBatch.DrawString(spriteFont, fondSonoreT.get() + " :", positionTexteVolumeFondSonore, Color.Gold);
+            spriteBatch.DrawString(spriteFont, pleinEcranT.get() + " :", positionTexteFullscreen, Color.Gold);
+            spriteBatch.DrawString(spriteFont, langueT.get() + " :", positionTexteLangue, Color.Gold);
 
             spriteBatch.Draw(curseur, new Vector2(mouse.X, mouse.Y), Color.White);
 

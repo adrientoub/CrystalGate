@@ -49,13 +49,13 @@ namespace CrystalGate.SceneEngine2
 
             fullscene = new Rectangle(0, 0, CrystalGateGame.graphics.GraphicsDevice.Viewport.Width, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height);
 
-            boutonServeurOuClient = new Rectangle((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width - boutons.Width) / 2, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height / 2 - 100, boutons.Width, boutons.Height);
-            champIP = new Rectangle((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width - boutons.Width) / 2, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height / 2 - 200, boutons.Width, boutons.Height);
-            boutonConnexion = new Rectangle((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width - boutons.Width) / 2, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height / 2, boutons.Width, boutons.Height);
-            boutonRetour = new Rectangle((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width - boutons.Width) / 2, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height / 2 + 100, boutons.Width, boutons.Height);
+            champIP = new Rectangle((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width - boutons.Width) / 2, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height / 2 - 150, boutons.Width, boutons.Height);
+            boutonServeurOuClient = new Rectangle((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width - boutons.Width) / 2, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height / 2 - 50, boutons.Width, boutons.Height);
+            boutonConnexion = new Rectangle((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width - boutons.Width) / 2, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height / 2 + 50, boutons.Width, boutons.Height);
+            boutonRetour = new Rectangle((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width - boutons.Width) / 2, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height / 2 + 150, boutons.Width, boutons.Height);
 
-            positionTexteIP = new Vector2(champIP.Left - spriteFont.MeasureString(ipT.get()).X, champIP.Center.Y - spriteFont.MeasureString(ipT.get()).Y / 2);
-            positionTexteMode = new Vector2(boutonServeurOuClient.Left - spriteFont.MeasureString(modeT.get()).X, boutonServeurOuClient.Center.Y - spriteFont.MeasureString(modeT.get()).Y / 2);
+            positionTexteIP = new Vector2(champIP.Left - spriteFont.MeasureString(ipT.get() + " :").X, champIP.Center.Y - spriteFont.MeasureString(ipT.get() + " :").Y / 2);
+            positionTexteMode = new Vector2(boutonServeurOuClient.Left - spriteFont.MeasureString(modeT.get() + " :").X, boutonServeurOuClient.Center.Y - spriteFont.MeasureString(modeT.get() + " :").Y / 2);
         }
 
         public override void Update(GameTime gameTime)
@@ -88,8 +88,8 @@ namespace CrystalGate.SceneEngine2
             if (!isServer)
                 SaisirTexte(ref textAsWrited);
 
-            positionTexteIP = new Vector2(champIP.Left - spriteFont.MeasureString(ipT.get()).X, champIP.Center.Y - spriteFont.MeasureString(ipT.get()).Y / 2);
-            positionTexteMode = new Vector2(boutonServeurOuClient.Left - spriteFont.MeasureString(modeT.get()).X, boutonServeurOuClient.Center.Y - spriteFont.MeasureString(modeT.get()).Y / 2);
+            positionTexteIP = new Vector2(champIP.Left - spriteFont.MeasureString(ipT.get() + " :").X, champIP.Center.Y - spriteFont.MeasureString(ipT.get() + " :").Y / 2);
+            positionTexteMode = new Vector2(boutonServeurOuClient.Left - spriteFont.MeasureString(modeT.get() + " :").X, boutonServeurOuClient.Center.Y - spriteFont.MeasureString(modeT.get() + " :").Y / 2);
         }
 
         public override void Draw(SpriteBatch spriteBatch)
@@ -116,7 +116,7 @@ namespace CrystalGate.SceneEngine2
                         champIP.Top + 10),
                     Color.White);
 
-                spriteBatch.DrawString(spriteFont, ipT.get(), positionTexteIP, Color.Blue);
+                spriteBatch.DrawString(spriteFont, ipT.get() + " :", positionTexteIP, Color.Gold);
             }
 
             Color c;
@@ -156,7 +156,7 @@ namespace CrystalGate.SceneEngine2
                     boutonRetour.Top + 10),
                 Color.White);
 
-            spriteBatch.DrawString(spriteFont, modeT.get(), positionTexteMode, Color.Blue);
+            spriteBatch.DrawString(spriteFont, modeT.get() + " :", positionTexteMode, Color.Gold);
 
             spriteBatch.Draw(curseur, new Vector2(mouse.X, mouse.Y), Color.White);
 
