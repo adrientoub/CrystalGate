@@ -65,9 +65,6 @@ namespace CrystalGate
         public KeyboardState key;
         public KeyboardState Oldkey;
 
-        public EffetSonore Victory = new EffetSonore(PackSon.Victory);
-        public EffetSonore Defeat = new EffetSonore(PackSon.Defeat);
-
         string tempsDeJeuActuel, compteurDeVague;
         int nombreDeVagues = 8;
 
@@ -163,6 +160,17 @@ namespace CrystalGate
                 }
 			}
             positionChat = new Vector2(widthFondNoir, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height - heightFondNoir - gamefont.MeasureString(messageRecu).Y - 50);
+
+            if (Win)
+            {
+                FondSonore.Stop();
+                SceneEngine2.SceneHandler.gameState = SceneEngine2.GameState.Victory;
+            }
+            else if (Lost)
+            {
+                FondSonore.Stop();
+                SceneEngine2.SceneHandler.gameState = SceneEngine2.GameState.Defeat;
+            }
         }
 
         #region fonctionsSupl
@@ -483,18 +491,6 @@ namespace CrystalGate
 
             string str2 = selectPoint.get();
             string str3 = selectUnit.get();
-            if (Win)
-            {
-                SceneEngine2.SceneHandler.gameState = SceneEngine2.GameState.Victory;
-                FondSonore.Stop();
-                Victory.Play(); 
-            }
-            else if (Lost)
-            {
-                SceneEngine2.SceneHandler.gameState = SceneEngine2.GameState.Defeat;
-                FondSonore.Stop();
-                Defeat.Play(); 
-            }
             // Selections d'unités et de points
             if (DrawSelectPoint)
                 spritebatch.DrawString(gamefont, str2, new Vector2(BarreDesSortsPosition.X - gamefont.MeasureString(str2).X / 2 , BarreDesSortsPosition.Y - BarreDesSorts.Height) + joueur.camera.Position, Color.White);

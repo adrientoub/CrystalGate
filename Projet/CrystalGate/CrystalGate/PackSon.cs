@@ -58,8 +58,6 @@ namespace CrystalGate
 
             // Autres
             LevelUp = content.Load<SoundEffect>("Sons/LevelUp");
-            Victory = content.Load<SoundEffect>("Musiques/Victory");
-            Defeat = content.Load<SoundEffect>("Musiques/GameOver");
             EffetSonore.InitEffects();
         }
     }

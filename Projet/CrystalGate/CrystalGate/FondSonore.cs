@@ -17,6 +17,8 @@ namespace CrystalGate
             "Musiques/CelticMusic-Prophecy",
             "Musiques/HOM4"
         };
+        static Song Victory; 
+        static Song Defeat;
         static Song[] _musiqueDeFond = new Song[_musicList.Length];
         static int _playingNow = 0;
         public static float volume = CrystalGateGame.isTest ? 0.1f : 0.5f;
@@ -65,12 +67,27 @@ namespace CrystalGate
                 PlayNext();
         }
 
+        public static void PlayVictory()
+        {
+            MediaPlayer.Volume = volume;
+            MediaPlayer.Play(Victory);
+            MediaPlayer.IsRepeating = false;
+        }
+        public static void PlayDefeat()
+        {
+            MediaPlayer.Volume = volume;
+            MediaPlayer.Play(Defeat);
+            MediaPlayer.IsRepeating = false;
+        }
+
         public static void Load(ContentManager content)
         {
             for (int i = 0; i < _musicList.Length; i++)
             {
                 _musiqueDeFond[i] = content.Load<Song>(_musicList[i]);
             }
+            Victory = content.Load<Song>("Musiques/Victory");
+            Defeat = content.Load<Song>("Musiques/GameOver");
             MediaPlayer.IsRepeating = false;
             isLoaded = true;
         }

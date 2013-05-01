@@ -22,9 +22,11 @@ namespace CrystalGate.SceneEngine2
 
         private Text defaiteT, quitT;
 
+        public bool firstTime;
+
         public override void Initialize()
         {
-            
+            firstTime = true;
         }
 
         public override void LoadContent()
@@ -42,13 +44,13 @@ namespace CrystalGate.SceneEngine2
 
         public override void Update(GameTime gameTime)
         {
-            mouseRec = new Rectangle(mouse.X, mouse.Y, 5, 5);
-            if (keyboardState.IsKeyDown(Keys.Escape) && !oldKeyboardState.IsKeyDown(Keys.Escape))
+            if (firstTime)
             {
-                FondSonore.Resume();
-                GamePlay.timer.Start();
-                SceneHandler.gameState = GameState.Gameplay;
+                FondSonore.PlayDefeat();
+                firstTime = false;
             }
+
+            mouseRec = new Rectangle(mouse.X, mouse.Y, 5, 5);
 
             if (mouse.LeftButton == ButtonState.Pressed && oldMouse.LeftButton == ButtonState.Released)
             {

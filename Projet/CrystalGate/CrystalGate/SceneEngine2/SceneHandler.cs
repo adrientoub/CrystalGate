@@ -172,6 +172,8 @@ namespace CrystalGate.SceneEngine2
             gameplayScene = new GamePlay();
             gameplayScene.Initialize();
             gameplayScene.LoadContent();
+            defeatScene.firstTime = true;
+            victoryScene.firstTime = true;
         }
 
         public static void ResetGameplay(string map) // Si on change de map
@@ -183,6 +185,8 @@ namespace CrystalGate.SceneEngine2
             gameplayScene = new GamePlay();
             gameplayScene.Initialize();
             gameplayScene.LoadContent();
+            defeatScene.firstTime = true;
+            victoryScene.firstTime = true;
         }
     }
 }
