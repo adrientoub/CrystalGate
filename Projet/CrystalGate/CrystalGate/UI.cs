@@ -49,7 +49,7 @@ namespace CrystalGate
         public bool Win,Lost,CurseurOffensif,IsDrag;
         public Item ItemSelected;
 
-        bool isWriting = false;
+        public bool isWriting = false;
         string message = "";
         List<string> dialogue = new List<string> { };
 

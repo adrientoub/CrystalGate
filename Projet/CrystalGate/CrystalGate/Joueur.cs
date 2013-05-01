@@ -68,20 +68,32 @@ namespace CrystalGate
                 // Pour se déplacer
                 if (Interface.mouse.RightButton == ButtonState.Pressed && !DonnerOrdreAttaquer() && (SourisHoverInventory() && !Interface.DrawSac || !SourisHoverInventory()) && (SourisHoverEquipement() && !Interface.DrawEquipement || !SourisHoverEquipement()))
                     DonnerOrdreDeplacer();
-                // Pour attaquer un point
-                if (Interface.key.IsKeyDown(Keys.A))
-                    DonnerOrdreAttaquerPoint();
-                // Pour arreter les déplacements
-                if (Interface.key.IsKeyDown(Keys.S))
-                    DonnerOrdreStop();
-                // Pour se teleporter!
-                if (Interface.key.IsKeyDown(Keys.T) && Interface.Oldkey.IsKeyUp(Keys.T))
+
+                if (!Interface.isWriting) // Si on écrit pas on peut utiliser les raccourcis clavier
                 {
-                    if(SceneHandler.level == "level1")
-                        SceneHandler.ResetGameplay("level2");
-                    else
-                        SceneHandler.ResetGameplay("level1");
+                    // Pour attaquer un point
+                    if (Interface.key.IsKeyDown(Keys.A))
+                        DonnerOrdreAttaquerPoint();
+                    // Pour arreter les déplacements
+                    if (Interface.key.IsKeyDown(Keys.S))
+                        DonnerOrdreStop();
+                    // Pour se teleporter!
+                    if (Interface.key.IsKeyDown(Keys.T) && Interface.Oldkey.IsKeyUp(Keys.T))
+                    {
+                        if (SceneHandler.level == "level1")
+                            SceneHandler.ResetGameplay("level2");
+                        else
+                            SceneHandler.ResetGameplay("level1");
+                    }
+
+                    // Pour afficher/cacher le sac
+                    if (Interface.key.IsKeyDown(Keys.B) && Interface.Oldkey.IsKeyUp(Keys.B) || Interface.key.IsKeyDown(Keys.I) && Interface.Oldkey.IsKeyUp(Keys.I))
+                        Interface.DrawSac = !Interface.DrawSac;
+                    // Pour afficher/cacher le sac
+                    if (Interface.key.IsKeyDown(Keys.C) && Interface.Oldkey.IsKeyUp(Keys.C))
+                        Interface.DrawEquipement = !Interface.DrawEquipement;
                 }
+
                 if (champion.PositionTile == new Vector2(97, 8) || champion.PositionTile == new Vector2(97, 7) || champion.PositionTile == new Vector2(97, 9))
                 {
                     if (SceneHandler.level == "level1")
@@ -189,13 +201,6 @@ namespace CrystalGate
                             champion.Cast(spell, champion.pointCible, SelectedUnit);
                     }
                 }
-
-                // Pour afficher/cacher le sac
-                if (Interface.key.IsKeyDown(Keys.B) && Interface.Oldkey.IsKeyUp(Keys.B) || Interface.key.IsKeyDown(Keys.I) && Interface.Oldkey.IsKeyUp(Keys.I))
-                    Interface.DrawSac = !Interface.DrawSac;
-                // Pour afficher/cacher le sac
-                if (Interface.key.IsKeyDown(Keys.C) && Interface.Oldkey.IsKeyUp(Keys.C))
-                    Interface.DrawEquipement = !Interface.DrawEquipement;
                 
                 
                 // Fait attaquer l'unité la plus proche
