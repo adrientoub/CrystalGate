@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using CrystalGate.SceneEngine2;
 using Microsoft.Xna.Framework;
+using CrystalGate.Unites;
 
 namespace CrystalGate
 {
@@ -25,22 +26,10 @@ namespace CrystalGate
                 Effets[i] = new List<Effet> { };
             }
             // Creation du joueur et du champion
-            j = new Joueur(new Assassin(new Vector2(0, 9)));
-            Unites[0].Add(j.champion);
-            // Chargement des waves du level1
-            PackWave packWave = new PackWave(j.champion);
-            Waves[0].Add(packWave.Level1Wave1());
-            Waves[0].Add(packWave.Level1Wave2());
-            Waves[0].Add(packWave.Level1Wave3());
-            Waves[0].Add(packWave.Level1Wave4());
-            Items[0].Add(new PotionDeVie(null, new Vector2(22, 24)));
-            Items[0].Add(new PotionDeVie(null, new Vector2(23, 24)));
-            Items[0].Add(new EpeeSolari(null, Vector2.One));
-            Items[0].Add(new GantsDeDevotion(null, Vector2.One));
-            Items[0].Add(new BottesDacier(null, Vector2.One));
-            Items[0].Add(new Epaulieres(null, Vector2.One));
-            Items[0].Add(new HelmetPurple(null, Vector2.One));
-            Items[0].Add(new RingLionHead(null, Vector2.One));
+            j = new Joueur(new Guerrier(new Vector2(0, 9)));
+            // Chargement des items et waves du level1
+            InitializeLevel1();
+            
 
         }
 
@@ -49,6 +38,7 @@ namespace CrystalGate
             // On stock les infos de la Map dans le PackMap
             int i = LevelToInt(SceneHandler.level);
             Unites[i] = Map.unites;
+            // Le champion se téléporte, on le supprime donc de la Map
             Unites[i].RemoveAll(p => p.isAChamp);
             Items[i] = Map.items;
             Waves[i] = Map.waves;
@@ -60,6 +50,7 @@ namespace CrystalGate
             // On restitue les infos du packMap dans la Map
             int i = LevelToInt(SceneHandler.level);
             Map.unites = Unites[i];
+            // Le champion s'est téléporté, on le rajoute sur la Map
             Map.unites.Add(j.champion);
             Map.joueurs = new List<Joueur> { j };
             Map.items = Items[i];
@@ -78,6 +69,20 @@ namespace CrystalGate
                 default: throw new Exception("Niveau incorrect");
             }
             return i;
+        }
+
+        static void InitializeLevel1()
+        {
+            Waves[0] = PackWave.PackWaveLevel1();
+            Unites[0].Add(new RobertLePNJ(Vector2.One));
+            Items[0].Add(new PotionDeVie(null, new Vector2(22, 24)));
+            Items[0].Add(new PotionDeVie(null, new Vector2(23, 24)));
+            Items[0].Add(new EpeeSolari(null, Vector2.One));
+            Items[0].Add(new GantsDeDevotion(null, Vector2.One));
+            Items[0].Add(new BottesDacier(null, Vector2.One));
+            Items[0].Add(new Epaulieres(null, Vector2.One));
+            Items[0].Add(new HelmetPurple(null, Vector2.One));
+            Items[0].Add(new RingLionHead(null, Vector2.One));
         }
     }
 }

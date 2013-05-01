@@ -20,6 +20,9 @@ namespace CrystalGate
         public static Texture2D SummerTiles;
         public static Texture2D WinterTiles;
         public static Texture2D VolcanicTiles;
+        // Polices
+        public static SpriteFont gamefont;
+        public static SpriteFont spellfont;
         // UI
         public static Texture2D Dialogue;
         public static Texture2D BarreDesSorts;
@@ -61,6 +64,10 @@ namespace CrystalGate
             boutons = new List<Texture2D> { content.Load<Texture2D>("Boutons/Explosion"), content.Load<Texture2D>("Boutons/Soin"), content.Load<Texture2D>("Boutons/Invisibility"), content.Load<Texture2D>("Boutons/PotionDeVie"), content.Load<Texture2D>("Boutons/PotionMana"), content.Load<Texture2D>("Boutons/BloodLust"), content.Load<Texture2D>("Boutons/EpeeSolari"), content.Load<Texture2D>("Boutons/BottesDacier"), content.Load<Texture2D>("Boutons/Epaulieres"), content.Load<Texture2D>("Boutons/GantsDeDevotion"), content.Load<Texture2D>("Boutons/HelmutPurple"), content.Load<Texture2D>("Boutons/RingLionHead"), content.Load<Texture2D>("Boutons/Polymorph") };
             projectiles = new List<Texture2D> { content.Load<Texture2D>("Projectiles/arrow"), content.Load<Texture2D>("Projectiles/axe"), content.Load<Texture2D>("Projectiles/fireball") };
             
+            // Fonts
+            gamefont = content.Load<SpriteFont>("Polices/gameFont");
+            spellfont = content.Load<SpriteFont>("Polices/SpellFont");
+
             // Tiles
             SummerTiles = content.Load<Texture2D>("PaletteEte");
             WinterTiles = content.Load<Texture2D>("PaletteHiver");

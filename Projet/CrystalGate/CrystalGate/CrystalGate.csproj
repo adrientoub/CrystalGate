@@ -184,6 +184,7 @@
     <Compile Include="Unites\Guerrier.cs" />
     <Compile Include="Unites\Ogre.cs" />
     <Compile Include="Unites\Demon.cs" />
+    <Compile Include="Unites\PNJs\RobertLePNJ.cs" />
     <Compile Include="Unites\Troll.cs" />
     <Compile Include="Unites\Grunt.cs" />
     <Compile Include="Wave.cs" />

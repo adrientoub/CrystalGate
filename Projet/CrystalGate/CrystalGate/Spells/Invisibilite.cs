@@ -60,20 +60,20 @@ namespace CrystalGate
                     uniteFollowing = new List<Unite>();
                     unite.isInvisible = false;
                 }
-                else
+                /*else
                 {
                     if (TickCurrent % 60 == 0)
                     {
                         foreach (Unite u in Map.unites)
                         {
-                            if (unite != u)
+                            if (unite != u && !u.isApnj)
                             {
-                                u.ObjectifListe.Add(new Noeud(u.PositionTile + new Vector2(1, 1) * rand.Next(-1, 2), true, 0));
+                                u.ObjectifListe.Add(new Noeud(u.PositionTile + new Vector2(2, 2) * rand.Next(-1, 2), true, 0));
                             }
                         }
                     }
 
-                }
+                }*/
         }
 
         public override string DescriptionSpell()

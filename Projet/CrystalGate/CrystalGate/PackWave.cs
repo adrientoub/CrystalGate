@@ -8,15 +8,10 @@ namespace CrystalGate
 {
     class PackWave
     {
-        Unite champion;
+        static Unite champion = PackMap.j.champion;
 
 
-        public PackWave(Unite _champion)
-        {
-            champion = _champion;
-        }
-
-        public Wave Level1Wave1()
+        static Wave Level1Wave1()
         {
             List<Vector2> PointsInit = new List<Vector2> { new Vector2(1, 8), new Vector2(1, 9), new Vector2(1, 10) };
             List<Vector2> PointsSpawn = new List<Vector2> { new Vector2(11, 0), new Vector2(31, 0), new Vector2(22, 20) };
@@ -29,7 +24,7 @@ namespace CrystalGate
             return new Wave(PointsInit, PointsSpawn, Mobs, champion);
         }
 
-        public Wave Level1Wave2()
+        static Wave Level1Wave2()
         {
             int level = 2;
 
@@ -44,7 +39,7 @@ namespace CrystalGate
             return new Wave(PointsInit, PointsSpawn, Mobs, champion);
         }
 
-        public Wave Level1Wave3()
+        static Wave Level1Wave3()
         {
             int level = 3;
 
@@ -59,7 +54,7 @@ namespace CrystalGate
             return new Wave(PointsInit, PointsSpawn, Mobs, champion);
         }
 
-        public Wave Level1Wave4()
+        static Wave Level1Wave4()
         {
             List<Vector2> PointsInit = new List<Vector2> { new Vector2(66, 22), new Vector2(67, 22), new Vector2(68, 22), new Vector2(83, 22), new Vector2(84, 22), new Vector2(85, 22) };
             List<Vector2> PointsSpawn = new List<Vector2> { new Vector2(66, 0), new Vector2(85, 0) };
@@ -71,5 +66,11 @@ namespace CrystalGate
 
             return new Wave(PointsInit, PointsSpawn, Mobs, champion);
         }
+
+        public static List<Wave> PackWaveLevel1()
+        {
+            return new List<Wave> { Level1Wave1(), Level1Wave2(), Level1Wave3(), Level1Wave4()};
+        }
+
     }
 }

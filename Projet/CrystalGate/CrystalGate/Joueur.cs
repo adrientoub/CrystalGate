@@ -25,12 +25,12 @@ namespace CrystalGate
         public Joueur(Unite champ)
         {
             champion = champ;
-
             // Statistiques
             champion.Drawlife = true;
             champion.isAChamp = true;
 
             camera = new Camera2D(Vector2.Zero);
+            Interface = new UI(this);
         }
 
         public void Update(List<Unite> unites)

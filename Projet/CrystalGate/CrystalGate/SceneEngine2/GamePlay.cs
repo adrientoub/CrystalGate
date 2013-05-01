@@ -38,46 +38,27 @@ namespace CrystalGate.SceneEngine2
             // Chargement sons
             PackSon.Initialize(content);
             FondSonore.Load(content);
+            
 
             // Chargement de la carte
             Outil.OuvrirMap(SceneHandler.level); // On initialise la carte avec les tuiles
-            if(PackMap.j == null)
+            if(PackMap.j == null) // Si c'ets la premiere fois qu'on lance le jeu, alors on initialise
                 PackMap.Initialize();
             PackMap.LoadLevel(SceneHandler.level); // On injecte les donnés (unités, joueurs)
-            // Ajout joueur
-
-          
+        
             // Bug de l'espace, si on ne reinit pas le body, il passe en statique!
             foreach (Unite u in Map.unites)
             {
                 u.body = BodyFactory.CreateRectangle(Map.world, ConvertUnits.ToSimUnits(25 * u.largeurPhysique), ConvertUnits.ToSimUnits(25 * u.largeurPhysique), 100f);
                 u.body.Position = ConvertUnits.ToSimUnits(u.PositionTile * Map.TailleTiles + new Vector2(16, 16));
-                u.body.IsStatic = false;
+                if(!u.isApnj)
+                    u.body.IsStatic = false;
             }
 
              /*Map.unites.Add(new Grunt(Vector2.One));
              Map.unites[Map.unites.Count - 1].isApnj = true;*/
 
-            // Ajout Interface
-            UI Interface = new UI(Map.joueurs[0], SceneHandler.spriteBatch, gameFont, content.Load<SpriteFont>("Polices/SpellFont"));
-            Map.joueurs[0].Interface = Interface;
-
-            Wave.waveNumber = 0;
-            // La vague
-            /*PackWave packWave = new PackWave(Map.joueurs[0].champion);
-            Map.waves.Add(packWave.Level1Wave1());
-            Map.waves.Add(packWave.Level1Wave2());
-            Map.waves.Add(packWave.Level1Wave3());
-            Map.waves.Add(packWave.Level1Wave4());*/
-            // Ajout des items
-            /*Map.items.Add(new PotionDeVie(null, new Vector2(22, 24)));
-            Map.items.Add(new PotionDeVie(null, new Vector2(23, 24)));
-            Map.items.Add(new EpeeSolari(null, Vector2.One));
-            Map.items.Add(new GantsDeDevotion(null, Vector2.One));
-            Map.items.Add(new BottesDacier(null, Vector2.One));
-            Map.items.Add(new Epaulieres(null, Vector2.One));
-            Map.items.Add(new HelmetPurple(null, Vector2.One));
-            Map.items.Add(new RingLionHead(null, Vector2.One));*/
+            //Wave.waveNumber = 0; // que faire de ce truc?
 
             timer = new System.Diagnostics.Stopwatch();
             timer.Start();
@@ -118,7 +99,7 @@ namespace CrystalGate.SceneEngine2
         public override void Draw(SpriteBatch spriteBatch)
         {
             CrystalGateGame.graphics.GraphicsDevice.Clear(ClearOptions.Target, Color.Black, 0, 0);
-            spriteBatch.Begin(0, null, null, null, null, null, Map.joueurs[0].camera.CameraMatrix);
+            spriteBatch.Begin(0, null, null, null, null, null, PackMap.j.camera.CameraMatrix);
             // DRAW Map
             Map.Draw(spriteBatch);
             // DRAW EFFETS

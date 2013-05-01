@@ -30,7 +30,7 @@ namespace CrystalGate
         public static List<Effet> effets; // effets (cadavres) qui seront draw
         public static List<Item> items;
         public static List<Wave> waves;
-
+        public static int waveNumber;
         public static GameTime gametime;
 
 

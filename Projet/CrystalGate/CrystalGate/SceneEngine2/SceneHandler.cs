@@ -45,7 +45,6 @@ namespace CrystalGate.SceneEngine2
         public static SplashScreenScene splashScreenScene;
 
         public static string level = "level1";
-        public static string Oldlevel = "level1";
 
         public SceneHandler()
         {
@@ -169,6 +168,7 @@ namespace CrystalGate.SceneEngine2
 
         public static void ResetGameplay()
         {
+            PackMap.j = null;
             gameplayScene = new GamePlay();
             gameplayScene.Initialize();
             gameplayScene.LoadContent();
@@ -178,7 +178,6 @@ namespace CrystalGate.SceneEngine2
         {
             // Oldmap
             PackMap.Sauvegarder();
-            Oldlevel = level;
             level = map;
             // Nouvelle map
             gameplayScene = new GamePlay();

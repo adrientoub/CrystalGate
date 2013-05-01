@@ -28,7 +28,9 @@ namespace CrystalGate
         public static SoundEffect InvisibiliteCible;
         public static SoundEffect FurieSanguinaireCible;
         public static SoundEffect PolymorphCible;
-
+        // Autres
+        public static SoundEffect LevelUp;
+        public static SoundEffect Victory, Defeat;
 
 
         public static void Initialize(ContentManager content)
@@ -54,6 +56,10 @@ namespace CrystalGate
             FurieSanguinaireCible = content.Load<SoundEffect>("Sons/BloodlustTarget");
             PolymorphCible = content.Load<SoundEffect>("Sons/PolymorphTarget");
 
+            // Autres
+            LevelUp = content.Load<SoundEffect>("Sons/LevelUp");
+            Victory = content.Load<SoundEffect>("Musiques/Victory");
+            Defeat = content.Load<SoundEffect>("Musiques/GameOver");
             EffetSonore.InitEffects();
         }
     }

@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Input;
+using CrystalGate.SceneEngine2;
 
 namespace CrystalGate
 {
@@ -64,6 +65,9 @@ namespace CrystalGate
         public KeyboardState key;
         public KeyboardState Oldkey;
 
+        public EffetSonore Victory = new EffetSonore(PackSon.Victory);
+        public EffetSonore Defeat = new EffetSonore(PackSon.Defeat);
+
         string tempsDeJeuActuel, compteurDeVague;
         int nombreDeVagues = 8;
 
@@ -72,7 +76,7 @@ namespace CrystalGate
         public int width = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width;
         public int height = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height;
 
-        public UI(Joueur joueur, SpriteBatch sp, SpriteFont gf, SpriteFont sf)
+        public UI(Joueur joueur)
         {
             this.joueur = joueur;
             Portrait = PackTexture.Portrait;
@@ -82,9 +86,9 @@ namespace CrystalGate
             Curseur = PackTexture.Curseur;
             CurseurRouge = PackTexture.CurseurRouge;
             this.blank = PackTexture.blank;
-            spritebatch = sp;
-            gamefont = gf;
-            spellfont = sf;
+            spritebatch = SceneHandler.spriteBatch;
+            gamefont = PackTexture.gamefont;
+            spellfont = PackTexture.spellfont;
             tempsDeJeuActuel = "0:00";
             compteurDeVague = "0/" + nombreDeVagues.ToString();
 
@@ -114,7 +118,7 @@ namespace CrystalGate
             else
                 tempsDeJeuActuel = SceneEngine2.GamePlay.timer.Elapsed.Minutes.ToString() + ":" + SceneEngine2.GamePlay.timer.Elapsed.Seconds.ToString();
 
-            compteurDeVague = Wave.waveNumber.ToString() + "/" + nombreDeVagues.ToString();
+            compteurDeVague = Map.waveNumber.ToString() + "/" + nombreDeVagues.ToString();
 
             if (SceneEngine2.BaseScene.keyboardState.IsKeyDown(Keys.Enter) &&
                 SceneEngine2.BaseScene.oldKeyboardState.IsKeyUp(Keys.Enter) &&
@@ -373,7 +377,7 @@ namespace CrystalGate
                     spritebatch.Draw(Portrait, new Rectangle((int)joueur.camera.Position.X + margeCadre, (int)joueur.camera.Position.Y + height - tailleCadre, tailleCadre, tailleCadre), Color.White);
                     spritebatch.Draw(joueur.PNJSelected.Portrait, new Rectangle((int)joueur.camera.Position.X + width - tailleCadre - margeCadre, (int)joueur.camera.Position.Y + height - tailleCadre, tailleCadre, tailleCadre), Color.White);
                     Text l1 = new Text(joueur.champion.ToString().Split(new char[1] { '.' })[1]);
-                    string l2 = joueur.PNJSelected.ToString().Split(new char[1] { '.' })[1];
+                    string l2 = joueur.PNJSelected.ToString().Split(new char[1] { '.' })[2];
                     spritebatch.DrawString(gamefont, l1.get(), new Vector2( 3 * margeCadre / 2 - gamefont.MeasureString(l1.get()).X / 2, height - HeightBDialogue) + joueur.camera.Position, Color.BurlyWood);
                     spritebatch.DrawString(gamefont, l2, new Vector2(width - 3 * margeCadre / 2 - gamefont.MeasureString(l2).X / 2, height - HeightBDialogue) + joueur.camera.Position, Color.BurlyWood);
 
@@ -480,9 +484,17 @@ namespace CrystalGate
             string str2 = selectPoint.get();
             string str3 = selectUnit.get();
             if (Win)
+            {
                 SceneEngine2.SceneHandler.gameState = SceneEngine2.GameState.Victory;
+                FondSonore.Stop();
+                Victory.Play(); 
+            }
             else if (Lost)
+            {
                 SceneEngine2.SceneHandler.gameState = SceneEngine2.GameState.Defeat;
+                FondSonore.Stop();
+                Defeat.Play(); 
+            }
             // Selections d'unités et de points
             if (DrawSelectPoint)
                 spritebatch.DrawString(gamefont, str2, new Vector2(BarreDesSortsPosition.X - gamefont.MeasureString(str2).X / 2 , BarreDesSortsPosition.Y - BarreDesSorts.Height) + joueur.camera.Position, Color.White);

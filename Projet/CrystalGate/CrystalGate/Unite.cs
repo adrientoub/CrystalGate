@@ -5,6 +5,7 @@ using System.Text;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using CrystalGate.SceneEngine2;
 
 namespace CrystalGate
 {
@@ -61,6 +62,8 @@ namespace CrystalGate
 
         protected EffetSonore effetUniteAttaque;
         public EffetSonore effetUniteDeath;
+        public EffetSonore effetUniteLevelUp;
+
         protected int nbFrameSonJoue;
         protected double lastManaAdd;
 
@@ -88,6 +91,7 @@ namespace CrystalGate
             Puissance = 1;
             effetUniteAttaque = new EffetSonore(PackSon.Epee);
             effetUniteDeath = new EffetSonore(PackSon.GruntDeath);
+            effetUniteLevelUp = new EffetSonore(PackSon.LevelUp);
             nbFrameSonJoue = 0;
             Vitesse_Attaque = 1.00f;
             Defense = 0;
@@ -103,7 +107,6 @@ namespace CrystalGate
             Inventory = new List<Item> { };
             Stuff = new List<Item> { };
 
-            Dialogue.Add("Dans la prochaine salle t'attends Odin, soit sur tes gardes!");
             //Dialogue.Add("Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.");
         }
 
@@ -211,6 +214,8 @@ namespace CrystalGate
                 effets.Add(new Effet(Sprite, ConvertUnits.ToDisplayUnits(body.Position), packAnimation.Mort(this), Tiles, 1));
                 Map.world.RemoveBody(body);
                 Drop();
+                if (isAChamp)
+                    PackMap.j.Interface.Lost = true;
             }
             // TEST MANA
             if (Mana < 0)
@@ -219,6 +224,7 @@ namespace CrystalGate
 
         public void newLevel()
         {
+            effetUniteLevelUp.Play();
             Level++;
             if ((int)(defense * byLevelAdd) == defense)
                 defense++;

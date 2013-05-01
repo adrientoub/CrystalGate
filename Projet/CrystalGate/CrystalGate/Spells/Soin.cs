@@ -15,7 +15,7 @@ namespace CrystalGate
         public Soin(Unite u, Unite cible, bool useMana = true)
             : base(u, cible)  
         {
-            Cooldown = 2;
+            Cooldown = 1;
             Ticks = 1;
             if (useMana)
                 CoutMana = 15;
