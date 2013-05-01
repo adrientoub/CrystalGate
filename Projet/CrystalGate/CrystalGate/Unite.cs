@@ -524,9 +524,9 @@ namespace CrystalGate
             if(Projectile != null)
                 Projectile.Draw(spriteBatch);
             // Pour voir le pathfinding
-            foreach (Noeud n in ObjectifListe)
+            /*foreach (Noeud n in ObjectifListe)
                 spriteBatch.Draw(PackTexture.blank, new Rectangle((int)n.Position.X * 32, (int)n.Position.Y * 32, 32, 32), Color.White);
-        }
+        */}
 
         void DrawVie(SpriteBatch spriteBatch)
         {

@@ -42,7 +42,7 @@ namespace CrystalGate.SceneEngine2
             // Chargement de la carte
             Outil.OuvrirMap(SceneHandler.level);
 
-            // Ajout joueurs
+            // Ajout joueur
             if (SceneHandler.joueur == null) // Si c'est la premier fois qu'on boot le jeu
             {
                 Map.joueurs.Add(new Joueur(new Assassin(new Vector2(0, 9))));
@@ -51,6 +51,12 @@ namespace CrystalGate.SceneEngine2
             else // Sinon on recupere le heros
             {
                 Map.joueurs.Add(SceneHandler.joueur);
+                SceneHandler.joueur.champion.ObjectifListe = new List<Noeud> { };
+                // Bug de l'espace, si on ne reinit pas le body, il passe en statique!
+                SceneHandler.joueur.champion.body = BodyFactory.CreateRectangle(Map.world, ConvertUnits.ToSimUnits(25 * 1), ConvertUnits.ToSimUnits(25 * 1), 100f);
+                SceneHandler.joueur.champion.body.Position = ConvertUnits.ToSimUnits(SceneHandler.joueur.champion.PositionTile * Map.TailleTiles + new Vector2(16, 16));
+                SceneHandler.joueur.champion.body.IsStatic = false;
+                //
                 Map.unites.Add(SceneHandler.joueur.champion);
             }
 
@@ -132,7 +138,8 @@ namespace CrystalGate.SceneEngine2
             // DRAW INTERFACE
             Map.joueurs[0].Interface.Draw();
             // DRAW STRINGS
-            /**/
+            /*if(SceneHandler.joueur != null)
+            spriteBatch.DrawString(gameFont, SceneHandler.joueur.champion.body.Position.ToString() + SceneHandler.joueur.champion.body.IsStatic.ToString(), Vector2.Zero, Color.White);*/
             spriteBatch.End();
         }
 

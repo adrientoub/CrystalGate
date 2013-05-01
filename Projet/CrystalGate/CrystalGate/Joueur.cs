@@ -75,7 +75,7 @@ namespace CrystalGate
                 if (Interface.key.IsKeyDown(Keys.S))
                     DonnerOrdreStop();
                 // Pour se teleporter!
-                if (Interface.key.IsKeyDown(Keys.T))
+                if (Interface.key.IsKeyDown(Keys.T) && Interface.Oldkey.IsKeyUp(Keys.T))
                     SceneHandler.ResetGameplay("level2");
 
                 // Pour lancer un sort
