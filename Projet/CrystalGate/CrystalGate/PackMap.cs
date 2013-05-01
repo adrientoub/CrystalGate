@@ -1,0 +1,83 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using CrystalGate.SceneEngine2;
+using Microsoft.Xna.Framework;
+
+namespace CrystalGate
+{
+    static class PackMap
+    {
+        static List<Unite>[] Unites = new List<Unite>[10];
+        static List<Item>[] Items = new List<Item>[10];
+        static List<Wave>[] Waves = new List<Wave>[10];
+        static List<Effet>[] Effets = new List<Effet>[10];
+        public static Joueur j = null;
+
+        public static void Initialize()
+        {
+            for (int i = 0; i < Unites.Length; i++)
+            {
+                Unites[i] = new List<Unite> { };
+                Items[i] = new List<Item> { };
+                Waves[i] = new List<Wave> { };
+                Effets[i] = new List<Effet> { };
+            }
+            // Creation du joueur et du champion
+            j = new Joueur(new Assassin(new Vector2(0, 9)));
+            Unites[0].Add(j.champion);
+            // Chargement des waves du level1
+            PackWave packWave = new PackWave(j.champion);
+            Waves[0].Add(packWave.Level1Wave1());
+            Waves[0].Add(packWave.Level1Wave2());
+            Waves[0].Add(packWave.Level1Wave3());
+            Waves[0].Add(packWave.Level1Wave4());
+            Items[0].Add(new PotionDeVie(null, new Vector2(22, 24)));
+            Items[0].Add(new PotionDeVie(null, new Vector2(23, 24)));
+            Items[0].Add(new EpeeSolari(null, Vector2.One));
+            Items[0].Add(new GantsDeDevotion(null, Vector2.One));
+            Items[0].Add(new BottesDacier(null, Vector2.One));
+            Items[0].Add(new Epaulieres(null, Vector2.One));
+            Items[0].Add(new HelmetPurple(null, Vector2.One));
+            Items[0].Add(new RingLionHead(null, Vector2.One));
+
+        }
+
+        public static void Sauvegarder()
+        {
+            // On stock les infos de la Map dans le PackMap
+            int i = LevelToInt(SceneHandler.level);
+            Unites[i] = Map.unites;
+            Unites[i].RemoveAll(p => p.isAChamp);
+            Items[i] = Map.items;
+            Waves[i] = Map.waves;
+            Effets[i] = Map.effets;
+        }
+
+        public static void LoadLevel(string level)
+        {
+            // On restitue les infos du packMap dans la Map
+            int i = LevelToInt(SceneHandler.level);
+            Map.unites = Unites[i];
+            Map.unites.Add(j.champion);
+            Map.joueurs = new List<Joueur> { j };
+            Map.items = Items[i];
+            Map.waves = Waves[i];
+        }
+
+        static int LevelToInt(string level)
+        {
+            int i = 0;
+            switch (level)
+            {
+                case "level1": i = 0;
+                    break;
+                case "level2": i = 1;
+                    break;
+                default: throw new Exception("Niveau incorrect");
+            }
+            return i;
+        }
+    }
+}

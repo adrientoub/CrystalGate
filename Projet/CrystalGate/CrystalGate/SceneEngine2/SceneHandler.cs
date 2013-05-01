@@ -45,7 +45,7 @@ namespace CrystalGate.SceneEngine2
         public static SplashScreenScene splashScreenScene;
 
         public static string level = "level1";
-        public static Joueur joueur = null;
+        public static string Oldlevel = "level1";
 
         public SceneHandler()
         {
@@ -60,6 +60,8 @@ namespace CrystalGate.SceneEngine2
             coopSettingsScene = new CoopSettingsScene();
             coopConnexionScene = new CoopConnexionScene();
             splashScreenScene = new SplashScreenScene();
+
+
         }
 
         public void Initialize()
@@ -174,8 +176,11 @@ namespace CrystalGate.SceneEngine2
 
         public static void ResetGameplay(string map) // Si on change de map
         {
+            // Oldmap
+            PackMap.Sauvegarder();
+            Oldlevel = level;
             level = map;
-            joueur = Map.joueurs[0];
+            // Nouvelle map
             gameplayScene = new GamePlay();
             gameplayScene.Initialize();
             gameplayScene.LoadContent();

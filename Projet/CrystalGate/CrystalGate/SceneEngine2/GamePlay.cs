@@ -40,28 +40,23 @@ namespace CrystalGate.SceneEngine2
             FondSonore.Load(content);
 
             // Chargement de la carte
-            Outil.OuvrirMap(SceneHandler.level);
-
+            Outil.OuvrirMap(SceneHandler.level); // On initialise la carte avec les tuiles
+            if(PackMap.j == null)
+                PackMap.Initialize();
+            PackMap.LoadLevel(SceneHandler.level); // On injecte les donnés (unités, joueurs)
             // Ajout joueur
-            if (SceneHandler.joueur == null) // Si c'est la premier fois qu'on boot le jeu
+
+          
+            // Bug de l'espace, si on ne reinit pas le body, il passe en statique!
+            foreach (Unite u in Map.unites)
             {
-                Map.joueurs.Add(new Joueur(new Assassin(new Vector2(0, 9))));
-                Map.unites.Add(Map.joueurs[0].champion);
-            }
-            else // Sinon on recupere le heros
-            {
-                Map.joueurs.Add(SceneHandler.joueur);
-                SceneHandler.joueur.champion.ObjectifListe = new List<Noeud> { };
-                // Bug de l'espace, si on ne reinit pas le body, il passe en statique!
-                SceneHandler.joueur.champion.body = BodyFactory.CreateRectangle(Map.world, ConvertUnits.ToSimUnits(25 * 1), ConvertUnits.ToSimUnits(25 * 1), 100f);
-                SceneHandler.joueur.champion.body.Position = ConvertUnits.ToSimUnits(SceneHandler.joueur.champion.PositionTile * Map.TailleTiles + new Vector2(16, 16));
-                SceneHandler.joueur.champion.body.IsStatic = false;
-                //
-                Map.unites.Add(SceneHandler.joueur.champion);
+                u.body = BodyFactory.CreateRectangle(Map.world, ConvertUnits.ToSimUnits(25 * u.largeurPhysique), ConvertUnits.ToSimUnits(25 * u.largeurPhysique), 100f);
+                u.body.Position = ConvertUnits.ToSimUnits(u.PositionTile * Map.TailleTiles + new Vector2(16, 16));
+                u.body.IsStatic = false;
             }
 
-            // Map.unites.Add(new Grunt(Vector2.One));
-            // Map.unites[Map.unites.Count - 1].isApnj = true;
+             /*Map.unites.Add(new Grunt(Vector2.One));
+             Map.unites[Map.unites.Count - 1].isApnj = true;*/
 
             // Ajout Interface
             UI Interface = new UI(Map.joueurs[0], SceneHandler.spriteBatch, gameFont, content.Load<SpriteFont>("Polices/SpellFont"));
@@ -69,20 +64,20 @@ namespace CrystalGate.SceneEngine2
 
             Wave.waveNumber = 0;
             // La vague
-            PackWave packWave = new PackWave(Map.joueurs[0].champion);
+            /*PackWave packWave = new PackWave(Map.joueurs[0].champion);
             Map.waves.Add(packWave.Level1Wave1());
             Map.waves.Add(packWave.Level1Wave2());
             Map.waves.Add(packWave.Level1Wave3());
-            Map.waves.Add(packWave.Level1Wave4());
+            Map.waves.Add(packWave.Level1Wave4());*/
             // Ajout des items
-            Map.items.Add(new PotionDeVie(null, new Vector2(22, 24)));
+            /*Map.items.Add(new PotionDeVie(null, new Vector2(22, 24)));
             Map.items.Add(new PotionDeVie(null, new Vector2(23, 24)));
             Map.items.Add(new EpeeSolari(null, Vector2.One));
             Map.items.Add(new GantsDeDevotion(null, Vector2.One));
             Map.items.Add(new BottesDacier(null, Vector2.One));
             Map.items.Add(new Epaulieres(null, Vector2.One));
             Map.items.Add(new HelmetPurple(null, Vector2.One));
-            Map.items.Add(new RingLionHead(null, Vector2.One));
+            Map.items.Add(new RingLionHead(null, Vector2.One));*/
 
             timer = new System.Diagnostics.Stopwatch();
             timer.Start();

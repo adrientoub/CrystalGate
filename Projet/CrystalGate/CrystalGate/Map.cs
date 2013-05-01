@@ -14,20 +14,25 @@ namespace CrystalGate
 {
     public static class Map
     {
+        // Geré par Initialize :
         static Texture2D Sprite;
         public static Vector2[,] Cellules;
         public static Vector2 TailleTiles;
         public static Vector2 Taille;
+        public static Noeud[,] unitesStatic;
+        public static World world;
+        static Body boundary; // Les limites du monde physique
+        public static TypeDeTerrain typeDeTerrain;
+
+        // Geré par LoadLevel
         public static List<Joueur> joueurs;
         public static List<Unite> unites;
         public static List<Effet> effets; // effets (cadavres) qui seront draw
         public static List<Item> items;
         public static List<Wave> waves;
-        public static Noeud[,] unitesStatic;
-        public static World world;
-        static Body boundary; // Les limites du monde physique
+
         public static GameTime gametime;
-        public static TypeDeTerrain typeDeTerrain;
+
 
         public static void Initialize(Texture2D sprite, Vector2 taille, Vector2 tailleTiles)
         {
