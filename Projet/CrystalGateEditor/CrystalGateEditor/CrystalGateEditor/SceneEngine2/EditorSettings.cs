@@ -31,7 +31,7 @@ namespace CrystalGateEditor.SceneEngine2
         private Rectangle fullscene;
         private Rectangle bouton1, bouton2, bouton3, bouton4;
 
-        private Text serveurT, clientT, lancerJeuT, retourJeuT, ipT, modeT;
+        private Text newMapT, loadMapT, loadT, createT, backT, heightT, widthT, validateT, incorrectT, typeSolT;
 
         public string textAsWrited;
 
@@ -70,12 +70,16 @@ namespace CrystalGateEditor.SceneEngine2
             if (content == null)
                 content = SceneHandler.content;
 
-            lancerJeuT = new Text("LaunchConnexion");
-            retourJeuT = new Text("BackToMenu");
-            serveurT = new Text("Server");
-            clientT = new Text("Client");
-            ipT = new Text("IP");
-            modeT = new Text("Mode");
+            createT = new Text("Create");
+            backT = new Text("Back");
+            newMapT = new Text("NewMap");
+            loadMapT = new Text("LoadMap");
+            widthT = new Text("Width");
+            heightT = new Text("Height");
+            validateT = new Text("Validate");
+            loadT = new Text("Load");
+            incorrectT = new Text("NameIncorrect");
+            typeSolT = new Text("SoilType");
 
             fullscene = new Rectangle(0, 0, Game1.graphics.GraphicsDevice.Viewport.Width, Game1.graphics.GraphicsDevice.Viewport.Height);
 
@@ -126,15 +130,17 @@ namespace CrystalGateEditor.SceneEngine2
 
                     if (CreateNew)
                     {
-                        texteBouton2 = "Nouvelle carte";
-                        texteBouton3 = "Créer";
+                        texteBouton2 = newMapT.get();
+                        texteBouton3 = createT.get();
                     }
                     else
                     {
-                        texteBouton2 = "Charger carte";
-                        texteBouton3 = "Charger";
+                        texteBouton2 = loadMapT.get();
+                        texteBouton3 = loadT.get();
                     }
-                    texteBouton4 = "Retour";
+                    texteBouton4 = backT.get();
+                    texteDescriptionBouton1 = "";
+                    texteDescriptionBouton2 = "";
                     break;
                 case Phase.ChargerMap:
                     if (SceneHandler.editorScene.ui.OuvrirMap(nomMap))
@@ -143,7 +149,7 @@ namespace CrystalGateEditor.SceneEngine2
                     }
                     else
                     {
-                        texteDescriptionBouton1 = "Nom incorrect";
+                        texteDescriptionBouton1 = incorrectT.get();
                         phase = Phase.LoadOrCreate;
                     }
                     break;
@@ -177,10 +183,11 @@ namespace CrystalGateEditor.SceneEngine2
                         texteBouton1 = longueur;
                         bouton3Lock = false;
                     }
-                    texteDescriptionBouton1 = "Longueur";
-                    texteBouton2 = SceneHandler.editorScene.ui.textureStart.ToString();;
-                    texteBouton3 = "Valider";
-                    texteBouton4 = "Retour";
+                    texteDescriptionBouton1 = widthT.get() + " :";
+                    texteDescriptionBouton2 = typeSolT.get() + " :";
+                    texteBouton2 = SceneHandler.editorScene.ui.textureStart.ToString();
+                    texteBouton3 = validateT.get();
+                    texteBouton4 = backT.get();
                     break;
                 case Phase.TailleY:
                     if (mouse.LeftButton == ButtonState.Pressed && oldMouse.LeftButton == ButtonState.Released)
@@ -212,10 +219,11 @@ namespace CrystalGateEditor.SceneEngine2
                         texteBouton1 = largeur;
                         bouton3Lock = false;
                     }
-                    texteDescriptionBouton1 = "Largeur";
-                    texteBouton2 = SceneHandler.editorScene.ui.textureStart.ToString(); ;
-                    texteBouton3 = "Valider";
-                    texteBouton4 = "Retour";
+                    texteDescriptionBouton1 = heightT.get() + " :";
+                    texteDescriptionBouton2 = typeSolT.get() + " :";
+                    texteBouton2 = new Text(SceneHandler.editorScene.ui.textureStart.ToString()).get();
+                    texteBouton3 = validateT.get();
+                    texteBouton4 = backT.get();
                     break;
                 case Phase.NouvelleMap:
                     SceneHandler.editorScene.ui.Map = new Vector2[int.Parse(longueur), int.Parse(largeur)];
@@ -250,7 +258,7 @@ namespace CrystalGateEditor.SceneEngine2
                         bouton1.Top + 10),
                     Color.White);
 
-                spriteBatch.DrawString(spriteFont, texteDescriptionBouton1, positionDescriptionBouton1, Color.Blue);
+                spriteBatch.DrawString(spriteFont, texteDescriptionBouton1, positionDescriptionBouton1, Color.Gold);
             }
 
             if (texteBouton2 != "")
@@ -267,7 +275,7 @@ namespace CrystalGateEditor.SceneEngine2
                         bouton2.Top + 10),
                     Color.White);
 
-                spriteBatch.DrawString(spriteFont, texteDescriptionBouton2, positionDescriptionBouton2, Color.Blue);
+                spriteBatch.DrawString(spriteFont, texteDescriptionBouton2, positionDescriptionBouton2, Color.Gold);
             }
 
             if (texteBouton3 != "")
@@ -290,7 +298,7 @@ namespace CrystalGateEditor.SceneEngine2
                         bouton3.Top + 10),
                     c);
 
-                spriteBatch.DrawString(spriteFont, texteDescriptionBouton2, positionDescriptionBouton2, Color.Blue);
+                spriteBatch.DrawString(spriteFont, texteDescriptionBouton3, positionDescriptionBouton3, Color.Gold);
             }
 
             if (texteBouton4 != "")
@@ -302,12 +310,12 @@ namespace CrystalGateEditor.SceneEngine2
 
                 spriteBatch.DrawString(
                     spriteFont,
-                    retourJeuT.get(),
-                    new Vector2((Game1.graphics.GraphicsDevice.Viewport.Width) / 2 - spriteFont.MeasureString(retourJeuT.get()).X / 2,
+                    backT.get(),
+                    new Vector2((Game1.graphics.GraphicsDevice.Viewport.Width) / 2 - spriteFont.MeasureString(backT.get()).X / 2,
                         bouton4.Top + 10),
                     Color.White);
 
-                spriteBatch.DrawString(spriteFont, texteDescriptionBouton2, positionDescriptionBouton2, Color.Blue);
+                spriteBatch.DrawString(spriteFont, texteDescriptionBouton4, positionDescriptionBouton4, Color.Gold);
             }
 
             spriteBatch.End();
