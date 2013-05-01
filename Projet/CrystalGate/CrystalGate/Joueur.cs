@@ -98,9 +98,9 @@ namespace CrystalGate
                 {
                     if (SceneHandler.level == "level1")
                     {
-                        champion.PositionTile = new Vector2(5, 20);
+                        champion.PositionTile = new Vector2(3, 20);
                         champion.ObjectifListe = new List<Noeud> { };
-                        camera.Position = new Vector2(0, 250);
+                        camera.Position = new Vector2(0, 200);
                         SceneHandler.ResetGameplay("level2");
                     }
                 }
@@ -204,7 +204,7 @@ namespace CrystalGate
                 
                 
                 // Fait attaquer l'unité la plus proche
-                if (isRoaming)
+                /*if (isRoaming)
                 {
                     float distanceInit = 9000;
                     Unite focus = null;
@@ -219,7 +219,7 @@ namespace CrystalGate
                         }
                     }
                     champion.uniteAttacked = focus;
-                }
+                }*/
             }
             // Pour verifier si on parle a un pnj
             SpeakToPNJ();

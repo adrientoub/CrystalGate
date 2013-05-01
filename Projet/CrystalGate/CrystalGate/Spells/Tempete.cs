@@ -20,7 +20,7 @@ namespace CrystalGate
             : base(u, cible)
         {
             Cooldown = 2;
-            Ticks = 400;
+            Ticks = 300;
             CoutMana = 10;
             Animation = PackAnimation.Explosion();
             AnimationReset = PackAnimation.Explosion();

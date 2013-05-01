@@ -68,27 +68,41 @@ namespace CrystalGate
                     break;
                 default: throw new Exception("Niveau incorrect");
             }
+            int c = 0;
+            foreach (Wave w in Waves[i])
+                c += w.unites.Count;
+            Map.nombreDeVagues = c;
             return i;
         }
 
         static void InitializeLevel1()
         {
             Waves[0] = PackWave.PackWaveLevel1();
-            Unites[0].Add(new Syndra(new Vector2(49, 39)));
+            Unite Pnj = new Syndra(new Vector2(49, 39));
+            Pnj.Dialogue.Clear();
+            Pnj.Dialogue.Add("La dernière vague d'ennemie de ce niveau sera plus tenace que tu le pense, tu vas avoir besoin d'aide.");
+            Pnj.Dialogue.Add("Tu trouveras derrière moi l'Epee Solari, elle te permettera d'infliger plus de dégats et augmentera ta résistance, soit beni Guerrier!");
+            Unites[0].Add(Pnj);
             Items[0].Add(new PotionDeVie(null, new Vector2(22, 24)));
             Items[0].Add(new PotionDeVie(null, new Vector2(23, 24)));
-            j.champion.Inventory.Add(new EpeeSolari(j.champion, new Vector2(2,2)));
+            Items[0].Add(new EpeeSolari(j.champion, new Vector2(50, 39)));
+
             j.champion.Inventory.Add(new GantsDeDevotion(j.champion, Vector2.One));
-            j.champion.Inventory.Add(new BottesDacier(j.champion, Vector2.One));
             j.champion.Inventory.Add(new Epaulieres(j.champion, Vector2.One));
             j.champion.Inventory.Add(new HelmetPurple(j.champion, Vector2.One));
             j.champion.Inventory.Add(new RingLionHead(j.champion, Vector2.One));
+
         }
 
         static void InitializeLevel2()
         {
+            Unite Pnj = new Syndra(new Vector2(7, 18));
+            Pnj.Dialogue.Clear();
+            Pnj.Dialogue.Add("Tu te trouves actuellement dans le Pôle Glaciaire, les distances à parcourir seront plutôt longues.");
+            Pnj.Dialogue.Add("Prends les bottes derrière moi, elles te permettront de te déplacer plus vite");
+            Unites[1].Add(Pnj);
+            Items[1].Add(new BottesDacier(j.champion, new Vector2(10,15)));
             Waves[1] = PackWave.PackWaveLevel2();
-            //Unites[0].Add(new RobertLePNJ(Vector2.One));
         }
     }
 }

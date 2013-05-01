@@ -154,7 +154,7 @@ namespace CrystalGate
             if (uniteAttacked != null)
                 Attaquer(uniteAttacked);
             else
-                if (OlduniteAttacked != null && ObjectifListe.Count == 0) // si l'unité se déplacait pour tirer
+                if (OlduniteAttacked != null && ObjectifListe.Count == 0 && IsRanged) // si l'unité se déplacait pour tirer
                     uniteAttacked = OlduniteAttacked;
         }
 

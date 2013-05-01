@@ -13,8 +13,8 @@ namespace CrystalGate.Unites
         {
             Vie = 550000;
             isApnj = true;
-            Dialogue.Add("Dans la prochaine salle t'attends Odin, soit sur tes gardes!");
-            Dialogue.Add("Wesh la famille et tout ?");
+            FlipH = true;
+            direction = Direction.Gauche;
         }
     }
 }

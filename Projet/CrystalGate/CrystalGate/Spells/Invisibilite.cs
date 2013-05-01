@@ -44,7 +44,6 @@ namespace CrystalGate
                         if (u != unite && u.uniteAttacked == unite)
                         {
                             u.uniteAttacked = null;
-                            u.OlduniteAttacked = null;
                             uniteFollowing.Add(u);
                         }
                     }

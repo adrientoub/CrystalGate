@@ -31,6 +31,7 @@ namespace CrystalGate
         public static List<Item> items;
         public static List<Wave> waves;
         public static int waveNumber;
+        public static int nombreDeVagues;
         public static GameTime gametime;
 
 
@@ -46,6 +47,7 @@ namespace CrystalGate
             effets = new List<Effet> { };
             items = new List<Item> { };
             waves = new List<Wave> { };
+            waveNumber = 0;
             unitesStatic = new Noeud[(int)taille.X, (int)taille.Y];
 
             // Creation de la physique de la carte

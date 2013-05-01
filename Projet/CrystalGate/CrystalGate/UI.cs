@@ -29,7 +29,7 @@ namespace CrystalGate
         public Rectangle EquipementPosition;
 
         // Position des pièces d'équipement
-        const int decalage = 44;
+        const int decalage = 43;
         public Vector2 CasquePosition = new Vector2(35, 25); // 42
         public Vector2 EpaulieresPosition = new Vector2(35, 25 + decalage * 1);
         public Vector2 GantsPosition = new Vector2(35, 25 + decalage * 2);
@@ -66,7 +66,6 @@ namespace CrystalGate
         public KeyboardState Oldkey;
 
         string tempsDeJeuActuel, compteurDeVague;
-        int nombreDeVagues = 8;
 
         public Joueur joueur;
 
@@ -87,7 +86,7 @@ namespace CrystalGate
             gamefont = PackTexture.gamefont;
             spellfont = PackTexture.spellfont;
             tempsDeJeuActuel = "0:00";
-            compteurDeVague = "0/" + nombreDeVagues.ToString();
+            compteurDeVague = "0/" + Map.nombreDeVagues.ToString();
 
             widthFondNoir = 380;
             heightFondNoir = 250;
@@ -115,7 +114,7 @@ namespace CrystalGate
             else
                 tempsDeJeuActuel = SceneEngine2.GamePlay.timer.Elapsed.Minutes.ToString() + ":" + SceneEngine2.GamePlay.timer.Elapsed.Seconds.ToString();
 
-            compteurDeVague = Map.waveNumber.ToString() + "/" + nombreDeVagues.ToString();
+            compteurDeVague = Map.waveNumber.ToString() + "/" + Map.nombreDeVagues.ToString();
 
             if (SceneEngine2.BaseScene.keyboardState.IsKeyDown(Keys.Enter) &&
                 SceneEngine2.BaseScene.oldKeyboardState.IsKeyUp(Keys.Enter) &&
@@ -404,7 +403,7 @@ namespace CrystalGate
 
             if (DrawUI)
             {
-                string str = " " + life.get() + " : " + joueur.champion.PositionTile + " / " + joueur.champion.VieMax + "\n "
+                string str = " " + life.get() + " : " + joueur.champion.Vie + " / " + joueur.champion.VieMax + "\n "
                     + manaText.get() + " : " + joueur.champion.Mana + " / " + joueur.champion.ManaMax + "\n "
                     + attack.get() + " : " + joueur.champion.Dommages + "\n "
                     + armor.get() + " : " + joueur.champion.Defense + " / " + joueur.champion.DefenseMagique + "\n "
@@ -448,7 +447,7 @@ namespace CrystalGate
                             color = Color.White;
                         else
                             color = Color.Red;
-                        spritebatch.Draw(joueur.champion.spells[i].SpriteBouton, new Vector2(BarreDesSortsPosition.X - 130 + i * (32 + 5), BarreDesSortsPosition.Y + 8) + joueur.camera.Position, color);
+                        spritebatch.Draw(joueur.champion.spells[i].SpriteBouton, new Vector2(BarreDesSortsPosition.X - 130 + i * (32 + 3), BarreDesSortsPosition.Y + 8) + joueur.camera.Position, color);
                     }
 
                 }
