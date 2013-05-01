@@ -34,6 +34,17 @@ namespace CrystalGate
                 _finDeLaMusique = _musiqueDeFond[_playingNow].Duration;
             }
         }
+        public static void Play(int i)
+        {
+            if (isLoaded)
+            {
+                _playingNow = i;
+                _playingNow = _playingNow % _musicList.Length; // On s'assure d'être dans les bornes. De ne pas lancer une musique inexistante.
+                MediaPlayer.Volume = volume; 
+                MediaPlayer.Play(_musiqueDeFond[_playingNow]);
+                _finDeLaMusique = _musiqueDeFond[_playingNow].Duration;
+            }
+        }
         public static void PlayNext()
         {
             if (isLoaded)
