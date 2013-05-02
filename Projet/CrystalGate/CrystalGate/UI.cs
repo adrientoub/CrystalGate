@@ -51,7 +51,7 @@ namespace CrystalGate
 
         public bool isWriting = false;
         string message = "";
-        List<string> dialogue = new List<string> { };
+        List<Text> dialogue = new List<Text> { };
 
         int MaxChar;
 
@@ -369,13 +369,13 @@ namespace CrystalGate
                 {
                     MaxChar = 0; // On reset tout
                     dialogue.Clear();
-                    foreach (string s in joueur.PNJSelected.Dialogue)
-                        dialogue.Add(s);
+                    foreach (Text t in joueur.PNJSelected.Dialogue)
+                        dialogue.Add(t);
                 }
 
                 if (dialogue.Count() > 0) // Si le dialogue est en cours on le draw
                 {
-                    string strDiag = dialogue[0];
+                    string strDiag = dialogue[0].get();
                     string strDraw = "";
                     int HeightBDialogue = 200;
                     int tailleCadre = 150;

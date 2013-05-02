@@ -85,8 +85,8 @@ namespace CrystalGate
             Waves[0] = PackWave.PackWaveLevel1();
             Unite Pnj = new Syndra(new Vector2(49, 39));
             Pnj.Dialogue.Clear();
-            Pnj.Dialogue.Add(new Text("Dialogue1a").get());
-            Pnj.Dialogue.Add(new Text("Dialogue1b").get());
+            Pnj.Dialogue.Add(new Text("Dialogue1a"));
+            Pnj.Dialogue.Add(new Text("Dialogue1b"));
             Unites[0].Add(Pnj);
             Items[0].Add(new PotionDeVie(null, new Vector2(22, 24)));
             Items[0].Add(new PotionDeVie(null, new Vector2(23, 24)));
@@ -105,8 +105,8 @@ namespace CrystalGate
             Pnj.Dialogue.Clear();
             Text a = new Text("Dialogue2a");
             Text b = new Text("Dialogue2b");
-            Pnj.Dialogue.Add(a.get());
-            Pnj.Dialogue.Add(b.get());
+            Pnj.Dialogue.Add(a);
+            Pnj.Dialogue.Add(b);
             
             Unites[1].Add(Pnj);
             Items[1].Add(new BottesDacier(j.champion, new Vector2(10,15)));

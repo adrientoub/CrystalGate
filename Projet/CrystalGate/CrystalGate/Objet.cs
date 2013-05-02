@@ -26,7 +26,7 @@ namespace CrystalGate
         public bool isApnj;
 
         public List<Vector2> Animation;
-        public List<string> Dialogue;
+        public List<Text> Dialogue;
         public Vector2 Tiles;
 
         protected Rectangle SpritePosition;
@@ -61,7 +61,7 @@ namespace CrystalGate
             // Graphique
             this.Sprite = PackTexture.blank;
             this.Animation = new List<Vector2> { };
-            this.Dialogue = new List<string> { };
+            this.Dialogue = new List<Text> { };
             this.packAnimation = new PackAnimation();
 
 
