@@ -16,7 +16,7 @@ namespace CrystalGate.SceneEngine2
 
         public static SpriteFont spriteFont;
 
-        public static Texture2D boutons, background, curseur;
+        public static Texture2D boutons, background, curseur, blank;
 
         public abstract void Initialize();
 

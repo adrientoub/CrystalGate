@@ -18,8 +18,6 @@ namespace CrystalGate.SceneEngine2
         private Rectangle fullscene;
         private Rectangle boutonQuitter;
 
-        private Texture2D blank;
-
         private Text defaiteT, quitT;
 
         public bool firstTime;
@@ -36,7 +34,6 @@ namespace CrystalGate.SceneEngine2
 
             defaiteT = new Text("Lose");
             quitT = new Text("QuitGame");
-            blank = content.Load<Texture2D>("blank");
 
             fullscene = new Rectangle(0, 0, CrystalGateGame.graphics.GraphicsDevice.Viewport.Width, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height);
             boutonQuitter = new Rectangle((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width - boutons.Width) / 2, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height / 2, boutons.Width, boutons.Height);

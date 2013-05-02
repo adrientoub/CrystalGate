@@ -133,6 +133,7 @@
     <Compile Include="Reseau\Reseau.cs" />
     <Compile Include="SceneEngine2\CoopSettingsScene.cs" />
     <Compile Include="SceneEngine2\CoopConnexionScene.cs" />
+    <Compile Include="SceneEngine2\Credits.cs" />
     <Compile Include="SceneEngine2\DefeatScene.cs" />
     <Compile Include="SceneEngine2\SplashScreenScene.cs" />
     <Compile Include="SceneEngine2\VictoryScene.cs" />

@@ -18,8 +18,6 @@ namespace CrystalGate.SceneEngine2
         private Rectangle fullscene;
         private Rectangle boutonQuitter;
 
-        private Texture2D blank;
-
         private Text victoireT, quitT;
 
         public bool firstTime;

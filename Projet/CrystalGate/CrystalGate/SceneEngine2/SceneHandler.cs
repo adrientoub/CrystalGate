@@ -25,7 +25,8 @@ namespace CrystalGate.SceneEngine2
         Gameplay,
         Pause,
         Victory,
-        Defeat
+        Defeat,
+        Credits
     }
 
     class SceneHandler
@@ -43,6 +44,7 @@ namespace CrystalGate.SceneEngine2
         public static CoopSettingsScene coopSettingsScene;
         public static CoopConnexionScene coopConnexionScene;
         public static SplashScreenScene splashScreenScene;
+        public static Credits creditsScene;
 
         public static string level = "level1";
 
@@ -59,8 +61,7 @@ namespace CrystalGate.SceneEngine2
             coopSettingsScene = new CoopSettingsScene();
             coopConnexionScene = new CoopConnexionScene();
             splashScreenScene = new SplashScreenScene();
-
-
+            creditsScene = new Credits();
         }
 
         public void Initialize()
@@ -74,6 +75,7 @@ namespace CrystalGate.SceneEngine2
             coopSettingsScene.Initialize();
             coopConnexionScene.Initialize();
             splashScreenScene.Initialize();
+            creditsScene.Initialize();
         }
 
         public void Update(GameTime gameTime)
@@ -109,6 +111,9 @@ namespace CrystalGate.SceneEngine2
                 case GameState.SplashScreen:
                     splashScreenScene.Update(gameTime);
                     break;
+                case GameState.Credits:
+                    creditsScene.Update(gameTime);
+                    break;
             }
             BaseScene.oldMouse = BaseScene.mouse;
             BaseScene.oldKeyboardState = BaseScene.keyboardState;
@@ -116,6 +121,7 @@ namespace CrystalGate.SceneEngine2
 
         public void Load()
         {
+            splashScreenScene.LoadContent();
             mainmenuScene.LoadContent();
             menuoptionScene.LoadContent();
             coopSettingsScene.LoadContent();
@@ -124,7 +130,7 @@ namespace CrystalGate.SceneEngine2
             gameplayScene.LoadContent();
             victoryScene.LoadContent();
             defeatScene.LoadContent();
-            splashScreenScene.LoadContent();
+            creditsScene.LoadContent();
         }
 
         public void Draw()
@@ -162,6 +168,9 @@ namespace CrystalGate.SceneEngine2
                     break;
                 case GameState.SplashScreen:
                     splashScreenScene.Draw(spriteBatch);
+                    break;
+                case GameState.Credits:
+                    creditsScene.Draw(spriteBatch);
                     break;
             }
         }

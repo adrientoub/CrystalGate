@@ -14,8 +14,6 @@ namespace CrystalGate.SceneEngine2
     {
         private ContentManager content;
 
-        private Texture2D blank;
-
         private Rectangle mouseRec;
         private Rectangle fullscene;
         private Rectangle boutonRetour, boutonOption, boutonMenuPrincipal;
@@ -35,7 +33,6 @@ namespace CrystalGate.SceneEngine2
             retourJeuT = new Text("BackToGame");
             optionsT = new Text("OptionGame");
             quitT = new Text("QuitGame");
-            blank = content.Load<Texture2D>("blank");
 
             fullscene = new Rectangle(0, 0, CrystalGateGame.graphics.GraphicsDevice.Viewport.Width, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height);
             boutonRetour = new Rectangle((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width - boutons.Width) / 2, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height / 2 - 100, boutons.Width, boutons.Height);

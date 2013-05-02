@@ -24,17 +24,16 @@ namespace CrystalGate.SceneEngine2
 
         private Texture2D volume;
         private Texture2D volumeVide;
-        private Texture2D blank;
 
         private Rectangle mouseRec;
 
         public static bool isPauseOption;
         public static bool endFirstClic;
 
-        private Rectangle boutonPleinEcran, boutonLangue, boutonRetour, volumeEffects, volumeFondSonore;
+        private Rectangle boutonPleinEcran, boutonLangue, boutonRetour, boutonCredits, volumeEffects, volumeFondSonore;
         private Vector2 positionTexteVolumeEffects, positionTexteVolumeFondSonore, positionTexteFullscreen, positionTexteLangue;
 
-        private Text pleinEcranT, langueT, retourT, noT, yesT, effetSonoreT, fondSonoreT;
+        private Text pleinEcranT, langueT, retourT, noT, yesT, effetSonoreT, fondSonoreT, creditsT;
 
         private static Language _currentLanguage = Language.Français;
         string fullscreenText;
@@ -54,7 +53,6 @@ namespace CrystalGate.SceneEngine2
             volume = content.Load<Texture2D>("Menu/Volume");
             volumeVide = content.Load<Texture2D>("Menu/VolumeVide");
             curseur = content.Load<Texture2D>("Curseur");
-            blank = content.Load<Texture2D>("blank");
 
             pleinEcranT = new Text("Fullscreen");
             langueT = new Text("Language");
@@ -63,13 +61,15 @@ namespace CrystalGate.SceneEngine2
             yesT = new Text("yes");
             effetSonoreT = new Text("VolumeEffects");
             fondSonoreT = new Text("Volume");
+            creditsT = new Text("Credits");
 
-            boutonPleinEcran = new Rectangle((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width - boutons.Width) / 2, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height / 2 - 200, boutons.Width, boutons.Height);
-            boutonLangue = new Rectangle((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width - boutons.Width) / 2, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height / 2 - 100, boutons.Width, boutons.Height);
-            volumeEffects = new Rectangle((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width - boutons.Width) / 2, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height / 2, volume.Width, volume.Height);
-            volumeFondSonore = new Rectangle((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width - boutons.Width) / 2, 
-                CrystalGateGame.graphics.GraphicsDevice.Viewport.Height / 2 + 100, volume.Width, volume.Height);
-            boutonRetour = new Rectangle((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width - boutons.Width) / 2, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height / 2 + 200, boutons.Width, boutons.Height);
+            boutonPleinEcran = new Rectangle((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width - boutons.Width) / 2, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height / 2 - 250, boutons.Width, boutons.Height);
+            boutonLangue = new Rectangle((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width - boutons.Width) / 2, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height / 2 - 150, boutons.Width, boutons.Height);
+            volumeEffects = new Rectangle((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width - boutons.Width) / 2, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height / 2 - 50, volume.Width, volume.Height);
+            volumeFondSonore = new Rectangle((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width - boutons.Width) / 2,
+                CrystalGateGame.graphics.GraphicsDevice.Viewport.Height / 2 + 50, volume.Width, volume.Height);
+            boutonCredits = new Rectangle((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width - boutons.Width) / 2, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height / 2 + 150, boutons.Width, boutons.Height);
+            boutonRetour = new Rectangle((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width - boutons.Width) / 2, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height / 2 + 250, boutons.Width, boutons.Height);
 
             positionTexteVolumeEffects = new Vector2(volumeEffects.Left - spriteFont.MeasureString(effetSonoreT.get() + " :").X, volumeEffects.Center.Y - spriteFont.MeasureString(effetSonoreT.get() + " :").Y / 2);
             positionTexteVolumeFondSonore = new Vector2(volumeFondSonore.Left - spriteFont.MeasureString(fondSonoreT.get() + " :").X, volumeFondSonore.Center.Y - spriteFont.MeasureString(fondSonoreT.get() + " :").Y / 2);
@@ -115,6 +115,12 @@ namespace CrystalGate.SceneEngine2
                         }
                         GameText.initGameText();
                     }
+                    else if (mouseRec.Intersects(boutonCredits))
+                    {
+                        SceneHandler.gameState = GameState.Credits;
+                        SceneHandler.creditsScene.ecranPrecedent = GameState.Setting;
+                        SceneHandler.creditsScene.Reinit();
+                    }
                     else if (mouseRec.Intersects(boutonRetour))
                     {
                         if (isPauseOption)
@@ -158,6 +164,10 @@ namespace CrystalGate.SceneEngine2
                 spriteBatch.Draw(boutons, boutonLangue, Color.Gray);
             else
                 spriteBatch.Draw(boutons, boutonLangue, Color.White);
+            if (mouseRec.Intersects(boutonCredits))
+                spriteBatch.Draw(boutons, boutonCredits, Color.Gray);
+            else
+                spriteBatch.Draw(boutons, boutonCredits, Color.White);
             if (mouseRec.Intersects(boutonRetour))
                 spriteBatch.Draw(boutons, boutonRetour, Color.Gray);
             else
@@ -186,6 +196,12 @@ namespace CrystalGate.SceneEngine2
                 _currentLanguage.ToString(),
                 new Vector2((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width) / 2 - spriteFont.MeasureString(_currentLanguage.ToString()).X / 2,
                     boutonLangue.Top + 10),
+                Color.White);
+            spriteBatch.DrawString(
+                spriteFont,
+                creditsT.get(),
+                new Vector2((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width) / 2 - spriteFont.MeasureString(creditsT.get()).X / 2,
+                    boutonCredits.Top + 10),
                 Color.White);
             spriteBatch.DrawString(
                 spriteFont,

@@ -19,7 +19,7 @@ namespace CrystalGate.SceneEngine2
         VideoPlayer videoPlayer;
         Rectangle screen, logoPosition;
 
-        Texture2D logo, blank;
+        Texture2D logo;
 
         bool firstTime, videoTime, pictureTime;
         
