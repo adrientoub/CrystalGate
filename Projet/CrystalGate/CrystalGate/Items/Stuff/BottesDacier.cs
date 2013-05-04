@@ -22,6 +22,8 @@ namespace CrystalGate
             ManaRegenBonus = 0;
             PuissanceBonus = 0;
             VitesseBonus = 0.05f;
+            VieMaxBonus = VieBonus;
+            ManaMaxBonus = ManaBonus;
         }
     }
 }

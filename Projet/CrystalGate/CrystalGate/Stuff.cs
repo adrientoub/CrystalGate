@@ -10,8 +10,10 @@ namespace CrystalGate
     public class Stuff : Item
     {
         public int VieBonus;
+        public int VieMaxBonus;
         public int DommagesBonus;
         public int ManaBonus;
+        public int ManaMaxBonus;
         public int ArmureBonus;
         public int ManaRegenBonus;
         public int PuissanceBonus;
@@ -30,13 +32,13 @@ namespace CrystalGate
                 unite.Stuff.Add(this);
                 unite.Inventory.Remove(this);
 
-                unite.VieBonus += 0;
-                unite.VieMaxBonus += VieBonus;
-                unite.ManaBonus += 0;
-                unite.ManaMaxBonus += ManaBonus;
+                unite.VieBonus += VieBonus;
+                unite.VieMaxBonus += VieMaxBonus;
+                unite.ManaBonus += ManaBonus;
+                unite.ManaMaxBonus += ManaMaxBonus;
                 unite.DommagesBonus += DommagesBonus;
                 unite.PuissanceBonus += PuissanceBonus;
-                unite.VitesseBonus += VitesseBonus;
+                unite.VitesseBonus -= VitesseBonus;
                 unite.DefenseBonus += ArmureBonus;
                 unite.DefenseMagiqueBonus += ArmureBonus;
                 unite.ManaRegenBonus -= ManaRegenBonus;
@@ -50,11 +52,14 @@ namespace CrystalGate
             {
                 unite.Inventory.Add(this);
                 unite.Stuff.Remove(this);
+
                 unite.VieBonus -= VieBonus;
-                unite.VieMaxBonus -= VieBonus;
+                unite.VieMaxBonus -= VieMaxBonus;
+                unite.ManaBonus -= ManaBonus;
+                unite.ManaMaxBonus -= ManaMaxBonus;
                 unite.DommagesBonus -= DommagesBonus;
                 unite.PuissanceBonus -= PuissanceBonus;
-                unite.VitesseBonus -= VitesseBonus;
+                unite.VitesseBonus += VitesseBonus;
                 unite.DefenseBonus -= ArmureBonus;
                 unite.DefenseMagiqueBonus -= ArmureBonus;
                 unite.ManaRegenBonus += ManaRegenBonus;
