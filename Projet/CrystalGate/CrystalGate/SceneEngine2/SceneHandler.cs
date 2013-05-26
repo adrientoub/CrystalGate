@@ -121,6 +121,7 @@ namespace CrystalGate.SceneEngine2
 
         public void Load()
         {
+            PackMap.Initialize();
             splashScreenScene.LoadContent();
             mainmenuScene.LoadContent();
             menuoptionScene.LoadContent();
@@ -177,8 +178,11 @@ namespace CrystalGate.SceneEngine2
 
         public static void ResetGameplay()
         {
-            PackMap.j = null;
+            // Reinitialise les levels ET le joueur (il faudra ajouter un truc qui charge les infos du joueur a partir d'un fichier texte
+            PackMap.j = new Joueur(new Guerrier(new Vector2(0, 9)));
+            PackMap.InitLevels();
             level = "level1";
+
             gameplayScene = new GamePlay();
             gameplayScene.Initialize();
             gameplayScene.LoadContent();

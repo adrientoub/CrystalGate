@@ -32,18 +32,6 @@ namespace CrystalGate.SceneEngine2
 
             gameFont = content.Load<SpriteFont>("Polices/gamefont");
 
-            // Chargement des textures : Pack de texture (Contient toutes les sprites des unites et des sorts)
-            PackTexture.Initialize(content);
-
-            // Chargement sons
-            PackSon.Initialize(content);
-            FondSonore.Load(content);
-            
-
-            // Chargement de la carte
-            Outil.OuvrirMap(SceneHandler.level); // On initialise la carte avec les tuiles
-            if(PackMap.j == null) // Si c'ets la premiere fois qu'on lance le jeu, alors on initialise
-                PackMap.Initialize();
             PackMap.LoadLevel(SceneHandler.level); // On injecte les donnés (unités, joueurs)
         
             // Bug de l'espace, si on ne reinit pas le body, il passe en statique!
@@ -54,11 +42,6 @@ namespace CrystalGate.SceneEngine2
                 if(!u.isApnj)
                     u.body.IsStatic = false;
             }
-
-             /*Map.unites.Add(new Grunt(Vector2.One));
-             Map.unites[Map.unites.Count - 1].isApnj = true;*/
-
-            //Wave.waveNumber = 0; // que faire de ce truc?
 
             timer = new System.Diagnostics.Stopwatch();
             timer.Start();
@@ -114,8 +97,7 @@ namespace CrystalGate.SceneEngine2
             // DRAW INTERFACE
             Map.joueurs[0].Interface.Draw();
             // DRAW STRINGS
-            /*if(SceneHandler.joueur != null)
-            spriteBatch.DrawString(gameFont, SceneHandler.joueur.champion.body.Position.ToString() + SceneHandler.joueur.champion.body.IsStatic.ToString(), Vector2.Zero, Color.White);*/
+            /*spriteBatch.DrawString(gameFont, SceneHandler.level, Vector2.Zero, Color.White);*/
             spriteBatch.End();
         }
 

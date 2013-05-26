@@ -15,9 +15,9 @@ namespace CrystalGate
     public static class Map
     {
         // Geré par Initialize :
-        static Texture2D Sprite;
+        public static Texture2D Sprite;
         public static Vector2[,] Cellules;
-        public static Vector2 TailleTiles;
+        public static Vector2 TailleTiles = new Vector2(32, 32);
         public static Vector2 Taille;
         public static Noeud[,] unitesStatic;
         public static World world;
@@ -30,31 +30,19 @@ namespace CrystalGate
         public static List<Effet> effets; // effets (cadavres) qui seront draw
         public static List<Item> items;
         public static List<Wave> waves;
-        public static int waveNumber;
+        public static int waveNumber = 0;
         public static int nombreDeVagues;
         public static GameTime gametime;
 
 
-        public static void Initialize(Texture2D sprite, Vector2 taille, Vector2 tailleTiles)
+        public static void Initialize()
         {
-            Sprite = sprite;
-            Cellules = new Vector2[(int)taille.X, (int)taille.Y];
-            TailleTiles = tailleTiles;
-            Taille = taille;
-            world = new World(Vector2.Zero);
-            joueurs = new List<Joueur> {};
-            unites = new List<Unite> { };
-            effets = new List<Effet> { };
-            items = new List<Item> { };
-            waves = new List<Wave> { };
-            waveNumber = 0;
-            unitesStatic = new Noeud[(int)taille.X, (int)taille.Y];
-
+            //ici
             // Creation de la physique de la carte
-            var bounds = GetBounds();
+            /*var bounds = GetBounds();
             boundary = BodyFactory.CreateLoopShape(world, bounds);
             boundary.CollisionCategories = Category.All;
-            boundary.CollidesWith = Category.All;
+            boundary.CollidesWith = Category.All;*/
 
         }
 
@@ -100,8 +88,8 @@ namespace CrystalGate
         // Utilisé pour creer le monde physique
         private static Vertices GetBounds()
         {
-            float width = ConvertUnits.ToSimUnits(Taille.X * TailleTiles.X);
-            float height = ConvertUnits.ToSimUnits(Taille.Y * TailleTiles.Y);
+            float width = ConvertUnits.ToSimUnits(100 * TailleTiles.X);
+            float height = ConvertUnits.ToSimUnits(100 * TailleTiles.Y);
 
             Vertices bounds = new Vertices(4);
             bounds.Add(new Vector2(0, 0));

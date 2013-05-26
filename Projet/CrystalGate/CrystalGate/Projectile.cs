@@ -35,7 +35,7 @@ namespace CrystalGate
         public bool IsInWall()
         {
             // Toutes les sprites dont l'Y est <= 4 sont des murs (cf la sprite des tiles)
-            return Outil.ProhibedTiles().Contains(Map.Cellules[(int)(Position.X / Map.TailleTiles.X), (int)(Position.Y / Map.TailleTiles.Y)]) && Map.Cellules[(int)(Position.X / Map.TailleTiles.X), (int)(Position.Y / Map.TailleTiles.Y)].Y != 15;
+            return PackMap.ProhibedTiles().Contains(Map.Cellules[(int)(Position.X / Map.TailleTiles.X), (int)(Position.Y / Map.TailleTiles.Y)]) && Map.Cellules[(int)(Position.X / Map.TailleTiles.X), (int)(Position.Y / Map.TailleTiles.Y)].Y != 15;
         }
 
         public bool CanReach(Vector2 Position) // renvoie vrai si le projectile peut atteindre sa cible
