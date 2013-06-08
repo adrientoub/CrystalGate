@@ -8,6 +8,7 @@ using CrystalGate.SceneEngine2;
 
 namespace CrystalGate
 {
+    [Serializable]
     public class Joueur
     {
         public Unite champion;
@@ -18,6 +19,7 @@ namespace CrystalGate
         bool InWaitingPoint;
         bool InWaitingUnit;
         int spell;
+        public bool IsLocal; // spécifie si le joueur est le joueur local de cette machine
 
         Unite SelectedUnit;
         bool isRoaming;
@@ -84,6 +86,10 @@ namespace CrystalGate
                             SceneHandler.ResetGameplay("level2");
                         else
                             SceneHandler.ResetGameplay("level1");
+                    }
+                    if (Interface.key.IsKeyDown(Keys.K) && Interface.Oldkey.IsKeyUp(Keys.K))
+                    {
+                        Reseau.Reseau.SendData(null, 0);
                     }
 
                     // Pour afficher/cacher le sac

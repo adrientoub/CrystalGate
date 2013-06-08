@@ -14,6 +14,7 @@ namespace CrystalGate
         Unite champ; // le champion à focus
         double id; // l'id de cette vague
         public bool enabled; // définit si la vague est activé
+        Random rand = new Random();
 
         public Wave(List<Vector2> pointsInit, List<Vector2> pointsSpawn, List<List<Unite>> unites, Unite champion)
         {
@@ -77,8 +78,8 @@ namespace CrystalGate
                                 Map.unites.Add(new Assassin(v, unites[0][0].Level));
                             else
                                 throw new Exception("Modif la wave!");
-
-                            Map.unites[Map.unites.Count - 1].uniteAttacked = champ;
+                            // Attaque un joueur au hasard
+                            Map.unites[Map.unites.Count - 1].uniteAttacked = PackMap.joueurs[rand.Next(0, PackMap.joueurs.Count)].champion;
                             Map.unites[Map.unites.Count - 1].idWave = id;
                             unites[0].RemoveAt(0);
                         }

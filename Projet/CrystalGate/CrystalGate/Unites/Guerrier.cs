@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace CrystalGate
 {
+            [Serializable]
     public class Guerrier : Unite
     {
 

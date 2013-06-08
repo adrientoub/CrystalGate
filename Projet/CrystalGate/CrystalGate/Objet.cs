@@ -13,6 +13,7 @@ using FarseerPhysics.Factories;
 
 namespace CrystalGate
 {
+        [Serializable]
     public class Objet
     {
         public Texture2D Sprite;
@@ -148,7 +149,7 @@ namespace CrystalGate
             this.body.Mass = 100;
             this.PositionTile = Position;
         }
-
+                    [Serializable]
         protected enum Direction
         {
             Haut,

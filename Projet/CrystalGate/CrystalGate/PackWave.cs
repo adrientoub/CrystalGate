@@ -8,7 +8,7 @@ namespace CrystalGate
 {
     class PackWave
     {
-        static Unite champion = PackMap.j.champion;
+        static Unite champion = PackMap.joueurs[0].champion; // attaquera que le premier joueur
 
         // LEVEL 1
 

@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework;
 
 namespace CrystalGate
 {
+            [Serializable]
     public class Spell
     {
         public string Nom;

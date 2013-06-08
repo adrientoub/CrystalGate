@@ -29,8 +29,9 @@ namespace CrystalGate
         static World[] Worlds = new World[10];
         // Represente la taille de chaque carte
         static Vector2[] Taille = new Vector2[10];
+        public static int NbDeJoueur = 3;
 
-        public static Joueur j = null;
+        public static List<Joueur> joueurs = new List<Joueur> { };
 
         public static void Initialize()
         {
@@ -58,7 +59,8 @@ namespace CrystalGate
             Map.world = Worlds[0]; // pas très propre mais marche
 
             // Ici on chargera les infos du champion via un fichier texte, en attendant...
-            j = new Joueur(new Guerrier(new Vector2(0, 9)));
+            LoadPlayers();
+
             // Chargement des items et waves
             InitLevels();
         }
@@ -87,7 +89,7 @@ namespace CrystalGate
             Items[i] = Map.items;
             Waves[i] = Map.waves;
             Effets[i] = Map.effets;
-            // Pas tres propre
+            // Pas tres propre, le changement de musique
             if (SceneHandler.level == "level1")
                 FondSonore.Play(5);
             else
@@ -100,9 +102,9 @@ namespace CrystalGate
             int i = LevelToInt(level);
             Map.unites = Unites[i];
             // Le champion s'est téléporté, on le rajoute sur la Map
+            foreach (Joueur j in joueurs)
+                Map.unites.Add(j.champion);
 
-            Map.unites.Add(j.champion);
-            Map.joueurs = new List<Joueur> { j };
             Map.items = Items[i];
             Map.waves = Waves[i];
             Map.effets = Effets[i];
@@ -113,6 +115,15 @@ namespace CrystalGate
             Map.Taille = Taille[i];
             Map.world = Worlds[i];
 
+        }
+
+        public static void LoadPlayers()
+        {
+            joueurs.Clear();
+            for (int i = 0; i < NbDeJoueur; i++)
+                joueurs.Add(new Joueur(new Guerrier(new Vector2(0, 9))));
+            // On spécifie le joueur local
+            joueurs[0].IsLocal = true;
         }
 
         public static void OuvrirMap(string MapName)
@@ -278,13 +289,15 @@ namespace CrystalGate
             Items[0] = new List<Item>{
                 new PotionDeVie(null, new Vector2(22, 24)),
                 new PotionDeVie(null, new Vector2(23, 24)),
-                new EpeeSolari(j.champion, new Vector2(50, 39))};
-
-            j.champion.Inventory = new List<Item>{
+                new EpeeSolari(null, new Vector2(50, 39))}; // bug, j.champion
+            foreach (Joueur j in joueurs)
+            {
+                j.champion.Inventory = new List<Item>{
                 new GantsDeDevotion(j.champion, Vector2.One),
                 new Epaulieres(j.champion, Vector2.One),
                 new HelmetPurple(j.champion, Vector2.One),
                 new RingLionHead(j.champion, Vector2.One)};
+            }
         }
 
         static void InitializeLevel2()
@@ -297,7 +310,7 @@ namespace CrystalGate
             Pnj.Dialogue.Add(b);
 
             Unites[1] = new List<Unite> { Pnj };
-            Items[1] = new List<Item>{new BottesDacier(j.champion, new Vector2(10,15))};
+            Items[1] = new List<Item>{new BottesDacier(null, new Vector2(10,15))}; // bug, j.champion
             Waves[1] = PackWave.PackWaveLevel2();
         }
     }

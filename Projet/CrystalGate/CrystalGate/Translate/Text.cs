@@ -5,6 +5,7 @@ using System.Text;
 
 namespace CrystalGate
 {
+            [Serializable]
     public class Text
     {
         string text;

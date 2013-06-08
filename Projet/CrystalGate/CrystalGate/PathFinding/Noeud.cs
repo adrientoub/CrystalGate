@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework;
 
 namespace CrystalGate
 {
+            [Serializable]
     public class Noeud
     {
         public Vector2 Position { get; set; }

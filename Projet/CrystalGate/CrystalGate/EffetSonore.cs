@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.Content;
 
 namespace CrystalGate
 {
+            [Serializable]
     public class EffetSonore
     {
         const int nbSonSimult = 20; // Nombre de sons simultanés.

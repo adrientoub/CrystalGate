@@ -9,6 +9,7 @@ using CrystalGate.SceneEngine2;
 
 namespace CrystalGate
 {
+        [Serializable]
     public class Unite : Objet
     {
         public int Vie { get { return vie + VieBonus; } set { vie = value - VieBonus; } }
@@ -202,20 +203,23 @@ namespace CrystalGate
             {
                 Vie = 0;
                 Mort = true;
-                if (Map.joueurs[0].champion.XP + XPUnite < Map.joueurs[0].champion.Level * 1000)
-                    Map.joueurs[0].champion.XP += XPUnite;
+                if (PackMap.joueurs[0].champion.XP + XPUnite < PackMap.joueurs[0].champion.Level * 1000)
+                    PackMap.joueurs[0].champion.XP += XPUnite;
                 else
                 {
-                    Map.joueurs[0].champion.XP = Map.joueurs[0].champion.XP + XPUnite - Map.joueurs[0].champion.Level * 1000;
-                    Map.joueurs[0].champion.newLevel();
+                    PackMap.joueurs[0].champion.XP = PackMap.joueurs[0].champion.XP + XPUnite - PackMap.joueurs[0].champion.Level * 1000;
+                    PackMap.joueurs[0].champion.newLevel();
                 }
                 effetUniteDeath.Play();
                 effetUniteAttaque.Dispose();
                 effets.Add(new Effet(Sprite, ConvertUnits.ToDisplayUnits(body.Position), packAnimation.Mort(this), Tiles, 1));
                 Map.world.RemoveBody(body);
                 Drop();
-                if (isAChamp)
-                    PackMap.j.Interface.Lost = true;
+                // Interface De GameOver pour le joueur 1 , risque" de bug
+                if (isAChamp) // Si un champion se fait tuer
+                    foreach (Joueur j in PackMap.joueurs) // On regarde si c'est le joueur local
+                        if(j.champion == this && j.IsLocal) // Si c'est le cas gameover sur cette ecran
+                            Outil.GetLocal().Interface.Lost = true;
             }
             // TEST MANA
             if (Mana < 0)

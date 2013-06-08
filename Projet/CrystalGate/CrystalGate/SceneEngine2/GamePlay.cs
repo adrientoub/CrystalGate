@@ -60,14 +60,15 @@ namespace CrystalGate.SceneEngine2
             foreach (Unite u in Map.unites)
                 u.Update(Map.unites, Map.effets);
             // On update les infos des joueurs
-            foreach (Joueur j in Map.joueurs)
-                j.Update(Map.unites);
+            foreach (Joueur j in PackMap.joueurs)
+                if(j.IsLocal)
+                    j.Update(Map.unites);
             // On update les effets sur la carte
             foreach (Effet e in Map.effets)
                 e.Update();
             // On update les infos des vagues
             foreach (Wave w in Map.waves)
-                w.Update(gameTime, Map.joueurs[0].champion);
+                w.Update(gameTime, PackMap.joueurs[0].champion);
             // Update de la physique
             Map.world.Step(1 / 60f);
 
@@ -79,10 +80,10 @@ namespace CrystalGate.SceneEngine2
             }
         }
 
-        public override void Draw(SpriteBatch spriteBatch)
+        public override void Draw(SpriteBatch spriteBatch) // la camera est celle du premier joueur, risque de bug en multi
         {
             CrystalGateGame.graphics.GraphicsDevice.Clear(ClearOptions.Target, Color.Black, 0, 0);
-            spriteBatch.Begin(0, null, null, null, null, null, PackMap.j.camera.CameraMatrix);
+            spriteBatch.Begin(0, null, null, null, null, null, PackMap.joueurs[0].camera.CameraMatrix);
             // DRAW Map
             Map.Draw(spriteBatch);
             // DRAW EFFETS
@@ -95,7 +96,7 @@ namespace CrystalGate.SceneEngine2
             foreach (Unite o in Map.unites)
                 o.Draw(spriteBatch);
             // DRAW INTERFACE
-            Map.joueurs[0].Interface.Draw();
+            PackMap.joueurs[0].Interface.Draw();
             // DRAW STRINGS
             /*spriteBatch.DrawString(gameFont, SceneHandler.level, Vector2.Zero, Color.White);*/
             spriteBatch.End();

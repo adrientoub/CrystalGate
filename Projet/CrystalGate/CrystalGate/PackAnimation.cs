@@ -11,6 +11,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace CrystalGate
 {
+            [Serializable]
     public class PackAnimation
     {
         /* Le packAnimation est un pack qui regroupe les differentes positions de la sprite

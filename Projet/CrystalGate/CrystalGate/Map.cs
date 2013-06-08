@@ -25,7 +25,6 @@ namespace CrystalGate
         public static TypeDeTerrain typeDeTerrain;
 
         // Geré par LoadLevel
-        public static List<Joueur> joueurs;
         public static List<Unite> unites;
         public static List<Effet> effets; // effets (cadavres) qui seront draw
         public static List<Item> items;
@@ -71,7 +70,7 @@ namespace CrystalGate
                     break;
                 }
             if (OnaWin && SceneHandler.level == "level2")
-                joueurs[0].Interface.Win = true;
+                PackMap.joueurs[0].Interface.Win = true;
         }
 
         public static void Draw(SpriteBatch spriteBatch)

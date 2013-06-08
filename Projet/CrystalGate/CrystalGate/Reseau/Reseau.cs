@@ -5,6 +5,8 @@ using System.Text;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.IO;
 
 namespace CrystalGate.Reseau
 {
@@ -30,7 +32,12 @@ namespace CrystalGate.Reseau
                 }
                 else // On reçoit autre chose :)
                 {
-
+                    if (buffer[0].Array[0] == 0) // Si on reçoit un perso
+                    {
+                        buffer.Clear();
+                        buffer.Add(new ArraySegment<byte>(new byte[142]));
+                        soc.BeginReceive(buffer, SocketFlags.None, receivePlayersCallback, soc);
+                    }
                 }
             }
             catch (Exception)
@@ -67,9 +74,27 @@ namespace CrystalGate.Reseau
             soc.BeginReceive(buffer, SocketFlags.None, receiveCallback, soc);
         }
 
+        public static void ReceivePlayersCallback(IAsyncResult result)
+        {
+            Socket soc = (Socket)result.AsyncState;
+            soc.EndReceive(result);
+            // Traitement :
+            BinaryFormatter formatter = new BinaryFormatter();
+            // On ecrit les octets recu dans un flux mémoire
+            MemoryStream stream = new MemoryStream(buffer[0].Array);
+            stream.Position = 0;
+            // On Deserialise le flux
+            TestPerso joueur = (TestPerso)formatter.Deserialize(stream);
+            
+            buffer.Clear();
+            buffer.Add(new ArraySegment<byte>(new byte[4]));
+            soc.BeginReceive(buffer, SocketFlags.None, receiveCallback, soc);
+        }
+
         static AsyncCallback receiveCallback = new AsyncCallback(ReceiveCallback);
         static AsyncCallback receiveStringLengthCallback = new AsyncCallback(ReceiveStringLengthCallback);
         static AsyncCallback receiveStringCallback = new AsyncCallback(ReceiveStringCallback);
+        static AsyncCallback receivePlayersCallback = new AsyncCallback(ReceivePlayersCallback);
 
         public static void SendData(object envoi, int type)
         {
@@ -95,6 +120,24 @@ namespace CrystalGate.Reseau
 
                 byte[] messageData = System.Text.Encoding.UTF8.GetBytes(texte);
                 soc.Send(messageData);
+            }
+            if (type == 0) // Envoi un objet Testperso, ca marche c'est vérifié
+            {
+                byte[] sendingString = new byte[] { 0 };
+                soc.Send(sendingString);
+
+                MemoryStream stream = new MemoryStream();
+                BinaryFormatter formater = new BinaryFormatter();
+                // On creer un perso appelé Lol Eric
+                TestPerso eric = new TestPerso();
+                eric.lol = 42;
+                // On le sérialize en l'écrivant dans le flux
+                formater.Serialize(stream, eric);
+                stream.Position = 0;
+                // On lit le stream dans un buffer et on envoie les octets
+                byte[] temp = new byte[stream.Length];
+                stream.Read(temp, 0, temp.Length);
+                soc.Send(temp);
             }
         }
 

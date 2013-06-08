@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework;
 
 namespace CrystalGate
 {
+            [Serializable]
     public class Item
     {
         public Texture2D Icone;

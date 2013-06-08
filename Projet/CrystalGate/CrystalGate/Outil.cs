@@ -87,6 +87,14 @@ namespace CrystalGate
             return rendu;
         }
 
+        public static Joueur GetLocal()
+        {
+            foreach (Joueur j in PackMap.joueurs)
+                if (j.IsLocal)
+                    return j;
+            throw new Exception("Il n'y a pas de joueur local, wtf ?");
+        }
+
         enum Direction
         {
             Haut,
