@@ -61,8 +61,8 @@ namespace CrystalGate.Reseau
             if (clientsSoc.Count >= 2)
                 SceneEngine2.SceneHandler.coopConnexionScene.lancerJeuActive = true;
 
-            joueurs.Add(new Players()); // On l'ajoute à la liste des joueurs
-            Reseau.ReceiveDataFromClient(joueurs[joueurs.Count - 1].id); // On commence à recevoir des données de ce client
+            Reseau.AddNewBuffer();
+            Reseau.ReceiveDataFromClient(clientsSoc.Count - 1); // On commence à recevoir des données de ce client
 
             AsyncCallback sc = new AsyncCallback(ServerConnected);
             serverSoc.BeginAcceptTcpClient(sc, serverSoc);

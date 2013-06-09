@@ -10,15 +10,22 @@ using System.IO;
 
 namespace CrystalGate.Reseau
 {
-    static class Reseau
+    class Reseau
     {
-        static byte[] buffer = new byte[1];
-        static int tailleObjetEnvoye = 0;
+        static byte[] buffer;
+        static int tailleObjetEnvoye;
         public static List<Message> discution = new List<Message>();
 
-        static List<byte[]> clientBuffers = new List<byte[]>();
+        static List<byte[]> clientBuffers;
 
-        public static NetworkStream ownStream = null; // Le stream du TcpClient local
+        public static NetworkStream ownStream; // Le stream du TcpClient local
+        
+        public static void InitializeNetwork()
+        {
+            buffer = new byte[1];
+            tailleObjetEnvoye = 0;
+            clientBuffers = new List<byte[]>();
+        }
 
         #region receive
         public static void ReceiveCallback(IAsyncResult result)
@@ -141,7 +148,7 @@ namespace CrystalGate.Reseau
             soc.BeginRead(buffer, 0, 1, receiveCallback, soc);
         }
 
-        public static void ReceivePlayerLengthCallback(IAsyncResult result)
+        public static void ReceivePlayersLengthCallback(IAsyncResult result)
         {
             NetworkStream soc = (NetworkStream)result.AsyncState;
             soc.EndRead(result);
@@ -181,6 +188,11 @@ namespace CrystalGate.Reseau
 
             }
         }
+
+        public static void AddNewBuffer()
+        {
+            clientBuffers.Add(new byte[0]);
+        }
         #endregion clientReceive
 
         #region callback
@@ -193,7 +205,7 @@ namespace CrystalGate.Reseau
         static AsyncCallback receiveStringLengthCallback = new AsyncCallback(ReceiveStringLengthCallback);
         static AsyncCallback receiveStringCallback = new AsyncCallback(ReceiveStringCallback);
         static AsyncCallback receivePlayersCallback = new AsyncCallback(ReceivePlayersCallback);
-        static AsyncCallback receivePlayersLengthCallback = new AsyncCallback(receivePlayersLengthCallback);
+        static AsyncCallback receivePlayersLengthCallback = new AsyncCallback(ReceivePlayersLengthCallback);
         #endregion callback
         #endregion receive
 

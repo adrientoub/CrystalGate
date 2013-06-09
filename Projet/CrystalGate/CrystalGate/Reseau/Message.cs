@@ -10,6 +10,12 @@ namespace CrystalGate.Reseau
         public TimeSpan dateEnvoi;
         public string message;
 
+        public Message()
+        {
+            message = "";
+            dateEnvoi = TimeSpan.Zero;
+        }
+
         public Message(TimeSpan dateEnvoi, string message)
         {
             this.dateEnvoi = dateEnvoi;

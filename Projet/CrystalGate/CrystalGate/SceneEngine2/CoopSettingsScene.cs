@@ -75,6 +75,7 @@ namespace CrystalGate.SceneEngine2
                 if (mouseRec.Intersects(boutonConnexion) && validIpAddress)
                 {
                     SceneHandler.gameState = GameState.CoopConnexion;
+                    Reseau.Reseau.InitializeNetwork();
                 }
                 else if (mouseRec.Intersects(boutonServeurOuClient))
                 {

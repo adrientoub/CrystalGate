@@ -6,6 +6,7 @@ using System.Net;
 
 namespace CrystalGate.Reseau
 {
+    [Serializable]
     class Players
     {
         // Classe qui permet d'instancier la liste des joueurs connectés
