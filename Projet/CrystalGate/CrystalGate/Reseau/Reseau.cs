@@ -16,6 +16,8 @@ namespace CrystalGate.Reseau
         static int tailleDeLaString = 0;
         public static List<Message> discution = new List<Message>();
 
+        static List<List<ArraySegment<byte>>> clientBuffers = new List<List<ArraySegment<byte>>>();
+
         public static void ReceiveCallback(IAsyncResult result)
         {
             try
@@ -30,14 +32,17 @@ namespace CrystalGate.Reseau
                     soc.BeginReceive(buffer, SocketFlags.None, receiveStringLengthCallback, soc);
                     tailleDeLaString = 0;
                 }
-                else // On reçoit autre chose :)
+                else if (buffer[0].Array[0] == 0) // Si on reçoit un perso
                 {
-                    if (buffer[0].Array[0] == 0) // Si on reçoit un perso
-                    {
-                        buffer.Clear();
-                        buffer.Add(new ArraySegment<byte>(new byte[142]));
-                        soc.BeginReceive(buffer, SocketFlags.None, receivePlayersCallback, soc);
-                    }
+                    buffer.Clear();
+                    buffer.Add(new ArraySegment<byte>(new byte[142]));
+                    soc.BeginReceive(buffer, SocketFlags.None, receivePlayersCallback, soc);
+                }
+                else if (buffer[0].Array[0] == 2)
+                {
+                    buffer.Clear();
+                    buffer.Add(new ArraySegment<byte>(new byte[555]));
+                    soc.BeginReceive(buffer, SocketFlags.None, receivePlayersCallback, soc);
                 }
             }
             catch (Exception)
@@ -96,17 +101,16 @@ namespace CrystalGate.Reseau
         static AsyncCallback receiveStringCallback = new AsyncCallback(ReceiveStringCallback);
         static AsyncCallback receivePlayersCallback = new AsyncCallback(ReceivePlayersCallback);
 
-        public static void SendData(object envoi, int type)
+        /// <summary>
+        /// On envoie une donnée via le réseau en TCP.
+        /// Actuellement seul l'envoi d'un message ou d'un joueur est possible
+        /// </summary>
+        /// <param name="envoi">La donnée à envoyer</param>
+        /// <param name="type">Le type de cette donnée</param>
+        public static void SendData(object envoi, int type) // Envoie des données en tant que client.
         {
             Socket soc;
-            if (SceneEngine2.SceneHandler.coopSettingsScene.isServer)
-            {
-                soc = SceneEngine2.SceneHandler.coopConnexionScene.clientSoc;
-            }
-            else
-            {
-                soc = SceneEngine2.SceneHandler.coopConnexionScene.soc;
-            }
+            soc = Connexion.soc;
             if (type == 1)
             {
                 string texte = (string)envoi;
@@ -121,7 +125,7 @@ namespace CrystalGate.Reseau
                 byte[] messageData = System.Text.Encoding.UTF8.GetBytes(texte);
                 soc.Send(messageData);
             }
-            if (type == 0) // Envoi un objet Testperso, ca marche c'est vérifié
+            else if (type == 0) // Envoi un objet Testperso, ca marche c'est vérifié
             {
                 byte[] sendingString = new byte[] { 0 };
                 soc.Send(sendingString);
@@ -139,21 +143,49 @@ namespace CrystalGate.Reseau
                 stream.Read(temp, 0, temp.Length);
                 soc.Send(temp);
             }
+            else if (type == 2) // On envoie un joueur
+            {
+                byte[] sendingPlayer = new byte[] { 2 };
+                soc.Send(sendingPlayer);
+
+                MemoryStream stream = new MemoryStream();
+                BinaryFormatter formater = new BinaryFormatter();
+
+                Players joueur = (Players)envoi;
+
+                formater.Serialize(stream, joueur);
+                stream.Position = 0;
+                // On lit le stream dans un buffer et on envoie les octets
+                byte[] serializedObject = new byte[stream.Length];
+                stream.Read(serializedObject, 0, serializedObject.Length);
+                soc.Send(serializedObject);
+            }
+        }
+
+        public static void SendServData(byte[] envoi) // Envoie une donnée
+        {
+            List<Socket> clientSoc;
+            clientSoc = Connexion.clientSoc;
+            foreach (var client in clientSoc)
+            {
+                client.Send(envoi);
+            }
         }
 
         public static void ReceiveData()
         {
             Socket soc;
-            if (SceneEngine2.SceneHandler.coopSettingsScene.isServer)
-            {
-                soc = SceneEngine2.SceneHandler.coopConnexionScene.clientSoc;
-            }
-            else
-            {
-                soc = SceneEngine2.SceneHandler.coopConnexionScene.soc;
-            }
+            soc = Connexion.soc;
             buffer.Add(new ArraySegment<byte>(new byte[1]));
             soc.BeginReceive(buffer, SocketFlags.None, receiveCallback, soc);
+        }
+
+        public static void ReceiveDataFromClient(int id)
+        {
+            Socket soc;
+            soc = Connexion.clientSoc[id];
+            clientBuffers[id].Add(new ArraySegment<byte>(new byte[1]));
+            soc.BeginReceive(clientBuffers[id], SocketFlags.None, receiveCallback, soc); // Il faut changer le callback ! Parce que dans ce cas-ci il fait la même chose qu'il soit un serveur ou un client
         }
     }
 }

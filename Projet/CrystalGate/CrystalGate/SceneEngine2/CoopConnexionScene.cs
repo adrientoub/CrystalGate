@@ -26,13 +26,10 @@ namespace CrystalGate.SceneEngine2
 
         public static string textAsWrited;
 
-        public static IPAddress ip;
-
-        private bool isServer, lancerJeuActive, firstTime;
+        private bool isServer, firstTime;
+        public bool lancerJeuActive;
 
         public static bool isOnlinePlay;
-
-        public Socket soc, clientSoc;
 
         public override void Initialize()
         {
@@ -40,6 +37,7 @@ namespace CrystalGate.SceneEngine2
             lancerJeuActive = false;
             firstTime = true;
             isOnlinePlay = false;
+            Reseau.Connexion.InitializeConnexion();
         }
 
         public override void LoadContent()
@@ -60,45 +58,12 @@ namespace CrystalGate.SceneEngine2
             positionTextePseudo = new Vector2(champPseudo.Left - spriteFont.MeasureString(pseudoT.get() + " :").X, champPseudo.Center.Y - spriteFont.MeasureString(pseudoT.get() + " :").Y / 2);
         }
 
-        public void ClientConnected(IAsyncResult result)
-        {
-            try
-            {
-                soc.EndConnect(result);
-                lancerJeuActive = true;
-            }
-            catch (Exception)
-            {
-                AsyncCallback cc = new AsyncCallback(ClientConnected);
-                soc.BeginConnect(ip, 6060, cc, soc);
-            }
-        }
-
-        public void ServerConnected(IAsyncResult result)
-        {
-            clientSoc = ((Socket)result.AsyncState).EndAccept(result);
-            lancerJeuActive = true;
-        }
 
         public override void Update(GameTime gameTime)
         {
             if (firstTime)
             {
-                isServer = SceneHandler.coopSettingsScene.isServer;
-                soc = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-
-                if (isServer)
-                {
-                    AsyncCallback sc = new AsyncCallback(ServerConnected);
-                    soc.Bind(new IPEndPoint(IPAddress.Any, 6060));
-                    soc.Listen(1);
-                    soc.BeginAccept(sc, soc);
-                }
-                else
-                {
-                    AsyncCallback cc = new AsyncCallback(ClientConnected);
-                    soc.BeginConnect(ip, 6060, cc, soc);
-                }
+                Reseau.Connexion.Connect();
                 firstTime = false;
             }
 

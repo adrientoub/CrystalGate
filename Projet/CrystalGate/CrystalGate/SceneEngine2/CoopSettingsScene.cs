@@ -61,7 +61,7 @@ namespace CrystalGate.SceneEngine2
         public override void Update(GameTime gameTime)
         {
             mouseRec = new Rectangle(mouse.X, mouse.Y, 5, 5);
-            if (isServer || IPAddress.TryParse(textAsWrited, out CoopConnexionScene.ip))
+            if (isServer || IPAddress.TryParse(textAsWrited, out Reseau.Connexion.ip))
             {
                 validIpAddress = true;
             }

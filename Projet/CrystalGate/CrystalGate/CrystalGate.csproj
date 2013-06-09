@@ -137,7 +137,9 @@
     <Compile Include="Items\Stuff\EpeeSolari.cs" />
     <Compile Include="PackMap.cs" />
     <Compile Include="PackSon.cs" />
+    <Compile Include="Reseau\Connexion.cs" />
     <Compile Include="Reseau\Message.cs" />
+    <Compile Include="Reseau\Players.cs" />
     <Compile Include="Reseau\Reseau.cs" />
     <Compile Include="Reseau\TestPerso.cs" />
     <Compile Include="SceneEngine2\CoopSettingsScene.cs" />
