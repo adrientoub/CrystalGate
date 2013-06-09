@@ -10,7 +10,7 @@ using System.IO;
 
 namespace CrystalGate.Reseau
 {
-    class Reseau
+    static class Reseau
     {
         static byte[] buffer = new byte[1];
         static int tailleObjetEnvoye = 0;
@@ -18,7 +18,7 @@ namespace CrystalGate.Reseau
 
         static List<byte[]> clientBuffers = new List<byte[]>();
 
-        public static NetworkStream ownStream; // Le stream du TcpClient local
+        public static NetworkStream ownStream = null; // Le stream du TcpClient local
 
         #region receive
         public static void ReceiveCallback(IAsyncResult result)
@@ -171,7 +171,15 @@ namespace CrystalGate.Reseau
         public static void ReceiveData()
         {
             buffer = new byte[1];
-            ownStream.BeginRead(buffer, 0, 1, receiveCallback, ownStream);
+            try
+            {
+                ownStream.BeginRead(buffer, 0, 1, receiveCallback, ownStream);
+            }
+            catch (Exception)
+            {
+                // On est pas encore connecté
+
+            }
         }
         #endregion clientReceive
 

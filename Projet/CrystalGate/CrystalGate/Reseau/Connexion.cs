@@ -10,7 +10,7 @@ namespace CrystalGate.Reseau
     class Connexion
     {
         /* A faire : 
-         * Ajouter l'envoi du joueur au serveur à chaque fois pour que le nom marqué sur le serv soit ok
+         * Ajouter l'envoi du joueur au serveur à chaque fois pour que le nom marqué sur le serv soit    ok
          * Faire que le serv envoie à tous les clients leurs noms
          * Ajouter une liste de personnes connectés au serveur sur la page de connexion
          * Refaire la page de connexion
@@ -77,7 +77,8 @@ namespace CrystalGate.Reseau
             if (isServer) // Si on est le serveur
             {
                 serverSoc = new TcpListener(IPAddress.Any, 6060);
-                // serverSoc = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+                serverSoc.Start(4);
+
                 AsyncCallback sc = new AsyncCallback(ServerConnected);
                 serverSoc.BeginAcceptTcpClient(sc, serverSoc); // On accepte la connexion
                 cliSoc.BeginConnect(IPAddress.Parse("127.0.0.1"), 6060, cc, cliSoc);
