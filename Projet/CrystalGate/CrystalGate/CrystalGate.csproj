@@ -141,7 +141,6 @@
     <Compile Include="Reseau\Message.cs" />
     <Compile Include="Reseau\Players.cs" />
     <Compile Include="Reseau\Reseau.cs" />
-    <Compile Include="Reseau\TestPerso.cs" />
     <Compile Include="SceneEngine2\CoopSettingsScene.cs" />
     <Compile Include="SceneEngine2\CoopConnexionScene.cs" />
     <Compile Include="SceneEngine2\Credits.cs" />

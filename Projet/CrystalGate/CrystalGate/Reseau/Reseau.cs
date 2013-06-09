@@ -12,37 +12,35 @@ namespace CrystalGate.Reseau
 {
     class Reseau
     {
-        static List<ArraySegment<byte>> buffer = new List<ArraySegment<byte>>();
-        static int tailleDeLaString = 0;
+        static byte[] buffer = new byte[1];
+        static int tailleObjetEnvoye = 0;
         public static List<Message> discution = new List<Message>();
 
-        static List<List<ArraySegment<byte>>> clientBuffers = new List<List<ArraySegment<byte>>>();
+        static List<byte[]> clientBuffers = new List<byte[]>();
 
+        public static NetworkStream ownStream; // Le stream du TcpClient local
+
+        #region receive
         public static void ReceiveCallback(IAsyncResult result)
         {
             try
             {
-                Socket soc = (Socket)result.AsyncState;
-                soc.EndReceive(result);
+                NetworkStream soc = (NetworkStream)result.AsyncState;
+                soc.EndRead(result);
                 // Traitement : 
-                if (buffer[0].Array[0] == 1) // Si on reçoit une string
+                if (buffer[0] == 1) // Si on reçoit une string
                 {
-                    buffer.Clear();
-                    buffer.Add(new ArraySegment<byte>(new byte[4]));
-                    soc.BeginReceive(buffer, SocketFlags.None, receiveStringLengthCallback, soc);
-                    tailleDeLaString = 0;
+                    buffer = new byte[4];
+
+                    soc.BeginRead(buffer, 0, 4, receiveStringCallback, soc);
+                    tailleObjetEnvoye = 0;
                 }
-                else if (buffer[0].Array[0] == 0) // Si on reçoit un perso
+                else if (buffer[0] == 2)
                 {
-                    buffer.Clear();
-                    buffer.Add(new ArraySegment<byte>(new byte[142]));
-                    soc.BeginReceive(buffer, SocketFlags.None, receivePlayersCallback, soc);
-                }
-                else if (buffer[0].Array[0] == 2)
-                {
-                    buffer.Clear();
-                    buffer.Add(new ArraySegment<byte>(new byte[555]));
-                    soc.BeginReceive(buffer, SocketFlags.None, receivePlayersCallback, soc);
+                    buffer = new byte[4];
+
+                    soc.BeginRead(buffer, 0, 4, receivePlayersCallback, soc);
+                    tailleObjetEnvoye = 0;
                 }
             }
             catch (Exception)
@@ -54,53 +52,144 @@ namespace CrystalGate.Reseau
             }
         }
 
+        #region broadcast
+        public static void ReceiveAndBroadcastCallback(IAsyncResult result)
+        {
+            int id = (int)result.AsyncState;
+            try
+            {
+                NetworkStream soc = Connexion.clientsSoc[id].GetStream();
+                soc.EndRead(result);
+                // Traitement : 
+                clientBuffers[id] = new byte[4];
+
+                soc.BeginRead(clientBuffers[id], 0, 4, ReceiveObjectLengthAndBroadcastCallback, id);
+                tailleObjetEnvoye = 0;
+                SendServData(clientBuffers[id]);
+            }
+            catch (Exception)
+            {
+                discution.Add(new Message(EffetSonore.time.Elapsed, "Connexion perdue avec " + Connexion.joueurs[id]));
+                // Supprimer ce client de la liste et essayer de s'y reconnecter
+            }
+        }
+
+        public static void ReceiveObjectLengthAndBroadcastCallback(IAsyncResult result)
+        {
+            int id = (int)result.AsyncState;
+            NetworkStream soc = Connexion.clientsSoc[id].GetStream();
+            soc.EndRead(result);
+
+            SendServData(clientBuffers[id]);
+            tailleObjetEnvoye = BitConverter.ToInt32(clientBuffers[id], 0);
+
+            clientBuffers[id] = new byte[tailleObjetEnvoye];
+            soc.BeginRead(clientBuffers[id], 0, tailleObjetEnvoye, receiveObjectAndBroadcastCallback, id);
+            tailleObjetEnvoye = 0;
+        }
+
+        public static void ReceiveObjectAndBroadcastCallback(IAsyncResult result)
+        {
+            int id = (int)result.AsyncState;
+            NetworkStream soc = Connexion.clientsSoc[id].GetStream();
+            soc.EndRead(result);
+
+            SendServData(clientBuffers[id]);
+
+            clientBuffers[id] = new byte[1];
+            soc.BeginRead(clientBuffers[id], 0, 1, receiveCallback, soc);
+        }
+
+        public static void BroadcastData()
+        {
+            for (int i = 0; i < Connexion.clientsSoc.Count; i++)
+            {
+                ReceiveDataFromClient(i);
+            }
+        }
+
+        public static void ReceiveDataFromClient(int id)
+        {
+            NetworkStream soc;
+            soc = Connexion.clientsSoc[id].GetStream();
+            clientBuffers[id] = new byte[1];
+            soc.BeginRead(clientBuffers[id], 0, 1, receiveAndBroadcastCallback, id); 
+        }
+        #endregion broadcast
+
+        #region clientReceive
         public static void ReceiveStringLengthCallback(IAsyncResult result)
         {
-            Socket soc = (Socket)result.AsyncState;
-            soc.EndReceive(result);
+            NetworkStream soc = (NetworkStream)result.AsyncState;
+            soc.EndRead(result);
             // Traitement : 
-            tailleDeLaString = BitConverter.ToInt32(buffer[0].Array, 0);
+            tailleObjetEnvoye = BitConverter.ToInt32(buffer, 0);
 
-            buffer.Clear();
-            buffer.Add(new ArraySegment<byte>(new byte[tailleDeLaString]));
-            soc.BeginReceive(buffer, SocketFlags.None, receiveStringCallback, soc);
-            tailleDeLaString = 0;
+            buffer = new byte[tailleObjetEnvoye];
+            soc.BeginRead(buffer, 0, tailleObjetEnvoye, receiveStringCallback, soc);
+            tailleObjetEnvoye = 0;
         }
 
         public static void ReceiveStringCallback(IAsyncResult result)
         {
-            Socket soc = (Socket)result.AsyncState;
-            soc.EndReceive(result);
+            NetworkStream soc = (NetworkStream)result.AsyncState;
+            soc.EndRead(result);
             // Traitement :
-            discution.Add(new Message(EffetSonore.time.Elapsed ,Encoding.UTF8.GetString(buffer[0].Array)));
+            discution.Add(new Message(EffetSonore.time.Elapsed, Encoding.UTF8.GetString(buffer)));
 
-            buffer.Clear();
-            buffer.Add(new ArraySegment<byte>(new byte[4]));
-            soc.BeginReceive(buffer, SocketFlags.None, receiveCallback, soc);
+            buffer = new byte[1];
+            soc.BeginRead(buffer, 0, 1, receiveCallback, soc);
+        }
+
+        public static void ReceivePlayerLengthCallback(IAsyncResult result)
+        {
+            NetworkStream soc = (NetworkStream)result.AsyncState;
+            soc.EndRead(result);
+            // Traitement : 
+            tailleObjetEnvoye = BitConverter.ToInt32(buffer, 0);
+
+            buffer = new byte[tailleObjetEnvoye];
+            soc.BeginRead(buffer, 0, tailleObjetEnvoye, receivePlayersCallback, soc);
+            tailleObjetEnvoye = 0;
         }
 
         public static void ReceivePlayersCallback(IAsyncResult result)
         {
-            Socket soc = (Socket)result.AsyncState;
-            soc.EndReceive(result);
-            // Traitement :
+            NetworkStream soc = (NetworkStream)result.AsyncState;
+            soc.EndRead(result);
+
             BinaryFormatter formatter = new BinaryFormatter();
             // On ecrit les octets recu dans un flux mémoire
-            MemoryStream stream = new MemoryStream(buffer[0].Array);
-            stream.Position = 0;
+            soc.Position = 0;
             // On Deserialise le flux
-            TestPerso joueur = (TestPerso)formatter.Deserialize(stream);
-            
-            buffer.Clear();
-            buffer.Add(new ArraySegment<byte>(new byte[4]));
-            soc.BeginReceive(buffer, SocketFlags.None, receiveCallback, soc);
+            Players joueur = (Players)formatter.Deserialize(soc);
+
+            buffer = new byte[1];
+            soc.BeginRead(buffer, 0, 1, receiveCallback, soc);
         }
 
+        public static void ReceiveData()
+        {
+            buffer = new byte[1];
+            ownStream.BeginRead(buffer, 0, 1, receiveCallback, ownStream);
+        }
+        #endregion clientReceive
+
+        #region callback
         static AsyncCallback receiveCallback = new AsyncCallback(ReceiveCallback);
+
+        static AsyncCallback receiveAndBroadcastCallback = new AsyncCallback(ReceiveAndBroadcastCallback);
+        static AsyncCallback receiveObjectLengthAndBroadcastCallback = new AsyncCallback(ReceiveObjectLengthAndBroadcastCallback);
+        static AsyncCallback receiveObjectAndBroadcastCallback = new AsyncCallback(ReceiveObjectAndBroadcastCallback);
+
         static AsyncCallback receiveStringLengthCallback = new AsyncCallback(ReceiveStringLengthCallback);
         static AsyncCallback receiveStringCallback = new AsyncCallback(ReceiveStringCallback);
         static AsyncCallback receivePlayersCallback = new AsyncCallback(ReceivePlayersCallback);
+        static AsyncCallback receivePlayersLengthCallback = new AsyncCallback(receivePlayersLengthCallback);
+        #endregion callback
+        #endregion receive
 
+        #region send
         /// <summary>
         /// On envoie une donnée via le réseau en TCP.
         /// Actuellement seul l'envoi d'un message ou d'un joueur est possible
@@ -109,44 +198,25 @@ namespace CrystalGate.Reseau
         /// <param name="type">Le type de cette donnée</param>
         public static void SendData(object envoi, int type) // Envoie des données en tant que client.
         {
-            Socket soc;
-            soc = Connexion.soc;
+            TcpClient soc = Connexion.cliSoc;
             if (type == 1)
             {
                 string texte = (string)envoi;
                 discution.Add(new Message(EffetSonore.time.Elapsed, texte));
 
                 byte[] sendingString = new byte[] { 1 };
-                soc.Send(sendingString);
+                soc.Client.Send(sendingString);
 
                 byte[] messageLength = BitConverter.GetBytes(texte.Length);
-                soc.Send(messageLength);
+                soc.Client.Send(messageLength);
 
                 byte[] messageData = System.Text.Encoding.UTF8.GetBytes(texte);
-                soc.Send(messageData);
-            }
-            else if (type == 0) // Envoi un objet Testperso, ca marche c'est vérifié
-            {
-                byte[] sendingString = new byte[] { 0 };
-                soc.Send(sendingString);
-
-                MemoryStream stream = new MemoryStream();
-                BinaryFormatter formater = new BinaryFormatter();
-                // On creer un perso appelé Lol Eric
-                TestPerso eric = new TestPerso();
-                eric.lol = 42;
-                // On le sérialize en l'écrivant dans le flux
-                formater.Serialize(stream, eric);
-                stream.Position = 0;
-                // On lit le stream dans un buffer et on envoie les octets
-                byte[] temp = new byte[stream.Length];
-                stream.Read(temp, 0, temp.Length);
-                soc.Send(temp);
+                soc.Client.Send(messageData);
             }
             else if (type == 2) // On envoie un joueur
             {
                 byte[] sendingPlayer = new byte[] { 2 };
-                soc.Send(sendingPlayer);
+                soc.Client.Send(sendingPlayer);
 
                 MemoryStream stream = new MemoryStream();
                 BinaryFormatter formater = new BinaryFormatter();
@@ -158,34 +228,22 @@ namespace CrystalGate.Reseau
                 // On lit le stream dans un buffer et on envoie les octets
                 byte[] serializedObject = new byte[stream.Length];
                 stream.Read(serializedObject, 0, serializedObject.Length);
-                soc.Send(serializedObject);
+                
+                byte[] objectLength = BitConverter.GetBytes(serializedObject.Length);
+                soc.Client.Send(objectLength);
+
+                soc.Client.Send(serializedObject);
             }
         }
 
         public static void SendServData(byte[] envoi) // Envoie une donnée
         {
-            List<Socket> clientSoc;
-            clientSoc = Connexion.clientSoc;
+            List<TcpClient> clientSoc = Connexion.clientsSoc;
             foreach (var client in clientSoc)
             {
-                client.Send(envoi);
+                client.Client.Send(envoi);
             }
         }
-
-        public static void ReceiveData()
-        {
-            Socket soc;
-            soc = Connexion.soc;
-            buffer.Add(new ArraySegment<byte>(new byte[1]));
-            soc.BeginReceive(buffer, SocketFlags.None, receiveCallback, soc);
-        }
-
-        public static void ReceiveDataFromClient(int id)
-        {
-            Socket soc;
-            soc = Connexion.clientSoc[id];
-            clientBuffers[id].Add(new ArraySegment<byte>(new byte[1]));
-            soc.BeginReceive(clientBuffers[id], SocketFlags.None, receiveCallback, soc); // Il faut changer le callback ! Parce que dans ce cas-ci il fait la même chose qu'il soit un serveur ou un client
-        }
+        #endregion send
     }
 }

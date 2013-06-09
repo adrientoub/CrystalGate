@@ -11,7 +11,6 @@ namespace CrystalGate.Reseau
         // Classe qui permet d'instancier la liste des joueurs connectés
         public string name;
         public int id;
-        public IPAddress ip;
 
         public static int idAct = 0;
 

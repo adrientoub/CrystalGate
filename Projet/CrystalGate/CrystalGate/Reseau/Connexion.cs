@@ -19,9 +19,9 @@ namespace CrystalGate.Reseau
 
         static bool isServer;
 
-        public static Socket soc;
-        public static Socket serverSoc; // Socket nul sauf dans le cas où on est le serveur
-        public static List<Socket> clientSoc;
+        public static TcpClient cliSoc;
+        public static TcpListener serverSoc; // Socket nul sauf dans le cas où on est le serveur
+        public static List<TcpClient> clientsSoc;
         public static List<Players> joueurs;
         
         public static IPAddress ip;
@@ -31,7 +31,7 @@ namespace CrystalGate.Reseau
 
         public static void InitializeConnexion()
         {
-            clientSoc = new List<Socket>();
+            clientsSoc = new List<TcpClient>();
             joueurs = new List<Players>();
             isConnected = false;
             selfPlayer = new Players();
@@ -41,56 +41,60 @@ namespace CrystalGate.Reseau
         {
             try
             {
-                soc.EndConnect(result);
-                if (joueurs.Count >= 2) 
+                cliSoc.EndConnect(result);
+                Reseau.ownStream = cliSoc.GetStream();
+                if (joueurs.Count >= 2)
                     SceneEngine2.SceneHandler.coopConnexionScene.lancerJeuActive = true;
                 // Ajouter le premier envoi au serveur c'est à dire celui du nom du joueur etc.
+                isConnected = true;
             }
             catch (Exception)
             {
                 AsyncCallback cc = new AsyncCallback(ClientConnected);
-                soc.BeginConnect(ip, 6060, cc, soc);
+                cliSoc.BeginConnect(ip, 6060, cc, cliSoc);
             }
         }
 
         public static void ServerConnected(IAsyncResult result)
         {
-            clientSoc.Add(((Socket)result.AsyncState).EndAccept(result)); // On ajoute ce client à la liste
-            if (clientSoc.Count >= 2)
+            clientsSoc.Add(((TcpListener)result.AsyncState).EndAcceptTcpClient(result)); // On ajoute ce client à la liste
+            if (clientsSoc.Count >= 2)
                 SceneEngine2.SceneHandler.coopConnexionScene.lancerJeuActive = true;
 
             joueurs.Add(new Players()); // On l'ajoute à la liste des joueurs
             Reseau.ReceiveDataFromClient(joueurs[joueurs.Count - 1].id); // On commence à recevoir des données de ce client
 
             AsyncCallback sc = new AsyncCallback(ServerConnected);
-            soc.BeginAccept(sc, soc);
+            serverSoc.BeginAcceptTcpClient(sc, serverSoc);
         }
 
         public static void Connect()
         {
             isServer = SceneEngine2.SceneHandler.coopSettingsScene.isServer;
-            soc = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            cliSoc = new TcpClient();
             AsyncCallback cc = new AsyncCallback(ClientConnected);
 
             if (isServer) // Si on est le serveur
             {
-                serverSoc = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+                serverSoc = new TcpListener(IPAddress.Any, 6060);
+                // serverSoc = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
                 AsyncCallback sc = new AsyncCallback(ServerConnected);
-                serverSoc.Bind(new IPEndPoint(IPAddress.Any, 6060));
-                serverSoc.Listen(4); // on lance l'écoute jusqu'à 4 joueurs
-                serverSoc.BeginAccept(sc, serverSoc); // On accepte la connexion
-                soc.BeginConnect(IPAddress.Parse("127.0.0.1"), 6060, cc, soc);
+                serverSoc.BeginAcceptTcpClient(sc, serverSoc); // On accepte la connexion
+                cliSoc.BeginConnect(IPAddress.Parse("127.0.0.1"), 6060, cc, cliSoc);
                 isConnected = true;
             }
             else // Sinon on ne fait que se connecter
             {
-                soc.BeginConnect(ip, 6060, cc, soc);
+                cliSoc.BeginConnect(ip, 6060, cc, cliSoc);
             }
         }
 
-        public static void SendPlayer(Players j)
+        /// <summary>
+        /// Envoi le joueur local
+        /// </summary>
+        public static void SendPlayer()
         {
-            Reseau.SendData(j, 2);
+            Reseau.SendData(selfPlayer, 2);
         }
     }
 }

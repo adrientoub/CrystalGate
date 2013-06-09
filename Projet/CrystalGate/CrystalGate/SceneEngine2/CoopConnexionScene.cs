@@ -26,8 +26,8 @@ namespace CrystalGate.SceneEngine2
 
         public static string textAsWrited;
 
-        private bool isServer, firstTime;
-        public bool lancerJeuActive;
+        private bool firstTime, firstTimeConnected;
+        public bool lancerJeuActive, isServer;
 
         public static bool isOnlinePlay;
 
@@ -36,6 +36,7 @@ namespace CrystalGate.SceneEngine2
             textAsWrited = "";
             lancerJeuActive = false;
             firstTime = true;
+            firstTimeConnected = true;
             isOnlinePlay = false;
             Reseau.Connexion.InitializeConnexion();
         }
@@ -63,8 +64,15 @@ namespace CrystalGate.SceneEngine2
         {
             if (firstTime)
             {
+                isServer = SceneHandler.coopSettingsScene.isServer;
                 Reseau.Connexion.Connect();
                 firstTime = false;
+            }
+
+            if (Reseau.Connexion.isConnected && firstTimeConnected)
+            {
+                Reseau.Reseau.ReceiveData();
+                firstTimeConnected = false;
             }
 
             mouseRec = new Rectangle(mouse.X, mouse.Y, 5, 5);
@@ -87,6 +95,13 @@ namespace CrystalGate.SceneEngine2
                 }
             }
             SaisirTexte(ref textAsWrited);
+
+            if (Reseau.Connexion.isConnected) // A chaque frame on envoie notre joueur
+            {
+                Reseau.Connexion.selfPlayer.name = textAsWrited;
+                Reseau.Connexion.SendPlayer();
+            }
+
             positionTextePseudo = new Vector2(champPseudo.Left - spriteFont.MeasureString(pseudoT.get() + " :").X, champPseudo.Center.Y - spriteFont.MeasureString(pseudoT.get() + " :").Y / 2);
         }
 
