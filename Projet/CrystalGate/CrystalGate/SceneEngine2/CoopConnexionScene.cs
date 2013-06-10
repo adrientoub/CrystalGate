@@ -69,12 +69,6 @@ namespace CrystalGate.SceneEngine2
                 firstTime = false;
             }
 
-            if (Reseau.Connexion.isConnected && firstTimeConnected)
-            {
-                Reseau.Reseau.ReceiveData();
-                firstTimeConnected = false;
-            }
-
             mouseRec = new Rectangle(mouse.X, mouse.Y, 5, 5);
             if (mouse.LeftButton == ButtonState.Pressed && oldMouse.LeftButton == ButtonState.Released)
             {
@@ -86,7 +80,6 @@ namespace CrystalGate.SceneEngine2
                     SceneHandler.gameplayScene.isCoopPlay = true;
                     SceneHandler.gameplayScene.isServer = isServer;
                     isOnlinePlay = true;
-                    Reseau.Reseau.ReceiveData();
                 }
                 else if (mouseRec.Intersects(boutonRetour))
                 {
@@ -96,7 +89,7 @@ namespace CrystalGate.SceneEngine2
             }
             SaisirTexte(ref textAsWrited);
 
-            if (Reseau.Connexion.isConnected) // A chaque frame on envoie notre joueur
+            if (Reseau.Connexion.isConnected && Reseau.Connexion.selfPlayer != null) // A chaque frame on envoie notre joueur
             {
                 Reseau.Connexion.selfPlayer.name = textAsWrited;
                 Reseau.Connexion.SendPlayer();

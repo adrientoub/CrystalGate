@@ -170,6 +170,24 @@ namespace CrystalGate.Reseau
             soc.Position = 0;
             // On Deserialise le flux
             Players joueur = (Players)formatter.Deserialize(soc);
+            bool exists = false;
+            for (int i = 0; i < Connexion.joueurs.Count; i++)
+            {
+                if (Connexion.joueurs[i].id == joueur.id)
+                {
+                    Connexion.joueurs[i] = joueur;
+                    exists = true;
+                    break;
+                }
+            }
+            if (!exists)
+            {
+                if (Connexion.selfPlayer == null)
+                    Connexion.selfPlayer = joueur;
+
+                if (!SceneEngine2.SceneHandler.coopConnexionScene.isServer)
+                    Connexion.joueurs.Add(joueur);
+            }
 
             buffer = new byte[1];
             soc.BeginRead(buffer, 0, 1, receiveCallback, soc);
@@ -184,6 +202,7 @@ namespace CrystalGate.Reseau
             }
             catch (Exception)
             {
+                ReceiveData();
                 // On est pas encore connecté
 
             }
@@ -225,18 +244,22 @@ namespace CrystalGate.Reseau
                 discution.Add(new Message(EffetSonore.time.Elapsed, texte));
 
                 byte[] sendingString = new byte[] { 1 };
-                soc.Client.Send(sendingString);
+                soc.GetStream().Write(sendingString, 0, sendingString.Length);
+                //soc.Client.Send(sendingString);
 
                 byte[] messageLength = BitConverter.GetBytes(texte.Length);
-                soc.Client.Send(messageLength);
+                soc.GetStream().Write(messageLength, 0, messageLength.Length);
+                //soc.Client.Send(messageLength);
 
                 byte[] messageData = System.Text.Encoding.UTF8.GetBytes(texte);
-                soc.Client.Send(messageData);
+                soc.GetStream().Write(messageData, 0, messageData.Length);
+                //soc.Client.Send(messageData);
             }
             else if (type == 2) // On envoie un joueur
             {
                 byte[] sendingPlayer = new byte[] { 2 };
-                soc.Client.Send(sendingPlayer);
+                //soc.Client.Send(sendingPlayer);
+                soc.GetStream().Write(sendingPlayer, 0, sendingPlayer.Length);
 
                 MemoryStream stream = new MemoryStream();
                 BinaryFormatter formater = new BinaryFormatter();
@@ -250,9 +273,11 @@ namespace CrystalGate.Reseau
                 stream.Read(serializedObject, 0, serializedObject.Length);
                 
                 byte[] objectLength = BitConverter.GetBytes(serializedObject.Length);
-                soc.Client.Send(objectLength);
+                soc.GetStream().Write(objectLength, 0, objectLength.Length);
+                //soc.Client.Send(objectLength);
 
-                soc.Client.Send(serializedObject);
+                soc.GetStream().Write(serializedObject, 0, serializedObject.Length);
+                //soc.Client.Send(serializedObject);
             }
         }
 
@@ -261,7 +286,9 @@ namespace CrystalGate.Reseau
             List<TcpClient> clientSoc = Connexion.clientsSoc;
             foreach (var client in clientSoc)
             {
-                client.Client.Send(envoi);
+                client.GetStream().Write(envoi, 0, envoi.Length);
+
+                //client.Client.Send(envoi);
             }
         }
         #endregion send

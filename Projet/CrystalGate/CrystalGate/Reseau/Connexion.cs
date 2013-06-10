@@ -34,7 +34,6 @@ namespace CrystalGate.Reseau
             clientsSoc = new List<TcpClient>();
             joueurs = new List<Players>();
             isConnected = false;
-            selfPlayer = new Players();
         }
 
         public static void ClientConnected(IAsyncResult result)
@@ -45,8 +44,9 @@ namespace CrystalGate.Reseau
                 Reseau.ownStream = cliSoc.GetStream();
                 if (joueurs.Count >= 2)
                     SceneEngine2.SceneHandler.coopConnexionScene.lancerJeuActive = true;
-                // Ajouter le premier envoi au serveur c'est à dire celui du nom du joueur etc.
+
                 isConnected = true;
+                Reseau.ReceiveData();
             }
             catch (Exception)
             {
@@ -63,6 +63,10 @@ namespace CrystalGate.Reseau
 
             Reseau.AddNewBuffer();
             Reseau.ReceiveDataFromClient(clientsSoc.Count - 1); // On commence à recevoir des données de ce client
+
+            Players j = new Players();
+            joueurs.Add(j);
+            Reseau.SendData(j, 2);
 
             AsyncCallback sc = new AsyncCallback(ServerConnected);
             serverSoc.BeginAcceptTcpClient(sc, serverSoc);
