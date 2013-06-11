@@ -42,6 +42,11 @@ namespace CrystalGate.SceneEngine2
 
             spriteFont = content.Load<SpriteFont>("Polices/sceneengine2font");
 
+            UpdatePositions();
+        }
+
+        public void UpdatePositions()
+        {
             boutonPlay = new Rectangle((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width - boutons.Width) / 2, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height / 2 - 150, boutons.Width, boutons.Height);
             boutonCoop = new Rectangle((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width - boutons.Width) / 2, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height / 2 - 50, boutons.Width, boutons.Height);
             boutonOptions = new Rectangle((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width - boutons.Width) / 2, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height / 2 + 50, boutons.Width, boutons.Height);

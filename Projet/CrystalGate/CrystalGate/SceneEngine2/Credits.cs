@@ -49,11 +49,16 @@ namespace CrystalGate.SceneEngine2
             credits.Add(new CreditName("Kévin Nguyen"));
             
             deplacement = 0;
-            screen = new Rectangle(0, 0, CrystalGateGame.graphics.GraphicsDevice.Viewport.Width, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height);
+            UpdatePositions();
             foreach (CreditName objet in credits)
             {
                 objet.position = new Vector2(screen.Width, screen.Height);
             }
+        }
+
+        public void UpdatePositions()
+        {
+            screen = new Rectangle(0, 0, CrystalGateGame.graphics.GraphicsDevice.Viewport.Width, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height);
         }
 
         public override void LoadContent()

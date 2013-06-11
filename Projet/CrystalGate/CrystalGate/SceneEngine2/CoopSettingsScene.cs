@@ -46,15 +46,20 @@ namespace CrystalGate.SceneEngine2
             ipT = new Text("IP");
             modeT = new Text("Mode");
 
+            UpdatePositions();
+
+            positionTexteIP = new Vector2(champIP.Left - spriteFont.MeasureString(ipT.get() + " :").X, champIP.Center.Y - spriteFont.MeasureString(ipT.get() + " :").Y / 2);
+            positionTexteMode = new Vector2(boutonServeurOuClient.Left - spriteFont.MeasureString(modeT.get() + " :").X, boutonServeurOuClient.Center.Y - spriteFont.MeasureString(modeT.get() + " :").Y / 2);
+        }
+
+        public void UpdatePositions()
+        {
             fullscene = new Rectangle(0, 0, CrystalGateGame.graphics.GraphicsDevice.Viewport.Width, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height);
 
             champIP = new Rectangle((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width - boutons.Width) / 2, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height / 2 - 150, boutons.Width, boutons.Height);
             boutonServeurOuClient = new Rectangle((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width - boutons.Width) / 2, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height / 2 - 50, boutons.Width, boutons.Height);
             boutonConnexion = new Rectangle((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width - boutons.Width) / 2, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height / 2 + 50, boutons.Width, boutons.Height);
             boutonRetour = new Rectangle((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width - boutons.Width) / 2, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height / 2 + 150, boutons.Width, boutons.Height);
-
-            positionTexteIP = new Vector2(champIP.Left - spriteFont.MeasureString(ipT.get() + " :").X, champIP.Center.Y - spriteFont.MeasureString(ipT.get() + " :").Y / 2);
-            positionTexteMode = new Vector2(boutonServeurOuClient.Left - spriteFont.MeasureString(modeT.get() + " :").X, boutonServeurOuClient.Center.Y - spriteFont.MeasureString(modeT.get() + " :").Y / 2);
         }
 
         public override void Update(GameTime gameTime)

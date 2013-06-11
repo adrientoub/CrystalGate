@@ -14,7 +14,6 @@ namespace CrystalGate
     {
         static Socket serveur;
         static int NbMaxClients = 2;
-        static bool Start;
 
         public static List<Socket> clients = new List<Socket> { };
 
@@ -49,7 +48,6 @@ namespace CrystalGate
                 else
                 {
                     Send(new byte[] { 1 });
-                    Start = true;
                     break;
                 }
             }

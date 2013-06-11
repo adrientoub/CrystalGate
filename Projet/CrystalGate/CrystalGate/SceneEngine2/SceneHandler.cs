@@ -78,6 +78,18 @@ namespace CrystalGate.SceneEngine2
             creditsScene.Initialize();
         }
 
+        public static void UpdatePositions()
+        {
+            mainmenuScene.UpdatePositions();
+            menuoptionScene.UpdatePositions();
+            pauseScene.UpdatePositions();
+            defeatScene.UpdatePositions();
+            victoryScene.UpdatePositions();
+            creditsScene.UpdatePositions();
+            coopConnexionScene.UpdatePositions();
+            coopSettingsScene.UpdatePositions();
+        }
+
         public void Update(GameTime gameTime)
         {
             BaseScene.mouse = Mouse.GetState();

@@ -45,15 +45,19 @@ namespace CrystalGate.SceneEngine2
             retourJeuT = new Text("BackToMenu");
             pseudoT = new Text("Pseudo");
 
+            UpdatePositions();
+
+            positionTextePseudo = new Vector2(champPseudo.Left - spriteFont.MeasureString(pseudoT.get() + " :").X, champPseudo.Center.Y - spriteFont.MeasureString(pseudoT.get() + " :").Y / 2);
+        }
+
+        public void UpdatePositions()
+        {
             fullscene = new Rectangle(0, 0, CrystalGateGame.graphics.GraphicsDevice.Viewport.Width, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height);
 
             champPseudo = new Rectangle((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width - boutons.Width) / 2, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height / 2 - 100, boutons.Width, boutons.Height);
             boutonLancerLeJeu = new Rectangle((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width - boutons.Width) / 2, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height / 2, boutons.Width, boutons.Height);
             boutonRetour = new Rectangle((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width - boutons.Width) / 2, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height / 2 + 100, boutons.Width, boutons.Height);
-
-            positionTextePseudo = new Vector2(champPseudo.Left - spriteFont.MeasureString(pseudoT.get() + " :").X, champPseudo.Center.Y - spriteFont.MeasureString(pseudoT.get() + " :").Y / 2);
         }
-
 
         public override void Update(GameTime gameTime)
         {
