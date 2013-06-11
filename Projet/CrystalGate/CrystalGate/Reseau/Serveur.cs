@@ -65,30 +65,35 @@ namespace CrystalGate
         public static void Receive()
         {
             Socket c = clients[clients.Count - 1];
+            int id = clients.Count;
             while (true)
             {
-                if (Start) // debug temporaire
+                // Initialisation des variables
+                ASCIIEncoding ascii = new ASCIIEncoding();
+                BinaryFormatter formatter = new BinaryFormatter();
+                byte[] buffer = new byte[4];
+                c.Receive(buffer);
+                int header = BitConverter.ToInt32(buffer, 0);
+
+                if (header == 0) // Si on recoit un personnage
                 {
-                    // Initialisation des variables
-                    ASCIIEncoding ascii = new ASCIIEncoding();
-                    BinaryFormatter formatter = new BinaryFormatter();
-
-                    // ID du joueur
-                    byte[] buffer1 = new byte[4];
-                    c.Receive(buffer1);
-                    int id = BitConverter.ToInt32(buffer1, 0);
-                    Send(buffer1);
-
-                    // Taille
+                    // Reception de la Taille
                     byte[] buffer2 = new byte[4];
                     c.Receive(buffer2);
                     int Length = BitConverter.ToInt32(buffer2, 0);
+
+                    // Envoi de l'ID du joueur et de la taille
+                    Send(BitConverter.GetBytes(id));
                     Send(buffer2);
 
                     // Données
                     byte[] buffer3 = new byte[Length];
                     c.Receive(buffer3);
                     Send(buffer3); // Envoie les infos reçus aux clients
+                }
+                else if (true) // Les autres cas
+                {
+
                 }
             }
         }

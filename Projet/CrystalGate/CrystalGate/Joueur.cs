@@ -6,6 +6,8 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework;
 using CrystalGate.SceneEngine2;
 using System.Timers;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace CrystalGate
 {
@@ -89,13 +91,8 @@ namespace CrystalGate
                         else
                             SceneHandler.ResetGameplay("level1");
                     }
-                    
-                    if (Client.Start)
-                    if (t >= 10 && Client.isConnected)
-                    {
-                        Client.Send();
-                        t = 0;
-                    }
+
+                    UpdateReseau();
                     
                     // Pour afficher/cacher le sac
                     if (Interface.key.IsKeyDown(Keys.B) && Interface.Oldkey.IsKeyUp(Keys.B) || Interface.key.IsKeyDown(Keys.I) && Interface.Oldkey.IsKeyUp(Keys.I))
@@ -240,9 +237,40 @@ namespace CrystalGate
             CurseurCheck();
             Interface.Oldmouse = Interface.mouse;
             Interface.Oldkey = Interface.key;
-            t++;
+
         }
 
+        public void UpdateReseau()
+        {
+            if (t >= 10 && Client.isConnected) // Si on est en reseau et que l'on doit send
+            {
+                // Serialise le personnage
+                // Initialisation des variables
+                ASCIIEncoding ascii = new ASCIIEncoding();
+                MemoryStream stream = new MemoryStream();
+                BinaryFormatter formatter = new BinaryFormatter();
+
+                // Definition du contenu
+                Player p = new Player();
+                Joueur Local = Outil.GetJoueur(Client.id);
+
+                // Pathfinding
+                if (Local.champion.ObjectifListe.Count > 0)
+                    p.objectifPoint = Local.champion.ObjectifListe[Local.champion.ObjectifListe.Count - 1];
+
+                // Stats
+                p.idUniteAttacked = Local.champion.idUniteAttacked;
+
+                formatter.Serialize(stream, p);
+                byte[] buffer = new byte[stream.Length];
+                stream.Position = 0;
+                stream.Read(buffer, 0, buffer.Length);
+                // Envoi
+                Client.Send(buffer, 0);
+                t = 0;
+            }
+            t++;
+        }
         public void DonnerOrdreDeplacer()
         {
             if (Interface.mouse.X < CrystalGateGame.graphics.PreferredBackBufferWidth && Interface.mouse.Y < CrystalGateGame.graphics.PreferredBackBufferHeight)

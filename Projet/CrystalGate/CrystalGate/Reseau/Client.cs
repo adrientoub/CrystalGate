@@ -16,7 +16,7 @@ namespace CrystalGate
         static Socket client;
         public static int id;
         public static bool isConnected { get { return client != null && client.Connected; } }
-        public static bool Start;
+        public static bool Started;
 
         public static void Connect(string ip)
         {
@@ -35,29 +35,12 @@ namespace CrystalGate
             Reception.Start();
         }
 
-        public static void Send()
+        public static void Send(byte[] buffer, int type)
         {
-            // Initialisation des variables
-            ASCIIEncoding ascii = new ASCIIEncoding();
-            MemoryStream stream = new MemoryStream();
-            BinaryFormatter formatter = new BinaryFormatter();
-            
-            // Definition du contenu
-            Player p = new Player();
-            Joueur Local = Outil.GetJoueur(Client.id);
-            // Pathfinding
-            if(Local.champion.ObjectifListe.Count > 0)
-                p.objectifPoint = Local.champion.ObjectifListe[Local.champion.ObjectifListe.Count - 1];
-            // Stats
+            if (type == 0) //envoyer un perso
+                client.Send(new byte[] { 0 });
 
-            p.idUniteAttacked = Local.champion.idUniteAttacked;
-            
-            formatter.Serialize(stream, p);
-            byte[] buffer = new byte[stream.Length];
-            stream.Position = 0;
-            stream.Read(buffer, 0, buffer.Length);
-            // Envoi de l'id, puis de la taille, puis de l'objet
-            client.Send(BitConverter.GetBytes(Client.id));
+            // Envoi puis de la taille, puis de l'objet
             client.Send(BitConverter.GetBytes(buffer.Length));
             client.Send(buffer);
         }
@@ -68,11 +51,7 @@ namespace CrystalGate
             client.Receive(buffer);
             if (BitConverter.ToBoolean(buffer, 0)) // le start
             {
-                Start = true;
-                SceneHandler.ResetGameplay();
-                SceneHandler.gameState = GameState.Gameplay;
-                FondSonore.Play();
-                GamePlay.timer.Restart();
+                Started = true;
                 while (true)
                 {
                         ASCIIEncoding ascii = new ASCIIEncoding();

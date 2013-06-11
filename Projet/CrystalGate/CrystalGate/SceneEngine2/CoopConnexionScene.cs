@@ -65,7 +65,10 @@ namespace CrystalGate.SceneEngine2
             {
                 if (lancerJeuActive && mouseRec.Intersects(boutonLancerLeJeu))
                 {
-
+                    SceneHandler.ResetGameplay();
+                    SceneHandler.gameState = GameState.Gameplay;
+                    FondSonore.Play();
+                    GamePlay.timer.Restart();
                     isOnlinePlay = true;
                 }
                 else if (mouseRec.Intersects(boutonRetour))
