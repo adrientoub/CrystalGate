@@ -122,7 +122,7 @@ namespace CrystalGate
             {
                 if (isWriting && message != "")
                 {
-                    Reseau.Reseau.SendData(SceneEngine2.CoopConnexionScene.textAsWrited + " : " + message, 1);
+                    //Reseau.Reseau.SendData(SceneEngine2.CoopConnexionScene.textAsWrited + " : " + message, 1);
                     message = "";
                     isWriting = false;
                 }
@@ -146,7 +146,7 @@ namespace CrystalGate
             }
 
             messageRecu = "";
-            for (int i = 0; i < Reseau.Reseau.discution.Count; i++)
+            /*for (int i = 0; i < Reseau.Reseau.discution.Count; i++)
 			{
                 if (Reseau.Reseau.discution[i].dateEnvoi + new TimeSpan(0, 0, 10) < EffetSonore.time.Elapsed)
                 {
@@ -157,7 +157,7 @@ namespace CrystalGate
                 {
                     messageRecu += "\n" + Reseau.Reseau.discution[i].message;
                 }
-			}
+			}*/
             positionChat = new Vector2(widthFondNoir, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height - heightFondNoir - gamefont.MeasureString(messageRecu).Y - 50);
 
             if (Win)

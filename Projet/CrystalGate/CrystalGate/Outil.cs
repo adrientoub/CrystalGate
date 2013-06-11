@@ -90,9 +90,17 @@ namespace CrystalGate
         public static Joueur GetLocal()
         {
             foreach (Joueur j in PackMap.joueurs)
-                if (j.IsLocal)
+                if (j.id == Client.id)
                     return j;
-            throw new Exception("Il n'y a pas de joueur local, wtf ?");
+            return null;
+        }
+
+        public static Joueur GetJoueur(int id)
+        {
+            foreach (Joueur j in PackMap.joueurs)
+                if (j.id == id)
+                    return j;
+            return null;
         }
 
         enum Direction

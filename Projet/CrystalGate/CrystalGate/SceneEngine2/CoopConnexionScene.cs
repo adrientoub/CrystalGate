@@ -26,7 +26,6 @@ namespace CrystalGate.SceneEngine2
 
         public static string textAsWrited;
 
-        private bool firstTime, firstTimeConnected;
         public bool lancerJeuActive, isServer;
 
         public static bool isOnlinePlay;
@@ -34,11 +33,7 @@ namespace CrystalGate.SceneEngine2
         public override void Initialize()
         {
             textAsWrited = "";
-            lancerJeuActive = false;
-            firstTime = true;
-            firstTimeConnected = true;
             isOnlinePlay = false;
-            Reseau.Connexion.InitializeConnexion();
         }
 
         public override void LoadContent()
@@ -62,38 +57,24 @@ namespace CrystalGate.SceneEngine2
 
         public override void Update(GameTime gameTime)
         {
-            if (firstTime)
-            {
-                isServer = SceneHandler.coopSettingsScene.isServer;
-                Reseau.Connexion.Connect();
-                firstTime = false;
-            }
+            isServer = SceneHandler.coopSettingsScene.isServer;
+            lancerJeuActive = Serveur.clients.Count > 0 || Client.isConnected && !isServer;
 
-            mouseRec = new Rectangle(mouse.X, mouse.Y, 5, 5);
+            mouseRec = new Rectangle(mouse.X, mouse.Y, 1, 1);
             if (mouse.LeftButton == ButtonState.Pressed && oldMouse.LeftButton == ButtonState.Released)
             {
                 if (lancerJeuActive && mouseRec.Intersects(boutonLancerLeJeu))
                 {
+                    SceneHandler.ResetGameplay();
                     SceneHandler.gameState = GameState.Gameplay;
                     FondSonore.Play();
                     GamePlay.timer.Restart();
-                    SceneHandler.gameplayScene.isCoopPlay = true;
-                    SceneHandler.gameplayScene.isServer = isServer;
                     isOnlinePlay = true;
                 }
                 else if (mouseRec.Intersects(boutonRetour))
-                {
                     SceneHandler.gameState = GameState.CoopSettings;
-                    firstTime = true;
-                }
             }
             SaisirTexte(ref textAsWrited);
-
-            if (Reseau.Connexion.isConnected && Reseau.Connexion.selfPlayer != null) // A chaque frame on envoie notre joueur
-            {
-                Reseau.Connexion.selfPlayer.name = textAsWrited;
-                Reseau.Connexion.SendPlayer();
-            }
 
             positionTextePseudo = new Vector2(champPseudo.Left - spriteFont.MeasureString(pseudoT.get() + " :").X, champPseudo.Center.Y - spriteFont.MeasureString(pseudoT.get() + " :").Y / 2);
         }
@@ -101,6 +82,7 @@ namespace CrystalGate.SceneEngine2
         public override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Begin();
+
             spriteBatch.Draw(background, fullscene, Color.White);
 
             if (mouseRec.Intersects(champPseudo))
@@ -132,6 +114,8 @@ namespace CrystalGate.SceneEngine2
                     champPseudo.Top + 10),
                 Color.White);
 
+            spriteBatch.DrawString(spriteFont, "Nombre de joueurs connectés à cette partie : " + Serveur.clients.Count.ToString(), new Vector2(50, 100), Color.White);
+            
             Color c;
             if (lancerJeuActive)
                 c = Color.White;

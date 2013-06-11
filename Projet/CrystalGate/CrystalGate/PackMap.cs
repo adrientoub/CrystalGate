@@ -59,7 +59,7 @@ namespace CrystalGate
             Map.world = Worlds[0]; // pas très propre mais marche
 
             // Ici on chargera les infos du champion via un fichier texte, en attendant...
-            LoadPlayers();
+            
 
             // Chargement des items et waves
             InitLevels();
@@ -102,6 +102,7 @@ namespace CrystalGate
             int i = LevelToInt(level);
             Map.unites = Unites[i];
             // Le champion s'est téléporté, on le rajoute sur la Map
+            LoadPlayers();
             foreach (Joueur j in joueurs)
                 Map.unites.Add(j.champion);
 
@@ -120,10 +121,20 @@ namespace CrystalGate
         public static void LoadPlayers()
         {
             joueurs.Clear();
-            for (int i = 0; i < NbDeJoueur; i++)
+            if (SceneHandler.gameplayScene.isCoopPlay)
+            {
+                for (int i = 0; i < 2; i++)
+                {
+                    joueurs.Add(new Joueur(new Guerrier(new Vector2(0, 9))));
+                    joueurs[joueurs.Count - 1].id = joueurs.Count;
+                }
+                
+            }
+            else
+            {
                 joueurs.Add(new Joueur(new Guerrier(new Vector2(0, 9))));
-            // On spécifie le joueur local
-            joueurs[0].IsLocal = true;
+                // On spécifie le joueur local
+            }
         }
 
         public static void OuvrirMap(string MapName)

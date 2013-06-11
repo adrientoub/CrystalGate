@@ -21,7 +21,6 @@ namespace CrystalGate
         public static Vector2 Taille;
         public static Noeud[,] unitesStatic;
         public static World world;
-        static Body boundary; // Les limites du monde physique
         public static TypeDeTerrain typeDeTerrain;
 
         // Geré par LoadLevel

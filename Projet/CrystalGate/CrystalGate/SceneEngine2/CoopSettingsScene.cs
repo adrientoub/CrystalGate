@@ -31,7 +31,6 @@ namespace CrystalGate.SceneEngine2
         public override void Initialize()
         {
             textAsWrited = "";
-            isServer = false;
             validIpAddress = false;
         }
 
@@ -61,30 +60,24 @@ namespace CrystalGate.SceneEngine2
         public override void Update(GameTime gameTime)
         {
             mouseRec = new Rectangle(mouse.X, mouse.Y, 5, 5);
-            if (isServer || IPAddress.TryParse(textAsWrited, out Reseau.Connexion.ip))
-            {
-                validIpAddress = true;
-            }
-            else
-            {
-                validIpAddress = false;
-            }
+            IPAddress temp;
+            validIpAddress = isServer || IPAddress.TryParse(textAsWrited, out temp);
 
             if (mouse.LeftButton == ButtonState.Pressed && oldMouse.LeftButton == ButtonState.Released)
             {
                 if (mouseRec.Intersects(boutonConnexion) && validIpAddress)
                 {
+                    if (isServer)
+                        Serveur.Host();
+                    else
+                        Client.Connect(textAsWrited);
+
                     SceneHandler.gameState = GameState.CoopConnexion;
-                    Reseau.Reseau.InitializeNetwork();
                 }
                 else if (mouseRec.Intersects(boutonServeurOuClient))
-                {
                     isServer = !isServer;
-                }
                 else if (mouseRec.Intersects(boutonRetour))
-                {
                     SceneHandler.gameState = GameState.MainMenu;
-                }
             }
             if (!isServer)
                 SaisirTexte(ref textAsWrited);
@@ -145,8 +138,8 @@ namespace CrystalGate.SceneEngine2
 
             spriteBatch.DrawString(
                 spriteFont,
-                lancerJeuT.get(),
-                new Vector2((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width) / 2 - spriteFont.MeasureString(lancerJeuT.get()).X / 2,
+                (isServer) ? "Heberger" : lancerJeuT.get(),
+                new Vector2((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width) / 2 - spriteFont.MeasureString((isServer) ? "Heberger" : lancerJeuT.get()).X / 2,
                     boutonConnexion.Top + 10),
                 c);
 

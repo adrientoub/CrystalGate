@@ -218,8 +218,8 @@ namespace CrystalGate
                 // Interface De GameOver pour le joueur 1 , risque" de bug
                 if (isAChamp) // Si un champion se fait tuer
                     foreach (Joueur j in PackMap.joueurs) // On regarde si c'est le joueur local
-                        if(j.champion == this && j.IsLocal) // Si c'est le cas gameover sur cette ecran
-                            Outil.GetLocal().Interface.Lost = true;
+                        if(j.champion == this && j.id == Client.id) // Si c'est le cas gameover sur cette ecran
+                            j.Interface.Lost = true;
             }
             // TEST MANA
             if (Mana < 0)

@@ -8,8 +8,6 @@ namespace CrystalGate
 {
     class PackWave
     {
-        static Unite champion = PackMap.joueurs[0].champion; // attaquera que le premier joueur
-
         // LEVEL 1
 
         static Wave Level1Wave1()
@@ -22,7 +20,7 @@ namespace CrystalGate
                 new List<Unite> { new Grunt(Vector2.Zero), new Cavalier(Vector2.Zero), new Archer(Vector2.Zero) }
             };
 
-            return new Wave(PointsInit, PointsSpawn, Mobs, champion);
+            return new Wave(PointsInit, PointsSpawn, Mobs);
         }
 
         static Wave Level1Wave2()
@@ -37,7 +35,7 @@ namespace CrystalGate
                 new List<Unite> { new Grunt(Vector2.Zero, level), new Cavalier(Vector2.Zero, level), new Archer(Vector2.Zero,level) }
             };
 
-            return new Wave(PointsInit, PointsSpawn, Mobs, champion);
+            return new Wave(PointsInit, PointsSpawn, Mobs);
         }
 
         static Wave Level1Wave3()
@@ -52,7 +50,7 @@ namespace CrystalGate
                 new List<Unite> { new Grunt(Vector2.Zero,level), new Cavalier(Vector2.Zero,level), new Ogre(Vector2.Zero,level), new Archer(Vector2.Zero,level) }
             };
 
-            return new Wave(PointsInit, PointsSpawn, Mobs, champion);
+            return new Wave(PointsInit, PointsSpawn, Mobs);
         }
 
         static Wave Level1Wave4()
@@ -65,7 +63,7 @@ namespace CrystalGate
                 new List<Unite> { new Grunt(Vector2.Zero), new Cavalier(Vector2.Zero), new Archer(Vector2.Zero), new Cavalier(Vector2.Zero), new Archer(Vector2.Zero), new Cavalier(Vector2.Zero), new Archer(Vector2.Zero), new Cavalier(Vector2.Zero), new Archer(Vector2.Zero), new Cavalier(Vector2.Zero), new Archer(Vector2.Zero) }
             };
 
-            return new Wave(PointsInit, PointsSpawn, Mobs, champion);
+            return new Wave(PointsInit, PointsSpawn, Mobs);
         }
 
         // LEVEL 2
@@ -80,7 +78,7 @@ namespace CrystalGate
                 new List<Unite> { new Grunt(Vector2.Zero), new Cavalier(Vector2.Zero), new Archer(Vector2.Zero) }
             };
 
-            return new Wave(PointsInit, PointsSpawn, Mobs, champion);
+            return new Wave(PointsInit, PointsSpawn, Mobs);
         }
 
         static Wave Level2Wave2()
@@ -95,7 +93,7 @@ namespace CrystalGate
                 new List<Unite> { new Grunt(Vector2.Zero, level), new Cavalier(Vector2.Zero, level), new Archer(Vector2.Zero,level) }
             };
 
-            return new Wave(PointsInit, PointsSpawn, Mobs, champion);
+            return new Wave(PointsInit, PointsSpawn, Mobs);
         }
 
         static Wave Level2Wave3()
@@ -110,7 +108,7 @@ namespace CrystalGate
                 new List<Unite> { new Grunt(Vector2.Zero, level), new Cavalier(Vector2.Zero, level), new Archer(Vector2.Zero, level), new Cavalier(Vector2.Zero, level), new Archer(Vector2.Zero, level), new Cavalier(Vector2.Zero, level), new Archer(Vector2.Zero, level), new Cavalier(Vector2.Zero, level), new Archer(Vector2.Zero, level), new Cavalier(Vector2.Zero, level), new Archer(Vector2.Zero, level) }
             };
 
-            return new Wave(PointsInit, PointsSpawn, Mobs, champion);
+            return new Wave(PointsInit, PointsSpawn, Mobs);
         }
 
         public static List<Wave> PackWaveLevel1()

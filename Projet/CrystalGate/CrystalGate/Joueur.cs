@@ -19,7 +19,7 @@ namespace CrystalGate
         bool InWaitingPoint;
         bool InWaitingUnit;
         int spell;
-        public bool IsLocal; // spécifie si le joueur est le joueur local de cette machine
+        public int id; // spécifie l'identifiant sur le reseau, supérieur à zero sinon on est en local
 
         Unite SelectedUnit;
         bool isRoaming;
@@ -89,7 +89,7 @@ namespace CrystalGate
                     }
                     if (Interface.key.IsKeyDown(Keys.K) && Interface.Oldkey.IsKeyUp(Keys.K))
                     {
-                        Reseau.Reseau.SendData(null, 0);
+                        Client.Send();
                     }
 
                     // Pour afficher/cacher le sac

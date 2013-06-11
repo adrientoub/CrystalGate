@@ -58,7 +58,6 @@ namespace CrystalGate.SceneEngine2
                 {
                     SceneHandler.gameState = GameState.Gameplay;
                     FondSonore.Play();
-                    SceneHandler.gameplayScene.isCoopPlay = false;
                     GamePlay.timer.Restart();
                 }
                 else if (mouseRec.Intersects(boutonOptions))

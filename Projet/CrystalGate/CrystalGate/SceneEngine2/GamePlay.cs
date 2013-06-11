@@ -22,8 +22,13 @@ namespace CrystalGate.SceneEngine2
         private SpriteFont gameFont; // Police d'ecriture
         public static System.Diagnostics.Stopwatch timer;
 
-        public bool isCoopPlay;
-        public bool isServer;
+        public bool isCoopPlay { get { return Client.isConnected; } }
+        public bool isServer { get { return Serveur.clients.Count > 0; } }
+
+        public override void Initialize()
+        {
+
+        }
 
         public override void LoadContent()
         {
@@ -61,14 +66,14 @@ namespace CrystalGate.SceneEngine2
                 u.Update(Map.unites, Map.effets);
             // On update les infos des joueurs
             foreach (Joueur j in PackMap.joueurs)
-                if(j.IsLocal)
+                if(j.id == Client.id)
                     j.Update(Map.unites);
             // On update les effets sur la carte
             foreach (Effet e in Map.effets)
                 e.Update();
             // On update les infos des vagues
             foreach (Wave w in Map.waves)
-                w.Update(gameTime, PackMap.joueurs[0].champion);
+                w.Update(gameTime);
             // Update de la physique
             Map.world.Step(1 / 60f);
 
@@ -100,12 +105,6 @@ namespace CrystalGate.SceneEngine2
             // DRAW STRINGS
             /*spriteBatch.DrawString(gameFont, SceneHandler.level, Vector2.Zero, Color.White);*/
             spriteBatch.End();
-        }
-
-        public override void Initialize()
-        {
-            isCoopPlay = false;
-            isServer = false;
         }
     }
 }
