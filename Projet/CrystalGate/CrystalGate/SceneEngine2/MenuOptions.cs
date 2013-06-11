@@ -61,11 +61,18 @@ namespace CrystalGate.SceneEngine2
             possibleResolutions = new List<Resolution>
             {
                 new Resolution(1920, 1080),
-                new Resolution(1024, 768),
+                new Resolution(1600, 900),
                 new Resolution(1280, 1024),
                 new Resolution(1280, 720),
-                new Resolution(1600, 900)
+                new Resolution(1024, 768),
+                new Resolution(800, 600),
+                new Resolution(640, 480)
             };
+            for (int i = 0; i < possibleResolutions.Count; i++)
+            {
+                if (possibleResolutions[i].width == CrystalGateGame.graphics.GraphicsDevice.Viewport.Width && possibleResolutions[i].height == CrystalGateGame.graphics.GraphicsDevice.Viewport.Height)
+                    _currentRes = i;
+            }
         }
 
         public override void LoadContent()
