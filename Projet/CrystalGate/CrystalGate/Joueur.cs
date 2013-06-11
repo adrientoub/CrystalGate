@@ -89,7 +89,7 @@ namespace CrystalGate
                         else
                             SceneHandler.ResetGameplay("level1");
                     }
-
+                    
                     if (Interface.key.IsKeyDown(Keys.K) && Interface.Oldkey.IsKeyUp(Keys.K))
                     {
                         Client.Send();
@@ -99,7 +99,7 @@ namespace CrystalGate
                         Client.Send();
                         t = 0;
                     }
-
+                    
                     // Pour afficher/cacher le sac
                     if (Interface.key.IsKeyDown(Keys.B) && Interface.Oldkey.IsKeyUp(Keys.B) || Interface.key.IsKeyDown(Keys.I) && Interface.Oldkey.IsKeyUp(Keys.I))
                         Interface.DrawSac = !Interface.DrawSac;
@@ -248,14 +248,17 @@ namespace CrystalGate
 
         public void DonnerOrdreDeplacer()
         {
-            isRoaming = false;
-            Vector2 ObjectifPoint = new Vector2(camera.Position.X + Interface.mouse.X, camera.Position.Y + Interface.mouse.Y) / Map.TailleTiles;
-            ObjectifPoint = new Vector2((int)ObjectifPoint.X, (int)ObjectifPoint.Y);
+            if (Interface.mouse.X < CrystalGateGame.graphics.PreferredBackBufferWidth && Interface.mouse.Y < CrystalGateGame.graphics.PreferredBackBufferHeight)
+            {
+                isRoaming = false;
+                Vector2 ObjectifPoint = new Vector2(camera.Position.X + Interface.mouse.X, camera.Position.Y + Interface.mouse.Y) / Map.TailleTiles;
+                ObjectifPoint = new Vector2((int)ObjectifPoint.X, (int)ObjectifPoint.Y);
 
-            List<Noeud> chemin = PathFinding.TrouverChemin(champion.PositionTile, ObjectifPoint, Map.Taille, new List<Unite> { }, Map.unitesStatic, false);
+                List<Noeud> chemin = PathFinding.TrouverChemin(champion.PositionTile, ObjectifPoint, Map.Taille, new List<Unite> { }, Map.unitesStatic, false);
                 if (chemin != null)
                     champion.ObjectifListe = chemin;
                 champion.uniteAttacked = null;
+            }
         }
 
         public bool DonnerOrdreAttaquer()
