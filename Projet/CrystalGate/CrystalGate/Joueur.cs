@@ -90,11 +90,8 @@ namespace CrystalGate
                             SceneHandler.ResetGameplay("level1");
                     }
                     
-                    if (Interface.key.IsKeyDown(Keys.K) && Interface.Oldkey.IsKeyUp(Keys.K))
-                    {
-                        Client.Send();
-                    }
-                    if (t == 5 && Client.isConnected)
+                    if (Client.Start)
+                    if (t >= 10 && Client.isConnected)
                     {
                         Client.Send();
                         t = 0;

@@ -16,6 +16,7 @@ namespace CrystalGate
         static Socket client;
         public static int id;
         public static bool isConnected { get { return client != null && client.Connected; } }
+        public static bool Start;
 
         public static void Connect(string ip)
         {
@@ -50,42 +51,49 @@ namespace CrystalGate
             // Stats
 
             p.idUniteAttacked = Local.champion.idUniteAttacked;
-
+            
             formatter.Serialize(stream, p);
             byte[] buffer = new byte[stream.Length];
             stream.Position = 0;
             stream.Read(buffer, 0, buffer.Length);
             // Envoi de l'id, puis de la taille, puis de l'objet
-            client.Send(new byte[] { (byte)Client.id });
+            client.Send(BitConverter.GetBytes(Client.id));
             client.Send(BitConverter.GetBytes(buffer.Length));
             client.Send(buffer);
         }
 
         public static void Receive()
         {
-            if (true)
+            byte[] buffer = new byte[1];
+            client.Receive(buffer);
+            if (BitConverter.ToBoolean(buffer, 0)) // le start
             {
+                Start = true;
+                SceneHandler.ResetGameplay();
+                SceneHandler.gameState = GameState.Gameplay;
+                FondSonore.Play();
+                GamePlay.timer.Restart();
                 while (true)
                 {
                         ASCIIEncoding ascii = new ASCIIEncoding();
                         BinaryFormatter formatter = new BinaryFormatter();
 
                         // Reception
-                        byte[] buffer = new byte[4];
-                        client.Receive(buffer);
-                        int IdDuJoueur = BitConverter.ToInt32(buffer, 0);
+                        byte[] buffer1 = new byte[4];
+                        client.Receive(buffer1);
+                        int IdDuJoueur = BitConverter.ToInt32(buffer1, 0);
 
                         // Taille
-                        buffer = new byte[4];
-                        client.Receive(buffer);
-                        int messageLength = BitConverter.ToInt32(buffer, 0);
+                        byte[] buffer2 = new byte[4];
+                        client.Receive(buffer2);
+                        int messageLength = BitConverter.ToInt32(buffer2, 0);
 
                         //Données
-                        buffer = new byte[messageLength];
-                        client.Receive(buffer);
+                        byte[] buffer3 = new byte[messageLength];
+                        client.Receive(buffer3);
 
                         // Traitement
-                        MemoryStream stream = new MemoryStream(buffer);
+                        MemoryStream stream = new MemoryStream(buffer3);
                         stream.Position = 0;
 
                         Player player = (Player)formatter.Deserialize(stream);

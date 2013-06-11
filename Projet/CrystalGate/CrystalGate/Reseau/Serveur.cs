@@ -14,15 +14,16 @@ namespace CrystalGate
     {
         static Socket serveur;
         static int NbMaxClients = 2;
+        static bool Start;
 
         public static List<Socket> clients = new List<Socket> { };
 
         public static void Host()
         {
             serveur = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            serveur.Bind(new IPEndPoint(IPAddress.Parse("127.0.0.1"), 5035));
+            serveur.Bind(new IPEndPoint(IPAddress.Any, 5035));
             serveur.Listen(42);
-            // On attend un client
+            // On attend les clients
             Thread InWaintingClient = new Thread(WaitingClient);
             InWaintingClient.Start();
 
@@ -42,7 +43,14 @@ namespace CrystalGate
                     // On lance la thread de reception pour ce socket
                     Thread Reception = new Thread(Receive);
                     Reception.Start();
+                    // Envoie l'identifiant
                     clients[clients.Count - 1].Send(new byte[] { (byte)clients.Count });
+                }
+                else
+                {
+                    Send(new byte[] { 1 });
+                    Start = true;
+                    break;
                 }
             }
         }
@@ -59,7 +67,7 @@ namespace CrystalGate
             Socket c = clients[clients.Count - 1];
             while (true)
             {
-                if (PackMap.joueurs.Count >= NbMaxClients) // debug temporaire
+                if (Start) // debug temporaire
                 {
                     // Initialisation des variables
                     ASCIIEncoding ascii = new ASCIIEncoding();
@@ -69,19 +77,17 @@ namespace CrystalGate
                     byte[] buffer1 = new byte[4];
                     c.Receive(buffer1);
                     int id = BitConverter.ToInt32(buffer1, 0);
-
+                    Send(buffer1);
 
                     // Taille
                     byte[] buffer2 = new byte[4];
                     c.Receive(buffer2);
                     int Length = BitConverter.ToInt32(buffer2, 0);
-
+                    Send(buffer2);
 
                     // Données
                     byte[] buffer3 = new byte[Length];
                     c.Receive(buffer3);
-                    Send(buffer1);
-                    Send(buffer2);
                     Send(buffer3); // Envoie les infos reçus aux clients
                 }
             }
