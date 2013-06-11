@@ -79,6 +79,9 @@ namespace CrystalGate
 
         public static Random rand;
 
+        // Variables pour le reseau, n'affecte pas le local
+        public byte idUniteAttacked = 0;
+
         public Unite(Vector2 Position, int Level = 1)
             : base(Position)
         {
@@ -157,8 +160,18 @@ namespace CrystalGate
             else
                 if (OlduniteAttacked != null && ObjectifListe.Count == 0 && IsRanged) // si l'unité se déplacait pour tirer
                     uniteAttacked = OlduniteAttacked;
+
+            // Reseau
+            UpdateReseau();
         }
 
+        void UpdateReseau()
+        {
+            if (uniteAttacked != null)
+                idUniteAttacked = uniteAttacked.id;
+            else
+                idUniteAttacked = 0;
+        }
         protected virtual void IA(List<Unite> unitsOnMap)
         {
             // Cast un heal si < à la moitié de vie
@@ -300,7 +313,7 @@ namespace CrystalGate
                 Suivre(unite);
             else
             {
-                if(CanAttack)
+                if (CanAttack)
                 {
                     if (!uniteAttacked.isInvisible)
                     {
@@ -334,10 +347,20 @@ namespace CrystalGate
                             if (IsRanged) // Si l'unité attaque à distance, on creer un projectile, sinon on attaque direct
                                 Projectile = new Projectile(this, uniteAttacked);
                             else
+                            {
                                 if (Dommages - unite.Defense <= 0) // Si armure > Dommages , degats = 1
+                                {
+                                    // On ne prend en compte les degats que si on est en local autrement ils sont effectués via le serveur
+
                                     unite.Vie -= 1;
+
+                                }
                                 else
+                                {
                                     unite.Vie -= Dommages - unite.Defense;
+
+                                }
+                            }
                             // son
                             effetUniteAttaque.Play();
 

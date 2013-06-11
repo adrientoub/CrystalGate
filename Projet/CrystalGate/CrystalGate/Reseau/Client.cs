@@ -7,6 +7,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 using CrystalGate.SceneEngine2;
 using Microsoft.Xna.Framework;
+using System.Collections.Generic;
 
 namespace CrystalGate
 {
@@ -42,7 +43,13 @@ namespace CrystalGate
             
             // Definition du contenu
             Player p = new Player();
-            p.noeuds = Outil.GetJoueur(Client.id).champion.ObjectifListe;
+            Joueur Local = Outil.GetJoueur(Client.id);
+            // Pathfinding
+            if(Local.champion.ObjectifListe.Count > 0)
+                p.objectifPoint = Local.champion.ObjectifListe[Local.champion.ObjectifListe.Count - 1];
+            // Stats
+
+            p.idUniteAttacked = Local.champion.idUniteAttacked;
 
             formatter.Serialize(stream, p);
             byte[] buffer = new byte[stream.Length];
@@ -84,8 +91,21 @@ namespace CrystalGate
                         Player player = (Player)formatter.Deserialize(stream);
                         if (Outil.GetJoueur(IdDuJoueur) != null)
                         {
-                            //Outil.GetJoueur(IdDuJoueur).champion.body.Position = new Vector2(player.positionX, player.positionY);
-                            Outil.GetJoueur(IdDuJoueur).champion.ObjectifListe = player.noeuds;
+                            Joueur joueur = Outil.GetJoueur(IdDuJoueur);
+                            // Pathfinding
+                            if (player.objectifPoint != null)
+                            {
+                                List<Noeud> path = PathFinding.TrouverChemin(joueur.champion.PositionTile, player.objectifPoint.Position, Map.Taille, Map.unites, Map.unitesStatic, true);
+                                if (path != null)
+                                    joueur.champion.ObjectifListe = path;
+                            }
+                            //Stats
+                            if (player.idUniteAttacked != 0)
+                            {
+                                foreach (Unite u in Map.unites)
+                                    if (u.id == player.idUniteAttacked)
+                                        joueur.champion.uniteAttacked = u;
+                            }
                         }
                 }
             }

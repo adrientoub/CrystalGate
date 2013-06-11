@@ -48,6 +48,7 @@ namespace CrystalGate
         public float LastAttack;
         public Unite OlduniteAttacked;
         public Unite uniteAttacked;
+        public byte id;
 
         public Objet(Vector2 Position)
         {

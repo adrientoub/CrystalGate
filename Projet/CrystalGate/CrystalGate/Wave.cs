@@ -79,6 +79,7 @@ namespace CrystalGate
                             // Attaque un joueur au hasard
                             Map.unites[Map.unites.Count - 1].uniteAttacked = PackMap.joueurs[rand.Next(0, PackMap.joueurs.Count)].champion;
                             Map.unites[Map.unites.Count - 1].idWave = id;
+                            Map.unites[Map.unites.Count - 1].id = (byte)Map.unites.Count;
                             unites[0].RemoveAt(0);
                         }
                         else // Si il y'a moins d'unité que de points de spawn, on arrete

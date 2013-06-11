@@ -15,6 +15,7 @@ namespace CrystalGate.Unites
             isApnj = true;
             FlipH = true;
             direction = Direction.Gauche;
+            id = 255;
         }
     }
 }

@@ -8,6 +8,7 @@ namespace CrystalGate
     [Serializable]
     class Player
     {
-        public List<Noeud> noeuds;
+        public Noeud objectifPoint;
+        public byte idUniteAttacked;
     }
 }

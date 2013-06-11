@@ -135,7 +135,10 @@ namespace CrystalGate
             }
 
             foreach (Joueur j in joueurs)
+            {
                 Map.unites.Add(j.champion);
+                Map.unites[Map.unites.Count - 1].id = (byte)Map.unites.Count;
+            }
         }
 
         public static void OuvrirMap(string MapName)

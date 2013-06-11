@@ -94,7 +94,7 @@ namespace CrystalGate
                     {
                         Client.Send();
                     }
-                    if (t == 20 && Client.isConnected)
+                    if (t == 5 && Client.isConnected)
                     {
                         Client.Send();
                         t = 0;
