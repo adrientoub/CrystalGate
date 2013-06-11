@@ -521,6 +521,8 @@ namespace CrystalGate
             spritebatch.Draw(CurseurOffensif ? CurseurRouge : Curseur, new Vector2(joueur.camera.Position.X + m.X, joueur.camera.Position.Y + m.Y), Color.White);
 
             OldDrawDialogue = DrawDialogue;
+
+            spritebatch.DrawString(PackTexture.gamefont, Outil.GetJoueur(Client.id).id.ToString(), ConvertUnits.ToDisplayUnits(joueur.champion.body.Position), Color.White);
         }
         #endregion draw
     }

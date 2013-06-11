@@ -103,8 +103,6 @@ namespace CrystalGate
             Map.unites = Unites[i];
             // Le champion s'est téléporté, on le rajoute sur la Map
             LoadPlayers();
-            foreach (Joueur j in joueurs)
-                Map.unites.Add(j.champion);
 
             Map.items = Items[i];
             Map.waves = Waves[i];
@@ -125,7 +123,7 @@ namespace CrystalGate
             {
                 for (int i = 0; i < 2; i++)
                 {
-                    joueurs.Add(new Joueur(new Guerrier(new Vector2(0, 9))));
+                    joueurs.Add(new Joueur(new Guerrier(new Vector2(0, 9 + 2*i))));
                     joueurs[joueurs.Count - 1].id = joueurs.Count;
                 }
                 
@@ -135,6 +133,9 @@ namespace CrystalGate
                 joueurs.Add(new Joueur(new Guerrier(new Vector2(0, 9))));
                 // On spécifie le joueur local
             }
+
+            foreach (Joueur j in joueurs)
+                Map.unites.Add(j.champion);
         }
 
         public static void OuvrirMap(string MapName)
@@ -290,7 +291,7 @@ namespace CrystalGate
 
         static void InitializeLevel1()
         {
-            Waves[0] = PackWave.PackWaveLevel1();
+            //Waves[0] = PackWave.PackWaveLevel1();
             Unite Pnj = new Syndra(new Vector2(49, 39));
             Pnj.Dialogue.Clear();
             Pnj.Dialogue.Add(new Text("Dialogue1a"));

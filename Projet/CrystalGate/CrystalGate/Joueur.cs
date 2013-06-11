@@ -5,6 +5,7 @@ using System.Text;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework;
 using CrystalGate.SceneEngine2;
+using System.Timers;
 
 namespace CrystalGate
 {
@@ -23,6 +24,7 @@ namespace CrystalGate
 
         Unite SelectedUnit;
         bool isRoaming;
+        int t;
 
         public Joueur(Unite champ)
         {
@@ -87,9 +89,15 @@ namespace CrystalGate
                         else
                             SceneHandler.ResetGameplay("level1");
                     }
+
                     if (Interface.key.IsKeyDown(Keys.K) && Interface.Oldkey.IsKeyUp(Keys.K))
                     {
                         Client.Send();
+                    }
+                    if (t == 20 && Client.isConnected)
+                    {
+                        Client.Send();
+                        t = 0;
                     }
 
                     // Pour afficher/cacher le sac
@@ -235,6 +243,7 @@ namespace CrystalGate
             CurseurCheck();
             Interface.Oldmouse = Interface.mouse;
             Interface.Oldkey = Interface.key;
+            t++;
         }
 
         public void DonnerOrdreDeplacer()

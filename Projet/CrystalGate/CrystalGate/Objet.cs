@@ -39,7 +39,7 @@ namespace CrystalGate
         public int suivreactuel = 20;
         public int largeurPhysique;
 
-        protected Direction direction;
+        public Direction direction;
         protected bool FlipH;
         public float Scale = 1;
         public bool Mort, CanAttack;
@@ -150,7 +150,7 @@ namespace CrystalGate
             this.PositionTile = Position;
         }
                     [Serializable]
-        protected enum Direction
+        public enum Direction
         {
             Haut,
             Bas,

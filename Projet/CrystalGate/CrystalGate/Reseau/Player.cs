@@ -8,6 +8,6 @@ namespace CrystalGate
     [Serializable]
     class Player
     {
-        public float positionX, positionY;
+        public List<Noeud> noeuds;
     }
 }

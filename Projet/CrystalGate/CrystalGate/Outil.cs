@@ -87,14 +87,6 @@ namespace CrystalGate
             return rendu;
         }
 
-        public static Joueur GetLocal()
-        {
-            foreach (Joueur j in PackMap.joueurs)
-                if (j.id == Client.id)
-                    return j;
-            return null;
-        }
-
         public static Joueur GetJoueur(int id)
         {
             foreach (Joueur j in PackMap.joueurs)

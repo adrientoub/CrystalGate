@@ -13,6 +13,7 @@ namespace CrystalGate
     public class Serveur
     {
         static Socket serveur;
+        static int NbMaxClients = 2;
 
         public static List<Socket> clients = new List<Socket> { };
 
@@ -27,20 +28,22 @@ namespace CrystalGate
 
             // On créer un client qui est soi même et on le connecte à ce serveur
             Client.Connect("127.0.0.1");
-            // CA BUG ICI LE CLIENT SE CO ALORS QUE LA THREAD RECEIVE EST ACTIVE DU COUP LA COLLECTION CHANGE
-            // IL FAUT ATTENDRE QUE TOUT LE MONDE SOIT CO AVANT DE BALANCER LA THREAD
-            Thread Reception = new Thread(Receive);
-            Reception.Start();
         }
 
         public static void WaitingClient()
         {
             while (true)
             {
-                // Attend qu'un client se connecte et lui fourni un identifiant
-                Socket nouveauClient = serveur.Accept();
-                clients.Add(nouveauClient);
-                clients[clients.Count - 1].Send(new byte[] { (byte)clients.Count });
+                if (clients.Count < NbMaxClients)
+                {
+                    // Attend qu'un client se connecte et lui fourni un identifiant
+                    Socket nouveauClient = serveur.Accept();
+                    clients.Add(nouveauClient);
+                    // On lance la thread de reception pour ce socket
+                    Thread Reception = new Thread(Receive);
+                    Reception.Start();
+                    clients[clients.Count - 1].Send(new byte[] { (byte)clients.Count });
+                }
             }
         }
 
@@ -53,14 +56,15 @@ namespace CrystalGate
 
         public static void Receive()
         {
+            Socket c = clients[clients.Count - 1];
             while (true)
             {
-                foreach(Socket c in clients)
+                if (PackMap.joueurs.Count >= NbMaxClients) // debug temporaire
                 {
                     // Initialisation des variables
                     ASCIIEncoding ascii = new ASCIIEncoding();
                     BinaryFormatter formatter = new BinaryFormatter();
-                    
+
                     // ID du joueur
                     byte[] buffer1 = new byte[4];
                     c.Receive(buffer1);
@@ -79,7 +83,6 @@ namespace CrystalGate
                     Send(buffer1);
                     Send(buffer2);
                     Send(buffer3); // Envoie les infos reçus aux clients
-                    
                 }
             }
         }

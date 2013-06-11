@@ -42,8 +42,7 @@ namespace CrystalGate
             
             // Definition du contenu
             Player p = new Player();
-            p.positionX = Outil.GetLocal().champion.body.Position.X;
-            p.positionY = Outil.GetLocal().champion.body.Position.Y;
+            p.noeuds = Outil.GetJoueur(Client.id).champion.ObjectifListe;
 
             formatter.Serialize(stream, p);
             byte[] buffer = new byte[stream.Length];
@@ -57,39 +56,38 @@ namespace CrystalGate
 
         public static void Receive()
         {
-            while (true)
+            if (true)
             {
-                ASCIIEncoding ascii = new ASCIIEncoding();
-                BinaryFormatter formatter = new BinaryFormatter();
-
-                // Reception
-                byte[] buffer = new byte[4];
-                client.Receive(buffer);
-                int IdDuJoueur = BitConverter.ToInt32(buffer, 0);
-
-                // Taille
-                buffer = new byte[4];
-                client.Receive(buffer);
-                int messageLength = BitConverter.ToInt32(buffer, 0);
-
-                //Données
-                buffer = new byte[messageLength];
-                client.Receive(buffer);
-
-                // Traitement
-                MemoryStream stream = new MemoryStream(buffer);
-                stream.Position = 0;
-                try
+                while (true)
                 {
-                    Player player = (Player)formatter.Deserialize(stream);
+                        ASCIIEncoding ascii = new ASCIIEncoding();
+                        BinaryFormatter formatter = new BinaryFormatter();
 
-                    Outil.GetJoueur(IdDuJoueur).champion.body.Position = new Vector2(player.positionX + 1, player.positionY);
+                        // Reception
+                        byte[] buffer = new byte[4];
+                        client.Receive(buffer);
+                        int IdDuJoueur = BitConverter.ToInt32(buffer, 0);
+
+                        // Taille
+                        buffer = new byte[4];
+                        client.Receive(buffer);
+                        int messageLength = BitConverter.ToInt32(buffer, 0);
+
+                        //Données
+                        buffer = new byte[messageLength];
+                        client.Receive(buffer);
+
+                        // Traitement
+                        MemoryStream stream = new MemoryStream(buffer);
+                        stream.Position = 0;
+
+                        Player player = (Player)formatter.Deserialize(stream);
+                        if (Outil.GetJoueur(IdDuJoueur) != null)
+                        {
+                            //Outil.GetJoueur(IdDuJoueur).champion.body.Position = new Vector2(player.positionX, player.positionY);
+                            Outil.GetJoueur(IdDuJoueur).champion.ObjectifListe = player.noeuds;
+                        }
                 }
-                catch
-                {
-
-                }
-
             }
         }
     }

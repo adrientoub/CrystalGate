@@ -66,7 +66,7 @@ namespace CrystalGate.SceneEngine2
                 u.Update(Map.unites, Map.effets);
             // On update les infos des joueurs
             foreach (Joueur j in PackMap.joueurs)
-                if(j.id == Client.id)
+                if (j.id == Client.id)
                     j.Update(Map.unites);
             // On update les effets sur la carte
             foreach (Effet e in Map.effets)
@@ -75,7 +75,7 @@ namespace CrystalGate.SceneEngine2
             foreach (Wave w in Map.waves)
                 w.Update(gameTime);
             // Update de la physique
-            Map.world.Step(1 / 60f);
+            Map.world.Step(1 / 40f);
 
             if (SceneEngine2.BaseScene.keyboardState.IsKeyDown(Keys.Escape) && !SceneEngine2.BaseScene.oldKeyboardState.IsKeyDown(Keys.Escape))
             {
@@ -101,7 +101,7 @@ namespace CrystalGate.SceneEngine2
             foreach (Unite o in Map.unites)
                 o.Draw(spriteBatch);
             // DRAW INTERFACE
-            PackMap.joueurs[0].Interface.Draw();
+            Outil.GetJoueur(Client.id).Interface.Draw();
             // DRAW STRINGS
             /*spriteBatch.DrawString(gameFont, SceneHandler.level, Vector2.Zero, Color.White);*/
             spriteBatch.End();
