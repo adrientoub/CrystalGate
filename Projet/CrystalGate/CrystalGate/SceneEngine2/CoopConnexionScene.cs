@@ -9,6 +9,8 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Audio;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace CrystalGate.SceneEngine2
 {
@@ -99,13 +101,34 @@ namespace CrystalGate.SceneEngine2
                 suspension = "...";
             }
             else if (nbFrames == 180)
-            { 
+            {
                 nbFrames = 0;
             }
 
             if (Client.isConnected)
             {
                 currentMessage = "Attente du lancement du jeu";
+                Client.ownPlayer.name = textAsWrited;
+                if (nbFrames % 15 == 0)
+                {
+                    // On s'envoit
+                    MemoryStream stream = new MemoryStream();
+                    BinaryFormatter formatter = new BinaryFormatter();
+
+                    formatter.Serialize(stream, Client.ownPlayer);
+                    byte[] buffer = new byte[stream.Length];
+                    stream.Position = 0;
+                    stream.Read(buffer, 0, buffer.Length);
+
+                    // Envoi
+                    Client.Send(buffer, 1);
+                }
+
+                // Mise à jour des pseudos
+                for (int i = 0; i < Client.joueursConnectes.Count && i < pseudoJoueurs.Length; i++)
+                {
+                    pseudoJoueurs[i] = Client.joueursConnectes[i].name;
+                }
             }
             else
             {
@@ -165,7 +188,7 @@ namespace CrystalGate.SceneEngine2
                 new Vector2(champPseudo.Center.X - spriteFont.MeasureString(textAsWrited).X / 2,
                     champPseudo.Top + 10),
                 Color.White);
-            
+
             Color c;
             if (lancerJeuActive)
                 c = Color.White;

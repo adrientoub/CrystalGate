@@ -17,6 +17,8 @@ namespace CrystalGate
         public static int id;
         public static bool isConnected { get { return client != null && client.Connected; } }
         public static bool Started;
+        public static Players ownPlayer;
+        public static List<Players> joueursConnectes = new List<Players>();
 
         public static void Connect()
         {
@@ -31,8 +33,9 @@ namespace CrystalGate
                 client.Receive(buffer);
                 id = buffer[0];
 
-                //On lance la thread de reception
+                ownPlayer = new Players("", id);
 
+                //On lance la thread de reception
                 Thread Reception = new Thread(Receive);
                 Reception.Start();
             }
@@ -84,7 +87,28 @@ namespace CrystalGate
                 }
                 else if (header == 1)
                 {
-                    // Les autres cas içi
+                    // De la taille
+                    byte[] buffer2 = new byte[4];
+                    client.Receive(buffer2);
+                    int messageLength = BitConverter.ToInt32(buffer2, 0);
+
+                    //Des données
+                    byte[] buffer3 = new byte[messageLength];
+                    client.Receive(buffer3);
+
+                    BinaryFormatter formatter = new BinaryFormatter();
+                    MemoryStream stream = new MemoryStream(buffer3);
+                    stream.Position = 0;
+
+                    Players j = (Players)formatter.Deserialize(stream);
+                    if (j.id - 1 == joueursConnectes.Count)
+                    {
+                        joueursConnectes.Add(j);
+                    }
+                    else 
+                    {
+                        joueursConnectes[j.id - 1] = j;
+                    }
                 }
             }
         }
