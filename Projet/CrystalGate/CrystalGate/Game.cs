@@ -24,7 +24,7 @@ namespace CrystalGate
             // Initialisation du GraphicsDeviceManager
             // pour obtenir une fenêtre de dimensions 800*480
             graphics = new GraphicsDeviceManager(this) {
-                PreferredBackBufferWidth = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width,
+                PreferredBackBufferWidth = 400,
                 PreferredBackBufferHeight = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height
             };
             if (!isTest)

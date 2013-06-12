@@ -65,9 +65,7 @@ namespace CrystalGate.SceneEngine2
             foreach (Unite u in Map.unites)
                 u.Update(Map.unites, Map.effets);
             // On update les infos des joueurs
-            foreach (Joueur j in PackMap.joueurs)
-                if (j.id == Client.id)
-                    j.Update(Map.unites);
+            Outil.GetJoueur(Client.id).Update(Map.unites);
             // On update les effets sur la carte
             foreach (Effet e in Map.effets)
                 e.Update();

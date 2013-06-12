@@ -242,7 +242,7 @@ namespace CrystalGate
 
         public void UpdateReseau()
         {
-            if (t >= 10 && Client.isConnected) // Si on est en reseau et que l'on doit send
+            if (Client.Started && t >= 10 && Client.isConnected) // Si on est en reseau et que l'on doit send
             {
                 // Serialise le personnage
                 // Initialisation des variables
@@ -292,7 +292,7 @@ namespace CrystalGate
             Vector2 ObjectifPoint = new Vector2(camera.Position.X + Interface.mouse.X, camera.Position.Y + Interface.mouse.Y) / Map.TailleTiles;
             ObjectifPoint = new Vector2((int)ObjectifPoint.X, (int)ObjectifPoint.Y);
             foreach (Unite u in Map.unites)
-                if(u != champion && !u.isApnj && Outil.DistancePoints(ObjectifPoint, u .PositionTile) <= 64)
+                if(u != champion && !u.isApnj && Outil.DistancePoints(ObjectifPoint, u .PositionTile) <= 45)
                 {
                     champion.uniteAttacked = u;
                     List<Noeud> chemin = PathFinding.TrouverChemin(champion.PositionTile, ObjectifPoint, Map.Taille, new List<Unite> { }, Map.unitesStatic, false);

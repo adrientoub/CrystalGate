@@ -432,7 +432,7 @@ namespace CrystalGate
                 spritebatch.DrawString(gamefont, strUnit.get(), new Vector2(CadrePosition.X + CadrePosition.Width - gamefont.MeasureString(strUnit.get()).X / 2 - Portrait.Width / 2, CadrePosition.Y) + joueur.camera.Position, Color.White);
 
                 spritebatch.DrawString(gamefont, str, new Vector2(CadrePosition.X, CadrePosition.Y + 25) + joueur.camera.Position, Color.White);
-                string xp = joueur.champion.XP + " / " + joueur.champion.Level * 1000;
+                string xp = joueur.champion.XP.ToString() + " / " + joueur.champion.Level * 1000;
                 spritebatch.DrawString(gamefont, xp, new Vector2(CadrePosition.X + CadrePosition.Width / 2 - gamefont.MeasureString(xp).X / 2, CadrePosition.Y + CadrePosition.Height - hauteurBarre - 2) + joueur.camera.Position, Color.White);
 
                 // Affichage de la barre des sorts

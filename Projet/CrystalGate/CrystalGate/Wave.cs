@@ -77,7 +77,10 @@ namespace CrystalGate
                             else
                                 throw new Exception("Modif la wave!");
                             // Attaque un joueur au hasard
-                            Map.unites[Map.unites.Count - 1].uniteAttacked = PackMap.joueurs[rand.Next(0, PackMap.joueurs.Count)].champion;
+                            if(Client.Started)
+                                Map.unites[Map.unites.Count - 1].uniteAttacked = Outil.GetJoueur(1).champion;
+                            else
+                                Map.unites[Map.unites.Count - 1].uniteAttacked = Outil.GetJoueur(0).champion;
                             Map.unites[Map.unites.Count - 1].idWave = id;
                             Map.unites[Map.unites.Count - 1].id = (byte)Map.unites.Count;
                             unites[0].RemoveAt(0);

@@ -93,6 +93,8 @@ namespace CrystalGate
                                     if (u.id == player.idUniteAttacked)
                                         joueur.champion.uniteAttacked = u;
                             }
+                            else
+                                joueur.champion.uniteAttacked = null;
                         }
                 }
             }

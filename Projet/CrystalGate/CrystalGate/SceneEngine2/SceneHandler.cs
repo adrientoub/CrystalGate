@@ -191,10 +191,9 @@ namespace CrystalGate.SceneEngine2
         public static void ResetGameplay()
         {
             // Reinitialise les levels ET le joueur (il faudra ajouter un truc qui charge les infos du joueur a partir d'un fichier texte
+            level = "level1";
             PackMap.LoadPlayers();
             PackMap.InitLevels();
-            level = "level1";
-
             gameplayScene = new GamePlay();
             gameplayScene.Initialize();
             gameplayScene.LoadContent();

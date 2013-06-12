@@ -62,7 +62,7 @@ namespace CrystalGate.SceneEngine2
         public override void Update(GameTime gameTime)
         {
             isServer = SceneHandler.coopSettingsScene.isServer;
-            lancerJeuActive = Serveur.clients.Count > 0 || Client.isConnected && !isServer;
+            lancerJeuActive = Serveur.clients.Count >= 2 || Client.isConnected && !isServer;
 
             mouseRec = new Rectangle(mouse.X, mouse.Y, 1, 1);
             if (mouse.LeftButton == ButtonState.Pressed && oldMouse.LeftButton == ButtonState.Released)
