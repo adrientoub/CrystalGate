@@ -16,8 +16,8 @@
     <XnaProfile>HiDef</XnaProfile>
     <XnaCrossPlatformGroupID>3ef4cc96-8ba2-4a07-9bf5-e7d26ac923d1</XnaCrossPlatformGroupID>
     <XnaOutputType>Game</XnaOutputType>
-    <ApplicationIcon>Game.ico</ApplicationIcon>
-    <Thumbnail>GameThumbnail.png</Thumbnail>
+    <ApplicationIcon>Logo.ico</ApplicationIcon>
+    <Thumbnail>LogoCG.png</Thumbnail>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
@@ -203,6 +203,8 @@
   <ItemGroup>
     <Content Include="Game.ico" />
     <Content Include="GameThumbnail.png" />
+    <Content Include="Logo.ico" />
+    <Content Include="LogoCG.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CrystalGateContent\CrystalGateContent.contentproj">
