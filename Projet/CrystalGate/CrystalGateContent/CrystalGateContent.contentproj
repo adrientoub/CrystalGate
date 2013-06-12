@@ -561,13 +561,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Unites\assassin.png">
-      <Name>assassin</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Sons\Levelup.wav">
       <Name>Levelup</Name>
       <Importer>WavImporter</Importer>
@@ -612,6 +605,13 @@
   <ItemGroup>
     <Compile Include="Menu\Lobby.jpg">
       <Name>Lobby</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Unites\assassin.png">
+      <Name>assassin</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

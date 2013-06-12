@@ -266,7 +266,7 @@ namespace CrystalGate
                 stream.Position = 0;
                 stream.Read(buffer, 0, buffer.Length);
                 // Envoi
-                Client.Send(buffer, 0);
+                Client.Send(buffer, 42);
                 t = 0;
             }
             t++;
@@ -292,7 +292,7 @@ namespace CrystalGate
             Vector2 ObjectifPoint = new Vector2(camera.Position.X + Interface.mouse.X, camera.Position.Y + Interface.mouse.Y) / Map.TailleTiles;
             ObjectifPoint = new Vector2((int)ObjectifPoint.X, (int)ObjectifPoint.Y);
             foreach (Unite u in Map.unites)
-                if(u != champion && !u.isApnj && Outil.DistancePoints(ObjectifPoint, u .PositionTile) <= 45)
+                if(u != champion && !u.isApnj && Outil.DistancePoints(ObjectifPoint, u .PositionTile) <= 60)
                 {
                     champion.uniteAttacked = u;
                     List<Noeud> chemin = PathFinding.TrouverChemin(champion.PositionTile, ObjectifPoint, Map.Taille, new List<Unite> { }, Map.unitesStatic, false);

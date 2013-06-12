@@ -19,18 +19,20 @@ namespace CrystalGate
             Scale = 0.4f;
             // Graphique
             Sprite = PackTexture.Assassin;
-            Tiles = new Vector2(1757 / 5, 1400 / 5);
+            Tiles = new Vector2(1757 / 5, 3150 / 11);
             Portrait = PackTexture.AssassinPortrait;
             packAnimation = new PackAnimation();
             // Statistiques
-            Vie = VieMax = 3000;
-            Vitesse = 0.2f;
-            Vitesse_Attaque = 1f;
+            Vie = VieMax = 350;
+            Vitesse = 0.12f;
+            Vitesse_Attaque = 0.4f;
             Portee = 1f; // 1 = Corps à corps
-            Dommages = 100;
-            Puissance = 100;
-            Defense = 10;
+            Dommages = 75;
+            Puissance = 10;
+            Defense = 3;
+            DefenseMagique = 3;
             XPUnite = 200;
+
             Inventory = new List<Item> { new PotionDeVie(this, Vector2.Zero) };
 
             // Sons

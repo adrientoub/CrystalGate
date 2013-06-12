@@ -58,6 +58,11 @@ namespace CrystalGate.SceneEngine2
             {
                 if (mouseRec.Intersects(boutonQuitter))
                 {
+                    // Deconnecte du reseau
+                    if (Serveur.clients.Count > 0) // Si on etait le serveur
+                        Serveur.Shutdown();
+                    if (Client.client != null) // Si on etait un client
+                        Client.client.Close();
                     SceneHandler.ResetGameplay();
                     CrystalGate.FondSonore.Stop();
                     SceneHandler.gameState = GameState.MainMenu;

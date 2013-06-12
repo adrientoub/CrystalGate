@@ -13,7 +13,7 @@ namespace CrystalGate
 {
     public class Client
     {
-        static Socket client;
+        public static Socket client;
         public static int id;
         public static bool isConnected { get { return client != null && client.Connected; } }
         public static bool Started;
@@ -59,57 +59,65 @@ namespace CrystalGate
 
         public static void Receive()
         {
-            Started = true;
-            while (true)
+            try
             {
-                // Réception du header
-                byte[] buffer = new byte[4];
-                client.Receive(buffer);
-                int header = BitConverter.ToInt32(buffer, 0);
-
-                if (header == 0)
+                Started = true;
+                while (true)
                 {
-                    // Réception de l'ID du client
-                    byte[] buffer1 = new byte[4];
-                    client.Receive(buffer1);
-                    int IdDuJoueur = BitConverter.ToInt32(buffer1, 0);
+                    // Réception du header
+                    byte[] buffer = new byte[4];
+                    client.Receive(buffer);
+                    int header = BitConverter.ToInt32(buffer, 0);
 
-                    // De la taille
-                    byte[] buffer2 = new byte[4];
-                    client.Receive(buffer2);
-                    int messageLength = BitConverter.ToInt32(buffer2, 0);
-
-                    //Des données
-                    byte[] buffer3 = new byte[messageLength];
-                    client.Receive(buffer3);
-                    // On deserialise et modifie le joueur
-                    Unserialize(IdDuJoueur, buffer3);
-                }
-                else if (header == 1)
-                {
-                    // De la taille
-                    byte[] buffer2 = new byte[4];
-                    client.Receive(buffer2);
-                    int messageLength = BitConverter.ToInt32(buffer2, 0);
-
-                    //Des données
-                    byte[] buffer3 = new byte[messageLength];
-                    client.Receive(buffer3);
-
-                    BinaryFormatter formatter = new BinaryFormatter();
-                    MemoryStream stream = new MemoryStream(buffer3);
-                    stream.Position = 0;
-
-                    Players j = (Players)formatter.Deserialize(stream);
-                    if (j.id - 1 == joueursConnectes.Count)
+                    if (header == 42)
                     {
-                        joueursConnectes.Add(j);
+                        // Réception de l'ID du client
+                        byte[] buffer1 = new byte[4];
+                        client.Receive(buffer1);
+                        int IdDuJoueur = BitConverter.ToInt32(buffer1, 0);
+
+                        // De la taille
+                        byte[] buffer2 = new byte[4];
+                        client.Receive(buffer2);
+                        int messageLength = BitConverter.ToInt32(buffer2, 0);
+
+                        //Des données
+                        byte[] buffer3 = new byte[messageLength];
+                        client.Receive(buffer3);
+                        // On deserialise et modifie le joueur
+                        Unserialize(IdDuJoueur, buffer3);
                     }
-                    else 
+                    else if (header == 1)
                     {
-                        joueursConnectes[j.id - 1] = j;
+                        // De la taille
+                        byte[] buffer2 = new byte[4];
+                        client.Receive(buffer2);
+                        int messageLength = BitConverter.ToInt32(buffer2, 0);
+
+                        //Des données
+                        byte[] buffer3 = new byte[messageLength];
+                        client.Receive(buffer3);
+
+                        BinaryFormatter formatter = new BinaryFormatter();
+                        MemoryStream stream = new MemoryStream(buffer3);
+                        stream.Position = 0;
+
+                        Players j = (Players)formatter.Deserialize(stream);
+                        if (j.id - 1 == joueursConnectes.Count)
+                        {
+                            joueursConnectes.Add(j);
+                        }
+                        else
+                        {
+                            joueursConnectes[j.id - 1] = j;
+                        }
                     }
+
                 }
+            }
+            catch
+            {
+                // Le client s'est deco
             }
         }
 
