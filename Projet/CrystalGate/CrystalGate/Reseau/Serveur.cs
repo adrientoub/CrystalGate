@@ -47,9 +47,8 @@ namespace CrystalGate
                     // Envoie l'identifiant
                     clients[clients.Count - 1].Send(new byte[] { (byte)clients.Count });
                 }
-                else
+                else // Si tout le monde est la , on envoi le signal pour que les client receptionnent
                 {
-                    Send(new byte[] { 1 });
                     break;
                 }
             }

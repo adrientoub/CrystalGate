@@ -56,61 +56,66 @@ namespace CrystalGate
 
         public static void Receive()
         {
-            byte[] buffer = new byte[1];
-            client.Receive(buffer);
-            if (BitConverter.ToBoolean(buffer, 0)) // le start
+            Started = true;
+            while (true)
             {
-                Started = true;
-                while (true)
-                {
-                    ASCIIEncoding ascii = new ASCIIEncoding();
-                    BinaryFormatter formatter = new BinaryFormatter();
+                // Réception du header
+                byte[] buffer = new byte[4];
+                client.Receive(buffer);
+                int header = BitConverter.ToInt32(buffer, 0);
 
-                    // Réception du type
-                    buffer = new byte[4];
-                    client.Receive(buffer);
-                    int type = BitConverter.ToInt32(buffer, 0);
-                    
+                if (header == 0)
+                {
                     // Réception de l'ID du client
                     byte[] buffer1 = new byte[4];
                     client.Receive(buffer1);
                     int IdDuJoueur = BitConverter.ToInt32(buffer1, 0);
 
-                    // Taille
+                    // De la taille
                     byte[] buffer2 = new byte[4];
                     client.Receive(buffer2);
                     int messageLength = BitConverter.ToInt32(buffer2, 0);
 
-                    //Données
+                    //Des données
                     byte[] buffer3 = new byte[messageLength];
                     client.Receive(buffer3);
-
-                    // Traitement
-                    MemoryStream stream = new MemoryStream(buffer3);
-                    stream.Position = 0;
-
-                    Player player = (Player)formatter.Deserialize(stream);
-                    if (Outil.GetJoueur(IdDuJoueur) != null)
-                    {
-                        Joueur joueur = Outil.GetJoueur(IdDuJoueur);
-                        // Pathfinding
-                        if (player.objectifPoint != null)
-                        {
-                            List<Noeud> path = PathFinding.TrouverChemin(joueur.champion.PositionTile, player.objectifPoint.Position, Map.Taille, Map.unites, Map.unitesStatic, true);
-                            if (path != null)
-                                joueur.champion.ObjectifListe = path;
-                        }
-                        //Stats
-                        if (player.idUniteAttacked != 0)
-                        {
-                            foreach (Unite u in Map.unites)
-                                if (u.id == player.idUniteAttacked)
-                                    joueur.champion.uniteAttacked = u;
-                        }
-                        else
-                            joueur.champion.uniteAttacked = null;
-                    }
+                    // On deserialise et modifie le joueur
+                    Unserialize(IdDuJoueur, buffer3);
                 }
+                else if (header == 1)
+                {
+                    // Les autres cas içi
+                }
+            }
+        }
+
+        public static void Unserialize(int IdDuJoueur, byte[] buffer)
+        {
+            // Traitement
+            BinaryFormatter formatter = new BinaryFormatter();
+            MemoryStream stream = new MemoryStream(buffer);
+            stream.Position = 0;
+
+            Player player = (Player)formatter.Deserialize(stream);
+            if (Outil.GetJoueur(IdDuJoueur) != null)
+            {
+                Joueur joueur = Outil.GetJoueur(IdDuJoueur);
+                // Pathfinding
+                if (player.objectifPoint != null)
+                {
+                    List<Noeud> path = PathFinding.TrouverChemin(joueur.champion.PositionTile, player.objectifPoint.Position, Map.Taille, Map.unites, Map.unitesStatic, true);
+                    if (path != null)
+                        joueur.champion.ObjectifListe = path;
+                }
+                //Stats
+                if (player.idUniteAttacked != 0)
+                {
+                    foreach (Unite u in Map.unites)
+                        if (u.id == player.idUniteAttacked)
+                            joueur.champion.uniteAttacked = u;
+                }
+                else
+                    joueur.champion.uniteAttacked = null;
             }
         }
     }
