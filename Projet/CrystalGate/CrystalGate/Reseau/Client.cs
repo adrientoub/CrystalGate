@@ -19,6 +19,7 @@ namespace CrystalGate
         public static bool Started;
         public static Players ownPlayer;
         public static List<Players> joueursConnectes = new List<Players>();
+        public static List<Message> discution = new List<Message>();
 
         public static void Connect()
         {
@@ -87,7 +88,7 @@ namespace CrystalGate
                         // On deserialise et modifie le joueur
                         Unserialize(IdDuJoueur, buffer3);
                     }
-                    else if (header == 1)
+                    else if (header == 1) // On reçoit un joueur
                     {
                         // De la taille
                         byte[] buffer2 = new byte[4];
@@ -111,6 +112,25 @@ namespace CrystalGate
                         {
                             joueursConnectes[j.id - 1] = j;
                         }
+                    }
+                    else if (header == 2) // On reçoit un message du chat
+                    {
+                        // De la taille
+                        byte[] buffer2 = new byte[4];
+                        client.Receive(buffer2);
+                        int messageLength = BitConverter.ToInt32(buffer2, 0);
+
+                        //Des données
+                        byte[] buffer3 = new byte[messageLength];
+                        client.Receive(buffer3);
+
+                        BinaryFormatter formatter = new BinaryFormatter();
+                        MemoryStream stream = new MemoryStream(buffer3);
+                        stream.Position = 0;
+
+                        Message m = (Message)formatter.Deserialize(stream);
+                        m.dateEnvoi = EffetSonore.time.Elapsed;
+                        discution.Add(m);
                     }
 
                 }

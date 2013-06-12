@@ -110,6 +110,20 @@ namespace CrystalGate
                         c.Receive(buffer3);
                         Send(buffer3); // Envoie les infos reçus aux clients
                     }
+                    else if (header == 2) // Si on reçoit un message 
+                    {
+                        // Reception de la Taille
+                        byte[] buffer2 = new byte[4];
+                        c.Receive(buffer2);
+                        int Length = BitConverter.ToInt32(buffer2, 0);
+
+                        Send(buffer2);
+
+                        // Données
+                        byte[] buffer3 = new byte[Length];
+                        c.Receive(buffer3);
+                        Send(buffer3); // Envoie les infos reçus aux clients
+                    }
                     else // Si on a recu un header incorrect, on attend de recevoir un header correct
                     {
                         byte[] debug = new byte[4];

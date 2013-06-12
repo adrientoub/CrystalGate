@@ -7,6 +7,8 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Input;
 using CrystalGate.SceneEngine2;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace CrystalGate
 {
@@ -122,7 +124,19 @@ namespace CrystalGate
             {
                 if (isWriting && message != "")
                 {
-                    //Reseau.Reseau.SendData(SceneEngine2.CoopConnexionScene.textAsWrited + " : " + message, 1);
+                    Message envoi = new Message(EffetSonore.time.Elapsed, Client.ownPlayer.name + " : " + message);
+
+                    // On s'envoit
+                    MemoryStream stream = new MemoryStream();
+                    BinaryFormatter formatter = new BinaryFormatter();
+
+                    formatter.Serialize(stream, envoi);
+                    byte[] buffer = new byte[stream.Length];
+                    stream.Position = 0;
+                    stream.Read(buffer, 0, buffer.Length);
+
+                    // Envoi
+                    Client.Send(buffer, 2);
                     message = "";
                     isWriting = false;
                 }
@@ -146,18 +160,18 @@ namespace CrystalGate
             }
 
             messageRecu = "";
-            /*for (int i = 0; i < Reseau.Reseau.discution.Count; i++)
+            for (int i = 0; i < Client.discution.Count; i++)
 			{
-                if (Reseau.Reseau.discution[i].dateEnvoi + new TimeSpan(0, 0, 10) < EffetSonore.time.Elapsed)
+                if (Client.discution[i].dateEnvoi + new TimeSpan(0, 0, 10) < EffetSonore.time.Elapsed)
                 {
-                    Reseau.Reseau.discution.RemoveAt(i);
+                    Client.discution.RemoveAt(i);
                     i--;
                 }
                 else
                 {
-                    messageRecu += "\n" + Reseau.Reseau.discution[i].message;
+                    messageRecu += "\n" + Client.discution[i].message;
                 }
-			}*/
+			}
             positionChat = new Vector2(widthFondNoir, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height - heightFondNoir - gamefont.MeasureString(messageRecu).Y - 50);
 
             if (Win)

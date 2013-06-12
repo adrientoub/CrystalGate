@@ -138,6 +138,7 @@
     <Compile Include="PackMap.cs" />
     <Compile Include="PackSon.cs" />
     <Compile Include="Reseau\Client.cs" />
+    <Compile Include="Reseau\Message.cs" />
     <Compile Include="Reseau\Player.cs" />
     <Compile Include="Reseau\Players.cs" />
     <Compile Include="Reseau\Serveur.cs" />
