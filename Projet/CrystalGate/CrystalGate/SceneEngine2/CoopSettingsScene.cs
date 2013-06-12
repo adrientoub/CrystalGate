@@ -24,6 +24,8 @@ namespace CrystalGate.SceneEngine2
 
         public string textAsWrited;
 
+        public static IPAddress ip;
+
         private Vector2 positionTexteIP, positionTexteMode;
 
         public bool isServer, validIpAddress;
@@ -46,6 +48,8 @@ namespace CrystalGate.SceneEngine2
             ipT = new Text("IP");
             modeT = new Text("Mode");
 
+            ip = IPAddress.Parse("127.0.0.1");
+
             UpdatePositions();
 
             positionTexteIP = new Vector2(champIP.Left - spriteFont.MeasureString(ipT.get() + " :").X, champIP.Center.Y - spriteFont.MeasureString(ipT.get() + " :").Y / 2);
@@ -65,8 +69,7 @@ namespace CrystalGate.SceneEngine2
         public override void Update(GameTime gameTime)
         {
             mouseRec = new Rectangle(mouse.X, mouse.Y, 5, 5);
-            IPAddress temp;
-            validIpAddress = isServer || IPAddress.TryParse(textAsWrited, out temp);
+            validIpAddress = isServer || IPAddress.TryParse(textAsWrited, out ip);
 
             if (mouse.LeftButton == ButtonState.Pressed && oldMouse.LeftButton == ButtonState.Released)
             {
@@ -75,7 +78,7 @@ namespace CrystalGate.SceneEngine2
                     if (isServer)
                         Serveur.Host();
                     else
-                        Client.Connect(textAsWrited);
+                        Client.Connect();
 
                     SceneHandler.gameState = GameState.CoopConnexion;
                 }

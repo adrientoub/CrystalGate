@@ -16,6 +16,7 @@ namespace CrystalGate
         static int NbMaxClients = 2;
 
         public static List<Socket> clients = new List<Socket> { };
+        public static List<Players> joueurs = new List<Players>();
 
         public static void Host()
         {
@@ -27,7 +28,8 @@ namespace CrystalGate
             InWaintingClient.Start();
 
             // On créer un client qui est soi même et on le connecte à ce serveur
-            Client.Connect("127.0.0.1");
+            SceneEngine2.CoopSettingsScene.ip = IPAddress.Parse("127.0.0.1");
+            Client.Connect();
         }
 
         public static void WaitingClient()
@@ -72,6 +74,7 @@ namespace CrystalGate
                 byte[] buffer = new byte[4];
                 c.Receive(buffer);
                 int header = BitConverter.ToInt32(buffer, 0);
+                Send(buffer);
 
                 if (header == 0) // Si on recoit un personnage
                 {
@@ -89,9 +92,19 @@ namespace CrystalGate
                     c.Receive(buffer3);
                     Send(buffer3); // Envoie les infos reçus aux clients
                 }
-                else if (true) // Les autres cas
+                else if (header == 1) // Si on reçoit une personne 
                 {
+                    // Reception de la Taille
+                    byte[] buffer2 = new byte[4];
+                    c.Receive(buffer2);
+                    int Length = BitConverter.ToInt32(buffer2, 0);
 
+                    Send(buffer2);
+
+                    // Données
+                    byte[] buffer3 = new byte[Length];
+                    c.Receive(buffer3);
+                    Send(buffer3); // Envoie les infos reçus aux clients
                 }
             }
         }

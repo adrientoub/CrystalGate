@@ -18,27 +18,36 @@ namespace CrystalGate
         public static bool isConnected { get { return client != null && client.Connected; } }
         public static bool Started;
 
-        public static void Connect(string ip)
+        public static void Connect()
         {
-            // On creer le socket et on se connecte
-            client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            client.Connect(new IPEndPoint(IPAddress.Parse(ip), 5035));
-            
-            // On attend notre identifiant sur le reseau
-            byte[] buffer = new byte[1];
-            client.Receive(buffer);
-            id = buffer[0];
+            try
+            {
+                // On creer le socket et on se connecte
+                client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+                client.Connect(new IPEndPoint(CoopSettingsScene.ip, 5035));
 
-            //On lance la thread de reception
+                // On attend notre identifiant sur le reseau
+                byte[] buffer = new byte[1];
+                client.Receive(buffer);
+                id = buffer[0];
 
-            Thread Reception = new Thread(Receive);
-            Reception.Start();
+                //On lance la thread de reception
+
+                Thread Reception = new Thread(Receive);
+                Reception.Start();
+            }
+            catch
+            {
+                // Si on arrive pas à se connecter on réessaie mais de manière asynchrone
+                Thread t = new Thread(Connect);
+                t.Start();
+            }
         }
 
         public static void Send(byte[] buffer, int type)
         {
-            if (type == 0) //envoyer un perso
-                client.Send(new byte[] { 0 });
+            // On envoie le type
+            client.Send(new byte[] { (byte)type });
 
             // Envoi puis de la taille, puis de l'objet
             client.Send(BitConverter.GetBytes(buffer.Length));
@@ -54,48 +63,53 @@ namespace CrystalGate
                 Started = true;
                 while (true)
                 {
-                        ASCIIEncoding ascii = new ASCIIEncoding();
-                        BinaryFormatter formatter = new BinaryFormatter();
+                    ASCIIEncoding ascii = new ASCIIEncoding();
+                    BinaryFormatter formatter = new BinaryFormatter();
 
-                        // Reception
-                        byte[] buffer1 = new byte[4];
-                        client.Receive(buffer1);
-                        int IdDuJoueur = BitConverter.ToInt32(buffer1, 0);
+                    // Réception du type
+                    buffer = new byte[4];
+                    client.Receive(buffer);
+                    int type = BitConverter.ToInt32(buffer, 0);
+                    
+                    // Réception de l'ID du client
+                    byte[] buffer1 = new byte[4];
+                    client.Receive(buffer1);
+                    int IdDuJoueur = BitConverter.ToInt32(buffer1, 0);
 
-                        // Taille
-                        byte[] buffer2 = new byte[4];
-                        client.Receive(buffer2);
-                        int messageLength = BitConverter.ToInt32(buffer2, 0);
+                    // Taille
+                    byte[] buffer2 = new byte[4];
+                    client.Receive(buffer2);
+                    int messageLength = BitConverter.ToInt32(buffer2, 0);
 
-                        //Données
-                        byte[] buffer3 = new byte[messageLength];
-                        client.Receive(buffer3);
+                    //Données
+                    byte[] buffer3 = new byte[messageLength];
+                    client.Receive(buffer3);
 
-                        // Traitement
-                        MemoryStream stream = new MemoryStream(buffer3);
-                        stream.Position = 0;
+                    // Traitement
+                    MemoryStream stream = new MemoryStream(buffer3);
+                    stream.Position = 0;
 
-                        Player player = (Player)formatter.Deserialize(stream);
-                        if (Outil.GetJoueur(IdDuJoueur) != null)
+                    Player player = (Player)formatter.Deserialize(stream);
+                    if (Outil.GetJoueur(IdDuJoueur) != null)
+                    {
+                        Joueur joueur = Outil.GetJoueur(IdDuJoueur);
+                        // Pathfinding
+                        if (player.objectifPoint != null)
                         {
-                            Joueur joueur = Outil.GetJoueur(IdDuJoueur);
-                            // Pathfinding
-                            if (player.objectifPoint != null)
-                            {
-                                List<Noeud> path = PathFinding.TrouverChemin(joueur.champion.PositionTile, player.objectifPoint.Position, Map.Taille, Map.unites, Map.unitesStatic, true);
-                                if (path != null)
-                                    joueur.champion.ObjectifListe = path;
-                            }
-                            //Stats
-                            if (player.idUniteAttacked != 0)
-                            {
-                                foreach (Unite u in Map.unites)
-                                    if (u.id == player.idUniteAttacked)
-                                        joueur.champion.uniteAttacked = u;
-                            }
-                            else
-                                joueur.champion.uniteAttacked = null;
+                            List<Noeud> path = PathFinding.TrouverChemin(joueur.champion.PositionTile, player.objectifPoint.Position, Map.Taille, Map.unites, Map.unitesStatic, true);
+                            if (path != null)
+                                joueur.champion.ObjectifListe = path;
                         }
+                        //Stats
+                        if (player.idUniteAttacked != 0)
+                        {
+                            foreach (Unite u in Map.unites)
+                                if (u.id == player.idUniteAttacked)
+                                    joueur.champion.uniteAttacked = u;
+                        }
+                        else
+                            joueur.champion.uniteAttacked = null;
+                    }
                 }
             }
         }

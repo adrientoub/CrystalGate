@@ -23,6 +23,13 @@ namespace CrystalGate.SceneEngine2
         private Text lancerJeuT, retourJeuT, pseudoT;
 
         private Vector2 positionTextePseudo;
+        private Texture2D fondLobby;
+        private Rectangle positionJ1, positionJ2, positionJ3, positionJ4;
+
+        private string currentMessage;
+        private string[] pseudoJoueurs;
+        private int nbFrames;
+        private string suspension;
 
         public static string textAsWrited;
 
@@ -45,6 +52,15 @@ namespace CrystalGate.SceneEngine2
             retourJeuT = new Text("BackToMenu");
             pseudoT = new Text("Pseudo");
 
+            fondLobby = content.Load<Texture2D>("Menu/Lobby");
+
+            nbFrames = 0;
+
+            currentMessage = isServer ? "Attente de clients" : "Tentative de connexion au serveur";
+            pseudoJoueurs = new string[] {
+                "","","",""
+            };
+
             UpdatePositions();
 
             positionTextePseudo = new Vector2(champPseudo.Left - spriteFont.MeasureString(pseudoT.get() + " :").X, champPseudo.Center.Y - spriteFont.MeasureString(pseudoT.get() + " :").Y / 2);
@@ -54,15 +70,47 @@ namespace CrystalGate.SceneEngine2
         {
             fullscene = new Rectangle(0, 0, CrystalGateGame.graphics.GraphicsDevice.Viewport.Width, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height);
 
-            champPseudo = new Rectangle((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width - boutons.Width) / 2, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height / 2 - 100, boutons.Width, boutons.Height);
-            boutonLancerLeJeu = new Rectangle((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width - boutons.Width) / 2, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height / 2, boutons.Width, boutons.Height);
-            boutonRetour = new Rectangle((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width - boutons.Width) / 2, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height / 2 + 100, boutons.Width, boutons.Height);
+            champPseudo = new Rectangle((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width) / 2 - boutons.Width, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height / 2 - 100, boutons.Width, boutons.Height);
+            boutonLancerLeJeu = new Rectangle((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width) / 2 - boutons.Width, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height / 2, boutons.Width, boutons.Height);
+            boutonRetour = new Rectangle((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width) / 2 - boutons.Width, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height / 2 + 100, boutons.Width, boutons.Height);
+
+            positionJ1 = new Rectangle((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width - fondLobby.Width) / 2 + fondLobby.Width, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height / 2 - 150, fondLobby.Width, fondLobby.Height);
+            positionJ2 = new Rectangle((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width - fondLobby.Width) / 2 + fondLobby.Width, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height / 2 - 50, fondLobby.Width, fondLobby.Height);
+            positionJ3 = new Rectangle((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width - fondLobby.Width) / 2 + fondLobby.Width, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height / 2 + 50, fondLobby.Width, fondLobby.Height);
+            positionJ4 = new Rectangle((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width - fondLobby.Width) / 2 + fondLobby.Width, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height / 2 + 150, fondLobby.Width, fondLobby.Height);
         }
 
         public override void Update(GameTime gameTime)
         {
             isServer = SceneHandler.coopSettingsScene.isServer;
             lancerJeuActive = Serveur.clients.Count >= 2 || Client.isConnected && !isServer;
+
+            nbFrames++;
+            if (nbFrames == 1)
+            {
+                suspension = ".";
+            }
+            else if (nbFrames == 60)
+            {
+                suspension = "..";
+            }
+            else if (nbFrames == 120)
+            {
+                suspension = "...";
+            }
+            else if (nbFrames == 180)
+            { 
+                nbFrames = 0;
+            }
+
+            if (Client.isConnected)
+            {
+                currentMessage = "Attente du lancement du jeu";
+            }
+            else
+            {
+                pseudoJoueurs[0] = textAsWrited;
+            }
 
             mouseRec = new Rectangle(mouse.X, mouse.Y, 1, 1);
             if (mouse.LeftButton == ButtonState.Pressed && oldMouse.LeftButton == ButtonState.Released)
@@ -114,11 +162,9 @@ namespace CrystalGate.SceneEngine2
             spriteBatch.DrawString(
                 spriteFont,
                 textAsWrited,
-                new Vector2((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width) / 2 - spriteFont.MeasureString(textAsWrited).X / 2,
+                new Vector2(champPseudo.Center.X - spriteFont.MeasureString(textAsWrited).X / 2,
                     champPseudo.Top + 10),
                 Color.White);
-
-            spriteBatch.DrawString(spriteFont, "Nombre de joueurs connectés à cette partie : " + Serveur.clients.Count.ToString(), new Vector2(50, 100), Color.White);
             
             Color c;
             if (lancerJeuActive)
@@ -129,18 +175,42 @@ namespace CrystalGate.SceneEngine2
             spriteBatch.DrawString(
                 spriteFont,
                 lancerJeuT.get(),
-                new Vector2((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width) / 2 - spriteFont.MeasureString(lancerJeuT.get()).X / 2,
+                new Vector2(boutonLancerLeJeu.Center.X - spriteFont.MeasureString(lancerJeuT.get()).X / 2,
                     boutonLancerLeJeu.Top + 10),
                 c);
 
             spriteBatch.DrawString(
                 spriteFont,
                 retourJeuT.get(),
-                new Vector2((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width) / 2 - spriteFont.MeasureString(retourJeuT.get()).X / 2,
+                new Vector2(boutonRetour.Center.X - spriteFont.MeasureString(retourJeuT.get()).X / 2,
                     boutonRetour.Top + 10),
                 Color.White);
 
             spriteBatch.DrawString(spriteFont, pseudoT.get() + " :", positionTextePseudo, Color.Gold);
+
+            // Affichage du lobby :
+            spriteBatch.DrawString(spriteFont, currentMessage + suspension, new Vector2(positionJ1.Center.X - spriteFont.MeasureString(currentMessage).X / 2, positionJ1.Top - 80), Color.White);
+            if (mouseRec.Intersects(positionJ1))
+                spriteBatch.Draw(fondLobby, positionJ1, Color.Gray);
+            else
+                spriteBatch.Draw(fondLobby, positionJ1, Color.White);
+            if (mouseRec.Intersects(positionJ2))
+                spriteBatch.Draw(fondLobby, positionJ2, Color.Gray);
+            else
+                spriteBatch.Draw(fondLobby, positionJ2, Color.White);
+            if (mouseRec.Intersects(positionJ3))
+                spriteBatch.Draw(fondLobby, positionJ3, Color.Gray);
+            else
+                spriteBatch.Draw(fondLobby, positionJ3, Color.White);
+            if (mouseRec.Intersects(positionJ4))
+                spriteBatch.Draw(fondLobby, positionJ4, Color.Gray);
+            else
+                spriteBatch.Draw(fondLobby, positionJ4, Color.White);
+            spriteBatch.DrawString(spriteFont, pseudoJoueurs[0], new Vector2(positionJ1.Center.X - spriteFont.MeasureString(pseudoJoueurs[0]).X / 2, positionJ1.Top + 10), Color.White);
+            spriteBatch.DrawString(spriteFont, pseudoJoueurs[1], new Vector2(positionJ2.Center.X - spriteFont.MeasureString(pseudoJoueurs[1]).X / 2, positionJ2.Top + 10), Color.White);
+            spriteBatch.DrawString(spriteFont, pseudoJoueurs[2], new Vector2(positionJ3.Center.X - spriteFont.MeasureString(pseudoJoueurs[2]).X / 2, positionJ3.Top + 10), Color.White);
+            spriteBatch.DrawString(spriteFont, pseudoJoueurs[3], new Vector2(positionJ4.Center.X - spriteFont.MeasureString(pseudoJoueurs[3]).X / 2, positionJ4.Top + 10), Color.White);
+            // Fin d'affichage du lobby
 
             spriteBatch.Draw(curseur, new Vector2(mouse.X, mouse.Y), Color.White);
 
