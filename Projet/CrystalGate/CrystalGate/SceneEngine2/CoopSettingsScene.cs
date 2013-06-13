@@ -20,7 +20,7 @@ namespace CrystalGate.SceneEngine2
         private Rectangle fullscene;
         private Rectangle boutonServeurOuClient, champIP, boutonConnexion, boutonRetour;
 
-        private Text serveurT, clientT, lancerJeuT, retourJeuT, ipT, modeT;
+        private Text serveurT, clientT, lancerJeuT, retourJeuT, ipT, modeT, hostT;
 
         public string textAsWrited;
 
@@ -47,6 +47,7 @@ namespace CrystalGate.SceneEngine2
             clientT = new Text("Client");
             ipT = new Text("IP");
             modeT = new Text("Mode");
+            hostT = new Text("Host");
 
             ip = IPAddress.Parse("127.0.0.1");
 
@@ -146,8 +147,8 @@ namespace CrystalGate.SceneEngine2
 
             spriteBatch.DrawString(
                 spriteFont,
-                (isServer) ? "Heberger" : lancerJeuT.get(),
-                new Vector2((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width) / 2 - spriteFont.MeasureString((isServer) ? "Heberger" : lancerJeuT.get()).X / 2,
+                (isServer) ? hostT.get() : lancerJeuT.get(),
+                new Vector2((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width) / 2 - spriteFont.MeasureString((isServer) ? hostT.get() : lancerJeuT.get()).X / 2,
                     boutonConnexion.Top + 10),
                 c);
 

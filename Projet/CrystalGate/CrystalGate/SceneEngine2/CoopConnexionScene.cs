@@ -23,6 +23,7 @@ namespace CrystalGate.SceneEngine2
         private Rectangle champPseudo, boutonLancerLeJeu, boutonRetour;
 
         private Text lancerJeuT, retourJeuT, pseudoT;
+        private Text waitClientT, waitLaunchT, tryToConnectServT;
 
         private Vector2 positionTextePseudo;
         private Texture2D fondLobby;
@@ -53,12 +54,15 @@ namespace CrystalGate.SceneEngine2
             lancerJeuT = new Text("SelectChampion");
             retourJeuT = new Text("BackToMenu");
             pseudoT = new Text("Pseudo");
+            waitClientT = new Text("WaitClient");
+            waitLaunchT = new Text("WaitLaunch");
+            tryToConnectServT = new Text("TryToConnectServ");
 
             fondLobby = content.Load<Texture2D>("Menu/Lobby");
 
             nbFrames = 0;
 
-            currentMessage = isServer ? "Attente de clients" : "Tentative de connexion au serveur";
+            currentMessage = isServer ? waitClientT.get() : tryToConnectServT.get();
             pseudoJoueurs = new string[] {
                 "","","",""
             };
@@ -107,7 +111,7 @@ namespace CrystalGate.SceneEngine2
 
             if (Client.isConnected)
             {
-                currentMessage = "Attente du lancement du jeu";
+                currentMessage = waitLaunchT.get();
                 Client.ownPlayer.name = textAsWrited;
                 if (nbFrames % 15 == 0)
                 {
@@ -140,12 +144,6 @@ namespace CrystalGate.SceneEngine2
             {
                 if (lancerJeuActive && mouseRec.Intersects(boutonLancerLeJeu))
                 {
-                    /*
-                    SceneHandler.ResetGameplay();
-                    SceneHandler.gameState = GameState.Gameplay;
-                    FondSonore.Play();
-                    GamePlay.timer.Restart();
-                     */
                     isOnlinePlay = true;
                     SceneHandler.gameState = GameState.ChampionSelection;
                 }

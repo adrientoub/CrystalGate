@@ -24,11 +24,13 @@ namespace CrystalGate.SceneEngine2
         private List<Texture2D> imagesPortraits;
         private List<Color> couleurAffichagePortrait;
         private int personnageSelectionne;
-        
+        private int nbFrames;
+
         private Text lancerJeuT, retourJeuT;
 
         private Texture2D fondLobby;
-        private Rectangle positionJ1, positionJ2, positionJ3, positionJ4;
+        private Rectangle[] positionJoueur;
+        private Rectangle[] positionsImages;
 
         private Rectangle boutonLancerLeJeu, boutonRetour;
 
@@ -58,6 +60,9 @@ namespace CrystalGate.SceneEngine2
                 imagesPortraits[i].Bounds.Width, imagesPortraits[i].Bounds.Height));
                 couleurAffichagePortrait.Add(Color.White);
             }
+            positionsImages = new Rectangle[4];
+            positionJoueur = new Rectangle[4];
+            nbFrames = 0;
 
             UpdatePositions();
         }
@@ -66,10 +71,15 @@ namespace CrystalGate.SceneEngine2
         {
             fullscene = new Rectangle(0, 0, CrystalGateGame.graphics.PreferredBackBufferWidth, CrystalGateGame.graphics.PreferredBackBufferHeight);
 
-            positionJ1 = new Rectangle((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width - fondLobby.Width) / 2 + fondLobby.Width, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height / 2 - 150, fondLobby.Width, fondLobby.Height);
-            positionJ2 = new Rectangle((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width - fondLobby.Width) / 2 + fondLobby.Width, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height / 2 - 50, fondLobby.Width, fondLobby.Height);
-            positionJ3 = new Rectangle((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width - fondLobby.Width) / 2 + fondLobby.Width, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height / 2 + 50, fondLobby.Width, fondLobby.Height);
-            positionJ4 = new Rectangle((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width - fondLobby.Width) / 2 + fondLobby.Width, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height / 2 + 150, fondLobby.Width, fondLobby.Height);
+            positionJoueur[0] = new Rectangle((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width - fondLobby.Width) / 2 + fondLobby.Width, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height / 2 - 150, fondLobby.Width, fondLobby.Height);
+            positionJoueur[1] = new Rectangle((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width - fondLobby.Width) / 2 + fondLobby.Width, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height / 2 - 50, fondLobby.Width, fondLobby.Height);
+            positionJoueur[2] = new Rectangle((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width - fondLobby.Width) / 2 + fondLobby.Width, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height / 2 + 50, fondLobby.Width, fondLobby.Height);
+            positionJoueur[3] = new Rectangle((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width - fondLobby.Width) / 2 + fondLobby.Width, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height / 2 + 150, fondLobby.Width, fondLobby.Height);
+
+            for (int i = 0; i < positionsImages.Length; i++)
+            {
+                positionsImages[i] = new Rectangle(positionJoueur[i].X + 10, positionJoueur[i].Y + 10, 60, 60);
+            }
 
             boutonLancerLeJeu = new Rectangle((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width) / 2 - boutons.Width, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height / 2, boutons.Width, boutons.Height);
             boutonRetour = new Rectangle((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width) / 2 - boutons.Width, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height / 2 + 100, boutons.Width, boutons.Height);
@@ -78,6 +88,7 @@ namespace CrystalGate.SceneEngine2
         public override void Update(GameTime gameTime)
         {
             mouseRec = new Rectangle(mouse.X, mouse.Y, 5, 5);
+            nbFrames++;
             for (int i = 0; i < portraits.Count; i++)
             {
                 if (personnageSelectionne == i)
@@ -95,6 +106,25 @@ namespace CrystalGate.SceneEngine2
                 else
                 {
                     couleurAffichagePortrait[i] = Color.White;
+                }
+            }
+
+            if (Client.isConnected)
+            {
+                Client.ownPlayer.championChoisi = personnageSelectionne;
+                if (nbFrames % 15 == 0)
+                {
+                    // On s'envoit
+                    MemoryStream stream = new MemoryStream();
+                    BinaryFormatter formatter = new BinaryFormatter();
+
+                    formatter.Serialize(stream, Client.ownPlayer);
+                    byte[] buffer = new byte[stream.Length];
+                    stream.Position = 0;
+                    stream.Read(buffer, 0, buffer.Length);
+
+                    // Envoi
+                    Client.Send(buffer, 1);
                 }
             }
 
@@ -147,26 +177,22 @@ namespace CrystalGate.SceneEngine2
                     boutonRetour.Top + 10),
                 Color.White);
 
-            if (mouseRec.Intersects(positionJ1))
-                spriteBatch.Draw(fondLobby, positionJ1, Color.Gray);
-            else
-                spriteBatch.Draw(fondLobby, positionJ1, Color.White);
-            if (mouseRec.Intersects(positionJ2))
-                spriteBatch.Draw(fondLobby, positionJ2, Color.Gray);
-            else
-                spriteBatch.Draw(fondLobby, positionJ2, Color.White);
-            if (mouseRec.Intersects(positionJ3))
-                spriteBatch.Draw(fondLobby, positionJ3, Color.Gray);
-            else
-                spriteBatch.Draw(fondLobby, positionJ3, Color.White);
-            if (mouseRec.Intersects(positionJ4))
-                spriteBatch.Draw(fondLobby, positionJ4, Color.Gray);
-            else
-                spriteBatch.Draw(fondLobby, positionJ4, Color.White);
-            spriteBatch.DrawString(spriteFont, SceneHandler.coopConnexionScene.pseudoJoueurs[0], new Vector2(positionJ1.Center.X - spriteFont.MeasureString(SceneHandler.coopConnexionScene.pseudoJoueurs[0]).X / 2, positionJ1.Top + 10), Color.White);
-            spriteBatch.DrawString(spriteFont, SceneHandler.coopConnexionScene.pseudoJoueurs[1], new Vector2(positionJ2.Center.X - spriteFont.MeasureString(SceneHandler.coopConnexionScene.pseudoJoueurs[1]).X / 2, positionJ2.Top + 10), Color.White);
-            spriteBatch.DrawString(spriteFont, SceneHandler.coopConnexionScene.pseudoJoueurs[2], new Vector2(positionJ3.Center.X - spriteFont.MeasureString(SceneHandler.coopConnexionScene.pseudoJoueurs[2]).X / 2, positionJ3.Top + 10), Color.White);
-            spriteBatch.DrawString(spriteFont, SceneHandler.coopConnexionScene.pseudoJoueurs[3], new Vector2(positionJ4.Center.X - spriteFont.MeasureString(SceneHandler.coopConnexionScene.pseudoJoueurs[3]).X / 2, positionJ4.Top + 10), Color.White);
+            for (int i = 0; i < positionJoueur.Length; i++)
+            {
+                if (mouseRec.Intersects(positionJoueur[i]))
+                    spriteBatch.Draw(fondLobby, positionJoueur[i], Color.Gray);
+                else
+                    spriteBatch.Draw(fondLobby, positionJoueur[i], Color.White);
+            }
+
+            for (int i = 0; i < Client.joueursConnectes.Count; i++)
+            {
+                if (Client.joueursConnectes[i].championChoisi != -1)
+                {
+                    spriteBatch.Draw(imagesPortraits[Client.joueursConnectes[i].championChoisi], positionsImages[i], Color.White);
+                }
+                spriteBatch.DrawString(spriteFont, SceneHandler.coopConnexionScene.pseudoJoueurs[i], new Vector2(positionJoueur[i].Center.X - spriteFont.MeasureString(SceneHandler.coopConnexionScene.pseudoJoueurs[i]).X / 2, positionJoueur[i].Top + 10), Color.White);
+            }
 
             spriteBatch.Draw(curseur, new Vector2(mouse.X, mouse.Y), Color.White);
 
