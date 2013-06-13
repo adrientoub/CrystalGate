@@ -61,10 +61,7 @@ namespace CrystalGate.SceneEngine2
             {
                 if (mouseRec.Intersects(boutonPlay))
                 {
-                    SceneHandler.ResetGameplay();
-                    SceneHandler.gameState = GameState.Gameplay;
-                    FondSonore.Play();
-                    GamePlay.timer.Restart();
+                    SceneHandler.gameState = GameState.ChampionSelection;
                 }
                 else if (mouseRec.Intersects(boutonOptions))
                 {

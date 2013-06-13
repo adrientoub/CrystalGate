@@ -25,6 +25,7 @@ namespace CrystalGate.SceneEngine2
         private List<Color> couleurAffichagePortrait;
         private int personnageSelectionne;
         private int nbFrames;
+        bool lancerLeJeuActive;
 
         private Text lancerJeuT, retourJeuT;
 
@@ -37,6 +38,7 @@ namespace CrystalGate.SceneEngine2
         public override void Initialize()
         {
             personnageSelectionne = -1;
+            lancerLeJeuActive = false;
         }
 
         public override void LoadContent()
@@ -71,23 +73,32 @@ namespace CrystalGate.SceneEngine2
         {
             fullscene = new Rectangle(0, 0, CrystalGateGame.graphics.PreferredBackBufferWidth, CrystalGateGame.graphics.PreferredBackBufferHeight);
 
-            positionJoueur[0] = new Rectangle((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width - fondLobby.Width) / 2 + fondLobby.Width, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height / 2 - 150, fondLobby.Width, fondLobby.Height);
-            positionJoueur[1] = new Rectangle((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width - fondLobby.Width) / 2 + fondLobby.Width, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height / 2 - 50, fondLobby.Width, fondLobby.Height);
-            positionJoueur[2] = new Rectangle((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width - fondLobby.Width) / 2 + fondLobby.Width, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height / 2 + 50, fondLobby.Width, fondLobby.Height);
-            positionJoueur[3] = new Rectangle((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width - fondLobby.Width) / 2 + fondLobby.Width, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height / 2 + 150, fondLobby.Width, fondLobby.Height);
+            if (CoopConnexionScene.isOnlinePlay)
+            {
+                positionJoueur[0] = new Rectangle((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width - fondLobby.Width) / 2 + fondLobby.Width, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height / 2 - 150, fondLobby.Width, fondLobby.Height);
+                positionJoueur[1] = new Rectangle((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width - fondLobby.Width) / 2 + fondLobby.Width, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height / 2 - 50, fondLobby.Width, fondLobby.Height);
+                positionJoueur[2] = new Rectangle((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width - fondLobby.Width) / 2 + fondLobby.Width, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height / 2 + 50, fondLobby.Width, fondLobby.Height);
+                positionJoueur[3] = new Rectangle((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width - fondLobby.Width) / 2 + fondLobby.Width, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height / 2 + 150, fondLobby.Width, fondLobby.Height);
+
+                boutonLancerLeJeu = new Rectangle((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width) / 2 - boutons.Width, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height / 2, boutons.Width, boutons.Height);
+                boutonRetour = new Rectangle((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width) / 2 - boutons.Width, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height / 2 + 100, boutons.Width, boutons.Height);
+            }
+            else
+            {
+                boutonLancerLeJeu = new Rectangle((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width - boutons.Width) / 2, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height / 2, boutons.Width, boutons.Height);
+                boutonRetour = new Rectangle((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width - boutons.Width) / 2, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height / 2 + 100, boutons.Width, boutons.Height);
+            }
 
             for (int i = 0; i < positionsImages.Length; i++)
             {
                 positionsImages[i] = new Rectangle(positionJoueur[i].X + 10, positionJoueur[i].Y + 10, 60, 60);
             }
-
-            boutonLancerLeJeu = new Rectangle((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width) / 2 - boutons.Width, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height / 2, boutons.Width, boutons.Height);
-            boutonRetour = new Rectangle((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width) / 2 - boutons.Width, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height / 2 + 100, boutons.Width, boutons.Height);
         }
 
         public override void Update(GameTime gameTime)
         {
             mouseRec = new Rectangle(mouse.X, mouse.Y, 5, 5);
+            UpdatePositions();
             nbFrames++;
             for (int i = 0; i < portraits.Count; i++)
             {
@@ -109,28 +120,51 @@ namespace CrystalGate.SceneEngine2
                 }
             }
 
-            if (Client.isConnected)
+            if (CoopConnexionScene.isOnlinePlay)
             {
-                Client.ownPlayer.championChoisi = personnageSelectionne;
-                if (nbFrames % 15 == 0)
+                if (Client.isConnected)
                 {
-                    // On s'envoit
-                    MemoryStream stream = new MemoryStream();
-                    BinaryFormatter formatter = new BinaryFormatter();
+                    Client.ownPlayer.championChoisi = personnageSelectionne;
+                    if (nbFrames % 15 == 0)
+                    {
+                        // On s'envoit
+                        MemoryStream stream = new MemoryStream();
+                        BinaryFormatter formatter = new BinaryFormatter();
 
-                    formatter.Serialize(stream, Client.ownPlayer);
-                    byte[] buffer = new byte[stream.Length];
-                    stream.Position = 0;
-                    stream.Read(buffer, 0, buffer.Length);
+                        formatter.Serialize(stream, Client.ownPlayer);
+                        byte[] buffer = new byte[stream.Length];
+                        stream.Position = 0;
+                        stream.Read(buffer, 0, buffer.Length);
 
-                    // Envoi
-                    Client.Send(buffer, 1);
+                        // Envoi
+                        Client.Send(buffer, 1);
+                    }
+                }
+
+                if (Serveur.IsRunning) // Si on est le serveur
+                {
+                    bool everybodyHaveChose = true;
+                    for (int i = 0; i < Client.joueursConnectes.Count; i++)
+                    {
+                        everybodyHaveChose &= (Client.joueursConnectes[i].championChoisi != 1);
+                    }
+                    if (everybodyHaveChose)
+                        lancerLeJeuActive = true;
+                }
+                else // Le client ne peut pas lancer le jeu
+                {
+                    lancerLeJeuActive = false;
                 }
             }
+            else // Si on joue en local il faut avoir sélectionné un perso avant de lancer le jeu
+                if (personnageSelectionne == -1)
+                    lancerLeJeuActive = false;
+                else
+                    lancerLeJeuActive = true;
 
             if (mouse.LeftButton == ButtonState.Pressed && oldMouse.LeftButton == ButtonState.Released)
             {
-                if (mouseRec.Intersects(boutonLancerLeJeu))
+                if (mouseRec.Intersects(boutonLancerLeJeu) && personnageSelectionne != -1)
                 {
                     SceneHandler.ResetGameplay();
                     SceneHandler.gameState = GameState.Gameplay;
@@ -138,7 +172,10 @@ namespace CrystalGate.SceneEngine2
                     GamePlay.timer.Restart();
                 }
                 else if (mouseRec.Intersects(boutonRetour))
-                    SceneHandler.gameState = GameState.CoopConnexion;
+                    if (CoopConnexionScene.isOnlinePlay)
+                        SceneHandler.gameState = GameState.CoopConnexion;
+                    else
+                        SceneHandler.gameState = GameState.MainMenu;
             }
         }
 
@@ -153,7 +190,7 @@ namespace CrystalGate.SceneEngine2
                 spriteBatch.Draw(imagesPortraits[i], portraits[i], couleurAffichagePortrait[i]);
             }
 
-            if (mouseRec.Intersects(boutonLancerLeJeu))
+            if (mouseRec.Intersects(boutonLancerLeJeu) || !lancerLeJeuActive)
                 spriteBatch.Draw(boutons, boutonLancerLeJeu, Color.Gray);
             else
                 spriteBatch.Draw(boutons, boutonLancerLeJeu, Color.White);
