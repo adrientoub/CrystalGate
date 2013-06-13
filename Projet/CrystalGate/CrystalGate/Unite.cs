@@ -134,6 +134,7 @@ namespace CrystalGate
             Animer(); 
             Deplacer();
             TestMort(effets);
+            Debug();
             // Update l'IA
             if(!isAChamp)
                 IA(unitsOnMap);
@@ -163,6 +164,14 @@ namespace CrystalGate
 
             // Reseau
             UpdateReseau();
+        }
+
+        void Debug()
+        {
+            if (Vie > VieMax)
+                Vie = VieMax;
+            if (Mana < ManaMax)
+                Mana = ManaMax;
         }
 
         void UpdateReseau()

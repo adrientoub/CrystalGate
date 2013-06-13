@@ -32,9 +32,8 @@ namespace CrystalGate
                 unite.Stuff.Add(this);
                 unite.Inventory.Remove(this);
 
-                unite.VieBonus += VieBonus;
                 unite.VieMaxBonus += VieMaxBonus;
-                unite.ManaBonus += ManaBonus;
+
                 unite.ManaMaxBonus += ManaMaxBonus;
                 unite.DommagesBonus += DommagesBonus;
                 unite.PuissanceBonus += PuissanceBonus;
@@ -48,14 +47,12 @@ namespace CrystalGate
 
         public void Desequiper()
         {
-            if (unite.Vie - VieBonus > 0)
-            {
                 unite.Inventory.Add(this);
                 unite.Stuff.Remove(this);
 
-                unite.VieBonus -= VieBonus;
+
                 unite.VieMaxBonus -= VieMaxBonus;
-                unite.ManaBonus -= ManaBonus;
+
                 unite.ManaMaxBonus -= ManaMaxBonus;
                 unite.DommagesBonus -= DommagesBonus;
                 unite.PuissanceBonus -= PuissanceBonus;
@@ -64,7 +61,6 @@ namespace CrystalGate
                 unite.DefenseMagiqueBonus -= ArmureBonus;
                 unite.ManaRegenBonus += ManaRegenBonus;
                 unite.PuissanceBonus -= PuissanceBonus;
-            }
         }
     }
 }
