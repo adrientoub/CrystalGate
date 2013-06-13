@@ -88,7 +88,7 @@ namespace CrystalGate
             gamefont = PackTexture.gamefont;
             spellfont = PackTexture.spellfont;
             tempsDeJeuActuel = "0:00";
-            compteurDeVague = "0/" + Map.nombreDeVagues.ToString();
+            compteurDeVague = Map.nombreDeVaguesPop.ToString() + Map.nombreDeVagues.ToString();
 
             widthFondNoir = 380;
             heightFondNoir = 250;
@@ -116,7 +116,7 @@ namespace CrystalGate
             else
                 tempsDeJeuActuel = SceneEngine2.GamePlay.timer.Elapsed.Minutes.ToString() + ":" + SceneEngine2.GamePlay.timer.Elapsed.Seconds.ToString();
 
-            compteurDeVague = Map.waveNumber.ToString() + "/" + Map.nombreDeVagues.ToString();
+            compteurDeVague = Map.nombreDeVaguesPop.ToString() + "/" + Map.nombreDeVagues.ToString();
 
             if (SceneEngine2.BaseScene.keyboardState.IsKeyDown(Keys.Enter) &&
                 SceneEngine2.BaseScene.oldKeyboardState.IsKeyUp(Keys.Enter) &&

@@ -90,6 +90,7 @@ namespace CrystalGate
                     }
                 }
                 unites.RemoveAt(0);
+                Map.nombreDeVaguesPop++;
             }
         }
     }

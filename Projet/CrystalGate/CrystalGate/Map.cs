@@ -29,7 +29,7 @@ namespace CrystalGate
         public static List<Item> items;
         public static List<Wave> waves;
         public static int waveNumber = 0;
-        public static int nombreDeVagues;
+        public static int nombreDeVaguesPop, nombreDeVagues;
         public static GameTime gametime;
 
 

@@ -17,7 +17,7 @@ namespace CrystalGate
     {
         static List<Unite>[] Unites = new List<Unite>[10];
         static List<Item>[] Items = new List<Item>[10];
-        static List<Wave>[] Waves = new List<Wave>[10];
+        public static List<Wave>[] Waves = new List<Wave>[10];
         static List<Effet>[] Effets = new List<Effet>[10];
         // Represente les tiles
         static Vector2[][,] Cellules = new Vector2[10][,];
@@ -116,7 +116,8 @@ namespace CrystalGate
             Map.typeDeTerrain = typeDeTerrain[i];
             Map.Taille = Taille[i];
             Map.world = Worlds[i];
-
+            // On reset le compteur
+            ResetCompteur();
         }
 
         public static void LoadPlayers()// charge le joueur et le met sur la map
@@ -282,11 +283,18 @@ namespace CrystalGate
                     break;
                 default: throw new Exception("Niveau incorrect");
             }
-            int c = 0;
-            foreach (Wave w in Waves[i])
-                c += w.unites.Count;
-            Map.nombreDeVagues = c;
             return i;
+        }
+
+        static void ResetCompteur()
+        {
+            Map.nombreDeVaguesPop = 0;
+            int nb = 0;
+            foreach (Wave w in PackMap.Waves[PackMap.LevelToInt(SceneHandler.level)])
+                foreach (List<Unite> u in w.unites)
+                    nb++;
+
+            Map.nombreDeVagues = nb;
         }
 
         static void InitializeLevel1()
