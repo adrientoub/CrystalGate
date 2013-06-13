@@ -26,7 +26,8 @@ namespace CrystalGate.SceneEngine2
         Pause,
         Victory,
         Defeat,
-        Credits
+        Credits,
+        ChampionSelection
     }
 
     class SceneHandler
@@ -45,6 +46,7 @@ namespace CrystalGate.SceneEngine2
         public static CoopConnexionScene coopConnexionScene;
         public static SplashScreenScene splashScreenScene;
         public static Credits creditsScene;
+        public static ChampionSelection championSelectionScene;
 
         public static string level = "level1";
 
@@ -62,6 +64,7 @@ namespace CrystalGate.SceneEngine2
             coopConnexionScene = new CoopConnexionScene();
             splashScreenScene = new SplashScreenScene();
             creditsScene = new Credits();
+            championSelectionScene = new ChampionSelection();
         }
 
         public void Initialize()
@@ -76,6 +79,7 @@ namespace CrystalGate.SceneEngine2
             coopConnexionScene.Initialize();
             splashScreenScene.Initialize();
             creditsScene.Initialize();
+            championSelectionScene.Initialize();
         }
 
         public static void UpdatePositions()
@@ -88,6 +92,7 @@ namespace CrystalGate.SceneEngine2
             creditsScene.UpdatePositions();
             coopConnexionScene.UpdatePositions();
             coopSettingsScene.UpdatePositions();
+            championSelectionScene.UpdatePositions();
         }
 
         public void Update(GameTime gameTime)
@@ -126,6 +131,9 @@ namespace CrystalGate.SceneEngine2
                 case GameState.Credits:
                     creditsScene.Update(gameTime);
                     break;
+                case GameState.ChampionSelection:
+                    championSelectionScene.Update(gameTime);
+                    break;
             }
             BaseScene.oldMouse = BaseScene.mouse;
             BaseScene.oldKeyboardState = BaseScene.keyboardState;
@@ -144,6 +152,7 @@ namespace CrystalGate.SceneEngine2
             victoryScene.LoadContent();
             defeatScene.LoadContent();
             creditsScene.LoadContent();
+            championSelectionScene.LoadContent();
         }
 
         public void Draw()
@@ -184,6 +193,9 @@ namespace CrystalGate.SceneEngine2
                     break;
                 case GameState.Credits:
                     creditsScene.Draw(spriteBatch);
+                    break;
+                case GameState.ChampionSelection:
+                    championSelectionScene.Draw(spriteBatch);
                     break;
             }
         }

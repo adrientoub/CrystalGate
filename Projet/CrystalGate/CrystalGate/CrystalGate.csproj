@@ -142,6 +142,7 @@
     <Compile Include="Reseau\Player.cs" />
     <Compile Include="Reseau\Players.cs" />
     <Compile Include="Reseau\Serveur.cs" />
+    <Compile Include="SceneEngine2\ChampionSelection.cs" />
     <Compile Include="SceneEngine2\CoopSettingsScene.cs" />
     <Compile Include="SceneEngine2\CoopConnexionScene.cs" />
     <Compile Include="SceneEngine2\Credits.cs" />

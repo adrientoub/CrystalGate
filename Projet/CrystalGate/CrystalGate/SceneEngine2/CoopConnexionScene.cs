@@ -29,7 +29,7 @@ namespace CrystalGate.SceneEngine2
         private Rectangle positionJ1, positionJ2, positionJ3, positionJ4;
 
         private string currentMessage;
-        private string[] pseudoJoueurs;
+        public string[] pseudoJoueurs;
         private int nbFrames;
         private string suspension;
 
@@ -50,7 +50,7 @@ namespace CrystalGate.SceneEngine2
             if (content == null)
                 content = SceneHandler.content;
 
-            lancerJeuT = new Text("LaunchGame");
+            lancerJeuT = new Text("SelectChampion");
             retourJeuT = new Text("BackToMenu");
             pseudoT = new Text("Pseudo");
 
@@ -140,11 +140,14 @@ namespace CrystalGate.SceneEngine2
             {
                 if (lancerJeuActive && mouseRec.Intersects(boutonLancerLeJeu))
                 {
+                    /*
                     SceneHandler.ResetGameplay();
                     SceneHandler.gameState = GameState.Gameplay;
                     FondSonore.Play();
                     GamePlay.timer.Restart();
+                     */
                     isOnlinePlay = true;
+                    SceneHandler.gameState = GameState.ChampionSelection;
                 }
                 else if (mouseRec.Intersects(boutonRetour))
                     SceneHandler.gameState = GameState.CoopSettings;
