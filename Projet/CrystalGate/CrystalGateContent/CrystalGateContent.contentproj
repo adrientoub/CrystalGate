@@ -610,8 +610,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Unites\assassin.png">
-      <Name>assassin</Name>
+    <Compile Include="Unites\voleur.png">
+      <Name>voleur</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

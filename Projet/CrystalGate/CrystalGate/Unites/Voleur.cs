@@ -9,10 +9,10 @@ using CrystalGate.Animations;
 
 namespace CrystalGate
 {
-    public class Assassin : Unite
+    public class Voleur : Unite
     {
 
-        public Assassin(Vector2 Position, int Level = 1)
+        public Voleur(Vector2 Position, int Level = 1)
             : base(Position, Level)
         {
             // Physique

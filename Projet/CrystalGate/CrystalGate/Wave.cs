@@ -72,8 +72,8 @@ namespace CrystalGate
                                 Map.unites.Add(new Ogre(v, unites[0][0].Level));
                             else if (unites[0][0] is Odin)
                                 Map.unites.Add(new Odin(v, unites[0][0].Level));
-                            else if (unites[0][0] is Assassin)
-                                Map.unites.Add(new Assassin(v, unites[0][0].Level));
+                            else if (unites[0][0] is Voleur)
+                                Map.unites.Add(new Voleur(v, unites[0][0].Level));
                             else
                                 throw new Exception("Modif la wave!");
                             // Attaque un joueur au hasard

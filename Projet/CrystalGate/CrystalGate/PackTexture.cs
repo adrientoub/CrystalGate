@@ -100,7 +100,7 @@ namespace CrystalGate
             Troll = content.Load<Texture2D>("Unites/troll");
             Critters = content.Load<Texture2D>("Unites/critters");
             Odin = content.Load<Texture2D>("Unites/Odin");
-            Assassin = content.Load<Texture2D>("Unites/Assassin");
+            Assassin = content.Load<Texture2D>("Unites/voleur");
         }
     }
 }

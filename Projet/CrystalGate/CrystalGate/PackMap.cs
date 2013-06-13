@@ -125,15 +125,20 @@ namespace CrystalGate
             joueurs.Clear();
             if (SceneHandler.gameplayScene.isCoopPlay)
             {
-                joueurs.Add(new Joueur(new Guerrier(new Vector2(0, 9))));
-                joueurs[joueurs.Count - 1].id = joueurs.Count;
-                joueurs.Add(new Joueur(new Assassin(new Vector2(0, 11))));
-                joueurs[joueurs.Count - 1].id = joueurs.Count;
+                for (int i = 0; i < Client.joueursConnectes.Count; i++)
+                {
+                            if (Client.joueursConnectes[i].championChoisi == 0)
+                                joueurs.Add(new Joueur(new Guerrier(new Vector2(0, 9))));
+                            else
+                                joueurs.Add(new Joueur(new Voleur(new Vector2(0, 11))));
+
+                            joueurs[joueurs.Count - 1].id = joueurs.Count;
+                }
             }
 
             else
             {
-                joueurs.Add(new Joueur(new Assassin(new Vector2(0, 9))));
+                joueurs.Add(new Joueur(new Voleur(new Vector2(0, 9))));
                 // On spécifie le joueur local
             }
 

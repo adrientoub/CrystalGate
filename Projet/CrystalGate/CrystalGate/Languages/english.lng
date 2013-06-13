@@ -70,3 +70,4 @@ Host=Host
 WaitClient=Waiting for clients
 TryToConnectServ=Attempt to connect to the server
 WaitLaunch=Waiting for the game to launch
+Voleur=Rogue

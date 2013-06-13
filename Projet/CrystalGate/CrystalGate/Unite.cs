@@ -170,7 +170,7 @@ namespace CrystalGate
         {
             if (Vie > VieMax)
                 Vie = VieMax;
-            if (Mana < ManaMax)
+            if (Mana > ManaMax)
                 Mana = ManaMax;
         }
 

@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework;
 
 namespace CrystalGate.Unites
 {
-    class Syndra : Assassin
+    class Syndra : Voleur
     {
         public Syndra(Vector2 Position)
             : base(Position)
