@@ -38,6 +38,7 @@ namespace CrystalGate
         public override void UpdateSort()
         {
                 unite.isInvisible = true;
+                FinDuDrawAtteint = true;
                 if (TickCurrent == 0)
                 {
                     foreach (Unite u in Map.unites)

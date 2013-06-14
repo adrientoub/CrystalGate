@@ -88,7 +88,7 @@ namespace CrystalGate
                     if (Interface.key.IsKeyDown(Keys.T) && Interface.Oldkey.IsKeyUp(Keys.T))
                     {
                         if (SceneHandler.level == "level1")
-                            SceneHandler.ResetGameplay("level2");
+                            SceneHandler.ResetGameplay("level3");
                         else
                             SceneHandler.ResetGameplay("level1");
                     }

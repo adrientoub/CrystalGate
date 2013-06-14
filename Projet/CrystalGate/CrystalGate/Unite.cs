@@ -322,8 +322,8 @@ namespace CrystalGate
 
         public virtual void Attaquer(Unite unite)
         {
-            float calcule = Outil.DistanceUnites(this, unite) - (25 * (unite.largeurPhysique + this.largeurPhysique) / 2);
-            if (Outil.DistanceUnites(this, unite) - (20 * (unite.largeurPhysique + this.largeurPhysique) / 2) >= Portee * Map.TailleTiles.X)
+            float calcul = Outil.DistanceUnites(this, unite) - (25 * (unite.largeurPhysique + this.largeurPhysique) / 2);
+            if (calcul >= Portee * Map.TailleTiles.X)
                 Suivre(unite);
             else
             {

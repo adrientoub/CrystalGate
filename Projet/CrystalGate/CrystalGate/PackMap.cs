@@ -54,6 +54,7 @@ namespace CrystalGate
             // On initialise la carte avec les tuiles
             OuvrirMap("level1");
             OuvrirMap("level2");
+            OuvrirMap("level3");
 
             // Creation du joueur et du champion
             Map.world = Worlds[0]; // pas très propre mais marche
@@ -152,6 +153,7 @@ namespace CrystalGate
             int id = LevelToInt(MapName); // numero de la carte dans le tableau
             // Read the file and display it line by line.
             string MapString;
+
             if (CrystalGateGame.isTest)
                 MapString = "../../../Maps/" + MapName + ".txt";
             else
@@ -289,6 +291,8 @@ namespace CrystalGate
                     break;
                 case "level2": i = 1;
                     break;
+                case "level3": i = 2;
+                    break;
                 default: throw new Exception("Niveau incorrect");
             }
             return i;
@@ -307,7 +311,7 @@ namespace CrystalGate
 
         static void InitializeLevel1()
         {
-            Waves[0] = PackWave.PackWaveLevel1();
+            // Ajout du PNJ
             Unite Pnj = new Syndra(new Vector2(49, 39));
             Pnj.Dialogue.Clear();
             Pnj.Dialogue.Add(new Text("Dialogue1a"));
@@ -318,6 +322,9 @@ namespace CrystalGate
                 new PotionDeVie(null, new Vector2(22, 24)),
                 new PotionDeVie(null, new Vector2(23, 24)),
                 new EpeeSolari(null, new Vector2(50, 39))}; // bug, j.champion
+            Waves[0] = PackWave.PackWaveLevel1();
+            
+            // Ajout du stuff
             foreach (Joueur j in joueurs)
             {
                 j.champion.Inventory = new List<Item>{
@@ -330,6 +337,7 @@ namespace CrystalGate
 
         static void InitializeLevel2()
         {
+            // Ajout du PNJ
             Unite Pnj = new Syndra(new Vector2(7, 18));
             Text a = new Text("Dialogue2a");
             Text b = new Text("Dialogue2b");

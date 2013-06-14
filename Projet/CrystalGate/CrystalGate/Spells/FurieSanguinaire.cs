@@ -41,6 +41,7 @@ namespace CrystalGate
                 }
                 else if (TickCurrent == Ticks - 1)
                 {
+                    FinDuDrawAtteint = true;
                     unite.Vitesse_Attaque += ratio;
                     unite.Scale /= 1.25f;
                     unite.color = Color.White;
