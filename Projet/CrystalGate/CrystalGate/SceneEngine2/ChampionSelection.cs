@@ -23,7 +23,7 @@ namespace CrystalGate.SceneEngine2
         private List<Rectangle> portraits;
         private List<Texture2D> imagesPortraits;
         private List<Color> couleurAffichagePortrait;
-        private int personnageSelectionne;
+        public int personnageSelectionne;
         private int nbFrames;
         bool lancerLeJeuActive;
 
