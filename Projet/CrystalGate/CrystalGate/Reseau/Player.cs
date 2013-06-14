@@ -16,5 +16,7 @@ namespace CrystalGate
         public float pointSortX;
         public float pointSortY;
         public byte idUniteCibleCast;
+
+        public byte LastDeath;
     }
 }

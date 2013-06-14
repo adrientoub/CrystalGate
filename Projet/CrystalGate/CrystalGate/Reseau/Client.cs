@@ -135,7 +135,7 @@ namespace CrystalGate
 
                 }
             }
-            catch(Exception e)
+            catch
             {
                 // Le client s'est deco
                 // Attention , risque de rentrer dans ce catch a l'entree du salon,
@@ -190,6 +190,13 @@ namespace CrystalGate
                         }
 
                 }
+                if(player.LastDeath != 0)
+                    foreach (Unite u in Map.unites)
+                        if (u.id == player.LastDeath)
+                        {
+                            u.Vie = 0;
+                            break;
+                        }
             }
         }
     }

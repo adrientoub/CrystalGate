@@ -86,7 +86,10 @@ namespace CrystalGate.SceneEngine2
                 else if (mouseRec.Intersects(boutonServeurOuClient))
                     isServer = !isServer;
                 else if (mouseRec.Intersects(boutonRetour))
+                {
                     SceneHandler.gameState = GameState.MainMenu;
+                    Serveur.Shutdown();
+                }
             }
             if (!isServer)
                 SaisirTexte(ref textAsWrited);

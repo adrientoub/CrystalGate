@@ -105,7 +105,7 @@ namespace CrystalGate
             foreach (Joueur j in joueurs)
             {
                 Map.unites.Add(j.champion);
-                Map.unites[Map.unites.Count - 1].id = (byte)Map.unites.Count;
+                Map.unites[Map.unites.Count - 1].id = Map.GetId();
             }
 
             Map.items = Items[i];

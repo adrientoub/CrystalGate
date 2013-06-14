@@ -21,6 +21,8 @@ namespace CrystalGate
         public static List<Socket> clients = new List<Socket> { };
         public static List<Players> joueurs = new List<Players>();
 
+        public static int LastDead; // represente la deniere unité qui vient de mourir selon le serveur
+
         public static void Host()
         {
             serveur = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
@@ -134,7 +136,7 @@ namespace CrystalGate
                     }
                 }
             }
-            catch(Exception e)
+            catch
             {
                 // Le client de cette thread s'est déco, on arrete de receive et la thread se finit
             }
@@ -142,7 +144,8 @@ namespace CrystalGate
 
         public static void Shutdown()
         {
-            serveur.Close();
+            if(serveur != null)
+                serveur.Close();
             IsRunning = false; // Arrete les threads
             clients.Clear();
         }

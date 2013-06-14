@@ -242,7 +242,9 @@ namespace CrystalGate
                 effets.Add(new Effet(Sprite, ConvertUnits.ToDisplayUnits(body.Position), packAnimation.Mort(this), Tiles, 1));
                 Map.world.RemoveBody(body);
                 Drop();
-                // Interface De GameOver pour le joueur 1 , risque" de bug
+                // Reseau
+                Serveur.LastDead = id;
+                // Interface De GameOver pour le joueur
                 if (isAChamp) // Si un champion se fait tuer
                     foreach (Joueur j in PackMap.joueurs) // On regarde si c'est le joueur local
                         if(j.champion == this && j.id == Client.id) // Si c'est le cas gameover sur cette ecran
@@ -322,7 +324,7 @@ namespace CrystalGate
 
         public virtual void Attaquer(Unite unite)
         {
-            float calcul = Outil.DistanceUnites(this, unite) - (25 * (unite.largeurPhysique + this.largeurPhysique) / 2);
+            float calcul = Outil.DistanceUnites(this, unite) - (26 * (unite.largeurPhysique + this.largeurPhysique) / 2);
             if (calcul >= Portee * Map.TailleTiles.X)
                 Suivre(unite);
             else

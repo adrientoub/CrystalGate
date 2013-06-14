@@ -304,9 +304,11 @@ namespace CrystalGate
             if (Local.champion.ObjectifListe.Count > 0)
                 p.objectifPoint = Local.champion.ObjectifListe[Local.champion.ObjectifListe.Count - 1];
 
-            // Stats
+            // Unité visé
             p.idUniteAttacked = Local.champion.idUniteAttacked;
-
+            if (Serveur.IsRunning)
+                p.LastDeath = (byte)Serveur.LastDead;
+            // Unit dernierement morte selon le serveur
             SendSpell(p);
 
             formatter.Serialize(stream, p);
