@@ -32,10 +32,11 @@ namespace CrystalGate
         public static Texture2D Sac;
         public static Texture2D Equipement;
         // Portraits
+        public static Texture2D GuerrierPortrait;
         public static Texture2D CavalierPortrait;
         public static Texture2D GruntPortrait;
         public static Texture2D ArcherPortrait;
-        public static Texture2D AssassinPortrait;
+        public static Texture2D VoleurPortrait;
         // Unites
         public static Texture2D Archer;
         public static Texture2D Cavalier;
@@ -80,15 +81,16 @@ namespace CrystalGate
             BarreDesSorts = content.Load<Texture2D>("UI/barre des sorts");
             Curseur = content.Load<Texture2D>("curseur");
             CurseurRouge = content.Load<Texture2D>("UI/curseurRouge");
-            Portrait = content.Load<Texture2D>("UI/GuerrierIcone");
+
             Sac = content.Load<Texture2D>("UI/inventaire");
             Equipement = content.Load<Texture2D>("UI/Equipement");
 
             // Portraits
+            GuerrierPortrait = content.Load<Texture2D>("UI/GuerrierIcone");
             CavalierPortrait = content.Load<Texture2D>("UI/knightIcone");
             GruntPortrait = content.Load<Texture2D>("UI/gruntIcone");
             ArcherPortrait = content.Load<Texture2D>("UI/archerIcone");
-            AssassinPortrait = content.Load<Texture2D>("UI/assassinIcone");
+            VoleurPortrait = content.Load<Texture2D>("UI/VoleurIcone");
 
             // Unites
             Archer = content.Load<Texture2D>("Unites/archer");

@@ -589,8 +589,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="UI\assassinIcone.jpg">
-      <Name>assassinIcone</Name>
+    <Compile Include="UI\voleurIcone.jpg">
+      <Name>voleurIcone</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

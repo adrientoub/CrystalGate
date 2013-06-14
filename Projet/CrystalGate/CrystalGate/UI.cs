@@ -77,7 +77,7 @@ namespace CrystalGate
         public UI(Joueur joueur)
         {
             this.joueur = joueur;
-            Portrait = PackTexture.Portrait;
+            Portrait = (joueur.champion is Voleur) ? PackTexture.VoleurPortrait : PackTexture.GuerrierPortrait;
             Sac = PackTexture.Sac;
             Equipement = PackTexture.Equipement;
             BarreDesSorts = PackTexture.BarreDesSorts;
