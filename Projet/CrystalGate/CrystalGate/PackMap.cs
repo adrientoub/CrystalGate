@@ -138,7 +138,10 @@ namespace CrystalGate
 
             else
             {
-                joueurs.Add(new Joueur(new Voleur(new Vector2(0, 9))));
+                if (SceneHandler.championSelectionScene.personnageSelectionne == 0)
+                    joueurs.Add(new Joueur(new Guerrier(new Vector2(0, 9))));
+                else
+                    joueurs.Add(new Joueur(new Voleur(new Vector2(0, 9))));
                 // On spécifie le joueur local
             }
 
