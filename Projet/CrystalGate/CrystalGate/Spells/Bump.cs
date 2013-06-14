@@ -8,8 +8,8 @@ namespace CrystalGate
 {
     class Bump : Spell
     {
-        public Bump(Unite u, Unite cible, bool useMana = true)
-            : base(u, cible)
+        public Bump(Unite u, bool useMana = true)
+            : base(u)
             
         {
             SpriteBouton = PackTexture.sorts[0];

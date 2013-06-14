@@ -68,7 +68,8 @@ namespace CrystalGate
         protected int nbFrameSonJoue;
         protected double lastManaAdd;
 
-        public List<Spell> spells;
+        public List<Spell> spells; // Les sorts disponibles pour cette unités
+        public List<Spell> spellsUpdate; // Les sorts qui doivent etre update
         public List<Item> Inventory;
         public List<Item> Stuff;
         public int InventoryCapacity = 64;
@@ -107,7 +108,8 @@ namespace CrystalGate
             color = Color.White; 
             
             idWave = -1;
-            spells = new List<Spell> { new Explosion(this, null), new Soin(this, null), new Invisibilite(this, null), new FurieSanguinaire(this, null), new Polymorphe(this, this), new Tempete(this, this) };
+            spells = new List<Spell> {  new Soin(this)};
+            spellsUpdate = new List<Spell> { };
             Inventory = new List<Item> { };
             Stuff = new List<Item> { };
 
@@ -140,9 +142,12 @@ namespace CrystalGate
                 IA(unitsOnMap);
 
             // Pour Update et Draw les sorts
-            foreach (Spell s in spells)
-                if (s.Activated)
+            foreach (Spell s in spellsUpdate)
                     s.Update();
+            // Retire les sorts qui sont finis
+            for (int i = 0; i < spellsUpdate.Count; i++)
+                if (!spellsUpdate[i].Activated)
+                    spellsUpdate.RemoveAt(i);
             // Pour Update et Draw les items de l'inventaire
             foreach (Item i in Inventory)
                 if (i.Activated)
@@ -184,8 +189,8 @@ namespace CrystalGate
         protected virtual void IA(List<Unite> unitsOnMap)
         {
             // Cast un heal si < à la moitié de vie
-            if (Vie <= VieMax / 2 && IsCastable(1))
-                Cast(1, PositionTile, null);
+            if (Vie <= VieMax / 2 && IsCastable(0))
+                Cast( new Soin(this), Vector2.Zero, null);
 
             if (uniteAttacked != null)
             {
@@ -318,7 +323,7 @@ namespace CrystalGate
         public virtual void Attaquer(Unite unite)
         {
             float calcule = Outil.DistanceUnites(this, unite) - (25 * (unite.largeurPhysique + this.largeurPhysique) / 2);
-            if (Outil.DistanceUnites(this, unite) - (25 * (unite.largeurPhysique + this.largeurPhysique) / 2) >= Portee * Map.TailleTiles.X)
+            if (Outil.DistanceUnites(this, unite) - (20 * (unite.largeurPhysique + this.largeurPhysique) / 2) >= Portee * Map.TailleTiles.X)
                 Suivre(unite);
             else
             {
@@ -545,10 +550,13 @@ namespace CrystalGate
             }
         }
 
-        public void Cast(int i, Vector2 point, Unite unit)
+        public void Cast(Spell s, Vector2 point, Unite unit)
         {
             // Cast ou initialise le sort
-            spells[i].Begin(point, unit);
+            s.Point = point;
+            s.UniteCible = unit;
+            spellsUpdate.Add(s);
+            spellsUpdate[spellsUpdate.Count - 1].Begin(point, unit);
         }
 
         public override void Draw(SpriteBatch spriteBatch)
@@ -556,8 +564,7 @@ namespace CrystalGate
             spriteBatch.Draw(Sprite, ConvertUnits.ToDisplayUnits(body.Position), SpritePosition, color, 0f, new Vector2(Tiles.X / 2, Tiles.Y / 2), Scale, FlipH ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 0);
             DrawVie(spriteBatch);
             // Draw les sorts
-            foreach (Spell s in spells)
-                if (s.Activated)
+            foreach (Spell s in spellsUpdate)
                     s.Draw(spriteBatch);
             foreach (Item i in Inventory)
                 if (i.Activated)

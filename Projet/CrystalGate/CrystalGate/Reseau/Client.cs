@@ -135,9 +135,11 @@ namespace CrystalGate
 
                 }
             }
-            catch
+            catch(Exception e)
             {
                 // Le client s'est deco
+                // Attention , risque de rentrer dans ce catch a l'entree du salon,
+                // si c'est le cas, ca va planter!
             }
         }
 
@@ -168,6 +170,26 @@ namespace CrystalGate
                 }
                 else
                     joueur.champion.uniteAttacked = null;
+                if (player.idSortCast != 0)
+                {
+                    Unite u = joueur.champion;
+                    List<Spell> toutLesSpellsPossibles = new List<Spell> { new Explosion(u), new Soin(u), new Invisibilite(u), new FurieSanguinaire(u), new Polymorphe(u), new Tempete(u) };
+                    
+                    foreach (Spell s in toutLesSpellsPossibles)
+                        if (s.idSort == player.idSortCast)
+                        {
+                            s.Point = new Vector2(player.pointSortX, player.pointSortY);
+                            if (player.idUniteCibleCast != 0)
+                            {
+                                foreach (Unite un in Map.unites)
+                                    if (un.id == player.idUniteCibleCast)
+                                        s.UniteCible = un;
+                            }
+                            joueur.champion.Cast(s, new Vector2(player.pointSortX, player.pointSortY), s.UniteCible);
+                            break;
+                        }
+
+                }
             }
         }
     }

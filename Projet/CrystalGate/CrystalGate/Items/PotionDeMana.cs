@@ -13,12 +13,12 @@ namespace CrystalGate
             : base(unite, position)
         {
             Icone = PackTexture.boutons[4];
-            spell = new RegenMana(unite, null, false);
+            spell = new RegenMana(unite, false);
         }
 
         public override void Effet(Unite unite)
         {
-            spell = new RegenMana(unite, null, false);
+            spell = new RegenMana(unite, false);
         }
     }
 }

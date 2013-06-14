@@ -12,9 +12,10 @@ namespace CrystalGate
         const float ratio = 0.2f;
         Text description;
 
-        public FurieSanguinaire(Unite u, Unite cible, bool useMana = true)
-            : base(u, cible)
+        public FurieSanguinaire(Unite u, bool useMana = true)
+            : base(u)
         {
+            idSort = 2;
             Cooldown = 5;
             Ticks = 300;
             if (useMana)

@@ -12,9 +12,10 @@ namespace CrystalGate
         const float ratio = 1.25f;
         Text description1, description2;
 
-        public Soin(Unite u, Unite cible, bool useMana = true)
-            : base(u, cible)  
+        public Soin(Unite u, bool useMana = true)
+            : base(u)  
         {
+            idSort = 6;
             Cooldown = 1;
             Ticks = 1;
             if (useMana)

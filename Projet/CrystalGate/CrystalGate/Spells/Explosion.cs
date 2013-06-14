@@ -13,9 +13,10 @@ namespace CrystalGate
         const float ratio = 2.5f;
         Text description1, description2, description3;
 
-        public Explosion(Unite u, Unite cible, bool useMana = true)
-            : base(u, cible)  
+        public Explosion(Unite u, bool useMana = true)
+            : base(u)  
         {
+            idSort = 1;
             Cooldown = 2;
             Ticks = 1;
             CoutMana = 10;

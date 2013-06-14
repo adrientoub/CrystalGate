@@ -32,11 +32,12 @@ namespace CrystalGate
         public Color Color = Color.White;
         public Vector2 Tiles; // Longueur et hauteur de la tile à Draw
 
+        public byte idSort;        
         public float LastCast;
 
         public EffetSonore sonSort;
 
-        public Spell(Unite u, Unite cible, bool useMana = true)
+        public Spell(Unite u, bool useMana = true)
         {
             unite = u;
             AnimationCurrent = AnimationLimite;

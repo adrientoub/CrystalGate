@@ -16,9 +16,10 @@ namespace CrystalGate
         List<Vector2> Positions = new List<Vector2> { };
         Random rand = new Random();
 
-        public Tempete(Unite u, Unite cible, bool useMana = true)
-            : base(u, cible)
+        public Tempete(Unite u, bool useMana = true)
+            : base(u)
         {
+            idSort = 7;
             Cooldown = 5;
             Ticks = 200;
             CoutMana = 50;

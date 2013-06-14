@@ -134,7 +134,7 @@ namespace CrystalGate
                     }
                 }
             }
-            catch
+            catch(Exception e)
             {
                 // Le client de cette thread s'est déco, on arrete de receive et la thread se finit
             }

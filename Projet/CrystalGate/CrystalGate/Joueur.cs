@@ -21,8 +21,9 @@ namespace CrystalGate
         public UI Interface;
         bool InWaitingPoint;
         bool InWaitingUnit;
-        int spell;
+        Spell spell;
         public int id; // spécifie l'identifiant sur le reseau, supérieur à zero sinon on est en local
+        bool IsCasting;
 
         Unite SelectedUnit;
         bool isRoaming;
@@ -91,8 +92,6 @@ namespace CrystalGate
                         else
                             SceneHandler.ResetGameplay("level1");
                     }
-
-                    UpdateReseau();
                     
                     // Pour afficher/cacher le sac
                     if (Interface.key.IsKeyDown(Keys.B) && Interface.Oldkey.IsKeyUp(Keys.B) || Interface.key.IsKeyDown(Keys.I) && Interface.Oldkey.IsKeyUp(Keys.I))
@@ -117,7 +116,7 @@ namespace CrystalGate
                 // Pour lancer un sort
                 if (Interface.key.IsKeyDown(Keys.D1) && champion.spells.Count > 0 || Interface.SourisClickSpellCheck(0) && champion.spells.Count > 0)
                 {
-                    spell = 0;
+                    spell = champion.spells[0];
                     if (champion.IsCastable(0))
                     {
                         if (champion.spells[0].NeedUnPoint)
@@ -126,12 +125,15 @@ namespace CrystalGate
                             InWaitingPoint = true;
                         }
                         else
+                        {
                             champion.Cast(spell, champion.pointCible, SelectedUnit);
+                            IsCasting = true;
+                        }
                     }
                 }
                 if (Interface.key.IsKeyDown(Keys.D2) && champion.spells.Count > 1 || Interface.SourisClickSpellCheck(1) && champion.spells.Count > 1)
                 {
-                    spell = 1;
+                    spell = champion.spells[1];
                     if (champion.IsCastable(1))
                     {
                         if (champion.spells[1].NeedUnPoint)
@@ -140,12 +142,15 @@ namespace CrystalGate
                             InWaitingPoint = true;
                         }
                         else
+                        {
                             champion.Cast(spell, champion.pointCible, SelectedUnit);
+                            IsCasting = true;
+                        }
                     }
                 }
                 if (Interface.key.IsKeyDown(Keys.D3) && champion.spells.Count > 2 || Interface.SourisClickSpellCheck(2) && champion.spells.Count > 2)
                 {
-                    spell = 2;
+                    spell = champion.spells[2];
                     if (champion.IsCastable(2))
                     {
                         if (champion.spells[2].NeedUnPoint)
@@ -154,12 +159,15 @@ namespace CrystalGate
                             InWaitingPoint = true;
                         }
                         else
+                        {
                             champion.Cast(spell, champion.pointCible, SelectedUnit);
+                            IsCasting = true;
+                        }
                     }
                 }
                 if (Interface.key.IsKeyDown(Keys.D4) && champion.spells.Count > 3 || Interface.SourisClickSpellCheck(3) && champion.spells.Count > 3)
                 {
-                    spell = 3;
+                    spell = champion.spells[3];
                     if (champion.IsCastable(3))
                     {
                         if (champion.spells[3].NeedUnPoint)
@@ -168,12 +176,15 @@ namespace CrystalGate
                             InWaitingPoint = true;
                         }
                         else
+                        {
                             champion.Cast(spell, champion.pointCible, SelectedUnit);
+                            IsCasting = true;
+                        }
                     }
                 }
                 if (Interface.key.IsKeyDown(Keys.D5) && champion.spells.Count > 4 || Interface.SourisClickSpellCheck(4) && champion.spells.Count > 4)
                 {
-                    spell = 4;
+                    spell = champion.spells[4];
                     if (champion.IsCastable(4))
                     {
                         if (champion.spells[4].NeedUnPoint)
@@ -187,12 +198,15 @@ namespace CrystalGate
                             InWaitingUnit = true;
                         }
                         else
+                        {
                             champion.Cast(spell, champion.pointCible, SelectedUnit);
+                            IsCasting = true;
+                        }
                     }
                 }
                 if (Interface.key.IsKeyDown(Keys.D6) && champion.spells.Count > 5 || Interface.SourisClickSpellCheck(5) && champion.spells.Count > 5)
                 {
-                    spell = 5;
+                    spell = champion.spells[5];
                     if (champion.IsCastable(5))
                     {
                         if (champion.spells[5].NeedUnPoint)
@@ -206,7 +220,10 @@ namespace CrystalGate
                             InWaitingUnit = true;
                         }
                         else
+                        {
                             champion.Cast(spell, champion.pointCible, SelectedUnit);
+                            IsCasting = true;
+                        }
                     }
                 }
                 
@@ -234,43 +251,72 @@ namespace CrystalGate
             // Pour déplacer la caméra
             CameraUpdate();
             Interface.Update();
+            UpdateReseau();
             CurseurCheck();
             Interface.Oldmouse = Interface.mouse;
             Interface.Oldkey = Interface.key;
+            IsCasting = false;
 
         }
 
         public void UpdateReseau()
         {
-            if (Client.Started && t >= 10 && Client.isConnected) // Si on est en reseau et que l'on doit send
+            if ((Client.Started && t >= 10 || IsCasting) && Client.isConnected) // Si on est en reseau et que l'on doit send
             {
-                // Serialise le personnage
-                // Initialisation des variables
-                ASCIIEncoding ascii = new ASCIIEncoding();
-                MemoryStream stream = new MemoryStream();
-                BinaryFormatter formatter = new BinaryFormatter();
-
-                // Definition du contenu
-                Player p = new Player();
-                Joueur Local = Outil.GetJoueur(Client.id);
-
-                // Pathfinding
-                if (Local.champion.ObjectifListe.Count > 0)
-                    p.objectifPoint = Local.champion.ObjectifListe[Local.champion.ObjectifListe.Count - 1];
-
-                // Stats
-                p.idUniteAttacked = Local.champion.idUniteAttacked;
-
-                formatter.Serialize(stream, p);
-                byte[] buffer = new byte[stream.Length];
-                stream.Position = 0;
-                stream.Read(buffer, 0, buffer.Length);
                 // Envoi
-                Client.Send(buffer, 42);
+                Client.Send(Serialize(), 42);
                 t = 0;
             }
             t++;
         }
+
+        void SendSpell(Player p)
+        {
+            if (IsCasting)
+            {
+                Unite u = champion;
+                List<Spell> toutLesSpellsPossibles = new List<Spell> { new Explosion(u), new Soin(u), new Invisibilite(u), new FurieSanguinaire(u), new Polymorphe(u), new Tempete(u) };
+
+                foreach (Spell s in toutLesSpellsPossibles)
+                    if (s.idSort == spell.idSort)
+                    {
+                        p.idSortCast = s.idSort;
+                        p.pointSortX = champion.pointCible.X;
+                        p.pointSortY = champion.pointCible.Y;
+                        if(SelectedUnit != null)
+                            p.idUniteCibleCast = SelectedUnit.id;
+                        break;
+                    }
+            }
+        }
+
+        public byte[] Serialize()
+        {
+            ASCIIEncoding ascii = new ASCIIEncoding();
+            MemoryStream stream = new MemoryStream();
+            BinaryFormatter formatter = new BinaryFormatter();
+
+            // Definition du contenu
+            Player p = new Player();
+            Joueur Local = Outil.GetJoueur(Client.id);
+
+            // Pathfinding
+            if (Local.champion.ObjectifListe.Count > 0)
+                p.objectifPoint = Local.champion.ObjectifListe[Local.champion.ObjectifListe.Count - 1];
+
+            // Stats
+            p.idUniteAttacked = Local.champion.idUniteAttacked;
+
+            SendSpell(p);
+
+            formatter.Serialize(stream, p);
+            byte[] buffer = new byte[stream.Length];
+            stream.Position = 0;
+            stream.Read(buffer, 0, buffer.Length);
+
+            return buffer;
+        }
+
         public void DonnerOrdreDeplacer()
         {
             if (Interface.mouse.X < CrystalGateGame.graphics.PreferredBackBufferWidth && Interface.mouse.Y < CrystalGateGame.graphics.PreferredBackBufferHeight)

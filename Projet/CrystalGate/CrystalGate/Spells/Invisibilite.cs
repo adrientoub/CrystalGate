@@ -13,9 +13,10 @@ namespace CrystalGate
         Random rand = new Random();
         Text description1, description2;
 
-        public Invisibilite(Unite u, Unite cible, bool useMana = true)
-            : base(u, cible)
+        public Invisibilite(Unite u, bool useMana = true)
+            : base(u)
         {
+            idSort = 3;
             Cooldown = 5;
             Ticks = 300;
             if (useMana)

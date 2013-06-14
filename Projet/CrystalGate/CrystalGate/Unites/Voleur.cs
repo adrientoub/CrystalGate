@@ -33,6 +33,8 @@ namespace CrystalGate
             DefenseMagique = 3;
             XPUnite = 200;
 
+            spells = new List<Spell> { new Explosion(this), new Soin(this), new Invisibilite(this), new FurieSanguinaire(this), new Polymorphe(this), new Tempete(this) };
+
             Inventory = new List<Item> { new PotionDeVie(this, Vector2.Zero) };
 
             // Sons

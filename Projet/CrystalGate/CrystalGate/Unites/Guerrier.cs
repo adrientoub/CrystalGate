@@ -30,6 +30,8 @@ namespace CrystalGate
             DefenseMagique = 3;
             XPUnite = 200;
 
+            spells = new List<Spell> { new Explosion(this), new Soin(this), new Invisibilite(this), new FurieSanguinaire(this), new Polymorphe(this), new Tempete(this) };
+
             // Sons
             effetUniteAttaque = new EffetSonore(PackSon.Epee);
             effetUniteDeath = new EffetSonore(PackSon.GruntDeath);

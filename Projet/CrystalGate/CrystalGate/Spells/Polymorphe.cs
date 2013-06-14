@@ -13,9 +13,10 @@ namespace CrystalGate
         const float ratio = 0.2f;
         Text description;
 
-        public Polymorphe(Unite u, Unite cible, bool useMana = true)
-            : base(u, cible)
+        public Polymorphe(Unite u, bool useMana = true)
+            : base(u)
         {
+            idSort = 4;
             Cooldown = 2;
             Ticks = 1;
             if (useMana)
