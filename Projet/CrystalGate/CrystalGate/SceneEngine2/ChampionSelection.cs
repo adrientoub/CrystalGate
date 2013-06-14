@@ -82,6 +82,11 @@ namespace CrystalGate.SceneEngine2
 
                 boutonLancerLeJeu = new Rectangle((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width) / 2 - boutons.Width, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height / 2, boutons.Width, boutons.Height);
                 boutonRetour = new Rectangle((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width) / 2 - boutons.Width, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height / 2 + 100, boutons.Width, boutons.Height);
+
+                for (int i = 0; i < positionsImages.Length; i++)
+                {
+                    positionsImages[i] = new Rectangle(positionJoueur[i].X + 10, positionJoueur[i].Y + 10, 60, 60);
+                }
             }
             else
             {
@@ -89,9 +94,10 @@ namespace CrystalGate.SceneEngine2
                 boutonRetour = new Rectangle((CrystalGateGame.graphics.GraphicsDevice.Viewport.Width - boutons.Width) / 2, CrystalGateGame.graphics.GraphicsDevice.Viewport.Height / 2 + 100, boutons.Width, boutons.Height);
             }
 
-            for (int i = 0; i < positionsImages.Length; i++)
+            for (int i = 0; i < imagesPortraits.Count; i++)
             {
-                positionsImages[i] = new Rectangle(positionJoueur[i].X + 10, positionJoueur[i].Y + 10, 60, 60);
+                portraits[i] = new Rectangle(CrystalGateGame.graphics.PreferredBackBufferWidth / 2 + (i - imagesPortraits.Count / 2) * (imagesPortraits[i].Bounds.Width + 30), CrystalGateGame.graphics.PreferredBackBufferHeight / 2 - 200,
+                imagesPortraits[i].Bounds.Width, imagesPortraits[i].Bounds.Height);
             }
         }
 
