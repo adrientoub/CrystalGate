@@ -7,6 +7,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Runtime.Serialization;
 using System.IO;
 using System.Collections.Generic;
+using CrystalGate.SceneEngine2;
 
 namespace CrystalGate
 {
@@ -24,17 +25,25 @@ namespace CrystalGate
 
         public static void Host()
         {
-            serveur = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            serveur.Bind(new IPEndPoint(IPAddress.Any, 5035));
-            serveur.Listen(42);
-            IsRunning = true;
-            // On attend les clients
-            Thread InWaintingClient = new Thread(WaitingClient);
-            InWaintingClient.Start();
+            try
+            {
+                serveur = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+                serveur.Bind(new IPEndPoint(IPAddress.Any, 5035));
+                serveur.Listen(42);
+                IsRunning = true;
+                // On attend les clients
+                Thread InWaintingClient = new Thread(WaitingClient);
+                InWaintingClient.Start();
 
-            // On créer un client qui est soi même et on le connecte à ce serveur
-            SceneEngine2.CoopSettingsScene.ip = IPAddress.Parse("127.0.0.1");
-            Client.Connect();
+                // On créer un client qui est soi même et on le connecte à ce serveur
+                SceneEngine2.CoopSettingsScene.ip = IPAddress.Parse("127.0.0.1");
+                Client.Connect();
+                SceneHandler.gameState = GameState.CoopConnexion;
+            }
+            catch
+            {
+                SceneHandler.coopSettingsScene.Error = true;
+            }
         }
 
         public static void WaitingClient()
@@ -132,6 +141,12 @@ namespace CrystalGate
                         c.Receive(buffer3);
                         Send(buffer3); // Envoie les infos reçus aux clients
                     }
+                    else if (header == 3) // lancement du jeu
+                    {
+                        //header
+                        Send(buffer);
+
+                    }
                     else // Si on a recu un header incorrect, on attend de recevoir un header correct
                     {
                         byte[] debug = new byte[1];
@@ -150,10 +165,10 @@ namespace CrystalGate
 
         public static void Shutdown()
         {
-            if(serveur != null)
+           /* if (serveur != null)
                 serveur.Close();
             IsRunning = false; // Arrete les threads
-            clients.Clear();
+            clients.Clear();*/
         }
     }
 }

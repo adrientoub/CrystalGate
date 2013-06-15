@@ -25,6 +25,7 @@ namespace CrystalGate.SceneEngine2
         public string textAsWrited;
 
         public static IPAddress ip;
+        public bool Error;
 
         private Vector2 positionTexteIP, positionTexteMode;
 
@@ -80,8 +81,6 @@ namespace CrystalGate.SceneEngine2
                         Serveur.Host();
                     else
                         Client.Connect();
-
-                    SceneHandler.gameState = GameState.CoopConnexion;
                 }
                 else if (mouseRec.Intersects(boutonServeurOuClient))
                     isServer = !isServer;
@@ -103,6 +102,8 @@ namespace CrystalGate.SceneEngine2
             spriteBatch.Begin();
             spriteBatch.Draw(background, fullscene, Color.White);
 
+            if (Error)
+                spriteBatch.DrawString(spriteFont, "Le port serveur est deja occupé, veuillez redemarrer le jeu", Vector2.One, Color.White);
             if (mouseRec.Intersects(boutonServeurOuClient))
                 spriteBatch.Draw(boutons, boutonServeurOuClient, Color.Gray);
             else

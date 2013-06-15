@@ -39,6 +39,7 @@ namespace CrystalGate
                 //On lance la thread de reception
                 Thread Reception = new Thread(Receive);
                 Reception.Start();
+                SceneHandler.gameState = GameState.CoopConnexion;
             }
             catch
             {
@@ -131,6 +132,13 @@ namespace CrystalGate
                         Message m = (Message)formatter.Deserialize(stream);
                         m.dateEnvoi = EffetSonore.time.Elapsed;
                         discution.Add(m);
+                    }
+                    else if (header == 3)
+                    {
+                        SceneHandler.ResetGameplay();
+                        SceneHandler.gameState = GameState.Gameplay;
+                        FondSonore.Play();
+                        GamePlay.timer.Restart();
                     }
                     else
                     {
