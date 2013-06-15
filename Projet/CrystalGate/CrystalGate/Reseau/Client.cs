@@ -51,7 +51,7 @@ namespace CrystalGate
         public static void Send(byte[] buffer, int type)
         {
             // On envoie le type
-            client.Send(new byte[] { (byte)type });
+            client.Send(new byte[4] { (byte)type,0,0,0 });
 
             // Envoi puis de la taille, puis de l'objet
             client.Send(BitConverter.GetBytes(buffer.Length));
@@ -132,6 +132,10 @@ namespace CrystalGate
                         m.dateEnvoi = EffetSonore.time.Elapsed;
                         discution.Add(m);
                     }
+                    else
+                    {
+
+                    }
 
                 }
             }
@@ -155,9 +159,9 @@ namespace CrystalGate
             {
                 Joueur joueur = Outil.GetJoueur(IdDuJoueur);
                 // Pathfinding
-                if (player.objectifPoint != null)
+                if (player.Mooved)
                 {
-                    List<Noeud> path = PathFinding.TrouverChemin(joueur.champion.PositionTile, player.objectifPoint.Position, Map.Taille, Map.unites, Map.unitesStatic, true);
+                    List<Noeud> path = PathFinding.TrouverChemin(joueur.champion.PositionTile, new Vector2(player.objectifPointX, player.objectifPointY), Map.Taille, Map.unites, Map.unitesStatic, true);
                     if (path != null)
                         joueur.champion.ObjectifListe = path;
                 }

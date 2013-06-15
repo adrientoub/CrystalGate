@@ -77,13 +77,16 @@ namespace CrystalGate
                     // Initialisation des variables
                     ASCIIEncoding ascii = new ASCIIEncoding();
                     BinaryFormatter formatter = new BinaryFormatter();
-                    if (!bug)
-                        c.Receive(buffer);
+
+                    c.Receive(buffer);
                     int header = BitConverter.ToInt32(buffer, 0);
-                    Send(buffer);
+
+                    
 
                     if (header == 42) // Si on recoit un personnage
                     {
+                        //header
+                        Send(buffer);
                         // Reception de la Taille
                         byte[] buffer2 = new byte[4];
                         c.Receive(buffer2);
@@ -100,6 +103,8 @@ namespace CrystalGate
                     }
                     else if (header == 1) // Si on reçoit une personne 
                     {
+                        //header
+                        Send(buffer);
                         // Reception de la Taille
                         byte[] buffer2 = new byte[4];
                         c.Receive(buffer2);
@@ -114,6 +119,8 @@ namespace CrystalGate
                     }
                     else if (header == 2) // Si on reçoit un message 
                     {
+                        //header
+                        Send(buffer);
                         // Reception de la Taille
                         byte[] buffer2 = new byte[4];
                         c.Receive(buffer2);
@@ -128,11 +135,12 @@ namespace CrystalGate
                     }
                     else // Si on a recu un header incorrect, on attend de recevoir un header correct
                     {
-                        byte[] debug = new byte[4];
-                        while (BitConverter.ToInt32(debug, 0) != 42)
+                        byte[] debug = new byte[1];
+                        while (debug[0] != 255)
                             c.Receive(debug);
+                        debug = new byte[159];
+                        c.Receive(debug);
                         bug = true;
-                        buffer = debug;
                     }
                 }
             }

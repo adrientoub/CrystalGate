@@ -9,7 +9,9 @@ namespace CrystalGate
     [Serializable]
     class Player
     {
-        public Noeud objectifPoint; // Le point ou cherche à aller le joueur
+        public bool Mooved;
+        public float objectifPointX; // Le point ou cherche à aller le joueur
+        public float objectifPointY;
         public byte idUniteAttacked; // L'unité attaqué par le joueur
 
         public byte idSortCast; // Le sort cast par le joueur

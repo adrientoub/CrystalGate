@@ -302,7 +302,11 @@ namespace CrystalGate
 
             // Pathfinding
             if (Local.champion.ObjectifListe.Count > 0)
-                p.objectifPoint = Local.champion.ObjectifListe[Local.champion.ObjectifListe.Count - 1];
+            {
+                p.Mooved = true;
+                p.objectifPointX = Local.champion.ObjectifListe[Local.champion.ObjectifListe.Count - 1].Position.X;
+                p.objectifPointY = Local.champion.ObjectifListe[Local.champion.ObjectifListe.Count - 1].Position.Y;
+            }
 
             // Unité visé
             p.idUniteAttacked = Local.champion.idUniteAttacked;

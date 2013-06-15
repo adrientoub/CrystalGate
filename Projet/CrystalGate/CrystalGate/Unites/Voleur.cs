@@ -23,7 +23,7 @@ namespace CrystalGate
             Portrait = PackTexture.VoleurPortrait;
             packAnimation = new PackAnimation();
             // Statistiques
-            Vie = VieMax = 350;
+            Vie = VieMax = 1350;
             Vitesse = 0.12f;
             Vitesse_Attaque = 0.4f;
             Portee = 1f; // 1 = Corps à corps
