@@ -190,7 +190,7 @@ namespace CrystalGate
         {
             // Cast un heal si < à la moitié de vie
             if (Vie <= VieMax / 2 && IsCastable(0))
-                Cast( new Soin(this), Vector2.Zero, null);
+                Cast( spells[0], Vector2.Zero, null);
 
             if (uniteAttacked != null)
             {
