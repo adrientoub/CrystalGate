@@ -88,7 +88,7 @@ namespace CrystalGate
                     if (Interface.key.IsKeyDown(Keys.T) && Interface.Oldkey.IsKeyUp(Keys.T))
                     {
                         if (SceneHandler.level == "level1")
-                            SceneHandler.ResetGameplay("level3");
+                            SceneHandler.ResetGameplay("level2");
                         else
                             SceneHandler.ResetGameplay("level1");
                     }
@@ -109,6 +109,16 @@ namespace CrystalGate
                         champion.ObjectifListe = new List<Noeud> { };
                         camera.Position = new Vector2(0, 200);
                         SceneHandler.ResetGameplay("level2");
+                    }
+                }
+                if (champion.PositionTile == new Vector2(129, 11) || champion.PositionTile == new Vector2(129, 12) || champion.PositionTile == new Vector2(129, 13))
+                {
+                    if (SceneHandler.level == "level2")
+                    {
+                        champion.PositionTile = new Vector2(2, 17);
+                        champion.ObjectifListe = new List<Noeud> { };
+                        camera.Position = new Vector2(0, 200);
+                        SceneHandler.ResetGameplay("level3");
                     }
                 }
 

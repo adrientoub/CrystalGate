@@ -62,6 +62,7 @@ namespace CrystalGate
                 if (items[i].InInventory)
                     items.RemoveAt(i);
 
+            // Dit si on a gagné , que toutes les vagues sont finies
             bool OnaWin = true;
             foreach(Wave w in waves)
                 if (w.unites.Count != 0)
@@ -69,7 +70,8 @@ namespace CrystalGate
                     OnaWin = false;
                     break;
                 }
-            if (OnaWin && SceneHandler.level == "level2")
+
+            if (OnaWin && SceneHandler.level == "level3")
                 PackMap.joueurs[0].Interface.Win = true;
         }
 

@@ -15,7 +15,6 @@ namespace CrystalGate
         public static Socket serveur;
         static int NbMaxClients = 2;
         
-        static bool bug;
         public static bool IsRunning;
 
         public static List<Socket> clients = new List<Socket> { };
@@ -140,7 +139,6 @@ namespace CrystalGate
                             c.Receive(debug);
                         debug = new byte[159];
                         c.Receive(debug);
-                        bug = true;
                     }
                 }
             }
