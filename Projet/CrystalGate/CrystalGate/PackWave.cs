@@ -71,7 +71,7 @@ namespace CrystalGate
         static Wave Level2Wave1()
         {
             List<Vector2> PointsInit = new List<Vector2> { new Vector2(13, 12), new Vector2(13, 13), new Vector2(13, 14), new Vector2(13, 15), };
-            List<Vector2> PointsSpawn = new List<Vector2> { new Vector2(23, 0)};
+            List<Vector2> PointsSpawn = new List<Vector2> { new Vector2(23, 0) };
 
             List<List<Unite>> Mobs = new List<List<Unite>> { 
                 new List<Unite> { new Ogre(Vector2.Zero), new Demon(Vector2.Zero), new Grunt(Vector2.Zero) },
@@ -111,9 +111,60 @@ namespace CrystalGate
             return new Wave(PointsInit, PointsSpawn, Mobs);
         }
 
+        static Wave Level3Wave1()
+        {
+            int level = 4;
+
+            List<Vector2> PointsInit = new List<Vector2> { new Vector2(5, 17), new Vector2(5, 16), new Vector2(5, 18) };
+            List<Vector2> PointsSpawn = new List<Vector2> { new Vector2(8, 4), new Vector2(8, 30) };
+
+            List<List<Unite>> Mobs = new List<List<Unite>> { 
+                new List<Unite> { new Archer(Vector2.Zero, level), new Demon(Vector2.Zero, level), new Grunt(Vector2.Zero, level), new Cavalier(Vector2.Zero, level),
+                    new Archer(Vector2.Zero, level), new Cavalier(Vector2.Zero, level), new Archer(Vector2.Zero, level) },
+                new List<Unite> { new Grunt(Vector2.Zero, level), new Cavalier(Vector2.Zero, level), new Archer(Vector2.Zero, level), new Cavalier(Vector2.Zero, level),
+                    new Cavalier(Vector2.Zero, level), new Archer(Vector2.Zero, level) }
+            };
+
+            return new Wave(PointsInit, PointsSpawn, Mobs);
+        }
+
+        static Wave Level3Wave2()
+        {
+            int level = 4;
+
+            List<Vector2> PointsInit = new List<Vector2> { new Vector2(28, 13), new Vector2(28, 12), new Vector2(28, 11) };
+            List<Vector2> PointsSpawn = new List<Vector2> { new Vector2(50, 13), new Vector2(31, 2), new Vector2(21, 23) };
+
+            List<List<Unite>> Mobs = new List<List<Unite>> { 
+                new List<Unite> { new Archer(Vector2.Zero, level), new Demon(Vector2.Zero, level), new Grunt(Vector2.Zero, level), new Cavalier(Vector2.Zero, level),
+                    new Archer(Vector2.Zero, level), new Cavalier(Vector2.Zero, level), new Archer(Vector2.Zero, level) },
+                new List<Unite> { new Grunt(Vector2.Zero, level), new Cavalier(Vector2.Zero, level), new Archer(Vector2.Zero, level), new Cavalier(Vector2.Zero, level),
+                    new Cavalier(Vector2.Zero, level), new Archer(Vector2.Zero, level) }
+            };
+
+            return new Wave(PointsInit, PointsSpawn, Mobs);
+        }
+
+        static Wave Level3Wave3()
+        {
+            int level = 4;
+
+            List<Vector2> PointsInit = new List<Vector2> { new Vector2(105, 38), new Vector2(105, 37), new Vector2(105, 36) };
+            List<Vector2> PointsSpawn = new List<Vector2> { new Vector2(115, 4), new Vector2(125, 4) };
+
+            List<List<Unite>> Mobs = new List<List<Unite>> { 
+                new List<Unite> { new Archer(Vector2.Zero, level), new Demon(Vector2.Zero, level), new Grunt(Vector2.Zero, level), new Cavalier(Vector2.Zero, level),
+                    new Archer(Vector2.Zero, level), new Cavalier(Vector2.Zero, level), new Archer(Vector2.Zero, level) },
+                new List<Unite> { new Grunt(Vector2.Zero, level), new Cavalier(Vector2.Zero, level), new Archer(Vector2.Zero, level), new Cavalier(Vector2.Zero, level),
+                    new Cavalier(Vector2.Zero, level), new Archer(Vector2.Zero, level) }
+            };
+
+            return new Wave(PointsInit, PointsSpawn, Mobs);
+        }
+
         public static List<Wave> PackWaveLevel1()
         {
-            return new List<Wave> { Level1Wave1(), Level1Wave2(), Level1Wave3(), Level1Wave4()};
+            return new List<Wave> { Level1Wave1(), Level1Wave2(), Level1Wave3(), Level1Wave4() };
         }
 
         public static List<Wave> PackWaveLevel2()
@@ -121,5 +172,9 @@ namespace CrystalGate
             return new List<Wave> { Level2Wave1(), Level2Wave2(), Level2Wave3() };
         }
 
+        public static List<Wave> PackWaveLevel3()
+        {
+            return new List<Wave> { Level3Wave1(), Level3Wave2(), Level3Wave3() };
+        }
     }
 }

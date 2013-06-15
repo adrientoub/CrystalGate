@@ -77,6 +77,7 @@ namespace CrystalGate
             }
             InitializeLevel1();
             InitializeLevel2();
+            InitializeLevel3();
         }
 
         public static void Sauvegarder()
@@ -348,6 +349,21 @@ namespace CrystalGate
             Unites[1] = new List<Unite> { Pnj };
             Items[1] = new List<Item>{new BottesDacier(null, new Vector2(10,15))}; // bug, j.champion
             Waves[1] = PackWave.PackWaveLevel2();
+        }
+
+        static void InitializeLevel3()
+        {
+            // Ajout du PNJ
+            /*
+            Unite Pnj = new Syndra(new Vector2(7, 18));
+            Text a = new Text("Dialogue2a");
+            Text b = new Text("Dialogue2b");
+            Pnj.Dialogue.Clear();
+            Pnj.Dialogue.Add(a);
+            Pnj.Dialogue.Add(b);
+
+            Unites[2] = new List<Unite> { Pnj };*/
+            Waves[2] = PackWave.PackWaveLevel3();
         }
     }
 }

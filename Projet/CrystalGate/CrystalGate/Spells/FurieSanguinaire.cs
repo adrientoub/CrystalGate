@@ -9,7 +9,7 @@ namespace CrystalGate
 {
     class FurieSanguinaire : Spell
     {
-        const float ratio = 0.2f;
+        const float ratio = 0.1f;
         Text description;
 
         public FurieSanguinaire(Unite u, bool useMana = true)
