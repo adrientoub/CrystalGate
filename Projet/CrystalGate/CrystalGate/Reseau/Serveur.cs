@@ -89,8 +89,6 @@ namespace CrystalGate
                     c.Receive(buffer);
                     int header = BitConverter.ToInt32(buffer, 0);
 
-                    
-
                     if (header == 42) // Si on recoit un personnage
                     {
                         //header
@@ -140,12 +138,6 @@ namespace CrystalGate
                         byte[] buffer3 = new byte[Length];
                         c.Receive(buffer3);
                         Send(buffer3); // Envoie les infos reçus aux clients
-                    }
-                    else if (header == 3) // lancement du jeu
-                    {
-                        //header
-                        Send(buffer);
-
                     }
                     else // Si on a recu un header incorrect, on attend de recevoir un header correct
                     {
