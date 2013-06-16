@@ -20,5 +20,7 @@ namespace CrystalGate
         public byte idUniteCibleCast;
 
         public byte LastDeath;
+        public int LastItemUsed = -1;
+        public int LastStuffUsed = -1;
     }
 }

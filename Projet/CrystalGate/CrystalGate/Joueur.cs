@@ -29,6 +29,9 @@ namespace CrystalGate
         bool isRoaming;
         int t;
 
+        public int lastItemUsed = -1;
+        public int lastStuffUsed = -1;
+
         public Joueur(Unite champ)
         {
             champion = champ;
@@ -53,6 +56,7 @@ namespace CrystalGate
                     InWaitingPoint = false;
                     Interface.DrawSelectPoint = false;
                     champion.Cast(spell, champion.pointCible, SelectedUnit);
+                    IsCasting = true;
                 }
                 // Pour cibler une unité pour un sort
                 if (Interface.mouse.LeftButton == ButtonState.Pressed && Interface.Oldmouse.LeftButton == ButtonState.Released && InWaitingUnit)
@@ -271,7 +275,7 @@ namespace CrystalGate
 
         public void UpdateReseau()
         {
-            if ((Client.Started && t >= 10 || IsCasting) && Client.isConnected) // Si on est en reseau et que l'on doit send
+            if ((Client.Started && t >= 10 || IsCasting || lastItemUsed != -1 || lastStuffUsed != -1) && Client.isConnected) // Si on est en reseau et que l'on doit send
             {
                 // Envoi
                 Client.Send(Serialize(), 42);
@@ -324,6 +328,13 @@ namespace CrystalGate
                 p.LastDeath = (byte)Serveur.LastDead;
             // Unit dernierement morte selon le serveur
             SendSpell(p);
+
+            if (lastItemUsed != -1)
+                p.LastItemUsed = lastItemUsed;
+            if (lastStuffUsed != -1)
+                p.LastStuffUsed = lastStuffUsed;
+            lastItemUsed = -1;
+            lastStuffUsed = -1;
 
             formatter.Serialize(stream, p);
             byte[] buffer = new byte[stream.Length];

@@ -86,7 +86,7 @@ namespace CrystalGate.SceneEngine2
         public override void Draw(SpriteBatch spriteBatch) // la camera est celle du premier joueur, risque de bug en multi
         {
             CrystalGateGame.graphics.GraphicsDevice.Clear(ClearOptions.Target, Color.Black, 0, 0);
-            spriteBatch.Begin(0, null, null, null, null, null, PackMap.joueurs[0].camera.CameraMatrix);
+            spriteBatch.Begin(0, null, null, null, null, null, Outil.GetJoueur(Client.id).camera.CameraMatrix);
             // DRAW Map
             Map.Draw(spriteBatch);
             // DRAW EFFETS

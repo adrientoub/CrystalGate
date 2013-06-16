@@ -200,12 +200,22 @@ namespace CrystalGate
                 {
                     if (Oldmouse.RightButton == ButtonState.Released)
                         if (joueur.champion.Inventory.Count > indice)
+                        {
                             if (joueur.champion.Inventory[indice] is Stuff) // Si on équipe
                             {
                                 ((Stuff)joueur.champion.Inventory[indice]).Equiper();
+                                // pour le reseau
+                                joueur.lastStuffUsed = indice;
                             }
-                            else // Si on utilise un objet
+                            else
+                            {
+                                // Si on utilise un objet
                                 joueur.champion.Inventory[indice].Utiliser();
+                                // pour le reseau
+                                joueur.lastItemUsed = indice;
+                            }
+
+                        }
                 }
                 if (mouse.LeftButton == ButtonState.Pressed && Oldmouse.LeftButton == ButtonState.Released) // Si c'est pour le Drag&Drop
                 {

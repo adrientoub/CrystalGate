@@ -184,7 +184,7 @@ namespace CrystalGate
                     if (path != null)
                         joueur.champion.ObjectifListe = path;
                 }
-                //Stats
+                // Unité ciblé
                 if (player.idUniteAttacked != 0)
                 {
                     foreach (Unite u in Map.unites)
@@ -193,6 +193,7 @@ namespace CrystalGate
                 }
                 else
                     joueur.champion.uniteAttacked = null;
+                // Sorts
                 if (player.idSortCast != 0)
                 {
                     Unite u = joueur.champion;
@@ -213,6 +214,7 @@ namespace CrystalGate
                         }
 
                 }
+                // Clear morts
                 if(player.LastDeath != 0)
                     foreach (Unite u in Map.unites)
                         if (u.id == player.LastDeath)
@@ -220,6 +222,18 @@ namespace CrystalGate
                             u.Vie = 0;
                             break;
                         }
+                try
+                {
+                    // Utilisation inventaire
+                    if (player.LastItemUsed != -1)
+                        joueur.champion.Inventory[player.LastItemUsed].Utiliser();
+                    if (player.LastStuffUsed != -1)
+                        ((Stuff)joueur.champion.Inventory[player.LastStuffUsed]).Equiper();
+                }
+                catch
+                {
+                    // On sait jamais
+                }
             }
         }
     }
