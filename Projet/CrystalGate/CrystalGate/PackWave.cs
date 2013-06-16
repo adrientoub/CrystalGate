@@ -150,7 +150,7 @@ namespace CrystalGate
             int level = 4;
 
             List<Vector2> PointsInit = new List<Vector2> { new Vector2(105, 38), new Vector2(105, 37), new Vector2(105, 36) };
-            List<Vector2> PointsSpawn = new List<Vector2> { new Vector2(115, 4), new Vector2(125, 4) };
+            List<Vector2> PointsSpawn = new List<Vector2> { new Vector2(113, 5), new Vector2(121, 5), new Vector2(113, 16), new Vector2(121, 16) };
 
             List<List<Unite>> Mobs = new List<List<Unite>> { 
                 new List<Unite> { new Archer(Vector2.Zero, level), new Demon(Vector2.Zero, level), new Grunt(Vector2.Zero, level), new Cavalier(Vector2.Zero, level),
