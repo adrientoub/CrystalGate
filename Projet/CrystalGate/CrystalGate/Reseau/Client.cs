@@ -68,8 +68,8 @@ namespace CrystalGate
 
         public static void Receive()
         {
-            /*try
-            {*/
+            try
+            {
                 Started = true;
                 while (true)
                 {
@@ -94,14 +94,8 @@ namespace CrystalGate
                         byte[] buffer3 = new byte[messageLength];
                         client.Receive(buffer3);
                         // On deserialise et modifie le joueur
-                        try
-                        {
-                            Unserialize(IdDuJoueur, buffer3);
-                        }
-                        catch
-                        {
+                        Unserialize(IdDuJoueur, buffer3);
 
-                        }
                     }
                     else if (header == 1) // On reçoit un joueur
                     {
@@ -118,22 +112,16 @@ namespace CrystalGate
                         MemoryStream stream = new MemoryStream(buffer3);
                         stream.Position = 0;
 
-                        try
+                        Players j = (Players)formatter.Deserialize(stream);
+                        if (j.id - 1 == joueursConnectes.Count || joueursConnectes.Count == 0)
                         {
-                            Players j = (Players)formatter.Deserialize(stream);
-                            if (j.id - 1 == joueursConnectes.Count)
-                            {
-                                joueursConnectes.Add(j);
-                            }
-                            else
-                            {
-                                joueursConnectes[j.id - 1] = j;
-                            }
+                            joueursConnectes.Add(j);
                         }
-                        catch
+                        else
                         {
+                            joueursConnectes[j.id - 1] = j;
+                        }
 
-                        }
                     }
                     else if (header == 2) // On reçoit un message du chat
                     {
@@ -167,15 +155,15 @@ namespace CrystalGate
                     }
 
                 }
-        //}
-            /*catch
+        }
+            catch
             {
                 SceneHandler.coopConnexionScene.Error = true;
                 SceneHandler.championSelectionScene.Error = true;
                 // Le client s'est deco
                 // Attention , risque de rentrer dans ce catch a l'entree du salon,
                 // si c'est le cas, ca va planter!
-            }*/
+            }
         }
 
         public static void Unserialize(int IdDuJoueur, byte[] buffer)

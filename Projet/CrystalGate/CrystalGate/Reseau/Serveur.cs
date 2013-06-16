@@ -78,6 +78,8 @@ namespace CrystalGate
 
         public static void Receive()
         {
+            try
+            {
 
                 Socket c = clients[clients.Count - 1];
                 int id = clients.Count;
@@ -152,7 +154,11 @@ namespace CrystalGate
                         current = (current + 1) % 2;
                     }
                 }
-
+            }
+            catch
+            {
+                UI.Error = true;
+            }
 
         }
 

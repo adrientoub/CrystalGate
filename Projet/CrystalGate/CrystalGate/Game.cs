@@ -2,6 +2,7 @@ using CrystalGate.Inputs;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+using System.Threading;
 
 namespace CrystalGate
 {
@@ -24,7 +25,7 @@ namespace CrystalGate
             // Initialisation du GraphicsDeviceManager
             // pour obtenir une fenêtre de dimensions 800*480
             graphics = new GraphicsDeviceManager(this) {
-                PreferredBackBufferWidth = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width,
+                PreferredBackBufferWidth = 500,
                 PreferredBackBufferHeight = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height
             };
             if (!isTest)
@@ -65,6 +66,8 @@ namespace CrystalGate
 
         protected override void UnloadContent()
         {
+            foreach (Thread t in Serveur.threads)
+                t.Abort();
             // TODO: Unload any non ContentManager content here
         }
 
