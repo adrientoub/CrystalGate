@@ -166,6 +166,24 @@ namespace CrystalGate
             else
                 if (OlduniteAttacked != null && ObjectifListe.Count == 0 && IsRanged) // si l'unité se déplacait pour tirer
                     uniteAttacked = OlduniteAttacked;
+            
+            // Fait attaquer l'unité la plus proche
+            if (!isAChamp && !isApnj)
+            {
+                float distanceInit = 9000;
+                Unite focus = null;
+                foreach (Unite u in Map.unites)
+                {
+                    float distance = 0;
+
+                    if (u.isAChamp && (distance = Outil.DistanceUnites(this, u)) <= distanceInit)
+                    {
+                        distanceInit = distance;
+                        focus = u;
+                    }
+                }
+                uniteAttacked = focus;
+            }
 
             // Reseau
             UpdateReseau();
@@ -186,6 +204,7 @@ namespace CrystalGate
             else
                 idUniteAttacked = 0;
         }
+
         protected virtual void IA(List<Unite> unitsOnMap)
         {
             // Cast un heal si < à la moitié de vie
@@ -553,11 +572,24 @@ namespace CrystalGate
 
         public void Cast(Spell s, Vector2 point, Unite unit)
         {
-            // Cast ou initialise le sort
-            s.Point = point;
-            s.UniteCible = unit;
-            spellsUpdate.Add(s);
-            spellsUpdate[spellsUpdate.Count - 1].Begin(point, unit);
+            bool onpeut = true;
+            foreach (Spell sin in spellsUpdate)
+            {
+                if (s.ToString() == s.ToString() && s.ToString() != new Polymorphe(this).ToString())
+                {
+                    onpeut = false;
+                    break;
+                }
+
+            }
+            if (onpeut)
+            {
+                // Cast ou initialise le sort
+                s.Point = point;
+                s.UniteCible = unit;
+                spellsUpdate.Add(s);
+                spellsUpdate[spellsUpdate.Count - 1].Begin(point, unit);
+            }
         }
 
         public override void Draw(SpriteBatch spriteBatch)

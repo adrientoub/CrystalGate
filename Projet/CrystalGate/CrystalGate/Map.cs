@@ -32,7 +32,7 @@ namespace CrystalGate
         public static int nombreDeVaguesPop, nombreDeVagues;
         public static GameTime gametime;
 
-        static byte id = 1;
+        public static byte id = 1;
 
         public static void Initialize()
         {

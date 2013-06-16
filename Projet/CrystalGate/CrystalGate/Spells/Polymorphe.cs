@@ -34,11 +34,14 @@ namespace CrystalGate
 
         public override void UpdateSort()
         {
+            if (!UniteCible.isAChamp)
+            {
                 UniteCible.packAnimation = new AnimationCritters();
                 UniteCible.Sprite = PackTexture.Critters;
                 UniteCible.Tiles = new Vector2(225 / 6, 177 / 4);
                 UniteCible.effetUniteDeath = new EffetSonore(PackSon.SheepDeath);
                 UniteCible.CanAttack = false;
+            }
         }
 
         public override string DescriptionSpell()

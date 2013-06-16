@@ -65,12 +65,13 @@ namespace CrystalGate
                     
                     foreach (Unite u in Map.unites)
                         if (u != champion && !u.isApnj && Outil.DistancePoints(point, u.PositionTile) <= 46)
-                        {
                             SelectedUnit = u;
-                        }
 
                     if (SelectedUnit != null)
+                    {
                         champion.Cast(spell, champion.pointCible, SelectedUnit);
+                        IsCasting = true;
+                    }
 
                     InWaitingUnit = false;
                     Interface.DrawSelectUnit = false;
@@ -241,24 +242,7 @@ namespace CrystalGate
                     }
                 }
                 
-                
-                // Fait attaquer l'unité la plus proche
-                /*if (isRoaming)
-                {
-                    float distanceInit = 9000;
-                    Unite focus = null;
-                    foreach (Unite u in Map.unites)
-                    {
-                        float distance = Outil.DistanceUnites(champion, u);
-
-                        if (champion != u && !u.isApnj && distance <= distanceInit)
-                        {
-                            distanceInit = distance;
-                            focus = u;
-                        }
-                    }
-                    champion.uniteAttacked = focus;
-                }*/
+               
             }
             // Pour verifier si on parle a un pnj
             SpeakToPNJ();
@@ -325,7 +309,7 @@ namespace CrystalGate
             // Unité visé
             p.idUniteAttacked = Local.champion.idUniteAttacked;
 
-                p.LastDeath = (byte)Serveur.LastDead;
+            p.LastDeath = (byte)Serveur.LastDead;
             // Unit dernierement morte selon le serveur
             SendSpell(p);
 

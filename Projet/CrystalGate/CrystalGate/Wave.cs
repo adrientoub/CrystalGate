@@ -76,11 +76,11 @@ namespace CrystalGate
                                 Map.unites.Add(new Voleur(v, unites[0][0].Level));
                             else
                                 throw new Exception("Modif la wave!");
-                            // Attaque un joueur au hasard
-                            if(Client.Started)
-                                Map.unites[Map.unites.Count - 1].uniteAttacked = Outil.GetJoueur(1).champion;
-                            else
-                                Map.unites[Map.unites.Count - 1].uniteAttacked = Outil.GetJoueur(0).champion;
+                            // Attaque le joueur le plus près
+                            
+                            // Fait attaquer l'unité la plus proche
+
+                            //Map.unites[Map.unites.Count - 1].uniteAttacked = focus;
                             Map.unites[Map.unites.Count - 1].idWave = id;
                             Map.unites[Map.unites.Count - 1].id = Map.GetId();
                             unites[0].RemoveAt(0);

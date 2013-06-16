@@ -39,7 +39,7 @@ namespace CrystalGate
             foreach (Unite u in Map.unites)
             {
                 float distance = Outil.DistancePoints(this.Point, u.PositionTile);
-                if (u != unite && distance <= Portée)
+                if (u != unite && !u.isAChamp && distance <= Portée)
                 {
                     u.Vie -= (int)(unite.Puissance * ratio - u.DefenseMagique);
                     //u.color = Color.Red;
