@@ -320,7 +320,7 @@ namespace CrystalGate
 
             // Unité visé
             p.idUniteAttacked = Local.champion.idUniteAttacked;
-            if (Serveur.IsRunning)
+
                 p.LastDeath = (byte)Serveur.LastDead;
             // Unit dernierement morte selon le serveur
             SendSpell(p);

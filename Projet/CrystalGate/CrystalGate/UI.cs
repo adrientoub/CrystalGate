@@ -56,6 +56,7 @@ namespace CrystalGate
         List<Text> dialogue = new List<Text> { };
 
         int MaxChar;
+        public static bool Error;
 
         public static string messageRecu = "";
         public Vector2 positionChat;
@@ -531,6 +532,9 @@ namespace CrystalGate
             // Compteur de vagues
             spritebatch.DrawString(gamefont, compteurDeVague, new Vector2(joueur.camera.Position.X + width - gamefont.MeasureString(compteurDeVague).X - 5, gamefont.MeasureString(tempsDeJeuActuel).Y + joueur.camera.Position.Y + 4), Color.Black);
 
+            // Erreur reseau
+            if(Error)
+                spritebatch.DrawString(gamefont, "L'autre joueur s'est deconnecté", joueur.camera.Position, Color.White);
             // Curseur
             spritebatch.Draw(CurseurOffensif ? CurseurRouge : Curseur, new Vector2(joueur.camera.Position.X + m.X, joueur.camera.Position.Y + m.Y), Color.White);
 

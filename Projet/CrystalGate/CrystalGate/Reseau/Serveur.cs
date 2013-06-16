@@ -20,6 +20,9 @@ namespace CrystalGate
 
         public static List<Socket> clients = new List<Socket> { };
         public static List<Players> joueurs = new List<Players>();
+        public static List<Thread> threads = new List<Thread>();
+
+        public static int current = 0; // client que le serveur ecoute , commence a 0
 
         public static int LastDead; // represente la deniere unité qui vient de mourir selon le serveur
 
@@ -56,8 +59,8 @@ namespace CrystalGate
                     Socket nouveauClient = serveur.Accept();
                     clients.Add(nouveauClient);
                     // On lance la thread de reception pour ce socket
-                    Thread Reception = new Thread(Receive);
-                    Reception.Start();
+                    threads.Add(new Thread(Receive));
+                    threads[threads.Count - 1].Start();
                     // Envoie l'identifiant
                     clients[clients.Count - 1].Send(new byte[] { (byte)clients.Count });
                 }
@@ -75,8 +78,7 @@ namespace CrystalGate
 
         public static void Receive()
         {
-            try
-            {
+
                 Socket c = clients[clients.Count - 1];
                 int id = clients.Count;
                 byte[] buffer = new byte[4];
@@ -87,72 +89,71 @@ namespace CrystalGate
                     BinaryFormatter formatter = new BinaryFormatter();
 
                     c.Receive(buffer);
-                    int header = BitConverter.ToInt32(buffer, 0);
 
-                    if (header == 42) // Si on recoit un personnage
+                    if (id - 1 == current)
                     {
-                        //header
-                        Send(buffer);
-                        // Reception de la Taille
-                        byte[] buffer2 = new byte[4];
-                        c.Receive(buffer2);
-                        int Length = BitConverter.ToInt32(buffer2, 0);
+                        int header = BitConverter.ToInt32(buffer, 0);
 
-                        // Envoi de l'ID du joueur et de la taille
-                        Send(BitConverter.GetBytes(id));
-                        Send(buffer2);
+                        if (header == 42) // Si on recoit un personnage
+                        {
+                            //header
+                            Send(buffer);
+                            // Reception de la Taille
+                            byte[] buffer2 = new byte[4];
+                            c.Receive(buffer2);
+                            int Length = BitConverter.ToInt32(buffer2, 0);
 
-                        // Données
-                        byte[] buffer3 = new byte[Length];
-                        c.Receive(buffer3);
-                        Send(buffer3); // Envoie les infos reçus aux clients
-                    }
-                    else if (header == 1) // Si on reçoit une personne 
-                    {
-                        //header
-                        Send(buffer);
-                        // Reception de la Taille
-                        byte[] buffer2 = new byte[4];
-                        c.Receive(buffer2);
-                        int Length = BitConverter.ToInt32(buffer2, 0);
+                            // Envoi de l'ID du joueur et de la taille
+                            Send(BitConverter.GetBytes(id));
+                            Send(buffer2);
 
-                        Send(buffer2);
+                            // Données
+                            byte[] buffer3 = new byte[Length];
+                            c.Receive(buffer3);
+                            Send(buffer3); // Envoie les infos reçus aux clients
+                        }
+                        else if (header == 1) // Si on reçoit une personne 
+                        {
 
-                        // Données
-                        byte[] buffer3 = new byte[Length];
-                        c.Receive(buffer3);
-                        Send(buffer3); // Envoie les infos reçus aux clients
-                    }
-                    else if (header == 2) // Si on reçoit un message 
-                    {
-                        //header
-                        Send(buffer);
-                        // Reception de la Taille
-                        byte[] buffer2 = new byte[4];
-                        c.Receive(buffer2);
-                        int Length = BitConverter.ToInt32(buffer2, 0);
+                            // Reception de la Taille
+                            byte[] buffer2 = new byte[4];
+                            c.Receive(buffer2);
+                            int Length = BitConverter.ToInt32(buffer2, 0);
 
-                        Send(buffer2);
 
-                        // Données
-                        byte[] buffer3 = new byte[Length];
-                        c.Receive(buffer3);
-                        Send(buffer3); // Envoie les infos reçus aux clients
-                    }
-                    else // Si on a recu un header incorrect, on attend de recevoir un header correct
-                    {
-                        byte[] debug = new byte[1];
-                        while (debug[0] != 255)
-                            c.Receive(debug);
-                        debug = new byte[159];
-                        c.Receive(debug);
+                            // Données
+                            byte[] buffer3 = new byte[Length];
+                            c.Receive(buffer3);
+                            //header
+                            Send(buffer);
+                            Send(buffer2);
+                            Send(buffer3); // Envoie les infos reçus aux clients
+                        }
+                        else if (header == 2) // Si on reçoit un message 
+                        {
+                            //header
+                            Send(buffer);
+                            // Reception de la Taille
+                            byte[] buffer2 = new byte[4];
+                            c.Receive(buffer2);
+                            int Length = BitConverter.ToInt32(buffer2, 0);
+
+                            Send(buffer2);
+
+                            // Données
+                            byte[] buffer3 = new byte[Length];
+                            c.Receive(buffer3);
+                            Send(buffer3); // Envoie les infos reçus aux clients
+                        }
+                        else // Si on a recu un header incorrect, on attend de recevoir un header correct
+                        {
+                            // header incorrect
+                        }
+                        current = (current + 1) % 2;
                     }
                 }
-            }
-            catch
-            {
-                // Le client de cette thread s'est déco, on arrete de receive et la thread se finit
-            }
+
+
         }
 
         public static void Shutdown()

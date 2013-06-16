@@ -26,6 +26,7 @@ namespace CrystalGate.SceneEngine2
         public int personnageSelectionne;
         private int nbFrames;
         bool lancerLeJeuActive;
+        public bool Error;
 
         private Text lancerJeuT, retourJeuT;
 
@@ -243,6 +244,9 @@ namespace CrystalGate.SceneEngine2
                 }
                 spriteBatch.DrawString(spriteFont, SceneHandler.coopConnexionScene.pseudoJoueurs[i], new Vector2(positionJoueur[i].Center.X - spriteFont.MeasureString(SceneHandler.coopConnexionScene.pseudoJoueurs[i]).X / 2, positionJoueur[i].Top + 10), Color.White);
             }
+
+            if (Error)
+                spriteBatch.DrawString(spriteFont, "Le client a recontré un problème veuillez reesayer", Vector2.Zero, Color.White);
 
             spriteBatch.Draw(curseur, new Vector2(mouse.X, mouse.Y), Color.White);
 
