@@ -151,7 +151,7 @@ namespace CrystalGate
                         {
                             // header incorrect
                         }
-                        current = (current + 1) % 2;
+                        current = (current + 1) % NbMaxClients;
                     }
                 }
             }

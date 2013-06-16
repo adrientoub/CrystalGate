@@ -259,7 +259,7 @@ namespace CrystalGate
 
         public void UpdateReseau()
         {
-            if ((Client.Started && t >= 10 || IsCasting || lastItemUsed != -1 || lastStuffUsed != -1) && Client.isConnected) // Si on est en reseau et que l'on doit send
+            if ((Client.Started && t >= 5 || IsCasting || lastItemUsed != -1 || lastStuffUsed != -1) && Client.isConnected) // Si on est en reseau et que l'on doit send
             {
                 // Envoi
                 Client.Send(Serialize(), 42);
@@ -270,7 +270,7 @@ namespace CrystalGate
 
         void SendSpell(Player p)
         {
-            if (IsCasting)
+            if (spell != null && (spell.NeedUnPoint && champion.pointCible != Vector2.Zero || !spell.NeedUnPoint) )
             {
                 Unite u = champion;
                 List<Spell> toutLesSpellsPossibles = new List<Spell> { new Explosion(u), new Soin(u), new Invisibilite(u), new FurieSanguinaire(u), new Polymorphe(u), new Tempete(u) };
@@ -281,11 +281,14 @@ namespace CrystalGate
                         p.idSortCast = s.idSort;
                         p.pointSortX = champion.pointCible.X;
                         p.pointSortY = champion.pointCible.Y;
-                        if(SelectedUnit != null)
+                        if (SelectedUnit != null)
                             p.idUniteCibleCast = SelectedUnit.id;
                         break;
                     }
+                spell = null;
+                champion.pointCible = Vector2.Zero;
             }
+
         }
 
         public byte[] Serialize()
@@ -313,12 +316,19 @@ namespace CrystalGate
             // Unit dernierement morte selon le serveur
             SendSpell(p);
 
+            // meme map?
+            p.level = SceneHandler.level;
+
             if (lastItemUsed != -1)
+            {
                 p.LastItemUsed = lastItemUsed;
+                lastItemUsed = -1;
+            }
             if (lastStuffUsed != -1)
+            {
                 p.LastStuffUsed = lastStuffUsed;
-            lastItemUsed = -1;
-            lastStuffUsed = -1;
+                lastStuffUsed = -1;
+            }
 
             formatter.Serialize(stream, p);
             byte[] buffer = new byte[stream.Length];

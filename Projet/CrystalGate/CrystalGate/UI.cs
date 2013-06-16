@@ -142,7 +142,7 @@ namespace CrystalGate
                     isWriting = false;
                 }
                 else
-                    isWriting = true;
+                    isWriting = !isWriting;
             }
             if (!SceneEngine2.CoopConnexionScene.isOnlinePlay)
                 isWriting = false;

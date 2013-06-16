@@ -22,5 +22,6 @@ namespace CrystalGate
         public byte LastDeath;
         public int LastItemUsed = -1;
         public int LastStuffUsed = -1;
+        public string level;
     }
 }

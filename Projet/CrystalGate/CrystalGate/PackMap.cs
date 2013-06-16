@@ -29,7 +29,7 @@ namespace CrystalGate
         static World[] Worlds = new World[10];
         // Represente la taille de chaque carte
         static Vector2[] Taille = new Vector2[10];
-        public static int NbDeJoueur = 3;
+        //public static int NbDeJoueur = 3;
 
         public static List<Joueur> joueurs = new List<Joueur> { };
 

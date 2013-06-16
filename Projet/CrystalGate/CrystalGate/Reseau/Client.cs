@@ -174,7 +174,7 @@ namespace CrystalGate
             stream.Position = 0;
             // mettre un try catch
             Player player = (Player)formatter.Deserialize(stream);
-            if (Outil.GetJoueur(IdDuJoueur) != null)
+            if (Outil.GetJoueur(IdDuJoueur) != null && player.level == SceneHandler.level)
             {
                 Joueur joueur = Outil.GetJoueur(IdDuJoueur);
                 // Pathfinding

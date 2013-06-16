@@ -142,8 +142,15 @@ namespace CrystalGate
                 IA(unitsOnMap);
 
             // Pour Update et Draw les sorts
-            foreach (Spell s in spellsUpdate)
+            try
+            {
+                foreach (Spell s in spellsUpdate)
                     s.Update();
+            }
+            catch
+            {
+
+            }
             // Retire les sorts qui sont finis
             for (int i = 0; i < spellsUpdate.Count; i++)
                 if (!spellsUpdate[i].Activated)
@@ -572,17 +579,7 @@ namespace CrystalGate
 
         public void Cast(Spell s, Vector2 point, Unite unit)
         {
-            bool onpeut = true;
-            foreach (Spell sin in spellsUpdate)
-            {
-                if (s.ToString() == s.ToString() && s.ToString() != new Polymorphe(this).ToString())
-                {
-                    onpeut = false;
-                    break;
-                }
-
-            }
-            if (onpeut)
+            if (s != null)
             {
                 // Cast ou initialise le sort
                 s.Point = point;
@@ -597,8 +594,15 @@ namespace CrystalGate
             spriteBatch.Draw(Sprite, ConvertUnits.ToDisplayUnits(body.Position), SpritePosition, color, 0f, new Vector2(Tiles.X / 2, Tiles.Y / 2), Scale, FlipH ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 0);
             DrawVie(spriteBatch);
             // Draw les sorts
-            foreach (Spell s in spellsUpdate)
+            try
+            {
+                foreach (Spell s in spellsUpdate)
                     s.Draw(spriteBatch);
+            }
+            catch
+            {
+
+            }
             foreach (Item i in Inventory)
                 if (i.Activated)
                     i.spell.Draw(spriteBatch);
