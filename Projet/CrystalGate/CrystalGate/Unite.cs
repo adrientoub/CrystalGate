@@ -227,24 +227,27 @@ namespace CrystalGate
                     // represente tous les noeuds possibles pour se rapprocher de la cible
                     List<Noeud> Chemin = PathFinding.TrouverChemin(PositionTile, uniteAttacked.PositionTile, Map.Taille, new List<Unite> { }, Map.unitesStatic, false);
                     Projectile = new Projectile(this, uniteAttacked);
-                    foreach (Noeud n in Chemin) // Pour chaque noeud possible
+                    if (Chemin != null)
                     {
-                        if (Projectile.CanReach(n.Position)) // Si on peut atteindre sa cible depuis ce noeud
+                        foreach (Noeud n in Chemin) // Pour chaque noeud possible
                         {
-                            ObjectifListe = new List<Noeud>{};
-                            foreach (Noeud n2 in Chemin) // Alors on se déplace sur ce noeud
+                            if (Projectile.CanReach(n.Position)) // Si on peut atteindre sa cible depuis ce noeud
                             {
-                                if (n2 != n)
-                                    ObjectifListe.Add(n2);
-                                else
+                                ObjectifListe = new List<Noeud> { };
+                                foreach (Noeud n2 in Chemin) // Alors on se déplace sur ce noeud
                                 {
-                                    ObjectifListe.Add(n2);
-                                    break;
+                                    if (n2 != n)
+                                        ObjectifListe.Add(n2);
+                                    else
+                                    {
+                                        ObjectifListe.Add(n2);
+                                        break;
+                                    }
                                 }
+                                break;
                             }
-                            break;
                         }
-                    }
+                    }   
                     OlduniteAttacked = uniteAttacked;
                     uniteAttacked = null;
                 }
@@ -270,7 +273,17 @@ namespace CrystalGate
                 Map.world.RemoveBody(body);
                 Drop();
                 // Reseau
-                Serveur.LastDead = id;
+                for (int i = 0; i < Serveur.LastDead.Length; i++)
+                {
+                    if (Serveur.LastDead[i] == 0)
+                    {
+                        if (i == Serveur.LastDead.Length - 1)
+                            for (int j = 0; j < Serveur.LastDead.Length; j++)
+                                Serveur.LastDead[j] = 0;
+                        Serveur.LastDead[i] = id;
+                        break;
+                    }
+                }
                 // Interface De GameOver pour le joueur
                 if (isAChamp) // Si un champion se fait tuer
                     foreach (Joueur j in PackMap.joueurs) // On regarde si c'est le joueur local

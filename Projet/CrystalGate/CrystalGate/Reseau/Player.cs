@@ -19,7 +19,7 @@ namespace CrystalGate
         public float pointSortY;
         public byte idUniteCibleCast;
 
-        public byte LastDeath;
+        public byte[] LastDeath = new byte[10];
         public int LastItemUsed = -1;
         public int LastStuffUsed = -1;
         public string level;

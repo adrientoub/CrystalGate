@@ -210,9 +210,9 @@ namespace CrystalGate
 
                 }
                 // Clear morts
-                if(player.LastDeath != 0)
-                    foreach (Unite u in Map.unites)
-                        if (u.id == player.LastDeath)
+                foreach (Unite u in Map.unites)
+                    foreach(byte b in player.LastDeath)
+                        if (u.id == b)
                         {
                             u.Vie = 0;
                             break;
