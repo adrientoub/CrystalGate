@@ -24,7 +24,7 @@ namespace CrystalGate
 
         public static int current = 0; // client que le serveur ecoute , commence a 0
 
-        public static byte[] LastDead = new byte[10]; // represente la deniere unité qui vient de mourir selon le serveur
+        public static int[] LastDead = new int[10]; // represente la deniere unité qui vient de mourir selon le serveur
 
         public static void Host()
         {

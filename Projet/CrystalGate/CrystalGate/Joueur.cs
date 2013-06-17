@@ -228,7 +228,7 @@ namespace CrystalGate
 
         public void UpdateReseau()
         {
-            if ((Client.Started && (t = (t + 1) % 5) == 0 || Mooved || lastItemUsed != -1 || lastStuffUsed != -1) && Client.isConnected) // Si on est en reseau et que l'on doit send
+            if ((Client.Started && (t = (t + 1) % 5) == 0 || champion.isCasting || Mooved || lastItemUsed != -1 || lastStuffUsed != -1) && Client.isConnected) // Si on est en reseau et que l'on doit send
                 Client.Send(Serialize(), 42); // Envoi
         }
 

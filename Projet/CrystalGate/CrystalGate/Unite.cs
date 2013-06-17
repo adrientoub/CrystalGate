@@ -82,7 +82,7 @@ namespace CrystalGate
         public static Random rand;
 
         // Variables pour le reseau, n'affecte pas le local
-        public byte idUniteAttacked = 0;
+        public int idUniteAttacked = 0;
 
         public Unite(Vector2 Position, int Level = 1)
             : base(Position)
@@ -259,14 +259,17 @@ namespace CrystalGate
         {
             if (Vie <= 0 && !Mort)
             {
-                Vie = 0;
-                Mort = true;
-                if (PackMap.joueurs[0].champion.XP + XPUnite < PackMap.joueurs[0].champion.Level * 1000)
-                    PackMap.joueurs[0].champion.XP += XPUnite;
-                else
+                foreach (Joueur j in PackMap.joueurs)
                 {
-                    PackMap.joueurs[0].champion.XP = PackMap.joueurs[0].champion.XP + XPUnite - PackMap.joueurs[0].champion.Level * 1000;
-                    PackMap.joueurs[0].champion.newLevel();
+                    Vie = 0;
+                    Mort = true;
+                    if (j.champion.XP + (XPUnite / 2) < j.champion.Level * 1000)
+                        j.champion.XP += XPUnite / 2;
+                    else
+                    {
+                        j.champion.XP = j.champion.XP + (XPUnite / 2) - PackMap.joueurs[0].champion.Level * 1000;
+                        j.champion.newLevel();
+                    }
                 }
                 effetUniteDeath.Play();
                 effetUniteAttaque.Dispose();
@@ -274,13 +277,21 @@ namespace CrystalGate
                 Map.world.RemoveBody(body);
                 Drop();
                 // Reseau
+                bool plein = true;
+                for (int i = 0; i < Serveur.LastDead.Length; i++)
+                    if (Serveur.LastDead[i] == 0)
+                    {
+                        plein = false;
+                        break;
+                    }
+                if(plein)
+                        for (int j = 0; j < Serveur.LastDead.Length; j++)
+                            Serveur.LastDead[j] = 0;
+
                 for (int i = 0; i < Serveur.LastDead.Length; i++)
                 {
                     if (Serveur.LastDead[i] == 0)
                     {
-                        if (i == Serveur.LastDead.Length - 1)
-                            for (int j = 0; j < Serveur.LastDead.Length; j++)
-                                Serveur.LastDead[j] = 0;
                         Serveur.LastDead[i] = id;
                         break;
                     }

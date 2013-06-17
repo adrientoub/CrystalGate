@@ -32,7 +32,7 @@ namespace CrystalGate
         public static int nombreDeVaguesPop, nombreDeVagues;
         public static GameTime gametime;
 
-        public static byte id = 1;
+        public static int id = 1;
 
         public static void Initialize()
         {
@@ -116,10 +116,10 @@ namespace CrystalGate
                 }
         }
 
-        public static byte GetId()
+        public static int GetId()
         {
             id++;
-            return (byte)(id - 1);
+            return (id - 1);
         }
         // Utilisé pour creer le monde physique
         private static Vertices GetBounds()
