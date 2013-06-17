@@ -105,9 +105,6 @@ namespace CrystalGate
                         Interface.DrawEquipement = !Interface.DrawEquipement;
                 }
 
-
-
-
                 // Pour lancer un sort
                 if (Interface.key.IsKeyDown(Keys.D1) && champion.spells.Count > 0 || Interface.SourisClickSpellCheck(0) && champion.spells.Count > 0)
                 {
@@ -337,7 +334,7 @@ namespace CrystalGate
             Vector2 ObjectifPoint = new Vector2(camera.Position.X + Interface.mouse.X, camera.Position.Y + Interface.mouse.Y) / Map.TailleTiles;
             ObjectifPoint = new Vector2((int)ObjectifPoint.X, (int)ObjectifPoint.Y);
             foreach (Unite u in Map.unites)
-                if(u != champion && !u.isApnj && Outil.DistancePoints(ObjectifPoint, u .PositionTile) <= 60)
+                if(!u.isAChamp && !u.isApnj && Outil.DistancePoints(ObjectifPoint, u .PositionTile) <= 60)
                 {
                     champion.uniteAttacked = u;
                     List<Noeud> chemin = PathFinding.TrouverChemin(champion.PositionTile, ObjectifPoint, Map.Taille, new List<Unite> { }, Map.unitesStatic, false);
@@ -397,7 +394,7 @@ namespace CrystalGate
             ObjectifPoint = new Vector2((int)ObjectifPoint.X, (int)ObjectifPoint.Y);
 
             foreach (Unite u in Map.unites)
-                if (champion != u && Outil.DistancePoints(ObjectifPoint, u.PositionTile) <= 32)
+                if (!u.isAChamp && Outil.DistancePoints(ObjectifPoint, u.PositionTile) <= 32)
                 {
                     Interface.CurseurOffensif = true;
                     return true;

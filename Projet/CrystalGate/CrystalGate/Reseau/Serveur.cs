@@ -80,7 +80,6 @@ namespace CrystalGate
         {
             try
             {
-
                 Socket c = clients[clients.Count - 1];
                 int id = clients.Count;
                 byte[] buffer = new byte[4];

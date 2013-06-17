@@ -43,9 +43,9 @@ namespace CrystalGate
             }
             catch
             {
-                // Si on arrive pas à se connecter on réessaie mais de manière asynchrone
+                /*// Si on arrive pas à se connecter on réessaie mais de manière asynchrone
                 Thread t = new Thread(Connect);
-                t.Start();
+                t.Start();*/
             }
         }
 
@@ -114,13 +114,9 @@ namespace CrystalGate
 
                         Players j = (Players)formatter.Deserialize(stream);
                         if (j.id - 1 == joueursConnectes.Count || joueursConnectes.Count == 0)
-                        {
                             joueursConnectes.Add(j);
-                        }
                         else
-                        {
                             joueursConnectes[j.id - 1] = j;
-                        }
 
                     }
                     else if (header == 2) // On reçoit un message du chat
@@ -151,7 +147,7 @@ namespace CrystalGate
                     }
                     else
                     {
-
+                        // header incorrect
                     }
 
                 }
@@ -160,9 +156,6 @@ namespace CrystalGate
             {
                 SceneHandler.coopConnexionScene.Error = true;
                 SceneHandler.championSelectionScene.Error = true;
-                // Le client s'est deco
-                // Attention , risque de rentrer dans ce catch a l'entree du salon,
-                // si c'est le cas, ca va planter!
             }
         }
 

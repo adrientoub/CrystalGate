@@ -157,7 +157,6 @@ namespace CrystalGate
                     dialogue.RemoveAt(0);
                     MaxChar = 0;
                 }
-                joueur.DonnerOrdreStop();
             }
 
             messageRecu = "";

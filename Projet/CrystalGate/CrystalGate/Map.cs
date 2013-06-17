@@ -82,7 +82,7 @@ namespace CrystalGate
                     {
                         foreach (Joueur j2 in PackMap.joueurs)
                         {
-                            j.champion.PositionTile = new Vector2(3, 20);
+                            j2.champion.PositionTile = new Vector2(3, 20);
                             j2.champion.ObjectifListe = new List<Noeud> { };
                             j2.camera.Position = new Vector2(0, 200);
                         }
