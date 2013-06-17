@@ -106,10 +106,7 @@ namespace CrystalGate
             Map.unites = Unites[i];
             // Le champion s'est téléporté, on le rajoute sur la Map
             foreach (Joueur j in joueurs)
-            {
                 Map.unites.Add(j.champion);
-                Map.unites[Map.unites.Count - 1].id = Map.GetId();
-            }
 
             Map.items = Items[i];
             Map.waves = Waves[i];

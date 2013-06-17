@@ -90,7 +90,7 @@ namespace CrystalGate
             // Constructeur par defaut d'une unité
             Vie = VieMax = 1;
             Mana = ManaMax = 200;
-            ManaRegen = 500;
+            ManaRegen = 300;
             Vitesse = 0.1f;
             Portee = 1; // 1 = Corps à corps
             Dommages = 1;
@@ -106,8 +106,9 @@ namespace CrystalGate
             // Graphique par defaut
             Sprite = PackTexture.blank;
             Tiles = Vector2.One;
-            color = Color.White; 
-            
+            color = Color.White;
+
+            id = Map.GetId();
             idWave = -1;
             spells = new List<Spell> {  new Soin(this)};
             spellsUpdate = new List<Spell> { };
@@ -176,7 +177,7 @@ namespace CrystalGate
                     uniteAttacked = OlduniteAttacked;
             
             // Fait attaquer l'unité la plus proche
-            if (!isAChamp && !isApnj)
+            if (!isAChamp && !isApnj && uniteAttacked != null)
             {
                 float distanceInit = 9000;
                 Unite focus = null;
@@ -254,7 +255,7 @@ namespace CrystalGate
             }
         }
 
-        public virtual void TestMort(List<Effet> effets) // aussi la mana
+        protected virtual void TestMort(List<Effet> effets) // aussi la mana
         {
             if (Vie <= 0 && !Mort)
             {

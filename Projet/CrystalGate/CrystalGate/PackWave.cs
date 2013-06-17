@@ -12,7 +12,7 @@ namespace CrystalGate
 
         static Wave Level1Wave1()
         {
-            List<Vector2> PointsInit = new List<Vector2> { new Vector2(1, 8), new Vector2(1, 9), new Vector2(1, 10) };
+            List<Vector2> PointsInit = new List<Vector2> { new Vector2(1, 8), new Vector2(1, 9), new Vector2(1, 10), new Vector2(1, 11) };
             List<Vector2> PointsSpawn = new List<Vector2> { new Vector2(11, 0), new Vector2(31, 0), new Vector2(22, 20) };
 
             List<List<Unite>> Mobs = new List<List<Unite>> { 

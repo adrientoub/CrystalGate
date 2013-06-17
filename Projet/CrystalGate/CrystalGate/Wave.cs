@@ -76,13 +76,27 @@ namespace CrystalGate
                                 Map.unites.Add(new Voleur(v, unites[0][0].Level));
                             else
                                 throw new Exception("Modif la wave!");
-                            // Attaque le joueur le plus près
                             
                             // Fait attaquer l'unité la plus proche
+                            if (!Map.unites[Map.unites.Count - 1].isAChamp && !Map.unites[Map.unites.Count - 1].isApnj)
+                            {
+                                float distanceInit = 9000;
+                                Unite focus = null;
+                                foreach (Unite u in Map.unites)
+                                {
+                                    float distance = 0;
+
+                                    if (u.isAChamp && (distance = Outil.DistanceUnites(Map.unites[Map.unites.Count - 1], u)) <= distanceInit)
+                                    {
+                                        distanceInit = distance;
+                                        focus = u;
+                                    }
+                                }
+                                Map.unites[Map.unites.Count - 1].uniteAttacked = focus;
+                            }
 
                             //Map.unites[Map.unites.Count - 1].uniteAttacked = focus;
                             Map.unites[Map.unites.Count - 1].idWave = id;
-                            Map.unites[Map.unites.Count - 1].id = Map.GetId();
                             unites[0].RemoveAt(0);
                         }
                         else // Si il y'a moins d'unité que de points de spawn, on arrete
