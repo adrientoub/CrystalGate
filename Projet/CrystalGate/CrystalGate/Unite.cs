@@ -75,6 +75,7 @@ namespace CrystalGate
         public int InventoryCapacity = 64;
         public bool Drawlife;
         public double idWave;
+        public bool isCasting; // dit si un sort est lancé, si c'est un champion uniquement
 
         public float byLevelAdd = 1.05f;
 
@@ -577,13 +578,15 @@ namespace CrystalGate
             }
         }
 
-        public void Cast(Spell s, Vector2 point, Unite unit)
+        public void Cast(Spell s, Vector2 point, Unite unit, bool fromOnline = false)
         {
-            if (s != null)
-            {
                 // Cast ou initialise le sort
                 s.Point = point;
                 s.UniteCible = unit;
+            if(SceneHandler.gameplayScene.isCoopPlay && !fromOnline)
+                isCasting = true;
+            else
+            {
                 spellsUpdate.Add(s);
                 spellsUpdate[spellsUpdate.Count - 1].Begin(point, unit);
             }

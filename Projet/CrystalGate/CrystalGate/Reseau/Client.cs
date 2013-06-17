@@ -202,7 +202,7 @@ namespace CrystalGate
                                     if (un.id == player.idUniteCibleCast)
                                         s.UniteCible = un;
                             }
-                            joueur.champion.Cast(s, new Vector2(player.pointSortX, player.pointSortY), s.UniteCible);
+                            joueur.champion.Cast(s, new Vector2(player.pointSortX, player.pointSortY), s.UniteCible, true);
                             break;
                         }
 

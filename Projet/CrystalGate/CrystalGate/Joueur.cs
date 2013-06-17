@@ -23,7 +23,6 @@ namespace CrystalGate
         bool InWaitingUnit;
         Spell spell;
         public int id; // spécifie l'identifiant sur le reseau, supérieur à zero sinon on est en local
-        bool IsCasting;
 
         Unite SelectedUnit;
         int t;
@@ -55,7 +54,6 @@ namespace CrystalGate
                     InWaitingPoint = false;
                     Interface.DrawSelectPoint = false;
                     champion.Cast(spell, champion.pointCible, SelectedUnit);
-                    IsCasting = true;
                 }
                 // Pour cibler une unité pour un sort
                 if (Interface.mouse.LeftButton == ButtonState.Pressed && Interface.Oldmouse.LeftButton == ButtonState.Released && InWaitingUnit)
@@ -69,7 +67,6 @@ namespace CrystalGate
                     if (SelectedUnit != null)
                     {
                         champion.Cast(spell, champion.pointCible, SelectedUnit);
-                        IsCasting = true;
                     }
 
                     InWaitingUnit = false;
@@ -119,7 +116,6 @@ namespace CrystalGate
                         else
                         {
                             champion.Cast(spell, champion.pointCible, SelectedUnit);
-                            IsCasting = true;
                         }
                     }
                 }
@@ -136,7 +132,6 @@ namespace CrystalGate
                         else
                         {
                             champion.Cast(spell, champion.pointCible, SelectedUnit);
-                            IsCasting = true;
                         }
                     }
                 }
@@ -153,7 +148,6 @@ namespace CrystalGate
                         else
                         {
                             champion.Cast(spell, champion.pointCible, SelectedUnit);
-                            IsCasting = true;
                         }
                     }
                 }
@@ -170,7 +164,6 @@ namespace CrystalGate
                         else
                         {
                             champion.Cast(spell, champion.pointCible, SelectedUnit);
-                            IsCasting = true;
                         }
                     }
                 }
@@ -192,7 +185,6 @@ namespace CrystalGate
                         else
                         {
                             champion.Cast(spell, champion.pointCible, SelectedUnit);
-                            IsCasting = true;
                         }
                     }
                 }
@@ -214,7 +206,6 @@ namespace CrystalGate
                         else
                         {
                             champion.Cast(spell, champion.pointCible, SelectedUnit);
-                            IsCasting = true;
                         }
                     }
                 }
@@ -230,13 +221,12 @@ namespace CrystalGate
             CurseurCheck();
             Interface.Oldmouse = Interface.mouse;
             Interface.Oldkey = Interface.key;
-            IsCasting = false;
 
         }
 
         public void UpdateReseau()
         {
-            if ((Client.Started && t >= 5 || IsCasting || lastItemUsed != -1 || lastStuffUsed != -1) && Client.isConnected) // Si on est en reseau et que l'on doit send
+            if ((Client.Started && t >= 5 || lastItemUsed != -1 || lastStuffUsed != -1) && Client.isConnected) // Si on est en reseau et que l'on doit send
             {
                 // Envoi
                 Client.Send(Serialize(), 42);
@@ -247,7 +237,7 @@ namespace CrystalGate
 
         void SendSpell(Player p)
         {
-            if (spell != null && (spell.NeedUnPoint && champion.pointCible != Vector2.Zero || !spell.NeedUnPoint) )
+            if (champion.isCasting)
             {
                 Unite u = champion;
                 List<Spell> toutLesSpellsPossibles = new List<Spell> { new Explosion(u), new Soin(u), new Invisibilite(u), new FurieSanguinaire(u), new Polymorphe(u), new Tempete(u) };
@@ -262,7 +252,7 @@ namespace CrystalGate
                             p.idUniteCibleCast = SelectedUnit.id;
                         break;
                     }
-                spell = null;
+                champion.isCasting = false;
                 champion.pointCible = Vector2.Zero;
             }
 
