@@ -202,16 +202,24 @@ namespace CrystalGate
                         {
                             if (joueur.champion.Inventory[indice] is Stuff) // Si on équipe
                             {
-                                ((Stuff)joueur.champion.Inventory[indice]).Equiper();
-                                // pour le reseau
-                                joueur.lastStuffUsed = indice;
+                                if (SceneHandler.gameplayScene.isCoopPlay)
+                                {
+                                    // pour le reseau
+                                    joueur.lastStuffUsed = indice;
+                                }
+                                else
+                                    ((Stuff)joueur.champion.Inventory[indice]).Equiper();
                             }
                             else
                             {
                                 // Si on utilise un objet
-                                joueur.champion.Inventory[indice].Utiliser();
-                                // pour le reseau
-                                joueur.lastItemUsed = indice;
+                                if (SceneHandler.gameplayScene.isCoopPlay)
+                                {
+                                    // pour le reseau
+                                    joueur.lastItemUsed = indice;
+                                }
+                                else
+                                    joueur.champion.Inventory[indice].Utiliser();
                             }
 
                         }
