@@ -569,7 +569,7 @@ namespace CrystalGate
         {
             for (int i = 0; i < Inventory.Count; i++)
             {
-                if (rand.Next(0,100) <= 25)
+                if (id % 2 == 0)
                 {
                     Inventory[i].Position = PositionTile;
                     Map.items.Add(Inventory[i]);

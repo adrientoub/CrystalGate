@@ -176,6 +176,8 @@ namespace CrystalGate
                     List<Noeud> path = PathFinding.TrouverChemin(joueur.champion.PositionTile, new Vector2(player.objectifPointX, player.objectifPointY), Map.Taille, Map.unites, Map.unitesStatic, true);
                     if (path != null)
                         joueur.champion.ObjectifListe = path;
+                    else
+                        joueur.champion.ObjectifListe.Clear();
                 }
                 // Unité ciblé
                 if (player.idUniteAttacked != 0)

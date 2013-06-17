@@ -132,9 +132,9 @@ namespace CrystalGate
                 for (int i = 0; i < Client.joueursConnectes.Count; i++)
                 {
                             if (Client.joueursConnectes[i].championChoisi == 0)
-                                joueurs.Add(new Joueur(new Guerrier(new Vector2(60, 9))));
+                                joueurs.Add(new Joueur(new Guerrier(new Vector2(0, 9))));
                             else
-                                joueurs.Add(new Joueur(new Voleur(new Vector2(60, 11))));
+                                joueurs.Add(new Joueur(new Voleur(new Vector2(0, 11))));
 
                             joueurs[joueurs.Count - 1].id = joueurs.Count;
                 }

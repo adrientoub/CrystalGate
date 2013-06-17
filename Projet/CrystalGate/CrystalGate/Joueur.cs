@@ -29,6 +29,8 @@ namespace CrystalGate
 
         public int lastItemUsed = -1;
         public int lastStuffUsed = -1;
+        bool Mooved;
+        Vector2 ObjectifPoint;
 
         public Joueur(Unite champ)
         {
@@ -226,13 +228,8 @@ namespace CrystalGate
 
         public void UpdateReseau()
         {
-            if ((Client.Started && t >= 5 || lastItemUsed != -1 || lastStuffUsed != -1) && Client.isConnected) // Si on est en reseau et que l'on doit send
-            {
-                // Envoi
-                Client.Send(Serialize(), 42);
-                t = 0;
-            }
-            t++;
+            if ((Client.Started && (t = (t + 1) % 5) == 0 || Mooved || lastItemUsed != -1 || lastStuffUsed != -1) && Client.isConnected) // Si on est en reseau et que l'on doit send
+                Client.Send(Serialize(), 42); // Envoi
         }
 
         void SendSpell(Player p)
@@ -269,11 +266,13 @@ namespace CrystalGate
             Joueur Local = Outil.GetJoueur(Client.id);
 
             // Pathfinding
-            if (Local.champion.ObjectifListe.Count > 0)
+            if (Mooved)
             {
                 p.Mooved = true;
-                p.objectifPointX = Local.champion.ObjectifListe[Local.champion.ObjectifListe.Count - 1].Position.X;
-                p.objectifPointY = Local.champion.ObjectifListe[Local.champion.ObjectifListe.Count - 1].Position.Y;
+                List<Noeud> chemin = PathFinding.TrouverChemin(champion.PositionTile, ObjectifPoint, Map.Taille, new List<Unite> { }, Map.unitesStatic, false);
+                p.objectifPointX = chemin[chemin.Count - 1].Position.X;
+                p.objectifPointY = chemin[chemin.Count - 1].Position.Y;
+                Mooved = false;
             }
 
             // Unité visé
@@ -309,12 +308,17 @@ namespace CrystalGate
         {
             if (Interface.mouse.X < CrystalGateGame.graphics.PreferredBackBufferWidth && Interface.mouse.Y < CrystalGateGame.graphics.PreferredBackBufferHeight)
             {
-                Vector2 ObjectifPoint = new Vector2(camera.Position.X + Interface.mouse.X, camera.Position.Y + Interface.mouse.Y) / Map.TailleTiles;
+                ObjectifPoint = new Vector2(camera.Position.X + Interface.mouse.X, camera.Position.Y + Interface.mouse.Y) / Map.TailleTiles;
                 ObjectifPoint = new Vector2((int)ObjectifPoint.X, (int)ObjectifPoint.Y);
 
                 List<Noeud> chemin = PathFinding.TrouverChemin(champion.PositionTile, ObjectifPoint, Map.Taille, new List<Unite> { }, Map.unitesStatic, false);
                 if (chemin != null)
-                    champion.ObjectifListe = chemin;
+                {
+                    if (SceneHandler.gameplayScene.isCoopPlay)
+                        Mooved = true;
+                    else
+                        champion.ObjectifListe = chemin;
+                }
                 champion.uniteAttacked = null;
             }
         }
