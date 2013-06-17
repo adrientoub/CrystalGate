@@ -55,6 +55,7 @@ namespace CrystalGate
             OuvrirMap("level1");
             OuvrirMap("level2");
             OuvrirMap("level3");
+            OuvrirMap("level4");
 
             // Creation du joueur et du champion
             Map.world = Worlds[0]; // pas très propre mais marche
@@ -78,6 +79,7 @@ namespace CrystalGate
             InitializeLevel1();
             InitializeLevel2();
             InitializeLevel3();
+            InitializeLevel4();
         }
 
         public static void Sauvegarder()
@@ -130,9 +132,9 @@ namespace CrystalGate
                 for (int i = 0; i < Client.joueursConnectes.Count; i++)
                 {
                             if (Client.joueursConnectes[i].championChoisi == 0)
-                                joueurs.Add(new Joueur(new Guerrier(new Vector2(0, 9))));
+                                joueurs.Add(new Joueur(new Guerrier(new Vector2(60, 9))));
                             else
-                                joueurs.Add(new Joueur(new Voleur(new Vector2(0, 11))));
+                                joueurs.Add(new Joueur(new Voleur(new Vector2(60, 11))));
 
                             joueurs[joueurs.Count - 1].id = joueurs.Count;
                 }
@@ -294,6 +296,8 @@ namespace CrystalGate
                     break;
                 case "level3": i = 2;
                     break;
+                case "level4": i = 3;
+                    break;
                 default: throw new Exception("Niveau incorrect");
             }
             return i;
@@ -364,6 +368,21 @@ namespace CrystalGate
 
             Unites[2] = new List<Unite> { Pnj };*/
             Waves[2] = PackWave.PackWaveLevel3();
+        }
+
+        static void InitializeLevel4()
+        {
+            // Ajout du PNJ
+            /*
+            Unite Pnj = new Syndra(new Vector2(7, 18));
+            Text a = new Text("Dialogue2a");
+            Text b = new Text("Dialogue2b");
+            Pnj.Dialogue.Clear();
+            Pnj.Dialogue.Add(a);
+            Pnj.Dialogue.Add(b);
+
+            Unites[2] = new List<Unite> { Pnj };*/
+            //Waves[2] = PackWave.PackWaveLevel3();
         }
     }
 }

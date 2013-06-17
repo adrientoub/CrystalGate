@@ -71,8 +71,38 @@ namespace CrystalGate
                     break;
                 }
 
+
             if (OnaWin && SceneHandler.level == "level3")
                 PackMap.joueurs[0].Interface.Win = true;
+            foreach (Joueur j in PackMap.joueurs)
+            {
+                if (j.champion.PositionTile == new Vector2(97, 8) || j.champion.PositionTile == new Vector2(97, 7) || j.champion.PositionTile == new Vector2(97, 9))
+                {
+                    if (SceneHandler.level == "level1")
+                    {
+                        foreach (Joueur j2 in PackMap.joueurs)
+                        {
+                            j.champion.PositionTile = new Vector2(3, 20);
+                            j2.champion.ObjectifListe = new List<Noeud> { };
+                            j2.camera.Position = new Vector2(0, 200);
+                        }
+                            SceneHandler.ResetGameplay("level2");
+                    }
+                }
+                if (j.champion.PositionTile == new Vector2(129, 11) || j.champion.PositionTile == new Vector2(129, 12) || j.champion.PositionTile == new Vector2(129, 13))
+                {
+                    if (SceneHandler.level == "level2")
+                    {
+                        foreach (Joueur j2 in PackMap.joueurs)
+                        {
+                            j2.champion.PositionTile = new Vector2(2, 17);
+                            j2.champion.ObjectifListe = new List<Noeud> { };
+                            j2.camera.Position = new Vector2(0, 200);
+                        }
+                            SceneHandler.ResetGameplay("level3");
+                    }
+                }
+            }
         }
 
         public static void Draw(SpriteBatch spriteBatch)

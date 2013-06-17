@@ -26,7 +26,6 @@ namespace CrystalGate
         bool IsCasting;
 
         Unite SelectedUnit;
-        bool isRoaming;
         int t;
 
         public int lastItemUsed = -1;
@@ -93,7 +92,7 @@ namespace CrystalGate
                     if (Interface.key.IsKeyDown(Keys.T) && Interface.Oldkey.IsKeyUp(Keys.T))
                     {
                         if (SceneHandler.level == "level1")
-                            SceneHandler.ResetGameplay("level3");
+                            SceneHandler.ResetGameplay("level4");
                         else
                             SceneHandler.ResetGameplay("level1");
                     }
@@ -106,26 +105,7 @@ namespace CrystalGate
                         Interface.DrawEquipement = !Interface.DrawEquipement;
                 }
 
-                if (champion.PositionTile == new Vector2(97, 8) || champion.PositionTile == new Vector2(97, 7) || champion.PositionTile == new Vector2(97, 9))
-                {
-                    if (SceneHandler.level == "level1")
-                    {
-                        champion.PositionTile = new Vector2(3, 20);
-                        champion.ObjectifListe = new List<Noeud> { };
-                        camera.Position = new Vector2(0, 200);
-                        SceneHandler.ResetGameplay("level2");
-                    }
-                }
-                if (champion.PositionTile == new Vector2(129, 11) || champion.PositionTile == new Vector2(129, 12) || champion.PositionTile == new Vector2(129, 13))
-                {
-                    if (SceneHandler.level == "level2")
-                    {
-                        champion.PositionTile = new Vector2(2, 17);
-                        champion.ObjectifListe = new List<Noeud> { };
-                        camera.Position = new Vector2(0, 200);
-                        SceneHandler.ResetGameplay("level3");
-                    }
-                }
+
 
 
                 // Pour lancer un sort
@@ -342,7 +322,6 @@ namespace CrystalGate
         {
             if (Interface.mouse.X < CrystalGateGame.graphics.PreferredBackBufferWidth && Interface.mouse.Y < CrystalGateGame.graphics.PreferredBackBufferHeight)
             {
-                isRoaming = false;
                 Vector2 ObjectifPoint = new Vector2(camera.Position.X + Interface.mouse.X, camera.Position.Y + Interface.mouse.Y) / Map.TailleTiles;
                 ObjectifPoint = new Vector2((int)ObjectifPoint.X, (int)ObjectifPoint.Y);
 
@@ -355,7 +334,6 @@ namespace CrystalGate
 
         public bool DonnerOrdreAttaquer()
         {
-            isRoaming = false;
             Vector2 ObjectifPoint = new Vector2(camera.Position.X + Interface.mouse.X, camera.Position.Y + Interface.mouse.Y) / Map.TailleTiles;
             ObjectifPoint = new Vector2((int)ObjectifPoint.X, (int)ObjectifPoint.Y);
             foreach (Unite u in Map.unites)
