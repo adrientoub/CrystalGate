@@ -55,6 +55,7 @@ namespace CrystalGate.SceneEngine2
             imagesPortraits = new List<Texture2D>();
             imagesPortraits.Add(content.Load<Texture2D>("UI/guerrierIcone"));
             imagesPortraits.Add(content.Load<Texture2D>("UI/voleurIcone"));
+            imagesPortraits.Add(content.Load<Texture2D>("UI/huntressIcone"));
             portraits = new List<Rectangle>();
             couleurAffichagePortrait = new List<Color>();
             for (int i = 0; i < imagesPortraits.Count; i++)

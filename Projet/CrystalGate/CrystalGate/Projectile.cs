@@ -22,7 +22,7 @@ namespace CrystalGate
             Position = ConvertUnits.ToDisplayUnits(tireur.body.Position);
             Tireur = tireur;
             Target = target;
-            Vitesse = 10;
+            Vitesse = 14;
             Timer = (int)Outil.DistanceUnites(tireur, target) / Vitesse;
         }
 

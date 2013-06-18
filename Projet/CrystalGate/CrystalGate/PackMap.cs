@@ -125,8 +125,10 @@ namespace CrystalGate
                 {
                             if (Client.joueursConnectes[i].championChoisi == 0)
                                 joueurs.Add(new Joueur(new Guerrier(new Vector2(0, 9))));
-                            else
+                            if (Client.joueursConnectes[i].championChoisi == 1)
                                 joueurs.Add(new Joueur(new Voleur(new Vector2(0, 11))));
+                            if (Client.joueursConnectes[i].championChoisi == 2)
+                                joueurs.Add(new Joueur(new Chasseur(new Vector2(0, 11))));
 
                             joueurs[joueurs.Count - 1].id = joueurs.Count;
                 }
@@ -136,8 +138,10 @@ namespace CrystalGate
             {
                 if (SceneHandler.championSelectionScene.personnageSelectionne == 0)
                     joueurs.Add(new Joueur(new Guerrier(new Vector2(0, 9))));
-                else
+                if (SceneHandler.championSelectionScene.personnageSelectionne == 1)
                     joueurs.Add(new Joueur(new Voleur(new Vector2(0, 9))));
+                if (SceneHandler.championSelectionScene.personnageSelectionne == 2)
+                    joueurs.Add(new Joueur(new Chasseur(new Vector2(0, 9))));
                 // On spécifie le joueur local
             }
 

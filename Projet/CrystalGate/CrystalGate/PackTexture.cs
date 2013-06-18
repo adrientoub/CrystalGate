@@ -37,6 +37,7 @@ namespace CrystalGate
         public static Texture2D GruntPortrait;
         public static Texture2D ArcherPortrait;
         public static Texture2D VoleurPortrait;
+        public static Texture2D ChasseurPortrait;
         // Unites
         public static Texture2D Archer;
         public static Texture2D Cavalier;
@@ -47,6 +48,7 @@ namespace CrystalGate
         public static Texture2D Troll;
         public static Texture2D Odin;
         public static Texture2D Assassin;
+        public static Texture2D Chasseur;
         // Autres
         public static Texture2D Critters;
 
@@ -91,6 +93,7 @@ namespace CrystalGate
             GruntPortrait = content.Load<Texture2D>("UI/gruntIcone");
             ArcherPortrait = content.Load<Texture2D>("UI/archerIcone");
             VoleurPortrait = content.Load<Texture2D>("UI/VoleurIcone");
+            ChasseurPortrait = content.Load<Texture2D>("UI/huntressIcone");
 
             // Unites
             Archer = content.Load<Texture2D>("Unites/archer");
@@ -103,6 +106,7 @@ namespace CrystalGate
             Critters = content.Load<Texture2D>("Unites/critters");
             Odin = content.Load<Texture2D>("Unites/Odin");
             Assassin = content.Load<Texture2D>("Unites/voleur");
+            Chasseur = content.Load<Texture2D>("Unites/chasseur");
         }
     }
 }
