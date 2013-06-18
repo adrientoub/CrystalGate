@@ -17,6 +17,7 @@ namespace CrystalGate
         public Unite unite; // Unite qui possède l'objet
         public Spell spell; // Spell qui sera appelé quand l'objet sera activé
         public Type type;
+        public int id;
 
         public Item(Unite unite, Vector2 position)
         {

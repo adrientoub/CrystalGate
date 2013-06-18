@@ -10,7 +10,7 @@ namespace CrystalGate
     class Tempete : Spell
     {
         const int Portée = 50; // Portée de l'explosion
-        const float ratio = 0.025f;
+        const float ratio = 0.015f;
         float rayon = 3;
         Text description1, description2;
         List<Vector2> Positions = new List<Vector2> { };
@@ -56,7 +56,7 @@ namespace CrystalGate
                     float distance = Outil.DistancePoints(v, u.PositionTile);
                     if (u != unite && !u.isAChamp && distance <= Portée)
                     {
-                        u.Vie -= (int)(unite.Puissance * ratio  + 1 - u.DefenseMagique);
+                        u.Vie -= (int)(unite.Puissance * ratio  + 3 - u.DefenseMagique);
                         //u.color = Color.Red;
                     }
                     /*else

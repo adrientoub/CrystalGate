@@ -24,6 +24,7 @@ namespace CrystalGate
             VitesseBonus = 0;
             VieMaxBonus = VieBonus;
             ManaMaxBonus = ManaBonus;
+            id = 6;
         }
     }
 }

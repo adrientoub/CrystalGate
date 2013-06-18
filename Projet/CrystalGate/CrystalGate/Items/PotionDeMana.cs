@@ -14,6 +14,7 @@ namespace CrystalGate
         {
             Icone = PackTexture.boutons[4];
             spell = new RegenMana(unite, false);
+            id = 2;
         }
 
         public override void Effet(Unite unite)

@@ -219,11 +219,55 @@ namespace CrystalGate
                         }
                 try
                 {
+                    Unite u = joueur.champion;
+                    Vector2 v = Vector2.Zero;
+
+                    List<Item> items = new List<Item> { new PotionDeVie(u, v), new PotionDeMana(u, v) };
+                    List<Stuff> stuffs = new List<Stuff> { new BottesDacier(u, v), new Epaulieres(u, v), new EpeeSolari(u, v), new GantsDeDevotion(u, v), new HelmetPurple(u, v), new RingLionHead(u, v) };
                     // Utilisation inventaire
+                    // Objets
                     if (player.LastItemUsed != -1)
-                        joueur.champion.Inventory[player.LastItemUsed].Utiliser();
+                    {
+                        bool found = false;
+                        // On regarde si il est dans l'inventaire
+                        for(int i = 0; i < joueur.champion.Inventory.Count; i++)
+                            if (joueur.champion.Inventory[i].id == player.LastItemUsed)
+                            {
+                                joueur.champion.Inventory[i].Utiliser();
+                                found = true;
+                                break;
+                            }
+                        // Sinon on l'ajoute
+                        if (!found)
+                            foreach(Item i in items)
+                                if (i.id == player.LastItemUsed)
+                                {
+                                    joueur.champion.Inventory.Add(i);
+                                    joueur.champion.Inventory[joueur.champion.Inventory.Count - 1].Utiliser();
+                                }
+                    }
+
+                    // Stuff
                     if (player.LastStuffUsed != -1)
-                        ((Stuff)joueur.champion.Inventory[player.LastStuffUsed]).Equiper();
+                    {
+                        bool found = false;
+                        // On regarde si il est dans l'inventaire
+                        for (int i = 0; i < joueur.champion.Inventory.Count; i++)
+                            if (joueur.champion.Inventory[i].id == player.LastStuffUsed)
+                            {
+                                ((Stuff)joueur.champion.Inventory[i]).Equiper();
+                                found = true;
+                                break;
+                            }
+                        // Sinon on l'ajoute
+                        if (!found)
+                            foreach (Stuff s in stuffs)
+                                if (s.id == player.LastStuffUsed)
+                                {
+                                    joueur.champion.Inventory.Add(s);
+                                    ((Stuff)joueur.champion.Inventory[joueur.champion.Inventory.Count - 1]).Equiper();
+                                }
+                    }
                 }
                 catch
                 {

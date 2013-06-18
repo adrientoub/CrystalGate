@@ -205,7 +205,7 @@ namespace CrystalGate
                                 if (SceneHandler.gameplayScene.isCoopPlay)
                                 {
                                     // pour le reseau
-                                    joueur.lastStuffUsed = indice;
+                                    joueur.lastStuffUsed = joueur.champion.Inventory[indice].id;
                                 }
                                 else
                                     ((Stuff)joueur.champion.Inventory[indice]).Equiper();
@@ -216,7 +216,7 @@ namespace CrystalGate
                                 if (SceneHandler.gameplayScene.isCoopPlay)
                                 {
                                     // pour le reseau
-                                    joueur.lastItemUsed = indice;
+                                    joueur.lastItemUsed = joueur.champion.Inventory[indice].id;
                                 }
                                 else
                                     joueur.champion.Inventory[indice].Utiliser();

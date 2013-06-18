@@ -9,7 +9,7 @@ namespace CrystalGate
 {
     class Soin : Spell
     {
-        const float ratio = 1.25f;
+        const float ratio = 1.00f;
         Text description1, description2;
 
         public Soin(Unite u, bool useMana = true)
@@ -39,7 +39,7 @@ namespace CrystalGate
         {
             if (unite.Vie != unite.VieMax)
             {
-                int ammount = (int)(unite.Puissance * ratio);
+                int ammount = (int)(unite.Puissance * ratio) + 50;
                 if (unite.Vie + ammount <= unite.VieMax)
                 {
                     unite.Vie += ammount;
