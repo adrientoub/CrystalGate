@@ -149,6 +149,7 @@
     <Compile Include="SceneEngine2\DefeatScene.cs" />
     <Compile Include="SceneEngine2\SplashScreenScene.cs" />
     <Compile Include="SceneEngine2\VictoryScene.cs" />
+    <Compile Include="Spells\NovaDeFeu.cs" />
     <Compile Include="Spells\Polymorphe.cs" />
     <Compile Include="Spells\Tempete.cs" />
     <Compile Include="Stuff.cs" />

@@ -92,11 +92,6 @@ namespace CrystalGate
             Items[i] = Map.items;
             Waves[i] = Map.waves;
             Effets[i] = Map.effets;
-            // Pas tres propre, le changement de musique
-            if (SceneHandler.level == "level1")
-                FondSonore.Play(5);
-            else
-                FondSonore.Play(0);
         }
 
         public static void LoadLevel(string level)
@@ -377,8 +372,8 @@ namespace CrystalGate
             Pnj.Dialogue.Clear();
             Pnj.Dialogue.Add(a);
             Pnj.Dialogue.Add(b);
-
-            Unites[2] = new List<Unite> { Pnj };*/
+            */
+            Unites[3] = new List<Unite> { new Odin(new Vector2(50, 12), 1) };
             //Waves[2] = PackWave.PackWaveLevel3();
         }
     }

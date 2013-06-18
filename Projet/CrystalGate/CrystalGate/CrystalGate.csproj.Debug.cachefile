@@ -52,7 +52,6 @@ Content\Logo.xnb
 Content\Unites\critters.xnb
 Content\Boutons\Polymorph.xnb
 Content\Unites\Odin.xnb
-Content\Boutons\Tempete.xnb
 Content\Musiques\HOM4.xnb
 Content\Sons\GruntAttack.xnb
 Content\Sons\sword3.xnb
@@ -65,7 +64,6 @@ Content\Musiques\CelticMusic-FortheKing.xnb
 Content\Musiques\CelticMusic-Ode to the Fallen.xnb
 Content\Musiques\Victory.xnb
 Content\Musiques\GameOver.xnb
-Content\Musiques\TES.xnb
 Content\Sons\Gruntquimeurt.xnb
 Content\Sons\Cavalierquimeurt.xnb
 Content\Sons\AxeMissileLaunch1.xnb
@@ -79,9 +77,12 @@ Content\Sons\PolymorphTarget.xnb
 Content\Sons\SheepDeath.xnb
 Content\Sons\Levelup.xnb
 Content\video.xnb
+Content\Boutons\Tempete.xnb
+Content\Musiques\TES.xnb
 Content\Menu\Lobby.xnb
-Content\UI\voleurIcone.xnb
 Content\Unites\voleur.xnb
+Content\UI\VoleurIcone.xnb
+Content\Musiques\Final Fantasy XII OST - Esper Battle.xnb
 Content\Musiques\HOM4.wma
 Content\Musiques\CelticMusic-Prophecy.wma
 Content\Musiques\CeltiqueIrishFolk.wma
@@ -90,5 +91,6 @@ Content\Musiques\CelticMusic-FortheKing.wma
 Content\Musiques\CelticMusic-Ode to the Fallen.wma
 Content\Musiques\Victory.wma
 Content\Musiques\GameOver.wma
-Content\Musiques\TES.wma
 Content\video.wmv
+Content\Musiques\TES.wma
+Content\Musiques\Final Fantasy XII OST - Esper Battle.wma

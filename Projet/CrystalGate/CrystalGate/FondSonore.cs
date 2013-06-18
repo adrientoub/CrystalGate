@@ -10,16 +10,18 @@ namespace CrystalGate
     class FondSonore
     {
         static TimeSpan _finDeLaMusique = new TimeSpan();
-        static string[] _musicList = new string[] {
+        public static string[] _musicList = new string[] {
             "Musiques/CelticMusic-FortheKing",
             "Musiques/CelticMusic-Ode to the Fallen",
             "Musiques/CelticBallad-Riversong",
             "Musiques/CelticMusic-Prophecy",
             "Musiques/HOM4",
-            "Musiques/TES"
+            "Musiques/TES",
+            "Musiques/Final Fantasy XII OST - Esper Battle"
         };
         static Song Victory; 
         static Song Defeat;
+        static Song Boss;
         static Song[] _musiqueDeFond = new Song[_musicList.Length];
         static int _playingNow = 0;
         public static float volume = CrystalGateGame.isTest ? 0.1f : 0.5f;
@@ -92,6 +94,14 @@ namespace CrystalGate
             MediaPlayer.IsRepeating = false;
         }
 
+        public static void PlayBoss()
+        {
+            FondSonore.Stop();
+            MediaPlayer.Volume = volume;
+            MediaPlayer.Play(Boss);
+            MediaPlayer.IsRepeating = false;
+        }
+
         public static void Load(ContentManager content)
         {
             for (int i = 0; i < _musicList.Length; i++)
@@ -100,6 +110,7 @@ namespace CrystalGate
             }
             Victory = content.Load<Song>("Musiques/Victory");
             Defeat = content.Load<Song>("Musiques/GameOver");
+            Boss = content.Load<Song>("Musiques/Final Fantasy XII OST - Esper Battle");
             MediaPlayer.IsRepeating = false;
             isLoaded = true;
         }

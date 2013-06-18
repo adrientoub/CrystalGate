@@ -91,7 +91,10 @@ namespace CrystalGate
                     if (Interface.key.IsKeyDown(Keys.T) && Interface.Oldkey.IsKeyUp(Keys.T))
                     {
                         if (SceneHandler.level == "level1")
+                        {
+                            FondSonore.PlayBoss();
                             SceneHandler.ResetGameplay("level4");
+                        }
                         else
                             SceneHandler.ResetGameplay("level1");
                     }

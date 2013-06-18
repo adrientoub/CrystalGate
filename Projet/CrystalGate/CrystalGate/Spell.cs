@@ -111,7 +111,8 @@ namespace CrystalGate
             LastCast = (float)Map.gametime.TotalGameTime.TotalMilliseconds;
             Activated = true;
             TickCurrent = 0;
-            sonSort.Play();
+            if(sonSort != null)
+                sonSort.Play();
             unite.Mana -= CoutMana;
             Point = p;
             UniteCible = unit;

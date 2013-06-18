@@ -263,11 +263,11 @@ namespace CrystalGate
                 {
                     Vie = 0;
                     Mort = true;
-                    if (j.champion.XP + (XPUnite / 2) < j.champion.Level * 1000)
-                        j.champion.XP += XPUnite / 2;
+                    if (j.champion.XP + (XPUnite / PackMap.joueurs.Count) < j.champion.Level * 1000)
+                        j.champion.XP += XPUnite / PackMap.joueurs.Count;
                     else
                     {
-                        j.champion.XP = j.champion.XP + (XPUnite / 2) - PackMap.joueurs[0].champion.Level * 1000;
+                        j.champion.XP = j.champion.XP + (XPUnite / PackMap.joueurs.Count) - j.champion.Level * 1000;
                         j.champion.newLevel();
                     }
                 }

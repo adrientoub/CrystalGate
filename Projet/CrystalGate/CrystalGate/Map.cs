@@ -31,7 +31,7 @@ namespace CrystalGate
         public static int waveNumber = 0;
         public static int nombreDeVaguesPop, nombreDeVagues;
         public static GameTime gametime;
-
+        public static bool OnaWin;
         public static int id = 1;
 
         public static void Initialize()
@@ -63,16 +63,10 @@ namespace CrystalGate
                     items.RemoveAt(i);
 
             // Dit si on a gagné , que toutes les vagues sont finies
-            bool OnaWin = true;
-            foreach(Wave w in waves)
-                if (w.unites.Count != 0)
-                {
-                    OnaWin = false;
-                    break;
-                }
 
 
-            if (OnaWin && SceneHandler.level == "level3")
+
+            if (OnaWin && SceneHandler.level == "level4")
                 PackMap.joueurs[0].Interface.Win = true;
             foreach (Joueur j in PackMap.joueurs)
             {
@@ -100,6 +94,21 @@ namespace CrystalGate
                             j2.camera.Position = new Vector2(0, 200);
                         }
                             SceneHandler.ResetGameplay("level3");
+                    }
+                }
+
+                if (j.champion.PositionTile == new Vector2(128, 29) || j.champion.PositionTile == new Vector2(128, 30) || j.champion.PositionTile == new Vector2(128, 31) || j.champion.PositionTile == new Vector2(128, 32))
+                {
+                    if (SceneHandler.level == "level3")
+                    {
+                        foreach (Joueur j2 in PackMap.joueurs)
+                        {
+                            j2.champion.PositionTile = new Vector2(12, 15);
+                            j2.champion.ObjectifListe = new List<Noeud> { };
+                            j2.camera.Position = new Vector2(0, 200);
+                            FondSonore.PlayBoss();
+                        }
+                        SceneHandler.ResetGameplay("level4");
                     }
                 }
             }
