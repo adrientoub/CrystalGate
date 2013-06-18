@@ -10,7 +10,7 @@ namespace CrystalGate
     class NovaDeFeu : Spell
     {
         const int Portée = 50; // Portée de l'explosion
-        const float ratio = 0.15f;
+        const float ratio = 0.20f;
         float rayon = 3;
         Text description1, description2;
         public List<Vector2> Positions = new List<Vector2> { };

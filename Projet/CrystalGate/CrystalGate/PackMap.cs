@@ -375,6 +375,7 @@ namespace CrystalGate
             */
             Unites[3] = new List<Unite> { new Odin(new Vector2(50, 12), 1) };
             //Waves[2] = PackWave.PackWaveLevel3();
+            Map.OnaWin = false;
         }
     }
 }
