@@ -11,20 +11,18 @@ namespace CrystalGate
     {
         static TimeSpan _finDeLaMusique = new TimeSpan();
         public static string[] _musicList = new string[] {
-            "Musiques/CelticMusic-FortheKing",
             "Musiques/CelticMusic-Ode to the Fallen",
             "Musiques/CelticBallad-Riversong",
             "Musiques/CelticMusic-Prophecy",
             "Musiques/HOM4",
             "Musiques/TES",
-            "Musiques/Final Fantasy XII OST - Esper Battle"
         };
         static Song Victory; 
         static Song Defeat;
         static Song Boss;
         static Song[] _musiqueDeFond = new Song[_musicList.Length];
         static int _playingNow = 0;
-        public static float volume = CrystalGateGame.isTest ? 0.1f : 0.5f;
+        public static float volume = CrystalGateGame.isTest ? 0.2f : 0.5f;
         static bool isLoaded = false;
 
 

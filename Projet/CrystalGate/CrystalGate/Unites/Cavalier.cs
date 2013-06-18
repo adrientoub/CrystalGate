@@ -25,7 +25,7 @@ namespace CrystalGate
             Vitesse_Attaque = 1f;
             Portee = 1f; // 1 = Corps à corps
             Dommages = 10;
-            Puissance = 10;
+            Puissance = 1;
             Defense = 10;
             XPUnite = 200;
             Inventory = new List<Item> { new PotionDeVie(this, Vector2.Zero) };

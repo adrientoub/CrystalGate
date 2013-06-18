@@ -74,3 +74,4 @@ Voleur=Rogue
 Error1=A player has disconnected
 Error2=Something went wrong with the client, please try again
 Error3=The server socket is already busy, please restart the game"
+Chasseur=Hunter

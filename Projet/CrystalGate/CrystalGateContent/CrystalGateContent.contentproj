@@ -336,11 +336,6 @@
       <Importer>Mp3Importer</Importer>
       <Processor>SongProcessor</Processor>
     </Compile>
-    <Compile Include="Musiques\CeltiqueIrishFolk.mp3">
-      <Name>CeltiqueIrishFolk</Name>
-      <Importer>Mp3Importer</Importer>
-      <Processor>SongProcessor</Processor>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="tresor.png">
@@ -394,11 +389,6 @@
   <ItemGroup>
     <Compile Include="Musiques\CelticBallad-Riversong.mp3">
       <Name>CelticBallad-Riversong</Name>
-      <Importer>Mp3Importer</Importer>
-      <Processor>SongProcessor</Processor>
-    </Compile>
-    <Compile Include="Musiques\CelticMusic-FortheKing.mp3">
-      <Name>CelticMusic-FortheKing</Name>
       <Importer>Mp3Importer</Importer>
       <Processor>SongProcessor</Processor>
     </Compile>

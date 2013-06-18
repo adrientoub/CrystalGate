@@ -17,7 +17,7 @@ namespace CrystalGate
         public static System.Diagnostics.Stopwatch time = new System.Diagnostics.Stopwatch();
         static bool[] isPlaying = new bool[nbSonSimult];
         static TimeSpan[] duree = new TimeSpan[nbSonSimult];
-        public static float volume = CrystalGateGame.isTest ? 0.1f : 0.5f;
+        public static float volume = CrystalGateGame.isTest ? 0.05f : 0.5f;
         static bool hasHP;
         SoundEffect SonChoisi;
 
