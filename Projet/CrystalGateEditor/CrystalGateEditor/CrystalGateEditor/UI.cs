@@ -267,7 +267,7 @@ namespace CrystalGateEditor
                 stream.WriteLine();
             }
             stream.Close();
-            current = "Carte sauvegarde";
+            current = new Text("MapSaved").get();
             ShowCurrent = true;
             thread = threadActuel;
         }
@@ -326,7 +326,7 @@ namespace CrystalGateEditor
             }
             if (ShowAlert)
             {
-                string str = "Nom de carte incorrect!";
+                string str = new Text("IncorrectName").get();
                 spriteBatch.DrawString(SpriteFont, str, new Vector2(user.camera.Position.X + width / 2, user.camera.Position.Y + height / 2 + 20), Color.Red, 0, SpriteFont.MeasureString(str) / 2, 1, SpriteEffects.None, 0);
             }
 

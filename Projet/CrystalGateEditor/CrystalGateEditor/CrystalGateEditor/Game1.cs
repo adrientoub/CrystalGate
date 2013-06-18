@@ -17,7 +17,7 @@ namespace CrystalGateEditor
     public class Game1 : Microsoft.Xna.Framework.Game
     {
         public static GraphicsDeviceManager graphics;
-        public static bool isTest = true;
+        public static bool isTest = false;
         public static SceneEngine2.SceneHandler scene;
 
         public static bool exit;

@@ -14,7 +14,7 @@ namespace CrystalGate
     public class CrystalGateGame : Game
     {
         public static GraphicsDeviceManager graphics;
-        public static bool isTest = true;
+        public static bool isTest = false;
         public static bool exit;
         SceneEngine2.SceneHandler scene;
 
