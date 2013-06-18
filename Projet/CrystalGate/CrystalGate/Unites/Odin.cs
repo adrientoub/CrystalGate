@@ -26,6 +26,7 @@ namespace CrystalGate
             Tiles = new Vector2(160, 160);
             Portrait = PackTexture.CavalierPortrait;
             packAnimation = new AnimationOdin();
+            
             // Statistiques
             Vie = VieMax = 3500;
             Vitesse = 0.20f;
@@ -56,9 +57,9 @@ namespace CrystalGate
                     timer.Start();
 
                 if (timer.Elapsed.Seconds < 1)
-                    color = Color.Pink;
+                    color = Color.Red;
 
-                if (timer.Elapsed.Seconds > 1 && timer.Elapsed.Seconds < 5)
+                if (timer.Elapsed.Seconds > 1 && timer.Elapsed.Seconds < 8)
                 {
 
                     if (IsCastable(0))
@@ -78,7 +79,7 @@ namespace CrystalGate
                 {
                     spellsUpdate.Clear();
                     uniteAttacked = Outil.GetJoueur(Client.id).champion;
-                    if (timer.Elapsed.Seconds > 9)
+                    if (timer.Elapsed.Seconds > 11)
                         timer.Reset();
                 }
             }

@@ -377,7 +377,7 @@ namespace CrystalGate
             Pnj.Dialogue.Add(a);
             Pnj.Dialogue.Add(b);
             */
-            Unites[3] = new List<Unite> { new Odin(new Vector2(50, 12), 1) };
+            Unites[3] = new List<Unite> { new Odin(new Vector2(48, 14), 1) };
             //Waves[2] = PackWave.PackWaveLevel3();
             Map.OnaWin = false;
         }
