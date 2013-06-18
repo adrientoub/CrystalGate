@@ -551,7 +551,7 @@ namespace CrystalGate
 
             // Erreur reseau
             if(Error)
-                spritebatch.DrawString(gamefont, "L'autre joueur s'est deconnecté", joueur.camera.Position, Color.White);
+                spritebatch.DrawString(gamefont, new Text("Error1").get(), joueur.camera.Position, Color.White);
             // Curseur
             spritebatch.Draw(CurseurOffensif ? CurseurRouge : Curseur, new Vector2(joueur.camera.Position.X + m.X, joueur.camera.Position.Y + m.Y), Color.White);
 

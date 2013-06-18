@@ -103,7 +103,7 @@ namespace CrystalGate.SceneEngine2
             spriteBatch.Draw(background, fullscene, Color.White);
 
             if (Error)
-                spriteBatch.DrawString(spriteFont, "Le port serveur est deja occupé, veuillez redemarrer le jeu", Vector2.One, Color.White);
+                spriteBatch.DrawString(spriteFont, new Text("Error3").get(), Vector2.One, Color.White);
             if (mouseRec.Intersects(boutonServeurOuClient))
                 spriteBatch.Draw(boutons, boutonServeurOuClient, Color.Gray);
             else

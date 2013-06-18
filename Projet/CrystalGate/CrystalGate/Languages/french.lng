@@ -71,3 +71,6 @@ WaitClient=Attente de clients
 TryToConnectServ=Tentative de connexion au serveur
 WaitLaunch=Attente du lancement du jeu
 Voleur=Voleur
+Error1=Un joueur s'est deconnecté
+Error2=Le client a recontré un problème veuillez reesayer
+Error3=Le port serveur est deja occupé, veuillez redemarrer le jeu

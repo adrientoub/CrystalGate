@@ -236,7 +236,7 @@ namespace CrystalGate.SceneEngine2
             spriteBatch.DrawString(spriteFont, pseudoJoueurs[3], new Vector2(positionJ4.Center.X - spriteFont.MeasureString(pseudoJoueurs[3]).X / 2, positionJ4.Top + 10), Color.White);
             // Fin d'affichage du lobby
             if(Error)
-                spriteBatch.DrawString(spriteFont, "Le client a recontré un problème veuillez reesayer", Vector2.Zero, Color.White);
+                spriteBatch.DrawString(spriteFont, new Text("Error2").get(), Vector2.Zero, Color.White);
             spriteBatch.Draw(curseur, new Vector2(mouse.X, mouse.Y), Color.White);
 
             spriteBatch.End();
