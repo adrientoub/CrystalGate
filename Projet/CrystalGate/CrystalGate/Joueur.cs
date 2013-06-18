@@ -108,7 +108,7 @@ namespace CrystalGate
                 }
 
                 // Pour lancer un sort
-                if (Interface.key.IsKeyDown(Keys.D1) && champion.spells.Count > 0 || Interface.SourisClickSpellCheck(0) && champion.spells.Count > 0)
+                if (Interface.key.IsKeyDown(Keys.D1) && Interface.Oldkey.IsKeyUp(Keys.D1) && champion.spells.Count > 0 || Interface.SourisClickSpellCheck(0) && champion.spells.Count > 0)
                 {
                     spell = champion.spells[0];
                     if (champion.IsCastable(0))
@@ -124,7 +124,7 @@ namespace CrystalGate
                         }
                     }
                 }
-                if (Interface.key.IsKeyDown(Keys.D2) && champion.spells.Count > 1 || Interface.SourisClickSpellCheck(1) && champion.spells.Count > 1)
+                if (Interface.key.IsKeyDown(Keys.D2) && Interface.Oldkey.IsKeyUp(Keys.D2) && champion.spells.Count > 1 || Interface.SourisClickSpellCheck(1) && champion.spells.Count > 1)
                 {
                     spell = champion.spells[1];
                     if (champion.IsCastable(1))
@@ -140,7 +140,7 @@ namespace CrystalGate
                         }
                     }
                 }
-                if (Interface.key.IsKeyDown(Keys.D3) && champion.spells.Count > 2 || Interface.SourisClickSpellCheck(2) && champion.spells.Count > 2)
+                if (Interface.key.IsKeyDown(Keys.D3) && Interface.Oldkey.IsKeyUp(Keys.D3) && champion.spells.Count > 2 || Interface.SourisClickSpellCheck(2) && champion.spells.Count > 2)
                 {
                     spell = champion.spells[2];
                     if (champion.IsCastable(2))
@@ -156,7 +156,7 @@ namespace CrystalGate
                         }
                     }
                 }
-                if (Interface.key.IsKeyDown(Keys.D4) && champion.spells.Count > 3 || Interface.SourisClickSpellCheck(3) && champion.spells.Count > 3)
+                if (Interface.key.IsKeyDown(Keys.D4) && Interface.Oldkey.IsKeyUp(Keys.D4) && champion.spells.Count > 3 || Interface.SourisClickSpellCheck(3) && champion.spells.Count > 3)
                 {
                     spell = champion.spells[3];
                     if (champion.IsCastable(3))
@@ -172,7 +172,7 @@ namespace CrystalGate
                         }
                     }
                 }
-                if (Interface.key.IsKeyDown(Keys.D5) && champion.spells.Count > 4 || Interface.SourisClickSpellCheck(4) && champion.spells.Count > 4)
+                if (Interface.key.IsKeyDown(Keys.D5) && Interface.Oldkey.IsKeyUp(Keys.D5) && champion.spells.Count > 4 || Interface.SourisClickSpellCheck(4) && champion.spells.Count > 4)
                 {
                     spell = champion.spells[4];
                     if (champion.IsCastable(4))
@@ -193,7 +193,7 @@ namespace CrystalGate
                         }
                     }
                 }
-                if (Interface.key.IsKeyDown(Keys.D6) && champion.spells.Count > 5 || Interface.SourisClickSpellCheck(5) && champion.spells.Count > 5)
+                if (Interface.key.IsKeyDown(Keys.D6) && Interface.Oldkey.IsKeyUp(Keys.D6) && champion.spells.Count > 5 || Interface.SourisClickSpellCheck(5) && champion.spells.Count > 5)
                 {
                     spell = champion.spells[5];
                     if (champion.IsCastable(5))

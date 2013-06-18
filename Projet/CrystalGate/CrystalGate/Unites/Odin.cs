@@ -87,7 +87,7 @@ namespace CrystalGate
 
         protected override void TestMort(List<Effet> effets)
         {
-            if(Vie < 0)
+            if(Vie <= 0)
                 Map.OnaWin = true;
             base.TestMort(effets);
         }
